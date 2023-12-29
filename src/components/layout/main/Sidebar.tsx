@@ -120,7 +120,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             <img
               className="h-8 w-auto"
               src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
+              alt="The tailwind logo"
             />
           </div>
           <nav className="flex flex-1 flex-col">
@@ -155,11 +155,11 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                   className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">
                   <img
                     className="h-8 w-8 rounded-full bg-gray-50"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
+                    src="https://media.licdn.com/dms/image/C5103AQFaf0t2wKfA4A/profile-displayphoto-shrink_800_800/0/1521536559143?e=1709164800&v=beta&t=uiMNtPa-2jmt6Dk7Zg2RSLymcdqpzlTJZhg7m6PdCcM"
+                    alt="Photo of Brandon Ramirez"
                   />
-                  <span className="sr-only">Your profile</span>
-                  <span aria-hidden="true">Tom Cook</span>
+                  <span className="sr-only">Brandon's LinkedIn Profile</span>
+                  <span aria-hidden="true">Brandon Ramirez</span>
                 </a>
               </li>
             </ul>

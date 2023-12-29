@@ -30,7 +30,7 @@ export const MainLayout = () => {
           <img
             className="h-8 w-8 rounded-full bg-gray-50"
             src="https://media.licdn.com/dms/image/C5103AQFaf0t2wKfA4A/profile-displayphoto-shrink_800_800/0/1521536559143?e=1709164800&v=beta&t=uiMNtPa-2jmt6Dk7Zg2RSLymcdqpzlTJZhg7m6PdCcM"
-            alt="Brandon Ramirez"
+            alt="Photo of Brandon Ramirez"
           />
         </Link>
       </Header>
