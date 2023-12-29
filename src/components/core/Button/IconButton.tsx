@@ -35,7 +35,6 @@ type IconButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   shape?: keyof typeof shapes;
   variant?: keyof typeof variants;
   className?: string;
-  icon: React.ReactElement;
 };
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
@@ -45,7 +44,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       shape = "none",
       variant = "primaryOutline",
       className,
-      icon,
+      ...props
     },
     ref,
   ) => {
@@ -60,8 +59,9 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
           variants[variant],
           states[variant],
           className,
-        )}>
-        {icon}
+        )}
+        {...props}>
+        {props.children}
       </button>
     );
   },
