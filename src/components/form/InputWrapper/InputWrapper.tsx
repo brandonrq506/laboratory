@@ -40,7 +40,7 @@ export const InputWrapper = ({
       {description && !error && (
         <p className="mt-2 text-sm text-gray-500 font-light">{description}</p>
       )}
-      {error && <p className="mt-2 text-sm text-red-600 font-light">{error}</p>}
+      {error && <p role="alert" className="mt-2 text-sm text-red-600 font-light">{error}</p>}
     </div>
   );
 };
