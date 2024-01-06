@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
-import { TextInput } from "@/components/form";
+import { TextArea, TextInput } from "@/components/form";
 import { Button } from "@/components/core";
 
 type InputFields = {
   name: string;
+  biography: string;
 };
 
 export const Activities = () => {
@@ -29,8 +30,22 @@ export const Activities = () => {
           error={errors.name?.message}
         />
 
+        <TextArea
+          label="Biography"
+          showAsterisk
+          wrapperClassName="w-1/3"
+          description="Tell us about yourself."
+          placeholder="Write as much as you want about you..."
+          registration={register("biography", {
+            required: "TELL US!!! What are you hiding???",
+          })}
+          error={errors.biography?.message}
+        />
+
         <div className="mt-4">
-          <Button className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm">
+          <Button
+            type="submit"
+            className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm">
             Submit
           </Button>
         </div>
