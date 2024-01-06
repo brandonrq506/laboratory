@@ -27,6 +27,7 @@ export const TextInput = ({
   return (
     <InputWrapper
       wrapperClassName={wrapperClassName}
+      errorClassName="flex items-center"
       label={label}
       showAsterisk={showAsterisk}
       description={description}

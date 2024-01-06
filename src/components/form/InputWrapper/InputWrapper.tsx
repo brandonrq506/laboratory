@@ -3,6 +3,7 @@ import { clsx } from "clsx";
 
 type InputWrapperProps = {
   wrapperClassName?: string;
+  errorClassName?: string;
   label: string;
   showAsterisk?: boolean;
   children: React.ReactNode;
@@ -14,6 +15,7 @@ export type InputWrapperPassProps = Omit<InputWrapperProps, "children">;
 
 export const InputWrapper = ({
   wrapperClassName,
+  errorClassName,
   label,
   showAsterisk,
   children,
@@ -28,7 +30,11 @@ export const InputWrapper = ({
         <div className="relative mt-2">
           {children}
           {error && (
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+            <div
+              className={clsx(
+                "pointer-events-none absolute inset-y-0 right-0 pr-3",
+                errorClassName,
+              )}>
               <ExclamationCircleIcon
                 className="h-5 w-5 text-red-500"
                 aria-hidden="true"
@@ -38,9 +44,13 @@ export const InputWrapper = ({
         </div>
       </label>
       {description && !error && (
-        <p className="mt-2 text-sm text-gray-500 font-light">{description}</p>
+        <p className="mt-2 text-sm font-light text-gray-500">{description}</p>
       )}
-      {error && <p role="alert" className="mt-2 text-sm text-red-600 font-light">{error}</p>}
+      {error && (
+        <p role="alert" className="mt-2 text-sm font-light text-red-600">
+          {error}
+        </p>
+      )}
     </div>
   );
 };
