@@ -1,3 +1,4 @@
+//TODO: Add ability to drop files
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { PhotoIcon } from "@heroicons/react/24/outline";
