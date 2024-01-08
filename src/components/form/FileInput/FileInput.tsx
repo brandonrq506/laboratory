@@ -7,6 +7,7 @@ import { clsx } from "clsx";
 
 type FileProps = InputWrapperPassProps & {
   registration: Partial<UseFormRegisterReturn>;
+  onFilesDropped: (files: FileList) => void;
   multiple?: boolean;
   accept?: string;
   className?: string;
@@ -20,6 +21,7 @@ export const FileInput = ({
   error,
   description,
   dropAreaClassName,
+  onFilesDropped,
   multiple = false,
   showAsterisk = false,
   accept = ".jpg, .jpeg, .png",
@@ -36,6 +38,14 @@ export const FileInput = ({
 
       {/* Input */}
       <div
+        onDrop={(e) => {
+          e.preventDefault();
+          onFilesDropped(e.dataTransfer.files);
+        }}
+        onDragOver={(e) => {
+          e.preventDefault();
+        }}
+        draggable
         className={clsx(
           "relative mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10",
           dropAreaClassName,
@@ -56,7 +66,6 @@ export const FileInput = ({
               <span>Upload a file</span>
               <input
                 id="file-upload"
-                name="file-upload"
                 type="file"
                 className="sr-only"
                 multiple={multiple}

@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
 import { TextArea, TextInput, FileInput } from "@/components/form";
 import { Button } from "@/components/core";
 
@@ -9,10 +10,29 @@ type InputFields = {
 };
 
 export const Activities = () => {
-  const { register, handleSubmit, formState } = useForm<InputFields>();
+  const { register, handleSubmit, formState, getValues, setValue, control } =
+    useForm<InputFields>();
   const { errors } = formState;
 
   const onSubmit = (data: InputFields) => console.log(data);
+
+  const updateFiles = (files: FileList) => {
+    const existingFiles = getValues("images");
+    const dataTransfer = new DataTransfer();
+
+    for (let i = 0; i < existingFiles.length; i++) {
+      dataTransfer.items.add(existingFiles[i]);
+    }
+    for (let i = 0; i < files.length; i++) {
+      dataTransfer.items.add(files[i]);
+    }
+
+    setValue("images", dataTransfer.files, {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
+  };
 
   return (
     <div className="h-screen rounded-lg border">
@@ -50,12 +70,11 @@ export const Activities = () => {
           label="Images"
           multiple
           showAsterisk
+          onFilesDropped={updateFiles}
           className="w-1/3"
           dropAreaClassName="bg-white"
           description="Upload as many images as needed of your activity."
-          registration={register("images", {
-            required: "Upload at least one image",
-          })}
+          registration={register("images")}
           error={errors.images?.message}
         />
         <div className="mt-4">
@@ -66,6 +85,7 @@ export const Activities = () => {
           </Button>
         </div>
       </form>
+      <DevTool control={control} />
     </div>
   );
 };
