@@ -14,6 +14,7 @@ const items = [
   { name: "Dashboard", href: "/", icon: HomeIcon },
   { name: "Projects", href: "/projects", icon: FolderIcon },
   { name: "Activities", href: "/activities", icon: UsersIcon },
+  { name: "Modal Testing", href: "/modal-testing", icon: UsersIcon },
 ];
 
 type SidebarProps = {
