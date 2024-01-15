@@ -3,16 +3,8 @@ import {
   TextArea,
   TextInput,
   FileInput,
-  ComboBox,
-  Option,
 } from "@/components/form";
 import { Button } from "@/components/core";
-
-const options: Option[] = [
-  { value: 1, label: "Oil Change" },
-  { value: 2, label: "Tire Replacement" },
-  { value: 3, label: "Windshield Repair" },
-];
 
 type InputFields = {
   name: string;
@@ -45,16 +37,6 @@ export const Activities = () => {
           })}
           error={errors.name?.message}
         />
-        <br />
-
-        <div className="w-1/3">
-          <ComboBox
-            label="Services"
-            options={options}
-            onChange={(value) => console.log(value)}
-          />
-        </div>
-
         <br />
         <TextArea
           label="Biography"
