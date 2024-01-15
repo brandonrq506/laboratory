@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { FileInput, NumberInput, TextArea, TextInput } from "@/components/form";
+import { ServiceComboBox } from "./components/ServiceComboBox";
 import { Button } from "@/components/core";
 
 type InputFields = {
@@ -16,7 +17,7 @@ export const Activities = () => {
   const onSubmit = (data: InputFields) => console.log(data);
 
   return (
-    <div className="h-screen rounded-lg border">
+    <div className="min:h-screen rounded-lg border">
       <div className="text-center">
         <h4 className="text-lg font-semibold">Activities</h4>
       </div>
@@ -73,6 +74,10 @@ export const Activities = () => {
           })}
           error={errors.images?.message}
         />
+        <br />
+        <div className="w-1/3">
+          <ServiceComboBox />
+        </div>
 
         <div className="mt-4">
           <Button
