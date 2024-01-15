@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Combobox } from "@headlessui/react";
-import { clsx } from "clsx";
 
 /*
 The idea is to be able to easily create a ComboBox component with the options looking the way we need it.
@@ -23,22 +22,24 @@ export const CustomeComboBox = ({value, onChange}) => {
           //Defining the options here as you'd like.
         )}
       </ComboBox.Options>
+      <ComboBox.Description>description</ComboBox.Description>
+      <ComboBox.Error>error</ComboBox.Error>
     </ComboBox>
   );
 };
 
 */
 
-const people = [
-  { id: 1, name: "Leslie Alexander" },
-  { id: 2, name: "Brandon Alexander" },
-  { id: 3, name: "Hillary Alexander" },
-  { id: 4, name: "Roberto Alexander" },
-  { id: 5, name: "Alex Alexander" },
-  { id: 6, name: "Jason Alexander" },
-  { id: 7, name: "Villeda Alexander" },
-  { id: 8, name: "Monge Alexander" },
-];
+// const people = [
+//   { id: 1, name: "Leslie Alexander" },
+//   { id: 2, name: "Brandon Alexander" },
+//   { id: 3, name: "Hillary Alexander" },
+//   { id: 4, name: "Roberto Alexander" },
+//   { id: 5, name: "Alex Alexander" },
+//   { id: 6, name: "Jason Alexander" },
+//   { id: 7, name: "Villeda Alexander" },
+//   { id: 8, name: "Monge Alexander" },
+// ];
 
 type ComboBoxProps = {
   label: string;
@@ -46,15 +47,15 @@ type ComboBoxProps = {
 };
 
 export const ComboBoxV2 = ({ label, showAsterisk }: ComboBoxProps) => {
-  const [query, setQuery] = useState("");
+  // const [query, setQuery] = useState("");
   const [selectedPerson, setSelectedPerson] = useState(null);
 
-  const filteredPeople =
-    query === ""
-      ? people
-      : people.filter((person) => {
-          return person.name.toLowerCase().includes(query.toLowerCase());
-        });
+  // const filteredPeople =
+  //   query === ""
+  //     ? people
+  //     : people.filter((person) => {
+  //         return person.name.toLowerCase().includes(query.toLowerCase());
+  //       });
 
   return (
     <Combobox
@@ -70,8 +71,8 @@ export const ComboBoxV2 = ({ label, showAsterisk }: ComboBoxProps) => {
         <Combobox.Button className="flex w-full items-center">
           <Combobox.Input
             className="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            onChange={(event) => setQuery(event.target.value)}
-            displayValue={(person) => person?.name}
+            // onChange={(event) => setQuery(event.target.value)}
+            // displayValue={(person) => person?.name}
             autoComplete="off"
           />
           <ChevronUpDownIcon
