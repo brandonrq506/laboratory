@@ -1,13 +1,10 @@
 import { useForm } from "react-hook-form";
-import {
-  TextArea,
-  TextInput,
-  FileInput,
-} from "@/components/form";
+import { FileInput, NumberInput, TextArea, TextInput } from "@/components/form";
 import { Button } from "@/components/core";
 
 type InputFields = {
   name: string;
+  age: number;
   biography: string;
   images: FileList;
 };
@@ -36,6 +33,20 @@ export const Activities = () => {
             minLength: { value: 5, message: "Name is too short" },
           })}
           error={errors.name?.message}
+        />
+        <br />
+        <NumberInput
+          label="Age"
+          showAsterisk
+          placeholder="24"
+          className="w-1/3"
+          description="How old are you?"
+          registration={register("age", {
+            required: "Your age is required",
+            valueAsNumber: true,
+            min: { value: 18, message: "You must be 18 years old" },
+          })}
+          error={errors.age?.message}
         />
         <br />
         <TextArea
