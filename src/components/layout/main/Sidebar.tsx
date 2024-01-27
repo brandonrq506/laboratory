@@ -8,6 +8,7 @@ import {
   HomeIcon,
   UsersIcon,
   XMarkIcon,
+  DocumentTextIcon
 } from "@heroicons/react/24/outline";
 
 const items = [
@@ -15,6 +16,7 @@ const items = [
   { name: "Projects", href: "/projects", icon: FolderIcon },
   { name: "Activities", href: "/activities", icon: UsersIcon },
   { name: "Modal Testing", href: "/modal-testing", icon: UsersIcon },
+  { name: "Form Projects", href: "/form-projects", icon: DocumentTextIcon },
 ];
 
 type SidebarProps = {
