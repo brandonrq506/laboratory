@@ -4,7 +4,7 @@ import { MainLayout } from "@/components/layout";
 import { Activities } from "@/pages/Activities";
 import { Projects } from "@/pages/Projects";
 import { TestingModal } from "@/pages/TestingModal";
-import { FormsPage } from '@/pages/forms';
+import { FormsPage, NewLocation } from "@/pages/forms";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "form-projects",
         element: <FormsPage />,
+      },
+      {
+        path: "form-projects/new-location",
+        element: <NewLocation />,
       },
     ],
   },
