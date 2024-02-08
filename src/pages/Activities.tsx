@@ -1,11 +1,18 @@
 import { useForm } from "react-hook-form";
-import { FileInput, NumberInput, TextArea, TextInput } from "@/components/form";
+import {
+  FileInput,
+  NumberInput,
+  TextArea,
+  TextInput,
+  Select,
+} from "@/components/form";
 import { ServiceComboBox } from "./components/ServiceComboBox";
 import { Button } from "@/components/core";
 
 type InputFields = {
   name: string;
   age: number;
+  gender: string;
   biography: string;
   images: FileList;
 };
@@ -48,6 +55,23 @@ export const Activities = () => {
             min: { value: 18, message: "You must be 18 years old" },
           })}
           error={errors.age?.message}
+        />
+        <br />
+        <Select
+          label="Gender"
+          showAsterisk
+          className="w-1/3"
+          description="What are you?"
+          registration={register("gender", {
+            required: "You must select a gender",
+          })}
+          error={errors.gender?.message}
+          options={[
+            { label: "Select one...", value: "" },
+            { label: "Male", value: 1 },
+            { label: "Female", value: 2 },
+            { label: "Other", value: 3 },
+          ]}
         />
         <br />
         <TextArea
