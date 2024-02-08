@@ -2,6 +2,7 @@
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { PhotoIcon } from "@heroicons/react/24/outline";
+import { transformLabel } from "@/components/utils";
 import { InputWrapperPassProps } from "..";
 import { clsx } from "clsx";
 
@@ -24,6 +25,8 @@ export const FileInput = ({
   showAsterisk = false,
   accept = ".jpg, .jpeg, .png",
 }: FileProps) => {
+  const inputUniqueId = `file-input-${transformLabel(label)}`;
+
   return (
     <div className={clsx("col-span-full", className)}>
       {/* Label */}
@@ -48,15 +51,15 @@ export const FileInput = ({
           />
           <div className="mt-4 flex text-sm leading-6 text-gray-600">
             <label
-              htmlFor="file-upload"
+              htmlFor={inputUniqueId}
               className={clsx(
                 "relative cursor-pointer rounded-md  font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500",
                 error && "text-red-700 ring-red-300 focus:ring-red-500",
               )}>
               <span>Upload a file</span>
               <input
-                id="file-upload"
-                name="file-upload"
+                id={inputUniqueId}
+                data-testid={inputUniqueId}
                 type="file"
                 className="sr-only"
                 multiple={multiple}

@@ -25,13 +25,13 @@ export const Select = ({
   error,
   options,
 }: SelectProps) => {
-  const transformedLabel = transformLabel(label);
-  const selectId = `select-input-${transformedLabel}`;
+  const inputUniqueId = `select-input-${transformLabel(label)}`;
+
 
   return (
     <div className={clsx(className)}>
       <label
-        htmlFor={selectId}
+        htmlFor={inputUniqueId}
         className="block text-sm font-medium leading-6 text-gray-900">
         {label}
         {showAsterisk && <span className="ml-1 text-red-700">*</span>}
@@ -39,8 +39,8 @@ export const Select = ({
 
       <div className="relative mt-2">
         <select
-          id={selectId}
-          data-testid={selectId}
+          id={inputUniqueId}
+          data-testid={inputUniqueId}
           {...registration}
           className={clsx(
             "mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6",
