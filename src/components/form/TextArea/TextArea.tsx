@@ -1,5 +1,6 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import { InputWrapper, InputWrapperPassProps } from "..";
+import { transformLabel } from "@/components/utils";
 import { clsx } from "clsx";
 
 const sizes = {
@@ -29,6 +30,8 @@ export function TextArea({
   placeholder,
   disabled,
 }: Props) {
+  const inputUniqueId = `textarea-input-${transformLabel(label)}`;
+  
   return (
     <InputWrapper
       wrapperClassName={wrapperClassName}
@@ -38,6 +41,8 @@ export function TextArea({
       description={description}
       error={error}>
       <textarea
+        id={inputUniqueId}
+        data-testid={inputUniqueId}
         rows={sizes[size]}
         disabled={disabled}
         placeholder={placeholder}

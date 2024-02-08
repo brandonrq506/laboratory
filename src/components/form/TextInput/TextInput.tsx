@@ -1,5 +1,6 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 import { InputWrapper, InputWrapperPassProps } from "..";
+import { transformLabel } from "@/components/utils";
 import { clsx } from "clsx";
 
 type Types = "text" | "password" | "email" | "search" | "url";
@@ -24,6 +25,8 @@ export const TextInput = ({
   description,
   error,
 }: InputProps) => {
+  const inputUniqueId = `text-input-${transformLabel(label)}`;
+
   return (
     <InputWrapper
       wrapperClassName={wrapperClassName}
@@ -33,6 +36,8 @@ export const TextInput = ({
       description={description}
       error={error}>
       <input
+        id={inputUniqueId}
+        data-testid={inputUniqueId}
         type={type}
         disabled={disabled}
         placeholder={placeholder}

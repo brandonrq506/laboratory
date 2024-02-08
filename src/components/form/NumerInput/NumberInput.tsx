@@ -1,5 +1,6 @@
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import { UseFormRegisterReturn } from "react-hook-form";
+import { transformLabel } from "@/components/utils";
 import { clsx } from "clsx";
 
 type InputProps = {
@@ -21,6 +22,8 @@ export const NumberInput = ({
   description,
   error,
 }: InputProps) => {
+  const inputUniqueId = `numeric-input-${transformLabel(label)}`;
+
   return (
     <div className={clsx(className)}>
       <label className="block text-sm font-medium leading-6 text-gray-900">
@@ -28,6 +31,8 @@ export const NumberInput = ({
         {showAsterisk && <span className="ml-1 text-red-700">*</span>}
         <div className="relative mt-2">
           <input
+            id={inputUniqueId}
+            data-testid={inputUniqueId}
             type="number"
             placeholder={placeholder}
             aria-invalid={!!error}
