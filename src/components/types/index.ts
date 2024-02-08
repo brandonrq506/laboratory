@@ -1,1 +1,5 @@
-export type Option = { value: number | string; label: string };
+export type Option = {
+  value: number | string;
+  label: string;
+  disabled?: boolean;
+};
