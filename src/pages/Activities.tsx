@@ -21,7 +21,9 @@ export const Activities = () => {
   const { register, handleSubmit, formState } = useForm<InputFields>();
   const { errors } = formState;
 
-  const onSubmit = (data: InputFields) => console.log(data);
+  const onSubmit = (data: InputFields) => {
+    data;
+  };
 
   return (
     <div className="min:h-screen rounded-lg border">

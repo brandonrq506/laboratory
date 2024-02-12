@@ -1,21 +1,25 @@
 /*
-TODO:
-- Remove the Dialog and Transition components.
-- There must be a Base ComboBox which literally only shows options
-- Then there must be the one who allows for groups, options, and whether those options are persistent.
-
-*/
+ *TODO:
+ *- Remove the Dialog and Transition components.
+ *- There must be a Base ComboBox which literally only shows options
+ *- Then there must be the one who allows for groups, options, and whether those options are persistent.
+ *
+ */
 
 import { Fragment, useState } from "react";
 import { Combobox, Dialog, Transition } from "@headlessui/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { clsx } from "clsx";
 import {
-  DocumentPlusIcon,
-  FolderPlusIcon,
+  /*
+   * DocumentPlusIcon,
+   * FolderPlusIcon,
+   */
   FolderIcon,
-  HashtagIcon,
-  TagIcon,
+  /*
+   * HashtagIcon,
+   * TagIcon,
+   */
 } from "@heroicons/react/24/outline";
 
 const projects = [
@@ -25,12 +29,15 @@ const projects = [
   // More projects...
 ];
 const recent = [projects[0]];
-const quickActions = [
-  { name: "Add new file...", icon: DocumentPlusIcon, shortcut: "N", url: "#" },
-  { name: "Add new folder...", icon: FolderPlusIcon, shortcut: "F", url: "#" },
-  { name: "Add hashtag...", icon: HashtagIcon, shortcut: "H", url: "#" },
-  { name: "Add label...", icon: TagIcon, shortcut: "L", url: "#" },
-];
+
+/*
+ * const quickActions = [
+ *   { name: "Add new file...", icon: DocumentPlusIcon, shortcut: "N", url: "#" },
+ *   { name: "Add new folder...", icon: FolderPlusIcon, shortcut: "F", url: "#" },
+ *   { name: "Add hashtag...", icon: HashtagIcon, shortcut: "H", url: "#" },
+ *   { name: "Add label...", icon: TagIcon, shortcut: "L", url: "#" },
+ * ];
+ */
 
 export function DialogComboBox() {
   const [query, setQuery] = useState("");
@@ -124,7 +131,7 @@ export function DialogComboBox() {
                                   {active && (
                                     <span
                                       className="ml-3 flex-none text-indigo-100"
-                                      onClick={() => console.log("Branodn")}>
+                                      onClick={() => {}}>
                                       Jump to...
                                     </span>
                                   )}
@@ -148,7 +155,7 @@ export function DialogComboBox() {
                     }
                   */}
                     {/* Quick Actions */}
-                    {query === "" && (
+                    {/* {query === "" && (
                       <li className="p-2">
                         <h2 className="sr-only">Quick actions</h2>
                         <ul className="text-sm text-gray-700">
@@ -192,7 +199,7 @@ export function DialogComboBox() {
                           ))}
                         </ul>
                       </li>
-                    )}
+                    )} */}
                   </Combobox.Options>
                 )}
 

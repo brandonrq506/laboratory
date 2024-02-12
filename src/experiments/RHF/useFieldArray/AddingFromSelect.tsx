@@ -2,18 +2,18 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { TextInput } from "@/components/form";
 import { Button } from "@/components/core";
 
-/* 
-Questions:
-
-- Fields = 0 by default, meaning use adds projects as he clicks.
-- Video shows 1 field by default, meaning user gets one by default with default information.
-- Experiment: Create a pre-defined array of Projects and see if they are all added to form.
-- Problem: These will be added to the form values. You need them to be like a 'Add Button'.
-
-ANSWER: By adding a select, but not registering it, you can allow the user to choose Projects
-and add those projects to the form. By default projects on the Select are not added to the form.
-The use must click on them to add them.
-*/
+/*
+ *Questions:
+ *
+ *- Fields = 0 by default, meaning use adds projects as he clicks.
+ *- Video shows 1 field by default, meaning user gets one by default with default information.
+ *- Experiment: Create a pre-defined array of Projects and see if they are all added to form.
+ *- Problem: These will be added to the form values. You need them to be like a 'Add Button'.
+ *
+ *ANSWER: By adding a select, but not registering it, you can allow the user to choose Projects
+ *and add those projects to the form. By default projects on the Select are not added to the form.
+ *The use must click on them to add them.
+ */
 
 type FormData = {
   firstName: string;
@@ -40,7 +40,9 @@ export const AddingFromSelect = () => {
     },
   });
 
-  const onSubmit = (data: FormData) => console.log(data);
+  const onSubmit = (data: FormData) => {
+    data;
+  };
 
   return (
     <div>

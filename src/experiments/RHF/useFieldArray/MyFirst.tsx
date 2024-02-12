@@ -2,14 +2,14 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { TextInput } from "@/components/form";
 import { Button } from "@/components/core";
 
-/* 
-Greatness:
-- Complete functional useFieldsArray
-- Has dynamic delete, can't delete first project
-- One project is by default and has 2 technologies by default
-- Other projects will required 1 technology and secondary is optional
-- Optional technology has been set to be undefined by default
-*/
+/*
+ *Greatness:
+ *- Complete functional useFieldsArray
+ *- Has dynamic delete, can't delete first project
+ *- One project is by default and has 2 technologies by default
+ *- Other projects will required 1 technology and secondary is optional
+ *- Optional technology has been set to be undefined by default
+ */
 
 type FormData = {
   firstName: string;
@@ -51,7 +51,9 @@ export const MyFirst = () => {
       },
     },
   });
-  const onSubmit = (data: FormData) => console.log(data);
+  const onSubmit = (data: FormData) => {
+    data;
+  };
 
   return (
     <div>

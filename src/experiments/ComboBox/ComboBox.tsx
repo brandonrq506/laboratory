@@ -29,7 +29,7 @@ type ComboBoxProps = {
 export const ComboBox = ({
   onChange,
   selectedOption,
-  dynamicOption = false,
+  // dynamicOption = false,
   showAsterisk = false,
   options = [],
   label,
@@ -40,7 +40,7 @@ export const ComboBox = ({
   error,
 }: ComboBoxProps) => {
   const [query, setQuery] = useState("");
-  const option = { value: -1, label: query };
+  // const option = { value: -1, label: query };
 
   const filteredOptions =
     query === ""
@@ -49,7 +49,7 @@ export const ComboBox = ({
           return person.label.toLowerCase().includes(query.toLowerCase());
         });
 
-  const displayDynamicOption = dynamicOption && filteredOptions.length === 0;
+  // const displayDynamicOption = dynamicOption && filteredOptions.length === 0;
 
   return (
     <>
@@ -122,7 +122,7 @@ export const ComboBox = ({
                   )}
                 </Combobox.Option>
               ))}
-            {displayDynamicOption && (
+            {/* {displayDynamicOption && (
               <Combobox.Option
                 key={option.value}
                 value={option}
@@ -154,7 +154,7 @@ export const ComboBox = ({
                   </>
                 )}
               </Combobox.Option>
-            )}
+            )} */}
           </Combobox.Options>
           {error && (
             <div
