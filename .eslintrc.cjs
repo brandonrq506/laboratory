@@ -16,5 +16,9 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
+    "no-console": "warn",
+    // "sort-imports": "warn",
+    "no-duplicate-imports": "error",
+    "complexity": "warn",
   },
 };

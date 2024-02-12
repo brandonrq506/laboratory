@@ -1,5 +1,4 @@
-import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
-import { EnvelopeIcon } from "@heroicons/react/20/solid";
+import { EnvelopeIcon, ExclamationCircleIcon } from "@heroicons/react/20/solid";
 
 export const Projects = () => {
   return (
