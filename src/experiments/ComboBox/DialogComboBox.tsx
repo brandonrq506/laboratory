@@ -78,7 +78,8 @@ export function DialogComboBox() {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95">
             <Dialog.Panel className="mx-auto max-w-2xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
-              <Combobox onChange={(item) => (window.location = item.url)}>
+              <Combobox>
+              {/* <Combobox onChange={(item) => (window.location = item.url)}> */}
                 {/* Search Bar */}
                 <div className="relative">
                   <MagnifyingGlassIcon
