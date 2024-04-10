@@ -10,6 +10,7 @@ const items = [
   { name: "Why Rerender 2", href: "/why-rerenders-two", icon: FolderIcon },
   { name: "Scroll Bad", href: "/scroll-bad", icon: FolderIcon },
   { name: "Scroll Good", href: "/scroll-good", icon: FolderIcon },
+  { name: "When Rerenders 1", href: "/when-rerenders-one", icon: FolderIcon },
 ];
 
 type SidebarProps = {

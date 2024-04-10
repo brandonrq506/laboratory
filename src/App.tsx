@@ -6,6 +6,7 @@ import {
   WhyReactRerendersTwo,
   ScrollBad,
   ScrollGood,
+  WhenRerendersOne,
 } from "@/pages";
 
 const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "scroll-good",
         element: <ScrollGood />,
+      },
+      {
+        path: "when-rerenders-one",
+        element: <WhenRerendersOne />,
       },
     ],
   },
