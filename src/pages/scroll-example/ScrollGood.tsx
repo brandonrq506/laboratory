@@ -1,8 +1,3 @@
-
 export const ScrollGood = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return <div></div>;
 };

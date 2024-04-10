@@ -8,9 +8,7 @@ type LinkButtonProps = React.ComponentProps<typeof Button> & {
 export const LinkButton = ({ to, ...props }: LinkButtonProps) => {
   return (
     <Link to={to} className="w-full">
-      <Button {...props}>
-        {props.children}
-      </Button>
+      <Button {...props}>{props.children}</Button>
     </Link>
   );
 };

@@ -8,12 +8,16 @@ import {
   HomeIcon,
   UsersIcon,
   XMarkIcon,
-  DocumentTextIcon
+  DocumentTextIcon,
 } from "@heroicons/react/24/outline";
 
 const items = [
   { name: "Dashboard", href: "/", icon: HomeIcon },
-  { name: "Why Rerender 1", href: "/why-react-rerenders-one", icon: FolderIcon },
+  {
+    name: "Why Rerender 1",
+    href: "/why-react-rerenders-one",
+    icon: FolderIcon,
+  },
   { name: "Why Rerender 2", href: "/why-react-rerenders-two", icon: UsersIcon },
   { name: "Modal Testing", href: "/modal-testing", icon: UsersIcon },
   { name: "Form Projects", href: "/form-projects", icon: DocumentTextIcon },
@@ -92,8 +96,8 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                 className={({ isActive }) =>
                                   clsx(
                                     isActive
-                                      ? "*:text-indigo-600 bg-gray-50 text-indigo-600"
-                                      : "*:text-gray-400 text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
+                                      ? "bg-gray-50 text-indigo-600 *:text-indigo-600"
+                                      : "text-gray-700 *:text-gray-400 hover:bg-gray-50 hover:text-indigo-600",
                                     "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                                   )
                                 }>
@@ -137,8 +141,8 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                         className={({ isActive }) =>
                           clsx(
                             isActive
-                              ? "*:text-indigo-600 bg-gray-50 text-indigo-600"
-                              : "*:text-gray-400 text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
+                              ? "bg-gray-50 text-indigo-600 *:text-indigo-600"
+                              : "text-gray-700 *:text-gray-400 hover:bg-gray-50 hover:text-indigo-600",
                             "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                           )
                         }>
