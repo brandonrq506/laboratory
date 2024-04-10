@@ -13,8 +13,8 @@ import {
 
 const items = [
   { name: "Dashboard", href: "/", icon: HomeIcon },
-  { name: "Projects", href: "/projects", icon: FolderIcon },
-  { name: "Activities", href: "/activities", icon: UsersIcon },
+  { name: "Why Rerender 1", href: "/why-react-rerenders-one", icon: FolderIcon },
+  { name: "Why Rerender 2", href: "/why-react-rerenders-two", icon: UsersIcon },
   { name: "Modal Testing", href: "/modal-testing", icon: UsersIcon },
   { name: "Form Projects", href: "/form-projects", icon: DocumentTextIcon },
 ];

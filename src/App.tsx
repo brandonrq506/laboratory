@@ -1,10 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { MainLayout } from "@/components/layout";
-import { Activities } from "@/pages/Activities";
-import { Projects } from "@/pages/Projects";
-import { TestingModal } from "@/pages/TestingModal";
-import { FormsPage, NewLocation } from "@/pages/forms";
+import { WhyReactRerendersOne, WhyReactRerendersTwo } from "@/pages";
 
 const router = createBrowserRouter([
   {
@@ -12,24 +9,12 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: "activities",
-        element: <Activities />,
+        path: "why-react-rerenders-one",
+        element: <WhyReactRerendersOne />,
       },
       {
-        path: "projects",
-        element: <Projects />,
-      },
-      {
-        path: "modal-testing",
-        element: <TestingModal />,
-      },
-      {
-        path: "form-projects",
-        element: <FormsPage />,
-      },
-      {
-        path: "form-projects/new-location",
-        element: <NewLocation />,
+        path: "why-react-rerenders-two",
+        element: <WhyReactRerendersTwo />,
       },
     ],
   },
