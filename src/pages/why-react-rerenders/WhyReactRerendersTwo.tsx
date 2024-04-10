@@ -1,9 +1,5 @@
 import { useState } from "react";
 import { Button } from "@/components/core";
-/*
- * import { NoPropComponentMemo } from "./NoPropComponentMemo";
- * import { NoPropComponent } from "./NoPropComponent";
- */
 
 export const WhyReactRerendersTwo = () => {
   const [count, setCount] = useState(0);
@@ -16,9 +12,6 @@ export const WhyReactRerendersTwo = () => {
     <div className="min-h-screen content-center text-center">
       <h1>Count: {count}</h1>
       <Button onClick={handleIncrement}>Increment</Button>
-
-      {/* <NoPropComponentMemo /> */}
-      {/* <NoPropComponent /> */}
     </div>
   );
 };
