@@ -20,7 +20,7 @@ export const MainLayout = () => {
           <Bars3Icon className="h-6 w-6" aria-hidden="true" />
         </IconButton>
         <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">
-          Laboratory
+          Session #1
         </div>
       </Header>
 
