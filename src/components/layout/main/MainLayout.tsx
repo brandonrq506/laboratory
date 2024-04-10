@@ -1,7 +1,7 @@
 import { useDisclosure } from "@/hooks/useDisclosure";
 
 import { Bars3Icon } from "@heroicons/react/24/outline";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { IconButton } from "../../core";
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
@@ -19,9 +19,11 @@ export const MainLayout = () => {
           <span className="sr-only">Open sidebar</span>
           <Bars3Icon className="h-6 w-6" aria-hidden="true" />
         </IconButton>
-        <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">
+        <Link
+          to="/home"
+          className="flex-1 text-sm font-semibold leading-6 text-gray-900">
           Session #1
-        </div>
+        </Link>
       </Header>
 
       <main className="py-6 lg:pl-72">

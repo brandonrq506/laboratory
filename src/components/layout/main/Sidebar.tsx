@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import clsx from "clsx";
 
 const items = [
-  { name: "Home", href: "/", icon: HomeIcon },
+  { name: "Home", href: "/home", icon: HomeIcon },
   { name: "Why Rerender 1", href: "/why-rerenders-one", icon: FolderIcon },
   { name: "Why Rerender 2", href: "/why-rerenders-two", icon: FolderIcon },
   { name: "Scroll Bad", href: "/scroll-bad", icon: FolderIcon },

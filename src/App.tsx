@@ -7,6 +7,7 @@ import {
   ScrollBad,
   ScrollGood,
   WhenRerendersOne,
+  Home,
 } from "@/pages";
 
 const router = createBrowserRouter([
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <MainLayout />,
     children: [
+      {
+        path: 'home',
+        element: <Home />,
+      },
       {
         path: "why-rerenders-one",
         element: <WhyReactRerendersOne />,
