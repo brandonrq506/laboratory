@@ -1,26 +1,15 @@
+import { FolderIcon, HomeIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Dialog, Transition } from "@headlessui/react";
 import { NavLink } from "react-router-dom";
 import { Fragment } from "react";
 import clsx from "clsx";
 
-import {
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
-  XMarkIcon,
-  DocumentTextIcon,
-} from "@heroicons/react/24/outline";
-
 const items = [
   { name: "Dashboard", href: "/", icon: HomeIcon },
-  {
-    name: "Why Rerender 1",
-    href: "/why-react-rerenders-one",
-    icon: FolderIcon,
-  },
-  { name: "Why Rerender 2", href: "/why-react-rerenders-two", icon: UsersIcon },
-  { name: "Modal Testing", href: "/modal-testing", icon: UsersIcon },
-  { name: "Form Projects", href: "/form-projects", icon: DocumentTextIcon },
+  { name: "Why Rerender 1", href: "/why-rerenders-one", icon: FolderIcon },
+  { name: "Why Rerender 2", href: "/why-rerenders-two", icon: FolderIcon },
+  { name: "Scroll Bad", href: "/scroll-bad", icon: FolderIcon },
+  { name: "Scroll Good", href: "/scroll-good", icon: FolderIcon },
 ];
 
 type SidebarProps = {
@@ -96,8 +85,8 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                 className={({ isActive }) =>
                                   clsx(
                                     isActive
-                                      ? "bg-gray-50 text-indigo-600 *:text-indigo-600"
-                                      : "text-gray-700 *:text-gray-400 hover:bg-gray-50 hover:text-indigo-600",
+                                      ? "*:text-indigo-600 bg-gray-50 text-indigo-600"
+                                      : "*:text-gray-400 text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
                                     "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                                   )
                                 }>
@@ -141,8 +130,8 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                         className={({ isActive }) =>
                           clsx(
                             isActive
-                              ? "bg-gray-50 text-indigo-600 *:text-indigo-600"
-                              : "text-gray-700 *:text-gray-400 hover:bg-gray-50 hover:text-indigo-600",
+                              ? "*:text-indigo-600 bg-gray-50 text-indigo-600"
+                              : "*:text-gray-400 text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
                             "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                           )
                         }>
