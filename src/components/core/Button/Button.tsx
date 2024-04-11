@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { forwardRef } from "react";
+import { ArrowPathIcon } from "@heroicons/react/16/solid";
 
 const sizes = {
   xs: "px-2 py-1 text-xs rounded",
@@ -52,7 +53,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           className,
         )}
         {...props}>
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <ArrowPathIcon className="animate-spin size-3" />}
         {!isLoading && startIcon}
         <span className="mx-2">{props.children}</span> {!isLoading && endIcon}
       </button>

@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home, Derived } from "@/pages";
+import { Home, Derived, Contradictions ,Duplication } from "@/pages";
 import { MainLayout } from "@/components/layout";
 
 const router = createBrowserRouter([
@@ -14,6 +14,14 @@ const router = createBrowserRouter([
       {
         path: "/derived-state",
         element: <Derived />,
+      },
+      {
+        path: "/derived-state-two",
+        element: <Duplication />,
+      },
+      {
+        path: "/structure-state",
+        element: <Contradictions />,
       },
     ],
   },

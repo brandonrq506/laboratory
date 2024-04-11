@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import { FolderIcon } from "@heroicons/react/24/outline";
 
 const items = [
-  { name: "Home", href: "/home", icon: FolderIcon },
-  { name: "Derived State", href: "/derived-state", icon: FolderIcon },
+  // { name: "Home", href: "/home", icon: FolderIcon },
+  { name: "Derived State One", href: "/derived-state", icon: FolderIcon },
+  { name: "Derived State Two", href: "/derived-state-two", icon: FolderIcon },
+  { name: "State Structure", href: "/structure-state", icon: FolderIcon },
 ];
 
 export const Home = () => {
