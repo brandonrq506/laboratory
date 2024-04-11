@@ -6,6 +6,8 @@ const items = [
   { name: "Derived State One", href: "/derived-state", icon: FolderIcon },
   { name: "Derived State Two", href: "/derived-state-two", icon: FolderIcon },
   { name: "State Structure", href: "/structure-state", icon: FolderIcon },
+  { name: "Share State", href: "/share-state", icon: FolderIcon },
+  { name: "What Rerenders", href: "/what-rerenders", icon: FolderIcon },
 ];
 
 export const Home = () => {

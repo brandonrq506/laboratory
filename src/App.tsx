@@ -1,5 +1,12 @@
+import {
+  Home,
+  Derived,
+  Contradictions,
+  Duplication,
+  Accordion,
+  Scoreboard,
+} from "@/pages";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home, Derived, Contradictions ,Duplication } from "@/pages";
 import { MainLayout } from "@/components/layout";
 
 const router = createBrowserRouter([
@@ -23,6 +30,14 @@ const router = createBrowserRouter([
         path: "/structure-state",
         element: <Contradictions />,
       },
+      {
+        path: "/share-state",
+        element: <Accordion />,
+      },
+      {
+        path: "/what-rerenders",
+        element: <Scoreboard />,
+      }
     ],
   },
 ]);
