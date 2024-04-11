@@ -1,22 +1,13 @@
+import { FolderIcon, HomeIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Dialog, Transition } from "@headlessui/react";
 import { NavLink } from "react-router-dom";
 import { Fragment } from "react";
 import clsx from "clsx";
 
-import {
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
-  XMarkIcon,
-  DocumentTextIcon
-} from "@heroicons/react/24/outline";
 
 const items = [
-  { name: "Dashboard", href: "/", icon: HomeIcon },
+  { name: "Home", href: "/home", icon: HomeIcon },
   { name: "Projects", href: "/projects", icon: FolderIcon },
-  { name: "Activities", href: "/activities", icon: UsersIcon },
-  { name: "Modal Testing", href: "/modal-testing", icon: UsersIcon },
-  { name: "Form Projects", href: "/form-projects", icon: DocumentTextIcon },
 ];
 
 type SidebarProps = {
