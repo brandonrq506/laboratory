@@ -7,7 +7,7 @@ import clsx from "clsx";
 
 const items = [
   { name: "Home", href: "/home", icon: HomeIcon },
-  { name: "Projects", href: "/projects", icon: FolderIcon },
+  { name: "Derived State", href: "/derived-state", icon: FolderIcon },
 ];
 
 type SidebarProps = {

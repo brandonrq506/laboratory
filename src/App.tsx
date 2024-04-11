@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home } from "@/pages";
+import { Home, Derived } from "@/pages";
 import { MainLayout } from "@/components/layout";
 
 const router = createBrowserRouter([
@@ -10,6 +10,10 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <Home />,
+      },
+      {
+        path: "/derived-state",
+        element: <Derived />,
       },
     ],
   },
