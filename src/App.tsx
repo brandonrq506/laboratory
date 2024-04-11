@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import { MainLayout } from "@/components/layout";
 import {
   WhyReactRerendersOne,
