@@ -1,5 +1,12 @@
+import {
+  ChatRoom,
+  ChatRoomTwo,
+  Home,
+  Interval,
+  Synchronization,
+  UseEffectOne,
+} from "@/pages";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home, UseEffectOne, ChatRoom, ChatRoomTwo, Interval } from "@/pages";
 import { MainLayout } from "@/components/layout";
 
 const router = createBrowserRouter([
@@ -26,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/challenge/interval",
         element: <Interval />,
+      },
+      {
+        path: "/challenge/synchronization",
+        element: <Synchronization />,
       },
     ],
   },

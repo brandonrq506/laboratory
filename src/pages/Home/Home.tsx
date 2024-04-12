@@ -6,6 +6,7 @@ const items = [
   { name: "Chat Room", href: "/chat-room", icon: FolderIcon },
   { name: "Chat Room Two", href: "/chat-room-two", icon: FolderIcon },
   { name: "Interval Challenge", href: "/challenge/interval", icon: FolderIcon },
+  { name: "Synchronization Challenge", href: "/challenge/synchronization", icon: FolderIcon },
 ];
 
 export const Home = () => {

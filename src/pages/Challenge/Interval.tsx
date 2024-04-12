@@ -11,5 +11,5 @@ export const Interval = () => {
     setInterval(onTick, ONE_SECOND);
   }, []);
 
-  return <div>{count}</div>;
+  return <div className="mt-16 text-center">{count}</div>;
 };
