@@ -4,10 +4,11 @@ import { NavLink } from "react-router-dom";
 import { Fragment } from "react";
 import clsx from "clsx";
 
-
 const items = [
   { name: "Home", href: "/home", icon: HomeIcon },
-  { name: "Projects", href: "/projects", icon: FolderIcon },
+  { name: "Simple useEffect", href: "/use-effect-one", icon: FolderIcon },
+  { name: "Chat Room", href: "/chat-room", icon: FolderIcon },
+  { name: "Chat Room Two", href: "/chat-room-two", icon: FolderIcon },
 ];
 
 type SidebarProps = {

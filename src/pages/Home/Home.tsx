@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import { FolderIcon } from "@heroicons/react/24/outline";
 
 const items = [
-  { name: "Home", href: "/home", icon: FolderIcon },
+  { name: "Simple useEffect", href: "/use-effect-one", icon: FolderIcon },
+  { name: "Chat Room", href: "/chat-room", icon: FolderIcon },
+  { name: "Chat Room Two", href: "/chat-room-two", icon: FolderIcon },
 ];
 
 export const Home = () => {
