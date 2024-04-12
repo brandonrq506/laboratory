@@ -10,6 +10,8 @@ export const Synchronization = () => {
     }
     window.addEventListener("pointermove", handleMove);
     return () => window.removeEventListener("pointermove", handleMove);
+
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, []);
 
   return (
