@@ -7,6 +7,7 @@ import clsx from "clsx";
 const items = [
   { name: "Home", href: "/home", icon: HomeIcon },
   { name: "Online Component", href: "/online-component", icon: FolderIcon },
+  { name: "Mouse Component", href: "/mouse-component", icon: FolderIcon },
 ];
 
 type SidebarProps = {

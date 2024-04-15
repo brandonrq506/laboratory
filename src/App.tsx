@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home, Online } from "@/pages";
+import { Home, Online, Mouse } from "@/pages";
 import { MainLayout } from "@/components/layout";
 
 const router = createBrowserRouter([
@@ -14,7 +14,11 @@ const router = createBrowserRouter([
       {
         path: "/online-component",
         element: <Online />,
-      }
+      },
+      {
+        path: "/mouse-component",
+        element: <Mouse />,
+      },
     ],
   },
 ]);
