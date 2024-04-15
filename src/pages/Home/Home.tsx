@@ -3,6 +3,7 @@ import { FolderIcon } from "@heroicons/react/24/outline";
 
 const items = [
   { name: "Home", href: "/home", icon: FolderIcon },
+  { name: "Online Component", href: "/online-component", icon: FolderIcon },
 ];
 
 export const Home = () => {

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useDisclosure } from "@/hooks/useDisclosure";
 import { IconButton, LinkButton } from "@/components/core";
 import { Bars3Icon } from "@heroicons/react/24/outline";
@@ -7,6 +8,21 @@ import { Header } from "./Header";
 
 export const MainLayout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isOnline, setIsOnline] = useState(true);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
+
   return (
     <>
       <Sidebar isOpen={isOpen} onClose={onClose} />
@@ -21,6 +37,7 @@ export const MainLayout = () => {
         <LinkButton to="/home" className="text-lg font-semibold">
           Home
         </LinkButton>
+        {isOnline ? '✅' : '❌'}
       </Header>
 
       <main className="py-6 lg:pl-72">

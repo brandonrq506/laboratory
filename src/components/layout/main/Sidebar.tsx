@@ -4,10 +4,9 @@ import { NavLink } from "react-router-dom";
 import { Fragment } from "react";
 import clsx from "clsx";
 
-
 const items = [
   { name: "Home", href: "/home", icon: HomeIcon },
-  { name: "Projects", href: "/projects", icon: FolderIcon },
+  { name: "Online Component", href: "/online-component", icon: FolderIcon },
 ];
 
 type SidebarProps = {
@@ -83,8 +82,8 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                                 className={({ isActive }) =>
                                   clsx(
                                     isActive
-                                      ? "*:text-indigo-600 bg-gray-50 text-indigo-600"
-                                      : "*:text-gray-400 text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
+                                      ? "bg-gray-50 text-indigo-600 *:text-indigo-600"
+                                      : "text-gray-700 *:text-gray-400 hover:bg-gray-50 hover:text-indigo-600",
                                     "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                                   )
                                 }>
@@ -128,8 +127,8 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                         className={({ isActive }) =>
                           clsx(
                             isActive
-                              ? "*:text-indigo-600 bg-gray-50 text-indigo-600"
-                              : "*:text-gray-400 text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
+                              ? "bg-gray-50 text-indigo-600 *:text-indigo-600"
+                              : "text-gray-700 *:text-gray-400 hover:bg-gray-50 hover:text-indigo-600",
                             "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                           )
                         }>

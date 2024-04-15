@@ -1,0 +1,19 @@
+
+
+Source: https://react.dev/learn/synchronizing-with-effects#controlling-non-react-widgets
+
+Cuáles son las únicas razones válidas para usar useEffect?
+
+1. Controlar Widgets que no sean componentes de React. ❌
+  - Existen librerías equivalentes en React con React components.
+  - La libreria de google-maps cuenta con optiones como react-google-maps.
+
+2. Suscribirse a eventos del navegador. ✅
+  - Es actualmente el principal uso que se le da a los custom hooks.
+
+3. Activar animaciones. ❌
+  - Librerias de UI como HeadlessUI vienen con esta lógica abstraida
+  - El componente "Transition" hace esto por nosotros.
+
+4. Obtener información de un API.  ❌
+  - Librerias como SWR y Tanstack Query manejan estos casos.

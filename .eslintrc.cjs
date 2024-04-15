@@ -32,7 +32,7 @@ module.exports = {
     "multiline-comment-style": "error",
     "no-await-in-loop": "error",
     "no-alert": "error",
-    "no-console": "warn",
+    // "no-console": "warn",
     "no-duplicate-imports": "error",
     "no-implicit-coercion": "error",
     "no-lonely-if": "error",
