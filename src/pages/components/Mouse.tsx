@@ -6,7 +6,6 @@ const tenthOfSecond = 1000;
 export const Mouse = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [delayedValueOne, setDelayedValueOne] = useState(position);
-  const [delayedValueTwo, setDelayedValueTwo] = useState(delayedValueOne);
 
   useEffect(() => {
     function handleMove(e: PointerEvent) {
@@ -22,17 +21,10 @@ export const Mouse = () => {
     }, tenthOfSecond);
   }, [position]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setDelayedValueTwo(delayedValueOne);
-    }, tenthOfSecond);
-  }, [delayedValueOne]);
-
   return (
     <div>
       <Dot opacity={1} position={position} />
       <Dot opacity={0.8} position={delayedValueOne} />
-      <Dot opacity={0.8} position={delayedValueTwo} />
     </div>
   );
 };
