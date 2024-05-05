@@ -31,7 +31,7 @@ export function TextArea({
   disabled,
 }: Props) {
   const inputUniqueId = `textarea-input-${transformLabel(label)}`;
-  
+
   return (
     <InputWrapper
       wrapperClassName={wrapperClassName}
@@ -50,7 +50,8 @@ export function TextArea({
         className={clsx(
           "block w-full rounded-md border-0 py-1.5 text-sm font-light text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6",
           "disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200",
-          error && "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500",
+          error &&
+            "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500",
           className,
         )}
       />

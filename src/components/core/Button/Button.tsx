@@ -10,9 +10,12 @@ const sizes = {
 };
 
 const variants = {
-  primary: "bg-blue-600 text-white hover:bg-blue-500 focus-visible:outline-blue-600",
-  secondary: "bg-white text-blue-600 hover:bg-gray-100 focus-visible:outline-gray-200 border border-gray-200",
-  danger: "bg-red-600 text-white hover:bg-red-500 focus-visible:outline-red-600",
+  primary:
+    "bg-blue-600 text-white hover:bg-blue-500 focus-visible:outline-blue-600",
+  secondary:
+    "bg-white text-blue-600 hover:bg-gray-100 focus-visible:outline-gray-200 border border-gray-200",
+  danger:
+    "bg-red-600 text-white hover:bg-red-500 focus-visible:outline-red-600",
   info: "bg-yellow-600 text-white hover:bg-yellow-500 focus-visible:outline-yellow-600",
 };
 

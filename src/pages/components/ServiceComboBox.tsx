@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { ComboBox, Option } from "@/experiments";
+import { ComboBox } from "@/experiments";
+import { Option } from "@/types/core";
 
-/* 
+/*
  *TODO:
  *1. Add Fake API call to get services.
- *2. Customize to accept on change that will open the modal, etc. 
+ *2. Customize to accept on change that will open the modal, etc.
  */
 
 const options: Option[] = [

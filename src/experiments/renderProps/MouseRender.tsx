@@ -7,14 +7,14 @@ type MouseWithCatProps = {
 export const MouseRender = ({ mouseRender }: MouseWithCatProps) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>,) => {
+  const handleMouseMove = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
     setMousePosition({ x: event.clientX, y: event.clientY });
   };
 
   return (
-    <div
-      className="bg-white h-full"
-      onMouseMove={handleMouseMove}>
+    <div className="h-full bg-white" onMouseMove={handleMouseMove}>
       {mouseRender(mousePosition)}
     </div>
   );

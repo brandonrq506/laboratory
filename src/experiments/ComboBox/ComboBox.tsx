@@ -5,12 +5,8 @@ import {
   ExclamationCircleIcon,
 } from "@heroicons/react/20/solid";
 import { Combobox } from "@headlessui/react";
+import { Option } from "@/types/core";
 import { clsx } from "clsx";
-
-export type Option = {
-  value: number;
-  label: string;
-};
 
 type ComboBoxProps = {
   onChange: (value: Option | null) => void;
