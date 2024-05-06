@@ -11,6 +11,8 @@ import { clsx } from "clsx";
  *- Placeholder
  *- Description
  *- Error message
+ *- Loading state
+ *- Support for disable options
  */
 
 const filterOptions = (query: string, options: Option[]) => {
