@@ -14,7 +14,7 @@ export const Projects = () => {
     useForm<FormData>();
   const { errors } = formState;
 
-  const onSubmit = (data: FormData) => {data.confirmPassword};
+  const onSubmit = (data: FormData) => console.log(data);
 
   return (
     <>
@@ -39,7 +39,7 @@ export const Projects = () => {
               message: "Password must have at least 8 characters",
             },
           })}
-          description="Make sure it's at least 15 characters OR at least 8 characters including a number and a lowercase letter."
+          description="Minimum of 8 characters is required to be secure."
           error={errors.password?.message}
         />
         <br />

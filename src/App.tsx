@@ -1,10 +1,14 @@
+import {
+  FormsPage,
+  NewLocation,
+  LastName,
+  DynamicPassword,
+} from "@/pages/forms";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import { MainLayout } from "@/components/layout";
 import { Activities } from "@/pages/Activities";
 import { Projects } from "@/pages/Projects";
 import { TestingModal } from "@/pages/TestingModal";
-import { FormsPage, NewLocation } from "@/pages/forms";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +34,14 @@ const router = createBrowserRouter([
       {
         path: "form-projects/new-location",
         element: <NewLocation />,
+      },
+      {
+        path: "form-projects/shouldunregister-1",
+        element: <LastName />,
+      },
+      {
+        path: "form-projects/shouldunregister-2",
+        element: <DynamicPassword />,
       },
     ],
   },
