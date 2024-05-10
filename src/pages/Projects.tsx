@@ -14,7 +14,7 @@ export const Projects = () => {
     useForm<FormData>();
   const { errors } = formState;
 
-  const onSubmit = (data: FormData) => console.log(data);
+  const onSubmit = (data: FormData) => data;
 
   return (
     <>
