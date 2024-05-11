@@ -5,6 +5,7 @@ import {
   LastName,
   DynamicPassword,
   Unregister,
+  AsyncFormState,
 } from "@/pages/forms";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout } from "@/components/layout";
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "form-projects/formstate",
         element: <FormState />,
+      },
+      {
+        path: "form-projects/formstate-async",
+        element: <AsyncFormState />,
       },
     ],
   },

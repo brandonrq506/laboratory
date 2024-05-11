@@ -27,6 +27,7 @@ export const FormsPage = () => {
         <LinkButton to="unregister">Unregister</LinkButton>
         <p>Experience the form-state variants</p>
         <LinkButton to="formstate">Form State</LinkButton>
+        <LinkButton to="formstate-async">Async Form State</LinkButton>
       </section>
     </div>
   );
