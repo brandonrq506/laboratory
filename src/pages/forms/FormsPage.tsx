@@ -21,6 +21,10 @@ export const FormsPage = () => {
           password and confirmation password are the same
         </p>
         <LinkButton to="deps-1">Deps</LinkButton>
+        <p>
+          This form explores Unregister differences compared to shouldUnregister
+        </p>
+        <LinkButton to="unregister">Unregister</LinkButton>
       </section>
     </div>
   );

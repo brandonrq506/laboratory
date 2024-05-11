@@ -3,6 +3,7 @@ import {
   NewLocation,
   LastName,
   DynamicPassword,
+  Unregister,
 } from "@/pages/forms";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout } from "@/components/layout";
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "form-projects/deps-1",
         element: <DynamicPassword />,
+      },
+      {
+        path: "form-projects/unregister",
+        element: <Unregister />,
       },
     ],
   },

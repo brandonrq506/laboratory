@@ -4,17 +4,9 @@ import { TextInput } from "@/components/form";
 import { Button } from "@/components/core";
 
 /*
- * Features: Register - shouldUnregister
- * - Conditional registration
- * - Conditional unregistration
- * - Conditional focus
- * - Focus with select
- */
-
-/**
- * To Play with the features on this concept:
- * - shouldUnregister: true
- * - shouldUnregister: false
+ * Features: Unregister
+ * - Truly seems like a programmatic way to remove a field from the form
+ * - as opposed to shouldUnregister, which is more of a declarative way.
  */
 
 type FormValues = {
@@ -22,14 +14,15 @@ type FormValues = {
   lastName: string;
 };
 
-export const LastName = () => {
+export const Unregister = () => {
   const [hasLastName, setHasLastName] = useState(true);
-  const { formState, handleSubmit, register, setFocus } = useForm<FormValues>({
-    defaultValues: {
-      firstName: "Brandon",
-      lastName: "Ramirez",
-    },
-  });
+  const { formState, handleSubmit, register, setFocus, unregister } =
+    useForm<FormValues>({
+      defaultValues: {
+        firstName: "Brandon",
+        lastName: "Ramirez",
+      },
+    });
   const { errors } = formState;
 
   const onSubmit = (data: FormValues) => console.log(data);
@@ -60,7 +53,11 @@ export const LastName = () => {
           id="hasLastName"
           type="checkbox"
           checked={hasLastName}
-          onChange={(e) => setHasLastName(e.target.checked)}
+          onChange={(e) => {
+            const isChecked = e.target.checked;
+            if (!isChecked) unregister("lastName");
+            setHasLastName(isChecked);
+          }}
         />
       </div>
 
@@ -76,7 +73,6 @@ export const LastName = () => {
                 !/\s{2,}/.test(value) ||
                 "Last name cannot contain sequential spaces.",
             },
-            shouldUnregister: true,
           })}
           error={errors.lastName?.message}
         />
