@@ -25,6 +25,8 @@ export const FormsPage = () => {
           This form explores Unregister differences compared to shouldUnregister
         </p>
         <LinkButton to="unregister">Unregister</LinkButton>
+        <p>Experience the form-state variants</p>
+        <LinkButton to="formstate">Form State</LinkButton>
       </section>
     </div>
   );

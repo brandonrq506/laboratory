@@ -1,5 +1,6 @@
 import {
   FormsPage,
+  FormState,
   NewLocation,
   LastName,
   DynamicPassword,
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "form-projects/unregister",
         element: <Unregister />,
+      },
+      {
+        path: "form-projects/formstate",
+        element: <FormState />,
       },
     ],
   },
