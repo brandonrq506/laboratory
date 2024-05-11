@@ -81,7 +81,7 @@ export const DynamicPassword = () => {
       },
     });
   const { errors } = formState;
-  const onSubmit = (data: FormData) => data;
+  const onSubmit = (data: FormData) => console.log(data);
 
   const securityLevel = watch("securityLevel");
 

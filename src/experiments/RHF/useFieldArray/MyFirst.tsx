@@ -51,9 +51,7 @@ export const MyFirst = () => {
       },
     },
   });
-  const onSubmit = (data: FormData) => {
-    data;
-  };
+  const onSubmit = (data: FormData) => console.log(data);
 
   return (
     <div>

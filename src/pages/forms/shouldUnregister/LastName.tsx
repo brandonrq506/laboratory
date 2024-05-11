@@ -25,8 +25,7 @@ export const LastName = () => {
   });
   const { errors } = formState;
 
-  //console.log(data)
-  const onSubmit = (data: FormValues) => data;
+  const onSubmit = (data: FormValues) => console.log(data);
 
   useEffect(() => {
     if (hasLastName) setFocus("lastName");
