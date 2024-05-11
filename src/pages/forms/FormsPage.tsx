@@ -11,9 +11,16 @@ export const FormsPage = () => {
       </section>
 
       <section className="my-4">
-        <h2 className="font-bold">ShouldUnregister</h2>
-        <LinkButton to="shouldunregister-1">Optional Last Name</LinkButton>
-        <LinkButton to="shouldunregister-2">Dynamic pswd strengh</LinkButton>
+        <p>
+          Allows to enter a First Name and optionally a last name, the last name
+          if not entered, is not sent in the POST request
+        </p>
+        <LinkButton to="shouldunregister-1">Should Unregister</LinkButton>
+        <p>
+          Variable password security based on Select, as well as ensuring
+          password and confirmation password are the same
+        </p>
+        <LinkButton to="deps-1">Deps</LinkButton>
       </section>
     </div>
   );

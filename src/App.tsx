@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <LastName />,
       },
       {
-        path: "form-projects/shouldunregister-2",
+        path: "form-projects/deps-1",
         element: <DynamicPassword />,
       },
     ],
