@@ -28,6 +28,9 @@ export const FormsPage = () => {
         <p>Experience the form-state variants</p>
         <LinkButton to="formstate">Form State</LinkButton>
         <LinkButton to="formstate-async">Async Form State</LinkButton>
+        <p>Different options to reset a form state</p>
+        <LinkButton to="reset-partial">Partial Reset</LinkButton>
+        <LinkButton to="reset-submit">Reset Submit</LinkButton>
       </section>
     </div>
   );

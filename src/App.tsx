@@ -1,11 +1,13 @@
 import {
+  AsyncFormState,
+  DynamicPassword,
   FormsPage,
   FormState,
-  NewLocation,
   LastName,
-  DynamicPassword,
+  NewLocation,
+  ResetPartial,
+  ResetSubmit,
   Unregister,
-  AsyncFormState,
 } from "@/pages/forms";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout } from "@/components/layout";
@@ -58,6 +60,14 @@ const router = createBrowserRouter([
         path: "form-projects/formstate-async",
         element: <AsyncFormState />,
       },
+      {
+        path: "form-projects/reset-partial",
+        element: <ResetPartial />,
+      },
+      {
+        path: "form-projects/reset-submit",
+        element: <ResetSubmit />,
+      }
     ],
   },
 ]);
