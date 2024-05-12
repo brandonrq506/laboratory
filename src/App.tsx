@@ -7,6 +7,7 @@ import {
   NewLocation,
   ResetPartial,
   ResetSubmit,
+  SetError,
   Unregister,
 } from "@/pages/forms";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -67,7 +68,11 @@ const router = createBrowserRouter([
       {
         path: "form-projects/reset-submit",
         element: <ResetSubmit />,
-      }
+      },
+      {
+        path: "form-projects/set-error",
+        element: <SetError />,
+      },
     ],
   },
 ]);

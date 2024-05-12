@@ -31,6 +31,8 @@ export const FormsPage = () => {
         <p>Different options to reset a form state</p>
         <LinkButton to="reset-partial">Partial Reset</LinkButton>
         <LinkButton to="reset-submit">Reset Submit</LinkButton>
+        <p>Set Error</p>
+        <LinkButton to="set-error">Set Error</LinkButton>
       </section>
     </div>
   );
