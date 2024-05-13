@@ -33,6 +33,8 @@ export const FormsPage = () => {
         <LinkButton to="reset-submit">Reset Submit</LinkButton>
         <p>Set Error</p>
         <LinkButton to="set-error">Set Error</LinkButton>
+        <p>Get Field State</p>
+        <LinkButton to="get-field-state">Get Field State</LinkButton>
       </section>
     </div>
   );

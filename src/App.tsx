@@ -3,6 +3,7 @@ import {
   DynamicPassword,
   FormsPage,
   FormState,
+  GetFieldState,
   LastName,
   NewLocation,
   ResetPartial,
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         path: "form-projects/set-error",
         element: <SetError />,
+      },
+      {
+        path: "form-projects/get-field-state",
+        element: <GetFieldState />,
       },
     ],
   },
