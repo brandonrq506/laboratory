@@ -41,7 +41,6 @@ export const AddingFromSelect = () => {
   });
 
   const onSubmit = (data: FormData) => console.log(data);
-  
 
   return (
     <div>
