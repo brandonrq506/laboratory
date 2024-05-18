@@ -8,6 +8,7 @@ import {
 } from "@/components/form";
 import { ServiceComboBox } from "./components/ServiceComboBox";
 import { Button } from "@/components/core";
+import { ComboBoxV3 } from "@/experiments/ComboBox";
 
 type InputFields = {
   name: string;
@@ -57,6 +58,23 @@ export const Activities = () => {
           error={errors.age?.message}
         />
         <br />
+        <div className="w-1/3">
+          <ComboBoxV3
+            label="Testing"
+            name="testing"
+            showAsterisk
+            options={[
+              { value: 1, label: "Brandon" },
+              { value: 2, label: "John" },
+              { value: 3, label: "Doe" },
+            ]}
+            value={null}
+            onChange={() => {}}
+            onBlur={() => {}}
+            ref={null}
+          />
+        </div>
+        <br />
         <Select
           label="Gender"
           showAsterisk
@@ -67,7 +85,7 @@ export const Activities = () => {
           })}
           error={errors.gender?.message}
           options={[
-            { label: "Select one...", value: "" },
+            { label: "Select one...", value: -1 },
             { label: "Male", value: 1 },
             { label: "Female", value: 2 },
             { label: "Other", value: 3 },
