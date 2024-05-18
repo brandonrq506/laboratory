@@ -34,6 +34,7 @@ export const GetFieldState = () => {
         <p>{getFieldState("firstName", formState).isDirty && "Dirty"}</p>
         <p>{getFieldState("firstName", formState).isTouched && "Touched"}</p>
         <p>{getFieldState("firstName", formState).invalid && "Invalid"}</p>
+        <p>{getFieldState("firstName", formState).error?.message}</p>
 
         <TextInput
           label="Last Name"
@@ -46,6 +47,7 @@ export const GetFieldState = () => {
         <p>{getFieldState("lastName", formState).isDirty && "Dirty"}</p>
         <p>{getFieldState("lastName", formState).isTouched && "Touched"}</p>
         <p>{getFieldState("lastName", formState).invalid && "Invalid"}</p>
+        <p>{getFieldState("lastName", formState).error?.message}</p>
 
         <NumberInput
           label="Age"
@@ -58,6 +60,7 @@ export const GetFieldState = () => {
         <p>{getFieldState("age", formState).isDirty && "Dirty"}</p>
         <p>{getFieldState("age", formState).isTouched && "Touched"}</p>
         <p>{getFieldState("age", formState).invalid && "Invalid"}</p>
+        <p>{getFieldState("age", formState).error?.message}</p>
 
         <Button type="submit" className="mt-3">
           Submit
