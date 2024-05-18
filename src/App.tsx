@@ -9,6 +9,7 @@ import {
   ResetPartial,
   ResetSubmit,
   SetError,
+  Trigger,
   Unregister,
 } from "@/pages/forms";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
       {
         path: "form-projects/get-field-state",
         element: <GetFieldState />,
+      },
+      {
+        path: "form-projects/trigger",
+        element: <Trigger />,
       },
     ],
   },

@@ -12,3 +12,5 @@ export * from "./reset/ResetSubmit";
 
 export * from "./setError/SetError";
 export * from "./getFieldState/GetFieldState";
+
+export * from "./trigger/Trigger";
