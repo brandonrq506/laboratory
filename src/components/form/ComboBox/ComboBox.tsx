@@ -48,7 +48,7 @@ type Props = {
   error?: string;
 };
 
-export const ComboBoxV3 = ({
+export const ComboBox = ({
   options,
   label,
   config,
