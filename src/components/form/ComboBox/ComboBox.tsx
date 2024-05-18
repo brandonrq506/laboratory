@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import {
   CheckIcon,
   ChevronUpDownIcon,
@@ -48,7 +48,7 @@ type Props = {
   error?: string;
 };
 
-export const ComboBox = ({
+export const ComboBox = forwardRef<HTMLInputElement, Props>(({
   options,
   label,
   config,
@@ -59,9 +59,8 @@ export const ComboBox = ({
   onChange,
   onBlur,
   name,
-  ref,
   error,
-}: Props) => {
+}, ref) => {
   const [query, setQuery] = useState("");
 
   const filteredOptions = filterOptions(query, options);
@@ -156,4 +155,4 @@ export const ComboBox = ({
       )}
     </>
   );
-};
+});

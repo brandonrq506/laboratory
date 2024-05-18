@@ -37,6 +37,8 @@ export const FormsPage = () => {
         <LinkButton to="get-field-state">Get Field State</LinkButton>
         <p>Trigger</p>
         <LinkButton to="trigger">Trigger</LinkButton>
+        <p>Controller</p>
+        <LinkButton to="controller-one">Controller</LinkButton>
       </section>
     </div>
   );

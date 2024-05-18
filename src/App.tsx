@@ -1,5 +1,6 @@
 import {
   AsyncFormState,
+  ControllerOne,
   DynamicPassword,
   FormsPage,
   FormState,
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
       {
         path: "form-projects/trigger",
         element: <Trigger />,
+      },
+      {
+        path: "form-projects/controller-one",
+        element: <ControllerOne />,
       },
     ],
   },
