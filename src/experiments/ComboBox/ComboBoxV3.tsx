@@ -12,7 +12,6 @@ type Configuration = BaseConfig & (PersistentConfig | NonPersistentConfig);
 
 /*
  *Missing:
- *- Show asterisk if required.
  *- Placeholder
  *- Description
  *- Error message
@@ -44,6 +43,7 @@ type Props = {
   options: Option[];
   label: string;
   config?: Configuration;
+  showAsterisk?: boolean;
 
   value: Option | null;
   onChange: (value: Option | null) => void;
@@ -56,6 +56,8 @@ export const ComboBoxV3 = ({
   options,
   label,
   config,
+  showAsterisk = false,
+
   value,
   onChange,
   onBlur,
@@ -74,7 +76,7 @@ export const ComboBoxV3 = ({
   return (
     <Combobox as="div" value={value} onChange={onChange} nullable>
       <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">
-        {label}
+        {label} {showAsterisk && <span className="ml-1 text-red-700">*</span>}
       </Combobox.Label>
       <div className="relative mt-2">
         <Combobox.Input
