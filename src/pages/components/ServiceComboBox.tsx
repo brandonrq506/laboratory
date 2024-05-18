@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ComboBox } from "@/experiments";
+import { ComboBox } from "@/experiments/ComboBox";
 import { Option } from "@/types/core";
 
 /*

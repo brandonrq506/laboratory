@@ -8,17 +8,10 @@ import { Combobox } from "@headlessui/react";
 import { Option } from "@/types/core";
 import { clsx } from "clsx";
 
-// Configuration for additional option
 type BaseConfig = { text: string };
 type PersistentConfig = { isPersistent: true; showFirst: boolean };
 type NonPersistentConfig = { isPersistent?: false; showFirst?: false };
 type Configuration = BaseConfig & (PersistentConfig | NonPersistentConfig);
-
-/*
- *Missing:
- *- Placeholder
- *- Loading state
- */
 
 const filterOptions = (query: string, options: Option[]) => {
   const trimmedQuery = query.trim().toLowerCase();
@@ -55,7 +48,7 @@ type Props = {
   error?: string;
 };
 
-export const ComboBoxV3 = ({
+export const ComboBox = ({
   options,
   label,
   config,
