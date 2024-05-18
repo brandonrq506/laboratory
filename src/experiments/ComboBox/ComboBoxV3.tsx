@@ -4,9 +4,14 @@ import { Combobox } from "@headlessui/react";
 import { Option } from "@/types/core";
 import { clsx } from "clsx";
 
+// Configuration for additional option
+type BaseConfig = { text: string };
+type PersistentConfig = { isPersistent: true; showFirst: boolean };
+type NonPersistentConfig = { isPersistent?: false; showFirst?: false };
+type Configuration = BaseConfig & (PersistentConfig | NonPersistentConfig);
+
 /*
  *Missing:
- *- Configuration object for optional option.
  *- Show asterisk if required.
  *- Placeholder
  *- Description
@@ -20,9 +25,25 @@ const filterOptions = (query: string, options: Option[]) => {
   return options.filter((op) => op.label.toLowerCase().includes(trimmedQuery));
 };
 
+const addOption = (first: boolean, option: Option, options: Option[]) => {
+  return first ? [option, ...options] : [...options, option];
+};
+
+const handleConfiguration = (options: Option[], config: Configuration) => {
+  const { text, isPersistent = false, showFirst = false } = config;
+  const hasOptions = options.length > 0;
+  const option: Option = { value: -1, label: text };
+  const alwaysVisible = hasOptions && isPersistent;
+
+  if (alwaysVisible) return addOption(showFirst, option, options);
+  else if (hasOptions) return options;
+  else return [option];
+};
+
 type Props = {
   options: Option[];
   label: string;
+  config?: Configuration;
 
   value: Option | null;
   onChange: (value: Option | null) => void;
@@ -31,9 +52,10 @@ type Props = {
   ref: React.Ref<HTMLInputElement>;
 };
 
-export const ComboBox = ({
+export const ComboBoxV3 = ({
   options,
   label,
+  config,
   value,
   onChange,
   onBlur,
@@ -43,6 +65,11 @@ export const ComboBox = ({
   const [query, setQuery] = useState("");
 
   const filteredOptions = filterOptions(query, options);
+  const hasConfig = config !== undefined;
+
+  const finalOptions = hasConfig
+    ? handleConfiguration(filteredOptions, config)
+    : filteredOptions;
 
   return (
     <Combobox as="div" value={value} onChange={onChange} nullable>
@@ -56,7 +83,7 @@ export const ComboBox = ({
           name={name}
           ref={ref}
           onChange={(event) => setQuery(event.target.value)}
-          displayValue={(option) => option?.label}
+          displayValue={(option: Option | null) => option?.label ?? ""}
         />
         <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
           <ChevronUpDownIcon
@@ -65,9 +92,9 @@ export const ComboBox = ({
           />
         </Combobox.Button>
 
-        {filteredOptions.length > 0 && (
+        {finalOptions.length > 0 && (
           <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-            {filteredOptions.map((option) => (
+            {finalOptions.map((option) => (
               <Combobox.Option
                 key={option.value}
                 value={option}
