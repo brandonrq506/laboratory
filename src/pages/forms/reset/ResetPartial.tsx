@@ -90,6 +90,7 @@ export const ResetPartial = () => {
           However it will reset ALL Dirty & Touched state to false, including those of first and last name.
           Bottom line: First and last name can be completely different from default values, and they will
           appear as clean and untouched.
+          If you want to reset just "Age" and keep the rest as is, you must use resetField();
           */}
           <Button variant="danger" onClick={() => reset({ age: 30 })}>
             Just Age
