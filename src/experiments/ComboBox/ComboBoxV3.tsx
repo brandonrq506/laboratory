@@ -16,7 +16,6 @@ type Configuration = BaseConfig & (PersistentConfig | NonPersistentConfig);
  *- Description
  *- Error message
  *- Loading state
- *- Support for disable options
  */
 
 const filterOptions = (query: string, options: Option[]) => {
@@ -100,10 +99,12 @@ export const ComboBoxV3 = ({
               <Combobox.Option
                 key={option.value}
                 value={option}
-                className={({ active }) =>
+                disabled={option.disabled}
+                className={({ active, disabled }) =>
                   clsx(
                     "relative cursor-default select-none py-2 pl-3 pr-9",
                     active ? "bg-indigo-600 text-white" : "text-gray-900",
+                    disabled && "cursor-not-allowed opacity-60",
                   )
                 }>
                 {({ active, selected }) => (
