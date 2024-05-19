@@ -15,3 +15,4 @@ export * from "./getFieldState/GetFieldState";
 
 export * from "./trigger/Trigger";
 export * from "./controller/ControllerOne";
+export * from "./UseController/ControllerTwo";

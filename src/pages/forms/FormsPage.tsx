@@ -39,6 +39,7 @@ export const FormsPage = () => {
         <LinkButton to="trigger">Trigger</LinkButton>
         <p>Controller</p>
         <LinkButton to="controller-one">Controller</LinkButton>
+        <LinkButton to="controller-two">Controller Two</LinkButton>
       </section>
     </div>
   );
