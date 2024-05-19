@@ -60,7 +60,7 @@ export const ControlledComboBox = <T extends FieldValues>({
  * 5. The reason why I do { options, label, ...controllerProps } is so I don't have to manually pass each prop to
  *    useController. This way, I can pass all the props to useController without having to manually pass each prop.
  *
- * 6. I would have to do {options, label, name, rules, etc...} if I didn't use object spread.
- *    And then do useController({name, rules, etc...}) which is more verbose.
+ * 6. I would have to do ({options, label, name, rules, shouldUnregister, etc...}) if I didn't use object spread.
+ *    And then do useController({name, rules, shouldUnregister, etc...}) which is more verbose.
  *
  */
