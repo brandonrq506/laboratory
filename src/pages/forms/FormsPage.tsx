@@ -40,6 +40,8 @@ export const FormsPage = () => {
         <p>Controller</p>
         <LinkButton to="controller-one">Controller</LinkButton>
         <LinkButton to="controller-two">Controller Two</LinkButton>
+        <p>Form Provider and useFormContext</p>
+        <LinkButton to="context-provider">Provider Form</LinkButton>
       </section>
     </div>
   );

@@ -8,6 +8,7 @@ import {
   GetFieldState,
   LastName,
   NewLocation,
+  ProviderForm,
   ResetPartial,
   ResetSubmit,
   SetError,
@@ -92,7 +93,11 @@ const router = createBrowserRouter([
       {
         path: "form-projects/controller-two",
         element: <ControllerTwo />,
-      }
+      },
+      {
+        path: "form-projects/context-provider",
+        element: <ProviderForm />,
+      },
     ],
   },
 ]);
