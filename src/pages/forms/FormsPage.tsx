@@ -42,6 +42,8 @@ export const FormsPage = () => {
         <LinkButton to="controller-two">Controller Two</LinkButton>
         <p>Form Provider and useFormContext</p>
         <LinkButton to="context-provider">Provider Form</LinkButton>
+        <p>Async Validation</p>
+        <LinkButton to="async-validation">Async Validation</LinkButton>
         <p>New Note Form</p>
         <LinkButton to="new-note">New Note Form</LinkButton>
       </section>
