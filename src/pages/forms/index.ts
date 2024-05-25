@@ -18,3 +18,5 @@ export * from "./controller/ControllerOne";
 export * from "./UseController/ControllerTwo";
 
 export * from "./ContextProvider/ProviderForm";
+
+export * from "./Forms/NewNoteForm";

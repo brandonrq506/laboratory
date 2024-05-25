@@ -8,6 +8,7 @@ import {
   GetFieldState,
   LastName,
   NewLocation,
+  NewNoteForm,
   ProviderForm,
   ResetPartial,
   ResetSubmit,
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
       {
         path: "form-projects/context-provider",
         element: <ProviderForm />,
+      },
+      {
+        path: "form-projects/new-note",
+        element: <NewNoteForm />,
       },
     ],
   },
