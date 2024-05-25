@@ -46,6 +46,8 @@ export const FormsPage = () => {
         <LinkButton to="async-validation">Async Validation</LinkButton>
         <p>New Note Form</p>
         <LinkButton to="new-note">New Note Form</LinkButton>
+        <p>Onboarding Form</p>
+        <LinkButton to="onboarding">Onboarding Form</LinkButton>
       </section>
     </div>
   );

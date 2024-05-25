@@ -17,7 +17,7 @@ import {
   Unregister,
 } from "@/pages/forms";
 
-import { AsyncValidation } from "@/experiments/forms";
+import { AsyncValidation, OnboardingForm } from "@/experiments/forms";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout } from "@/components/layout";
 import { Activities } from "@/pages/Activities";
@@ -108,6 +108,10 @@ const router = createBrowserRouter([
       {
         path: "form-projects/async-validation",
         element: <AsyncValidation />,
+      },
+      {
+        path: "form-projects/onboarding",
+        element: <OnboardingForm />,
       },
     ],
   },
