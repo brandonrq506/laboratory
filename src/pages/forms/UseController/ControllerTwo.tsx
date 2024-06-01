@@ -37,17 +37,21 @@ export const ControllerTwo = () => {
         <ControlledComboBox
           control={control}
           name="food"
-          label="Favorite Food"
+          showAsterisk
           options={PizzasAPI}
+          label="Favorite Food"
           rules={{ required: "I NEED to know your favorite food" }}
+          description="We'll use this information to plan out Team Building!"
         />
-
+        <br />
         <ControlledComboBox
           control={control}
           name="planet"
-          label="Favorite Planet"
+          showAsterisk
           options={PlanetsAPI}
+          label="Favorite Planet"
           rules={{ required: "Are you annoyed that Uranus is not an option?" }}
+          description="This helps up plan the Trivia games"
         />
 
         <Button type="submit" className="mt-3">

@@ -1,4 +1,5 @@
 export * from "./ComboBox/ComboBox";
+export * from "./ComboBox/ControlComboBox";
 export * from "./FileInput/FileInput";
 export * from "./InputWrapper/InputWrapper";
 export * from "./NumerInput/NumberInput";

@@ -3,30 +3,33 @@ import {
   useController,
   UseControllerProps,
 } from "react-hook-form";
-import { ComboBox } from "@/components/form";
-import { Option } from "@/types/core";
+import { ComboBox, ComboBoxProps } from "@/components/form";
 
-type ControlledComboBoxProps<T extends FieldValues> = UseControllerProps<T> & {
-  options: Option[];
-  label: string;
-};
+type ControlledComboBoxProps<T extends FieldValues> = UseControllerProps<T> &
+  ComboBoxProps;
 
 export const ControlledComboBox = <T extends FieldValues>({
-  options,
+  config,
+  description,
   label,
+  options,
+  showAsterisk,
   ...controllerProps
 }: ControlledComboBoxProps<T>) => {
   const { field, fieldState } = useController(controllerProps);
   return (
     <ComboBox
+      config={config}
+      description={description}
       label={label}
+      options={options}
+      showAsterisk={showAsterisk}
       onChange={field.onChange}
       onBlur={field.onBlur}
       value={field.value}
       name={field.name}
       ref={field.ref}
       error={fieldState.error?.message}
-      options={options}
     />
   );
 };

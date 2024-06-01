@@ -53,7 +53,7 @@ export const FileInput = ({
             <label
               htmlFor={inputUniqueId}
               className={clsx(
-                "relative cursor-pointer rounded-md  font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500",
+                "relative cursor-pointer rounded-md font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500",
                 error && "text-red-700 ring-red-300 focus:ring-red-500",
               )}>
               <span>Upload a file</span>
