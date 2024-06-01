@@ -143,7 +143,7 @@ export const LastExample = () => {
                 {index > 0 && (
                   <Button
                     variant="danger"
-                    size="xs"
+                    size="sm"
                     className="mt-1"
                     onClick={() => remove(index)}>
                     {`Delete Project ${index + 1}`}
