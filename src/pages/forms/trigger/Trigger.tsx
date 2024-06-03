@@ -37,7 +37,7 @@ export const Trigger = () => {
           label="Last Name"
           registration={register("lastName", {
             required: "Last Name is required",
-            minLength: { value: 10, message: "First Name is too short" },
+            minLength: { value: 10, message: "Last Name is too short" },
           })}
           error={errors.lastName?.message}
         />
@@ -85,7 +85,7 @@ export const Trigger = () => {
             onClick={() =>
               trigger(["firstName", "lastName"], { shouldFocus: true })
             }>
-            Trigger First & Last name
+            Trigger First & Last name with Focus
           </Button>
 
           {/* TODO: Trigger with async validation: https://www.youtube.com/watch?v=-bcyJCDjksE */}
