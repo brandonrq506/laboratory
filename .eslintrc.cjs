@@ -7,10 +7,11 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:@tanstack/eslint-plugin-query/recommended",
     "prettier",
+    "plugin:testing-library/react",
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
-  plugins: ["react-refresh"],
+  plugins: ["react-refresh", "testing-library"],
   rules: {
     "react-refresh/only-export-components": [
       "warn",
@@ -53,6 +54,7 @@ module.exports = {
     "no-useless-concat": "error",
     "no-useless-return": "error",
     "no-var": "error",
+    'testing-library/prefer-user-event': 'error',
     "object-shorthand": "error",
     "prefer-arrow-callback": "error",
     "prefer-const": "error",
