@@ -1,5 +1,5 @@
-import { MouseRender } from "./MouseRender";
 import { CatRender } from "./CatRender";
+import { MouseRender } from "./MouseRender";
 
 export const MouseTracker = () => {
   return (

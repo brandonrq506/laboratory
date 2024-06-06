@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
-import { TextInput } from "@/components/form";
+
 import { Button } from "@/components/core";
+import { TextInput } from "@/components/form";
 const URL = "https://jsonplaceholder.typicode.com/users/1";
 
 type FormValues = {

@@ -3,8 +3,8 @@ import {
   ControllerOne,
   ControllerTwo,
   DynamicPassword,
-  FormsPage,
   FormState,
+  FormsPage,
   GetFieldState,
   LastName,
   NewLocation,
@@ -17,10 +17,10 @@ import {
   Unregister,
 } from "@/pages/forms";
 
-import { AsyncValidation } from "@/experiments/forms";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { MainLayout } from "@/components/layout";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Activities } from "@/pages/Activities";
+import { AsyncValidation } from "@/experiments/forms";
+import { MainLayout } from "@/components/layout";
 import { Projects } from "@/pages/Projects";
 import { TestingModal } from "@/pages/TestingModal";
 

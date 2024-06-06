@@ -6,21 +6,11 @@
  *
  */
 
-import { Fragment, useState } from "react";
 import { Combobox, Dialog, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
+import { FolderIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { clsx } from "clsx";
-import {
-  /*
-   * DocumentPlusIcon,
-   * FolderPlusIcon,
-   */
-  FolderIcon,
-  /*
-   * HashtagIcon,
-   * TagIcon,
-   */
-} from "@heroicons/react/24/outline";
 
 const projects = [
   { id: 1, name: "Workflow Inc. / Website Redesign", url: "#" },

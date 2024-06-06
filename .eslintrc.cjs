@@ -17,7 +17,7 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
-    // "sort-imports": "warn",
+    "sort-imports": ["error", { "allowSeparatedGroups": true}],
     "array-callback-return": "error",
     "complexity": "warn",
     "default-case": "error",

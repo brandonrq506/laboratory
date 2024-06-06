@@ -1,6 +1,7 @@
 import { useId } from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
+
 import { InputWrapper, InputWrapperPassProps } from "..";
+import { UseFormRegisterReturn } from "react-hook-form";
 import { clsx } from "clsx";
 
 type Types = "text" | "password" | "email" | "search" | "url";

@@ -1,5 +1,5 @@
-import { Fragment, MutableRefObject } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, MutableRefObject } from "react";
 
 export type ModalProps = {
   isOpen: boolean;

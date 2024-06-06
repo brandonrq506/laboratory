@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
+
 import { Button } from "@/components/core";
-import { Option } from "@/types/core";
 import { ControlledComboBox } from "./ControlledComboBox";
+import { DevTool } from "@hookform/devtools";
+import { Option } from "@/types/core";
 
 const PizzasAPI: Option[] = [
   { value: 1, label: "Pizza" },

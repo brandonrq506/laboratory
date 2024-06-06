@@ -1,6 +1,7 @@
-import { useForm, useFieldArray } from "react-hook-form";
-import { TextInput } from "@/components/form";
+import { useFieldArray, useForm } from "react-hook-form";
+
 import { Button } from "@/components/core";
+import { TextInput } from "@/components/form";
 
 /*
  *Greatness:

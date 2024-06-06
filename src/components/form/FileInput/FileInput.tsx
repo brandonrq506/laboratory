@@ -1,8 +1,8 @@
 import { useId } from "react";
-import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
-import { UseFormRegisterReturn } from "react-hook-form";
-import { PhotoIcon } from "@heroicons/react/24/outline";
+
+import { ExclamationCircleIcon, PhotoIcon } from "@heroicons/react/24/outline";
 import { InputWrapperPassProps } from "..";
+import { UseFormRegisterReturn } from "react-hook-form";
 import { clsx } from "clsx";
 
 type FileProps = InputWrapperPassProps & {

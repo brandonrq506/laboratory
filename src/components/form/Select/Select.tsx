@@ -1,7 +1,8 @@
 import { useId } from "react";
+
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
-import { UseFormRegisterReturn } from "react-hook-form";
 import { Option } from "@/types/core";
+import { UseFormRegisterReturn } from "react-hook-form";
 import { clsx } from "clsx";
 
 type SelectProps = {

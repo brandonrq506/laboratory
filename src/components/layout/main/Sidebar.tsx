@@ -1,14 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { NavLink } from "react-router-dom";
 import { Fragment } from "react";
+import { NavLink } from "react-router-dom";
 import clsx from "clsx";
 
 import {
+  DocumentTextIcon,
   FolderIcon,
   HomeIcon,
   UsersIcon,
   XMarkIcon,
-  DocumentTextIcon,
 } from "@heroicons/react/24/outline";
 
 const items = [

@@ -1,10 +1,10 @@
 import { useDisclosure } from "@/hooks/useDisclosure";
 
-import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Link, Outlet } from "react-router-dom";
+import { Bars3Icon } from "@heroicons/react/24/outline";
+import { Header } from "./Header";
 import { IconButton } from "../../core";
 import { Sidebar } from "./Sidebar";
-import { Header } from "./Header";
 
 export const MainLayout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

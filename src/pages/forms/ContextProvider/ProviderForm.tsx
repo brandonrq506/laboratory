@@ -1,7 +1,7 @@
 import { FavoritesInfo, PersonalInfo } from "./components";
-import { useForm, FormProvider } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
+import { FormProvider, useForm } from "react-hook-form";
 import { Button } from "@/components/core";
+import { DevTool } from "@hookform/devtools";
 import { FormValues } from "./types";
 
 export const ProviderForm = () => {
