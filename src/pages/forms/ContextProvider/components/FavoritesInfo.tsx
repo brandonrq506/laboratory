@@ -1,7 +1,7 @@
-import { useFormContext, Controller } from "react-hook-form";
 import { ComboBox, NumberInput } from "@/components/form";
-import { Option } from "@/types/core";
+import { Controller, useFormContext } from "react-hook-form";
 import { FormValues } from "../types";
+import { Option } from "@/types/core";
 
 const favFoods: Option[] = [
   { value: 1, label: "Pizza" },

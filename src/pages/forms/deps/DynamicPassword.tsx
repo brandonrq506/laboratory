@@ -1,6 +1,6 @@
 import { RegisterOptions, useForm } from "react-hook-form";
-import { TextInput } from "@/components/form";
 import { Button } from "@/components/core";
+import { TextInput } from "@/components/form";
 
 /**
  * Features: Register - deps

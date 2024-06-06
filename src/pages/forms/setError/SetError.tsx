@@ -1,4 +1,4 @@
-import { useForm, FieldPath, Message } from "react-hook-form";
+import { FieldPath, Message, useForm } from "react-hook-form";
 import { NumberInput, TextInput } from "@/components/form";
 import { Button } from "@/components/core";
 import { DevTool } from "@hookform/devtools";

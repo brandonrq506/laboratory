@@ -1,10 +1,10 @@
-import clsx from "clsx";
-import { Description, Modal, ModalProps, Title } from "..";
 import {
   CheckBadgeIcon,
   ExclamationTriangleIcon,
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
+import { Description, Modal, ModalProps, Title } from "..";
+import clsx from "clsx";
 
 const icons = {
   success: (

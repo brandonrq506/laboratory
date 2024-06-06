@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import { Link, LinkProps } from "react-router-dom";
+import clsx from "clsx";
 
 const sizes = {
   sm: "px-2 py-1 text-sm rounded",

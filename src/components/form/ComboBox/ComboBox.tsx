@@ -1,4 +1,6 @@
-import { useState, forwardRef } from "react";
+import { forwardRef, useState } from "react";
+import { clsx } from "clsx";
+
 import {
   CheckIcon,
   ChevronUpDownIcon,
@@ -6,7 +8,6 @@ import {
 } from "@heroicons/react/20/solid";
 import { Combobox } from "@headlessui/react";
 import { Option } from "@/types/core";
-import { clsx } from "clsx";
 
 type BaseConfig = { text: string };
 type PersistentConfig = { isPersistent: true; showFirst: boolean };

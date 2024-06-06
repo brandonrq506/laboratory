@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
-import { TextInput } from "@/components/form";
+
+import { getUser, getUserByPhone } from "./api";
 import { Button } from "@/components/core";
 import { DevTool } from "@hookform/devtools";
-import { getUser, getUserByPhone } from "./api";
+import { TextInput } from "@/components/form";
 
 type FormValues = {
   id: number;

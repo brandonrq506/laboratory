@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
+
 import { Button } from "@/components/core";
-import { TextInput } from "@/components/form";
 import { DevTool } from "@hookform/devtools";
+import { TextInput } from "@/components/form";
 
 type FormData = {
   username: string;
