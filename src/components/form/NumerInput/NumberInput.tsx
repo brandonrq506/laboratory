@@ -1,6 +1,6 @@
+import { useId } from "react";
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import { UseFormRegisterReturn } from "react-hook-form";
-import { transformLabel } from "@/components/utils";
 import { clsx } from "clsx";
 
 type InputProps = {
@@ -22,7 +22,9 @@ export const NumberInput = ({
   description,
   error,
 }: InputProps) => {
-  const inputUniqueId = `numeric-input-${transformLabel(label)}`;
+  const id = useId();
+  const descriptionId = `number-input-description-${id}`;
+  const errorId = `number-input-error-${id}`;
 
   return (
     <div className={clsx(className)}>
@@ -31,10 +33,9 @@ export const NumberInput = ({
         {showAsterisk && <span className="ml-1 text-red-700">*</span>}
         <div className="relative mt-2">
           <input
-            id={inputUniqueId}
-            data-testid={inputUniqueId}
             type="number"
             placeholder={placeholder}
+            aria-describedby={error ? errorId : descriptionId}
             aria-invalid={Boolean(error)}
             {...registration}
             className={clsx(
@@ -56,10 +57,15 @@ export const NumberInput = ({
         </div>
       </label>
       {description && !error && (
-        <p className="mt-2 text-sm font-light text-gray-500">{description}</p>
+        <p id={descriptionId} className="mt-2 text-sm font-light text-gray-500">
+          {description}
+        </p>
       )}
       {error && (
-        <p role="alert" className="mt-2 text-sm font-light text-red-600">
+        <p
+          id={errorId}
+          role="alert"
+          className="mt-2 text-sm font-light text-red-600">
           {error}
         </p>
       )}

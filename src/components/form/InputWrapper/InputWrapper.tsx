@@ -8,7 +8,9 @@ type InputWrapperProps = {
   showAsterisk?: boolean;
   children: React.ReactNode;
   description?: string;
+  descriptionId?: string;
   error?: string;
+  errorId?: string;
 };
 
 export type InputWrapperPassProps = Omit<InputWrapperProps, "children">;
@@ -20,7 +22,9 @@ export const InputWrapper = ({
   showAsterisk,
   children,
   description,
+  descriptionId,
   error,
+  errorId,
 }: InputWrapperProps) => {
   return (
     <div className={clsx(wrapperClassName)}>
@@ -44,10 +48,15 @@ export const InputWrapper = ({
         </div>
       </label>
       {description && !error && (
-        <p className="mt-2 text-sm font-light text-gray-500">{description}</p>
+        <p id={descriptionId} className="mt-2 text-sm font-light text-gray-500">
+          {description}
+        </p>
       )}
       {error && (
-        <p role="alert" className="mt-2 text-sm font-light text-red-600">
+        <p
+          id={errorId}
+          role="alert"
+          className="mt-2 text-sm font-light text-red-600">
           {error}
         </p>
       )}

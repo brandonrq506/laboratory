@@ -1,6 +1,6 @@
+import { useId } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { InputWrapper, InputWrapperPassProps } from "..";
-import { transformLabel } from "@/components/utils";
 import { clsx } from "clsx";
 
 const sizes = {
@@ -30,7 +30,10 @@ export function TextArea({
   placeholder,
   disabled,
 }: Props) {
-  const inputUniqueId = `textarea-input-${transformLabel(label)}`;
+  const id = useId();
+  const inputUniqueId = `file-input-${id}`;
+  const descriptionId = `file-input-description-${id}`;
+  const errorId = `file-input-error-${id}`;
 
   return (
     <InputWrapper
@@ -39,14 +42,17 @@ export function TextArea({
       label={label}
       showAsterisk={showAsterisk}
       description={description}
-      error={error}>
+      descriptionId={descriptionId}
+      error={error}
+      errorId={errorId}>
       <textarea
         id={inputUniqueId}
-        data-testid={inputUniqueId}
         rows={sizes[size]}
         disabled={disabled}
         placeholder={placeholder}
         {...registration}
+        aria-describedby={error ? errorId : descriptionId}
+        aria-invalid={Boolean(error)}
         className={clsx(
           "block w-full rounded-md border-0 py-1.5 text-sm font-light text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6",
           "disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200",
