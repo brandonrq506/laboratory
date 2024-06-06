@@ -1,8 +1,7 @@
-//TODO: Add ability to drop files
+import { useId } from "react";
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { PhotoIcon } from "@heroicons/react/24/outline";
-import { transformLabel } from "@/components/utils";
 import { InputWrapperPassProps } from "..";
 import { clsx } from "clsx";
 
@@ -25,7 +24,10 @@ export const FileInput = ({
   showAsterisk = false,
   accept = ".jpg, .jpeg, .png",
 }: FileProps) => {
-  const inputUniqueId = `file-input-${transformLabel(label)}`;
+  const id = useId();
+  const inputUniqueId = `file-input-${id}`;
+  const descriptionId = `file-input-description-${id}`;
+  const errorId = `file-input-error-${id}`;
 
   return (
     <div className={clsx("col-span-full", className)}>
@@ -59,12 +61,13 @@ export const FileInput = ({
               <span>Upload a file</span>
               <input
                 id={inputUniqueId}
-                data-testid={inputUniqueId}
                 type="file"
                 className="sr-only"
                 multiple={multiple}
                 accept={accept}
                 {...registration}
+                aria-describedby={error ? errorId : descriptionId}
+                aria-invalid={Boolean(error)}
               />
             </label>
             <p className="pl-1">or drag and drop</p>
@@ -87,10 +90,15 @@ export const FileInput = ({
 
       {/* Error & Description */}
       {description && !error && (
-        <p className="mt-2 text-sm font-light text-gray-500">{description}</p>
+        <p id={descriptionId} className="mt-2 text-sm font-light text-gray-500">
+          {description}
+        </p>
       )}
       {error && (
-        <p role="alert" className="mt-2 text-sm font-light text-red-600">
+        <p
+          id={errorId}
+          role="alert"
+          className="mt-2 text-sm font-light text-red-600">
           {error}
         </p>
       )}

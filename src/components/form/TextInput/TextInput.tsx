@@ -1,6 +1,6 @@
+import { useId } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { InputWrapper, InputWrapperPassProps } from "..";
-import { transformLabel } from "@/components/utils";
 import { clsx } from "clsx";
 
 type Types = "text" | "password" | "email" | "search" | "url";
@@ -25,7 +25,10 @@ export const TextInput = ({
   description,
   error,
 }: InputProps) => {
-  const inputUniqueId = `text-input-${transformLabel(label)}`;
+  const id = useId();
+  const inputUniqueId = `file-input-${id}`;
+  const descriptionId = `file-input-description-${id}`;
+  const errorId = `file-input-error-${id}`;
 
   return (
     <InputWrapper
@@ -34,13 +37,15 @@ export const TextInput = ({
       label={label}
       showAsterisk={showAsterisk}
       description={description}
-      error={error}>
+      descriptionId={descriptionId}
+      error={error}
+      errorId={errorId}>
       <input
         id={inputUniqueId}
-        data-testid={inputUniqueId}
         type={type}
         disabled={disabled}
         placeholder={placeholder}
+        aria-describedby={error ? errorId : descriptionId}
         aria-invalid={Boolean(error)}
         {...registration}
         className={clsx(
