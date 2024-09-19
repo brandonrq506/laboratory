@@ -69,7 +69,7 @@ export const ComboBox = ({
               displayValue={(option: Option) => option?.label}
               onChange={(event) => {
                 const value = event.target.value;
-                onQueryChange && onQueryChange(value);
+                if (onQueryChange) onQueryChange(value);
                 setQuery(value);
               }}
               className={clsx(
