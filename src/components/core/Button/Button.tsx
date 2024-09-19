@@ -1,3 +1,4 @@
+import { Button as HButton } from "@headlessui/react";
 import clsx from "clsx";
 import { forwardRef } from "react";
 
@@ -10,11 +11,11 @@ const sizes = {
 
 const variants = {
   primary:
-    "bg-blue-600 text-white hover:bg-blue-500 focus-visible:outline-blue-600",
+    "bg-blue-600 text-white data-[hover]:bg-blue-500 data-[focus]:bg-blue-500",
   secondary:
-    "bg-white text-blue-600 hover:bg-gray-100 focus-visible:outline-gray-200 border border-gray-200",
+    "bg-white text-blue-600 data-[hover]:bg-gray-100 data-[focus]:bg-gray-100 border border-gray-200",
   danger:
-    "bg-red-600 text-white hover:bg-red-500 focus-visible:outline-red-600",
+    "bg-red-600 text-white data-[hover]:bg-red-500 data-[focus]:bg-red-500",
 };
 
 type IconProps =
@@ -43,11 +44,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     return (
-      <button
+      <HButton
         ref={ref}
         type={type}
         className={clsx(
-          "inline-flex items-center font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-75",
+          "inline-flex items-center font-semibold shadow-sm",
+          "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-75",
+          "data-[focus]:outline-none",
           variants[variant],
           sizes[size],
           className,
@@ -56,7 +59,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading && <p>Loading...</p>}
         {!isLoading && startIcon}
         <span className="mx-2">{props.children}</span> {!isLoading && endIcon}
-      </button>
+      </HButton>
     );
   },
 );
