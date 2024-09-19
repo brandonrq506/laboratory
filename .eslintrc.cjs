@@ -70,6 +70,12 @@ module.exports = {
       "rules": {
         "max-lines-per-function": ["error", { "max": 150, "skipBlankLines": true, "skipComments": true }],
       },
-    }
+    },
+    {
+      "files": ["tailwind.config.js"],
+      "rules": {
+        "no-restricted-exports": "off",
+      },
+    },
   ]
 };

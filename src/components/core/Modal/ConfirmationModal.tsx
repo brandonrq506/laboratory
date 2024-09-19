@@ -3,7 +3,8 @@ import {
   ExclamationTriangleIcon,
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
-import { Description, Modal, ModalProps, Title } from "..";
+import { Description, DialogTitle } from "@headlessui/react";
+import { Modal, ModalProps } from "..";
 import clsx from "clsx";
 
 const icons = {
@@ -40,14 +41,13 @@ type ConfirmationModalProps = Omit<ModalProps, "children"> & {
 export const ConfirmationModal = ({
   isOpen,
   onClose,
-  initialFocus,
   icon,
   title,
   description,
   actions,
 }: ConfirmationModalProps) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} initialFocus={initialFocus}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <div className="sm:flex sm:items-start">
         <div
           className={clsx(
@@ -57,11 +57,11 @@ export const ConfirmationModal = ({
           {icons[icon]}
         </div>
         <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-          <Title
+          <DialogTitle
             as="h3"
             className="text-base font-semibold leading-6 text-gray-900">
             {title}
-          </Title>
+          </DialogTitle>
           <div className="mt-2">
             <Description className="text-sm text-gray-500">
               {description}
