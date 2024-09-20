@@ -14,7 +14,6 @@ export const TestingModal = () => {
         isOpen={isOpen}
         onClose={onClose}
         icon="success"
-        initialFocus={cancelButtonRef}
         title="Testing Modal"
         description="This text is way to long simply to test the looks of it on the modal. I am mainly worried about the text wrapping and how it looks."
         actions={
