@@ -39,7 +39,7 @@ const handleConfiguration = (options: Option[], config: Configuration) => {
 
   if (alwaysVisible) return addOption(showFirst, option, options);
   else if (hasOptions) return options;
-  else return [option];
+  return [option];
 };
 
 type ComboBoxRHFProps = {

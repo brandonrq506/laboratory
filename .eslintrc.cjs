@@ -34,6 +34,7 @@ module.exports = {
     "no-await-in-loop": "error",
     "no-alert": "error",
     "no-duplicate-imports": "error",
+    "no-else-return": "error",
     "no-implicit-coercion": "error",
     "no-lonely-if": "error",
     "no-magic-numbers": ["error", { "ignore": [0, 1] }],
