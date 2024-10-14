@@ -18,7 +18,7 @@ import {
 } from "@/pages/forms";
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Activities } from "@/pages/Activities";
+import { ActivitiesPage } from "@/pages/ActivitiesPage";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
 import { MainLayout } from "@/components/layout";
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "activities",
-        element: <Activities />,
+        element: <ActivitiesPage />,
       },
       {
         path: "projects",
