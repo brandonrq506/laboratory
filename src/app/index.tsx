@@ -19,6 +19,7 @@ import {
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Activities } from "@/pages/Activities";
+import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
 import { MainLayout } from "@/components/layout";
 import { Projects } from "@/pages/Projects";
@@ -114,5 +115,9 @@ const router = createBrowserRouter([
 ]);
 
 export const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <AppProvider>
+      <RouterProvider router={router} />;
+    </AppProvider>
+  );
 };

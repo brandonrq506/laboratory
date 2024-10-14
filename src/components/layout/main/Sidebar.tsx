@@ -122,7 +122,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           <div className="flex h-16 shrink-0 items-center">
             <img
               className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+              src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
               alt="The tailwind logo"
             />
           </div>
