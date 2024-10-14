@@ -1,0 +1,16 @@
+import axios from "axios";
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+export const apiV1 = axios.create({
+  baseURL: `${API_URL}/v1`,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// ENDPOINTS
+export const ACTIVITIES_ENDPOINT = "/activities";
+export const CATEGORIES_ENDPOINT = "/categories";
+export const TASKS_ENDPOINT = "/tasks";
+export const USERS_ENDPOINT = "/users";
