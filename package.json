@@ -11,7 +11,9 @@
     "prettier:fix": "prettier --write \"src/**/*.{ts,tsx,html}\"",
     "preview": "vite preview",
     "test": "vitest --ui",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "type-check": "tsc --noEmit",
+    "validate:fix": "npm run prettier:fix && npm run lint:fix && npm run type-check && npm run test"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.8",

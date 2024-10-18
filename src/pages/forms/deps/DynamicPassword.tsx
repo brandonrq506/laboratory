@@ -10,7 +10,15 @@ import { TextInput } from "@/components/form";
  *  - When password is updated, confirmPassword is checked for equality.
  */
 
-const highSecurity: RegisterOptions = {
+type SecurityLevel = "High" | "Medium" | "Low";
+
+type FormData = {
+  securityLevel: SecurityLevel;
+  password: string;
+  confirmPassword: string;
+};
+
+const highSecurity: RegisterOptions<FormData, "password"> = {
   required: "Password is required",
   minLength: {
     value: 12,
@@ -24,7 +32,7 @@ const highSecurity: RegisterOptions = {
   deps: ["confirmPassword"],
 };
 
-const mediumSecurity: RegisterOptions = {
+const mediumSecurity: RegisterOptions<FormData, "password"> = {
   required: "Password is required",
   minLength: {
     value: 8,
@@ -37,7 +45,7 @@ const mediumSecurity: RegisterOptions = {
   deps: ["confirmPassword"],
 };
 
-const lowSecurity: RegisterOptions = {
+const lowSecurity: RegisterOptions<FormData, "password"> = {
   required: "Password is required",
   minLength: {
     value: 6,
@@ -50,8 +58,6 @@ const lowSecurity: RegisterOptions = {
   deps: ["confirmPassword"],
 };
 
-type SecurityLevel = "High" | "Medium" | "Low";
-
 const getPasswordValidations = (securityLevel: SecurityLevel) => {
   switch (securityLevel) {
     case "High":
@@ -63,12 +69,6 @@ const getPasswordValidations = (securityLevel: SecurityLevel) => {
     default:
       return lowSecurity;
   }
-};
-
-type FormData = {
-  securityLevel: SecurityLevel;
-  password: string;
-  confirmPassword: string;
 };
 
 export const DynamicPassword = () => {
