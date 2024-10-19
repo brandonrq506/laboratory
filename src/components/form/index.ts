@@ -5,4 +5,5 @@ export * from "./InputWrapper/InputWrapper";
 export * from "./NumerInput/NumberInput";
 export * from "./Select/Select";
 export * from "./TextArea/TextArea";
+export * from "./TextInput/InputText";
 export * from "./TextInput/TextInput";
