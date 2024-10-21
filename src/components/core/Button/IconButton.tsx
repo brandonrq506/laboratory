@@ -44,6 +44,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       shape = "none",
       variant = "primaryOutline",
       className,
+      children,
       ...props
     },
     ref,
@@ -61,7 +62,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
           className,
         )}
         {...props}>
-        {props.children}
+        {children}
       </button>
     );
   },
