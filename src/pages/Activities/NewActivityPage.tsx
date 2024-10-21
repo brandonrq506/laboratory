@@ -14,7 +14,11 @@ export const NewActivityPage = () => {
     <div>
       <Modal isOpen={isOpen} onClose={() => navigate("..")}>
         <CreateActivityForm
-          initialValues={{ category_id: { value: 1, label: "Productive" } }}
+          initialValues={{
+            avg_time: 1800,
+            category_id: { value: 1, label: "Productive" },
+            max_time: 3600,
+          }}
         />
       </Modal>
     </div>
