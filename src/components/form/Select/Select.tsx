@@ -52,7 +52,8 @@ export const Select = forwardRef<HTMLButtonElement, Props>(
           name={name}
           value={value}
           onBlur={onBlur}
-          onChange={onChange}>
+          onChange={onChange}
+          className="mt-2">
           <ListboxButton
             ref={ref}
             data-invalid={error}

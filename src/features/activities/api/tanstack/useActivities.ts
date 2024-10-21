@@ -6,6 +6,6 @@ import { getActivities } from "../axios/getActivities";
 export const useActivities = () => {
   return useQuery({
     queryKey: [ACTIVITIES_ENDPOINT],
-    queryFn: ({ signal }) => getActivities({ signal }),
+    queryFn: getActivities,
   });
 };

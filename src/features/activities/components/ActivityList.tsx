@@ -30,7 +30,7 @@ export const ActivityList = () => {
                 ? "N/A"
                 : convertSecondsToTime(activity.max_time)}
             </p>
-            <p className="flex-1">{activity.category_id}</p>
+            <p className="flex-1">{activity.category.name}</p>
           </li>
         ))}
       </ul>
