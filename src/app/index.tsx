@@ -17,8 +17,8 @@ import {
   Unregister,
 } from "@/pages/forms";
 
+import { ActivitiesPage, NewActivityPage } from "@/pages/Activities";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { ActivitiesPage } from "@/pages/ActivitiesPage";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
 import { MainLayout } from "@/components/layout";
@@ -33,6 +33,12 @@ const router = createBrowserRouter([
       {
         path: "activities",
         element: <ActivitiesPage />,
+        children: [
+          {
+            path: "new",
+            element: <NewActivityPage />,
+          },
+        ],
       },
       {
         path: "projects",
