@@ -1,6 +1,5 @@
-import { GetActivity } from "./getActivity";
+import { CreateForm } from "./createForm";
 
-export type PostActivity = Pick<
-  GetActivity,
-  "avg_time" | "category_id" | "max_time" | "name"
->;
+export type PostActivity = Omit<CreateForm, "category_id"> & {
+  category_id: number;
+};
