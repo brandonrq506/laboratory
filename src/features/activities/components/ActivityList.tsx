@@ -1,6 +1,7 @@
-import { Card } from "@/components/layout";
 import { useActivities } from "../api/tanstack/useActivities";
 
+import { Card } from "@/components/layout";
+import { DeleteActivity } from "./DeleteActivity";
 import { convertSecondsToTime } from "@/utils";
 
 export const ActivityList = () => {
@@ -31,6 +32,7 @@ export const ActivityList = () => {
                 : convertSecondsToTime(activity.max_time)}
             </p>
             <p className="flex-1">{activity.category.name}</p>
+            <DeleteActivity activityId={activity.id} />
           </li>
         ))}
       </ul>
