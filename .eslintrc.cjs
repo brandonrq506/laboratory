@@ -30,7 +30,7 @@ module.exports = {
     "max-depth": "error",
     "max-lines": ["error", { "max": 170, "skipBlankLines": true, "skipComments": true }],
     "max-lines-per-function": ["error", { "skipBlankLines": true, "skipComments": true }],
-    "multiline-comment-style": "error",
+    "multiline-comment-style": ["error", "bare-block"],
     "no-await-in-loop": "error",
     "no-alert": "error",
     "no-duplicate-imports": "error",
