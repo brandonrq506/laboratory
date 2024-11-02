@@ -75,7 +75,9 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                   <li>
                     <ul role="list" className="-mx-2 space-y-1">
                       {items.map((item) => (
-                        <SidebarItem {...item} onClose={onClose} />
+                        <li key={item.name}>
+                          <SidebarItem {...item} onClose={onClose} />
+                        </li>
                       ))}
                     </ul>
                   </li>
@@ -85,7 +87,9 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                     </div>
                     <ul role="list" className="-mx-2 mt-2 space-y-1">
                       {experiments.map((experiment) => (
-                        <SidebarItem {...experiment} onClose={onClose} />
+                        <li key={experiment.name}>
+                          <SidebarItem {...experiment} onClose={onClose} />
+                        </li>
                       ))}
                     </ul>
                   </li>
@@ -112,7 +116,9 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
               <li>
                 <ul role="list" className="-mx-2 space-y-1">
                   {items.map((item) => (
-                    <SidebarItem {...item} />
+                    <li key={item.name}>
+                      <SidebarItem {...item} onClose={onClose} />
+                    </li>
                   ))}
                 </ul>
               </li>
@@ -122,7 +128,9 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                 </div>
                 <ul role="list" className="-mx-2 mt-2 space-y-1">
                   {experiments.map((experiment) => (
-                    <SidebarItem {...experiment} />
+                    <li key={experiment.name}>
+                      <SidebarItem {...experiment} onClose={onClose} />
+                    </li>
                   ))}
                 </ul>
               </li>
