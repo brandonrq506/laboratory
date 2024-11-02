@@ -123,7 +123,7 @@ const router = createBrowserRouter([
 export const App = () => {
   return (
     <AppProvider>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </AppProvider>
   );
 };
