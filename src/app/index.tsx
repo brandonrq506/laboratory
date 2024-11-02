@@ -23,6 +23,7 @@ import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
 import { MainLayout } from "@/components/layout";
 import { Projects } from "@/pages/Projects";
+import { TasksPage } from "@/pages/Tasks";
 import { TestingModal } from "@/pages/TestingModal";
 
 const router = createBrowserRouter([
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
             element: <NewActivityPage />,
           },
         ],
+      },
+      {
+        path: "tasks",
+        element: <TasksPage />,
       },
       {
         path: "projects",
