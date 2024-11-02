@@ -11,22 +11,24 @@ type Props = {
 
 export const SidebarItem = ({ name, href, icon: Icon, onClose }: Props) => {
   return (
-    <NavLink
-      to={href}
-      onClick={onClose}
-      className={({ isActive }) =>
-        clsx(
-          isActive
-            ? "bg-gray-50 text-indigo-600 *:text-indigo-600"
-            : "text-gray-700 *:text-gray-400 hover:bg-gray-50 hover:text-indigo-600",
-          "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
-        )
-      }>
-      <Icon
-        className="size-6 shrink-0 group-hover:text-indigo-600"
-        aria-hidden="true"
-      />
-      {name}
-    </NavLink>
+    <li>
+      <NavLink
+        to={href}
+        onClick={onClose}
+        className={({ isActive }) =>
+          clsx(
+            isActive
+              ? "bg-gray-50 text-indigo-600 *:text-indigo-600"
+              : "text-gray-700 *:text-gray-400 hover:bg-gray-50 hover:text-indigo-600",
+            "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
+          )
+        }>
+        <Icon
+          className="size-6 shrink-0 group-hover:text-indigo-600"
+          aria-hidden="true"
+        />
+        {name}
+      </NavLink>
+    </li>
   );
 };
