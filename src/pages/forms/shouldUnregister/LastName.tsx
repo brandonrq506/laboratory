@@ -4,13 +4,11 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/core";
 import { TextInput } from "@/components/form";
 
-/*
- * Features: Register - shouldUnregister
- * - Conditional registration
- * - Conditional unregistration
- * - Conditional focus
- * - Focus with select
- */
+/* Features: Register - shouldUnregister
+   - Conditional registration
+   - Conditional unregistration
+   - Conditional focus
+   - Focus with select */
 
 /**
  * To Play with the features on this concept:

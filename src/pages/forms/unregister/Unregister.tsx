@@ -4,11 +4,9 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/core";
 import { TextInput } from "@/components/form";
 
-/*
- * Features: Unregister
- * - Truly seems like a programmatic way to remove a field from the form
- * - as opposed to shouldUnregister, which is more of a declarative way.
- */
+/* Features: Unregister
+   - Truly seems like a programmatic way to remove a field from the form
+   - as opposed to shouldUnregister, which is more of a declarative way. */
 
 type FormValues = {
   firstName: string;
