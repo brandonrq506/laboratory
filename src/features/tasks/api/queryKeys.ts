@@ -1,5 +1,5 @@
 import { TASKS_ENDPOINT } from "@/libs/axios";
-import { TaskStatus } from "../types/TaskStatus";
+import { TaskStatus } from "../types/taskStatus";
 
 export const taskKeys = {
   all: [{ scope: TASKS_ENDPOINT }] as const,

@@ -9,6 +9,7 @@ import {
   DocumentTextIcon,
   FolderIcon,
   HomeIcon,
+  RectangleStackIcon,
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -23,6 +24,7 @@ const experiments = [
 const items = [
   { name: "Dashboard", href: "/", icon: HomeIcon },
   { name: "Activities", href: "/activities", icon: UsersIcon },
+  { name: "Tasks", href: "/tasks", icon: RectangleStackIcon },
 ];
 
 type SidebarProps = {
@@ -75,9 +77,11 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                   <li>
                     <ul role="list" className="-mx-2 space-y-1">
                       {items.map((item) => (
-                        <li key={item.name}>
-                          <SidebarItem {...item} onClose={onClose} />
-                        </li>
+                        <SidebarItem
+                          key={item.name}
+                          {...item}
+                          onClose={onClose}
+                        />
                       ))}
                     </ul>
                   </li>
@@ -87,9 +91,11 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                     </div>
                     <ul role="list" className="-mx-2 mt-2 space-y-1">
                       {experiments.map((experiment) => (
-                        <li key={experiment.name}>
-                          <SidebarItem {...experiment} onClose={onClose} />
-                        </li>
+                        <SidebarItem
+                          key={experiment.name}
+                          {...experiment}
+                          onClose={onClose}
+                        />
                       ))}
                     </ul>
                   </li>
@@ -116,9 +122,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
               <li>
                 <ul role="list" className="-mx-2 space-y-1">
                   {items.map((item) => (
-                    <li key={item.name}>
-                      <SidebarItem {...item} onClose={onClose} />
-                    </li>
+                    <SidebarItem key={item.name} {...item} onClose={onClose} />
                   ))}
                 </ul>
               </li>
@@ -128,9 +132,11 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                 </div>
                 <ul role="list" className="-mx-2 mt-2 space-y-1">
                   {experiments.map((experiment) => (
-                    <li key={experiment.name}>
-                      <SidebarItem {...experiment} onClose={onClose} />
-                    </li>
+                    <SidebarItem
+                      key={experiment.name}
+                      {...experiment}
+                      onClose={onClose}
+                    />
                   ))}
                 </ul>
               </li>

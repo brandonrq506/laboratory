@@ -1,10 +1,12 @@
+import { ActivityAPI } from "@/features/activities/types/activityAPI";
 import { BaseEntity } from "@/types/core";
+import { TaskStatus } from "./taskStatus";
 
 export type TaskAPI = BaseEntity & {
-  activity_id: number;
+  activity: ActivityAPI;
   end_time: string | null;
-  start_time: string | null;
   optional_name: string | null;
-  status: string;
+  start_time: string | null;
+  status: TaskStatus;
   user_id: number;
 };
