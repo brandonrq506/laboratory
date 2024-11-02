@@ -1,10 +1,8 @@
-/*
- *TODO:
- *- Remove the Dialog and Transition components.
- *- There must be a Base ComboBox which literally only shows options
- *- Then there must be the one who allows for groups, options, and whether those options are persistent.
- *
- */
+/* TODO:
+   - Remove the Dialog and Transition components.
+   - There must be a Base ComboBox which literally only shows options
+   - Then there must be the one who allows for groups, options, and whether those options are persistent.
+    */
 
 import { Combobox, Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
@@ -20,14 +18,12 @@ const projects = [
 ];
 const recent = [projects[0]];
 
-/*
- * const quickActions = [
- *   { name: "Add new file...", icon: DocumentPlusIcon, shortcut: "N", url: "#" },
- *   { name: "Add new folder...", icon: FolderPlusIcon, shortcut: "F", url: "#" },
- *   { name: "Add hashtag...", icon: HashtagIcon, shortcut: "H", url: "#" },
- *   { name: "Add label...", icon: TagIcon, shortcut: "L", url: "#" },
- * ];
- */
+/* const quickActions = [
+     { name: "Add new file...", icon: DocumentPlusIcon, shortcut: "N", url: "#" },
+     { name: "Add new folder...", icon: FolderPlusIcon, shortcut: "F", url: "#" },
+     { name: "Add hashtag...", icon: HashtagIcon, shortcut: "H", url: "#" },
+     { name: "Add label...", icon: TagIcon, shortcut: "L", url: "#" },
+   ]; */
 
 export function DialogComboBox() {
   const [query, setQuery] = useState("");

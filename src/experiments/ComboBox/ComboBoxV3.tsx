@@ -15,11 +15,9 @@ type PersistentConfig = { isPersistent: true; showFirst: boolean };
 type NonPersistentConfig = { isPersistent?: false; showFirst?: false };
 type Configuration = BaseConfig & (PersistentConfig | NonPersistentConfig);
 
-/*
- *Missing:
- *- Placeholder
- *- Loading state
- */
+/* Missing:
+   - Placeholder
+   - Loading state */
 
 const filterOptions = (query: string, options: Option[]) => {
   const trimmedQuery = query.trim().toLowerCase();

@@ -3,11 +3,9 @@ import { useState } from "react";
 import { ComboBox } from "@/experiments/ComboBox";
 import { Option } from "@/types/core";
 
-/*
- *TODO:
- *1. Add Fake API call to get services.
- *2. Customize to accept on change that will open the modal, etc.
- */
+/* TODO:
+   1. Add Fake API call to get services.
+   2. Customize to accept on change that will open the modal, etc. */
 
 const options: Option[] = [
   { value: 1, label: "Oil Change" },
