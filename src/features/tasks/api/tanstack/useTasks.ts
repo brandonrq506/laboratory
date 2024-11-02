@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { TaskStatus } from "../../types/TaskStatus";
+import { TaskStatus } from "../../types/taskStatus";
 import { getTasks } from "../axios/getTasks";
 import { taskKeys } from "../queryKeys";
 

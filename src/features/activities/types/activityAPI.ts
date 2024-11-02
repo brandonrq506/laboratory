@@ -1,6 +1,6 @@
 import { BaseEntity } from "@/types/core";
 
-export type GetActivity = BaseEntity & {
+export type ActivityAPI = BaseEntity & {
   avg_time: number | null;
   category: {
     id: number;

@@ -1,6 +1,6 @@
 import { TASKS_ENDPOINT, USERS_ENDPOINT, apiV1 } from "@/libs/axios";
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { TaskAPI } from "../../types/TaskAPI";
+import { TaskAPI } from "../../types/taskAPI";
 import { taskKeys } from "../queryKeys";
 
 const URL = `${USERS_ENDPOINT}/1${TASKS_ENDPOINT}`;
