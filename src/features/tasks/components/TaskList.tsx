@@ -14,6 +14,8 @@ export const TaskList = ({ tasks }: Props) => {
           <p>Logged at: {task.created_at}</p>
         </div>
       ))}
+
+      {tasks.length === 0 && <div>No tasks found</div>}
     </div>
   );
 };
