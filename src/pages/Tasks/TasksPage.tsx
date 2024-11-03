@@ -1,10 +1,12 @@
-import { TodayScheduledTasks } from "./TodayScheduledTasks";
+import { CategorySelectFilter } from "@/features/categories/components";
+import { FilterableTaskList } from "./FilterableTaskList";
 
 export const TasksPage = () => {
   return (
     <div>
       <h1>Tasks</h1>
-      <TodayScheduledTasks />
+      <CategorySelectFilter />
+      <FilterableTaskList />
     </div>
   );
 };
