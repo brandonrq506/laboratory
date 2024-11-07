@@ -6,9 +6,9 @@ import {
 } from "@headlessui/react";
 
 import {
+  ClockIcon,
   DocumentTextIcon,
   FolderIcon,
-  HomeIcon,
   RectangleStackIcon,
   UsersIcon,
   XMarkIcon,
@@ -22,9 +22,9 @@ const experiments = [
 ];
 
 const items = [
-  { name: "Dashboard", href: "/", icon: HomeIcon },
   { name: "Activities", href: "/activities", icon: UsersIcon },
   { name: "Tasks", href: "/tasks", icon: RectangleStackIcon },
+  { name: "Timer", href: "/timer", icon: ClockIcon },
 ];
 
 type SidebarProps = {

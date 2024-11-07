@@ -18,19 +18,28 @@ import {
 } from "@/pages/forms";
 
 import { ActivitiesPage, NewActivityPage } from "@/pages/Activities";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
 import { MainLayout } from "@/components/layout";
 import { Projects } from "@/pages/Projects";
 import { TasksPage } from "@/pages/Tasks";
 import { TestingModal } from "@/pages/TestingModal";
+import { TimerPage } from "@/pages/timer";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
     children: [
+      {
+        index: true,
+        element: <Navigate to="/timer" />,
+      },
       {
         path: "activities",
         element: <ActivitiesPage />,
@@ -44,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "tasks",
         element: <TasksPage />,
+      },
+      {
+        path: "timer",
+        element: <TimerPage />,
       },
       {
         path: "projects",
