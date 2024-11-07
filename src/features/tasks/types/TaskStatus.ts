@@ -1,1 +1,1 @@
-export type TaskStatus = "scheduled" | "completed";
+export type TaskStatus = "scheduled" | "completed" | "in-progress";
