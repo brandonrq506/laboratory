@@ -6,6 +6,7 @@ import {
   ChevronUpDownIcon,
   ExclamationCircleIcon,
 } from "@heroicons/react/20/solid";
+import { ComboBoxType, Configuration } from "./types";
 import {
   Combobox,
   ComboboxButton,
@@ -16,11 +17,6 @@ import {
   Label,
 } from "@headlessui/react";
 import { Option } from "@/types/core";
-
-type BaseConfig = { text: string };
-type PersistentConfig = { isPersistent: true; showFirst: boolean };
-type NonPersistentConfig = { isPersistent?: false; showFirst?: false };
-type Configuration = BaseConfig & (PersistentConfig | NonPersistentConfig);
 
 const filterOptions = (query: string, options: Option[]) => {
   const trimmedQuery = query.trim().toLowerCase();
@@ -51,15 +47,7 @@ type ComboBoxRHFProps = {
   error?: string;
 };
 
-export type ComboBoxProps = {
-  options: Option[];
-  label: string;
-  config?: Configuration;
-  showAsterisk?: boolean;
-  description?: string;
-};
-
-type Props = ComboBoxRHFProps & ComboBoxProps;
+type Props = ComboBoxRHFProps & ComboBoxType;
 
 export const ComboBox = forwardRef<HTMLInputElement, Props>(
   (
