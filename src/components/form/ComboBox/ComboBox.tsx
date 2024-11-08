@@ -80,7 +80,12 @@ export const ComboBox = forwardRef<HTMLInputElement, Props>(
         <Label className="block text-sm font-medium leading-6 text-gray-900">
           {label} {showAsterisk && <span className="ml-1 text-red-700">*</span>}
         </Label>
-        <Combobox as="div" value={value} onChange={onChange}>
+        <Combobox
+          as="div"
+          by="value"
+          value={value}
+          onChange={onChange}
+          onClose={() => setQuery("")}>
           <div className="relative mt-2">
             <ComboboxInput
               className={clsx(
@@ -116,13 +121,12 @@ export const ComboBox = forwardRef<HTMLInputElement, Props>(
                     key={option.value}
                     value={option}
                     disabled={option.disabled}
-                    className="relative cursor-default select-none py-1.5 pl-3 pr-9 text-gray-900 data-[disabled]:cursor-not-allowed data-[focus]:bg-indigo-600 data-[focus]:text-white data-[disabled]:opacity-60">
+                    className="group relative cursor-default select-none py-1.5 pl-3 pr-9 text-gray-900 data-[disabled]:cursor-not-allowed data-[focus]:bg-indigo-600 data-[focus]:text-white data-[disabled]:opacity-60">
                     <span className="block truncate data-[selected]:font-semibold">
                       {option.label}
                     </span>
-
-                    <span className="absolute inset-y-0 left-0 hidden items-center pl-1.5 text-indigo-600 group-data-[selected]:flex group-data-[focus]:text-white">
-                      <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                    <span className="absolute inset-y-0 right-0 hidden items-center pr-4 text-indigo-600 group-data-[selected]:flex group-data-[focus]:text-white">
+                      <CheckIcon className="size-5" aria-hidden="true" />
                     </span>
                   </ComboboxOption>
                 ))}
