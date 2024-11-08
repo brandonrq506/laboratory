@@ -7,6 +7,7 @@ import {
 
 import {
   ClockIcon,
+  Cog6ToothIcon,
   DocumentTextIcon,
   FolderIcon,
   RectangleStackIcon,
@@ -25,6 +26,7 @@ const items = [
   { name: "Activities", href: "/activities", icon: UsersIcon },
   { name: "Tasks", href: "/tasks", icon: RectangleStackIcon },
   { name: "Timer", href: "/timer", icon: ClockIcon },
+  { name: "Settings", href: "/settings", icon: Cog6ToothIcon },
 ];
 
 type SidebarProps = {

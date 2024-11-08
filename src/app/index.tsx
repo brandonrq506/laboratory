@@ -17,6 +17,12 @@ import {
   Unregister,
 } from "@/pages/forms";
 
+import {
+  AccountSettingsPage,
+  CategorySettingsPage,
+  NotificationSettingsPage,
+  SettingsPage,
+} from "@/pages/settings";
 import { ActivitiesPage, NewActivityPage } from "@/pages/Activities";
 import {
   Navigate,
@@ -36,104 +42,43 @@ const router = createBrowserRouter([
     path: "/",
     element: <MainLayout />,
     children: [
-      {
-        index: true,
-        element: <Navigate to="/timer" />,
-      },
+      { index: true, element: <Navigate to="/timer" /> },
       {
         path: "activities",
         element: <ActivitiesPage />,
+        children: [{ path: "new", element: <NewActivityPage /> }],
+      },
+      { path: "tasks", element: <TasksPage /> },
+      { path: "timer", element: <TimerPage /> },
+      {
+        path: "settings",
+        element: <SettingsPage />,
         children: [
-          {
-            path: "new",
-            element: <NewActivityPage />,
-          },
+          { index: true, element: <Navigate to="account" /> },
+          { path: "account", element: <AccountSettingsPage /> },
+          { path: "categories", element: <CategorySettingsPage /> },
+          { path: "notifications", element: <NotificationSettingsPage /> },
         ],
       },
-      {
-        path: "tasks",
-        element: <TasksPage />,
-      },
-      {
-        path: "timer",
-        element: <TimerPage />,
-      },
-      {
-        path: "projects",
-        element: <Projects />,
-      },
-      {
-        path: "modal-testing",
-        element: <TestingModal />,
-      },
-      {
-        path: "form-projects",
-        element: <FormsPage />,
-      },
-      {
-        path: "form-projects/new-location",
-        element: <NewLocation />,
-      },
-      {
-        path: "form-projects/shouldunregister-1",
-        element: <LastName />,
-      },
-      {
-        path: "form-projects/deps-1",
-        element: <DynamicPassword />,
-      },
-      {
-        path: "form-projects/unregister",
-        element: <Unregister />,
-      },
-      {
-        path: "form-projects/formstate",
-        element: <FormState />,
-      },
-      {
-        path: "form-projects/formstate-async",
-        element: <AsyncFormState />,
-      },
-      {
-        path: "form-projects/reset-partial",
-        element: <ResetPartial />,
-      },
-      {
-        path: "form-projects/reset-submit",
-        element: <ResetSubmit />,
-      },
-      {
-        path: "form-projects/set-error",
-        element: <SetError />,
-      },
-      {
-        path: "form-projects/get-field-state",
-        element: <GetFieldState />,
-      },
-      {
-        path: "form-projects/trigger",
-        element: <Trigger />,
-      },
-      {
-        path: "form-projects/controller-one",
-        element: <ControllerOne />,
-      },
-      {
-        path: "form-projects/controller-two",
-        element: <ControllerTwo />,
-      },
-      {
-        path: "form-projects/context-provider",
-        element: <ProviderForm />,
-      },
-      {
-        path: "form-projects/new-note",
-        element: <NewNoteForm />,
-      },
-      {
-        path: "form-projects/async-validation",
-        element: <AsyncValidation />,
-      },
+      { path: "projects", element: <Projects /> },
+      { path: "modal-testing", element: <TestingModal /> },
+      { path: "form-projects", element: <FormsPage /> },
+      { path: "form-projects/new-location", element: <NewLocation /> },
+      { path: "form-projects/shouldunregister-1", element: <LastName /> },
+      { path: "form-projects/deps-1", element: <DynamicPassword /> },
+      { path: "form-projects/unregister", element: <Unregister /> },
+      { path: "form-projects/formstate", element: <FormState /> },
+      { path: "form-projects/formstate-async", element: <AsyncFormState /> },
+      { path: "form-projects/reset-partial", element: <ResetPartial /> },
+      { path: "form-projects/reset-submit", element: <ResetSubmit /> },
+      { path: "form-projects/set-error", element: <SetError /> },
+      { path: "form-projects/get-field-state", element: <GetFieldState /> },
+      { path: "form-projects/trigger", element: <Trigger /> },
+      { path: "form-projects/controller-one", element: <ControllerOne /> },
+      { path: "form-projects/controller-two", element: <ControllerTwo /> },
+      { path: "form-projects/context-provider", element: <ProviderForm /> },
+      { path: "form-projects/new-note", element: <NewNoteForm /> },
+      { path: "form-projects/async-validation", element: <AsyncValidation /> },
     ],
   },
 ]);
