@@ -7,6 +7,6 @@ export type ActivityAPI = BaseEntity & {
     name: string;
   };
   max_time: number | null;
-  name: string | null;
+  name: string;
   user_id: number;
 };

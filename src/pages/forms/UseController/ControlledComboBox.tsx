@@ -1,12 +1,13 @@
-import { ComboBox, ComboBoxProps } from "@/components/form";
 import {
   FieldValues,
   UseControllerProps,
   useController,
 } from "react-hook-form";
+import { ComboBox } from "@/components/form";
+import { ComboBoxType } from "@/components/form/ComboBox/types";
 
 type ControlledComboBoxProps<T extends FieldValues> = UseControllerProps<T> &
-  ComboBoxProps;
+  ComboBoxType;
 
 export const ControlledComboBox = <T extends FieldValues>({
   config,
