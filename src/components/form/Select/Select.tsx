@@ -74,7 +74,7 @@ export const Select = forwardRef<HTMLButtonElement, Props>(
           <ListboxOptions
             anchor="bottom"
             transition
-            className="absolute z-10 mt-1 max-h-60 w-[var(--button-width)] overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm">
+            className="absolute z-10 mt-1 max-h-60 w-[var(--button-width)] min-w-fit overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm">
             {options.map((option) => (
               <ListboxOption
                 value={option}

@@ -15,14 +15,14 @@ export const SettingsPage = () => {
         <nav>
           <ul role="list" aria-label="Tabs" className="flex space-x-4">
             {settingsPages.map((page) => (
-              <li>
+              <li key={page.href}>
                 <NavLink
                   to={page.href}
                   className={({ isActive }) =>
                     clsx(
                       isActive
                         ? "bg-indigo-100 text-indigo-700"
-                        : "text-gray-500 hover:text-gray-700",
+                        : "text-gray-500 hover:bg-gray-50 hover:text-gray-700",
                       "rounded-md px-3 py-2 text-sm font-medium",
                     )
                   }>
