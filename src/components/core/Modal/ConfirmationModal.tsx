@@ -9,17 +9,17 @@ import clsx from "clsx";
 
 const icons = {
   success: (
-    <CheckBadgeIcon className="h-6 w-6 text-green-600" aria-hidden="true" />
+    <CheckBadgeIcon className="size-6 text-green-600" aria-hidden="true" />
   ),
   info: (
     <InformationCircleIcon
-      className="h-6 w-6 text-yellow-600"
+      className="size-6 text-yellow-600"
       aria-hidden="true"
     />
   ),
   danger: (
     <ExclamationTriangleIcon
-      className="h-6 w-6 text-red-600"
+      className="size-6 text-red-600"
       aria-hidden="true"
     />
   ),
@@ -69,7 +69,9 @@ export const ConfirmationModal = ({
           </div>
         </div>
       </div>
-      <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">{actions}</div>
+      <div className="mt-5 gap-2 sm:mt-4 sm:flex sm:flex-row-reverse">
+        {actions}
+      </div>
     </Modal>
   );
 };

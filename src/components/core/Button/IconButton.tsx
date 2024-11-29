@@ -10,11 +10,11 @@ const variants = {
 };
 
 const states = {
-  primary: "hover:bg-blue-500 focus-visible:outline-blue-600",
-  primaryOutline: "hover:text-blue-500 focus-visible:outline-blue-600",
-  danger: "hover:bg-red-500 focus-visible:outline-red-600",
-  dangerOutline: "hover:text-red-500 focus-visible:outline-red-600",
-  blackOutline: "hover:text-gray-500 focus-visible:outline-black",
+  primary: "hover:bg-blue-500 focus-visible:ring-blue-600",
+  primaryOutline: "hover:text-blue-500 focus-visible:ring-blue-600",
+  danger: "hover:bg-red-500 focus-visible:ring-red-600",
+  dangerOutline: "hover:text-red-500 focus-visible:ring-red-600",
+  blackOutline: "hover:text-gray-500 focus-visible:ring-black",
 };
 
 const shapes = {
@@ -54,7 +54,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         ref={ref}
         type="button"
         className={clsx(
-          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+          "border-none outline-none ring-2 ring-transparent ring-offset-0 transition focus-visible:ring-offset-4",
           sizes[size],
           shapes[shape],
           variants[variant],
