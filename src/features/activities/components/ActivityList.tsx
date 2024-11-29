@@ -21,12 +21,12 @@ export const ActivityList = () => {
         {data.map((activity) => (
           <li key={activity.id} className="flex gap-4 px-3 py-2">
             <p className="flex-1">{activity.name}</p>
-            <p className="flex-1">
+            <p className="flex-1 tabular-nums">
               {activity.avg_time === null
                 ? "N/A"
                 : convertSecondsToTime(activity.avg_time)}
             </p>
-            <p className="flex-1">
+            <p className="flex-1 tabular-nums">
               {activity.max_time === null
                 ? "N/A"
                 : convertSecondsToTime(activity.max_time)}
