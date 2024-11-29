@@ -1,4 +1,5 @@
 import { Button as HButton } from "@headlessui/react";
+import { Loading } from "../Loading/Loading";
 import clsx from "clsx";
 import { forwardRef } from "react";
 
@@ -56,7 +57,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           className,
         )}
         {...props}>
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <Loading />}
         {!isLoading && startIcon}
         <span className="mx-2">{props.children}</span> {!isLoading && endIcon}
       </HButton>
