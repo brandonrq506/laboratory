@@ -1,10 +1,11 @@
 import { CategorySelectFilter } from "@/features/categories/components";
 import { FilterableTaskList } from "./FilterableTaskList";
+import { PageHeader } from "@/components/layout";
 
 export const TasksPage = () => {
   return (
     <div>
-      <h1>Tasks</h1>
+      <PageHeader title="Tasks" />
       <CategorySelectFilter />
       <FilterableTaskList />
     </div>
