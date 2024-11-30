@@ -6,4 +6,5 @@ export type Color = {
   bgClass: string;
   textClass: string;
   borderClass: string;
+  fillClass: string;
 };
