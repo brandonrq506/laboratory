@@ -46,10 +46,14 @@ export const DeleteActivity = ({ activityId }: Props) => {
             <Button
               variant="danger"
               isLoading={isPending}
-              onClick={handleDelete}>
+              onClick={handleDelete}
+              className="inline-flex w-full justify-center sm:ml-3 sm:w-auto">
               {CONFIRM}
             </Button>
-            <Button variant="secondary" autoFocus onClick={onClose}>
+            <Button
+              onClick={onClose}
+              variant="secondary"
+              className="mt-3 inline-flex w-full justify-center sm:mt-0 sm:w-auto">
               {CANCEL}
             </Button>
           </>
