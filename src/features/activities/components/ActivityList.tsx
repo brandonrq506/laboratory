@@ -2,7 +2,7 @@ import { useActivities } from "../api/tanstack/useActivities";
 
 import { Card } from "@/components/layout";
 import { DeleteActivity } from "./DeleteActivity";
-import { convertSecondsToTime } from "@/utils";
+import { convertSecondsToHHMMSS } from "@/utils";
 
 export const ActivityList = () => {
   const { data, isPending, isError } = useActivities();
@@ -24,12 +24,12 @@ export const ActivityList = () => {
             <p className="flex-1 tabular-nums">
               {activity.avg_time === null
                 ? "N/A"
-                : convertSecondsToTime(activity.avg_time)}
+                : convertSecondsToHHMMSS(activity.avg_time)}
             </p>
             <p className="flex-1 tabular-nums">
               {activity.max_time === null
                 ? "N/A"
-                : convertSecondsToTime(activity.max_time)}
+                : convertSecondsToHHMMSS(activity.max_time)}
             </p>
             <p className="flex-1">{activity.category.name}</p>
             <DeleteActivity activityId={activity.id} />

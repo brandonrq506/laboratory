@@ -6,7 +6,7 @@ const padNumber = (number: number) => {
   return number.toString().padStart(PADDING, "0");
 };
 
-export const convertSecondsToTime = (seconds: number) => {
+export const convertSecondsToHHMMSS = (seconds: number) => {
   if (seconds < 0) throw new Error("Seconds must be a positive number");
 
   const hours = Math.floor(seconds / SECONDS_IN_HOUR);

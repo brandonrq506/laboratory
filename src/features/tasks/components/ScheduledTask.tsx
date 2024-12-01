@@ -3,7 +3,7 @@ import { DeleteTask } from "./DeleteTask";
 import { Dot } from "@/components/core";
 import { TaskAPI } from "../types/taskAPI";
 
-import { convertSecondsToTime } from "@/utils";
+import { convertSecondsToHHMMSS } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
 type Props = { task: TaskAPI };
@@ -24,7 +24,7 @@ export const ScheduledTask = ({ task }: Props) => {
             <>
               <p>Avg: </p>
               <p className="tabular-nums">
-                {convertSecondsToTime(task.activity.avg_time)}
+                {convertSecondsToHHMMSS(task.activity.avg_time)}
               </p>
             </>
           )}

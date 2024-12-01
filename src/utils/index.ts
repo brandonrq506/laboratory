@@ -1,2 +1,2 @@
-export * from "./convertSecondsToTime";
+export * from "./convertSecondsToHHMMSS";
 export * from "./transformToOption";
