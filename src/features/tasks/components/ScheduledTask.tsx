@@ -1,12 +1,12 @@
 import { Card } from "@/components/layout";
 import { DeleteTask } from "./DeleteTask";
 import { Dot } from "@/components/core";
-import { TaskAPI } from "../types/taskAPI";
+import { ScheduledTaskAPI } from "../types/scheduledTask";
 
 import { convertSecondsToTime } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
-type Props = { task: TaskAPI };
+type Props = { task: ScheduledTaskAPI };
 
 export const ScheduledTask = ({ task }: Props) => {
   const color = getColorByName(task.activity.category.color);
