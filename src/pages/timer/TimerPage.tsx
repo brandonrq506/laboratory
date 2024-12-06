@@ -1,4 +1,5 @@
 import { CreateTaskForm } from "@/features/tasks/components";
+import { TodayCompletedTaskList } from "../Tasks/TodayCompletedTaskList";
 import { TodayScheduledTaskList } from "../Tasks/TodayScheduledTaskList";
 
 export const TimerPage = () => {
@@ -6,6 +7,7 @@ export const TimerPage = () => {
     <div>
       <CreateTaskForm />
       <TodayScheduledTaskList />
+      <TodayCompletedTaskList />
     </div>
   );
 };

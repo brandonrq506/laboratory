@@ -1,16 +1,19 @@
-import { ScheduledTask } from "./ScheduledTask";
-import { TaskAPI } from "../types/taskAPI";
+import { BaseEntity } from "@/types/core";
 
-type Props = {
-  tasks: TaskAPI[];
+type Props<T> = {
+  tasks: T[];
+  renderItem: (item: T) => React.ReactNode;
 };
 
-export const TaskList = ({ tasks }: Props) => {
+export const TaskList = <T extends BaseEntity>({
+  tasks,
+  renderItem,
+}: Props<T>) => {
   return (
     <ul>
       {tasks.map((task) => (
         <li key={task.id} className="my-1">
-          <ScheduledTask task={task} />
+          {renderItem(task)}
         </li>
       ))}
 
