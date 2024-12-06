@@ -1,4 +1,4 @@
-import { TaskAPI } from "./taskAPI";
+import { TaskAPI } from "./task";
 
 export interface ScheduledTaskAPI extends TaskAPI {
   status: "scheduled";

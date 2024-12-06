@@ -1,4 +1,4 @@
-import { TaskAPI } from "./taskAPI";
+import { TaskAPI } from "./task";
 
 export interface InProgressTaskAPI extends TaskAPI {
   status: "in-progress";
