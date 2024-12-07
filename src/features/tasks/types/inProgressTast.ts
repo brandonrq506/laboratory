@@ -1,7 +1,7 @@
 import { TaskAPI } from "./task";
 
 export interface InProgressTaskAPI extends TaskAPI {
-  status: "in-progress";
+  status: "in_progress";
   start_time: string;
   end_time: null;
 }
