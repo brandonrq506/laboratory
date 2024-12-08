@@ -57,4 +57,9 @@ describe("convertSecondsToTime", () => {
     const seconds = 86400;
     expect(convertSecondsToTime(seconds)).toBe("24h");
   });
+
+  it("returns '1:30h' when seconds is a float", () => {
+    const seconds = 5400.345;
+    expect(convertSecondsToTime(seconds)).toBe("1:30h");
+  });
 });

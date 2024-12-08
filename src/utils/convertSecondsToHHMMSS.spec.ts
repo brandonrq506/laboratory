@@ -42,4 +42,9 @@ describe("convertSecondsToHHMMSS", () => {
       "Seconds must be a positive number",
     );
   });
+
+  it("returns '01:30:00' when seconds is a float", () => {
+    const seconds = 5400.345;
+    expect(convertSecondsToHHMMSS(seconds)).toBe("01:30:00");
+  });
 });

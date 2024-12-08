@@ -11,7 +11,7 @@ export const convertSecondsToHHMMSS = (seconds: number) => {
 
   const hours = Math.floor(seconds / SECONDS_IN_HOUR);
   const minutes = Math.floor((seconds % SECONDS_IN_HOUR) / MINUTES_IN_MINUTE);
-  const remainingSeconds = seconds % MINUTES_IN_MINUTE;
+  const remainingSeconds = Math.floor(seconds % MINUTES_IN_MINUTE);
 
   return `${padNumber(hours)}:${padNumber(minutes)}:${padNumber(remainingSeconds)}`;
 };
