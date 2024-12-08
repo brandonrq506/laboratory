@@ -96,6 +96,7 @@ export const ComboBox = forwardRef<HTMLInputElement, Props>(
               onBlur={onBlur}
               name={name}
               ref={ref}
+              autoComplete="off"
               onChange={(event) => setQuery(event.target.value)}
               displayValue={(option: Option | null) => option?.label ?? ""}
             />

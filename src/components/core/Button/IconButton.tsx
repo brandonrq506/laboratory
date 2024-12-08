@@ -55,6 +55,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         type="button"
         className={clsx(
           "border-none outline-none ring-2 ring-transparent ring-offset-0 transition focus-visible:ring-offset-4",
+          "disabled:cursor-not-allowed disabled:opacity-70",
           sizes[size],
           shapes[shape],
           variants[variant],
