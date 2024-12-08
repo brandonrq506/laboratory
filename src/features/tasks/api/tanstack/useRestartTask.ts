@@ -9,8 +9,7 @@ export const useReStartTask = () => {
   return useMutation({
     mutationFn: restartTask,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: taskKeys.list("completed") });
-      queryClient.invalidateQueries({ queryKey: taskKeys.list("in_progress") });
+      queryClient.invalidateQueries({ queryKey: taskKeys.lists() });
     },
   });
 };
