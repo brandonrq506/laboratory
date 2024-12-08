@@ -67,7 +67,7 @@ module.exports = {
   },
   overrides: [
     {
-      "files": ["src/**/*.tsx"],
+      "files": ["src/**/*.tsx", "**/*.spec.{tsx,ts}"],
       "rules": {
         "max-lines-per-function": ["error", { "max": 150, "skipBlankLines": true, "skipComments": true }],
       },

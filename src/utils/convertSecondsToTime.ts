@@ -25,7 +25,7 @@ export const convertSecondsToTime = (seconds: number) => {
 
   const hours = Math.floor(seconds / SECONDS_IN_HOUR);
   const minutes = Math.floor((seconds % SECONDS_IN_HOUR) / MINUTES_IN_MINUTE);
-  const remainingSeconds = seconds % MINUTES_IN_MINUTE;
+  const remainingSeconds = Math.floor(seconds % MINUTES_IN_MINUTE);
 
   if (hours >= 1) return displayHours(hours, minutes, remainingSeconds);
 
