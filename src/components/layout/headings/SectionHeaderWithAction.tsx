@@ -14,7 +14,7 @@ export const SectionHeaderWithAction = ({
   return (
     <div
       className={clsx(
-        "flex items-center justify-between border-b border-gray-200 pb-2.5 mb-1",
+        "mb-1 flex items-center justify-between border-b border-gray-200 pb-2.5",
         className,
       )}>
       <h3 className="text-base font-semibold text-gray-900">{title}</h3>
