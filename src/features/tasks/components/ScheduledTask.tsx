@@ -1,7 +1,7 @@
 import { Card } from "@/components/layout";
-import { DeleteTask } from "./DeleteTask";
 import { Dot } from "@/components/core";
 import { ScheduledTaskAPI } from "../types/scheduledTask";
+import { ScheduledTaskActionMenu } from "./ScheduledTaskActionMenu";
 
 import { convertSecondsToTime } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
@@ -33,7 +33,7 @@ export const ScheduledTask = ({ task }: Props) => {
         </div>
       </div>
 
-      <DeleteTask taskId={task.id} />
+      <ScheduledTaskActionMenu taskId={task.id} />
     </Card>
   );
 };
