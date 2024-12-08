@@ -3,5 +3,6 @@ export * from "./Button/IconButton";
 export * from "./Button/LinkButton";
 export * from "./Dot/Dot";
 export * from "./Loading/Loading";
+export * from "./Menu/ThreeDotsMenu";
 export * from "./Modal/Modal";
 export * from "./Modal/ConfirmationModal";
