@@ -1,4 +1,5 @@
 import { BaseEntity } from "@/types/core";
+import { TaskEmptyList } from "./TaskEmptyList";
 
 type Props<T> = {
   tasks: T[];
@@ -17,7 +18,7 @@ export const TaskList = <T extends BaseEntity>({
         </li>
       ))}
 
-      {tasks.length === 0 && <div>No tasks found</div>}
+      {tasks.length === 0 && <TaskEmptyList />}
     </ul>
   );
 };

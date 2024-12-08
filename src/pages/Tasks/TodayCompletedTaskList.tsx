@@ -1,8 +1,11 @@
 import { useTasks } from "@/features/tasks/api/tanstack/useTasks";
 
 import { CompletedTask, TaskList } from "@/features/tasks/components";
-import { Button } from "@/components/core";
 import { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
+import { IconButton } from "@/components/core";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { SectionHeaderWithAction } from "@/components/layout";
+import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
 
 const today = new Date().toISOString().split("T")[0];
 
@@ -14,12 +17,23 @@ export const TodayCompletedTaskList = () => {
 
   if (isPending) return <div>Loading...</div>;
 
-  if (isError) return <Button onClick={() => refetch()}>Try again</Button>;
+  if (isError) return <TaskErrorList refetch={refetch} />;
 
   return (
-    <TaskList
-      tasks={data}
-      renderItem={(task) => <CompletedTask task={task as CompletedTaskAPI} />}
-    />
+    <div>
+      <SectionHeaderWithAction
+        title="Today's Completed Tasks"
+        className="pr-2.5"
+        action={
+          <IconButton shape="circle">
+            <PlusIcon className="size-5" aria-hidden />
+          </IconButton>
+        }
+      />
+      <TaskList
+        tasks={data}
+        renderItem={(task) => <CompletedTask task={task as CompletedTaskAPI} />}
+      />
+    </div>
   );
 };
