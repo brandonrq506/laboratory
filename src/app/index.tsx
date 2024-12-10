@@ -31,6 +31,7 @@ import {
 } from "react-router-dom";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
+import { ExcelPage } from "@/pages/Excel";
 import { MainLayout } from "@/components/layout";
 import { Projects } from "@/pages/Projects";
 import { TasksPage } from "@/pages/Tasks";
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
           { path: "notifications", element: <NotificationSettingsPage /> },
         ],
       },
+      { path: "excel", element: <ExcelPage /> },
       { path: "projects", element: <Projects /> },
       { path: "modal-testing", element: <TestingModal /> },
       { path: "form-projects", element: <FormsPage /> },
