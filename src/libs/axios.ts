@@ -13,5 +13,6 @@ export const apiV1 = axios.create({
 export const ACTIVITIES_ENDPOINT = "/activities";
 export const CATEGORIES_ENDPOINT = "/categories";
 export const SESSION_ENDPOINT = "/session";
+export const EXCEL_ENDPOINT = "/excel";
 export const TASKS_ENDPOINT = "/tasks";
 export const USERS_ENDPOINT = "/users";
