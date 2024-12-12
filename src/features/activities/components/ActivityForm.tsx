@@ -1,14 +1,14 @@
 import { useForm } from "react-hook-form";
 
-import { InputText, NumberInput } from "@/components/form";
+import { InputText, TimeInput } from "@/components/form";
 import { Button } from "@/components/core";
 import { CategorySelect } from "@/features/categories/components";
 import { CreateForm } from "../types/createForm";
 
 const defaultActivity: CreateForm = {
   name: "",
-  avg_time: 0,
-  max_time: 0,
+  avg_time: "",
+  max_time: "",
   category_id: null,
 };
 
@@ -48,22 +48,19 @@ export const ActivityForm = ({
           rules={{ required: "A category must be selected" }}
         />
 
-        <NumberInput
-          label="Avg. Seconds"
+        <TimeInput
+          label="Avg. Time"
           error={errors.avg_time?.message}
           registration={register("avg_time", {
             required: "Required to handle thresholds",
-            min: { value: 1, message: "Must be at least 1" },
-            valueAsNumber: true,
+            min: { value: "00:01", message: "Must be at least 1 minute" },
           })}
         />
 
-        <NumberInput
-          label="Max. Seconds"
+        <TimeInput
+          label="Max. Time"
           error={errors.max_time?.message}
-          registration={register("max_time", {
-            valueAsNumber: true,
-          })}
+          registration={register("max_time")}
         />
       </div>
 
