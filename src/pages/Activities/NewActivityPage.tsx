@@ -15,9 +15,9 @@ export const NewActivityPage = () => {
       <Modal isOpen={isOpen} onClose={() => navigate("..")}>
         <CreateActivityForm
           initialValues={{
-            avg_time: 1800,
+            avg_time: "00:30",
             category_id: { value: 1, label: "Productive" },
-            max_time: 3600,
+            max_time: "01:00",
           }}
         />
       </Modal>
