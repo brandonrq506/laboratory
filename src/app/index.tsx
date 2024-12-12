@@ -23,7 +23,11 @@ import {
   NotificationSettingsPage,
   SettingsPage,
 } from "@/pages/settings";
-import { ActivitiesPage, NewActivityPage } from "@/pages/Activities";
+import {
+  ActivitiesPage,
+  EditActivityPage,
+  NewActivityPage,
+} from "@/pages/Activities";
 import {
   Navigate,
   RouterProvider,
@@ -46,7 +50,10 @@ const router = createBrowserRouter([
       {
         path: "activities",
         element: <ActivitiesPage />,
-        children: [{ path: "new", element: <NewActivityPage /> }],
+        children: [
+          { path: "new", element: <NewActivityPage /> },
+          { path: "edit/:activityId", element: <EditActivityPage /> },
+        ],
       },
       { path: "tasks", element: <TasksPage /> },
       { path: "timer", element: <TimerPage /> },
