@@ -1,6 +1,6 @@
 import { useDisclosure } from "@/hooks/useDisclosure";
 
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Header } from "./Header";
 import { IconButton } from "../../core";

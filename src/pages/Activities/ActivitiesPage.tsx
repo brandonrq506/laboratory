@@ -1,6 +1,6 @@
 import { ActivityList } from "@/features/activities/components";
 import { LinkButton } from "@/components/core";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import { PageHeaderWithActions } from "@/components/layout";
 import { PlusIcon } from "@heroicons/react/24/outline";
 

@@ -1,5 +1,5 @@
 import { FolderIcon } from "@heroicons/react/24/outline";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import clsx from "clsx";
 
 type Props = {
