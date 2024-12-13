@@ -20,6 +20,7 @@ const experiments = [
   { name: "Projects", href: "/projects", icon: FolderIcon },
   { name: "Modal Testing", href: "/modal-testing", icon: UsersIcon },
   { name: "Form Projects", href: "/form-projects", icon: DocumentTextIcon },
+  { name: "Table Projects", href: "/table-projects", icon: RectangleStackIcon },
 ];
 
 const items = [

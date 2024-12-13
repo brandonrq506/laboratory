@@ -34,6 +34,7 @@ import { AsyncValidation } from "@/experiments/forms";
 import { MainLayout } from "@/components/layout";
 import { Projects } from "@/pages/Projects";
 import { RouterProvider } from "react-router/dom";
+import { TanstackTableExperimentsPage } from "@/pages/TanstackTable";
 import { TasksPage } from "@/pages/Tasks";
 import { TestingModal } from "@/pages/TestingModal";
 import { TimerPage } from "@/pages/timer";
@@ -83,6 +84,7 @@ const router = createBrowserRouter([
       { path: "form-projects/context-provider", element: <ProviderForm /> },
       { path: "form-projects/new-note", element: <NewNoteForm /> },
       { path: "form-projects/async-validation", element: <AsyncValidation /> },
+      { path: "table-projects", element: <TanstackTableExperimentsPage /> },
     ],
   },
 ]);
