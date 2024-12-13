@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import { useTasks } from "@/features/tasks/api/tanstack/useTasks";
 
 import { ScheduledTask, TaskList } from "@/features/tasks/components";

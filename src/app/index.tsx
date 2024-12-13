@@ -28,15 +28,12 @@ import {
   EditActivityPage,
   NewActivityPage,
 } from "@/pages/Activities";
-import {
-  Navigate,
-  RouterProvider,
-  createBrowserRouter,
-} from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
 import { MainLayout } from "@/components/layout";
 import { Projects } from "@/pages/Projects";
+import { RouterProvider } from "react-router/dom";
 import { TasksPage } from "@/pages/Tasks";
 import { TestingModal } from "@/pages/TestingModal";
 import { TimerPage } from "@/pages/timer";

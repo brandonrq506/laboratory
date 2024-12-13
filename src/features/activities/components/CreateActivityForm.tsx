@@ -1,5 +1,5 @@
 import { useCreateActivity } from "../api/tanstack/useCreateActivity";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { ACTIVITY } from "@/constants/entities";
 import { ADD } from "@/constants/actions";

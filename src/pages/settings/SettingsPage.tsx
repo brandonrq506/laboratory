@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router";
 import { Card } from "@/components/layout";
 import { clsx } from "clsx";
 
