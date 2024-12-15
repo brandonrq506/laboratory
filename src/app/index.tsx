@@ -28,6 +28,10 @@ import {
   EditActivityPage,
   NewActivityPage,
 } from "@/pages/Activities";
+import {
+  FirstTableAttempt,
+  TanstackTableExperimentsPage,
+} from "@/pages/TanstackTable";
 import { Navigate, createBrowserRouter } from "react-router";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
@@ -83,6 +87,8 @@ const router = createBrowserRouter([
       { path: "form-projects/context-provider", element: <ProviderForm /> },
       { path: "form-projects/new-note", element: <NewNoteForm /> },
       { path: "form-projects/async-validation", element: <AsyncValidation /> },
+      { path: "table-projects", element: <TanstackTableExperimentsPage /> },
+      { path: "table-projects/first-attempt", element: <FirstTableAttempt /> },
     ],
   },
 ]);
