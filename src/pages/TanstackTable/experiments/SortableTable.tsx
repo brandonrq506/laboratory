@@ -1,21 +1,38 @@
 import {
+  SortDirection,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { useMemo } from "react";
 
+import {
+  ChevronDownIcon,
+  ChevronUpDownIcon,
+  ChevronUpIcon,
+  PencilIcon,
+} from "@heroicons/react/24/outline";
 import { ActivityAPI } from "@/features/activities/types/activityAPI";
 import { DeleteActivity } from "@/features/activities/components";
 import { LinkButton } from "@/components/core";
-import { PencilIcon } from "@heroicons/react/24/outline";
 import { activities } from "../helpers/activityData";
+import { clsx } from "clsx";
 import { convertSecondsToHHMMSS } from "@/utils";
 
 const formatDuration = (avg_time: number | null) => {
   if (avg_time === null) return "N/A";
   return convertSecondsToHHMMSS(avg_time);
+};
+
+const displaySortIcon = (column: SortDirection | false, canSort: boolean) => {
+  if (!canSort) return null;
+  if (column === false)
+    return <ChevronUpDownIcon aria-hidden className="size-5 text-gray-400" />;
+  if (column === "asc")
+    return <ChevronUpIcon aria-hidden className="size-5 text-gray-400" />;
+  return <ChevronDownIcon aria-hidden className="size-5 text-gray-400" />;
 };
 
 const columnHelper = createColumnHelper<ActivityAPI>();
@@ -27,6 +44,7 @@ export const SortableTable = () => {
     () => [
       columnHelper.accessor("name", {
         header: "Name",
+        sortingFn: "text",
       }),
       columnHelper.accessor((row) => formatDuration(row.avg_time), {
         id: "avg_time",
@@ -38,6 +56,7 @@ export const SortableTable = () => {
       }),
       columnHelper.accessor("category.name", {
         header: "Category",
+        sortingFn: "text",
       }),
       columnHelper.display({
         id: "actions",
@@ -63,19 +82,37 @@ export const SortableTable = () => {
     columns,
     data,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    enableSortingRemoval: false,
+    maxMultiSortColCount: 3,
   });
 
   return (
     <div>
+      <p className="text-xs font-light text-gray-500">
+        Hold <mark>Shift</mark> to apply multi-sort
+      </p>
       <table className="w-full border text-center">
         <thead>
           <tr>
             {table.getFlatHeaders().map((header) => (
               <th key={header.id} className="font-semibold">
-                {flexRender(
-                  header.column.columnDef.header,
-                  header.getContext(),
-                )}
+                <div
+                  className={clsx(
+                    header.column.getCanSort() &&
+                      "flex cursor-pointer select-none items-center justify-center",
+                  )}
+                  onClick={header.column.getToggleSortingHandler()}>
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext(),
+                  )}
+
+                  {displaySortIcon(
+                    header.column.getIsSorted(),
+                    header.column.getCanSort(),
+                  )}
+                </div>
               </th>
             ))}
           </tr>
