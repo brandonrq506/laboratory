@@ -2,6 +2,7 @@ import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { useMemo } from "react";
@@ -28,13 +29,13 @@ export const GlobalSearchTable = () => {
       columnHelper.accessor("name", {
         header: "Name",
       }),
-      columnHelper.accessor("avg_time", {
+      columnHelper.accessor((row) => formatDuration(row.avg_time), {
+        id: "avg_time",
         header: "Avg. Duration",
-        cell: (props) => formatDuration(props.getValue()),
       }),
-      columnHelper.accessor("max_time", {
+      columnHelper.accessor((row) => formatDuration(row.max_time), {
+        id: "max_time",
         header: "Max. Duration",
-        cell: (props) => formatDuration(props.getValue()),
       }),
       columnHelper.accessor("category.name", {
         header: "Category",
@@ -63,10 +64,22 @@ export const GlobalSearchTable = () => {
     columns,
     data,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    globalFilterFn: "includesString",
+    initialState: {
+      globalFilter: "prod",
+    },
   });
 
   return (
     <div>
+      <input
+        value={table.getState().globalFilter}
+        onChange={(e) => table.setGlobalFilter(String(e.target.value))}
+        placeholder="Search..."
+        className="block w-1/3 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+      />
+      <br />
       <table className="w-full border text-center">
         <thead>
           <tr>

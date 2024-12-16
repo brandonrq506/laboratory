@@ -90,7 +90,10 @@ const router = createBrowserRouter([
       { path: "form-projects/async-validation", element: <AsyncValidation /> },
       { path: "table-projects", element: <TanstackTableExperimentsPage /> },
       { path: "table-projects/first-attempt", element: <FirstTableAttempt /> },
-      { path: "table-projects/global-search-table", element: <GlobalSearchTable /> },
+      {
+        path: "table-projects/global-search-table",
+        element: <GlobalSearchTable />,
+      },
     ],
   },
 ]);
