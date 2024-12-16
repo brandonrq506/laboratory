@@ -31,6 +31,7 @@ import {
 import {
   FirstTableAttempt,
   GlobalSearchTable,
+  SortableTable,
   TanstackTableExperimentsPage,
 } from "@/pages/TanstackTable";
 import { Navigate, createBrowserRouter } from "react-router";
@@ -90,10 +91,8 @@ const router = createBrowserRouter([
       { path: "form-projects/async-validation", element: <AsyncValidation /> },
       { path: "table-projects", element: <TanstackTableExperimentsPage /> },
       { path: "table-projects/first-attempt", element: <FirstTableAttempt /> },
-      {
-        path: "table-projects/global-search-table",
-        element: <GlobalSearchTable />,
-      },
+      { path: "table-projects/global-search", element: <GlobalSearchTable /> },
+      { path: "table-projects/sorting", element: <SortableTable /> },
     ],
   },
 ]);
