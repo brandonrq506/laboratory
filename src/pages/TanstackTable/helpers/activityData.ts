@@ -37,6 +37,23 @@ export const activities: ActivityAPI[] = [
     user_id: 1,
   },
   {
+    id: 949,
+    avg_time: 3600,
+    category: {
+      id: 3,
+      created_at: "2024-08-11T23:33:11.193Z",
+      name: "Necessary",
+      updated_at: "2024-11-09T17:20:18.866Z",
+      user_id: 1,
+      color: "blue",
+    },
+    created_at: "2024-08-31T18:18:41.851Z",
+    max_time: 3600,
+    name: "Angular",
+    updated_at: "2024-08-31T18:18:41.851Z",
+    user_id: 1,
+  },
+  {
     id: 38,
     avg_time: 14400,
     category: {
