@@ -1,4 +1,4 @@
-import { ActivityList } from "@/features/activities/components";
+import { ActivityTable } from "@/features/activities/components";
 import { LinkButton } from "@/components/core";
 import { Outlet } from "react-router";
 import { PageHeaderWithActions } from "@/components/layout";
@@ -23,7 +23,7 @@ export const ActivitiesPage = () => {
         }
       />
 
-      <ActivityList />
+      <ActivityTable />
       <Outlet />
     </div>
   );
