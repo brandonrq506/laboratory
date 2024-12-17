@@ -13,6 +13,9 @@ export const SUBMIT = "Submit";
 export const IMPORT = "Import";
 export const CONFIRM = "Confirm";
 export const DOWNLOAD = "Download";
+export const START = "Start";
+export const FINISH = "Finish";
+export const RESTART = "Restart";
 
 /* CANCELLATION ACTIONS */
 export const CLOSE = "Close";
@@ -33,12 +36,3 @@ export const REGISTER = "Register";
 export const SIGN_IN = "Sign In";
 export const SIGN_OUT = "Sign Out";
 export const CREATE_ACCOUNT = "Create Account";
-
-/* REPAIRS */
-export const REPAIR = "Repair";
-export const GO_REPAIRS = "Go to Repairs";
-export const ADD_ANOTHER_REPAIR = "Add Another Repair";
-
-/* TOWS */
-export const GO_TOWS = "Go to Tows";
-export const ADD_ANOTHER_TOW = "Add Another Tow";

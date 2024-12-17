@@ -7,6 +7,9 @@ import { Fragment } from "react/jsx-runtime";
 import { MenuItem } from "@headlessui/react";
 import { ThreeDotsMenu } from "@/components/core";
 
+import { DELETE, START } from "@/constants/actions";
+import { TASK } from "@/constants/entities";
+
 type Props = {
   taskId: number;
 };
@@ -24,7 +27,7 @@ export const ScheduledTaskActionMenu = ({ taskId }: Props) => {
               onClick={() => startTask(taskId)}
               className="group flex w-full items-center gap-2 text-nowrap px-4 py-2 text-sm text-blue-600 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none">
               <PlayIcon aria-hidden className="size-4" />
-              Start Activity
+              {START} {TASK}
             </button>
           </MenuItem>
         </div>
@@ -35,7 +38,7 @@ export const ScheduledTaskActionMenu = ({ taskId }: Props) => {
               onClick={() => onOpen()}
               className="group flex w-full items-center gap-2 text-nowrap px-4 py-2 text-sm text-red-600 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none">
               <TrashIcon aria-hidden className="size-4" />
-              Delete Task
+              {DELETE} {TASK}
             </button>
           </MenuItem>
         </div>
