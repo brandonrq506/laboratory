@@ -1,5 +1,4 @@
 import {
-  SortDirection,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
@@ -10,36 +9,13 @@ import {
 import { useActivities } from "../api/tanstack/useActivities";
 import { useMemo } from "react";
 
-import {
-  ChevronDownIcon,
-  ChevronUpDownIcon,
-  ChevronUpIcon,
-} from "@heroicons/react/24/outline";
 import { ActivityAPI } from "../types/activityAPI";
 import { EmptyState } from "@/components/core/Table/EmptyState";
 import { Loading } from "@/components/core";
+import { SortIcon } from "@/components/core/Table/SortIcon";
 import { StateInputText } from "@/components/form";
 import { clsx } from "clsx";
 import { displayTableDuration } from "../utils/displayTableDuration";
-
-const displaySortIcon = (column: SortDirection | false, canSort: boolean) => {
-  if (!canSort) return null;
-  if (column === false)
-    return <ChevronUpDownIcon aria-hidden className="size-5 text-gray-400" />;
-  if (column === "asc")
-    return (
-      <ChevronUpIcon
-        aria-hidden
-        className="m-1 size-3 stroke-2 text-gray-400"
-      />
-    );
-  return (
-    <ChevronDownIcon
-      aria-hidden
-      className="m-1 size-3 stroke-2 text-gray-400"
-    />
-  );
-};
 
 const columnHelper = createColumnHelper<ActivityAPI>();
 
@@ -126,10 +102,10 @@ export const ActivityTable = () => {
                             header.getContext(),
                           )}
 
-                          {displaySortIcon(
-                            header.column.getIsSorted(),
-                            header.column.getCanSort(),
-                          )}
+                          <SortIcon
+                            sortDirection={header.column.getIsSorted()}
+                            canSort={header.column.getCanSort()}
+                          />
                         </div>
                       </th>
                     ))}
