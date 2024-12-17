@@ -1,7 +1,8 @@
 import { useDeleteTask } from "../api/tanstack/useDeleteTask";
 
 import { Button, ConfirmationModal } from "@/components/core";
-import { CANCEL, CONFIRM } from "@/constants/actions";
+import { CANCEL, CONFIRM, DELETE } from "@/constants/actions";
+import { TASK } from "@/constants/entities";
 
 type Props = {
   isOpen: boolean;
@@ -23,7 +24,7 @@ export const DeleteTaskDialog = ({ isOpen, onClose, taskId }: Props) => {
       isOpen={isOpen}
       onClose={onClose}
       icon="danger"
-      title="Delete Task"
+      title={`${DELETE} ${TASK}`}
       description="Are you sure you want to delete this task?"
       actions={
         <>
