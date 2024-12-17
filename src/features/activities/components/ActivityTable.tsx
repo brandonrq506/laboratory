@@ -10,6 +10,7 @@ import { useActivities } from "../api/tanstack/useActivities";
 import { useMemo } from "react";
 
 import { ActivityAPI } from "../types/activityAPI";
+import { ActivityActionMenu } from "./ActivityActionMenu";
 import { EmptyState } from "@/components/core/Table/EmptyState";
 import { Loading } from "@/components/core";
 import { SortIcon } from "@/components/core/Table/SortIcon";
@@ -43,6 +44,14 @@ export const ActivityTable = () => {
       columnHelper.accessor("category.name", {
         header: "Category",
         sortingFn: "text",
+      }),
+      columnHelper.display({
+        id: "actions",
+        cell: (props) => (
+          <div className="flex items-center justify-center">
+            <ActivityActionMenu activityId={props.row.original.id} />
+          </div>
+        ),
       }),
     ],
     [],
