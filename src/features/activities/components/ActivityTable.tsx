@@ -18,6 +18,7 @@ import {
 import { ActivityAPI } from "../types/activityAPI";
 import { EmptyState } from "@/components/core/Table/EmptyState";
 import { Loading } from "@/components/core";
+import { StateInputText } from "@/components/form";
 import { clsx } from "clsx";
 import { displayTableDuration } from "../utils/displayTableDuration";
 
@@ -26,8 +27,18 @@ const displaySortIcon = (column: SortDirection | false, canSort: boolean) => {
   if (column === false)
     return <ChevronUpDownIcon aria-hidden className="size-5 text-gray-400" />;
   if (column === "asc")
-    return <ChevronUpIcon aria-hidden className="size-5 text-gray-400" />;
-  return <ChevronDownIcon aria-hidden className="size-5 text-gray-400" />;
+    return (
+      <ChevronUpIcon
+        aria-hidden
+        className="m-1 size-3 stroke-2 text-gray-400"
+      />
+    );
+  return (
+    <ChevronDownIcon
+      aria-hidden
+      className="m-1 size-3 stroke-2 text-gray-400"
+    />
+  );
 };
 
 const columnHelper = createColumnHelper<ActivityAPI>();
@@ -82,66 +93,88 @@ export const ActivityTable = () => {
 
   return (
     <div>
-      <input
-        value={table.getState().globalFilter}
-        onChange={(e) => table.setGlobalFilter(String(e.target.value))}
-        placeholder="Search..."
-        className="block w-1/3 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-      />
-      <br />
-      <table className="w-full border text-center">
-        <thead>
-          <tr>
-            {table.getFlatHeaders().map((header) => (
-              <th key={header.id} className="font-semibold">
-                <div
-                  className={clsx(
-                    header.column.getCanSort() &&
-                      "flex cursor-pointer select-none items-center justify-center",
-                  )}
-                  onClick={header.column.getToggleSortingHandler()}>
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext(),
-                  )}
+      <div className="w-1/2 p-0.5 pb-2">
+        <StateInputText
+          value={table.getState().globalFilter}
+          onChange={(e) => table.setGlobalFilter(String(e.target.value))}
+          placeholder="Search..."
+        />
+      </div>
+      <div className="flow-root">
+        <div className="overflow-x-auto">
+          <div className="inline-block min-w-full p-0.5 align-middle">
+            <div className="overflow-hidden rounded-lg shadow ring-1 ring-black/5">
+              <table className="min-w-full divide-y divide-gray-300">
+                <thead className="bg-gray-50">
+                  <tr>
+                    {table.getFlatHeaders().map((header, index) => (
+                      <th
+                        scope="col"
+                        key={header.id}
+                        className={clsx(
+                          "whitespace-nowrap text-left text-sm font-semibold text-gray-900",
+                          index === 0 ? "pl-4 pr-3" : "px-2 py-3",
+                        )}>
+                        <div
+                          className={clsx(
+                            header.column.getCanSort() &&
+                              "flex cursor-pointer select-none items-center",
+                          )}
+                          onClick={header.column.getToggleSortingHandler()}>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
 
-                  {displaySortIcon(
-                    header.column.getIsSorted(),
-                    header.column.getCanSort(),
+                          {displaySortIcon(
+                            header.column.getIsSorted(),
+                            header.column.getCanSort(),
+                          )}
+                        </div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 bg-white tabular-nums">
+                  {table.getRowModel().rows.map((row) => (
+                    <tr key={row.id}>
+                      {row.getVisibleCells().map((cell, index) => (
+                        <td
+                          key={cell.id}
+                          className={clsx(
+                            "whitespace-nowrap text-sm text-gray-500",
+                            index === 0 ? "pl-4 pr-3" : "px-3 py-2",
+                          )}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                  {isEmpty && (
+                    <tr>
+                      <th colSpan={columns.length}>
+                        <EmptyState />
+                      </th>
+                    </tr>
                   )}
-                </div>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="border tabular-nums">
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="border p-2">
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="font-light">
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-          {isEmpty && (
-            <tr>
-              <th colSpan={columns.length}>
-                <EmptyState />
-              </th>
-            </tr>
-          )}
-          {isPending && (
-            <tr>
-              <th colSpan={columns.length}>
-                <div className="py-10">
-                  <Loading sizeStyles="size-10" className="mx-auto" />
-                </div>
-              </th>
-            </tr>
-          )}
-        </tbody>
-      </table>
+                  {isPending && (
+                    <tr>
+                      <th colSpan={columns.length}>
+                        <div className="py-10">
+                          <Loading sizeStyles="size-10" className="mx-auto" />
+                        </div>
+                      </th>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
