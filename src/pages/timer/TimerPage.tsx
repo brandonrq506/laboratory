@@ -1,3 +1,4 @@
+import { Outlet } from "react-router";
 import { Timer } from "./Timer";
 import { TodayCompletedTaskList } from "../Tasks/TodayCompletedTaskList";
 import { TodayScheduledTaskList } from "../Tasks/TodayScheduledTaskList";
@@ -11,6 +12,7 @@ export const TimerPage = () => {
         <TodayScheduledTaskList />
         <TodayCompletedTaskList />
       </div>
+      <Outlet />
     </div>
   );
 };

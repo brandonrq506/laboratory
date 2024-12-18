@@ -35,12 +35,12 @@ import {
   TanstackTableExperimentsPage,
 } from "@/pages/TanstackTable";
 import { Navigate, createBrowserRouter } from "react-router";
+import { NewTaskPage, TasksPage } from "@/pages/Tasks";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
 import { MainLayout } from "@/components/layout";
 import { Projects } from "@/pages/Projects";
 import { RouterProvider } from "react-router/dom";
-import { TasksPage } from "@/pages/Tasks";
 import { TestingModal } from "@/pages/TestingModal";
 import { TimerPage } from "@/pages/timer";
 
@@ -59,7 +59,11 @@ const router = createBrowserRouter([
         ],
       },
       { path: "tasks", element: <TasksPage /> },
-      { path: "timer", element: <TimerPage /> },
+      {
+        path: "timer",
+        element: <TimerPage />,
+        children: [{ path: "new", element: <NewTaskPage /> }],
+      },
       {
         path: "settings",
         element: <SettingsPage />,
