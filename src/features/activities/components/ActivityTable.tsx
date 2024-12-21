@@ -9,11 +9,10 @@ import {
 import { useActivities } from "../api/tanstack/useActivities";
 import { useMemo } from "react";
 
+import { EmptyState, Loading, SortIcon } from "@/components/core";
 import { ActivityAPI } from "../types/activityAPI";
 import { ActivityActionMenu } from "./ActivityActionMenu";
-import { EmptyState } from "@/components/core/Table/EmptyState";
-import { Loading } from "@/components/core";
-import { SortIcon } from "@/components/core/Table/SortIcon";
+import { CategoryBadge } from "@/features/categories/components";
 import { StateInputText } from "@/components/form";
 import { clsx } from "clsx";
 import { displayTableDuration } from "../utils/displayTableDuration";
@@ -44,6 +43,9 @@ export const ActivityTable = () => {
       columnHelper.accessor("category.name", {
         header: "Category",
         sortingFn: "text",
+        cell: (props) => (
+          <CategoryBadge category={props.row.original.category} />
+        ),
       }),
       columnHelper.display({
         id: "actions",

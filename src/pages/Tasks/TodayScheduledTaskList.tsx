@@ -1,8 +1,10 @@
 import { useTasks } from "@/features/tasks/api/tanstack/useTasks";
 
-import { ScheduledTask, TaskList } from "@/features/tasks/components";
-import { IconButton } from "@/components/core";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import {
+  QuickCreateTaskMenu,
+  ScheduledTask,
+  TaskList,
+} from "@/features/tasks/components";
 import { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 import { SectionHeaderWithAction } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
@@ -24,11 +26,7 @@ export const TodayScheduledTaskList = () => {
       <SectionHeaderWithAction
         title="Today's Scheduled Tasks"
         className="pr-2.5"
-        action={
-          <IconButton shape="circle">
-            <PlusIcon className="size-5" aria-hidden />
-          </IconButton>
-        }
+        action={<QuickCreateTaskMenu />}
       />
       <TaskList
         tasks={data}
