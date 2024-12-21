@@ -13,7 +13,7 @@ export default [
   ...pluginQuery.configs["flat/recommended"],
   reactRefresh.configs.recommended,
   {
-    files: ["**/*.{js,ts,jsx,tsx}"],
+    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
     ...testingLibrary.configs["flat/react"],
   },
   {
@@ -22,7 +22,7 @@ export default [
     },
   },
   {
-    ignores: ["dist", "eslint.config.js", "*.md"],
+    ignores: ["dist", "eslint.config.js", "html/**"],
   },
   {
     languageOptions: {
