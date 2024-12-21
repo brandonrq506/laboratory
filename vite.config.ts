@@ -1,12 +1,11 @@
 /// <reference types="vitest" />
 
-import { defineConfig } from "vite";
+import { ViteUserConfig, defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-// eslint-disable-next-line no-restricted-exports
 export default defineConfig({
-  plugins: [react(), tsconfigPaths()],
+  plugins: [react(), tsconfigPaths()] as ViteUserConfig["plugins"],
   test: {
     globals: true,
     environment: "jsdom",
