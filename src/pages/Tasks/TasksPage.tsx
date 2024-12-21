@@ -7,8 +7,10 @@ export const TasksPage = () => {
   return (
     <div>
       <PageHeader title="Tasks" />
-      <CategorySelectFilter />
-      <TaskStatusSelectFilter />
+      <div className="flex w-full gap-2">
+        <CategorySelectFilter />
+        <TaskStatusSelectFilter />
+      </div>
       <FilterableTaskList />
     </div>
   );

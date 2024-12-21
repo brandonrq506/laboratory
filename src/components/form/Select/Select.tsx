@@ -41,7 +41,7 @@ export const Select = forwardRef<HTMLButtonElement, Props>(
     ref,
   ) => {
     return (
-      <Field>
+      <Field className="w-full">
         <Label className="block text-sm font-medium leading-6 text-gray-900">
           {label} {showAsterisk && <span className="ml-1 text-red-700">*</span>}
         </Label>
