@@ -8,23 +8,23 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
-import { Option } from "@/types/core";
-import { SelectType } from "./types";
+import { StringOption } from "@/types/core";
+import { StringSelectType } from "./types";
 import { clsx } from "clsx";
 import { forwardRef } from "react";
 
 type SelectRHFProps = {
-  value: Option | null;
-  onChange: (value: Option) => void;
+  value: StringOption | null;
+  onChange: (value: StringOption) => void;
   onBlur: () => void;
   name: string;
   ref: React.Ref<HTMLButtonElement>;
   error?: string;
 };
 
-type Props = SelectRHFProps & SelectType;
+type Props = SelectRHFProps & StringSelectType;
 
-export const Select = forwardRef<HTMLButtonElement, Props>(
+export const StringSelect = forwardRef<HTMLButtonElement, Props>(
   (
     {
       description,
