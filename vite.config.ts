@@ -1,6 +1,10 @@
 /// <reference types="vitest" />
 
-import { ViteUserConfig, defineConfig } from "vitest/config";
+import {
+  ViteUserConfig,
+  coverageConfigDefaults,
+  defineConfig,
+} from "vitest/config";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 
@@ -14,6 +18,11 @@ export default defineConfig({
       enabled: true,
       reporter: ["text", "html", "clover", "json"],
       extension: ["ts", "tsx"],
+      exclude: [
+        "src/experiments",
+        "src/pages/forms",
+        ...coverageConfigDefaults.exclude,
+      ],
     },
     setupFiles: ["./src/test/setup.ts"],
   },
