@@ -6,6 +6,7 @@ import pluginQuery from "@tanstack/eslint-plugin-query";
 import testingLibrary from "eslint-plugin-testing-library";
 import eslintConfigPrettier from "eslint-config-prettier";
 import pluginReactHooks from "eslint-plugin-react-hooks";
+import reactCompiler from 'eslint-plugin-react-compiler'
 import reactRefresh from "eslint-plugin-react-refresh";
 
 /** @type {import('eslint').Linter.Config[]} */
@@ -19,6 +20,7 @@ export default [
   {
     plugins: {
       "react-hooks": pluginReactHooks,
+      'react-compiler': reactCompiler,
     },
   },
   {
@@ -74,6 +76,7 @@ export default [
       "no-useless-concat": "error",
       "no-useless-return": "error",
       "no-var": "error",
+      'react-compiler/react-compiler': 'error',
       "testing-library/no-debugging-utils": "error",
       "testing-library/prefer-user-event": "error",
       "object-shorthand": "error",
