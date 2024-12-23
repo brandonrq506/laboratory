@@ -4,12 +4,6 @@ export const FormsPage = () => {
   return (
     <div className="min-h-full rounded-md bg-white p-3 shadow-sm">
       <h1 className="m-2 text-center text-lg">Forms Page</h1>
-
-      <section className="my-4">
-        <h2>Main Projects</h2>
-        <LinkButton to="new-location">Create Location</LinkButton>
-      </section>
-
       <section className="my-4">
         <p>
           Allows to enter a First Name and optionally a last name, the last name
@@ -44,8 +38,6 @@ export const FormsPage = () => {
         <LinkButton to="context-provider">Provider Form</LinkButton>
         <p>Async Validation</p>
         <LinkButton to="async-validation">Async Validation</LinkButton>
-        <p>New Note Form</p>
-        <LinkButton to="new-note">New Note Form</LinkButton>
       </section>
     </div>
   );

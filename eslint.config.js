@@ -91,7 +91,7 @@ export default [
     },
   },
   {
-    "files": ["src/**/*.tsx", "**/*.spec.{tsx,ts}"],
+    "files": ["src/**/*.tsx"],
     "rules": {
       "max-lines-per-function": ["error", { "max": 150, "skipBlankLines": true, "skipComments": true }],
     },
@@ -102,4 +102,11 @@ export default [
       "no-restricted-exports": "off",
     },
   },
+  {
+    "files": ["**/*.spec.{tsx,ts}"],
+    "rules": {
+      "max-lines-per-function": ["error", { "max": 150, "skipBlankLines": true, "skipComments": true }],
+      "no-magic-numbers": "off",
+    },
+  }
 ];
