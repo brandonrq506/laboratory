@@ -21,7 +21,7 @@ export const ResetSubmit = () => {
       },
     });
   const { errors, isSubmitSuccessful } = formState;
-  const onSubmit = (data: FormValues) => console.log(data);
+  const onSubmit = (data: FormValues) => data;
 
   useEffect(() => {
     if (isSubmitSuccessful) reset();
