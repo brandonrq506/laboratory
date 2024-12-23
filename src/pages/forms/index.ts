@@ -1,5 +1,4 @@
 export * from "./FormsPage";
-export * from "./LocationForm/NewLocation";
 export * from "./shouldUnregister/LastName";
 export * from "./deps/DynamicPassword";
 export * from "./unregister/Unregister";
@@ -18,5 +17,3 @@ export * from "./controller/ControllerOne";
 export * from "./UseController/ControllerTwo";
 
 export * from "./ContextProvider/ProviderForm";
-
-export * from "./Forms/NewNoteForm";
