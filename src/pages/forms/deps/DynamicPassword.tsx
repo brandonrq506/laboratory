@@ -89,7 +89,9 @@ export const DynamicPassword = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <label htmlFor="securityLevel">Security Level</label>
-        <select {...register("securityLevel", { deps: ["password"] })}>
+        <select
+          role="listbox"
+          {...register("securityLevel", { deps: ["password"] })}>
           <option value="High">High</option>
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>

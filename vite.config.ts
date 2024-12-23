@@ -18,11 +18,7 @@ export default defineConfig({
       enabled: true,
       reporter: ["text", "html", "clover", "json"],
       extension: ["ts", "tsx"],
-      exclude: [
-        "src/experiments",
-        "src/pages/forms",
-        ...coverageConfigDefaults.exclude,
-      ],
+      exclude: ["src/experiments", ...coverageConfigDefaults.exclude],
     },
     setupFiles: ["./src/test/setup.ts"],
   },
