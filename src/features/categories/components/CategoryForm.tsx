@@ -6,6 +6,7 @@ import { EditForm } from "../types/editForm";
 import { IconButton } from "@/components/core";
 import { InputText } from "@/components/form";
 
+// TODO: Add type-safety to color. How do we know value 1 is white?
 const defaultCategory: EditForm = {
   name: "",
   color: { value: 1, label: "white" },
@@ -25,7 +26,9 @@ export const CategoryForm = ({ initialValues, onSubmit }: Props) => {
   const { errors, isDirty } = formState;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex items-end">
+    <form
+      onSubmit={handleSubmit((data) => onSubmit(data))}
+      className="flex items-end">
       <div className="flex gap-4">
         <InputText
           showAsterisk
@@ -42,12 +45,14 @@ export const CategoryForm = ({ initialValues, onSubmit }: Props) => {
       {isDirty && (
         <div className="flex gap-2">
           <IconButton type="submit">
+            <span className="sr-only">Save</span>
             <CloudArrowUpIcon className="size-5" aria-hidden />
           </IconButton>
           <IconButton
             type="reset"
             variant="dangerOutline"
             onClick={() => reset()}>
+            <span className="sr-only">Reset</span>
             <BackspaceIcon className="size-5" aria-hidden />
           </IconButton>
         </div>
