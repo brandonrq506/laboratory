@@ -5,14 +5,6 @@ import { TaskStatusSelectFilter } from "./TaskStatusSelectFilter";
 import userEvent from "@testing-library/user-event";
 
 describe("TaskStatusSelectFilter", () => {
-  const ResizeObserverMock = vi.fn(() => ({
-    observe: vi.fn(),
-    unobserve: vi.fn(),
-    disconnect: vi.fn(),
-  }));
-
-  vi.stubGlobal("ResizeObserver", ResizeObserverMock);
-
   it("renders with 'All' by default", () => {
     const Stub = createRoutesStub([
       {
