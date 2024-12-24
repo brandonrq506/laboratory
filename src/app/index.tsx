@@ -41,6 +41,7 @@ import { RouterProvider } from "react-router/dom";
 import { TasksPage } from "@/pages/Tasks";
 import { TestingModal } from "@/pages/TestingModal";
 import { TimerPage } from "@/pages/timer";
+import { TodoList } from "@/features/worktest/components";
 
 const router = createBrowserRouter([
   {
@@ -89,6 +90,7 @@ const router = createBrowserRouter([
       { path: "table-projects/first-attempt", element: <FirstTableAttempt /> },
       { path: "table-projects/global-search", element: <GlobalSearchTable /> },
       { path: "table-projects/sorting", element: <SortableTable /> },
+      { path: "todos-todos", element: <TodoList /> },
     ],
   },
 ]);
