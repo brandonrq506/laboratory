@@ -3,14 +3,6 @@ import { ControllerOne } from "./ControllerOne";
 import userEvent from "@testing-library/user-event";
 
 describe("ControllerOne", () => {
-  const ResizeObserverMock = vi.fn(() => ({
-    observe: vi.fn(),
-    unobserve: vi.fn(),
-    disconnect: vi.fn(),
-  }));
-
-  vi.stubGlobal("ResizeObserver", ResizeObserverMock);
-
   it('focuses on the input when the "Focus" button is clicked', async () => {
     const user = userEvent.setup();
     render(<ControllerOne />);

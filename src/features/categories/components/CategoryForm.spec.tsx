@@ -3,14 +3,6 @@ import { CategoryForm } from "./CategoryForm";
 import userEvent from "@testing-library/user-event";
 
 describe("CategoryForm", () => {
-  const ResizeObserverMock = vi.fn(() => ({
-    observe: vi.fn(),
-    unobserve: vi.fn(),
-    disconnect: vi.fn(),
-  }));
-
-  vi.stubGlobal("ResizeObserver", ResizeObserverMock);
-
   it("shows all 14 colors as options", async () => {
     const user = userEvent.setup();
     render(<CategoryForm onSubmit={vi.fn()} />);
