@@ -11,6 +11,7 @@
     "prettier:fix": "prettier --write \"src/**/*.{ts,tsx,html}\"",
     "preview": "vite preview",
     "test": "vitest --ui",
+    "test:expert": "DEBUG_PRINT_LIMIT=10000 npm run test",
     "coverage": "vitest run --coverage",
     "type-check": "tsc --noEmit",
     "validate:fix": "npm run prettier:fix && npm run lint:fix && npm run type-check && npm run test"
@@ -51,6 +52,7 @@
     "eslint-plugin-testing-library": "^7.1.1",
     "globals": "^15.14.0",
     "jsdom": "^25.0.1",
+    "msw": "^2.7.0",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
