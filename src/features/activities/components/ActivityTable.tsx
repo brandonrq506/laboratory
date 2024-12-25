@@ -82,9 +82,10 @@ export const ActivityTable = () => {
     <div>
       <div className="w-1/2 p-0.5 pb-2">
         <StateInputText
-          value={table.getState().globalFilter}
-          onChange={(e) => table.setGlobalFilter(String(e.target.value))}
+          role="search"
           placeholder="Search..."
+          value={table.getState().globalFilter ?? ""}
+          onChange={(e) => table.setGlobalFilter(String(e.target.value))}
         />
       </div>
       <div className="flow-root">
