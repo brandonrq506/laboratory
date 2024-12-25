@@ -4,8 +4,11 @@ import userEvent from "@testing-library/user-event";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import { ACTIVITIES_ENDPOINT, USERS_ENDPOINT } from "@/libs/axios";
 import { HttpResponse, http } from "msw";
 import { server } from "@/test/server";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 describe("ActivityTable", () => {
   const queryClient = new QueryClient({
@@ -57,7 +60,7 @@ describe("ActivityTable", () => {
 
     server.use(
       http.get(
-        "http://127.0.0.1:3000/v1/users/1/activities",
+        `${API_URL}/v1${USERS_ENDPOINT}/1${ACTIVITIES_ENDPOINT}`,
         () => {
           return HttpResponse.json([], { status: 200 });
         },
