@@ -1,8 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "@/test/test-utils";
 import { ActivityTable } from "./ActivityTable";
 import userEvent from "@testing-library/user-event";
-
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { ACTIVITIES_ENDPOINT, USERS_ENDPOINT } from "@/libs/axios";
 import { HttpResponse, http } from "msw";
@@ -11,20 +9,8 @@ import { server } from "@/test/server";
 const API_URL = import.meta.env.VITE_API_URL;
 
 describe("ActivityTable", () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
-
   it("renders component", async () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ActivityTable />
-      </QueryClientProvider>,
-    );
+    render(<ActivityTable />);
 
     expect(screen.getByText("Loading...")).toBeInTheDocument();
 
@@ -37,11 +23,7 @@ describe("ActivityTable", () => {
   it("filters globally", async () => {
     const user = userEvent.setup();
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ActivityTable />
-      </QueryClientProvider>,
-    );
+    render(<ActivityTable />);
 
     await screen.findByText("Brush Teeth");
     await user.type(screen.getByRole("search"), "Produc");
@@ -68,11 +50,7 @@ describe("ActivityTable", () => {
       ),
     );
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ActivityTable />
-      </QueryClientProvider>,
-    );
+    render(<ActivityTable />);
 
     await screen.findByText(message);
 
