@@ -9,6 +9,6 @@ type Props = {
 export const updateActivity = async ({ activityId, activity }: Props) => {
   const URL = `${USERS_ENDPOINT}/1${ACTIVITIES_ENDPOINT}/${activityId}`;
 
-  const response = await apiV1.patch(URL, activity);
-  return response.data;
+  const { data } = await apiV1.patch(URL, activity);
+  return data;
 };
