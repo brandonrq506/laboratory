@@ -18,4 +18,13 @@ export const activityHandlers = [
   http.post(`${API_URL}/v1${USERS_ENDPOINT}/1${ACTIVITIES_ENDPOINT}`, (req) => {
     return HttpResponse.json(req.params, { status: 201 });
   }),
+  http.patch(`${API_URL}/v1${USERS_ENDPOINT}/1${ACTIVITIES_ENDPOINT}/1`, () => {
+    return HttpResponse.json(activities[0], { status: 200 });
+  }),
+  http.options(
+    `${API_URL}/v1${USERS_ENDPOINT}/1${ACTIVITIES_ENDPOINT}/1`,
+    () => {
+      return HttpResponse.json({}, { status: 200 });
+    },
+  ),
 ];
