@@ -15,4 +15,7 @@ export const activityHandlers = [
       return HttpResponse.json({}, { status: 204 });
     },
   ),
+  http.post(`${API_URL}/v1${USERS_ENDPOINT}/1${ACTIVITIES_ENDPOINT}`, (req) => {
+    return HttpResponse.json(req.params, { status: 201 });
+  }),
 ];
