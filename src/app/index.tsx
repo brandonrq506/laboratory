@@ -36,6 +36,7 @@ import { Navigate, createBrowserRouter } from "react-router";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
 import { MainLayout } from "@/components/layout";
+import { NotFoundPage } from "@/pages/NotFoundPage";
 import { Projects } from "@/pages/Projects";
 import { RouterProvider } from "react-router/dom";
 import { TasksPage } from "@/pages/Tasks";
@@ -89,6 +90,7 @@ const router = createBrowserRouter([
       { path: "table-projects/first-attempt", element: <FirstTableAttempt /> },
       { path: "table-projects/global-search", element: <GlobalSearchTable /> },
       { path: "table-projects/sorting", element: <SortableTable /> },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 ]);
