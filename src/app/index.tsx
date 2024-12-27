@@ -32,10 +32,10 @@ import {
   SortableTable,
   TanstackTableExperimentsPage,
 } from "@/pages/TanstackTable";
+import { MainErrorPage, MainLayout } from "@/components/layout";
 import { Navigate, createBrowserRouter } from "react-router";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
-import { MainLayout } from "@/components/layout";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { Projects } from "@/pages/Projects";
 import { RouterProvider } from "react-router/dom";
@@ -47,6 +47,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <MainErrorPage />,
     children: [
       { index: true, element: <Navigate to="/timer" /> },
       {

@@ -1,3 +1,4 @@
+export * from "./main/MainErrorPage";
 export * from "./main/MainLayout";
 export * from "./Card";
 export * from "./headings/PageHeader";
