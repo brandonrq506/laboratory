@@ -1,6 +1,6 @@
-import { TaskAPI } from "./task";
+import { BaseTaskAPI } from "./baseTask";
 
-export interface CompletedTaskAPI extends TaskAPI {
+export interface CompletedTaskAPI extends BaseTaskAPI {
   status: "completed";
   start_time: string;
   end_time: string;

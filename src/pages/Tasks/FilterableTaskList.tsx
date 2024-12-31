@@ -27,6 +27,7 @@ export const FilterableTaskList = () => {
   return (
     <TaskList
       tasks={data}
+      // TODO: We need to improve this type casting.
       renderItem={(task) => <ScheduledTask task={task as ScheduledTaskAPI} />}
     />
   );

@@ -1,10 +1,5 @@
-import { ActivityAPI } from "@/features/activities/types/activityAPI";
-import { BaseEntity } from "@/types/core";
-import { TaskStatus } from "./taskStatus";
+import { CompletedTaskAPI } from "./completedTask";
+import { InProgressTaskAPI } from "./inProgressTast";
+import { ScheduledTaskAPI } from "./scheduledTask";
 
-export interface TaskAPI extends BaseEntity {
-  activity: ActivityAPI;
-  optional_name: string | null;
-  status: TaskStatus;
-  user_id: number;
-}
+export type TaskAPI = ScheduledTaskAPI | InProgressTaskAPI | CompletedTaskAPI;
