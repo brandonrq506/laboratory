@@ -3,6 +3,7 @@ import { useTasks } from "@/features/tasks/api/tanstack/useTasks";
 import { CompletedTask, TaskList } from "@/features/tasks/components";
 import { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
 import { IconButton } from "@/components/core";
+import { Link } from "react-router";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { SectionHeaderWithAction } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
@@ -32,7 +33,11 @@ export const TodayCompletedTaskList = () => {
       />
       <TaskList
         tasks={data}
-        renderItem={(task) => <CompletedTask task={task as CompletedTaskAPI} />}
+        renderItem={(task) => (
+          <Link to={`edit/${task.id}`} key={task.id}>
+            <CompletedTask task={task as CompletedTaskAPI} />
+          </Link>
+        )}
       />
     </div>
   );

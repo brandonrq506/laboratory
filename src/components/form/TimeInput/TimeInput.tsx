@@ -27,7 +27,7 @@ type Props = CustomTimeField & {
   error?: string;
   inputClassName?: string;
   label: string;
-  registration?: Partial<UseFormRegisterReturn>;
+  registration: Partial<UseFormRegisterReturn>;
   showAsterisk?: boolean;
 };
 

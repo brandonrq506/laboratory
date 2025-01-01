@@ -16,6 +16,7 @@ export const DOWNLOAD = "Download";
 export const START = "Start";
 export const FINISH = "Finish";
 export const RESTART = "Restart";
+export const RETRY = "Retry";
 
 /* CANCELLATION ACTIONS */
 export const CLOSE = "Close";

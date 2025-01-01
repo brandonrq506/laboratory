@@ -26,6 +26,7 @@ import {
   EditActivityPage,
   NewActivityPage,
 } from "@/pages/Activities";
+import { EditTaskPage, TasksPage } from "@/pages/Tasks";
 import {
   FirstTableAttempt,
   GlobalSearchTable,
@@ -39,7 +40,6 @@ import { AsyncValidation } from "@/experiments/forms";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { Projects } from "@/pages/Projects";
 import { RouterProvider } from "react-router/dom";
-import { TasksPage } from "@/pages/Tasks";
 import { TestingModal } from "@/pages/TestingModal";
 import { TimerPage } from "@/pages/timer";
 
@@ -59,7 +59,11 @@ const router = createBrowserRouter([
         ],
       },
       { path: "tasks", element: <TasksPage /> },
-      { path: "timer", element: <TimerPage /> },
+      {
+        path: "timer",
+        element: <TimerPage />,
+        children: [{ path: "edit/:taskId", element: <EditTaskPage /> }],
+      },
       {
         path: "settings",
         element: <SettingsPage />,
