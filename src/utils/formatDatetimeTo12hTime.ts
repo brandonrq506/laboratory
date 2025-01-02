@@ -3,5 +3,6 @@ export const formatDatetimeTo12hTime = (datetime: string) => {
     hour12: true,
     hour: "2-digit",
     minute: "2-digit",
+    // Decide if you want to allow seconds to be displayed.
   });
 };
