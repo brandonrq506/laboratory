@@ -24,7 +24,7 @@ export const ActivityForm = ({
   submitButtonText,
 }: Props) => {
   const { control, formState, handleSubmit, register } = useForm<CreateForm>({
-    defaultValues: { ...defaultActivity, ...initialValues },
+    values: { ...defaultActivity, ...initialValues },
   });
   const { errors, isSubmitting } = formState;
 
