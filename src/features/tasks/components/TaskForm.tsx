@@ -18,7 +18,7 @@ type Props = {
 
 export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
   const { formState, handleSubmit, register } = useForm<EditForm>({
-    defaultValues: initialValues,
+    values: initialValues,
   });
   const { isSubmitting } = formState;
 
