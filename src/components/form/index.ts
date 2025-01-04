@@ -11,3 +11,4 @@ export * from "./TextInput/InputText";
 export * from "./TextInput/StateInputText";
 export * from "./TextInput/TextInput";
 export * from "./TimeInput/TimeInput";
+export * from "./TimeInput/TimeInputV2";
