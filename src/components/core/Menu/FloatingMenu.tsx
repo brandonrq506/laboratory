@@ -8,8 +8,8 @@ type Props = {
 
 export const FloatingMenu = ({ children, iconBtn, srBtnText }: Props) => {
   return (
-    <Menu as="div" className="relative inline-block text-left">
-      <MenuButton className="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
+    <Menu as="div" className="relative flex m-auto">
+      <MenuButton className="rounded-full text-blue-600 outline-none ring-2 ring-transparent ring-offset-0 transition focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-4">
         <span className="sr-only">{srBtnText}</span>
         {iconBtn}
       </MenuButton>

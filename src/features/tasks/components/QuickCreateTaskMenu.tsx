@@ -39,11 +39,7 @@ export const QuickCreateTaskMenu = () => {
   return (
     <FloatingMenu
       srBtnText={`${ADD} ${TASKS}`}
-      iconBtn={
-        <IconButton shape="circle">
-          <PlusIcon className="size-5" aria-hidden />
-        </IconButton>
-      }>
+      iconBtn={<PlusIcon className="size-5" aria-hidden />}>
       {data.map((activity) => (
         <MenuItem key={activity.id}>
           <button
