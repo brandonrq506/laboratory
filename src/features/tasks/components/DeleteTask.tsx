@@ -22,7 +22,10 @@ export const DeleteTask = ({ taskId }: Props) => {
         shape="circle"
         aria-label={BTN_TEXT}
         variant="dangerOutline"
-        onClick={onOpen}>
+        onClick={(e) => {
+          e.preventDefault();
+          onOpen();
+        }}>
         <TrashIcon className="size-5" aria-hidden />
       </IconButton>
 
