@@ -7,7 +7,6 @@ type Props = {
 };
 
 export const updateTask = async ({ taskId, task }: Props) => {
-  console.log(task);
   const URL = `${USERS_ENDPOINT}/1${TASKS_ENDPOINT}/${taskId}`;
 
   const { data } = await apiV1.patch<TaskAPI>(URL, task);
