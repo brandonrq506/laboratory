@@ -5,7 +5,7 @@ import { CategoryBadge } from "@/features/categories/components";
 import { CompletedTaskAPI } from "../types/completedTask";
 import { EditForm } from "../types/editForm";
 import { InProgressTaskAPI } from "../types/inProgressTast";
-import { TimeInput } from "@/components/form";
+import { TimeInputV2 } from "@/components/form";
 
 import { TASK } from "@/constants/entities";
 import { UPDATE } from "@/constants/actions";
@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
-  const { formState, handleSubmit, register } = useForm<EditForm>({
+  const { control, formState, handleSubmit } = useForm<EditForm>({
     values: initialValues,
   });
   const { isSubmitting } = formState;
@@ -31,22 +31,21 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
         <CategoryBadge category={task.activity.category} />
       </div>
 
-      <TimeInput
-        label="Start Time"
+      <TimeInputV2
         step={1}
-        registration={register("start_time", {
-          required: "Start time is required.",
-        })}
+        label="Start Time"
+        name="start_time"
+        control={control}
+        rules={{ required: "Start time is required." }}
       />
 
       {isCompletedTask && (
-        <TimeInput
-          label="End Time"
+        <TimeInputV2
           step={1}
-          registration={register("end_time", {
-            required: "End time is required.",
-            shouldUnregister: true,
-          })}
+          label="End Time"
+          name="end_time"
+          control={control}
+          rules={{ required: "End time is required." }}
         />
       )}
 

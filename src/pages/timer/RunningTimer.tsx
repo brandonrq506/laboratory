@@ -2,6 +2,7 @@ import { useCompleteTask } from "@/features/tasks/api/tanstack/useCompleteTask";
 
 import { IconButton } from "@/components/core";
 import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTast";
+import { Link } from "react-router";
 import { StopIcon } from "@heroicons/react/24/solid";
 import { TimerTime } from "./TimerTime";
 
@@ -14,12 +15,12 @@ export const RunningTimer = ({ task }: Props) => {
 
   return (
     <div className="flex items-center gap-2">
-      <div className="w-full">
+      <Link to={`edit/${task.id}`} className="w-full">
         <p className="text-sm">{task.activity.name}</p>
         <p className="text-xs">
           {new Date(task.start_time).toLocaleTimeString()}
         </p>
-      </div>
+      </Link>
 
       <TimerTime start_time={task.start_time} />
 
