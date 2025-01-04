@@ -18,7 +18,7 @@ export const SectionHeaderWithAction = ({
         className,
       )}>
       <h3 className="text-base font-semibold text-gray-900">{title}</h3>
-      <div>{action}</div>
+      <div className="flex size-9 justify-center items-center">{action}</div>
     </div>
   );
 };
