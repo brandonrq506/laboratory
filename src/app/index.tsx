@@ -37,6 +37,7 @@ import { MainErrorPage, MainLayout } from "@/components/layout";
 import { Navigate, createBrowserRouter } from "react-router";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
+import { LoginPage } from "@/pages/auth";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { Projects } from "@/pages/Projects";
 import { RouterProvider } from "react-router/dom";
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
       { path: "table-projects/sorting", element: <SortableTable /> },
       { path: "*", element: <NotFoundPage /> },
     ],
+  },
+  {
+    path: "login",
+    element: <LoginPage />,
   },
 ]);
 
