@@ -1,16 +1,25 @@
 import { render, screen } from "@/test/test-utils";
+import { AuthProvider } from "../stores";
 import { LoginForm } from "./LoginForm";
 import userEvent from "@testing-library/user-event";
 
 describe("LoginForm", () => {
   it("focuses on the 'Email' input by default", () => {
-    render(<LoginForm />);
+    render(
+      <AuthProvider>
+        <LoginForm />
+      </AuthProvider>,
+    );
 
-    expect(screen.getByLabelText("Email *")).toHaveFocus();
+    expect(screen.getByLabelText("Email")).toHaveFocus();
   });
 
   it("requires necessary values before submitting", async () => {
-    render(<LoginForm />);
+    render(
+      <AuthProvider>
+        <LoginForm />
+      </AuthProvider>,
+    );
 
     await userEvent.click(screen.getByRole("button", { name: "Sign In" }));
 
@@ -19,9 +28,13 @@ describe("LoginForm", () => {
   });
 
   it("validates email format", async () => {
-    render(<LoginForm />);
+    render(
+      <AuthProvider>
+        <LoginForm />
+      </AuthProvider>,
+    );
 
-    await userEvent.type(screen.getByLabelText("Email *"), "test");
+    await userEvent.type(screen.getByLabelText("Email"), "test");
     await userEvent.click(screen.getByRole("button", { name: "Sign In" }));
 
     expect(screen.getByText("Email must contain @")).toBeInTheDocument();
