@@ -15,6 +15,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { LinkedInProfile } from "@/components/core";
+import { LogoutButton } from "@/features/auth/components";
 import { SidebarItem } from "./SidebarItem";
 
 const experiments = [
@@ -103,6 +104,13 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                       ))}
                     </ul>
                   </li>
+                  <li className="mb-4 mt-auto flex items-center justify-between">
+                    <div className="flex gap-2">
+                      <LinkedInProfile />
+                      <span aria-hidden="true">Brandon Ramirez</span>
+                    </div>
+                    <LogoutButton />
+                  </li>
                 </ul>
               </nav>
             </div>
@@ -144,9 +152,12 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                   ))}
                 </ul>
               </li>
-              <li className="mb-4 mt-auto flex gap-2">
-                <LinkedInProfile />
-                <span aria-hidden="true">Brandon Ramirez</span>
+              <li className="mb-4 mt-auto flex items-center justify-between">
+                <div className="flex gap-2">
+                  <LinkedInProfile />
+                  <span aria-hidden="true">Brandon Ramirez</span>
+                </div>
+                <LogoutButton />
               </li>
             </ul>
           </nav>

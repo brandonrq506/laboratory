@@ -3,13 +3,14 @@ import { useDisclosure } from "@/hooks/useDisclosure";
 import { IconButton, LinkedInProfile } from "../../core";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Header } from "./Header";
+import { LoginGuard } from "./LoginGuard";
 import { Outlet } from "react-router";
 import { Sidebar } from "./Sidebar";
 
 export const MainLayout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <>
+    <LoginGuard>
       <Sidebar isOpen={isOpen} onClose={onClose} />
 
       <Header>
@@ -28,6 +29,6 @@ export const MainLayout = () => {
       <main className="py-6 lg:pl-72">
         <div className="px-4 sm:px-6">{<Outlet />}</div>
       </main>
-    </>
+    </LoginGuard>
   );
 };
