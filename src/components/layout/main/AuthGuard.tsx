@@ -6,7 +6,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export const LoginGuard = ({ children }: Props) => {
+export const AuthGuard = ({ children }: Props) => {
   const { isAuth } = useAuth();
 
   return isAuth ? children : <Navigate to="login" replace />;
