@@ -19,7 +19,7 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
-    "@tanstack/react-query": "^5.63.0",
+    "@tanstack/react-query": "^5.64.0",
     "@tanstack/react-query-devtools": "^5.63.0",
     "@tanstack/react-table": "^8.20.6",
     "axios": "^1.7.9",
