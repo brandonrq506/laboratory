@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 type MouseWithCatProps = {
-  mouseRender: (mouse: { x: number; y: number }) => JSX.Element;
+  mouseRender: (mouse: { x: number; y: number }) => React.ReactNode;
 };
 
 export const MouseRender = ({ mouseRender }: MouseWithCatProps) => {
