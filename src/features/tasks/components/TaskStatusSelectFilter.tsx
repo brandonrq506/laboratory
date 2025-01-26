@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router";
 
 import { StringSelect } from "@/components/form";
-import { TaskStatus } from "../types/taskStatus";
+import { TaskStatus } from "../types/task-status";
 
 import { StringOption } from "@/types/core";
 
