@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
+    "postinstall": "npm run build",
+    "serve-heroku": "vite --host 0.0.0.0 --port $PORT preview",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --report-unused-disable-directives --max-warnings 0 --fix",
     "prettier:fix": "prettier --write \"src/**/*.{ts,tsx,html}\"",
@@ -27,7 +29,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
-    "react-router": "^7.1.3"
+    "react-router": "^7.1.3",
+    "vite": "^6.0.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
@@ -59,7 +62,6 @@
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.21.0",
-    "vite": "^6.0.11",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.4"
   }
