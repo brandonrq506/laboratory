@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
-    "serve-heroku": "vite --host 0.0.0.0 --port $PORT preview",
+    "serve-heroku": "npx serve -s dist -l $PORT",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --report-unused-disable-directives --max-warnings 0 --fix",
     "prettier:fix": "prettier --write \"src/**/*.{ts,tsx,html}\"",
