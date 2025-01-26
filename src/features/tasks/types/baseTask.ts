@@ -1,6 +1,6 @@
 import { ActivityAPI } from "@/features/activities/types/activityAPI";
 import { BaseEntity } from "@/types/core";
-import { TaskStatus } from "./taskStatus";
+import { TaskStatus } from "./task-status";
 
 export interface BaseTaskAPI extends BaseEntity {
   activity: ActivityAPI;
