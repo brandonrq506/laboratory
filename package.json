@@ -34,7 +34,7 @@
     "vite": "^6.0.11"
   },
   "devDependencies": {
-    "@eslint/js": "^9.18.0",
+    "@eslint/js": "^9.19.0",
     "@hookform/devtools": "^4.3.3",
     "@tailwindcss/forms": "^0.5.10",
     "@tanstack/eslint-plugin-query": "^5.64.2",
