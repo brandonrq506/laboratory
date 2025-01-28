@@ -16,6 +16,13 @@ type Props = {
   task: CompletedTaskAPI | InProgressTaskAPI;
 };
 
+const isInThePast = (value: string) => {
+  const startedTime = new Date(value);
+  const now = new Date();
+
+  return now.getTime() > startedTime.getTime();
+};
+
 export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
   const { control, formState, handleSubmit } = useForm<EditForm>({
     values: initialValues,
@@ -36,7 +43,12 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
         label="Start Time"
         name="start_time"
         control={control}
-        rules={{ required: "Start time is required." }}
+        rules={{
+          required: "Start time is required.",
+          validate: {
+            isPast: (v) => isInThePast(v!) || "Time set to the future",
+          },
+        }}
       />
 
       {isCompletedTask && (
