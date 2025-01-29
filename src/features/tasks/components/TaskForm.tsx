@@ -10,6 +10,8 @@ import { TimeInputV2 } from "@/components/form";
 import { TASK } from "@/constants/entities";
 import { UPDATE } from "@/constants/actions";
 
+import { isInThePast } from "../utils/formValidations";
+
 type Props = {
   initialValues: EditForm;
   onSubmit: (data: EditForm) => void;
@@ -23,6 +25,7 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
   const { isSubmitting } = formState;
 
   const isCompletedTask = task.status === "completed";
+  const isInProgressTask = task.status === "in_progress";
 
   return (
     <form onSubmit={handleSubmit((data) => onSubmit(data))}>
@@ -31,13 +34,32 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
         <CategoryBadge category={task.activity.category} />
       </div>
 
-      <TimeInputV2
-        step={1}
-        label="Start Time"
-        name="start_time"
-        control={control}
-        rules={{ required: "Start time is required." }}
-      />
+      {isInProgressTask && (
+        <TimeInputV2
+          step={1}
+          label="Start Time"
+          name="start_time"
+          control={control}
+          rules={{
+            required: "Start time is required.",
+            validate: {
+              isPast: (v) => isInThePast(v!) || "Time set to the future",
+            },
+          }}
+        />
+      )}
+
+      {isCompletedTask && (
+        <TimeInputV2
+          step={1}
+          label="Start Time"
+          name="start_time"
+          control={control}
+          rules={{
+            required: "Start time is required.",
+          }}
+        />
+      )}
 
       {isCompletedTask && (
         <TimeInputV2
