@@ -9,7 +9,7 @@ export const useCompleteTask = () => {
   return useMutation({
     mutationFn: completeTask,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: taskKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: taskKeys.all });
     },
   });
 };
