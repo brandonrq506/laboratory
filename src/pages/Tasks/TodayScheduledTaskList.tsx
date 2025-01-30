@@ -5,6 +5,7 @@ import {
   ScheduledTask,
   TaskList,
 } from "@/features/tasks/components";
+import { Loading } from "@/components/core";
 import { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 import { SectionHeaderWithAction } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
@@ -17,7 +18,17 @@ export const TodayScheduledTaskList = () => {
     created_at: today,
   });
 
-  if (isPending) return <div>Loading...</div>;
+  if (isPending)
+    return (
+      <div>
+        <SectionHeaderWithAction
+          title="Today's Scheduled Tasks"
+          className="pr-2.5"
+          action={<QuickCreateTaskMenu />}
+        />
+        <Loading className="mx-auto my-10" sizeStyles="size-10" />
+      </div>
+    );
 
   if (isError) return <TaskErrorList refetch={refetch} />;
 
