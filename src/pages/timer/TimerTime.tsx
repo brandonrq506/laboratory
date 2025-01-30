@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { convertSecondsToHHMMSS } from "@/utils";
 
@@ -17,8 +17,8 @@ type Props = {
 };
 
 export const TimerTime = ({ start_time }: Props) => {
-  const elapsedSeconds = useMemo(() => elapsedTime(start_time), [start_time]);
-  const [time, setTime] = useState(elapsedSeconds);
+  const [, setTime] = useState(0);
+  const elapsedSeconds = elapsedTime(start_time);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -27,5 +27,5 @@ export const TimerTime = ({ start_time }: Props) => {
     return () => clearInterval(id);
   }, []);
 
-  return <div>{convertSecondsToHHMMSS(time)}</div>;
+  return <div>{convertSecondsToHHMMSS(elapsedSeconds)}</div>;
 };
