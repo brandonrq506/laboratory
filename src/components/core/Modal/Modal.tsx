@@ -11,7 +11,7 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
     <Dialog open={isOpen} onClose={onClose} className="relative z-10">
       <DialogBackdrop
         transition
-        className="bg-opacity-75 fixed inset-0 bg-gray-500 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+        className="fixed inset-0 bg-slate-800/50 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
       />
 
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto">

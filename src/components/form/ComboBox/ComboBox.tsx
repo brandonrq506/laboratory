@@ -117,7 +117,7 @@ export const ComboBox = forwardRef<HTMLInputElement, Props>(
             </ComboboxButton>
 
             {finalOptions.length > 0 && (
-              <ComboboxOptions className="ring-opacity-5 absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base ring-1 shadow-lg ring-black focus:outline-hidden sm:text-sm">
+              <ComboboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base ring-1 shadow-lg ring-gray-100 focus:outline-hidden sm:text-sm">
                 {finalOptions.map((option) => (
                   <ComboboxOption
                     key={option.value}
