@@ -10,7 +10,11 @@ import tailwindcss from "@tailwindcss/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [react(), tsconfigPaths(), tailwindcss()] as ViteUserConfig["plugins"],
+  plugins: [
+    react(),
+    tsconfigPaths(),
+    tailwindcss(),
+  ] as ViteUserConfig["plugins"],
   test: {
     globals: true,
     environment: "jsdom",
