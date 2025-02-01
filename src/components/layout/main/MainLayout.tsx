@@ -20,7 +20,7 @@ export const MainLayout = () => {
           <span className="sr-only">Open sidebar</span>
           <Bars3Icon className="h-6 w-6" aria-hidden="true" />
         </IconButton>
-        <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">
+        <div className="flex-1 text-sm leading-6 font-semibold text-gray-900">
           Laboratory
         </div>
         <LinkedInProfile />

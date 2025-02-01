@@ -39,7 +39,7 @@ export const IdleTimer = () => {
         />
       </div>
 
-      <p className="tabular-nums text-gray-600">0:00:00</p>
+      <p className="text-gray-600 tabular-nums">0:00:00</p>
 
       <IconButton variant="primary" shape="circle" type="submit">
         <PlayIcon aria-hidden className="size-5" />

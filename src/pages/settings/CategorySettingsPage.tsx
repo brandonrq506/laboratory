@@ -19,8 +19,8 @@ const DummyActivity = ({ color }: { color: Color }) => {
       <div className="flex flex-col">
         <p>Basketball</p>
         <div className="flex gap-2 tracking-wide">
-          <p className="text-xs text-opacity-80">Avg: 60m</p>
-          <p className="text-xs text-opacity-80">Max: 120m</p>
+          <p className="text-opacity-80 text-xs">Avg: 60m</p>
+          <p className="text-opacity-80 text-xs">Max: 120m</p>
         </div>
       </div>
     </div>
@@ -40,9 +40,9 @@ const DummyTask = ({ color }: { color: Color }) => {
       <div className="flex flex-col">
         <p>Basketball</p>
         <div className="flex gap-2 tracking-wide">
-          <p className="text-xs text-opacity-80">Started: 15:24</p>
-          <p className="text-xs text-opacity-80">Ended: 16:43</p>
-          <p className="text-xs text-opacity-80">(01h:19m)</p>
+          <p className="text-opacity-80 text-xs">Started: 15:24</p>
+          <p className="text-opacity-80 text-xs">Ended: 16:43</p>
+          <p className="text-opacity-80 text-xs">(01h:19m)</p>
         </div>
       </div>
     </div>

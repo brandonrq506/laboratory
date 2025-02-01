@@ -28,7 +28,7 @@ export const InputWrapper = ({
 }: InputWrapperProps) => {
   return (
     <div className={clsx(wrapperClassName)}>
-      <label className="block text-sm font-medium leading-6 text-gray-900">
+      <label className="block text-sm leading-6 font-medium text-gray-900">
         <span>{label}</span>
         {showAsterisk && <span className="ml-1 text-red-700">*</span>}
         <div className="relative mt-2">

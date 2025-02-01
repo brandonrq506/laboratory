@@ -43,7 +43,7 @@ export const QuickCreateTaskMenu = () => {
       {data.map((activity) => (
         <MenuItem key={activity.id}>
           <button
-            className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-[focus]:bg-gray-100"
+            className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
             onClick={(e) => {
               e.preventDefault();
               handleClick(activity.id);

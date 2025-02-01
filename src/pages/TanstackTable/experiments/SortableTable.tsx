@@ -100,7 +100,7 @@ export const SortableTable = () => {
                 <div
                   className={clsx(
                     header.column.getCanSort() &&
-                      "flex cursor-pointer select-none items-center justify-center",
+                      "flex cursor-pointer items-center justify-center select-none",
                   )}
                   onClick={header.column.getToggleSortingHandler()}>
                   {flexRender(

@@ -42,7 +42,7 @@ export const Select = forwardRef<HTMLButtonElement, Props>(
   ) => {
     return (
       <Field className="w-full">
-        <Label className="block text-sm font-medium leading-6 text-gray-900">
+        <Label className="block text-sm leading-6 font-medium text-gray-900">
           {label} {showAsterisk && <span className="ml-1 text-red-700">*</span>}
         </Label>
 
@@ -58,8 +58,8 @@ export const Select = forwardRef<HTMLButtonElement, Props>(
             ref={ref}
             data-invalid={error}
             className={clsx(
-              "relative w-full cursor-pointer rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6",
-              "data-[invalid]:text-red-900 data-[invalid]:ring-red-300 data-[invalid]:placeholder:text-red-300 data-[invalid]:focus:ring-red-500",
+              "relative w-full cursor-pointer rounded-md bg-white py-1.5 pr-10 pl-3 text-left text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset focus:ring-2 focus:ring-indigo-600 focus:outline-hidden sm:text-sm sm:leading-6",
+              "data-invalid:text-red-900 data-invalid:ring-red-300 data-invalid:placeholder:text-red-300 data-invalid:focus:ring-red-500",
             )}>
             <span className="block truncate">
               {value?.label || "Missing Default"}
@@ -74,18 +74,18 @@ export const Select = forwardRef<HTMLButtonElement, Props>(
           <ListboxOptions
             anchor="bottom"
             transition
-            className="absolute z-10 mt-1 max-h-60 w-[var(--button-width)] min-w-fit overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm">
+            className="ring-opacity-5 absolute z-10 mt-1 max-h-60 w-[var(--button-width)] min-w-fit overflow-auto rounded-md bg-white py-1 text-base ring-1 shadow-lg ring-black focus:outline-hidden data-leave:transition data-leave:duration-100 data-leave:ease-in data-closed:data-leave:opacity-0 sm:text-sm">
             {options.map((option) => (
               <ListboxOption
                 value={option}
                 key={option.value}
                 disabled={option.disabled}
-                className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white">
-                <span className="block truncate font-normal group-data-[selected]:font-semibold">
+                className="group relative cursor-default py-2 pr-9 pl-3 text-gray-900 select-none data-focus:bg-indigo-600 data-focus:text-white">
+                <span className="block truncate font-normal group-data-selected:font-semibold">
                   {option.label}
                 </span>
 
-                <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 group-data-[focus]:text-white [.group:not([data-selected])_&]:hidden">
+                <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 group-data-focus:text-white [.group:not([data-selected])_&]:hidden">
                   <CheckIcon aria-hidden="true" className="size-5" />
                 </span>
               </ListboxOption>

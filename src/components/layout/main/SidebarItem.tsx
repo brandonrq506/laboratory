@@ -20,7 +20,7 @@ export const SidebarItem = ({ name, href, icon: Icon, onClose }: Props) => {
             isActive
               ? "bg-gray-50 text-indigo-600 *:text-indigo-600"
               : "text-gray-700 *:text-gray-400 hover:bg-gray-50 hover:text-indigo-600",
-            "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
+            "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold",
           )
         }>
         <Icon

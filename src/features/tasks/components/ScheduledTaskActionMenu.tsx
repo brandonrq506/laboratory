@@ -25,7 +25,7 @@ export const ScheduledTaskActionMenu = ({ taskId }: Props) => {
           <MenuItem>
             <button
               onClick={() => startTask(taskId)}
-              className="group flex w-full items-center gap-2 text-nowrap px-4 py-2 text-sm text-blue-600 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none">
+              className="group flex w-full items-center gap-2 px-4 py-2 text-sm text-nowrap text-blue-600 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
               <PlayIcon aria-hidden className="size-4" />
               {START} {TASK}
             </button>
@@ -36,7 +36,7 @@ export const ScheduledTaskActionMenu = ({ taskId }: Props) => {
           <MenuItem>
             <button
               onClick={() => onOpen()}
-              className="group flex w-full items-center gap-2 text-nowrap px-4 py-2 text-sm text-red-600 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none">
+              className="group flex w-full items-center gap-2 px-4 py-2 text-sm text-nowrap text-red-600 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
               <TrashIcon aria-hidden className="size-4" />
               {DELETE} {TASK}
             </button>
