@@ -12,7 +12,7 @@ export const ScheduledTask = ({ task }: Props) => {
   const color = getColorByName(task.activity.category.color);
 
   return (
-    <Card className="flex justify-between shadow-sm">
+    <Card className="flex justify-between shadow-xs">
       <div>
         <div className="flex items-center gap-1.5">
           <Dot sizeStyles="size-2" colorStyles={color.fillClass} />

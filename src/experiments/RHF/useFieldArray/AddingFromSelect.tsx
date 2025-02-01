@@ -110,7 +110,7 @@ export const AddingFromSelect = () => {
           <div>
             {fields.map((field, index) => (
               <div
-                className="rounded-lg border bg-white p-2 shadow-sm"
+                className="rounded-lg border bg-white p-2 shadow-xs"
                 key={field.id}>
                 <div>
                   <TextInput

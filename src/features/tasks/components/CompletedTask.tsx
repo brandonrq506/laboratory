@@ -14,12 +14,12 @@ export const CompletedTask = ({ task }: Props) => {
   const durationSeconds = getDurationInSeconds(task.start_time, task.end_time);
 
   return (
-    <Card className="flex justify-between shadow-sm">
+    <Card className="flex justify-between shadow-xs">
       <div className="flex flex-col justify-between">
         <div className="flex items-center gap-1.5">
           <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
           <p className="text-sm font-semibold">{task.activity.name}</p>
-          <p className="text-xs tabular-nums text-gray-600">
+          <p className="text-xs text-gray-600 tabular-nums">
             {convertSecondsToTime(durationSeconds)}
           </p>
         </div>
