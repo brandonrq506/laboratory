@@ -91,7 +91,7 @@ export const ActivityTable = () => {
       <div className="flow-root">
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full p-0.5 align-middle">
-            <div className="overflow-hidden rounded-lg shadow ring-1 ring-black/5">
+            <div className="overflow-hidden rounded-lg ring-1 shadow-sm ring-black/5">
               <table className="min-w-full divide-y divide-gray-300">
                 <thead className="bg-gray-50">
                   <tr>
@@ -100,13 +100,13 @@ export const ActivityTable = () => {
                         scope="col"
                         key={header.id}
                         className={clsx(
-                          "whitespace-nowrap text-left text-sm font-semibold text-gray-900",
-                          index === 0 ? "pl-4 pr-3" : "px-2 py-3",
+                          "text-left text-sm font-semibold whitespace-nowrap text-gray-900",
+                          index === 0 ? "pr-3 pl-4" : "px-2 py-3",
                         )}>
                         <div
                           className={clsx(
                             header.column.getCanSort() &&
-                              "flex cursor-pointer select-none items-center",
+                              "flex cursor-pointer items-center select-none",
                           )}
                           onClick={header.column.getToggleSortingHandler()}>
                           {flexRender(
@@ -130,8 +130,8 @@ export const ActivityTable = () => {
                         <td
                           key={cell.id}
                           className={clsx(
-                            "whitespace-nowrap text-sm text-gray-500",
-                            index === 0 ? "pl-4 pr-3" : "px-3 py-2",
+                            "text-sm whitespace-nowrap text-gray-500",
+                            index === 0 ? "pr-3 pl-4" : "px-3 py-2",
                           )}>
                           {flexRender(
                             cell.column.columnDef.cell,

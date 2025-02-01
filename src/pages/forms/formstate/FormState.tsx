@@ -79,7 +79,7 @@ export const FormState = () => {
         <Button type="submit" className="mt-3">
           Submit
         </Button>
-        <Button variant="danger" onClick={() => reset()} className="ml-3 mt-3">
+        <Button variant="danger" onClick={() => reset()} className="mt-3 ml-3">
           Reset
         </Button>
       </form>

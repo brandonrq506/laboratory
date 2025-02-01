@@ -2,7 +2,7 @@ import { Link, LinkProps } from "react-router";
 import clsx from "clsx";
 
 const sizes = {
-  sm: "px-2 py-1 text-sm rounded",
+  sm: "px-2 py-1 text-sm rounded-sm",
   md: "px-2.5 py-1.5 text-sm rounded-md",
   lg: "px-3 py-2 text-sm rounded-md",
   xl: "px-3.5 py-2.5 text-sm rounded-md",
@@ -41,7 +41,7 @@ export const LinkButton = ({
     <Link
       {...props}
       className={clsx(
-        "inline-flex items-center font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+        "inline-flex items-center font-semibold shadow-xs focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
         variants[variant],
         sizes[size],
         className,

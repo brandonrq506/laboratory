@@ -2,7 +2,7 @@ import { LinkButton } from "@/components/core";
 
 export const FormsPage = () => {
   return (
-    <div className="min-h-full rounded-md bg-white p-3 shadow-sm">
+    <div className="min-h-full rounded-md bg-white p-3 shadow-xs">
       <h1 className="m-2 text-center text-lg">Forms Page</h1>
       <section className="my-4">
         <p>

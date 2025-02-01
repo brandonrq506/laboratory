@@ -80,13 +80,13 @@ export const ComboBoxV3 = ({
   return (
     <>
       <Combobox as="div" value={value} onChange={onChange} nullable>
-        <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">
+        <Combobox.Label className="block text-sm leading-6 font-medium text-gray-900">
           {label} {showAsterisk && <span className="ml-1 text-red-700">*</span>}
         </Combobox.Label>
         <div className="relative mt-2">
           <Combobox.Input
             className={clsx(
-              "w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6",
+              "w-full rounded-md border-0 bg-white py-1.5 pr-10 pl-3 text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:text-sm sm:leading-6",
               error &&
                 "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500",
             )}
@@ -96,7 +96,7 @@ export const ComboBoxV3 = ({
             onChange={(event) => setQuery(event.target.value)}
             displayValue={(option: Option | null) => option?.label ?? ""}
           />
-          <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
+          <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-hidden">
             {!error && (
               <ChevronUpDownIcon
                 className="size-5 text-gray-400"
@@ -112,7 +112,7 @@ export const ComboBoxV3 = ({
           </Combobox.Button>
 
           {finalOptions.length > 0 && (
-            <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Combobox.Options className="ring-opacity-5 absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base ring-1 shadow-lg ring-black focus:outline-hidden sm:text-sm">
               {finalOptions.map((option) => (
                 <Combobox.Option
                   key={option.value}
@@ -120,7 +120,7 @@ export const ComboBoxV3 = ({
                   disabled={option.disabled}
                   className={({ active, disabled }) =>
                     clsx(
-                      "relative cursor-default select-none py-1.5 pl-3 pr-9",
+                      "relative cursor-default py-1.5 pr-9 pl-3 select-none",
                       active ? "bg-indigo-600 text-white" : "text-gray-900",
                       disabled && "cursor-not-allowed opacity-60",
                     )

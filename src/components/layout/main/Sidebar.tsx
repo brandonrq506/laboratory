@@ -47,15 +47,15 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         className="relative z-50 lg:hidden">
         <DialogBackdrop
           transition
-          className="fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
+          className="fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-closed:opacity-0"
         />
 
         <div className="fixed inset-0 flex">
           <DialogPanel
             transition
-            className="relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-[closed]:-translate-x-full">
+            className="relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-closed:-translate-x-full">
             <TransitionChild>
-              <div className="absolute left-full top-0 flex w-16 justify-center pt-5 duration-300 ease-in-out data-[closed]:opacity-0">
+              <div className="absolute top-0 left-full flex w-16 justify-center pt-5 duration-300 ease-in-out data-closed:opacity-0">
                 <button
                   type="button"
                   onClick={onClose}
@@ -104,7 +104,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                       ))}
                     </ul>
                   </li>
-                  <li className="mb-4 mt-auto flex items-center justify-between">
+                  <li className="mt-auto mb-4 flex items-center justify-between">
                     <div className="flex gap-2">
                       <LinkedInProfile />
                       <span aria-hidden="true">Brandon Ramirez</span>
@@ -152,7 +152,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                   ))}
                 </ul>
               </li>
-              <li className="mb-4 mt-auto flex items-center justify-between">
+              <li className="mt-auto mb-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <LinkedInProfile />
                   <span aria-hidden="true">Brandon Ramirez</span>

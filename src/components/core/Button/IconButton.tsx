@@ -2,9 +2,9 @@ import clsx from "clsx";
 import { forwardRef } from "react";
 
 const variants = {
-  primary: "bg-blue-600 text-white shadow-sm",
+  primary: "bg-blue-600 text-white shadow-xs",
   primaryOutline: "bg-transparent text-blue-600",
-  danger: "bg-red-600 text-white shadow-sm",
+  danger: "bg-red-600 text-white shadow-xs",
   dangerOutline: "bg-transparent text-red-600",
   blackOutline: "bg-transparent text-black",
 };
@@ -19,7 +19,7 @@ const states = {
 
 const shapes = {
   circle: "rounded-full",
-  square: "rounded",
+  square: "rounded-sm",
   none: "",
 };
 
@@ -54,7 +54,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         ref={ref}
         type="button"
         className={clsx(
-          "border-none outline-none ring-2 ring-transparent ring-offset-0 transition focus-visible:ring-offset-4",
+          "border-none ring-2 ring-transparent ring-offset-0 outline-hidden transition focus-visible:ring-offset-4",
           "disabled:cursor-not-allowed disabled:opacity-70",
           sizes[size],
           shapes[shape],

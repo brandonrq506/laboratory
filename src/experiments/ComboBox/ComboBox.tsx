@@ -57,7 +57,7 @@ export const ComboBox = ({
         by="value"
         className={clsx(className)}
         nullable>
-        <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900">
+        <Combobox.Label className="block text-sm leading-6 font-medium text-gray-900">
           {label}
           {showAsterisk && <span className="ml-1 text-red-700">*</span>}
         </Combobox.Label>
@@ -73,7 +73,7 @@ export const ComboBox = ({
                 setQuery(value);
               }}
               className={clsx(
-                "w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6",
+                "w-full rounded-md border-0 bg-white py-1.5 pr-10 pl-3 text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:text-sm sm:leading-6",
                 error &&
                   "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500",
               )}
@@ -84,7 +84,7 @@ export const ComboBox = ({
             />
           </Combobox.Button>
 
-          <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Combobox.Options className="ring-opacity-5 absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base ring-1 shadow-lg ring-black focus:outline-hidden sm:text-sm">
             {filteredOptions.length > 0 &&
               filteredOptions.map((option) => (
                 <Combobox.Option
@@ -92,7 +92,7 @@ export const ComboBox = ({
                   value={option}
                   className={({ active }) =>
                     clsx(
-                      "relative cursor-default select-none py-2 pl-3 pr-9",
+                      "relative cursor-default py-2 pr-9 pl-3 select-none",
                       active ? "bg-indigo-600 text-white" : "text-gray-900",
                     )
                   }>

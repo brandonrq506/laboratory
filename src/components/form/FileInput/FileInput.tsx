@@ -34,7 +34,7 @@ export const FileInput = ({
       {/* Label */}
       <label
         htmlFor="cover-photo"
-        className="block text-sm font-medium leading-6 text-gray-900">
+        className="block text-sm leading-6 font-medium text-gray-900">
         <span>{label}</span>
         {showAsterisk && <span className="ml-1 text-red-700">*</span>}
       </label>
@@ -55,7 +55,7 @@ export const FileInput = ({
             <label
               htmlFor={inputUniqueId}
               className={clsx(
-                "relative cursor-pointer rounded-md font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500",
+                "relative cursor-pointer rounded-md font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500",
                 error && "text-red-700 ring-red-300 focus:ring-red-500",
               )}>
               <span>Upload a file</span>
@@ -79,7 +79,7 @@ export const FileInput = ({
 
         {/* Error Icon */}
         {error && (
-          <div className="items-base pointer-events-none absolute inset-y-0 right-0 flex pr-3 pt-3">
+          <div className="items-base pointer-events-none absolute inset-y-0 right-0 flex pt-3 pr-3">
             <ExclamationCircleIcon
               className="h-5 w-5 text-red-500"
               aria-hidden="true"

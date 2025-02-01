@@ -9,9 +9,7 @@ export const useDeleteTask = () => {
   return useMutation({
     mutationFn: deleteTask,
     onSuccess() {
-      queryClient.invalidateQueries({
-        queryKey: taskKeys.all,
-      });
+      queryClient.invalidateQueries({ queryKey: taskKeys.all });
     },
   });
 };

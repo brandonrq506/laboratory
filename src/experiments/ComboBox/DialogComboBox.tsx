@@ -51,7 +51,7 @@ export function DialogComboBox() {
           leave="ease-in duration-200"
           leaveFrom="opacity-100"
           leaveTo="opacity-0">
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-25 transition-opacity" />
+          <div className="bg-opacity-25 fixed inset-0 bg-gray-500 transition-opacity" />
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto p-4 sm:p-6 md:p-20">
@@ -63,17 +63,17 @@ export function DialogComboBox() {
             leave="ease-in duration-200"
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95">
-            <Dialog.Panel className="mx-auto max-w-2xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
+            <Dialog.Panel className="ring-opacity-5 mx-auto max-w-2xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white ring-1 shadow-2xl ring-black transition-all">
               <Combobox>
                 {/* <Combobox onChange={(item) => (window.location = item.url)}> */}
                 {/* Search Bar */}
                 <div className="relative">
                   <MagnifyingGlassIcon
-                    className="pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-gray-400"
+                    className="pointer-events-none absolute top-3.5 left-4 h-5 w-5 text-gray-400"
                     aria-hidden="true"
                   />
                   <Combobox.Input
-                    className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
+                    className="h-12 w-full border-0 bg-transparent pr-4 pl-11 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
                     placeholder="Search..."
                     onChange={(event) => setQuery(event.target.value)}
                   />
@@ -86,7 +86,7 @@ export function DialogComboBox() {
                     className="max-h-80 scroll-py-2 divide-y divide-gray-100 overflow-y-auto">
                     <li className="p-2">
                       {query === "" && (
-                        <h2 className="mb-2 mt-4 px-3 text-xs font-semibold text-gray-500">
+                        <h2 className="mt-4 mb-2 px-3 text-xs font-semibold text-gray-500">
                           Recent searches
                         </h2>
                       )}
@@ -99,7 +99,7 @@ export function DialogComboBox() {
                               value={project}
                               className={({ active }) =>
                                 clsx(
-                                  "flex cursor-default select-none items-center rounded-md px-3 py-2",
+                                  "flex cursor-default items-center rounded-md px-3 py-2 select-none",
                                   active && "bg-indigo-600 text-white",
                                 )
                               }>
