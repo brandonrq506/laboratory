@@ -3,6 +3,7 @@ import { useCategories } from "@/features/categories/api/tanstack/useCategories"
 import { Color } from "@/features/colors/types/color";
 import { EditCategoryForm } from "@/features/categories/components";
 import { Fragment } from "react";
+import { Outlet } from "react-router";
 import { clsx } from "clsx";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
@@ -75,6 +76,8 @@ export const CategorySettingsPage = () => {
             </Fragment>
           );
         })}
+
+      <Outlet />
     </div>
   );
 };
