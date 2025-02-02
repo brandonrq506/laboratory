@@ -38,6 +38,7 @@ import { Navigate, createBrowserRouter } from "react-router";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
 import { LoginPage } from "@/pages/auth";
+import { NewCategoryPage } from "@/pages/categories";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { Projects } from "@/pages/Projects";
 import { RouterProvider } from "react-router/dom";
@@ -71,7 +72,11 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <Navigate to="account" /> },
           { path: "account", element: <AccountSettingsPage /> },
-          { path: "categories", element: <CategorySettingsPage /> },
+          {
+            path: "categories",
+            element: <CategorySettingsPage />,
+            children: [{ path: "new", element: <NewCategoryPage /> }],
+          },
           { path: "notifications", element: <NotificationSettingsPage /> },
         ],
       },

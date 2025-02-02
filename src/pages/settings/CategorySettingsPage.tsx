@@ -1,8 +1,14 @@
 import { useCategories } from "@/features/categories/api/tanstack/useCategories";
 
-import { Color } from "@/features/colors/types/color";
-import { EditCategoryForm } from "@/features/categories/components";
+import {
+  EditCategoryForm,
+  NewCategoryButton,
+} from "@/features/categories/components";
 import { Fragment } from "react";
+import { Outlet } from "react-router";
+import { PageHeaderWithActions } from "@/components/layout";
+
+import { Color } from "@/features/colors/types/color";
 import { clsx } from "clsx";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
@@ -54,7 +60,11 @@ export const CategorySettingsPage = () => {
 
   return (
     <div>
-      <h1>Category Settings</h1>
+      <PageHeaderWithActions
+        title="Category Settings"
+        className="mb-2"
+        actions={<NewCategoryButton />}
+      />
       {isSuccess &&
         data.map((category) => {
           const colorObject = getColorByName(category.color);
@@ -75,6 +85,8 @@ export const CategorySettingsPage = () => {
             </Fragment>
           );
         })}
+
+      <Outlet />
     </div>
   );
 };
