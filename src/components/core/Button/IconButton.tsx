@@ -36,19 +36,17 @@ type IconButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   className?: string;
 };
 
-export const IconButton = (
-  {
-    ref,
-    size = "md",
-    shape = "none",
-    variant = "primaryOutline",
-    className,
-    children,
-    ...props
-  }: IconButtonProps & {
-    ref: React.RefObject<HTMLButtonElement>;
-  }
-) => {
+export const IconButton = ({
+  ref,
+  size = "md",
+  shape = "none",
+  variant = "primaryOutline",
+  className,
+  children,
+  ...props
+}: IconButtonProps & {
+  ref?: React.RefObject<HTMLButtonElement>;
+}) => {
   return (
     <button
       ref={ref}

@@ -17,28 +17,24 @@ type SelectRHFProps = {
   onChange: (value: StringOption) => void;
   onBlur: () => void;
   name: string;
-  ref: React.Ref<HTMLButtonElement>;
+  ref?: React.RefCallback<HTMLButtonElement>;
   error?: string;
 };
 
 type Props = SelectRHFProps & StringSelectType;
 
-export const StringSelect = (
-  {
-    ref,
-    description,
-    label,
-    options,
-    showAsterisk,
-    value,
-    onChange,
-    onBlur,
-    name,
-    error
-  }: Props & {
-    ref: React.RefObject<HTMLButtonElement>;
-  }
-) => {
+export const StringSelect = ({
+  ref,
+  description,
+  label,
+  options,
+  showAsterisk,
+  value,
+  onChange,
+  onBlur,
+  name,
+  error,
+}: Props) => {
   return (
     <Field className="w-full">
       <Label className="block text-sm leading-6 font-medium text-gray-900">

@@ -28,21 +28,19 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   isLoading?: boolean;
 } & IconProps;
 
-export const Button = (
-  {
-    ref,
-    className = "",
-    type = "button",
-    variant = "primary",
-    size = "md",
-    isLoading = false,
-    endIcon,
-    startIcon,
-    ...props
-  }: ButtonProps & {
-    ref: React.RefObject<HTMLButtonElement>;
-  }
-) => {
+export const Button = ({
+  ref,
+  className = "",
+  type = "button",
+  variant = "primary",
+  size = "md",
+  isLoading = false,
+  endIcon,
+  startIcon,
+  ...props
+}: ButtonProps & {
+  ref?: React.RefObject<HTMLButtonElement | null>;
+}) => {
   return (
     <HButton
       ref={ref}

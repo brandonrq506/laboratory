@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { clsx } from "clsx";
 
 import {
   CheckIcon,
@@ -17,6 +16,7 @@ import {
   Label,
 } from "@headlessui/react";
 import { Option } from "@/types/core";
+import { clsx } from "clsx";
 
 const filterOptions = (query: string, options: Option[]) => {
   const trimmedQuery = query.trim().toLowerCase();
@@ -43,29 +43,25 @@ type ComboBoxRHFProps = {
   onChange: (value: Option | null) => void;
   onBlur: () => void;
   name: string;
-  ref: React.Ref<HTMLInputElement>;
+  ref: React.RefCallback<HTMLInputElement>;
   error?: string;
 };
 
 type Props = ComboBoxRHFProps & ComboBoxType;
 
-export const ComboBox = (
-  {
-    ref,
-    config,
-    description,
-    label,
-    options,
-    showAsterisk = false,
-    value,
-    onChange,
-    onBlur,
-    name,
-    error
-  }: Props & {
-    ref: React.RefObject<HTMLInputElement>;
-  }
-) => {
+export const ComboBox = ({
+  ref,
+  config,
+  description,
+  label,
+  options,
+  showAsterisk = false,
+  value,
+  onChange,
+  onBlur,
+  name,
+  error,
+}: Props) => {
   const [query, setQuery] = useState("");
 
   const filteredOptions = filterOptions(query, options);
