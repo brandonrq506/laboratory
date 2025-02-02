@@ -1,6 +1,7 @@
 import { useCategories } from "@/features/categories/api/tanstack/useCategories";
 
 import {
+  DeleteCategory,
   EditCategoryForm,
   NewCategoryButton,
 } from "@/features/categories/components";
@@ -78,6 +79,7 @@ export const CategorySettingsPage = () => {
                   color: { value: colorObject.id, label: colorObject.name },
                 }}
               />
+              <DeleteCategory categoryId={category.id} />
               <div className="mt-2 flex flex-col gap-2">
                 <DummyActivity color={colorObject} />
                 <DummyTask color={colorObject} />
