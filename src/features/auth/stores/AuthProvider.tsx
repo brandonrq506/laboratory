@@ -56,8 +56,8 @@ export const AuthProvider = ({ children }: Props) => {
   };
 
   return (
-    <AuthContext.Provider value={initialAuthState}>
+    (<AuthContext value={initialAuthState}>
       {children}
-    </AuthContext.Provider>
+    </AuthContext>)
   );
 };
