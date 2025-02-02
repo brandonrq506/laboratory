@@ -1,7 +1,6 @@
 import { Button as HButton } from "@headlessui/react";
 import { Loading } from "../Loading/Loading";
 import clsx from "clsx";
-import { forwardRef } from "react";
 
 const sizes = {
   sm: "px-2 py-1 text-sm rounded-sm",
@@ -29,37 +28,35 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   isLoading?: boolean;
 } & IconProps;
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      className = "",
-      type = "button",
-      variant = "primary",
-      size = "md",
-      isLoading = false,
-      endIcon,
-      startIcon,
-      ...props
-    },
-    ref,
-  ) => {
-    return (
-      <HButton
-        ref={ref}
-        type={type}
-        className={clsx(
-          "inline-flex items-center font-semibold shadow-xs",
-          "data-disabled:cursor-not-allowed data-disabled:opacity-75",
-          "data-focus:outline-hidden",
-          variants[variant],
-          sizes[size],
-          className,
-        )}
-        {...props}>
-        {isLoading && <Loading />}
-        {!isLoading && startIcon}
-        <span className="mx-2">{props.children}</span> {!isLoading && endIcon}
-      </HButton>
-    );
-  },
-);
+export const Button = ({
+  ref,
+  className = "",
+  type = "button",
+  variant = "primary",
+  size = "md",
+  isLoading = false,
+  endIcon,
+  startIcon,
+  ...props
+}: ButtonProps & {
+  ref?: React.RefObject<HTMLButtonElement | null>;
+}) => {
+  return (
+    <HButton
+      ref={ref}
+      type={type}
+      className={clsx(
+        "inline-flex items-center font-semibold shadow-xs",
+        "data-disabled:cursor-not-allowed data-disabled:opacity-75",
+        "data-focus:outline-hidden",
+        variants[variant],
+        sizes[size],
+        className,
+      )}
+      {...props}>
+      {isLoading && <Loading />}
+      {!isLoading && startIcon}
+      <span className="mx-2">{props.children}</span> {!isLoading && endIcon}
+    </HButton>
+  );
+};

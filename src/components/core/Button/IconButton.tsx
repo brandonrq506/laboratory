@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { forwardRef } from "react";
 
 const variants = {
   primary: "bg-blue-600 text-white shadow-xs",
@@ -37,34 +36,32 @@ type IconButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   className?: string;
 };
 
-export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  (
-    {
-      size = "md",
-      shape = "none",
-      variant = "primaryOutline",
-      className,
-      children,
-      ...props
-    },
-    ref,
-  ) => {
-    return (
-      <button
-        ref={ref}
-        type="button"
-        className={clsx(
-          "border-none ring-2 ring-transparent ring-offset-0 outline-hidden transition focus-visible:ring-offset-4",
-          "disabled:cursor-not-allowed disabled:opacity-70",
-          sizes[size],
-          shapes[shape],
-          variants[variant],
-          states[variant],
-          className,
-        )}
-        {...props}>
-        {children}
-      </button>
-    );
-  },
-);
+export const IconButton = ({
+  ref,
+  size = "md",
+  shape = "none",
+  variant = "primaryOutline",
+  className,
+  children,
+  ...props
+}: IconButtonProps & {
+  ref?: React.RefObject<HTMLButtonElement>;
+}) => {
+  return (
+    <button
+      ref={ref}
+      type="button"
+      className={clsx(
+        "border-none ring-2 ring-transparent ring-offset-0 outline-hidden transition focus-visible:ring-offset-4",
+        "disabled:cursor-not-allowed disabled:opacity-70",
+        sizes[size],
+        shapes[shape],
+        variants[variant],
+        states[variant],
+        className,
+      )}
+      {...props}>
+      {children}
+    </button>
+  );
+};
