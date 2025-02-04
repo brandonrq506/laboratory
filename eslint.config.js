@@ -6,7 +6,7 @@ import pluginQuery from "@tanstack/eslint-plugin-query";
 import testingLibrary from "eslint-plugin-testing-library";
 import eslintConfigPrettier from "eslint-config-prettier";
 import pluginReactHooks from "eslint-plugin-react-hooks";
-import reactCompiler from 'eslint-plugin-react-compiler'
+import reactCompiler from "eslint-plugin-react-compiler";
 import reactRefresh from "eslint-plugin-react-refresh";
 
 /** @type {import('eslint').Linter.Config[]} */
@@ -20,7 +20,7 @@ export default [
   {
     plugins: {
       "react-hooks": pluginReactHooks,
-      'react-compiler': reactCompiler,
+      "react-compiler": reactCompiler,
     },
   },
   {
@@ -39,19 +39,25 @@ export default [
   eslintConfigPrettier,
   {
     rules: {
-      "sort-imports": ["error", { "allowSeparatedGroups": true}],
+      "sort-imports": ["error", { allowSeparatedGroups: true }],
       "array-callback-return": "error",
-      "complexity": "warn",
+      complexity: "warn",
       "default-case": "error",
       "default-case-last": "error",
       "default-param-last": "error",
       "dot-notation": "error",
-      "eqeqeq": "error",
+      eqeqeq: "error",
       "logical-assignment-operators": "error",
       "line-comment-position": "error",
       "max-depth": "error",
-      "max-lines": ["error", { "max": 170, "skipBlankLines": true, "skipComments": true }],
-      "max-lines-per-function": ["error", { "skipBlankLines": true, "skipComments": true }],
+      "max-lines": [
+        "error",
+        { max: 170, skipBlankLines: true, skipComments: true },
+      ],
+      "max-lines-per-function": [
+        "error",
+        { skipBlankLines: true, skipComments: true },
+      ],
       "multiline-comment-style": ["error", "bare-block"],
       "no-await-in-loop": "error",
       "no-alert": "error",
@@ -76,7 +82,7 @@ export default [
       "no-useless-concat": "error",
       "no-useless-return": "error",
       "no-var": "error",
-      'react-compiler/react-compiler': 'error',
+      "react-compiler/react-compiler": "error",
       "testing-library/no-debugging-utils": "error",
       "testing-library/prefer-user-event": "error",
       "object-shorthand": "error",
@@ -91,22 +97,28 @@ export default [
     },
   },
   {
-    "files": ["src/**/*.tsx"],
-    "rules": {
-      "max-lines-per-function": ["error", { "max": 150, "skipBlankLines": true, "skipComments": true }],
+    files: ["src/**/*.tsx"],
+    rules: {
+      "max-lines-per-function": [
+        "error",
+        { max: 150, skipBlankLines: true, skipComments: true },
+      ],
     },
   },
   {
-    "files": ["tailwind.config.js"],
-    "rules": {
+    files: ["tailwind.config.js"],
+    rules: {
       "no-restricted-exports": "off",
     },
   },
   {
-    "files": ["**/*.spec.{tsx,ts}"],
-    "rules": {
-      "max-lines-per-function": ["error", { "max": 150, "skipBlankLines": true, "skipComments": true }],
+    files: ["**/*.spec.{tsx,ts}"],
+    rules: {
+      "max-lines-per-function": [
+        "error",
+        { max: 150, skipBlankLines: true, skipComments: true },
+      ],
       "no-magic-numbers": "off",
     },
-  }
+  },
 ];
