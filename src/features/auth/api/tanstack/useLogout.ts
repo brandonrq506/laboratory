@@ -1,13 +1,17 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "../../stores";
-import { useMutation } from "@tanstack/react-query";
 
 import { logout as logoutFn } from "../axios/logout";
 
 export const useLogout = () => {
+  const queryClient = useQueryClient();
   const { logout } = useAuth();
 
   return useMutation({
     mutationFn: logoutFn,
-    onSuccess: () => logout(),
+    onSuccess: () => {
+      logout();
+      queryClient.invalidateQueries();
+    },
   });
 };
