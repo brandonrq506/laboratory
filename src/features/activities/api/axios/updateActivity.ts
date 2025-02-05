@@ -1,4 +1,5 @@
-import { ACTIVITIES_ENDPOINT, USERS_ENDPOINT, apiV1 } from "@/libs/axios";
+import { ACTIVITIES_ENDPOINT, apiV1 } from "@/libs/axios";
+import { ActivityAPI } from "../../types/activityAPI";
 import { PostActivity } from "../../types/postActivity";
 
 type Props = {
@@ -7,9 +8,8 @@ type Props = {
 };
 
 export const updateActivity = async ({ activityId, activity }: Props) => {
-  const URL = `${USERS_ENDPOINT}/1${ACTIVITIES_ENDPOINT}/${activityId}`;
+  const URL = `${ACTIVITIES_ENDPOINT}/${activityId}`;
 
-  // TODO: Missing return type
-  const { data } = await apiV1.patch(URL, activity);
+  const { data } = await apiV1.patch<ActivityAPI>(URL, activity);
   return data;
 };
