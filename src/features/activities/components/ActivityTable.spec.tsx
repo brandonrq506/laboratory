@@ -2,8 +2,8 @@ import { render, screen } from "@/test/test-utils";
 import { ActivityTable } from "./ActivityTable";
 import userEvent from "@testing-library/user-event";
 
-import { ACTIVITIES_ENDPOINT, USERS_ENDPOINT } from "@/libs/axios";
 import { HttpResponse, http } from "msw";
+import { ACTIVITIES_ENDPOINT } from "@/libs/axios";
 import { server } from "@/test/server";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -42,7 +42,7 @@ describe("ActivityTable", () => {
 
     server.use(
       http.get(
-        `${API_URL}/v1${USERS_ENDPOINT}/1${ACTIVITIES_ENDPOINT}`,
+        `${API_URL}/v1${ACTIVITIES_ENDPOINT}`,
         () => {
           return HttpResponse.json([], { status: 200 });
         },
