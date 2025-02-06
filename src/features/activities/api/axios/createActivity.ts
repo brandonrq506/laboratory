@@ -1,10 +1,8 @@
-import { ACTIVITIES_ENDPOINT, USERS_ENDPOINT, apiV1 } from "@/libs/axios";
+import { ACTIVITIES_ENDPOINT, apiV1 } from "@/libs/axios";
+import { ActivityAPI } from "../../types/activityAPI";
 import { PostActivity } from "../../types/postActivity";
 
-//TODO: Revoved hardcored user id
-const URL = `${USERS_ENDPOINT}/1${ACTIVITIES_ENDPOINT}`;
-
 export const createActivity = async (activity: PostActivity) => {
-  const { data } = await apiV1.post<PostActivity>(URL, activity);
+  const { data } = await apiV1.post<ActivityAPI>(ACTIVITIES_ENDPOINT, activity);
   return data;
 };

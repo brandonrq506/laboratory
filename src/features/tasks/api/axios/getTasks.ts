@@ -1,9 +1,7 @@
-import { TASKS_ENDPOINT, USERS_ENDPOINT, apiV1 } from "@/libs/axios";
+import { TASKS_ENDPOINT, apiV1 } from "@/libs/axios";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import { TaskAPI } from "../../types/task";
 import { taskKeys } from "../queryKeys";
-
-const URL = `${USERS_ENDPOINT}/1${TASKS_ENDPOINT}`;
 
 export const getTasks = async ({
   signal,
@@ -11,7 +9,7 @@ export const getTasks = async ({
 }: QueryFunctionContext<ReturnType<(typeof taskKeys)["list"]>>) => {
   const [{ status, category_id, created_at }] = queryKey;
 
-  const { data } = await apiV1.get<TaskAPI[]>(URL, {
+  const { data } = await apiV1.get<TaskAPI[]>(TASKS_ENDPOINT, {
     signal,
     params: {
       status,

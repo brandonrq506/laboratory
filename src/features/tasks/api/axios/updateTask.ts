@@ -1,4 +1,4 @@
-import { TASKS_ENDPOINT, USERS_ENDPOINT, apiV1 } from "@/libs/axios";
+import { TASKS_ENDPOINT, apiV1 } from "@/libs/axios";
 import { TaskAPI } from "../../types/task";
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const updateTask = async ({ taskId, task }: Props) => {
-  const URL = `${USERS_ENDPOINT}/1${TASKS_ENDPOINT}/${taskId}`;
+  const URL = `${TASKS_ENDPOINT}/${taskId}`;
 
   const { data } = await apiV1.patch<TaskAPI>(URL, task);
   return data;
