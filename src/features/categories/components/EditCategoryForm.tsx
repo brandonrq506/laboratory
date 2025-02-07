@@ -4,6 +4,9 @@ import { CategoryForm } from "./CategoryForm";
 import { EditForm } from "../types/editForm";
 import { isColor } from "@/features/colors/utils/isColor";
 
+import { CATEGORY } from "@/constants/entities";
+import { UPDATE } from "@/constants/actions";
+
 type Props = {
   categoryId: number;
   initialValues?: Partial<EditForm>;
@@ -22,5 +25,11 @@ export const EditCategoryForm = ({ categoryId, initialValues }: Props) => {
     });
   };
 
-  return <CategoryForm initialValues={initialValues} onSubmit={onSubmit} />;
+  return (
+    <CategoryForm
+      submitButtonText={`${UPDATE} ${CATEGORY}`}
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+    />
+  );
 };
