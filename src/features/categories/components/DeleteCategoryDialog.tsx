@@ -7,21 +7,24 @@ import { CATEGORY } from "@/constants/entities";
 type Props = {
   isOpen: boolean;
   onClose: () => void;
+  onDelete?: () => void;
   categoryId: number;
 };
 
 export const DeleteCategoryDialog = ({
   isOpen,
   onClose,
+  onDelete = onClose,
   categoryId,
 }: Props) => {
   const { mutate, isPending } = useDeleteCategory();
 
   const handleDelete = () => {
     mutate(categoryId, {
-      onSuccess: () => onClose(),
+      onSuccess: () => onDelete(),
     });
   };
+
   return (
     <ConfirmationModal
       isOpen={isOpen}

@@ -21,7 +21,7 @@ export const EditActivityPage = () => {
 
   return (
     <Modal isOpen={isOpen} onClose={() => navigate("..")}>
-      {isPending && <Loading />}
+      {isPending && <Loading className="mx-auto" />}
       {isSuccess && (
         <EditActivityForm
           activityId={parseInt(activityId)}
