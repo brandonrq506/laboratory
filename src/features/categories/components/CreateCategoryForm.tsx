@@ -1,9 +1,12 @@
 import { useCreateCategory } from "../api/tanstack/useCreateCategory";
+import { useNavigate } from "react-router";
 
 import { CategoryForm } from "./CategoryForm";
 import { EditForm } from "../types/editForm";
 import { isColor } from "@/features/colors/utils/isColor";
-import { useNavigate } from "react-router";
+
+import { ADD } from "@/constants/actions";
+import { CATEGORY } from "@/constants/entities";
 
 type Props = {
   initialValues?: Partial<EditForm>;
@@ -21,5 +24,11 @@ export const CreateCategoryForm = ({ initialValues }: Props) => {
     navigate("..");
   };
 
-  return <CategoryForm initialValues={initialValues} onSubmit={onSubmit} />;
+  return (
+    <CategoryForm
+      submitButtonText={`${ADD} ${CATEGORY}`}
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+    />
+  );
 };

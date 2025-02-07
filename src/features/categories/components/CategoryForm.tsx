@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 
-import { BackspaceIcon, CloudArrowUpIcon } from "@heroicons/react/24/outline";
+import { Button } from "@/components/core";
+import { CategoryFormTaskExample } from "./CategoryFormTaskExample";
 import { ColorSelect } from "@/features/colors/components";
 import { EditForm } from "../types/editForm";
-import { IconButton } from "@/components/core";
 import { InputText } from "@/components/form";
 
 // TODO: Add type-safety to color. How do we know value 1 is white?
@@ -15,21 +15,23 @@ const defaultCategory: EditForm = {
 type Props = {
   initialValues?: Partial<EditForm>;
   onSubmit: (data: EditForm) => void;
+  submitButtonText: string;
 };
 
-export const CategoryForm = ({ initialValues, onSubmit }: Props) => {
-  const { control, formState, handleSubmit, register, reset } =
-    useForm<EditForm>({
-      values: { ...defaultCategory, ...initialValues },
-    });
+export const CategoryForm = ({
+  initialValues,
+  onSubmit,
+  submitButtonText,
+}: Props) => {
+  const { control, formState, handleSubmit, register } = useForm<EditForm>({
+    values: { ...defaultCategory, ...initialValues },
+  });
 
-  const { errors, isDirty } = formState;
+  const { errors, isDirty, isSubmitting } = formState;
 
   return (
-    <form
-      onSubmit={handleSubmit((data) => onSubmit(data))}
-      className="flex items-end">
-      <div className="flex gap-4">
+    <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+      <div className="grid gap-2 sm:grid-cols-2 sm:gap-4">
         <InputText
           showAsterisk
           label="Name"
@@ -42,21 +44,15 @@ export const CategoryForm = ({ initialValues, onSubmit }: Props) => {
         <ColorSelect control={control} name="color" />
       </div>
 
-      {isDirty && (
-        <div className="flex gap-2">
-          <IconButton type="submit">
-            <span className="sr-only">Save</span>
-            <CloudArrowUpIcon className="size-5" aria-hidden />
-          </IconButton>
-          <IconButton
-            type="reset"
-            variant="dangerOutline"
-            onClick={() => reset()}>
-            <span className="sr-only">Reset</span>
-            <BackspaceIcon className="size-5" aria-hidden />
-          </IconButton>
-        </div>
-      )}
+      <div className="my-4 rounded-md bg-gray-100 p-2">
+        <CategoryFormTaskExample control={control} />
+      </div>
+
+      <div className="mt-2 flex justify-center">
+        <Button type="submit" isLoading={isSubmitting} disabled={!isDirty}>
+          {submitButtonText}
+        </Button>
+      </div>
     </form>
   );
 };
