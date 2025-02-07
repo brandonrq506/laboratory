@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { useUpdateCategory } from "../api/tanstack/useUpdateCategory";
 
 import { CategoryForm } from "./CategoryForm";
@@ -13,16 +14,19 @@ type Props = {
 };
 
 export const EditCategoryForm = ({ categoryId, initialValues }: Props) => {
-  const { mutate } = useUpdateCategory();
+  const navigate = useNavigate();
+  const { mutateAsync } = useUpdateCategory();
 
-  const onSubmit = (data: EditForm) => {
+  const onSubmit = async (data: EditForm) => {
     const { name, color: possiblyColor } = data;
     const color = isColor(possiblyColor.label) ? possiblyColor.label : "white";
 
-    mutate({
+    await mutateAsync({
       category: { name, color },
       categoryId,
     });
+
+    navigate("..");
   };
 
   return (

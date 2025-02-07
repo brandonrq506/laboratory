@@ -4,7 +4,7 @@ import {
   CategoryBadge,
   NewCategoryButton,
 } from "@/features/categories/components";
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 import { PageHeaderWithActions } from "@/components/layout";
 
 export const CategorySettingsPage = () => {
@@ -22,9 +22,9 @@ export const CategorySettingsPage = () => {
         {isSuccess &&
           data.map((category) => {
             return (
-              <div key={category.id}>
+              <Link to={`edit/${category.id}`} key={category.id}>
                 <CategoryBadge category={category} />
-              </div>
+              </Link>
             );
           })}
       </div>

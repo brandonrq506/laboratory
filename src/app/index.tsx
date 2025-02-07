@@ -26,6 +26,11 @@ import {
   EditActivityPage,
   NewActivityPage,
 } from "@/pages/Activities";
+import {
+  DeleteCategoryPage,
+  EditCategoryPage,
+  NewCategoryPage,
+} from "@/pages/categories";
 import { EditTaskPage, TasksPage } from "@/pages/Tasks";
 import {
   FirstTableAttempt,
@@ -38,7 +43,6 @@ import { Navigate, createBrowserRouter } from "react-router";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
 import { LoginPage } from "@/pages/auth";
-import { NewCategoryPage } from "@/pages/categories";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { Projects } from "@/pages/Projects";
 import { RouterProvider } from "react-router/dom";
@@ -75,7 +79,11 @@ const router = createBrowserRouter([
           {
             path: "categories",
             element: <CategorySettingsPage />,
-            children: [{ path: "new", element: <NewCategoryPage /> }],
+            children: [
+              { path: "new", element: <NewCategoryPage /> },
+              { path: "edit/:categoryId", element: <EditCategoryPage /> },
+              { path: "delete/:categoryId", element: <DeleteCategoryPage /> },
+            ],
           },
           { path: "notifications", element: <NotificationSettingsPage /> },
         ],
