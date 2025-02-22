@@ -10,19 +10,16 @@ import { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 import { SectionHeaderWithAction } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
 
-const today = new Date().toISOString().split("T")[0];
-
-export const TodayScheduledTaskList = () => {
+export const ScheduledTaskList = () => {
   const { data, isPending, isError, refetch } = useTasks({
     status: "scheduled",
-    created_at: today,
   });
 
   if (isPending)
     return (
       <div>
         <SectionHeaderWithAction
-          title="Today's Scheduled Tasks"
+          title="Scheduled Tasks"
           className="pr-2.5"
           action={<QuickCreateTaskMenu />}
         />
@@ -35,7 +32,7 @@ export const TodayScheduledTaskList = () => {
   return (
     <div>
       <SectionHeaderWithAction
-        title="Today's Scheduled Tasks"
+        title="Scheduled Tasks"
         className="pr-2.5"
         action={<QuickCreateTaskMenu />}
       />
