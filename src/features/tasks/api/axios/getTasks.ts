@@ -6,16 +6,13 @@ import { taskKeys } from "../queryKeys";
 export const getTasks = async ({
   signal,
   queryKey,
-}: QueryFunctionContext<ReturnType<(typeof taskKeys)["list"]>>) => {
-  const [{ status, category_id, created_at, end_time }] = queryKey;
-
+}: QueryFunctionContext<ReturnType<typeof taskKeys.list>>) => {
+  const [{ filter, sort }] = queryKey;
   const { data } = await apiV1.get<TaskAPI[]>(TASKS_ENDPOINT, {
     signal,
     params: {
-      status,
-      category_id,
-      created_at,
-      end_time,
+      filter,
+      sort,
       time_zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     },
   });

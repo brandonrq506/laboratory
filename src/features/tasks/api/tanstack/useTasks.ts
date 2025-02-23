@@ -1,19 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { TaskApiFilters } from "../../types/taskApiFilters";
+import { TaskOptions } from "../../types/taskOptions";
 import { getTasks } from "../axios/getTasks";
 import { taskKeys } from "../queryKeys";
 
-type Props = Partial<TaskApiFilters>;
-
-export const useTasks = ({
-  status,
-  category_id,
-  created_at,
-  end_time,
-}: Props = {}) => {
+export const useTasks = ({ filter, sort }: TaskOptions = {}) => {
   return useQuery({
-    queryKey: taskKeys.list(status, category_id, created_at, end_time),
+    queryKey: taskKeys.list({ filter, sort }),
     queryFn: getTasks,
   });
 };
