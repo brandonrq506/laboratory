@@ -8,12 +8,10 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import { SectionHeaderWithAction } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
 
-const today = new Date().toISOString().split("T")[0];
-
 export const TodayCompletedTaskList = () => {
   const { data, isPending, isError, refetch } = useTasks({
     status: "completed",
-    created_at: today,
+    created_at: "today",
   });
 
   if (isPending)
