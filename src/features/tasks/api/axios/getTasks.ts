@@ -15,6 +15,7 @@ export const getTasks = async ({
       status,
       category_id,
       created_at,
+      time_zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     },
   });
   return data;
