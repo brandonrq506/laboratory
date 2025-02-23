@@ -6,9 +6,14 @@ import { taskKeys } from "../queryKeys";
 
 type Props = Partial<TaskApiFilters>;
 
-export const useTasks = ({ status, category_id, created_at }: Props = {}) => {
+export const useTasks = ({
+  status,
+  category_id,
+  created_at,
+  end_time,
+}: Props = {}) => {
   return useQuery({
-    queryKey: taskKeys.list(status, category_id, created_at),
+    queryKey: taskKeys.list(status, category_id, created_at, end_time),
     queryFn: getTasks,
   });
 };

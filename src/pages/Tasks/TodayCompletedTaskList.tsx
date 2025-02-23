@@ -11,7 +11,7 @@ import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
 export const TodayCompletedTaskList = () => {
   const { data, isPending, isError, refetch } = useTasks({
     status: "completed",
-    created_at: "today",
+    end_time: "today",
   });
 
   if (isPending)
