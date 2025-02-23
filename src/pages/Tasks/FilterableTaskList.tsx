@@ -16,8 +16,7 @@ export const FilterableTaskList = () => {
   const status = statusParam as TaskStatus | undefined;
 
   const { data, isPending, isError, refetch } = useTasks({
-    category_id,
-    status,
+    filter: { category_id, status },
   });
 
   if (isPending) return <div>Loading...</div>;

@@ -12,7 +12,8 @@ import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
 
 export const ScheduledTaskList = () => {
   const { data, isPending, isError, refetch } = useTasks({
-    status: "scheduled",
+    filter: { status: "scheduled" },
+    sort: { sort_by: "created_at", sort_order: "asc" },
   });
 
   if (isPending)

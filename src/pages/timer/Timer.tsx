@@ -7,7 +7,7 @@ import { RunningTimer } from "./RunningTimer";
 
 export const Timer = () => {
   const { data } = useTasks({
-    status: "in_progress",
+    filter: { status: "in_progress" },
   });
 
   const status = data === undefined || data.length === 0 ? "idle" : "active";
