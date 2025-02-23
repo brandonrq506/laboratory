@@ -1,10 +1,11 @@
 import { useCompleteTask } from "@/features/tasks/api/tanstack/useCompleteTask";
 
-import { IconButton } from "@/components/core";
+import { Dot, IconButton } from "@/components/core";
 import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTast";
 import { Link } from "react-router";
 import { StopIcon } from "@heroicons/react/24/solid";
 import { TimerTime } from "./TimerTime";
+import { getColorByName } from "@/features/colors/utils/getColorByName";
 
 type Props = {
   task: InProgressTaskAPI;
@@ -12,11 +13,15 @@ type Props = {
 
 export const RunningTimer = ({ task }: Props) => {
   const { mutate } = useCompleteTask();
+  const color = getColorByName(task.activity.category.color);
 
   return (
     <div className="flex items-center gap-2">
       <Link to={`edit/${task.id}`} className="w-full">
-        <p className="text-sm">{task.activity.name}</p>
+        <div className="flex items-center gap-1.5">
+          <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
+          <p className="text-sm">{task.activity.name}</p>
+        </div>
         <p className="text-xs">
           {new Date(task.start_time).toLocaleTimeString()}
         </p>
