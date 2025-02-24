@@ -13,7 +13,7 @@ export const getTasks = async ({
     params: {
       filter,
       sort,
-      time_zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      misc: { time_zone: Intl.DateTimeFormat().resolvedOptions().timeZone },
     },
   });
   return data;
