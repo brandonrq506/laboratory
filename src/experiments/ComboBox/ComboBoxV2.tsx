@@ -69,7 +69,7 @@ export const ComboBoxV2 = ({ label, showAsterisk }: ComboBoxProps) => {
       <div className="relative mt-2">
         <Combobox.Button className="flex w-full items-center">
           <Combobox.Input
-            className="w-full rounded-md border-0 bg-white py-1.5 pr-10 pl-3 text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:text-sm sm:leading-6"
+            className="w-full rounded-md border-0 bg-white py-1.5 pr-10 pl-3 text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:text-sm sm:leading-6"
             /* onChange={(event) => setQuery(event.target.value)}
                displayValue={(person) => person?.name} */
             autoComplete="off"

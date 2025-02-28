@@ -63,7 +63,7 @@ export function DialogComboBox() {
             leave="ease-in duration-200"
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95">
-            <Dialog.Panel className="ring-opacity-5 mx-auto max-w-2xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white ring-1 shadow-2xl ring-black transition-all">
+            <Dialog.Panel className="ring-opacity-5 mx-auto max-w-2xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black transition-all">
               <Combobox>
                 {/* <Combobox onChange={(item) => (window.location = item.url)}> */}
                 {/* Search Bar */}

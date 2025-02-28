@@ -50,7 +50,7 @@ export const TextInput = ({
         aria-invalid={Boolean(error)}
         {...registration}
         className={clsx(
-          "block w-full rounded-md border-0 py-1.5 text-sm text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6",
+          "block w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6",
           "font-light disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200",
           error &&
             "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500",
