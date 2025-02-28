@@ -91,7 +91,7 @@ export const ActivityTable = () => {
       <div className="flow-root">
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full p-0.5 align-middle">
-            <div className="overflow-hidden rounded-lg ring-1 shadow-sm ring-black/5">
+            <div className="overflow-hidden rounded-lg shadow-sm ring-1 ring-black/5">
               <table className="min-w-full divide-y divide-gray-300">
                 <thead className="bg-gray-50">
                   <tr>

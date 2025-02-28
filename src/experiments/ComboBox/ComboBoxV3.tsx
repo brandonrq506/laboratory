@@ -86,7 +86,7 @@ export const ComboBoxV3 = ({
         <div className="relative mt-2">
           <Combobox.Input
             className={clsx(
-              "w-full rounded-md border-0 bg-white py-1.5 pr-10 pl-3 text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:text-sm sm:leading-6",
+              "w-full rounded-md border-0 bg-white py-1.5 pr-10 pl-3 text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:text-sm sm:leading-6",
               error &&
                 "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500",
             )}
@@ -112,7 +112,7 @@ export const ComboBoxV3 = ({
           </Combobox.Button>
 
           {finalOptions.length > 0 && (
-            <Combobox.Options className="ring-opacity-5 absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base ring-1 shadow-lg ring-black focus:outline-hidden sm:text-sm">
+            <Combobox.Options className="ring-opacity-5 absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black focus:outline-hidden sm:text-sm">
               {finalOptions.map((option) => (
                 <Combobox.Option
                   key={option.value}
