@@ -1,6 +1,7 @@
 import { useTasks } from "@/features/tasks/api/tanstack/useTasks";
 
 import {
+  DeleteAllScheduledTasks,
   QuickCreateTaskMenu,
   ScheduledTask,
   TaskList,
@@ -30,6 +31,8 @@ export const ScheduledTaskList = () => {
 
   if (isError) return <TaskErrorList refetch={refetch} />;
 
+  const hasTasks = data.length > 0;
+
   return (
     <div>
       <SectionHeaderWithAction
@@ -41,6 +44,11 @@ export const ScheduledTaskList = () => {
         tasks={data}
         renderItem={(task) => <ScheduledTask task={task as ScheduledTaskAPI} />}
       />
+      {hasTasks && (
+        <div className="mt-2 text-center">
+          <DeleteAllScheduledTasks />
+        </div>
+      )}
     </div>
   );
 };

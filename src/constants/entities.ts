@@ -7,3 +7,8 @@ export const ACTIVITIES = "Activities";
 export const CATEGORIES = "Categories";
 export const TASKS = "Tasks";
 export const USERS = "Users";
+
+// Tasks Statuses
+export const SCHEDULED = "Scheduled";
+export const COMPLETED = "Completed";
+export const IN_PROGRESS = "In Progress";
