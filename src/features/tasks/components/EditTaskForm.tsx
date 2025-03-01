@@ -17,7 +17,11 @@ export const EditTaskForm = ({ task }: Props) => {
   const handleSubmit = async (data: EditForm) => {
     await mutateAsync({
       taskId: task.id,
-      task: data,
+      task: {
+        activity_id: data.activity.value,
+        start_time: data.start_time,
+        end_time: data.end_time,
+      },
     });
 
     navigate("..");
@@ -30,6 +34,7 @@ export const EditTaskForm = ({ task }: Props) => {
       initialValues={{
         end_time: task.end_time,
         start_time: task.start_time,
+        activity: { label: task.activity.name, value: task.activity.id },
       }}
     />
   );

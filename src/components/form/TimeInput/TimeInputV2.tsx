@@ -73,7 +73,7 @@ export const TimeInputV2 = <T extends FieldValues>({
 
   return (
     <Field className={clsx(className)}>
-      <Label>
+      <Label className="block text-sm leading-6 font-medium text-gray-900">
         {label} {showAsterisk && <span className="ml-1 text-red-700">*</span>}
       </Label>
       <Input

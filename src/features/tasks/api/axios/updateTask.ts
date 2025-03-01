@@ -1,8 +1,9 @@
 import { TASKS_ENDPOINT, apiV1 } from "@/libs/axios";
 import { TaskAPI } from "../../types/task";
+import { TaskModel } from "../../types/taskModel";
 
 type Props = {
-  task: Partial<TaskAPI>;
+  task: Partial<TaskModel>;
   taskId: number;
 };
 

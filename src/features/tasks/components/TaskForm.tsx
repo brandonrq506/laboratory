@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 
+import { ActivityComboBox } from "@/features/activities/components";
 import { Button } from "@/components/core";
 import { CategoryBadge } from "@/features/categories/components";
 import { CompletedTaskAPI } from "../types/completedTask";
@@ -29,21 +30,22 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
 
   return (
     <form onSubmit={handleSubmit((data) => onSubmit(data))}>
-      <div className="flex items-center justify-between">
-        <p>{task.activity.name}</p>
+      <div className="flex items-start justify-between">
+        <ActivityComboBox control={control} name="activity" />
         <CategoryBadge category={task.activity.category} />
       </div>
 
       {isInProgressTask && (
         <TimeInputV2
           step={1}
+          control={control}
           label="Start Time"
           name="start_time"
-          control={control}
           rules={{
             required: "Start time is required.",
             validate: {
-              isPast: (v) => isInThePast(v!) || "Time set to the future",
+              isPast: (v) =>
+                isInThePast(v as string) || "Time set to the future",
             },
           }}
         />
