@@ -1,15 +1,13 @@
-import { CategorySelectFilter } from "@/features/categories/components";
+import { DateFilter } from "@/components/core/Date";
 import { FilterableTaskList } from "./FilterableTaskList";
 import { PageHeader } from "@/components/layout";
-import { TaskStatusSelectFilter } from "@/features/tasks/components";
 
 export const TasksPage = () => {
   return (
     <div>
       <PageHeader title="Tasks" />
-      <div className="flex w-full gap-2">
-        <CategorySelectFilter />
-        <TaskStatusSelectFilter />
+      <div className="mb-2 w-1/2 sm:w-1/3 md:w-1/4">
+        <DateFilter label="Date Filter" hideLabel />
       </div>
       <FilterableTaskList />
     </div>

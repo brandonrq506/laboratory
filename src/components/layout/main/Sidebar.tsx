@@ -27,7 +27,7 @@ const experiments = [
 
 const items = [
   { name: "Activities", href: "/activities", icon: UsersIcon },
-  { name: "Tasks", href: "/tasks", icon: RectangleStackIcon },
+  { name: "History", href: "/history", icon: RectangleStackIcon },
   { name: "Timer", href: "/timer", icon: ClockIcon },
   { name: "Settings", href: "/settings", icon: Cog6ToothIcon },
 ];

@@ -64,7 +64,7 @@ const router = createBrowserRouter([
           { path: "edit/:activityId", element: <EditActivityPage /> },
         ],
       },
-      { path: "tasks", element: <TasksPage /> },
+      { path: "history", element: <TasksPage /> },
       {
         path: "timer",
         element: <TimerPage />,

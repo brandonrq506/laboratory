@@ -1,22 +1,17 @@
 import { useSearchParams } from "react-router";
 import { useTasks } from "@/features/tasks/api/tanstack/useTasks";
 
-import { ScheduledTask, TaskList } from "@/features/tasks/components";
+import { CompletedTask, TaskList } from "@/features/tasks/components";
 import { Button } from "@/components/core";
-import { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
-import { TaskStatus } from "@/features/tasks/types/task-status";
+import { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
 
-// TODO: Make sure status is type-safe with custom useTaskStatusSearchParam or something
 export const FilterableTaskList = () => {
   const [params] = useSearchParams();
-  const categoryParam = params.get("category_id");
-  const statusParam = params.get("status");
-
-  const category_id = categoryParam ? parseInt(categoryParam) : undefined;
-  const status = statusParam as TaskStatus | undefined;
+  const dateParam = params.get("date") ?? "today";
 
   const { data, isPending, isError, refetch } = useTasks({
-    filter: { category_id, status },
+    filter: { status: "completed", end_time: dateParam },
+    sort: { sort_by: "start_time", sort_order: "asc" },
   });
 
   if (isPending) return <div>Loading...</div>;
@@ -26,8 +21,7 @@ export const FilterableTaskList = () => {
   return (
     <TaskList
       tasks={data}
-      // TODO: We need to improve this type casting.
-      renderItem={(task) => <ScheduledTask task={task as ScheduledTaskAPI} />}
+      renderItem={(task) => <CompletedTask task={task as CompletedTaskAPI} />}
     />
   );
 };
