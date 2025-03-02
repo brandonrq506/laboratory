@@ -115,7 +115,7 @@ export const ComboBox = ({
           {finalOptions.length > 0 && (
             <ComboboxOptions
               anchor={{ to: "bottom", padding: "1.5rem", gap: "0.5rem" }}
-              className="absolute z-10 mt-1 max-h-60 w-[var(--input-width)] overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-gray-100 focus:outline-hidden sm:text-sm md:h-1/2">
+              className="absolute z-10 mt-1 w-[var(--input-width)] overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-gray-100 focus:outline-hidden sm:text-sm">
               {finalOptions.map((option) => (
                 <ComboboxOption
                   key={option.value}
