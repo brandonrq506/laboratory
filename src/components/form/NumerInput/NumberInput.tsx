@@ -1,42 +1,42 @@
-import { useId } from "react";
-
+import { Description, Field, Input, Label } from "@headlessui/react";
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { clsx } from "clsx";
 
 type InputProps = {
   className?: string;
-  label: string;
-  showAsterisk?: boolean;
-  placeholder?: string;
-  registration?: Partial<UseFormRegisterReturn>;
   description?: string;
   error?: string;
+  hideLabel?: boolean;
+  label: string;
+  placeholder?: string;
+  registration?: Partial<UseFormRegisterReturn>;
+  showAsterisk?: boolean;
 };
 
 export const NumberInput = ({
   className,
-  label,
-  showAsterisk,
-  placeholder,
-  registration,
   description,
   error,
+  hideLabel = false,
+  label,
+  placeholder,
+  registration,
+  showAsterisk,
 }: InputProps) => {
-  const id = useId();
-  const descriptionId = `number-input-description-${id}`;
-  const errorId = `number-input-error-${id}`;
-
   return (
-    <div className={clsx(className)}>
-      <label className="block text-sm leading-6 font-medium text-gray-900">
+    <Field className={clsx(className)}>
+      <Label
+        className={clsx(
+          "block text-sm leading-6 font-medium text-gray-900",
+          hideLabel && "sr-only",
+        )}>
         <span>{label}</span>
         {showAsterisk && <span className="ml-1 text-red-700">*</span>}
-        <div className="relative mt-2">
-          <input
+        <div className={clsx("relative", !hideLabel && "mt-2")}>
+          <Input
             type="number"
             placeholder={placeholder}
-            aria-describedby={error ? errorId : descriptionId}
             aria-invalid={Boolean(error)}
             {...registration}
             className={clsx(
@@ -56,20 +56,19 @@ export const NumberInput = ({
             </div>
           )}
         </div>
-      </label>
+      </Label>
       {description && !error && (
-        <p id={descriptionId} className="mt-2 text-sm font-light text-gray-500">
+        <Description className="mt-2 text-sm font-light text-gray-500">
           {description}
-        </p>
+        </Description>
       )}
       {error && (
-        <p
-          id={errorId}
+        <Description
           role="alert"
           className="mt-2 text-sm font-light text-red-600">
           {error}
-        </p>
+        </Description>
       )}
-    </div>
+    </Field>
   );
 };
