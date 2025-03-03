@@ -11,6 +11,8 @@ import { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 import { SectionHeaderWithAction } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
 
+const MIN_WORTH_TRIGGERING_THRESHOLD = 3;
+
 export const ScheduledTaskList = () => {
   const { data, isPending, isError, refetch } = useTasks({
     filter: { status: "scheduled" },
@@ -31,7 +33,7 @@ export const ScheduledTaskList = () => {
 
   if (isError) return <TaskErrorList refetch={refetch} />;
 
-  const hasTasks = data.length > 0;
+  const displayDeleteAll = data.length > MIN_WORTH_TRIGGERING_THRESHOLD;
 
   return (
     <div>
@@ -44,7 +46,7 @@ export const ScheduledTaskList = () => {
         tasks={data}
         renderItem={(task) => <ScheduledTask task={task as ScheduledTaskAPI} />}
       />
-      {hasTasks && (
+      {displayDeleteAll && (
         <div className="mt-2 text-center">
           <DeleteAllScheduledTasks />
         </div>
