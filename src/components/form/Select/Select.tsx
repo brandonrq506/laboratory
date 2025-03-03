@@ -26,6 +26,7 @@ type Props = SelectRHFProps & SelectType;
 export const Select = ({
   ref,
   description,
+  hideLabel = false,
   label,
   options,
   showAsterisk,
@@ -37,7 +38,11 @@ export const Select = ({
 }: Props) => {
   return (
     <Field className="w-full">
-      <Label className="block text-sm leading-6 font-medium text-gray-900">
+      <Label
+        className={clsx(
+          "block text-sm leading-6 font-medium text-gray-900",
+          hideLabel && "sr-only",
+        )}>
         {label} {showAsterisk && <span className="ml-1 text-red-700">*</span>}
       </Label>
 
@@ -48,7 +53,7 @@ export const Select = ({
         value={value}
         onBlur={onBlur}
         onChange={onChange}
-        className="mt-2">
+        className={clsx(!hideLabel && "mt-2")}>
         <ListboxButton
           ref={ref}
           data-invalid={error}

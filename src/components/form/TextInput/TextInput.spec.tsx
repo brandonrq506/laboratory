@@ -7,6 +7,11 @@ describe("TextInput", () => {
     expect(screen.getByLabelText(/Name/i)).toBeInTheDocument();
   });
 
+  it("is accessible even if label is hidden", () => {
+    render(<TextInput label="Invisible" registration={{}} hideLabel />);
+    expect(screen.getByLabelText(/invisible/i)).toBeInTheDocument();
+  });
+
   it("displays the asterisk if showAsterisk is true", () => {
     render(<TextInput label="Password" showAsterisk registration={{}} />);
     expect(screen.getByText("*")).toBeInTheDocument();

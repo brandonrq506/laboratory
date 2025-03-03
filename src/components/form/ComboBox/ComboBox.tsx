@@ -53,6 +53,7 @@ export const ComboBox = ({
   ref,
   config,
   description,
+  hideLabel = false,
   label,
   options,
   showAsterisk = false,
@@ -73,7 +74,11 @@ export const ComboBox = ({
 
   return (
     <Field>
-      <Label className="block text-sm leading-6 font-medium text-gray-900">
+      <Label
+        className={clsx(
+          "block text-sm leading-6 font-medium text-gray-900",
+          hideLabel && "sr-only",
+        )}>
         {label} {showAsterisk && <span className="ml-1 text-red-700">*</span>}
       </Label>
       <Combobox
@@ -82,7 +87,7 @@ export const ComboBox = ({
         value={value}
         onChange={onChange}
         onClose={() => setQuery("")}>
-        <div className="relative mt-2">
+        <div className={clsx("relative", !hideLabel && "mt-2")}>
           <ComboboxInput
             className={clsx(
               "w-full rounded-md border-0 bg-white py-1.5 pr-10 pl-3 text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:text-sm sm:leading-6",

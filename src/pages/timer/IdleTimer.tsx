@@ -31,6 +31,7 @@ export const IdleTimer = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-2">
       <div className="w-full">
         <ActivityComboBox
+          hideLabel
           control={control}
           name="activity_id"
           rules={{

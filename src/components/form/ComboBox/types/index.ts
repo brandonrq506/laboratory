@@ -10,6 +10,7 @@ export type ComboBoxType = {
   options: Option[];
   label: string;
   config?: Configuration;
-  showAsterisk?: boolean;
   description?: string;
+  hideLabel?: boolean;
+  showAsterisk?: boolean;
 };

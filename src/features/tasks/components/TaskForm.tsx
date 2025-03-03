@@ -29,9 +29,11 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
   const isInProgressTask = task.status === "in_progress";
 
   return (
-    <form onSubmit={handleSubmit((data) => onSubmit(data))}>
-      <div className="flex items-start justify-between">
-        <ActivityComboBox control={control} name="activity" />
+    <form
+      onSubmit={handleSubmit((data) => onSubmit(data))}
+      className="flex flex-col gap-y-2">
+      <div className="flex items-center justify-between">
+        <ActivityComboBox control={control} name="activity" hideLabel />
         <CategoryBadge category={task.activity.category} />
       </div>
 
@@ -73,7 +75,7 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
         />
       )}
 
-      <div className="mt-2 flex justify-center">
+      <div className="flex justify-center">
         <Button type="submit" disabled={isSubmitting}>
           {`${UPDATE} ${TASK}`}
         </Button>
