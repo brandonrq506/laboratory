@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-import { InputText, TimeInput } from "@/components/form";
+import { TextInput, TimeInput } from "@/components/form";
 import { Button } from "@/components/core";
 import { CategorySelect } from "@/features/categories/components";
 import { CreateForm } from "../types/createForm";
@@ -31,7 +31,7 @@ export const ActivityForm = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid gap-2 sm:grid-cols-2 sm:gap-4">
-        <InputText
+        <TextInput
           autoFocus
           showAsterisk
           label="Name"

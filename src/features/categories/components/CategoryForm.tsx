@@ -4,7 +4,7 @@ import { Button } from "@/components/core";
 import { CategoryFormTaskExample } from "./CategoryFormTaskExample";
 import { ColorSelect } from "@/features/colors/components";
 import { EditForm } from "../types/editForm";
-import { InputText } from "@/components/form";
+import { TextInput } from "@/components/form";
 
 // TODO: Add type-safety to color. How do we know value 1 is white?
 const defaultCategory: EditForm = {
@@ -32,7 +32,7 @@ export const CategoryForm = ({
   return (
     <form onSubmit={handleSubmit((data) => onSubmit(data))}>
       <div className="grid gap-2 sm:grid-cols-2 sm:gap-4">
-        <InputText
+        <TextInput
           showAsterisk
           label="Name"
           placeholder="Productive"

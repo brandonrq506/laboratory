@@ -1,62 +1,85 @@
-import { useId } from "react";
-
-import { InputWrapper, InputWrapperPassProps } from "..";
 import { UseFormRegisterReturn } from "react-hook-form";
-import { clsx } from "clsx";
+
+import {
+  Description,
+  Field,
+  Input,
+  InputProps,
+  Label,
+} from "@headlessui/react";
+import clsx from "clsx";
 
 type Types = "text" | "password" | "email" | "search" | "url";
 
-type InputProps = InputWrapperPassProps & {
-  registration: Partial<UseFormRegisterReturn>;
-  placeholder?: string;
+type TextField = InputProps;
+type CustomTextField = Omit<
+  TextField,
+  | "onChange"
+  | "onBlur"
+  | "ref"
+  | "name"
+  | "min"
+  | "max"
+  | "maxLength"
+  | "minLength"
+  | "pattern"
+  | "required"
+>;
+
+type Props = CustomTextField & {
   className?: string;
-  disabled?: boolean;
+  description?: string;
+  error?: string;
+  inputClassName?: string;
+  label: string;
+  registration: Partial<UseFormRegisterReturn>;
+  showAsterisk?: boolean;
   type?: Types;
 };
 
 export const TextInput = ({
-  type = "text",
-  registration,
   className,
-  wrapperClassName,
-  placeholder,
-  disabled,
-  label,
-  showAsterisk,
   description,
   error,
-}: InputProps) => {
-  const id = useId();
-  const inputUniqueId = `file-input-${id}`;
-  const descriptionId = `file-input-description-${id}`;
-  const errorId = `file-input-error-${id}`;
-
+  inputClassName,
+  label,
+  registration,
+  showAsterisk = false,
+  type = "text",
+  ...props
+}: Props) => {
   return (
-    <InputWrapper
-      wrapperClassName={wrapperClassName}
-      errorClassName="flex items-center"
-      label={label}
-      showAsterisk={showAsterisk}
-      description={description}
-      descriptionId={descriptionId}
-      error={error}
-      errorId={errorId}>
-      <input
-        id={inputUniqueId}
+    <Field className={clsx(className)}>
+      <Label className="block text-sm leading-6 font-medium text-gray-900">
+        {label} {showAsterisk && <span className="ml-1 text-red-700">*</span>}
+      </Label>
+      <Input
+        spellCheck
         type={type}
-        disabled={disabled}
-        placeholder={placeholder}
-        aria-describedby={error ? errorId : descriptionId}
         aria-invalid={Boolean(error)}
+        invalid={Boolean(error)}
         {...registration}
+        {...props}
         className={clsx(
-          "block w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6",
-          "font-light disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200",
-          error &&
-            "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500",
-          className,
+          "mt-2 block w-full rounded-md border-0 py-1.5 text-sm font-light text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 sm:leading-6",
+          "data-focus:ring-2 data-focus:ring-indigo-600 data-focus:ring-inset",
+          "data-disabled:cursor-not-allowed data-disabled:bg-gray-50 data-disabled:text-gray-500 data-disabled:ring-gray-200",
+          "data-invalid:text-red-900 data-invalid:ring-red-300 data-invalid:placeholder:text-red-300 data-invalid:focus:ring-red-500",
+          inputClassName,
         )}
       />
-    </InputWrapper>
+      {description && !error && (
+        <Description className="mt-2 text-sm font-light text-gray-500">
+          {description}
+        </Description>
+      )}
+      {error && (
+        <Description
+          role="alert"
+          className="mt-2 text-sm font-light text-red-600">
+          {error}
+        </Description>
+      )}
+    </Field>
   );
 };
