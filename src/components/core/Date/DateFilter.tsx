@@ -9,7 +9,9 @@ import {
 } from "@headlessui/react";
 import clsx from "clsx";
 
-const today = new Date().toISOString().split("T")[0];
+const now = new Date();
+now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+const today = now.toISOString().split("T")[0];
 
 type DateField = Omit<InputProps, "onChange" | "value" | "max">;
 

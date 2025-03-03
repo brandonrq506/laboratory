@@ -42,6 +42,7 @@ import { MainErrorPage, MainLayout } from "@/components/layout";
 import { Navigate, createBrowserRouter } from "react-router";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
+import { ExcelPage } from "@/pages/Excel";
 import { LoginPage } from "@/pages/auth";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { Projects } from "@/pages/Projects";
@@ -64,6 +65,7 @@ const router = createBrowserRouter([
           { path: "edit/:activityId", element: <EditActivityPage /> },
         ],
       },
+      { path: "excel", element: <ExcelPage /> },
       { path: "history", element: <TasksPage /> },
       {
         path: "timer",
