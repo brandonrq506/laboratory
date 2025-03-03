@@ -1,25 +1,25 @@
 import { render, screen } from "@testing-library/react";
-import { InputText } from "./InputText";
+import { TextInput } from "./TextInput";
 
-describe("InputText", () => {
+describe("TextInput", () => {
   it("renders the label and input correctly", () => {
-    render(<InputText label="Name" registration={{}} />);
+    render(<TextInput label="Name" registration={{}} />);
     expect(screen.getByLabelText(/Name/i)).toBeInTheDocument();
   });
 
   it("displays the asterisk if showAsterisk is true", () => {
-    render(<InputText label="Password" showAsterisk registration={{}} />);
+    render(<TextInput label="Password" showAsterisk registration={{}} />);
     expect(screen.getByText("*")).toBeInTheDocument();
   });
 
   it("does not display the asterisk if showAsterisk is false", () => {
-    render(<InputText label="Email" registration={{}} />);
+    render(<TextInput label="Email" registration={{}} />);
     expect(screen.queryByText("*")).not.toBeInTheDocument();
   });
 
   it("renders a description if provided", () => {
     render(
-      <InputText
+      <TextInput
         label="Username"
         registration={{}}
         description="Enter a unique username"
@@ -30,7 +30,7 @@ describe("InputText", () => {
 
   it("renders an error message if error prop is provided", () => {
     render(
-      <InputText
+      <TextInput
         label="Username"
         registration={{}}
         error="Username is required"
@@ -44,7 +44,7 @@ describe("InputText", () => {
     const error = "Username is required";
 
     render(
-      <InputText
+      <TextInput
         label="Username"
         registration={{}}
         description={description}
@@ -57,20 +57,20 @@ describe("InputText", () => {
 
   it("adds aria-invalid and invalid styles when error prop is present", () => {
     render(
-      <InputText label="Username" registration={{}} error="Invalid username" />,
+      <TextInput label="Username" registration={{}} error="Invalid username" />,
     );
     const inputElement = screen.getByLabelText(/Username/i);
     expect(inputElement).toHaveAttribute("aria-invalid");
   });
 
   it("does not apply error styles if no error is present", () => {
-    render(<InputText label="Username" registration={{}} />);
+    render(<TextInput label="Username" registration={{}} />);
     const inputElement = screen.getByLabelText(/Username/i);
     expect(inputElement).not.toHaveAttribute("aria-invalid");
   });
 
   it("renders with default type 'text' if no type is provided", () => {
-    render(<InputText label="Search" registration={{}} />);
+    render(<TextInput label="Search" registration={{}} />);
     const inputElement = screen.getByLabelText(/Search/i);
     expect(inputElement).toHaveAttribute("type", "text");
   });

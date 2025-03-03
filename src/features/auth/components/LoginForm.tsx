@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useLogin } from "../api/tanstack/useLogin";
 
 import { Button } from "@/components/core";
-import { InputText } from "@/components/form";
+import { TextInput } from "@/components/form";
 
 import { LoginFormType } from "../types/loginForm";
 import { SIGN_IN } from "@/constants/actions";
@@ -28,7 +28,7 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <InputText
+      <TextInput
         autoFocus
         label="Email"
         error={errors.email_address?.message}
@@ -42,7 +42,7 @@ export const LoginForm = () => {
         })}
       />
 
-      <InputText
+      <TextInput
         type="password"
         label="Password"
         error={errors.password?.message}
