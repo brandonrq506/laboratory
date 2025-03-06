@@ -32,7 +32,7 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
     <form
       onSubmit={handleSubmit((data) => onSubmit(data))}
       className="flex flex-col gap-y-2">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2">
         <ActivityComboBox control={control} name="activity" hideLabel />
         <CategoryBadge category={task.activity.category} />
       </div>
