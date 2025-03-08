@@ -13,9 +13,9 @@
     "prettier": "prettier --check \"src/**/*.{ts,tsx,html}\"",
     "prettier:fix": "prettier --write \"src/**/*.{ts,tsx,html}\"",
     "preview": "vite preview",
-    "test": "vitest --ui",
+    "test": "vitest",
     "test:expert": "DEBUG_PRINT_LIMIT=10000 npm run test",
-    "coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
     "type-check": "tsc --noEmit",
     "validate:fix": "npm run prettier:fix && npm run lint:fix && npm run type-check && npm run test"
   },
