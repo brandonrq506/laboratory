@@ -12,10 +12,10 @@ type Props = {
 
 export const EditTaskForm = ({ task }: Props) => {
   const navigate = useNavigate();
-  const { mutateAsync } = useUpdateTask();
+  const { mutate } = useUpdateTask();
 
-  const handleSubmit = async (data: EditForm) => {
-    await mutateAsync({
+  const handleSubmit = (data: EditForm) => {
+    mutate({
       taskId: task.id,
       task: {
         activity_id: data.activity.value,
