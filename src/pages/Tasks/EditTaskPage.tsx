@@ -24,7 +24,7 @@ export const EditTaskPage = () => {
   if (isPending) {
     return (
       <Modal isOpen={isOpen} onClose={() => navigate("..")}>
-        <Loading sizeStyles="size-10" />
+        <Loading sizeStyles="size-10" className="mx-auto" />
       </Modal>
     );
   }
