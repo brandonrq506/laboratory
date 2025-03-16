@@ -10,7 +10,7 @@ export const FilterableTaskList = () => {
   const dateParam = params.get("date") ?? "today";
 
   const { data, isPending, isError, refetch } = useTasks({
-    filter: { status: "completed", end_time: dateParam },
+    filter: { status: "completed", start_time: dateParam },
     sort: { sort_by: "start_time", sort_order: "asc" },
   });
 

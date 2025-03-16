@@ -5,4 +5,5 @@ export type TaskApiFilters = {
   category_id: number;
   created_at: string;
   end_time: string;
+  start_time: string;
 };
