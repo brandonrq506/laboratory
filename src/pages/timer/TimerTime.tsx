@@ -20,6 +20,17 @@ export const TimerTime = ({ start_time }: Props) => {
   const [, setTime] = useState(0);
   const elapsedSeconds = elapsedTime(start_time);
 
+  let formattedTime;
+  try {
+    formattedTime = convertSecondsToHHMMSS(elapsedSeconds);
+  } catch (error) {
+    throw new Error(`
+      ElapsedSeconds: ${elapsedSeconds}\n
+      StartTime: ${start_time}\n
+      Now: ${new Date()}\n
+      Error: ${error}`);
+  }
+
   useEffect(() => {
     const id = setInterval(() => {
       setTime((c) => c + 1);
@@ -27,5 +38,5 @@ export const TimerTime = ({ start_time }: Props) => {
     return () => clearInterval(id);
   }, []);
 
-  return <div>{convertSecondsToHHMMSS(elapsedSeconds)}</div>;
+  return <div>{formattedTime}</div>;
 };
