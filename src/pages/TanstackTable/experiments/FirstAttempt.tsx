@@ -50,7 +50,7 @@ export const FirstTableAttempt = () => {
       columnHelper.display({
         id: "actions",
         header: "Actions",
-        cell: (props) => <DeleteActivity activityId={props.row.original.id} />,
+        cell: (props) => <DeleteActivity activity={props.row.original} />,
       }),
       columnHelper.display({
         id: "edit",

@@ -3,22 +3,19 @@ import { useDeleteActivity } from "../api/tanstack/useDeleteActivity";
 import { Button, ConfirmationModal } from "@/components/core";
 import { CANCEL, CONFIRM, DELETE } from "@/constants/actions";
 import { ACTIVITY } from "@/constants/entities";
+import { ActivityAPI } from "../types/activityAPI";
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  activityId: number;
+  activity: ActivityAPI;
 };
 
-export const DeleteActivityDialog = ({
-  isOpen,
-  onClose,
-  activityId,
-}: Props) => {
+export const DeleteActivityDialog = ({ isOpen, onClose, activity }: Props) => {
   const { mutate, isPending } = useDeleteActivity();
 
   const handleDelete = () => {
-    mutate(activityId, {
+    mutate(activity.id, {
       onSuccess: () => onClose(),
     });
   };
@@ -29,7 +26,7 @@ export const DeleteActivityDialog = ({
       onClose={onClose}
       icon="danger"
       title={`${DELETE} ${ACTIVITY}`}
-      description="Are you sure you want to delete this activity?"
+      description={`Are you sure you want to delete "${activity.name}"?`}
       actions={
         <>
           <Button

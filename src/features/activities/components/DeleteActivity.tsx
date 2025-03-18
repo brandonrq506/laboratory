@@ -1,5 +1,6 @@
 import { useDisclosure } from "@/hooks";
 
+import { ActivityAPI } from "../types/activityAPI";
 import { DeleteActivityDialog } from "./DeleteActivityDialog";
 import { IconButton } from "@/components/core";
 import { TrashIcon } from "@heroicons/react/24/outline";
@@ -8,12 +9,12 @@ import { ACTIVITY } from "@/constants/entities";
 import { DELETE } from "@/constants/actions";
 
 type Props = {
-  activityId: number;
+  activity: ActivityAPI;
 };
 
 const BTN_TEXT = `${DELETE} ${ACTIVITY}`;
 
-export const DeleteActivity = ({ activityId }: Props) => {
+export const DeleteActivity = ({ activity }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -29,7 +30,7 @@ export const DeleteActivity = ({ activityId }: Props) => {
       <DeleteActivityDialog
         isOpen={isOpen}
         onClose={onClose}
-        activityId={activityId}
+        activity={activity}
       />
     </>
   );
