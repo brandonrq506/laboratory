@@ -1,18 +1,22 @@
 import { render, screen } from "@/test/test-utils";
-import { ActivityActionMenu } from "./ActivityActionMenu";
 import { createRoutesStub } from "react-router";
 import userEvent from "@testing-library/user-event";
 
+import { ActivityActionMenu } from "./ActivityActionMenu";
+import { activities } from "@/test/store/activities";
+
 describe("ActivityActionMenu", () => {
+  const activity = activities[0];
+
   it("redirects to edit page when clicking on update", async () => {
     const user = userEvent.setup();
     const Stub = createRoutesStub([
       {
         path: "/activities",
-        Component: () => <ActivityActionMenu activityId={1} />,
+        Component: () => <ActivityActionMenu activity={activity} />,
       },
       {
-        path: "/activities/edit/1",
+        path: `/activities/edit/${activity.id}`,
         Component: () => <div>edit page</div>,
       },
     ]);
@@ -29,7 +33,7 @@ describe("ActivityActionMenu", () => {
     const Stub = createRoutesStub([
       {
         path: "/activities",
-        Component: () => <ActivityActionMenu activityId={1} />,
+        Component: () => <ActivityActionMenu activity={activity} />,
       },
     ]);
     render(<Stub initialEntries={["/activities"]} />);
