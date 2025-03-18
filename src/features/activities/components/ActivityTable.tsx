@@ -51,7 +51,7 @@ export const ActivityTable = () => {
         id: "actions",
         cell: (props) => (
           <div className="flex items-center justify-center">
-            <ActivityActionMenu activityId={props.row.original.id} />
+            <ActivityActionMenu activity={props.row.original} />
           </div>
         ),
       }),

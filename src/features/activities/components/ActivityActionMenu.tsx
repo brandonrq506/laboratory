@@ -7,14 +7,15 @@ import { ThreeDotsMenu } from "@/components/core";
 
 import { DELETE, UPDATE } from "@/constants/actions";
 import { ACTIVITY } from "@/constants/entities";
+import { ActivityAPI } from "../types/activityAPI";
 import { DeleteActivityDialog } from "./DeleteActivityDialog";
 import { Link } from "react-router";
 
 type Props = {
-  activityId: number;
+  activity: ActivityAPI;
 };
 
-export const ActivityActionMenu = ({ activityId }: Props) => {
+export const ActivityActionMenu = ({ activity }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -23,7 +24,7 @@ export const ActivityActionMenu = ({ activityId }: Props) => {
         <div className="py-1">
           <MenuItem>
             <Link
-              to={`/activities/edit/${activityId}`}
+              to={`/activities/edit/${activity.id}`}
               className="group flex w-full items-center gap-2 px-4 py-2 text-sm text-nowrap text-blue-600 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
               <PencilIcon aria-hidden className="size-4" />
               {UPDATE} {ACTIVITY}
@@ -45,7 +46,7 @@ export const ActivityActionMenu = ({ activityId }: Props) => {
       <DeleteActivityDialog
         isOpen={isOpen}
         onClose={onClose}
-        activityId={activityId}
+        activity={activity}
       />
     </Fragment>
   );
