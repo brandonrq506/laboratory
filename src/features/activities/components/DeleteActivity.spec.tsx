@@ -28,4 +28,15 @@ describe("DeleteActivity", () => {
     expect(screen.getByRole("button", { name: "Confirm" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Cancel" })).toBeInTheDocument();
   });
+
+  it("shows the name of the activity to be deleted", async () => {
+    const user = userEvent.setup();
+    render(<DeleteActivity activity={activity} />);
+
+    await user.click(screen.getByRole("button", { name: "Delete Activity" }));
+
+    expect(
+      screen.getByText(`Are you sure you want to delete "${activity.name}"?`),
+    ).toBeInTheDocument();
+  });
 });
