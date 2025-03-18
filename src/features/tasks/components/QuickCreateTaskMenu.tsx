@@ -1,7 +1,7 @@
 import { useActivities } from "@/features/activities/api/tanstack/useActivities";
 import { useCreateTask } from "../api/tanstack/useCreateTask";
 
-import { FloatingMenu, IconButton, Loading } from "@/components/core";
+import { FloatingMenu, Loading } from "@/components/core";
 import { CategoryBadge } from "@/features/categories/components";
 import { MenuItem } from "@headlessui/react";
 import { PlusIcon } from "@heroicons/react/24/solid";
@@ -17,11 +17,7 @@ export const QuickCreateTaskMenu = () => {
     return (
       <FloatingMenu
         srBtnText={`${ADD} ${TASKS}`}
-        iconBtn={
-          <IconButton shape="circle">
-            <Loading sizeStyles="size-5" />
-          </IconButton>
-        }>
+        iconBtn={<Loading sizeStyles="size-5" />}>
         <MenuItem>
           <div className="py-10">
             <Loading />
