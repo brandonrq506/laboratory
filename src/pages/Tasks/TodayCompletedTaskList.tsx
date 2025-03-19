@@ -1,3 +1,4 @@
+import { usePrefetchTask } from "@/features/tasks/api/tanstack/usePrefetchTask";
 import { useTasks } from "@/features/tasks/api/tanstack/useTasks";
 
 import { CompletedTask, TaskList } from "@/features/tasks/components";
@@ -9,6 +10,7 @@ import { SectionHeaderWithAction } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
 
 export const TodayCompletedTaskList = () => {
+  const prefetchTask = usePrefetchTask();
   const { data, isPending, isError, refetch } = useTasks({
     filter: { status: "completed", start_time: "today" },
     sort: { sort_by: "start_time", sort_order: "desc" },
@@ -46,7 +48,11 @@ export const TodayCompletedTaskList = () => {
       <TaskList
         tasks={data}
         renderItem={(task) => (
-          <Link to={`edit/${task.id}`} key={task.id}>
+          <Link
+            key={task.id}
+            to={`edit/${task.id}`}
+            onFocus={() => prefetchTask(task.id)}
+            onMouseEnter={() => prefetchTask(task.id)}>
             <CompletedTask task={task as CompletedTaskAPI} />
           </Link>
         )}
