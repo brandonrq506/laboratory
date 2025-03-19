@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 import { AuthContext } from "./AuthContext";
 import { AuthContextType } from "./AuthContextType";
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }: Props) => {
     setIsAuth(false);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const requestInterceptor = apiV1.interceptors.request.use((config) => {
       const token = localStorage.getItem("token");
       if (token) {
