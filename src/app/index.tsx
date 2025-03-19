@@ -66,7 +66,11 @@ const router = createBrowserRouter([
         ],
       },
       { path: "excel", element: <ExcelPage /> },
-      { path: "history", element: <TasksPage /> },
+      {
+        path: "history",
+        element: <TasksPage />,
+        children: [{ path: "edit/:taskId", element: <EditTaskPage /> }],
+      },
       {
         path: "timer",
         element: <TimerPage />,
