@@ -1,4 +1,5 @@
-import { useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
+import { usePrefetchTask } from "@/features/tasks/api/tanstack/usePrefetchTask";
 import { useTasks } from "@/features/tasks/api/tanstack/useTasks";
 
 import { CompletedTask, TaskList } from "@/features/tasks/components";
@@ -6,6 +7,7 @@ import { Button } from "@/components/core";
 import { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
 
 export const FilterableTaskList = () => {
+  const prefetchTask = usePrefetchTask();
   const [params] = useSearchParams();
   const dateParam = params.get("date") ?? "today";
 
@@ -21,7 +23,15 @@ export const FilterableTaskList = () => {
   return (
     <TaskList
       tasks={data}
-      renderItem={(task) => <CompletedTask task={task as CompletedTaskAPI} />}
+      renderItem={(task) => (
+        <Link
+          key={task.id}
+          to={`edit/${task.id}?date=${dateParam}`}
+          onFocus={() => prefetchTask(task.id)}
+          onMouseEnter={() => prefetchTask(task.id)}>
+          <CompletedTask task={task as CompletedTaskAPI} />
+        </Link>
+      )}
     />
   );
 };

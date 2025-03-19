@@ -1,5 +1,6 @@
 import { DateFilter } from "@/components/core/Date";
 import { FilterableTaskList } from "./FilterableTaskList";
+import { Outlet } from "react-router";
 import { PageHeader } from "@/components/layout";
 
 export const TasksPage = () => {
@@ -10,6 +11,7 @@ export const TasksPage = () => {
         <DateFilter label="Date Filter" hideLabel />
       </div>
       <FilterableTaskList />
+      <Outlet />
     </div>
   );
 };

@@ -24,7 +24,7 @@ export const EditTaskForm = ({ task }: Props) => {
       },
     });
 
-    navigate("..");
+    navigate(-1);
   };
 
   return (

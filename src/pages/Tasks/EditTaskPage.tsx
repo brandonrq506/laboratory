@@ -23,7 +23,7 @@ export const EditTaskPage = () => {
 
   if (isPending) {
     return (
-      <Modal isOpen={isOpen} onClose={() => navigate("..")}>
+      <Modal isOpen={isOpen} onClose={() => navigate(-1)}>
         <Loading sizeStyles="size-10" className="mx-auto" />
       </Modal>
     );
@@ -31,7 +31,7 @@ export const EditTaskPage = () => {
 
   if (isError) {
     return (
-      <Modal isOpen={isOpen} onClose={() => navigate("..")}>
+      <Modal isOpen={isOpen} onClose={() => navigate(-1)}>
         <p>{error.name}</p>
         <p>{error.message}</p>
         <Button onClick={() => refetch()}>{RETRY}</Button>
@@ -40,7 +40,7 @@ export const EditTaskPage = () => {
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={() => navigate("..")}>
+    <Modal isOpen={isOpen} onClose={() => navigate(-1)}>
       <EditTaskForm task={data} />
     </Modal>
   );
