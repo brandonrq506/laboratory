@@ -17,7 +17,7 @@ export const Timer = () => {
   const task = data?.[0] as InProgressTaskAPI;
 
   return (
-    <Card>
+    <Card className="sticky top-16 z-[1] lg:top-4">
       {isIdle && <IdleTimer />}
       {isActive && <RunningTimer task={task} />}
     </Card>
