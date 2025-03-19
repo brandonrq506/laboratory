@@ -1,4 +1,5 @@
 import { useCompleteTask } from "@/features/tasks/api/tanstack/useCompleteTask";
+import { usePrefetchTask } from "@/features/tasks/api/tanstack/usePrefetchTask";
 
 import { Dot, IconButton } from "@/components/core";
 import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTast";
@@ -15,14 +16,20 @@ type Props = {
 
 export const RunningTimer = ({ task }: Props) => {
   const { mutate } = useCompleteTask();
+  const prefetchTask = usePrefetchTask();
+
   const color = getColorByName(task.activity.category.color);
 
   return (
     <div className="flex items-center gap-2">
-      <Link to={`edit/${task.id}`} className="w-full">
+      <Link
+        to={`edit/${task.id}`}
+        className="w-full"
+        onFocus={() => prefetchTask(task.id)}
+        onMouseEnter={() => prefetchTask(task.id)}>
         <div className="flex items-center gap-1.5">
           <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
-          <p className="text-sm">{task.activity.name}</p>
+          <p className="text-sm font-semibold">{task.activity.name}</p>
         </div>
         <p className="text-xs">
           {new Date(task.start_time).toLocaleTimeString()}
