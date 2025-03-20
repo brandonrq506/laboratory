@@ -7,8 +7,8 @@ export const TasksPage = () => {
   return (
     <div>
       <PageHeader title="Tasks" />
-      <div className="mb-2 w-1/2 sm:w-1/3 md:w-1/4">
-        <DateFilter label="Date Filter" hideLabel />
+      <div className="mb-2 w-2/3 md:w-1/3">
+        <DateFilter label="Date Filter" hideLabel className="w-full" />
       </div>
       <FilterableTaskList />
       <Outlet />

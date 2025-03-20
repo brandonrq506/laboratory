@@ -53,7 +53,7 @@ export const IconButton = ({
       type="button"
       className={clsx(
         "border-none ring-2 ring-transparent ring-offset-0 outline-hidden transition focus-visible:ring-offset-4",
-        "disabled:cursor-not-allowed disabled:opacity-70",
+        "cursor-pointer disabled:cursor-not-allowed disabled:opacity-70",
         sizes[size],
         shapes[shape],
         variants[variant],
