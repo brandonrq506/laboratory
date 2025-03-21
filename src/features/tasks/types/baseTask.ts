@@ -7,4 +7,5 @@ export interface BaseTaskAPI extends BaseEntity {
   optional_name: string | null;
   status: TaskStatus;
   user_id: number;
+  position: string | null;
 }

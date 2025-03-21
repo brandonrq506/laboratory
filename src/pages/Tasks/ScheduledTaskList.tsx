@@ -16,7 +16,7 @@ const MIN_WORTH_TRIGGERING_THRESHOLD = 3;
 export const ScheduledTaskList = () => {
   const { data, isPending, isError, refetch } = useTasks({
     filter: { status: "scheduled" },
-    sort: { sort_by: "created_at", sort_order: "asc" },
+    sort: { sort_by: "position", sort_order: "asc" },
   });
 
   if (isPending)
