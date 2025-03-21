@@ -33,6 +33,7 @@ export const CategoryFormTaskExample = ({ control }: Props) => {
           id: 1,
         },
         optional_name: null,
+        position: null,
         status: "completed",
         user_id: 1,
         start_time: "2024-01-01T00:00:00Z",
