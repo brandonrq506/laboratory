@@ -6,6 +6,7 @@ import { ActivityComboBox } from "@/features/activities/components";
 import { IconButton } from "@/components/core";
 import { Option } from "@/types/core";
 import { PlayIcon } from "@heroicons/react/24/solid";
+import { useEffect } from "react";
 
 type FormValues = {
   activity_id: Option | null;
@@ -14,7 +15,7 @@ type FormValues = {
 export const IdleTimer = () => {
   const { mutateAsync: createTask } = useCreateTask();
   const { mutateAsync: startTask } = useStartTask();
-  const { control, formState, handleSubmit } = useForm<FormValues>({
+  const { control, formState, handleSubmit, setFocus } = useForm<FormValues>({
     defaultValues: {
       activity_id: null,
     },
@@ -28,6 +29,8 @@ export const IdleTimer = () => {
       await startTask(newTask.id);
     }
   };
+
+  useEffect(() => setFocus("activity_id"), [setFocus]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-2">
