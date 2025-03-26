@@ -13,17 +13,19 @@ type FormValues = {
 
 export const IdleTimer = () => {
   const { mutateAsync: createTask } = useCreateTask();
-  const { mutate: startTask } = useStartTask();
-  const { control, handleSubmit } = useForm<FormValues>({
+  const { mutateAsync: startTask } = useStartTask();
+  const { control, formState, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       activity_id: null,
     },
   });
 
+  const { isSubmitting } = formState;
+
   const onSubmit = async (data: FormValues) => {
     if (data.activity_id) {
       const newTask = await createTask({ activity_id: data.activity_id.value });
-      startTask(newTask.id);
+      await startTask(newTask.id);
     }
   };
 
@@ -42,7 +44,11 @@ export const IdleTimer = () => {
 
       <p className="text-gray-600 tabular-nums">0:00:00</p>
 
-      <IconButton variant="primary" shape="circle" type="submit">
+      <IconButton
+        type="submit"
+        shape="circle"
+        variant="primary"
+        disabled={isSubmitting}>
         <PlayIcon aria-hidden className="size-5" />
       </IconButton>
     </form>
