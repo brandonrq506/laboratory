@@ -2,7 +2,7 @@ import { useCategories } from "@/features/categories/api/tanstack/useCategories"
 
 import { CategoryBadge } from "@/features/categories/components";
 import { ExcelTable } from "@/features/excel/types/excelTable";
-import { calculatePercentageByCategory } from "@/features/excel/utils/caculatePercentageByCategory";
+import { calculatePercentageByCategory } from "@/features/excel/utils/calculatePercentageByCategory";
 
 const HUNDREDTH = 100;
 const PRECISION = 4;
