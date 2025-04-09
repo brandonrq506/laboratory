@@ -47,6 +47,7 @@ import { LoginPage } from "@/pages/auth";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { Projects } from "@/pages/Projects";
 import { RouterProvider } from "react-router/dom";
+import { RoutinesPage } from "@/pages/routines";
 import { TestingModal } from "@/pages/TestingModal";
 import { TimerPage } from "@/pages/timer";
 
@@ -72,9 +73,8 @@ const router = createBrowserRouter([
         children: [{ path: "edit/:taskId", element: <EditTaskPage /> }],
       },
       {
-        path: "timer",
-        element: <TimerPage />,
-        children: [{ path: "edit/:taskId", element: <EditTaskPage /> }],
+        path: "routines",
+        element: <RoutinesPage />,
       },
       {
         path: "settings",
@@ -93,6 +93,11 @@ const router = createBrowserRouter([
           },
           { path: "notifications", element: <NotificationSettingsPage /> },
         ],
+      },
+      {
+        path: "timer",
+        element: <TimerPage />,
+        children: [{ path: "edit/:taskId", element: <EditTaskPage /> }],
       },
       { path: "projects", element: <Projects /> },
       { path: "modal-testing", element: <TestingModal /> },
