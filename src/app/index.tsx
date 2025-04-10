@@ -40,6 +40,7 @@ import {
 } from "@/pages/TanstackTable";
 import { MainErrorPage, MainLayout } from "@/components/layout";
 import { Navigate, createBrowserRouter } from "react-router";
+import { NewRoutinePage, RoutinesPage } from "@/pages/routines";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
 import { ExcelPage } from "@/pages/Excel";
@@ -47,7 +48,6 @@ import { LoginPage } from "@/pages/auth";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { Projects } from "@/pages/Projects";
 import { RouterProvider } from "react-router/dom";
-import { RoutinesPage } from "@/pages/routines";
 import { TestingModal } from "@/pages/TestingModal";
 import { TimerPage } from "@/pages/timer";
 
@@ -75,6 +75,7 @@ const router = createBrowserRouter([
       {
         path: "routines",
         element: <RoutinesPage />,
+        children: [{ path: "new", element: <NewRoutinePage /> }],
       },
       {
         path: "settings",

@@ -2,12 +2,18 @@ import { useApplyRoutine } from "@/features/routines/api/tanstack/useApplyRoutin
 import { useDeleteRoutine } from "@/features/routines/api/tanstack/useDeleteRoutine";
 import { useRoutines } from "@/features/routines/api/tanstack/useRoutines";
 
-import { Card, PageHeader, SectionHeaderWithAction } from "@/components/layout";
-import { IconButton } from "@/components/core";
-import { PlayIcon } from "@heroicons/react/24/solid";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import {
+  Card,
+  PageHeaderWithActions,
+  SectionHeaderWithAction,
+} from "@/components/layout";
+import { IconButton, LinkButton } from "@/components/core";
+import { Outlet } from "react-router";
 
-import { DELETE } from "@/constants/actions";
+import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { PlayIcon } from "@heroicons/react/24/solid";
+
+import { ADD, DELETE } from "@/constants/actions";
 import { ROUTINE } from "@/constants/entities";
 
 import { convertSecondsToTime } from "@/utils";
@@ -31,7 +37,18 @@ export const RoutinesPage = () => {
 
   return (
     <div>
-      <PageHeader title="Routines" className="mb-2" />
+      <PageHeaderWithActions
+        title="Routines"
+        className="mb-2"
+        actions={
+          <LinkButton
+            to="new"
+            size="lg"
+            startIcon={<PlusIcon className="size-5" aria-hidden />}>
+            {`${ADD} ${ROUTINE}`}
+          </LinkButton>
+        }
+      />
 
       <div className="flex flex-wrap items-center gap-2">
         {isSuccess &&
@@ -85,6 +102,7 @@ export const RoutinesPage = () => {
             );
           })}
       </div>
+      <Outlet />
     </div>
   );
 };
