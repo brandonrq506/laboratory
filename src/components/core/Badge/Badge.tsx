@@ -3,7 +3,7 @@ import { getColorByName } from "@/features/colors/utils/getColorByName";
 
 interface Props {
   color: string;
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export const Badge = ({ color, children }: Props) => {

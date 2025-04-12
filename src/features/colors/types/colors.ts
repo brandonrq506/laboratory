@@ -11,5 +11,4 @@ export type Colors =
   | "violet"
   | "purple"
   | "fuchsia"
-  | "pink"
-  | "rose";
+  | "pink";
