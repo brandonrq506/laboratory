@@ -36,7 +36,7 @@ export const ExampleCompletedTask = ({ task }: Props) => {
       </div>
 
       <TrashIcon
-        className="my-auto size-5 cursor-pointer text-red-600"
+        className="my-auto size-5 cursor-pointer text-gray-600"
         aria-hidden
       />
     </Card>
