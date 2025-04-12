@@ -1,5 +1,4 @@
 import { useApplyRoutine } from "@/features/routines/api/tanstack/useApplyRoutine";
-import { useDeleteRoutine } from "@/features/routines/api/tanstack/useDeleteRoutine";
 import { useRoutines } from "@/features/routines/api/tanstack/useRoutines";
 
 import {
@@ -10,8 +9,8 @@ import {
 import { IconButton, LinkButton } from "@/components/core";
 import { Link, Outlet } from "react-router";
 
-import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { PlayIcon } from "@heroicons/react/24/solid";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 import { ADD, DELETE } from "@/constants/actions";
 import { ROUTINE } from "@/constants/entities";
@@ -20,12 +19,9 @@ import { convertSecondsToTime } from "@/utils";
 
 export const RoutinesPage = () => {
   const { data, isSuccess } = useRoutines();
-  const { mutate: deleteMutate } = useDeleteRoutine();
   const { mutate: applyMutate } = useApplyRoutine();
 
   const deleteText = `${DELETE} ${ROUTINE}`;
-
-  const onDeleteRoutine = (id: number) => deleteMutate(id);
 
   const onApplyRoutine = (id: number) => applyMutate(id);
 
@@ -59,22 +55,13 @@ export const RoutinesPage = () => {
                   title={`${routine.name} ${convertSecondsToTime(totalAvgTime(routine.activities))}`}
                   className="gap-x-2"
                   action={
-                    <div>
-                      <IconButton
-                        shape="circle"
-                        aria-label={deleteText}
-                        variant="dangerOutline"
-                        onClick={() => onDeleteRoutine(routine.id)}>
-                        <TrashIcon className="size-5" aria-hidden />
-                      </IconButton>
-                      <IconButton
-                        shape="circle"
-                        aria-label={deleteText}
-                        variant="primaryOutline"
-                        onClick={() => onApplyRoutine(routine.id)}>
-                        <PlayIcon className="size-5" aria-hidden />
-                      </IconButton>
-                    </div>
+                    <IconButton
+                      shape="circle"
+                      aria-label={deleteText}
+                      variant="primaryOutline"
+                      onClick={() => onApplyRoutine(routine.id)}>
+                      <PlayIcon className="size-5" aria-hidden />
+                    </IconButton>
                   }
                 />
 
