@@ -3,6 +3,7 @@ export * from "./Button/Button";
 export * from "./Button/IconButton";
 export * from "./Button/LinkButton";
 export * from "./Dot/Dot";
+export * from "./List/EmptyList";
 export * from "./Loading/Loading";
 export * from "./Menu/FloatingMenu";
 export * from "./Menu/ThreeDotsMenu";
