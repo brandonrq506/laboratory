@@ -31,6 +31,11 @@ import {
   EditCategoryPage,
   NewCategoryPage,
 } from "@/pages/categories";
+import {
+  EditRoutinePage,
+  NewRoutinePage,
+  RoutinesPage,
+} from "@/pages/routines";
 import { EditTaskPage, TasksPage } from "@/pages/Tasks";
 import {
   FirstTableAttempt,
@@ -40,7 +45,6 @@ import {
 } from "@/pages/TanstackTable";
 import { MainErrorPage, MainLayout } from "@/components/layout";
 import { Navigate, createBrowserRouter } from "react-router";
-import { NewRoutinePage, RoutinesPage } from "@/pages/routines";
 import { AppProvider } from "./provider";
 import { AsyncValidation } from "@/experiments/forms";
 import { ExcelPage } from "@/pages/Excel";
@@ -75,7 +79,10 @@ const router = createBrowserRouter([
       {
         path: "routines",
         element: <RoutinesPage />,
-        children: [{ path: "new", element: <NewRoutinePage /> }],
+        children: [
+          { path: "new", element: <NewRoutinePage /> },
+          { path: "edit/:routineId", element: <EditRoutinePage /> },
+        ],
       },
       {
         path: "settings",

@@ -8,7 +8,7 @@ import {
   SectionHeaderWithAction,
 } from "@/components/layout";
 import { IconButton, LinkButton } from "@/components/core";
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { PlayIcon } from "@heroicons/react/24/solid";
@@ -78,7 +78,7 @@ export const RoutinesPage = () => {
                   }
                 />
 
-                <div>
+                <Link to={`edit/${routine.id}`}>
                   {routine.activities.map((activity) => (
                     <div key={activity.id} className="flex justify-between">
                       <div className="flex items-center gap-x-2">
@@ -97,7 +97,15 @@ export const RoutinesPage = () => {
                       </div>
                     </div>
                   ))}
-                </div>
+
+                  {routine.activities.length === 0 && (
+                    <div className="flex h-20 items-center justify-center">
+                      <span className="text-sm text-gray-500">
+                        No activities
+                      </span>
+                    </div>
+                  )}
+                </Link>
               </Card>
             );
           })}
