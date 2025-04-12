@@ -32,6 +32,7 @@ import {
   NewCategoryPage,
 } from "@/pages/categories";
 import {
+  DeleteRoutinePage,
   EditRoutinePage,
   NewRoutinePage,
   RoutinesPage,
@@ -82,6 +83,7 @@ const router = createBrowserRouter([
         children: [
           { path: "new", element: <NewRoutinePage /> },
           { path: "edit/:routineId", element: <EditRoutinePage /> },
+          { path: "delete/:routineId", element: <DeleteRoutinePage /> },
         ],
       },
       {
