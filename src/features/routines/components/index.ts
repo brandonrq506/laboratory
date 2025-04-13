@@ -1,3 +1,4 @@
+export * from "./ActivityRoutineForm";
 export * from "./DeleteActivityRoutine";
 export * from "./DeleteRoutineDialog";
 export * from "./PlayRoutineButton";
