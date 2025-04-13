@@ -27,7 +27,7 @@ export const RoutineActivityList = () => {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold">Activities</h2>
+      <h2 className="text-lg font-semibold">Routine:</h2>
       <ul>
         {routine_activities.map((routine_activity) => (
           <li key={routine_activity.id} className="my-1">

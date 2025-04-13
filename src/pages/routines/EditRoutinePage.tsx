@@ -2,12 +2,13 @@ import { Link, useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { useRoutine } from "@/features/routines/api/tanstack/useRoutine";
 
-import { Loading, Modal } from "@/components/core";
 import {
+  ActivityRoutineForm,
   PlayRoutineButton,
   RoutineActivityList,
   RoutineNameForm,
 } from "@/features/routines/components";
+import { Loading, Modal } from "@/components/core";
 import { TrashIcon } from "@heroicons/react/24/outline";
 
 export const EditRoutinePage = () => {
@@ -43,7 +44,9 @@ export const EditRoutinePage = () => {
   return (
     <Modal isOpen={isOpen} onClose={() => navigate("..")}>
       <RoutineNameForm initialValues={{ name: data.name }} />
-      <br />
+      <div className="my-2.5">
+        <ActivityRoutineForm />
+      </div>
       <RoutineActivityList />
       <br />
       <div className="flex items-center justify-between">
