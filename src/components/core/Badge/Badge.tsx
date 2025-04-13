@@ -7,7 +7,6 @@ interface Props {
 }
 
 export const Badge = ({ color, children }: Props) => {
-  console.log(color);
   const safeColor = getColorByName(color);
 
   return (

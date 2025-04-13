@@ -25,9 +25,9 @@ export const RoutinesPage = () => {
 
   const onApplyRoutine = (id: number) => applyMutate(id);
 
-  const totalAvgTime = (activities: { avg_time: number }[]) => {
+  const totalAvgTime = (activities: { activity_avg_time: number }[]) => {
     return activities.reduce((total, activity) => {
-      return total + activity.avg_time;
+      return total + activity.activity_avg_time;
     }, 0);
   };
 
@@ -70,7 +70,7 @@ export const RoutinesPage = () => {
                     <div key={activity.id} className="flex justify-between">
                       <div className="flex items-center gap-x-2">
                         <span className="text-sm font-medium">
-                          {activity.name}
+                          {activity.activity_name}
                         </span>
                         <span className="text-xs text-gray-500">
                           {activity.category_name}
@@ -79,7 +79,7 @@ export const RoutinesPage = () => {
 
                       <div>
                         <span className="text-xs">
-                          {convertSecondsToTime(activity.avg_time)}
+                          {convertSecondsToTime(activity.activity_avg_time)}
                         </span>
                       </div>
                     </div>

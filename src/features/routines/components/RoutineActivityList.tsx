@@ -3,13 +3,15 @@ import { useRoutine } from "../api/tanstack/useRoutine";
 
 import { Badge, EmptyList, Loading } from "@/components/core";
 import { Card } from "@/components/layout";
+import { DeleteActivityRoutine } from "./DeleteActivityRoutine";
 
 import { convertSecondsToTime } from "@/utils";
 
 export const RoutineActivityList = () => {
   const { routineId } = useParams();
-  const { data, isPending, isError } = useRoutine(Number(routineId));
-  const activities = data?.activities;
+  const routineNumber = Number(routineId);
+  const { data, isPending, isError } = useRoutine(routineNumber);
+  const routine_activities = data?.activities;
 
   if (isPending) {
     return <Loading className="mx-auto" />;
@@ -19,7 +21,7 @@ export const RoutineActivityList = () => {
     return <div>Error loading routine activities</div>;
   }
 
-  if (!activities || activities.length === 0) {
+  if (!routine_activities || routine_activities.length === 0) {
     return <EmptyList title="No activities found" />;
   }
 
@@ -27,13 +29,22 @@ export const RoutineActivityList = () => {
     <div>
       <h2 className="text-lg font-semibold">Activities</h2>
       <ul>
-        {activities.map((activity) => (
-          <li key={activity.id} className="my-1">
-            <Card className="flex items-center gap-2">
-              <Badge color={activity.category_color}>{activity.name}</Badge>
-              <span className="text-xs">
-                {convertSecondsToTime(activity.avg_time)}
-              </span>
+        {routine_activities.map((routine_activity) => (
+          <li key={routine_activity.id} className="my-1">
+            <Card className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Badge color={routine_activity.category_color}>
+                  {routine_activity.activity_name}
+                </Badge>
+                <span className="text-xs">
+                  {convertSecondsToTime(routine_activity.activity_avg_time)}
+                </span>
+              </div>
+
+              <DeleteActivityRoutine
+                activityId={routine_activity.id}
+                routineId={routineNumber}
+              />
             </Card>
           </li>
         ))}
