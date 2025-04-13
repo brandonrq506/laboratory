@@ -4,6 +4,7 @@ import { useRoutine } from "@/features/routines/api/tanstack/useRoutine";
 
 import { Loading, Modal } from "@/components/core";
 import {
+  PlayRoutineButton,
   RoutineActivityList,
   RoutineNameForm,
 } from "@/features/routines/components";
@@ -45,10 +46,13 @@ export const EditRoutinePage = () => {
       <br />
       <RoutineActivityList />
       <br />
-      <Link to={`../delete/${routineNumber}`}>
-        <span className="sr-only">Delete Routine</span>
-        <TrashIcon className="size-5 text-red-600" />
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link to={`../delete/${routineNumber}`}>
+          <span className="sr-only">Delete Routine</span>
+          <TrashIcon className="size-5 text-red-600" />
+        </Link>
+        <PlayRoutineButton routineId={routineNumber} />
+      </div>
     </Modal>
   );
 };
