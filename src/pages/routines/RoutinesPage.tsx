@@ -15,6 +15,8 @@ import { ROUTINE } from "@/constants/entities";
 
 import { convertSecondsToTime } from "@/utils";
 
+const MAX_VISIBLE_ACTIVITIES = 5;
+
 export const RoutinesPage = () => {
   const { data, isSuccess } = useRoutines();
 
@@ -39,18 +41,22 @@ export const RoutinesPage = () => {
         }
       />
 
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {isSuccess &&
           data.map((routine) => {
             return (
-              <Card key={routine.id} className="w-full sm:w-1/2 lg:w-1/3">
+              <Card
+                key={routine.id}
+                className="relative max-h-56 w-full overflow-hidden xl:max-w-md">
                 <Link to={`edit/${routine.id}`}>
                   <SectionHeaderWithAction
                     title={routine.name}
                     className="gap-x-2"
-                    action={convertSecondsToTime(
-                      totalAvgTime(routine.activities),
-                    )}
+                    action={
+                      <div className="text-sm tabular-nums">
+                        {convertSecondsToTime(totalAvgTime(routine.activities))}
+                      </div>
+                    }
                   />
 
                   {routine.activities.map((activity) => (
@@ -82,6 +88,9 @@ export const RoutinesPage = () => {
                     </div>
                   )}
                 </Link>
+                {routine.activities.length > MAX_VISIBLE_ACTIVITIES && (
+                  <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-8 bg-gradient-to-t from-white to-transparent" />
+                )}
               </Card>
             );
           })}
