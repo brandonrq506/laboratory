@@ -2,10 +2,10 @@ import { useTasks } from "@/features/tasks/api/tanstack/useTasks";
 
 import {
   DeleteAllScheduledTasks,
-  QuickCreateTaskMenu,
   ScheduledTask,
   TaskList,
 } from "@/features/tasks/components";
+import { AddScheduledTaskMenu } from "./AddScheduledTaskMenu";
 import { Loading } from "@/components/core";
 import { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 import { SectionHeaderWithAction } from "@/components/layout";
@@ -25,7 +25,7 @@ export const ScheduledTaskList = () => {
         <SectionHeaderWithAction
           title="Scheduled Tasks"
           className="pr-2.5"
-          action={<QuickCreateTaskMenu />}
+          action={<AddScheduledTaskMenu />}
         />
         <Loading className="mx-auto my-10" sizeStyles="size-10" />
       </div>
@@ -40,7 +40,7 @@ export const ScheduledTaskList = () => {
       <SectionHeaderWithAction
         title="Scheduled Tasks"
         className="pr-2.5"
-        action={<QuickCreateTaskMenu />}
+        action={<AddScheduledTaskMenu />}
       />
       <TaskList
         tasks={data}
