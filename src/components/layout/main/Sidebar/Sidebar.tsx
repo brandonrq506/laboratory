@@ -5,34 +5,12 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 
-import {
-  ClockIcon,
-  Cog6ToothIcon,
-  DocumentTextIcon,
-  FolderIcon,
-  RectangleStackIcon,
-  UsersIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Experiments } from "./Experiments";
+import { Items } from "./Items";
 import { LinkedInProfile } from "@/components/core";
 import { LogoutButton } from "@/features/auth/components";
-import { SidebarItem } from "./SidebarItem";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import appLogo from "@/assets/app_logo.png";
-
-const experiments = [
-  { name: "Projects", href: "/projects", icon: FolderIcon },
-  { name: "Modal Testing", href: "/modal-testing", icon: UsersIcon },
-  { name: "Form Projects", href: "/form-projects", icon: DocumentTextIcon },
-  { name: "Table Projects", href: "/table-projects", icon: RectangleStackIcon },
-];
-
-const items = [
-  { name: "Activities", href: "/activities", icon: UsersIcon },
-  { name: "Timer", href: "/timer", icon: ClockIcon },
-  { name: "History", href: "/history", icon: RectangleStackIcon },
-  { name: "Routines", href: "/routines", icon: DocumentTextIcon },
-  { name: "Settings", href: "/settings", icon: Cog6ToothIcon },
-];
 
 type SidebarProps = {
   isOpen: boolean;
@@ -81,31 +59,8 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
               </div>
               <nav className="flex flex-1 flex-col">
                 <ul role="list" className="flex flex-1 flex-col gap-y-7">
-                  <li>
-                    <ul role="list" className="-mx-2 space-y-1">
-                      {items.map((item) => (
-                        <SidebarItem
-                          key={item.name}
-                          {...item}
-                          onClose={onClose}
-                        />
-                      ))}
-                    </ul>
-                  </li>
-                  <li>
-                    <div className="text-xs/6 font-semibold text-gray-400">
-                      My experiments
-                    </div>
-                    <ul role="list" className="-mx-2 mt-2 space-y-1">
-                      {experiments.map((experiment) => (
-                        <SidebarItem
-                          key={experiment.name}
-                          {...experiment}
-                          onClose={onClose}
-                        />
-                      ))}
-                    </ul>
-                  </li>
+                  <Items onClose={onClose} />
+                  <Experiments onClose={onClose} />
                   <li className="mt-auto mb-4 flex items-center justify-between">
                     <div className="flex gap-2">
                       <LinkedInProfile />
@@ -133,27 +88,8 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           </div>
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
-              <li>
-                <ul role="list" className="-mx-2 space-y-1">
-                  {items.map((item) => (
-                    <SidebarItem key={item.name} {...item} onClose={onClose} />
-                  ))}
-                </ul>
-              </li>
-              <li>
-                <div className="text-xs/6 font-semibold text-gray-400">
-                  Your experiments
-                </div>
-                <ul role="list" className="-mx-2 mt-2 space-y-1">
-                  {experiments.map((experiment) => (
-                    <SidebarItem
-                      key={experiment.name}
-                      {...experiment}
-                      onClose={onClose}
-                    />
-                  ))}
-                </ul>
-              </li>
+              <Items onClose={onClose} />
+              <Experiments onClose={onClose} />
               <li className="mt-auto mb-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <LinkedInProfile />
