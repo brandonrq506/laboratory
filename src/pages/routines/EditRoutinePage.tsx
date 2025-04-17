@@ -20,7 +20,7 @@ export const EditRoutinePage = () => {
 
   useEffect(() => setIsOpen(true), []);
 
-  if (!routineId) throw new Error("Category ID is required");
+  if (!routineId) throw new Error("Routine ID is required");
 
   if (isPending) {
     return (
