@@ -1,3 +1,4 @@
+import { usePrefetchRoutine } from "@/features/routines/api/tanstack/usePrefetchRoutine";
 import { useRoutines } from "@/features/routines/api/tanstack/useRoutines";
 
 import { Badge, LinkButton } from "@/components/core";
@@ -18,6 +19,7 @@ import { convertSecondsToTime } from "@/utils";
 const MAX_VISIBLE_ACTIVITIES = 5;
 
 export const RoutinesPage = () => {
+  const prefetchRoutine = usePrefetchRoutine();
   const { data, isSuccess } = useRoutines();
 
   const totalAvgTime = (activities: { activity_avg_time: number }[]) => {
@@ -48,7 +50,10 @@ export const RoutinesPage = () => {
               <Card
                 key={routine.id}
                 className="relative max-h-56 w-full overflow-hidden xl:max-w-md">
-                <Link to={`edit/${routine.id}`}>
+                <Link
+                  to={`edit/${routine.id}`}
+                  onFocus={() => prefetchRoutine(routine.id)}
+                  onMouseEnter={() => prefetchRoutine(routine.id)}>
                   <SectionHeaderWithAction
                     title={routine.name}
                     className="gap-x-2"
