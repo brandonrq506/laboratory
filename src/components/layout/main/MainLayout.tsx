@@ -5,7 +5,7 @@ import { AuthGuard } from "./AuthGuard";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Header } from "./Header";
 import { Outlet } from "react-router";
-import { Sidebar } from "./Sidebar";
+import { Sidebar } from "./Sidebar/Sidebar";
 
 export const MainLayout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
