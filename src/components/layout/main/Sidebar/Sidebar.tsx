@@ -9,6 +9,7 @@ import { Experiments } from "./Experiments";
 import { Items } from "./Items";
 import { LinkedInProfile } from "@/components/core";
 import { LogoutButton } from "@/features/auth/components";
+import { Username } from "@/features/user/components";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import appLogo from "@/assets/app_logo.png";
 
@@ -93,7 +94,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
               <li className="mt-auto mb-4 flex items-center justify-between">
                 <div className="flex gap-2">
                   <LinkedInProfile />
-                  <span aria-hidden="true">Brandon Ramirez</span>
+                  <Username />
                 </div>
                 <LogoutButton />
               </li>
