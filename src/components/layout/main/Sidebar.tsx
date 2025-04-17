@@ -17,7 +17,7 @@ import {
 import { LinkedInProfile } from "@/components/core";
 import { LogoutButton } from "@/features/auth/components";
 import { SidebarItem } from "./SidebarItem";
-import appLogo from "@/assets/app_logo.jpeg";
+import appLogo from "@/assets/app_logo.png";
 
 const experiments = [
   { name: "Projects", href: "/projects", icon: FolderIcon },
@@ -74,9 +74,9 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
               <div className="flex h-16 shrink-0 items-center">
                 <img
-                  alt="Your Company"
-                  src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-                  className="h-8 w-auto"
+                  alt="App Logo"
+                  src={appLogo}
+                  className="h-8 w-auto rounded-md"
                 />
               </div>
               <nav className="flex flex-1 flex-col">
