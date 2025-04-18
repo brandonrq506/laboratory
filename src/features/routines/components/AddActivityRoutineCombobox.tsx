@@ -1,11 +1,11 @@
+import { useCreateActivityRoutine } from "../api/tanstack/useCreateActivityRoutine";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
 
 import { ActivityComboBox } from "@/features/activities/components";
 import { Option } from "@/types/core";
-import { useCreateActivityRoutine } from "../api/tanstack/useCreateActivityRoutine";
 
-export const ActivityRoutineForm = () => {
+export const AddActivityRoutineCombobox = () => {
   const { routineId } = useParams();
   const routineNumber = Number(routineId);
   const { mutate } = useCreateActivityRoutine();

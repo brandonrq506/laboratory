@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
+import { useRoutine } from "../api/tanstack/useRoutine";
 import { useUpdateRoutine } from "../api/tanstack/useUpdateRoutine";
 
 import { Button } from "@/components/core";
@@ -12,19 +13,23 @@ const defaultValues: EditNameForm = {
 };
 
 interface Props {
-  initialValues?: Partial<EditNameForm>;
   routineId?: number;
 }
 
-export const RoutineNameForm = ({ initialValues, routineId }: Props) => {
+export const RoutineNameForm = ({ routineId }: Props) => {
+  const { routineId: routineIdFromParams } = useParams();
+  const routineIdToUse = routineId || Number(routineIdFromParams);
+
+  if (!routineIdToUse) throw new Error("Routine ID is required");
+
+  const { data } = useRoutine(routineIdToUse);
+  const nameToUse = data?.name ?? defaultValues.name;
+
   const { formState, handleSubmit, register } = useForm<EditNameForm>({
-    values: { ...defaultValues, ...initialValues },
+    values: { name: nameToUse },
   });
   const { errors, isSubmitting } = formState;
-  const { routineId: routineIdFromParams } = useParams();
   const { mutateAsync, isPending } = useUpdateRoutine();
-
-  const routineIdToUse = routineId || Number(routineIdFromParams);
 
   const onSubmit = async (values: EditNameForm) => {
     await mutateAsync({
