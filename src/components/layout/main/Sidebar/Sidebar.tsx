@@ -65,7 +65,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                   <li className="mt-auto mb-4 flex items-center justify-between">
                     <div className="flex gap-2">
                       <LinkedInProfile />
-                      <span aria-hidden="true">Brandon Ramirez</span>
+                      <Username />
                     </div>
                     <LogoutButton />
                   </li>
