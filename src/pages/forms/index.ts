@@ -1,3 +1,5 @@
+export * from "./durationInputForm/DurationInputForm";
+
 export * from "./FormsPage";
 export * from "./shouldUnregister/LastName";
 export * from "./deps/DynamicPassword";
