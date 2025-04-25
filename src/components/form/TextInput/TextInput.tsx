@@ -11,9 +11,8 @@ import clsx from "clsx";
 
 type Types = "text" | "password" | "email" | "search" | "url";
 
-type TextField = InputProps;
 type CustomTextField = Omit<
-  TextField,
+  InputProps,
   | "onChange"
   | "onBlur"
   | "ref"
