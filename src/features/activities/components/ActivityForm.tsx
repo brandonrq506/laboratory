@@ -1,15 +1,17 @@
 import { useForm } from "react-hook-form";
 
-import { TextInput, TimeInput } from "@/components/form";
+import { DurationInput, TextInput } from "@/components/form";
 import { Button } from "@/components/core";
 import { CategorySelect } from "@/features/categories/components";
 import { CreateForm } from "../types/createForm";
 
 const defaultActivity: CreateForm = {
   name: "",
-  avg_time: "",
-  max_time: "",
+  avg_time_hours: 0,
+  avg_time_minutes: 0,
   category_id: null,
+  max_time_hours: 0,
+  max_time_minutes: 0,
 };
 
 type Props = {
@@ -23,9 +25,10 @@ export const ActivityForm = ({
   onSubmit,
   submitButtonText,
 }: Props) => {
-  const { control, formState, handleSubmit, register } = useForm<CreateForm>({
-    values: { ...defaultActivity, ...initialValues },
-  });
+  const { control, formState, getValues, handleSubmit, register } =
+    useForm<CreateForm>({
+      values: { ...defaultActivity, ...initialValues },
+    });
   const { errors, isSubmitting } = formState;
 
   return (
@@ -48,19 +51,82 @@ export const ActivityForm = ({
           rules={{ required: "A category must be selected" }}
         />
 
-        <TimeInput
+        <DurationInput
           label="Avg. Time"
-          error={errors.avg_time?.message}
-          registration={register("avg_time", {
-            required: "Required to handle thresholds",
-            min: { value: "00:01", message: "Must be at least 1 minute" },
+          error={
+            errors.avg_time_minutes?.message || errors.avg_time_hours?.message
+          }
+          hoursProps={{ placeholder: "00" }}
+          minutesProps={{ placeholder: "30" }}
+          hoursregistration={register("avg_time_hours", {
+            valueAsNumber: true,
+            min: {
+              value: 0,
+              message: "Hours must be at least 0",
+            },
+            max: {
+              value: 23,
+              message: "Hours must be less than 24",
+            },
+          })}
+          minutesregistration={register("avg_time_minutes", {
+            valueAsNumber: true,
+            min: {
+              value: 0,
+              message: "Minutes must be at least 0",
+            },
+            max: {
+              value: 59,
+              message: "Minutes must be less than 60",
+            },
+            validate: {
+              isNotZero: (value) => {
+                const { avg_time_hours } = getValues();
+                if (avg_time_hours === 0 && value === 0) {
+                  return "Avg. Time must be at least 1 minute";
+                }
+              },
+            },
           })}
         />
 
-        <TimeInput
+        <DurationInput
           label="Max. Time"
-          error={errors.max_time?.message}
-          registration={register("max_time")}
+          error={
+            errors.max_time_minutes?.message || errors.max_time_hours?.message
+          }
+          hoursProps={{ placeholder: "01" }}
+          minutesProps={{ placeholder: "30" }}
+          hoursregistration={register("max_time_hours", {
+            valueAsNumber: true,
+            min: {
+              value: 0,
+              message: "Hours must be at least 0",
+            },
+            max: {
+              value: 23,
+              message: "Hours must be less than 24",
+            },
+          })}
+          minutesregistration={register("max_time_minutes", {
+            valueAsNumber: true,
+            min: {
+              value: 0,
+              message: "Minutes must be at least 0",
+            },
+            max: {
+              value: 59,
+              message: "Minutes must be less than 60",
+            },
+            validate: {
+              isNotZero: (value) => {
+                const { max_time_hours } = getValues();
+                if (max_time_hours === 0 && value === 0) {
+                  return "Max. Time must be at least 1 minute";
+                }
+              },
+            },
+          })}
         />
       </div>
 

@@ -15,18 +15,27 @@ describe("ActivityForm", () => {
         onSubmit={vi.fn()}
         submitButtonText="Submit"
         initialValues={{
-          avg_time: "00:30",
+          avg_time_hours: 0,
+          avg_time_minutes: 30,
           category_id: { value: 1, label: "Productive" },
-          max_time: "01:00",
+          max_time_hours: 1,
+          max_time_minutes: 0,
           name: "Test",
         }}
       />,
     );
 
+    const avgTimeInputs = screen.getAllByLabelText("Avg. Time");
+    const maxTimeInputs = screen.getAllByLabelText("Max. Time");
+
     expect(screen.getByLabelText("Name *")).toHaveValue("Test");
     expect(screen.getByLabelText("Category *")).toHaveTextContent("Productive");
-    expect(screen.getByLabelText("Avg. Time")).toHaveValue("00:30");
-    expect(screen.getByLabelText("Max. Time")).toHaveValue("01:00");
+
+    expect(avgTimeInputs[0]).toHaveValue(0);
+    expect(avgTimeInputs[1]).toHaveValue(30);
+
+    expect(maxTimeInputs[0]).toHaveValue(1);
+    expect(maxTimeInputs[1]).toHaveValue(0);
   });
 
   it("requires necessary values before submitting", async () => {
@@ -39,7 +48,10 @@ describe("ActivityForm", () => {
     expect(screen.getByText("Name is required")).toBeInTheDocument();
     expect(screen.getByText("A category must be selected")).toBeInTheDocument();
     expect(
-      screen.getByText("Required to handle thresholds"),
+      screen.getByText("Avg. Time must be at least 1 minute"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Max. Time must be at least 1 minute"),
     ).toBeInTheDocument();
   });
 });

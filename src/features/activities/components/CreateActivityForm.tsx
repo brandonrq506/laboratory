@@ -5,7 +5,7 @@ import { ACTIVITY } from "@/constants/entities";
 import { ADD } from "@/constants/actions";
 import { ActivityForm } from "./ActivityForm";
 import { CreateForm } from "../types/createForm";
-import { convertTimeToSeconds } from "@/utils";
+import { convertDurationToSeconds } from "@/utils";
 
 type Props = {
   initialValues?: Partial<CreateForm>;
@@ -17,9 +17,15 @@ export const CreateActivityForm = ({ initialValues }: Props) => {
 
   const onSubmit = async (values: CreateForm) => {
     await mutateAsync({
-      avg_time: convertTimeToSeconds(values.avg_time),
+      avg_time: convertDurationToSeconds(
+        values.avg_time_hours,
+        values.avg_time_minutes,
+      ),
       category_id: values.category_id!.value,
-      max_time: convertTimeToSeconds(values.max_time),
+      max_time: convertDurationToSeconds(
+        values.max_time_hours,
+        values.max_time_minutes,
+      ),
       name: values.name,
     });
 

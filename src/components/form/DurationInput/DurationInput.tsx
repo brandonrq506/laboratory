@@ -60,7 +60,7 @@ export const DurationInput = ({
       </Label>
       <div
         className={clsx(
-          "relative flex items-center gap-2",
+          "relative flex items-center gap-1",
           !hideLabel && "mt-2",
         )}>
         <Input

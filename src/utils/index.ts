@@ -1,3 +1,5 @@
+export * from "./convertDurationToSeconds";
+export * from "./convertSecondsToDuration";
 export * from "./convertSecondsToHHMMSS";
 export * from "./convertSecondsToTime";
 export * from "./convertTimeToSeconds";

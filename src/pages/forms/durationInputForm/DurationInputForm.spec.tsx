@@ -18,7 +18,9 @@ describe("DurationInputForm", () => {
     const submitButton = screen.getByRole("button", { name: /submit/i });
     await user.click(submitButton);
 
-    expect(screen.getByText("Form submitted successfully!")).toBeInTheDocument();
+    expect(
+      screen.getByText("Form submitted successfully!"),
+    ).toBeInTheDocument();
   });
 
   it("submits successfully with valid values", async () => {
@@ -37,7 +39,9 @@ describe("DurationInputForm", () => {
 
     await user.click(submitButton);
 
-    expect(screen.getByText("Form submitted successfully!")).toBeInTheDocument();
+    expect(
+      screen.getByText("Form submitted successfully!"),
+    ).toBeInTheDocument();
   });
 
   it("shows error when hours is less than 0", async () => {
@@ -100,7 +104,9 @@ describe("DurationInputForm", () => {
 
     await user.click(submitButton);
 
-    expect(screen.getByText("Minutes must be less than 60")).toBeInTheDocument();
+    expect(
+      screen.getByText("Minutes must be less than 60"),
+    ).toBeInTheDocument();
     expect(minutesInput).toHaveFocus();
   });
 
@@ -120,7 +126,9 @@ describe("DurationInputForm", () => {
 
     await user.click(submitButton);
 
-    expect(screen.getByText("Duration must be at least 1 minute")).toBeInTheDocument();
+    expect(
+      screen.getByText("Duration must be at least 1 minute"),
+    ).toBeInTheDocument();
     expect(minutesInput).toHaveFocus();
   });
 
@@ -140,16 +148,22 @@ describe("DurationInputForm", () => {
 
     await user.click(submitButton);
 
-    expect(screen.getByText("Duration must be at least 1 minute")).toBeInTheDocument();
+    expect(
+      screen.getByText("Duration must be at least 1 minute"),
+    ).toBeInTheDocument();
     expect(minutesInput).toHaveFocus();
 
     await user.clear(hoursInput);
     await user.type(hoursInput, "1");
 
-    expect(screen.queryByText("Duration must be at least 1 minute")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("Duration must be at least 1 minute"),
+    ).not.toBeInTheDocument();
 
     await user.click(submitButton);
 
-    expect(screen.getByText("Form submitted successfully!")).toBeInTheDocument();
+    expect(
+      screen.getByText("Form submitted successfully!"),
+    ).toBeInTheDocument();
   });
 });

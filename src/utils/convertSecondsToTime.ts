@@ -1,5 +1,5 @@
 const SECONDS_IN_HOUR = 3600;
-const MINUTES_IN_MINUTE = 60;
+const MINUTES_IN_HOUR = 60;
 const SECONDS_IN_DAY = 86400;
 
 const padNumber = (number: number) => {
@@ -24,8 +24,8 @@ export const convertSecondsToTime = (seconds: number) => {
     throw new Error("Seconds must be less than a day");
 
   const hours = Math.floor(seconds / SECONDS_IN_HOUR);
-  const minutes = Math.floor((seconds % SECONDS_IN_HOUR) / MINUTES_IN_MINUTE);
-  const remainingSeconds = Math.floor(seconds % MINUTES_IN_MINUTE);
+  const minutes = Math.floor((seconds % SECONDS_IN_HOUR) / MINUTES_IN_HOUR);
+  const remainingSeconds = Math.floor(seconds % MINUTES_IN_HOUR);
 
   if (hours >= 1) return displayHours(hours, minutes, remainingSeconds);
 
