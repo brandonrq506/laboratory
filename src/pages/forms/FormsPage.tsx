@@ -38,6 +38,8 @@ export const FormsPage = () => {
         <LinkButton to="context-provider">Provider Form</LinkButton>
         <p>Async Validation</p>
         <LinkButton to="async-validation">Async Validation</LinkButton>
+        <p>Duration Form</p>
+        <LinkButton to="duration-form">Duration Form</LinkButton>
       </section>
     </div>
   );

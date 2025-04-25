@@ -1,5 +1,6 @@
 export * from "./ComboBox/ComboBox";
 export * from "./ComboBox/ControlComboBox";
+export * from "./DurationInput/DurationInput";
 export * from "./NumerInput/NumberInput";
 export * from "./Select/ControlledStringSelect";
 export * from "./Select/ControlledSelect";
