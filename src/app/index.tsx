@@ -37,7 +37,7 @@ import {
   NewRoutinePage,
   RoutinesPage,
 } from "@/pages/routines";
-import { EditTaskPage, TasksPage } from "@/pages/Tasks";
+import { EditTaskPage, HistoryPage } from "@/pages/Tasks";
 import {
   FirstTableAttempt,
   GlobalSearchTable,
@@ -74,7 +74,7 @@ const router = createBrowserRouter([
       { path: "excel", element: <ExcelPage /> },
       {
         path: "history",
-        element: <TasksPage />,
+        element: <HistoryPage />,
         children: [{ path: "edit/:taskId", element: <EditTaskPage /> }],
       },
       {

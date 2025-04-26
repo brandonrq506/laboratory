@@ -3,7 +3,7 @@ import { FilterableTaskList } from "./FilterableTaskList";
 import { Outlet } from "react-router";
 import { PageHeader } from "@/components/layout";
 
-export const TasksPage = () => {
+export const HistoryPage = () => {
   return (
     <div>
       <PageHeader title="Tasks" />
