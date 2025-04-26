@@ -7,5 +7,4 @@ export * from "./Select/StringSelect";
 export * from "./Select/Select";
 export * from "./TextInput/TextInput";
 export * from "./TextInput/StateInputText";
-export * from "./TimeInput/TimeInput";
 export * from "./TimeInput/TimeInputV2";
