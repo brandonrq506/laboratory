@@ -51,7 +51,8 @@ export const IdleTimer = () => {
         type="submit"
         shape="circle"
         variant="primary"
-        disabled={isSubmitting}>
+        disabled={isSubmitting}
+        className="relative overflow-visible before:absolute before:-inset-2 before:content-['']">
         <PlayIcon aria-hidden className="size-5" />
       </IconButton>
     </form>
