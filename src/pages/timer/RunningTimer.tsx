@@ -45,9 +45,10 @@ export const RunningTimer = ({ task }: Props) => {
       </div>
 
       <IconButton
-        variant="primary"
         shape="circle"
-        onClick={() => mutate(task.id)}>
+        variant="primary"
+        onClick={() => mutate(task.id)}
+        className="relative overflow-visible before:absolute before:-inset-2 before:content-['']">
         <StopIcon aria-hidden className="size-5" />
       </IconButton>
     </div>
