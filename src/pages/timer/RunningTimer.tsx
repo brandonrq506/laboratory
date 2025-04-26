@@ -29,7 +29,9 @@ export const RunningTimer = ({ task }: Props) => {
         onMouseEnter={() => prefetchTask(task.id)}>
         <div className="flex items-center gap-1.5">
           <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
-          <p className="text-sm font-semibold">{task.activity.name}</p>
+          <p className="line-clamp-1 text-sm font-semibold">
+            {task.activity.name}
+          </p>
         </div>
         <p className="text-xs">
           {new Date(task.start_time).toLocaleTimeString()}
