@@ -6,7 +6,7 @@ import { CreateForm } from "../types/createForm";
 
 import { ACTIVITY } from "@/constants/entities";
 import { UPDATE } from "@/constants/actions";
-import { convertTimeToSeconds } from "@/utils";
+import { convertHHandMMtoSeconds } from "../utils/convertHHandMMtoSeconds";
 
 type Props = {
   activityId: number;
@@ -21,9 +21,15 @@ export const EditActivityForm = ({ activityId, initialValues }: Props) => {
     await mutateAsync({
       activityId,
       activity: {
-        avg_time: convertTimeToSeconds(values.avg_time),
+        avg_time: convertHHandMMtoSeconds({
+          hours: values.avg_time_hours,
+          minutes: values.avg_time_minutes,
+        }),
         category_id: values.category_id!.value,
-        max_time: convertTimeToSeconds(values.max_time),
+        max_time: convertHHandMMtoSeconds({
+          hours: values.max_time_hours,
+          minutes: values.max_time_minutes,
+        }),
         name: values.name,
       },
     });

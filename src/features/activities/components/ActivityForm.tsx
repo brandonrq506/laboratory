@@ -1,14 +1,16 @@
 import { useForm } from "react-hook-form";
 
-import { TextInput, TimeInput } from "@/components/form";
+import { NumberInput, TextInput } from "@/components/form";
 import { Button } from "@/components/core";
 import { CategorySelect } from "@/features/categories/components";
 import { CreateForm } from "../types/createForm";
 
 const defaultActivity: CreateForm = {
   name: "",
-  avg_time: "",
-  max_time: "",
+  avg_time_hours: 0,
+  avg_time_minutes: 0,
+  max_time_hours: 0,
+  max_time_minutes: 0,
   category_id: null,
 };
 
@@ -23,9 +25,10 @@ export const ActivityForm = ({
   onSubmit,
   submitButtonText,
 }: Props) => {
-  const { control, formState, handleSubmit, register } = useForm<CreateForm>({
-    values: { ...defaultActivity, ...initialValues },
-  });
+  const { control, formState, getValues, handleSubmit, register } =
+    useForm<CreateForm>({
+      values: { ...defaultActivity, ...initialValues },
+    });
   const { errors, isSubmitting } = formState;
 
   return (
@@ -48,20 +51,100 @@ export const ActivityForm = ({
           rules={{ required: "A category must be selected" }}
         />
 
-        <TimeInput
-          label="Avg. Time"
-          error={errors.avg_time?.message}
-          registration={register("avg_time", {
-            required: "Required to handle thresholds",
-            min: { value: "00:01", message: "Must be at least 1 minute" },
-          })}
-        />
+        <div className="flex gap-1">
+          <NumberInput
+            label="Avg. Hours"
+            placeholder="00"
+            className="flex-auto"
+            error={errors.avg_time_hours?.message}
+            registration={register("avg_time_hours", {
+              required: "At least 0 is required",
+              valueAsNumber: true,
+              min: {
+                value: 0,
+                message: "Hours can't be negative",
+              },
+              max: {
+                value: 23,
+                message: "Can't be longer than a day",
+              },
+            })}
+          />
+          <NumberInput
+            label="Avg. Minutes"
+            placeholder="30"
+            className="flex-auto"
+            error={errors.avg_time_minutes?.message}
+            registration={register("avg_time_minutes", {
+              required: "At least 0 is required",
+              valueAsNumber: true,
+              min: {
+                value: 0,
+                message: "Minutes can't be negative",
+              },
+              max: {
+                value: 59,
+                message: "Minutes must be less than an hour",
+              },
+              validate: {
+                isNotZero: (value) => {
+                  const { avg_time_hours } = getValues();
+                  if (avg_time_hours === 0 && value === 0) {
+                    return "Activities should take at least 1 minute";
+                  }
+                },
+              },
+            })}
+          />
+        </div>
 
-        <TimeInput
-          label="Max. Time"
-          error={errors.max_time?.message}
-          registration={register("max_time")}
-        />
+        <div className="flex gap-1">
+          <NumberInput
+            label="Max. Hours"
+            placeholder="01"
+            className="flex-auto"
+            error={errors.max_time_hours?.message}
+            registration={register("max_time_hours", {
+              required: "At least 0 is required",
+              valueAsNumber: true,
+              min: {
+                value: 0,
+                message: "Hours can't be negative",
+              },
+              max: {
+                value: 23,
+                message: "Can't be longer than a day",
+              },
+            })}
+          />
+
+          <NumberInput
+            label="Max. Minutes"
+            placeholder="30"
+            className="flex-auto"
+            error={errors.max_time_minutes?.message}
+            registration={register("max_time_minutes", {
+              required: "At least 0 is required",
+              valueAsNumber: true,
+              min: {
+                value: 0,
+                message: "Minutes can't be negative",
+              },
+              max: {
+                value: 59,
+                message: "Minutes must be less than an hour",
+              },
+              validate: {
+                isNotZero: (value) => {
+                  const { max_time_hours } = getValues();
+                  if (max_time_hours === 0 && value === 0) {
+                    return "Activities should take at least 1 minute";
+                  }
+                },
+              },
+            })}
+          />
+        </div>
       </div>
 
       <div className="mt-2 flex justify-center">
