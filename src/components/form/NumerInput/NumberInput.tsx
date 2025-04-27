@@ -7,6 +7,7 @@ type InputProps = {
   className?: string;
   description?: string;
   error?: string;
+  hideErrorMessage?: boolean;
   hideLabel?: boolean;
   label: string;
   placeholder?: string;
@@ -18,6 +19,7 @@ export const NumberInput = ({
   className,
   description,
   error,
+  hideErrorMessage = false,
   hideLabel = false,
   label,
   placeholder,
@@ -38,6 +40,7 @@ export const NumberInput = ({
             type="number"
             placeholder={placeholder}
             aria-invalid={Boolean(error)}
+            invalid={Boolean(error)}
             {...registration}
             className={clsx(
               "block w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6",
@@ -62,7 +65,7 @@ export const NumberInput = ({
           {description}
         </Description>
       )}
-      {error && (
+      {error && !hideErrorMessage && (
         <Description
           role="alert"
           className="mt-2 text-sm font-light text-red-600">

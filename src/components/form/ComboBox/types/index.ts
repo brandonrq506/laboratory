@@ -11,6 +11,7 @@ export type ComboBoxType = {
   label: string;
   config?: Configuration;
   description?: string;
+  hideErrorMessage?: boolean;
   hideLabel?: boolean;
   showAsterisk?: boolean;
 };

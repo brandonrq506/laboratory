@@ -26,6 +26,7 @@ type Props = SelectRHFProps & SelectType;
 export const Select = ({
   ref,
   description,
+  hideErrorMessage = false,
   hideLabel = false,
   label,
   options,
@@ -98,7 +99,7 @@ export const Select = ({
           {description}
         </Description>
       )}
-      {error && (
+      {error && !hideErrorMessage && (
         <Description className="mt-2 text-sm font-light text-red-600">
           {error}
         </Description>

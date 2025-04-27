@@ -11,6 +11,8 @@ type ControlledSelectType<T extends FieldValues> = UseControllerProps<T> &
 
 export const ControlledSelect = <T extends FieldValues>({
   description,
+  hideErrorMessage = false,
+  hideLabel = false,
   label,
   options,
   showAsterisk,
@@ -20,9 +22,11 @@ export const ControlledSelect = <T extends FieldValues>({
 
   return (
     <Select
+      description={description}
+      hideErrorMessage={hideErrorMessage}
+      hideLabel={hideLabel}
       label={label}
       options={options}
-      description={description}
       showAsterisk={showAsterisk}
       error={fieldState.error?.message}
       onChange={field.onChange}
