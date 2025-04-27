@@ -3,6 +3,8 @@ import { CompletedTaskAPI } from "../../types/completedTask";
 
 export const completeTask = async (taskId: number) => {
   const URL = `${TASKS_ENDPOINT}/${taskId}/finish`;
-  const { data } = await apiV1.post<CompletedTaskAPI>(URL);
+  const { data } = await apiV1.post<CompletedTaskAPI>(URL, {
+    end_time: new Date().toISOString(),
+  });
   return data;
 };
