@@ -143,6 +143,13 @@ describe("ActivityForm", () => {
 
     expect(onSubmit).not.toHaveBeenCalled();
     expect(screen.getAllByText("Hours can't be negative")).toHaveLength(2);
+
+    await user.clear(screen.getByLabelText("Avg. Hours"));
+    await user.type(screen.getByLabelText("Avg. Hours"), "2");
+
+    await user.clear(screen.getByLabelText("Max. Hours"));
+    await user.type(screen.getByLabelText("Max. Hours"), "2");
+
     expect(screen.getAllByText("Minutes can't be negative")).toHaveLength(2);
   });
 
