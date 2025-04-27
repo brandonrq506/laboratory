@@ -3,6 +3,8 @@ import { InProgressTaskAPI } from "../../types/inProgressTast";
 
 export const startTask = async (taskId: number) => {
   const URL = `${TASKS_ENDPOINT}/${taskId}/start`;
-  const { data } = await apiV1.post<InProgressTaskAPI>(URL);
+  const { data } = await apiV1.post<InProgressTaskAPI>(URL, {
+    start_time: new Date().toISOString(),
+  });
   return data;
 };
