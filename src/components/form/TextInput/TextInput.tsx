@@ -32,6 +32,7 @@ type Props = CustomTextField & {
   error?: string;
   inputClassName?: string;
   label: string;
+  hideErrorMessage?: boolean;
   hideLabel?: boolean;
   registration: Partial<UseFormRegisterReturn>;
   showAsterisk?: boolean;
@@ -44,6 +45,7 @@ export const TextInput = ({
   error,
   inputClassName,
   label,
+  hideErrorMessage = false,
   hideLabel = false,
   registration,
   showAsterisk = false,
@@ -80,7 +82,7 @@ export const TextInput = ({
           {description}
         </Description>
       )}
-      {error && (
+      {error && !hideErrorMessage && (
         <Description
           role="alert"
           className="mt-2 text-sm font-light text-red-600">

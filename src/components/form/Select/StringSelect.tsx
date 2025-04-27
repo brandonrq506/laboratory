@@ -27,6 +27,7 @@ export const StringSelect = ({
   ref,
   description,
   label,
+  hideErrorMessage = false,
   hideLabel = false,
   options,
   showAsterisk,
@@ -98,7 +99,7 @@ export const StringSelect = ({
           {description}
         </Description>
       )}
-      {error && (
+      {error && !hideErrorMessage && (
         <Description className="mt-2 text-sm font-light text-red-600">
           {error}
         </Description>

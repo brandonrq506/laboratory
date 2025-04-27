@@ -51,99 +51,113 @@ export const ActivityForm = ({
           rules={{ required: "A category must be selected" }}
         />
 
-        <div className="flex gap-1">
-          <NumberInput
-            label="Avg. Hours"
-            placeholder="00"
-            className="flex-auto"
-            error={errors.avg_time_hours?.message}
-            registration={register("avg_time_hours", {
-              required: "At least 0 is required",
-              valueAsNumber: true,
-              min: {
-                value: 0,
-                message: "Hours can't be negative",
-              },
-              max: {
-                value: 23,
-                message: "Can't be longer than a day",
-              },
-            })}
-          />
-          <NumberInput
-            label="Avg. Minutes"
-            placeholder="30"
-            className="flex-auto"
-            error={errors.avg_time_minutes?.message}
-            registration={register("avg_time_minutes", {
-              required: "At least 0 is required",
-              valueAsNumber: true,
-              min: {
-                value: 0,
-                message: "Minutes can't be negative",
-              },
-              max: {
-                value: 59,
-                message: "Minutes must be less than an hour",
-              },
-              validate: {
-                isNotZero: (value) => {
-                  const { avg_time_hours } = getValues();
-                  if (avg_time_hours === 0 && value === 0) {
-                    return "Activities should take at least 1 minute";
-                  }
+        <div>
+          <div className="flex gap-1">
+            <NumberInput
+              label="Avg. Hours"
+              placeholder="00"
+              hideErrorMessage
+              className="flex-auto"
+              error={errors.avg_time_hours?.message}
+              registration={register("avg_time_hours", {
+                required: "At least 0 is required",
+                valueAsNumber: true,
+                min: {
+                  value: 0,
+                  message: "Hours can't be negative",
                 },
-              },
-            })}
-          />
+                max: {
+                  value: 23,
+                  message: "Can't be longer than a day",
+                },
+              })}
+            />
+            <NumberInput
+              label="Avg. Minutes"
+              placeholder="30"
+              hideErrorMessage
+              className="flex-auto"
+              error={errors.avg_time_minutes?.message}
+              registration={register("avg_time_minutes", {
+                required: "At least 0 is required",
+                valueAsNumber: true,
+                min: {
+                  value: 0,
+                  message: "Minutes can't be negative",
+                },
+                max: {
+                  value: 59,
+                  message: "Minutes must be less than an hour",
+                },
+                validate: {
+                  isNotZero: (value) => {
+                    const { avg_time_hours } = getValues();
+                    if (avg_time_hours === 0 && value === 0) {
+                      return "Activities should take at least 1 minute";
+                    }
+                  },
+                },
+              })}
+            />
+          </div>
+          <div role="alert" className="mt-2 text-sm font-light text-red-600">
+            {errors.avg_time_hours?.message || errors.avg_time_minutes?.message}
+          </div>
         </div>
 
-        <div className="flex gap-1">
-          <NumberInput
-            label="Max. Hours"
-            placeholder="01"
-            className="flex-auto"
-            error={errors.max_time_hours?.message}
-            registration={register("max_time_hours", {
-              required: "At least 0 is required",
-              valueAsNumber: true,
-              min: {
-                value: 0,
-                message: "Hours can't be negative",
-              },
-              max: {
-                value: 23,
-                message: "Can't be longer than a day",
-              },
-            })}
-          />
-
-          <NumberInput
-            label="Max. Minutes"
-            placeholder="30"
-            className="flex-auto"
-            error={errors.max_time_minutes?.message}
-            registration={register("max_time_minutes", {
-              required: "At least 0 is required",
-              valueAsNumber: true,
-              min: {
-                value: 0,
-                message: "Minutes can't be negative",
-              },
-              max: {
-                value: 59,
-                message: "Minutes must be less than an hour",
-              },
-              validate: {
-                isNotZero: (value) => {
-                  const { max_time_hours } = getValues();
-                  if (max_time_hours === 0 && value === 0) {
-                    return "Activities should take at least 1 minute";
-                  }
+        <div>
+          <div className="flex gap-1">
+            <NumberInput
+              label="Max. Hours"
+              placeholder="01"
+              hideErrorMessage
+              className="flex-auto"
+              error={errors.max_time_hours?.message}
+              registration={register("max_time_hours", {
+                required: "At least 0 is required",
+                valueAsNumber: true,
+                min: {
+                  value: 0,
+                  message: "Hours can't be negative",
                 },
-              },
-            })}
-          />
+                max: {
+                  value: 23,
+                  message: "Can't be longer than a day",
+                },
+              })}
+            />
+
+            <NumberInput
+              label="Max. Minutes"
+              placeholder="30"
+              hideErrorMessage
+              className="flex-auto"
+              error={errors.max_time_minutes?.message}
+              registration={register("max_time_minutes", {
+                required: "At least 0 is required",
+                valueAsNumber: true,
+                min: {
+                  value: 0,
+                  message: "Minutes can't be negative",
+                },
+                max: {
+                  value: 59,
+                  message: "Minutes must be less than an hour",
+                },
+                validate: {
+                  isNotZero: (value) => {
+                    const { max_time_hours } = getValues();
+                    if (max_time_hours === 0 && value === 0) {
+                      return "Activities should take at least 1 minute";
+                    }
+                  },
+                },
+              })}
+            />
+          </div>
+          <div role="alert" className="mt-2 text-sm font-light text-red-600">
+            {errors.max_time_hours?.message || errors.max_time_minutes?.message}
+          </div>
         </div>
       </div>
 

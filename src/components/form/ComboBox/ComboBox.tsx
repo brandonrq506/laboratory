@@ -53,6 +53,7 @@ export const ComboBox = ({
   ref,
   config,
   description,
+  hideErrorMessage = false,
   hideLabel = false,
   label,
   options,
@@ -142,7 +143,7 @@ export const ComboBox = ({
       {description && !error && (
         <p className="mt-2 text-sm font-light text-gray-500">{description}</p>
       )}
-      {error && (
+      {error && !hideErrorMessage && (
         <p role="alert" className="mt-2 text-sm font-light text-red-600">
           {error}
         </p>

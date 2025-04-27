@@ -31,6 +31,7 @@ type CustomTimeProps = CustomTimeField & {
   description?: string;
   inputClassName?: string;
   label: string;
+  hideErrorMessage?: boolean;
   hideLabel?: boolean;
   showAsterisk?: boolean;
 };
@@ -50,6 +51,7 @@ export const TimeInputV2 = <T extends FieldValues>({
   description,
   inputClassName,
   label,
+  hideErrorMessage = false,
   hideLabel = false,
   showAsterisk = false,
   ...props
@@ -109,7 +111,7 @@ export const TimeInputV2 = <T extends FieldValues>({
           {description}
         </Description>
       )}
-      {fieldState.error && (
+      {fieldState.error && !hideErrorMessage && (
         <Description className="mt-2 text-sm font-light text-red-600">
           {fieldState.error.message}
         </Description>

@@ -79,4 +79,20 @@ describe("TextInput", () => {
     const inputElement = screen.getByLabelText(/Search/i);
     expect(inputElement).toHaveAttribute("type", "text");
   });
+
+  it("hides the error message if hideErrorMessage is true", () => {
+    render(
+      <TextInput
+        label="Username"
+        registration={{}}
+        error="Username is required"
+        hideErrorMessage
+      />,
+    );
+
+    const inputElement = screen.getByLabelText(/Username/i);
+
+    expect(screen.queryByText(/Username is required/i)).not.toBeInTheDocument();
+    expect(inputElement).toHaveAttribute("aria-invalid");
+  });
 });
