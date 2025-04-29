@@ -9,4 +9,10 @@ export const categoryHandlers = [
   http.get(`${API_URL}/v1${CATEGORIES_ENDPOINT}`, () => {
     return HttpResponse.json(categories, { status: 200 });
   }),
+  http.delete(`${API_URL}/v1${CATEGORIES_ENDPOINT}/:categoryId`, () => {
+    return HttpResponse.json({}, { status: 204 });
+  }),
+  http.post(`${API_URL}/v1${CATEGORIES_ENDPOINT}`, (req) => {
+    return HttpResponse.json(req.params, { status: 201 });
+  }),
 ];
