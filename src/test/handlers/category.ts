@@ -15,4 +15,7 @@ export const categoryHandlers = [
   http.post(`${API_URL}/v1${CATEGORIES_ENDPOINT}`, (req) => {
     return HttpResponse.json(req.params, { status: 201 });
   }),
+  http.patch(`${API_URL}/v1${CATEGORIES_ENDPOINT}/:categoryId`, () => {
+    return HttpResponse.json(categories[0], { status: 200 });
+  }),
 ];
