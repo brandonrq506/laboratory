@@ -35,10 +35,12 @@ export const ActivityTable = () => {
       columnHelper.accessor((row) => displayTableDuration(row.avg_time), {
         id: "avg_time",
         header: "Avg. Duration",
+        meta: { className: "hidden sm:table-cell" },
       }),
       columnHelper.accessor((row) => displayTableDuration(row.max_time), {
         id: "max_time",
         header: "Max. Duration",
+        meta: { className: "hidden sm:table-cell" },
       }),
       columnHelper.accessor("category.name", {
         header: "Category",
@@ -68,14 +70,7 @@ export const ActivityTable = () => {
     globalFilterFn: "includesString",
     enableSortingRemoval: false,
     maxMultiSortColCount: 3,
-    initialState: {
-      sorting: [
-        {
-          id: "name",
-          desc: false,
-        },
-      ],
-    },
+    initialState: { sorting: [{ id: "name", desc: false }] },
   });
 
   return (
@@ -102,6 +97,12 @@ export const ActivityTable = () => {
                         className={clsx(
                           "text-left text-sm font-semibold whitespace-nowrap text-gray-900",
                           index === 0 ? "pr-3 pl-4" : "px-2 py-3",
+                          // Have to do this until this improves: https://tanstack.com/table/latest/docs/api/core/column-def#meta
+                          (
+                            header.column.columnDef.meta as {
+                              className?: string;
+                            }
+                          )?.className,
                         )}>
                         <div
                           className={clsx(
@@ -132,6 +133,12 @@ export const ActivityTable = () => {
                           className={clsx(
                             "text-sm whitespace-nowrap text-gray-500",
                             index === 0 ? "pr-3 pl-4" : "px-3 py-2",
+                            // Have to do this until this improves: https://tanstack.com/table/latest/docs/api/core/column-def#meta
+                            (
+                              cell.column.columnDef.meta as {
+                                className?: string;
+                              }
+                            )?.className,
                           )}>
                           {flexRender(
                             cell.column.columnDef.cell,
