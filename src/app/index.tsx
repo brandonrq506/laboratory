@@ -55,6 +55,7 @@ import { Projects } from "@/pages/Projects";
 import { RouterProvider } from "react-router/dom";
 import { TestingModal } from "@/pages/TestingModal";
 import { TimerPage } from "@/pages/timer";
+import { WeekViewPage } from "@/pages/calendar";
 
 const router = createBrowserRouter([
   {
@@ -109,6 +110,7 @@ const router = createBrowserRouter([
         element: <TimerPage />,
         children: [{ path: "edit/:taskId", element: <EditTaskPage /> }],
       },
+      { path: "weekview", element: <WeekViewPage /> },
       { path: "projects", element: <Projects /> },
       { path: "modal-testing", element: <TestingModal /> },
       { path: "form-projects", element: <FormsPage /> },
