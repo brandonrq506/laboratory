@@ -48,7 +48,9 @@ export const RoutineCard = ({ routine }: Props) => {
         </div>
       )}
       {routine.activities.length > MAX_VISIBLE_ACTIVITIES && (
-        <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-8 bg-gradient-to-t from-white to-transparent" />
+        <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-8 bg-gradient-to-t from-white to-transparent">
+          <span className="sr-only">Blurred section</span>
+        </div>
       )}
     </Card>
   );
