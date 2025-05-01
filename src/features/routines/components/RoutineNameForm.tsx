@@ -20,9 +20,7 @@ export const RoutineNameForm = ({ routineId }: Props) => {
   const { routineId: routineIdFromParams } = useParams();
   const routineIdToUse = routineId || Number(routineIdFromParams);
 
-  if (!routineIdToUse) throw new Error("Routine ID is required");
-
-  const { data } = useRoutine(routineIdToUse);
+  const { data, isPending: isDataPending } = useRoutine(routineIdToUse);
   const nameToUse = data?.name ?? defaultValues.name;
 
   const { formState, handleSubmit, register } = useForm<EditNameForm>({
@@ -54,7 +52,7 @@ export const RoutineNameForm = ({ routineId }: Props) => {
       />
 
       <Button type="submit" disabled={isSubmitting} isLoading={isPending}>
-        {UPDATE}
+        {isDataPending ? "Loading..." : UPDATE}
       </Button>
     </form>
   );

@@ -26,7 +26,7 @@ export const RoutineForm = ({
   const { errors, isSubmitting } = formState;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit((data) => onSubmit(data))}>
       <TextInput
         autoFocus
         showAsterisk

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import {
   AddActivityRoutineCombobox,
@@ -11,7 +11,10 @@ import { Modal } from "@/components/core";
 
 export const EditRoutinePage = () => {
   const navigate = useNavigate();
+  const { routineId } = useParams();
   const [isOpen, setIsOpen] = useState(false);
+
+  const routineNumber = Number(routineId);
 
   useEffect(() => setIsOpen(true), []);
 
@@ -19,7 +22,7 @@ export const EditRoutinePage = () => {
     <Modal isOpen={isOpen} onClose={() => navigate("..")}>
       <RoutineNameForm />
       <div className="my-2.5">
-        <AddActivityRoutineCombobox />
+        <AddActivityRoutineCombobox routineId={routineNumber} />
       </div>
       <RoutineActivityList />
       <br />
