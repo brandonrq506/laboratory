@@ -29,4 +29,8 @@ export const routineHandlers = [
   http.patch(`${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId`, () => {
     return HttpResponse.json(routines[0], { status: 200 });
   }),
+
+  http.post(`${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`, () => {
+    return HttpResponse.json({}, { status: 201 });
+  }),
 ];

@@ -1,13 +1,14 @@
 import { useCreateActivityRoutine } from "../api/tanstack/useCreateActivityRoutine";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router";
 
 import { ActivityComboBox } from "@/features/activities/components";
 import { Option } from "@/types/core";
 
-export const AddActivityRoutineCombobox = () => {
-  const { routineId } = useParams();
-  const routineNumber = Number(routineId);
+interface Props {
+  routineId: number;
+}
+
+export const AddActivityRoutineCombobox = ({ routineId }: Props) => {
   const { mutate } = useCreateActivityRoutine();
 
   const { control, reset } = useForm({
@@ -16,15 +17,8 @@ export const AddActivityRoutineCombobox = () => {
     },
   });
 
-  if (!routineId) throw new Error("Routine ID is required");
-
-  const onChangeSubmit = (activity: Option | null) => {
-    if (!activity) return;
-
-    mutate({
-      activityId: activity.value,
-      routineId: routineNumber,
-    });
+  const onChangeSubmit = (activity: Option) => {
+    mutate({ activityId: activity.value, routineId });
 
     reset();
   };
