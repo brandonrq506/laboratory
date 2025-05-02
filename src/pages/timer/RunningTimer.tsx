@@ -1,10 +1,9 @@
-import { useCompleteTask } from "@/features/tasks/api/tanstack/useCompleteTask";
 import { usePrefetchTask } from "@/features/tasks/api/tanstack/usePrefetchTask";
 
-import { Dot, IconButton } from "@/components/core";
+import { Dot } from "@/components/core";
 import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTast";
 import { Link } from "react-router";
-import { StopIcon } from "@heroicons/react/24/solid";
+import { RunningTimerButton } from "./RunningTimerButton";
 import { TimerTime } from "./TimerTime";
 
 import { convertSecondsToHHMMSS } from "@/utils";
@@ -15,7 +14,6 @@ type Props = {
 };
 
 export const RunningTimer = ({ task }: Props) => {
-  const { mutate } = useCompleteTask();
   const prefetchTask = usePrefetchTask();
 
   const color = getColorByName(task.activity.category.color);
@@ -44,13 +42,7 @@ export const RunningTimer = ({ task }: Props) => {
           convertSecondsToHHMMSS(task.activity.max_time)}
       </div>
 
-      <IconButton
-        shape="circle"
-        variant="primary"
-        onClick={() => mutate(task.id)}
-        className="relative overflow-visible before:absolute before:-inset-2 before:content-['']">
-        <StopIcon aria-hidden className="size-5" />
-      </IconButton>
+      <RunningTimerButton taskId={task.id} />
     </div>
   );
 };
