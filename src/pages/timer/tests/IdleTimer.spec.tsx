@@ -22,7 +22,7 @@ describe("IdleTimer", () => {
     render(<IdleTimer />);
 
     const input = screen.getByRole("combobox", { name: "Activities" });
-    const playBtn = screen.getByRole("button", { name: "Play Button" });
+    const playBtn = screen.getByRole("button", { name: "Start Button" });
 
     await user.click(playBtn);
 

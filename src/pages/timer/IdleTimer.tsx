@@ -1,13 +1,12 @@
 import { useCreateTask } from "@/features/tasks/api/tanstack/useCreateTask";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useOnlineStatus } from "@/hooks";
 import { useStartTask } from "@/features/tasks/api/tanstack/useStartTask";
 
 import { ActivityComboBox } from "@/features/activities/components";
-import { IconButton } from "@/components/core";
+import { IdleTimerButton } from "./IdleTimerButton";
 import { Option } from "@/types/core";
-import { PlayIcon } from "@heroicons/react/24/solid";
-import { useEffect } from "react";
-import { useOnlineStatus } from "@/hooks";
 
 type FormValues = {
   activity_id: Option | null;
@@ -15,8 +14,8 @@ type FormValues = {
 
 export const IdleTimer = () => {
   const isOnline = useOnlineStatus();
-  const { mutateAsync: createTask } = useCreateTask();
-  const { mutateAsync: startTask } = useStartTask();
+  const { mutateAsync: createTask, isError: isCreateError } = useCreateTask();
+  const { mutateAsync: startTask, isError: isStartError } = useStartTask();
   const { control, formState, handleSubmit, setFocus } = useForm<FormValues>({
     defaultValues: {
       activity_id: null,
@@ -25,7 +24,11 @@ export const IdleTimer = () => {
 
   const { isSubmitting } = formState;
 
+  const isError = isCreateError || isStartError;
+
   const onSubmit = async (data: FormValues) => {
+    if (!isOnline) return;
+
     if (data.activity_id) {
       const newTask = await createTask({ activity_id: data.activity_id.value });
       await startTask(newTask.id);
@@ -50,15 +53,11 @@ export const IdleTimer = () => {
 
       <p className="text-gray-600 tabular-nums">0:00:00</p>
 
-      <IconButton
-        type="submit"
-        shape="circle"
-        variant="primary"
-        disabled={isSubmitting || !isOnline}
-        className="relative overflow-visible before:absolute before:-inset-2 before:content-[''] disabled:bg-slate-400">
-        <span className="sr-only">Play Button</span>
-        <PlayIcon aria-hidden className="size-5" />
-      </IconButton>
+      <IdleTimerButton
+        isError={isError}
+        isOnline={isOnline}
+        isPending={isSubmitting}
+      />
     </form>
   );
 };
