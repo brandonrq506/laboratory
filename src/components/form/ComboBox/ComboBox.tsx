@@ -101,6 +101,7 @@ export const ComboBox = ({
             autoComplete="off"
             onChange={(event) => setQuery(event.target.value)}
             displayValue={(option: Option | null) => option?.label ?? ""}
+            aria-invalid={Boolean(error)}
           />
           <ComboboxButton className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-hidden">
             <span className="sr-only">ComboBox button</span>

@@ -38,6 +38,7 @@ export const IdleTimer = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-2">
       <div className="w-full">
         <ActivityComboBox
+          hideErrorMessage
           hideLabel
           control={control}
           name="activity_id"
@@ -55,6 +56,7 @@ export const IdleTimer = () => {
         variant="primary"
         disabled={isSubmitting || !isOnline}
         className="relative overflow-visible before:absolute before:-inset-2 before:content-[''] disabled:bg-slate-400">
+        <span className="sr-only">Play Button</span>
         <PlayIcon aria-hidden className="size-5" />
       </IconButton>
     </form>
