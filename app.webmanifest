@@ -1,0 +1,22 @@
+{
+  "id": "/",
+  "background_color": "#f9fafb",
+  "display": "standalone",
+  "name": "Laboratory - Orgnize your life",
+  "start_url": "/",
+  "scope": "/",
+  "theme_color": "#f9fafb",
+  "short_name": "Laboratory",
+  "icons": [
+    {
+      "src": "/icons/logo_192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/logo_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
