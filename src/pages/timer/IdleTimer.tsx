@@ -7,12 +7,14 @@ import { IconButton } from "@/components/core";
 import { Option } from "@/types/core";
 import { PlayIcon } from "@heroicons/react/24/solid";
 import { useEffect } from "react";
+import { useOnlineStatus } from "@/hooks";
 
 type FormValues = {
   activity_id: Option | null;
 };
 
 export const IdleTimer = () => {
+  const isOnline = useOnlineStatus();
   const { mutateAsync: createTask } = useCreateTask();
   const { mutateAsync: startTask } = useStartTask();
   const { control, formState, handleSubmit, setFocus } = useForm<FormValues>({
@@ -51,8 +53,8 @@ export const IdleTimer = () => {
         type="submit"
         shape="circle"
         variant="primary"
-        disabled={isSubmitting}
-        className="relative overflow-visible before:absolute before:-inset-2 before:content-['']">
+        disabled={isSubmitting || !isOnline}
+        className="relative overflow-visible before:absolute before:-inset-2 before:content-[''] disabled:bg-slate-400">
         <PlayIcon aria-hidden className="size-5" />
       </IconButton>
     </form>
