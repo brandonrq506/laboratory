@@ -1,18 +1,22 @@
+import { useCompleteTask } from "@/features/tasks/api/tanstack/useCompleteTask";
+import { useOnlineStatus } from "@/hooks";
+
 import {
   ArrowPathIcon,
-  PlayIcon,
   SlashIcon,
+  StopIcon,
   WifiIcon,
 } from "@heroicons/react/24/solid";
 import { IconButton, Loading } from "@/components/core";
 
 interface Props {
-  isError: boolean;
-  isOnline: boolean;
-  isPending: boolean;
+  taskId: number;
 }
 
-export const IdleTimerButton = ({ isPending, isError, isOnline }: Props) => {
+export const RunningTimerButton = ({ taskId }: Props) => {
+  const { mutate, isPending, isError } = useCompleteTask();
+  const isOnline = useOnlineStatus();
+
   if (!isOnline) {
     return (
       <IconButton
@@ -37,12 +41,12 @@ export const IdleTimerButton = ({ isPending, isError, isOnline }: Props) => {
 
   return (
     <IconButton
-      type="submit"
       shape="circle"
       variant="primary"
+      onClick={() => mutate(taskId)}
       className="relative overflow-visible before:absolute before:-inset-2 before:content-['']">
-      <span className="sr-only">{isError ? "Retry" : "Start"} Button</span>
-      {!isError && <PlayIcon aria-hidden className="size-5" />}
+      <span className="sr-only">{isError ? "Retry" : "Stop"} button</span>
+      {!isError && <StopIcon aria-hidden className="size-5" />}
       {isError && <ArrowPathIcon aria-hidden className="size-5" />}
     </IconButton>
   );
