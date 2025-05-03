@@ -1,5 +1,8 @@
 import "@testing-library/jest-dom";
+import { mockAnimationsApi } from 'jsdom-testing-mocks'
 import { server } from "./server";
+
+mockAnimationsApi()
 
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
