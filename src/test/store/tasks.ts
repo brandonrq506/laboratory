@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
 import { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
+import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTast";
 import { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 
 export const completedTasks: CompletedTaskAPI[] = [
@@ -275,5 +276,35 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     start_time: null,
     status: "scheduled",
     updated_at: "2025-05-02T21:43:03.798Z",
+  },
+];
+
+export const inProgressTasks: InProgressTaskAPI[] = [
+  {
+    id: 3424,
+    activity: {
+      id: 59,
+      avg_time: 3600,
+      category: {
+        id: 1,
+        name: "Productive",
+        created_at: "2025-01-19T00:15:15.630Z",
+        updated_at: "2025-02-24T03:59:47.770Z",
+        user_id: 1,
+        color: "blue",
+      },
+      created_at: "2025-01-26T23:40:54.779Z",
+      max_time: 5400,
+      name: "React",
+      updated_at: "2025-01-26T23:40:54.779Z",
+      user_id: 1,
+    },
+    created_at: "2025-05-02T23:30:24.188Z",
+    end_time: null,
+    optional_name: null,
+    position: null,
+    start_time: "2025-05-03T03:35:00.000Z",
+    status: "in_progress",
+    updated_at: "2025-05-03T03:45:02.079Z",
   },
 ];
