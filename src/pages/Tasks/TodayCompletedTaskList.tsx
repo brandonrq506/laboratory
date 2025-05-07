@@ -1,19 +1,18 @@
 import { usePrefetchTask } from "@/features/tasks/api/tanstack/usePrefetchTask";
-import { useTasks } from "@/features/tasks/api/tanstack/useTasks";
+import { useQuery } from "@tanstack/react-query";
 
 import { CompletedTask, TaskList } from "@/features/tasks/components";
-import { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
 import { Link } from "react-router";
 import { Loading } from "@/components/core";
 import { SectionHeader } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
+import { todayCompletedTasksOptions } from "@/features/tasks/api/queryOptions";
 
 export const TodayCompletedTaskList = () => {
   const prefetchTask = usePrefetchTask();
-  const { data, isPending, isError, refetch } = useTasks({
-    filter: { status: "completed", start_time: "today" },
-    sort: { sort_by: "start_time", sort_order: "desc" },
-  });
+  const { data, isPending, isError, refetch } = useQuery(
+    todayCompletedTasksOptions(),
+  );
 
   if (isPending)
     return (
@@ -36,7 +35,7 @@ export const TodayCompletedTaskList = () => {
             to={`edit/${task.id}`}
             onFocus={() => prefetchTask(task.id)}
             onMouseEnter={() => prefetchTask(task.id)}>
-            <CompletedTask task={task as CompletedTaskAPI} />
+            <CompletedTask task={task} />
           </Link>
         )}
       />

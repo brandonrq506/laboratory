@@ -1,14 +1,13 @@
-import { useTasks } from "@/features/tasks/api/tanstack/useTasks";
+import { useQuery } from "@tanstack/react-query";
 
 import { Card } from "@/components/layout";
 import { IdleTimer } from "./IdleTimer";
 import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTast";
 import { RunningTimer } from "./RunningTimer";
+import { inProgressTaskOptions } from "@/features/tasks/api/queryOptions";
 
 export const Timer = () => {
-  const { data } = useTasks({
-    filter: { status: "in_progress" },
-  });
+  const { data } = useQuery(inProgressTaskOptions());
 
   const status = data === undefined || data.length === 0 ? "idle" : "active";
   const isIdle = status === "idle";
