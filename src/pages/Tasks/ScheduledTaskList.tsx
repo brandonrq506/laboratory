@@ -1,4 +1,4 @@
-import { useTasks } from "@/features/tasks/api/tanstack/useTasks";
+import { useQuery } from "@tanstack/react-query";
 
 import {
   DeleteAllScheduledTasks,
@@ -7,17 +7,16 @@ import {
 } from "@/features/tasks/components";
 import { AddScheduledTaskMenu } from "./AddScheduledTaskMenu";
 import { Loading } from "@/components/core";
-import { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 import { SectionHeaderWithAction } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
+import { scheduledTasksOptions } from "@/features/tasks/api/queryOptions";
 
 const MIN_WORTH_TRIGGERING_THRESHOLD = 3;
 
 export const ScheduledTaskList = () => {
-  const { data, isPending, isError, refetch } = useTasks({
-    filter: { status: "scheduled" },
-    sort: { sort_by: "position", sort_order: "asc" },
-  });
+  const { data, isPending, isError, refetch } = useQuery(
+    scheduledTasksOptions(),
+  );
 
   if (isPending)
     return (
@@ -44,7 +43,7 @@ export const ScheduledTaskList = () => {
       />
       <TaskList
         tasks={data}
-        renderItem={(task) => <ScheduledTask task={task as ScheduledTaskAPI} />}
+        renderItem={(task) => <ScheduledTask task={task} />}
       />
       {displayDeleteAll && (
         <div className="mt-2 text-center">
