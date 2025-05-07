@@ -7,14 +7,16 @@ import {
   StopIcon,
   WifiIcon,
 } from "@heroicons/react/24/solid";
-import { IconButton, Loading } from "@/components/core";
+import { IconButton } from "@/components/core";
+import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTast";
+import { floorMilliseconds } from "@/utils";
 
 interface Props {
-  taskId: number;
+  task: InProgressTaskAPI;
 }
 
-export const RunningTimerButton = ({ taskId }: Props) => {
-  const { mutate, isPending, isError } = useCompleteTask();
+export const RunningTimerButton = ({ task }: Props) => {
+  const { mutate, isError } = useCompleteTask();
   const isOnline = useOnlineStatus();
 
   if (!isOnline) {
@@ -31,19 +33,17 @@ export const RunningTimerButton = ({ taskId }: Props) => {
     );
   }
 
-  if (isPending) {
-    return (
-      <IconButton shape="circle" variant="primary" disabled={true}>
-        <Loading sizeStyles="size-5" />
-      </IconButton>
-    );
-  }
-
   return (
     <IconButton
       shape="circle"
       variant="primary"
-      onClick={() => mutate(taskId)}
+      onClick={() =>
+        mutate({
+          ...task,
+          status: "completed",
+          end_time: floorMilliseconds(new Date()).toISOString(),
+        })
+      }
       className="relative overflow-visible before:absolute before:-inset-2 before:content-['']">
       <span className="sr-only">{isError ? "Retry" : "Stop"} button</span>
       {!isError && <StopIcon aria-hidden className="size-5" />}

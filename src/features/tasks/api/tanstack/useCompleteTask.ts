@@ -4,19 +4,15 @@ import {
   inProgressTaskOptions,
   todayCompletedTasksOptions,
 } from "../queryOptions";
-import { CompletedTaskAPI } from "../../types/completedTask";
 import { completeTask } from "../axios/completeTask";
 import { taskKeys } from "../queryKeys";
 
-// We may be able to remove this eslint-disable once we pass in the task instead of taskId.
-
-// eslint-disable-next-line max-lines-per-function
 export const useCompleteTask = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: completeTask,
-    onMutate: async () => {
+    onMutate: async (newCompletedTask) => {
       const queryKey = { queryKey: taskKeys.lists() };
 
       await queryClient.cancelQueries(queryKey);
@@ -24,12 +20,6 @@ export const useCompleteTask = () => {
       const prevInProgress = queryClient.getQueryData(
         inProgressTaskOptions().queryKey,
       )!;
-
-      const inProgressTask: CompletedTaskAPI = {
-        ...prevInProgress[0],
-        status: "completed",
-        end_time: new Date().toISOString(),
-      };
 
       const prevCompleted = queryClient.getQueryData(
         todayCompletedTasksOptions().queryKey,
@@ -40,9 +30,9 @@ export const useCompleteTask = () => {
         todayCompletedTasksOptions().queryKey,
         (previousTasks) => {
           if (previousTasks) {
-            return [inProgressTask, ...previousTasks];
+            return [newCompletedTask, ...previousTasks];
           }
-          return [inProgressTask];
+          return [newCompletedTask];
         },
       );
 
