@@ -1,12 +1,12 @@
-import { useCreateTask } from "@/features/tasks/api/tanstack/useCreateTask";
+import { useCreateStartTask } from "@/features/tasks/api/tanstack/useCreateStartTask";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useOnlineStatus } from "@/hooks";
-import { useStartTask } from "@/features/tasks/api/tanstack/useStartTask";
 
 import { ActivityComboBox } from "@/features/activities/components";
 import { IdleTimerButton } from "./IdleTimerButton";
 import { Option } from "@/types/core";
+import { floorMilliseconds } from "@/utils";
 
 type FormValues = {
   activity_id: Option | null;
@@ -14,8 +14,7 @@ type FormValues = {
 
 export const IdleTimer = () => {
   const isOnline = useOnlineStatus();
-  const { mutateAsync: createTask, isError: isCreateError } = useCreateTask();
-  const { mutateAsync: startTask, isError: isStartError } = useStartTask();
+  const { mutateAsync, isError } = useCreateStartTask();
   const { control, formState, handleSubmit, setFocus } = useForm<FormValues>({
     defaultValues: {
       activity_id: null,
@@ -24,14 +23,15 @@ export const IdleTimer = () => {
 
   const { isSubmitting } = formState;
 
-  const isError = isCreateError || isStartError;
-
   const onSubmit = async (data: FormValues) => {
     if (!isOnline) return;
 
     if (data.activity_id) {
-      const newTask = await createTask({ activity_id: data.activity_id.value });
-      await startTask(newTask.id);
+      await mutateAsync({
+        activity_id: data.activity_id.value,
+        status: "in_progress",
+        start_time: floorMilliseconds(new Date()).toISOString(),
+      });
     }
   };
 
