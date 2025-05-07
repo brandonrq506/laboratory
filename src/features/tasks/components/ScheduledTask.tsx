@@ -33,7 +33,7 @@ export const ScheduledTask = ({ task }: Props) => {
         </div>
       </div>
 
-      <ScheduledTaskActionMenu taskId={task.id} />
+      <ScheduledTaskActionMenu task={task} />
     </Card>
   );
 };

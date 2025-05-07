@@ -13,9 +13,7 @@ export const useCompleteTask = () => {
   return useMutation({
     mutationFn: completeTask,
     onMutate: async (newCompletedTask) => {
-      const queryKey = { queryKey: taskKeys.lists() };
-
-      await queryClient.cancelQueries(queryKey);
+      await queryClient.cancelQueries({ queryKey: taskKeys.lists() });
 
       const prevInProgress = queryClient.getQueryData(
         inProgressTaskOptions().queryKey,
@@ -37,9 +35,7 @@ export const useCompleteTask = () => {
       );
 
       // Set in_progress to empty array
-      queryClient.setQueryData(inProgressTaskOptions().queryKey, () => {
-        return [];
-      });
+      queryClient.setQueryData(inProgressTaskOptions().queryKey, []);
 
       return { prevInProgress, prevCompleted };
     },
