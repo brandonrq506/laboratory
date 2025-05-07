@@ -33,6 +33,7 @@ export const useUpdateTask = () => {
     },
 
     onSettled: () => {
+      // Could be better by just invalidating either scheduled, in_progress or completed
       queryClient.invalidateQueries({ queryKey: taskKeys.all });
     },
   });
