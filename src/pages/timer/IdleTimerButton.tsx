@@ -6,6 +6,14 @@ import {
 } from "@heroicons/react/24/solid";
 import { IconButton, Loading } from "@/components/core";
 
+/*
+This should be implemented like RunningTimerButton once we have optimistic update to start and create task endpoint
+
+Props - IsError: boolean;
+isPending - No longer needed
+isOnline - Just use "useOnlineStatus" from inside instead of passing it as prop
+*/
+
 interface Props {
   isError: boolean;
   isOnline: boolean;

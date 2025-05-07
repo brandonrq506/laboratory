@@ -42,7 +42,7 @@ export const RunningTimer = ({ task }: Props) => {
           convertSecondsToHHMMSS(task.activity.max_time)}
       </div>
 
-      <RunningTimerButton taskId={task.id} />
+      <RunningTimerButton task={task} />
     </div>
   );
 };
