@@ -1,6 +1,6 @@
 import { useActivities } from "@/features/activities/api/tanstack/useActivities";
 import { useApplyRoutine } from "@/features/routines/api/tanstack/useApplyRoutine";
-import { useCreateTask } from "@/features/tasks/api/tanstack/useCreateTask";
+import { useCreateScheduledTask } from "@/features/tasks/api/tanstack/useCreateScheduledTask";
 import { useRoutines } from "@/features/routines/api/tanstack/useRoutines";
 
 import { Badge, FloatingMenu } from "@/components/core";
@@ -17,7 +17,7 @@ export const AddScheduledTaskMenu = () => {
   const { data: activities } = useActivities();
   const { data: routines } = useRoutines();
 
-  const { mutate: mutateTask } = useCreateTask();
+  const { mutate: mutateTask } = useCreateScheduledTask();
   const { mutate: applyRoutine } = useApplyRoutine();
 
   const hasRoutines = routines && routines.length > 0;
@@ -61,7 +61,7 @@ export const AddScheduledTaskMenu = () => {
               className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
               onClick={(e) => {
                 e.preventDefault();
-                mutateTask({ activity_id: activity.id });
+                mutateTask(activity);
               }}>
               {activity.name} <CategoryBadge category={activity.category} />
             </button>
