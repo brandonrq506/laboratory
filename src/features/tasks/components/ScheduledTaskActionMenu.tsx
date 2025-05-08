@@ -55,7 +55,7 @@ export const ScheduledTaskActionMenu = ({ task }: Props) => {
                   position: null,
                 })
               }
-              className="group flex w-full items-center gap-2 px-4 py-2 text-sm text-nowrap text-blue-600 disabled:cursor-not-allowed disabled:text-gray-400 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
+              className="group flex w-full items-center gap-2 px-4 py-3.5 text-sm text-nowrap text-blue-600 disabled:cursor-not-allowed disabled:text-gray-400 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden md:py-2">
               <PlayIcon aria-hidden className="size-4" />
               {START} {TASK}
             </button>
