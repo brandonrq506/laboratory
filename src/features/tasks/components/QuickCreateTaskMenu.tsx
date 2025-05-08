@@ -1,5 +1,5 @@
 import { useActivities } from "@/features/activities/api/tanstack/useActivities";
-import { useCreateTask } from "../api/tanstack/useCreateTask";
+import { useCreateScheduledTask } from "../api/tanstack/useCreateScheduledTask";
 
 import { FloatingMenu, Loading } from "@/components/core";
 import { CategoryBadge } from "@/features/categories/components";
@@ -11,7 +11,7 @@ import { TASKS } from "@/constants/entities";
 
 export const QuickCreateTaskMenu = () => {
   const { data, isPending, isError } = useActivities();
-  const { mutate } = useCreateTask();
+  const { mutate } = useCreateScheduledTask();
 
   if (isPending)
     return (
@@ -28,10 +28,6 @@ export const QuickCreateTaskMenu = () => {
 
   if (isError) return <div>Error</div>;
 
-  const handleClick = (activityId: number) => {
-    mutate({ activity_id: activityId });
-  };
-
   return (
     <FloatingMenu
       srBtnText={`${ADD} ${TASKS}`}
@@ -42,7 +38,7 @@ export const QuickCreateTaskMenu = () => {
             className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
             onClick={(e) => {
               e.preventDefault();
-              handleClick(activity.id);
+              mutate(activity);
             }}>
             {activity.name} <CategoryBadge category={activity.category} />
           </button>
