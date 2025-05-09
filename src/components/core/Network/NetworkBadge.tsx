@@ -13,8 +13,6 @@ export const NetworkBadge = () => {
   const [shouldRender, setShouldRender] = useState(false);
   // Controls translation for slide in/out
   const [visible, setVisible] = useState(false);
-  // Track whether we're showing "offline" or "restored" state
-  const [status, setStatus] = useState<"offline" | "restored">("offline");
 
   useEffect(() => {
     const wasOnline = prevOnlineRef.current;
@@ -22,7 +20,6 @@ export const NetworkBadge = () => {
 
     // Trigger on online -> offline
     if (wasOnline && !isOnline) {
-      setStatus("offline");
       setShouldRender(true);
       // Allow browser to apply initial styles before animating in
       requestAnimationFrame(() => setVisible(true));
@@ -30,7 +27,6 @@ export const NetworkBadge = () => {
 
     // Trigger on offline -> online
     if (!wasOnline && isOnline && shouldRender) {
-      setStatus("restored");
       // Already rendered, just ensure visible
       setVisible(true);
 
@@ -64,13 +60,13 @@ export const NetworkBadge = () => {
       role="status"
       aria-live="polite">
       <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-lg">
-        {status === "offline" ? (
-          <XCircleIcon className="size-5 animate-pulse text-red-400" />
-        ) : (
+        {isOnline ? (
           <CheckCircleIcon className="size-5 animate-pulse text-green-400" />
+        ) : (
+          <XCircleIcon className="size-5 animate-pulse text-red-400" />
         )}
-        <span className="text-xs transition text-nowrap text-gray-600">
-          {status === "offline" ? "You are Offline" : "Connection Restored"}
+        <span className="text-xs text-nowrap text-gray-600 transition">
+          {isOnline ? "Connection Restored" : "You are Offline"}
         </span>
       </div>
     </div>
