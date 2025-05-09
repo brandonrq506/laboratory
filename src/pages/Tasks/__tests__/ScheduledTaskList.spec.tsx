@@ -13,13 +13,9 @@ const API_URL = import.meta.env.VITE_API_URL;
 describe("ScheduledTaskList", () => {
   const setupServer = (tasks: ScheduledTaskAPI[]) => {
     server.use(
-      http.get(
-        `${API_URL}/v1${TASKS_ENDPOINT}`,
-        () => {
-          return HttpResponse.json(tasks, { status: 200 });
-        },
-        { once: true },
-      ),
+      http.get(`${API_URL}/v1${TASKS_ENDPOINT}`, () => {
+        return HttpResponse.json(tasks, { status: 200 });
+      }),
     );
   };
 
@@ -54,13 +50,9 @@ describe("ScheduledTaskList", () => {
     const errorMessage = "Failed to fetch tasks";
 
     server.use(
-      http.get(
-        `${API_URL}/v1${TASKS_ENDPOINT}`,
-        () => {
-          return HttpResponse.json({ message: errorMessage }, { status: 500 });
-        },
-        { once: true },
-      ),
+      http.get(`${API_URL}/v1${TASKS_ENDPOINT}`, () => {
+        return HttpResponse.json({ message: errorMessage }, { status: 500 });
+      }),
     );
 
     render(<ScheduledTaskList />);
