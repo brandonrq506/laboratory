@@ -5,15 +5,20 @@ import {
   ScheduledTask,
   TaskList,
 } from "@/features/tasks/components";
+import {
+  inProgressTaskOptions,
+  scheduledTasksOptions,
+} from "@/features/tasks/api/queryOptions";
 import { AddScheduledTaskMenu } from "./AddScheduledTaskMenu";
 import { Loading } from "@/components/core";
 import { SectionHeaderWithAction } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
-import { scheduledTasksOptions } from "@/features/tasks/api/queryOptions";
+import { calculateExpectedStartTimes } from "@/features/tasks/utils/calculateExpectedStartTimes";
 
 const MIN_WORTH_TRIGGERING_THRESHOLD = 3;
 
 export const ScheduledTaskList = () => {
+  const { data: inProgressTask } = useQuery(inProgressTaskOptions());
   const { data, isPending, isError, refetch } = useQuery(
     scheduledTasksOptions(),
   );
@@ -34,6 +39,11 @@ export const ScheduledTaskList = () => {
 
   const displayDeleteAll = data.length > MIN_WORTH_TRIGGERING_THRESHOLD;
 
+  const tasksWithExpectedStartTime = calculateExpectedStartTimes(
+    data,
+    inProgressTask?.[0],
+  );
+
   return (
     <div>
       <SectionHeaderWithAction
@@ -42,7 +52,7 @@ export const ScheduledTaskList = () => {
         action={<AddScheduledTaskMenu />}
       />
       <TaskList
-        tasks={data}
+        tasks={tasksWithExpectedStartTime}
         renderItem={(task) => <ScheduledTask task={task} />}
       />
       {displayDeleteAll && (
