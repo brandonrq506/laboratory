@@ -9,6 +9,7 @@ export * from "./Menu/FloatingMenu";
 export * from "./Menu/ThreeDotsMenu";
 export * from "./Modal/Modal";
 export * from "./Modal/ConfirmationModal";
+export * from "./Network/NetworkBadge";
 export * from "./Social/LinkedInProfile";
 export * from "./Table/EmptyState";
 export * from "./Table/SortIcon";
