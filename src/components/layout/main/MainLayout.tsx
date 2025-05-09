@@ -1,6 +1,6 @@
 import { useDisclosure } from "@/hooks/useDisclosure";
 
-import { IconButton, LinkedInProfile } from "../../core";
+import { IconButton, LinkedInProfile, NetworkBadge } from "../../core";
 import { AuthGuard } from "./AuthGuard";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Header } from "./Header";
@@ -28,6 +28,7 @@ export const MainLayout = () => {
 
       <main className="py-6 lg:pl-72">
         <div className="px-4 sm:px-6">{<Outlet />}</div>
+        <NetworkBadge />
       </main>
     </AuthGuard>
   );
