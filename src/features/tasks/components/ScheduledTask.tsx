@@ -1,12 +1,15 @@
 import { Card } from "@/components/layout";
+import { ClockIcon } from "@heroicons/react/24/outline";
 import { Dot } from "@/components/core";
-import { ScheduledTaskAPI } from "../types/scheduledTask";
 import { ScheduledTaskActionMenu } from "./ScheduledTaskActionMenu";
+import { ScheduledTaskWithExpectedStartTime } from "../types/scheduledTaskWithExpectedStartTime";
 
-import { convertSecondsToTime } from "@/utils";
+import { convertSecondsToTime, formatDatetimeTo12hTime } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
-type Props = { task: ScheduledTaskAPI };
+type Props = {
+  task: ScheduledTaskWithExpectedStartTime;
+};
 
 export const ScheduledTask = ({ task }: Props) => {
   const color = getColorByName(task.activity.category.color);
@@ -19,17 +22,24 @@ export const ScheduledTask = ({ task }: Props) => {
           <p className="text-sm font-semibold">{task.activity.name}</p>
         </div>
 
-        <div className="flex gap-1 text-xs text-gray-600">
+        <div className="flex gap-2.5">
+          {task.expected_start_time && (
+            <div className="flex gap-1 text-xs text-gray-600">
+              <p className="tabular-nums">
+                {formatDatetimeTo12hTime(
+                  task.expected_start_time.toISOString(),
+                )}
+              </p>
+            </div>
+          )}
           {task.activity.avg_time && (
-            <>
-              <p>Avg: </p>
+            <div className="flex gap-1 text-xs text-gray-600">
+              <ClockIcon className="size-4" />
               <p className="tabular-nums">
                 {convertSecondsToTime(task.activity.avg_time)}
               </p>
-            </>
+            </div>
           )}
-
-          {!task.activity.avg_time && <p>Average time undefined</p>}
         </div>
       </div>
 

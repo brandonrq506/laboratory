@@ -7,7 +7,9 @@ describe("ScheduledTask", () => {
   const task = scheduledTasks[0];
 
   it("renders the component with all proper elements", () => {
-    render(<ScheduledTask task={task} />);
+    render(
+      <ScheduledTask task={{ ...task, expected_start_time: new Date() }} />,
+    );
 
     expect(screen.getByText(task.activity.name)).toBeInTheDocument();
   });
