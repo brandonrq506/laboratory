@@ -1,6 +1,8 @@
-import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
 import { useOnlineStatus } from "@/hooks";
+
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 
 const FIVE_SECONDS = 5000;
 const THREE_HUNDRED_MS = 300;
@@ -56,7 +58,10 @@ export const NetworkBadge = () => {
 
   return (
     <div
-      className={`fixed bottom-4 left-1/2 -translate-x-1/2 transform ${translateClass} transition-transform duration-300 ease-out`}
+      className={clsx(
+        "fixed bottom-4 left-1/2 -translate-x-1/2 transform transition-transform duration-300 ease-out",
+        translateClass,
+      )}
       role="status"
       aria-live="polite">
       <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-lg">
