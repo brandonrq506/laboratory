@@ -8,7 +8,7 @@ describe("Badge", () => {
     render(<Badge color={color}>Test Badge</Badge>);
 
     const badge = screen.getByText("Test Badge");
-    expect(badge.getAttribute("class")).toContain(
+    expect(badge).toHaveClass(
       "bg-rose-300 text-rose-950 border-rose-600",
     );
   });

@@ -8,6 +8,7 @@ import eslintConfigPrettier from "eslint-config-prettier";
 import pluginReactHooks from "eslint-plugin-react-hooks";
 import reactCompiler from "eslint-plugin-react-compiler";
 import reactRefresh from "eslint-plugin-react-refresh";
+import jestDom from 'eslint-plugin-jest-dom';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -16,6 +17,10 @@ export default [
   {
     files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
     ...testingLibrary.configs["flat/react"],
+  },
+  {
+    files: ["**/*.spec.{tsx,ts}"],
+    ...jestDom.configs['flat/recommended'],
   },
   {
     plugins: {
