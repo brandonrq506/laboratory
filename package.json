@@ -22,7 +22,7 @@
   "dependencies": {
     "@headlessui/react": "^2.2.2",
     "@heroicons/react": "^2.2.0",
-    "@tailwindcss/vite": "^4.1.5",
+    "@tailwindcss/vite": "^4.1.6",
     "@tanstack/react-query": "^5.76.0",
     "@tanstack/react-query-devtools": "^5.75.5",
     "@tanstack/react-table": "^8.21.3",
