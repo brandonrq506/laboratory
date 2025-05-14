@@ -62,7 +62,7 @@ export const useCompleteTask = () => {
         );
       }
     },
-    onSettled: (newComletedTask) => {
+    onSettled: (newCompletedTask) => {
       // Invalidate in progress query
       queryClient.invalidateQueries(inProgressTaskOptions());
 
@@ -70,8 +70,8 @@ export const useCompleteTask = () => {
       queryClient.invalidateQueries(todayCompletedTasksOptions());
 
       // Invalidate detail query
-      if (newComletedTask)
-        queryClient.invalidateQueries(taskDetailsOptions(newComletedTask.id));
+      if (newCompletedTask)
+        queryClient.invalidateQueries(taskDetailsOptions(newCompletedTask.id));
     },
   });
 };
