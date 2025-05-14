@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { useTask } from "@/features/tasks/api/tanstack/useTask";
+import { useQuery } from "@tanstack/react-query";
 
 import { Button, Loading, Modal } from "@/components/core";
 import { EditTaskForm } from "@/features/tasks/components/EditTaskForm";
 import { RETRY } from "@/constants/actions";
+import { taskDetailsOptions } from "@/features/tasks/api/queryOptions";
 
 export const EditTaskPage = () => {
   const navigate = useNavigate();
   const { taskId } = useParams();
   const taskIdInt = parseInt(taskId!);
   const [isOpen, setIsOpen] = useState(false);
-  const { data, error, isError, isPending, refetch } = useTask(taskIdInt);
+  const { data, error, isError, isPending, refetch } = useQuery(
+    taskDetailsOptions(taskIdInt),
+  );
 
   const isScheduledTask = data?.status === "scheduled";
 
