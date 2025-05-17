@@ -8,7 +8,7 @@ describe("DeleteTaskDialog", () => {
     const user = userEvent.setup();
     const onClose = vi.fn();
 
-    render(<DeleteTaskDialog isOpen={true} onClose={onClose} taskId={1} />);
+    render(<DeleteTaskDialog isOpen={true} onClose={onClose} taskId={3407} />);
 
     const cancelBtn = screen.getByRole("button", { name: "Cancel" });
     await user.click(cancelBtn);
@@ -20,7 +20,7 @@ describe("DeleteTaskDialog", () => {
     const user = userEvent.setup();
     const onClose = vi.fn();
 
-    render(<DeleteTaskDialog isOpen={true} onClose={onClose} taskId={1} />);
+    render(<DeleteTaskDialog isOpen={true} onClose={onClose} taskId={3407} />);
 
     const deleteBtn = screen.getByRole("button", { name: "Confirm" });
     await user.click(deleteBtn);
