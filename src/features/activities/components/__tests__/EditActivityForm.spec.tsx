@@ -11,7 +11,7 @@ describe("EditActivityForm", () => {
         path: "/activities/edit/1",
         Component: () => (
           <EditActivityForm
-            activityId={1}
+            activityId={6}
             initialValues={{
               name: "Test",
               category_id: { value: 1, label: "Productive" },
