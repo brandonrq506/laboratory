@@ -69,9 +69,9 @@ export const TimeInputV2 = <T extends FieldValues>({
   const localized_24h_value = formatDatetimeTo24hTime(field.value);
 
   const convertBackToUTC = (hhmmss: string) => {
-    const [hours, minutes, seconds] = hhmmss.split(":");
+    const [hours, minutes] = hhmmss.split(":");
     const localDate = new Date(field.value);
-    localDate.setHours(Number(hours), Number(minutes), Number(seconds));
+    localDate.setHours(Number(hours), Number(minutes));
     return localDate.toISOString();
   };
 
