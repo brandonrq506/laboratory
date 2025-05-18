@@ -1,13 +1,12 @@
 import { useSearchParams } from "react-router";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { addDays, format, isAfter, isToday, parseISO } from "date-fns";
 import { DateInput } from "./DateInput";
 import { IconButton } from "../Button/IconButton";
 import { InputProps } from "@headlessui/react";
 
-const now = new Date();
-now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-const today = now.toISOString().split("T")[0];
+const today = () => format(new Date(), "yyyy-MM-dd");
 
 type DateField = Omit<InputProps, "onChange" | "value" | "max" | "type">;
 
@@ -29,30 +28,21 @@ export const DateFilter = ({
   label,
 }: Props) => {
   const [params, setParams] = useSearchParams({
-    date: today,
+    date: today(),
   });
 
-  const date = params.get("date") ?? today;
+  const date = params.get("date") ?? today();
 
-  const handlePrevious = () => {
-    const currentDate = new Date(date);
-    currentDate.setDate(currentDate.getDate() - 1);
-    const newDate = currentDate.toISOString().split("T")[0];
-    setParams({ date: newDate });
-  };
+  const shiftDate = (delta: number) => {
+    const newDateObj = addDays(parseISO(date), delta);
+    if (isAfter(newDateObj, new Date())) return;
 
-  const handleNext = () => {
-    const currentDate = new Date(date);
-    currentDate.setDate(currentDate.getDate() + 1);
-    const newDate = currentDate.toISOString().split("T")[0];
-    if (newDate <= today) {
-      setParams({ date: newDate });
-    }
+    setParams({ date: format(newDateObj, "yyyy-MM-dd") });
   };
 
   return (
     <div className="flex items-center space-x-2">
-      <IconButton onClick={handlePrevious} variant="blackOutline">
+      <IconButton onClick={() => shiftDate(-1)} variant="blackOutline">
         <ChevronLeftIcon className="size-5" />
       </IconButton>
       <DateInput
@@ -61,14 +51,14 @@ export const DateFilter = ({
         hideLabel={hideLabel}
         inputClassName={inputClassName}
         label={label}
-        max={today}
+        max={today()}
         onChange={(e) => setParams({ date: e.target.value })}
         showAsterisk={showAsterisk}
         value={date}
       />
       <IconButton
-        onClick={handleNext}
-        disabled={date === today}
+        onClick={() => shiftDate(1)}
+        disabled={isToday(parseISO(date))}
         variant="blackOutline"
         className="disabled:text-gray-600">
         <ChevronRightIcon className="size-5" />

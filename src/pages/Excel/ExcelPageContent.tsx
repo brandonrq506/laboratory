@@ -4,10 +4,9 @@ import { useSearchParams } from "react-router";
 import { ExcelCategoryHeaders } from "./ExcelCategoryHeaders";
 import { ExcelTable } from "@/features/excel/components/ExcelTable";
 import { Loading } from "@/components/core";
+import { format } from "date-fns";
 
-const now = new Date();
-now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-const today = now.toISOString().split("T")[0];
+const today = format(new Date(), "yyyy-MM-dd");
 
 export const ExcelPageContent = () => {
   const [params] = useSearchParams();
