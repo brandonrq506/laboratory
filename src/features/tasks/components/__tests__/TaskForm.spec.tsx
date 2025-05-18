@@ -48,7 +48,7 @@ describe("TaskForm", () => {
 
     await user.click(screen.getByRole("button", { name: "Update Task" }));
 
-    const errorMessage = "Time set to the future";
+    const errorMessage = "Start time must be in the past";
 
     expect(await screen.findByText(errorMessage)).toBeInTheDocument();
   });
@@ -141,5 +141,31 @@ describe("TaskForm", () => {
       end_time: task.end_time,
       activity: { label: task.activity.name, value: task.activity.id },
     });
+  });
+
+  it("shows error message when end time is before start time", async () => {
+    const user = userEvent.setup();
+    const task = completedTasks[0];
+
+    const now = new Date().toISOString().substring(0, 16);
+    const pastTime = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+
+    render(
+      <TaskForm
+        task={task}
+        onSubmit={vi.fn()}
+        initialValues={{
+          start_time: now,
+          end_time: pastTime,
+          activity: { label: task.activity.name, value: task.activity.id },
+        }}
+      />,
+    );
+
+    await user.click(screen.getByRole("button", { name: "Update Task" }));
+
+    expect(
+      await screen.findByText("End time must be after start time"),
+    ).toBeInTheDocument();
   });
 });

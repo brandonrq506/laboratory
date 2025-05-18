@@ -11,7 +11,7 @@ import { TimeInputV2 } from "@/components/form";
 import { TASK } from "@/constants/entities";
 import { UPDATE } from "@/constants/actions";
 
-import { isInThePast } from "../utils/formValidations";
+import { isAfter, isBefore, parseISO } from "date-fns";
 
 type Props = {
   initialValues: EditForm;
@@ -20,7 +20,7 @@ type Props = {
 };
 
 export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
-  const { control, formState, handleSubmit } = useForm<EditForm>({
+  const { control, formState, getValues, handleSubmit } = useForm<EditForm>({
     values: initialValues,
   });
   const { isSubmitting } = formState;
@@ -46,8 +46,13 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
           rules={{
             required: "Start time is required.",
             validate: {
-              isPast: (v) =>
-                isInThePast(v as string) || "Time set to the future",
+              isPast: (v) => {
+                const startTime = parseISO(v as string);
+                const now = new Date();
+                return (
+                  isBefore(startTime, now) || "Start time must be in the past"
+                );
+              },
             },
           }}
         />
@@ -59,9 +64,7 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
           label="Start Time"
           name="start_time"
           control={control}
-          rules={{
-            required: "Start time is required.",
-          }}
+          rules={{ required: "Start time is required." }}
         />
       )}
 
@@ -71,7 +74,21 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
           label="End Time"
           name="end_time"
           control={control}
-          rules={{ required: "End time is required." }}
+          rules={{
+            required: "End time is required.",
+            validate: {
+              isAfterStartTime: (v) => {
+                const { start_time } = getValues();
+                const endTime = parseISO(v as string);
+                const startTime = parseISO(start_time as string);
+
+                return (
+                  isAfter(endTime, startTime) ||
+                  "End time must be after start time"
+                );
+              },
+            },
+          }}
         />
       )}
 
