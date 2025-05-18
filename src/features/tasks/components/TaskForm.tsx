@@ -39,7 +39,6 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
 
       {isInProgressTask && (
         <TimeInputV2
-          step={1}
           control={control}
           label="Start Time"
           name="start_time"
@@ -60,7 +59,6 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
 
       {isCompletedTask && (
         <TimeInputV2
-          step={1}
           label="Start Time"
           name="start_time"
           control={control}
@@ -70,7 +68,6 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
 
       {isCompletedTask && (
         <TimeInputV2
-          step={1}
           label="End Time"
           name="end_time"
           control={control}
