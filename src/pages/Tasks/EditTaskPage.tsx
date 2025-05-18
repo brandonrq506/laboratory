@@ -16,13 +16,9 @@ export const EditTaskPage = () => {
     taskDetailsOptions(taskIdInt),
   );
 
-  const isScheduledTask = data?.status === "scheduled";
-
   useEffect(() => setIsOpen(true), []);
 
   if (!taskId) throw new Error("Task ID is required");
-
-  if (isScheduledTask) throw new Error("Cannot edit a scheduled task");
 
   if (isPending) {
     return (
@@ -41,6 +37,8 @@ export const EditTaskPage = () => {
       </Modal>
     );
   }
+
+  if (data.status === "scheduled") throw new Error("Can't edit scheduled task");
 
   return (
     <Modal isOpen={isOpen} onClose={() => navigate(-1)}>
