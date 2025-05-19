@@ -60,7 +60,7 @@
     "globals": "^16.1.0",
     "jsdom": "^26.1.0",
     "jsdom-testing-mocks": "^1.13.1",
-    "msw": "^2.8.2",
+    "msw": "^2.8.4",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^4.1.7",
