@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { getTask } from "../axios/getTask";
 import { taskKeys } from "../queryKeys";
 
-import { MINUTE } from "@/utils/time";
+import { millisecondsInMinute } from "date-fns/constants";
 
 export const usePrefetchTask = () => {
   const queryClient = useQueryClient();
@@ -12,7 +12,7 @@ export const usePrefetchTask = () => {
     queryClient.prefetchQuery({
       queryKey: taskKeys.detail(taskId),
       queryFn: getTask,
-      staleTime: MINUTE,
+      staleTime: millisecondsInMinute,
     });
   };
 
