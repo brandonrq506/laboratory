@@ -11,7 +11,7 @@ import {
   useController,
 } from "react-hook-form";
 import { clsx } from "clsx";
-import { formatDatetimeTo24hTime } from "@/utils";
+import { format } from "date-fns";
 
 type CustomTimeField = Omit<
   InputProps,
@@ -66,7 +66,7 @@ export const TimeInputV2 = <T extends FieldValues>({
   });
   const error = fieldState.error;
 
-  const localized_24h_value = formatDatetimeTo24hTime(field.value);
+  const localized_24h_value = format(field.value, "HH:mm");
 
   const convertBackToUTC = (hhmmss: string) => {
     const [hours, minutes] = hhmmss.split(":");
