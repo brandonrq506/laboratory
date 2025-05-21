@@ -17,11 +17,7 @@ import {
 } from "@headlessui/react";
 import { Option } from "@/types/core";
 import { clsx } from "clsx";
-
-const filterOptions = (query: string, options: Option[]) => {
-  const trimmedQuery = query.trim().toLowerCase();
-  return options.filter((op) => op.label.toLowerCase().includes(trimmedQuery));
-};
+import { filterOptions } from "./utils/filterOptions";
 
 const addOption = (first: boolean, option: Option, options: Option[]) => {
   return first ? [option, ...options] : [...options, option];
