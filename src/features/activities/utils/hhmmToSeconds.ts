@@ -6,7 +6,7 @@ type Props = {
   minutes: number;
 };
 
-export const convertHHandMMtoSeconds = ({ hours, minutes }: Props) => {
+export const hhmmToSeconds = ({ hours, minutes }: Props) => {
   if (hours < 0 || minutes < 0) {
     throw new Error(`Invalid time: ${hours} hours and ${minutes} minutes`);
   }

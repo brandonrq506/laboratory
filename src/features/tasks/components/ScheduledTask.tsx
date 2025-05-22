@@ -4,7 +4,7 @@ import { Dot } from "@/components/core";
 import { ScheduledTaskActionMenu } from "./ScheduledTaskActionMenu";
 import { ScheduledTaskWithExpectedStartTime } from "../types/scheduledTaskWithExpectedStartTime";
 
-import { convertSecondsToTime, formatDatetimeTo12hTime } from "@/utils";
+import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
 type Props = {
@@ -36,7 +36,7 @@ export const ScheduledTask = ({ task }: Props) => {
             <div className="flex gap-1 text-xs text-gray-600">
               <ClockIcon className="size-4" />
               <p className="tabular-nums">
-                {convertSecondsToTime(task.activity.avg_time)}
+                {secondsToTime(task.activity.avg_time)}
               </p>
             </div>
           )}
