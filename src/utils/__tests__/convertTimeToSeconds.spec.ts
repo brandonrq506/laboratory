@@ -1,6 +1,6 @@
 import { convertTimeToSeconds } from "../convertTimeToSeconds";
 
-describe("convertSecondsToHHMMSS", () => {
+describe("convertTimeToSeconds", () => {
   it("throws when time is empty", () => {
     expect(() => convertTimeToSeconds("")).toThrow("Time cannot be empty");
   });

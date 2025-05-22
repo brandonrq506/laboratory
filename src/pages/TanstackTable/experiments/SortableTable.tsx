@@ -19,11 +19,11 @@ import { DeleteActivity } from "@/features/activities/components";
 import { LinkButton } from "@/components/core";
 import { activities } from "../helpers/activityData";
 import { clsx } from "clsx";
-import { convertSecondsToHHMMSS } from "@/utils";
+import { secondsToHHmmss } from "@/utils";
 
 const formatDuration = (avg_time: number | null) => {
   if (avg_time === null) return "N/A";
-  return convertSecondsToHHMMSS(avg_time);
+  return secondsToHHmmss(avg_time);
 };
 
 const displaySortIcon = (column: SortDirection | false, canSort: boolean) => {

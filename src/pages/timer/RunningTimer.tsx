@@ -6,8 +6,8 @@ import { Link } from "react-router";
 import { RunningTimerButton } from "./RunningTimerButton";
 import { TimerTime } from "./TimerTime";
 
-import { convertSecondsToHHMMSS } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
+import { secondsToHHmmss } from "@/utils";
 
 type Props = {
   task: InProgressTaskAPI;
@@ -38,8 +38,7 @@ export const RunningTimer = ({ task }: Props) => {
       <div className="flex gap-x-1.5 text-sm">
         <TimerTime start_time={task.start_time} />
         <p className="font-light text-gray-700">/</p>
-        {task.activity.avg_time &&
-          convertSecondsToHHMMSS(task.activity.avg_time)}
+        {task.activity.avg_time && secondsToHHmmss(task.activity.avg_time)}
       </div>
 
       <RunningTimerButton task={task} />

@@ -1,6 +1,6 @@
 import { convertSecondsToHHandMM } from "../convertSecondsToHHandMM";
 
-describe("convertSecondsToHHMMSS", () => {
+describe("convertSecondsToHHandMM", () => {
   it("should convert 0 seconds to 0 hours and 0 minutes", () => {
     expect(convertSecondsToHHandMM(0)).toEqual({ hours: 0, minutes: 0 });
   });
