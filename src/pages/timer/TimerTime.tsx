@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { convertSecondsToHHMMSS } from "@/utils";
+import { secondsToHHmmss } from "@/utils";
 
 const DELAY = 1000;
 const MILI_TO_SEC = 1000;
@@ -27,5 +27,5 @@ export const TimerTime = ({ start_time }: Props) => {
     return () => clearInterval(id);
   }, []);
 
-  return <div>{convertSecondsToHHMMSS(elapsedSeconds)}</div>;
+  return <div>{secondsToHHmmss(elapsedSeconds)}</div>;
 };

@@ -12,11 +12,11 @@ import { DeleteActivity } from "@/features/activities/components";
 import { LinkButton } from "@/components/core";
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { activities } from "../helpers/activityData";
-import { convertSecondsToHHMMSS } from "@/utils";
+import { secondsToHHmm } from "@/utils";
 
 const formatDuration = (avg_time: number | null) => {
   if (avg_time === null) return "N/A";
-  return convertSecondsToHHMMSS(avg_time);
+  return secondsToHHmm(avg_time);
 };
 
 const columnHelper = createColumnHelper<ActivityAPI>();
