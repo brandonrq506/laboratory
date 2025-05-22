@@ -5,7 +5,6 @@ import {
   ChevronUpDownIcon,
   ExclamationCircleIcon,
 } from "@heroicons/react/20/solid";
-import { ComboBoxType, Configuration } from "./types";
 import {
   Combobox,
   ComboboxButton,
@@ -15,27 +14,13 @@ import {
   Field,
   Label,
 } from "@headlessui/react";
+import { ComboBoxType } from "./types";
 import { Option } from "@/types/core";
 import { clsx } from "clsx";
 
 const filterOptions = (query: string, options: Option[]) => {
   const trimmedQuery = query.trim().toLowerCase();
   return options.filter((op) => op.label.toLowerCase().includes(trimmedQuery));
-};
-
-const addOption = (first: boolean, option: Option, options: Option[]) => {
-  return first ? [option, ...options] : [...options, option];
-};
-
-const handleConfiguration = (options: Option[], config: Configuration) => {
-  const { text, isPersistent = false, showFirst = false } = config;
-  const hasOptions = options.length > 0;
-  const option: Option = { value: -1, label: text };
-  const alwaysVisible = hasOptions && isPersistent;
-
-  if (alwaysVisible) return addOption(showFirst, option, options);
-  else if (hasOptions) return options;
-  return [option];
 };
 
 type ComboBoxRHFProps = {
@@ -51,7 +36,6 @@ type Props = ComboBoxRHFProps & ComboBoxType;
 
 export const ComboBox = ({
   ref,
-  config,
   description,
   hideErrorMessage = false,
   hideLabel = false,
@@ -66,12 +50,7 @@ export const ComboBox = ({
 }: Props) => {
   const [query, setQuery] = useState("");
 
-  const filteredOptions = filterOptions(query, options);
-  const hasConfig = config !== undefined;
-
-  const finalOptions = hasConfig
-    ? handleConfiguration(filteredOptions, config)
-    : filteredOptions;
+  const finalOptions = filterOptions(query, options);
 
   return (
     <Field>

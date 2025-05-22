@@ -10,7 +10,6 @@ type ControlledComboBoxProps<T extends FieldValues> = UseControllerProps<T> &
   ComboBoxType;
 
 export const ControlledComboBox = <T extends FieldValues>({
-  config,
   description,
   label,
   options,
@@ -20,7 +19,6 @@ export const ControlledComboBox = <T extends FieldValues>({
   const { field, fieldState } = useController(controllerProps);
   return (
     <ComboBox
-      config={config}
       description={description}
       label={label}
       options={options}

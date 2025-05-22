@@ -10,7 +10,6 @@ type ControlledComboBoxProps<T extends FieldValues> = UseControllerProps<T> &
   ComboBoxType;
 
 export const ControlComboBox = <T extends FieldValues>({
-  config,
   description,
   hideErrorMessage,
   hideLabel,
@@ -22,7 +21,6 @@ export const ControlComboBox = <T extends FieldValues>({
   const { field, fieldState } = useController(controllerProps);
   return (
     <ComboBox
-      config={config}
       description={description}
       hideErrorMessage={hideErrorMessage}
       hideLabel={hideLabel}
