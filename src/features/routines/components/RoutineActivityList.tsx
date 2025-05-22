@@ -5,7 +5,7 @@ import { Badge, EmptyList, Loading } from "@/components/core";
 import { Card } from "@/components/layout";
 import { DeleteActivityRoutine } from "./DeleteActivityRoutine";
 
-import { convertSecondsToTime } from "@/utils";
+import { secondsToTime } from "@/utils";
 
 export const RoutineActivityList = () => {
   const { routineId } = useParams();
@@ -37,7 +37,7 @@ export const RoutineActivityList = () => {
                   {routine_activity.activity_name}
                 </Badge>
                 <span className="text-xs">
-                  {convertSecondsToTime(routine_activity.activity_avg_time)}
+                  {secondsToTime(routine_activity.activity_avg_time)}
                 </span>
               </div>
 

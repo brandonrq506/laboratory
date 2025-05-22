@@ -3,7 +3,7 @@ import { CompletedTaskAPI } from "../types/completedTask";
 import { DeleteTask } from "./DeleteTask";
 import { Dot } from "@/components/core";
 
-import { convertSecondsToTime, formatDatetimeTo12hTime } from "@/utils";
+import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 import { getDurationInSeconds } from "../utils/getDurationInSeconds";
 
@@ -20,7 +20,7 @@ export const CompletedTask = ({ task }: Props) => {
           <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
           <p className="text-sm font-semibold">{task.activity.name}</p>
           <p className="text-xs text-gray-600 tabular-nums">
-            {convertSecondsToTime(durationSeconds)}
+            {secondsToTime(durationSeconds)}
           </p>
         </div>
 

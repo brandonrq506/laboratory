@@ -18,7 +18,7 @@ const displayMinutes = (minutes: number, seconds: number) => {
   return `${minutes}:${padNumber(seconds)}m`;
 };
 
-export const convertSecondsToTime = (seconds: number) => {
+export const secondsToTime = (seconds: number) => {
   if (seconds < 0) throw new Error("Seconds must be a positive number");
   if (seconds > SECONDS_IN_DAY)
     throw new Error("Seconds must be less than a day");

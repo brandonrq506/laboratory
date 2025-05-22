@@ -3,7 +3,7 @@ import { Badge } from "@/components/core";
 import { Routine } from "../types/routine";
 
 import { calculateTotalAvgTime } from "../utils/calculateTotalAvgTime";
-import { convertSecondsToTime } from "@/utils";
+import { secondsToTime } from "@/utils";
 
 const MAX_VISIBLE_ACTIVITIES = 5;
 
@@ -13,7 +13,7 @@ interface Props {
 
 export const RoutineCard = ({ routine }: Props) => {
   const totalAvgTime = calculateTotalAvgTime(routine.activities);
-  const totalTime = convertSecondsToTime(totalAvgTime);
+  const totalTime = secondsToTime(totalAvgTime);
 
   return (
     <Card className="relative h-full w-full overflow-hidden">
@@ -36,7 +36,7 @@ export const RoutineCard = ({ routine }: Props) => {
 
           <div>
             <span className="text-xs">
-              {convertSecondsToTime(activity.activity_avg_time)}
+              {secondsToTime(activity.activity_avg_time)}
             </span>
           </div>
         </div>
