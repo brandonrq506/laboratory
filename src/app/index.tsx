@@ -38,12 +38,6 @@ import {
   RoutinesPage,
 } from "@/pages/routines";
 import { EditTaskPage, HistoryPage } from "@/pages/Tasks";
-import {
-  FirstTableAttempt,
-  GlobalSearchTable,
-  SortableTable,
-  TanstackTableExperimentsPage,
-} from "@/pages/TanstackTable";
 import { MainErrorPage, MainLayout } from "@/components/layout";
 import { Navigate, createBrowserRouter } from "react-router";
 import { AppProvider } from "./provider";
@@ -126,10 +120,6 @@ const router = createBrowserRouter([
       { path: "form-projects/controller-two", element: <ControllerTwo /> },
       { path: "form-projects/context-provider", element: <ProviderForm /> },
       { path: "form-projects/async-validation", element: <AsyncValidation /> },
-      { path: "table-projects", element: <TanstackTableExperimentsPage /> },
-      { path: "table-projects/first-attempt", element: <FirstTableAttempt /> },
-      { path: "table-projects/global-search", element: <GlobalSearchTable /> },
-      { path: "table-projects/sorting", element: <SortableTable /> },
       { path: "*", element: <NotFoundPage /> },
     ],
   },
