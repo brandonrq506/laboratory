@@ -32,12 +32,12 @@ export const ActivityTable = () => {
         header: "Name",
         sortingFn: "text",
       }),
-      columnHelper.accessor((row) => displayTableDuration(row.avg_time), {
-        id: "avg_time",
-        header: "Avg. Duration",
+      columnHelper.accessor((row) => displayTableDuration(row.exp_seconds), {
+        id: "exp_time",
+        header: "Exp. Duration",
         meta: { className: "hidden sm:table-cell" },
       }),
-      columnHelper.accessor((row) => displayTableDuration(row.max_time), {
+      columnHelper.accessor((row) => displayTableDuration(row.max_seconds), {
         id: "max_time",
         header: "Max. Duration",
         meta: { className: "hidden sm:table-cell" },

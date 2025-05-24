@@ -2,9 +2,9 @@ import { BaseEntity } from "@/types/core";
 import { Category } from "@/features/categories/types/category";
 
 export type ActivityAPI = BaseEntity & {
-  avg_time: number | null;
+  exp_seconds: number;
   category: Category;
-  max_time: number | null;
+  max_seconds: number;
   name: string;
   user_id: number;
 };

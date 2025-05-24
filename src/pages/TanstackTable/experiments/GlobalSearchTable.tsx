@@ -14,11 +14,6 @@ import { PencilIcon } from "@heroicons/react/24/outline";
 import { activities } from "../helpers/activityData";
 import { secondsToHHmm } from "@/utils";
 
-const formatDuration = (avg_time: number | null) => {
-  if (avg_time === null) return "N/A";
-  return secondsToHHmm(avg_time);
-};
-
 const columnHelper = createColumnHelper<ActivityAPI>();
 
 export const GlobalSearchTable = () => {
@@ -29,11 +24,11 @@ export const GlobalSearchTable = () => {
       columnHelper.accessor("name", {
         header: "Name",
       }),
-      columnHelper.accessor((row) => formatDuration(row.avg_time), {
-        id: "avg_time",
-        header: "Avg. Duration",
+      columnHelper.accessor((row) => secondsToHHmm(row.exp_seconds), {
+        id: "exp_time",
+        header: "Exp. Duration",
       }),
-      columnHelper.accessor((row) => formatDuration(row.max_time), {
+      columnHelper.accessor((row) => secondsToHHmm(row.max_seconds), {
         id: "max_time",
         header: "Max. Duration",
       }),

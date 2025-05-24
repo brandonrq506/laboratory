@@ -2,7 +2,7 @@ import { Card, SectionHeaderWithAction } from "@/components/layout";
 import { Badge } from "@/components/core";
 import { Routine } from "../types/routine";
 
-import { calculateTotalAvgTime } from "../utils/calculateTotalAvgTime";
+import { calculateTotalExpTime } from "../utils/calculateTotalExpTime";
 import { secondsToTime } from "@/utils";
 
 const MAX_VISIBLE_ACTIVITIES = 5;
@@ -12,8 +12,8 @@ interface Props {
 }
 
 export const RoutineCard = ({ routine }: Props) => {
-  const totalAvgTime = calculateTotalAvgTime(routine.activities);
-  const totalTime = secondsToTime(totalAvgTime);
+  const totalExpTime = calculateTotalExpTime(routine.activities);
+  const totalTime = secondsToTime(totalExpTime);
 
   return (
     <Card className="relative h-full w-full overflow-hidden">
@@ -36,7 +36,7 @@ export const RoutineCard = ({ routine }: Props) => {
 
           <div>
             <span className="text-xs">
-              {secondsToTime(activity.activity_avg_time)}
+              {secondsToTime(activity.activity_exp_seconds)}
             </span>
           </div>
         </div>

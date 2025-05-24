@@ -8,7 +8,7 @@ export const completedTasks: CompletedTaskAPI[] = [
     id: 3406,
     activity: {
       id: 101,
-      avg_time: 300,
+      exp_seconds: 300,
       category: {
         id: 1,
         name: "Productive",
@@ -18,7 +18,7 @@ export const completedTasks: CompletedTaskAPI[] = [
         color: "blue",
       },
       created_at: "2025-02-24T00:33:21.275Z",
-      max_time: 44100,
+      max_seconds: 44100,
       name: "Daily",
       updated_at: "2025-03-02T21:31:27.256Z",
       user_id: 1,
@@ -35,7 +35,7 @@ export const completedTasks: CompletedTaskAPI[] = [
     id: 3398,
     activity: {
       id: 39,
-      avg_time: 420,
+      exp_seconds: 420,
       category: {
         id: 2,
         name: "Wellness",
@@ -45,7 +45,7 @@ export const completedTasks: CompletedTaskAPI[] = [
         color: "emerald",
       },
       created_at: "2025-01-26T22:24:10.985Z",
-      max_time: 480,
+      max_seconds: 480,
       name: "Brush Teeth",
       updated_at: "2025-01-26T22:24:10.985Z",
       user_id: 1,
@@ -62,7 +62,7 @@ export const completedTasks: CompletedTaskAPI[] = [
     id: 3405,
     activity: {
       id: 36,
-      avg_time: 300,
+      exp_seconds: 300,
       category: {
         id: 3,
         name: "Necessary",
@@ -72,7 +72,7 @@ export const completedTasks: CompletedTaskAPI[] = [
         color: "amber",
       },
       created_at: "2025-01-26T22:23:11.907Z",
-      max_time: 600,
+      max_seconds: 600,
       name: "Bathroom",
       updated_at: "2025-01-26T22:23:11.907Z",
       user_id: 1,
@@ -89,7 +89,7 @@ export const completedTasks: CompletedTaskAPI[] = [
     id: 3404,
     activity: {
       id: 42,
-      avg_time: 600,
+      exp_seconds: 600,
       category: {
         id: 3,
         name: "Necessary",
@@ -99,7 +99,7 @@ export const completedTasks: CompletedTaskAPI[] = [
         color: "amber",
       },
       created_at: "2025-01-26T23:34:00.727Z",
-      max_time: 2400,
+      max_seconds: 2400,
       name: "Barbara",
       updated_at: "2025-01-26T23:34:00.727Z",
       user_id: 1,
@@ -119,7 +119,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     id: 3407,
     activity: {
       id: 57,
-      avg_time: 300,
+      exp_seconds: 300,
       category: {
         id: 3,
         name: "Necessary",
@@ -129,7 +129,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
         color: "amber",
       },
       created_at: "2025-01-26T23:38:46.302Z",
-      max_time: 480,
+      max_seconds: 480,
       name: "PreWorkout",
       updated_at: "2025-01-26T23:38:46.302Z",
       user_id: 1,
@@ -146,7 +146,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     id: 3408,
     activity: {
       id: 68,
-      avg_time: 300,
+      exp_seconds: 300,
       category: {
         id: 2,
         name: "Wellness",
@@ -156,7 +156,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
         color: "emerald",
       },
       created_at: "2025-01-26T23:42:54.388Z",
-      max_time: 600,
+      max_seconds: 600,
       name: "Stretch",
       updated_at: "2025-01-26T23:42:54.388Z",
       user_id: 1,
@@ -173,7 +173,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     id: 3409,
     activity: {
       id: 1,
-      avg_time: 4500,
+      exp_seconds: 4500,
       category: {
         id: 1,
         name: "Productive",
@@ -183,7 +183,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
         color: "blue",
       },
       created_at: "2025-01-20T14:03:38.102Z",
-      max_time: 6300,
+      max_seconds: 6300,
       name: "Workout",
       updated_at: "2025-01-20T14:03:38.102Z",
       user_id: 1,
@@ -200,7 +200,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     id: 3410,
     activity: {
       id: 56,
-      avg_time: 300,
+      exp_seconds: 300,
       category: {
         id: 3,
         name: "Necessary",
@@ -210,7 +210,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
         color: "amber",
       },
       created_at: "2025-01-26T23:38:38.028Z",
-      max_time: 480,
+      max_seconds: 480,
       name: "PostWorkout",
       updated_at: "2025-01-26T23:38:38.028Z",
       user_id: 1,
@@ -227,7 +227,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     id: 3411,
     activity: {
       id: 67,
-      avg_time: 600,
+      exp_seconds: 600,
       category: {
         id: 2,
         name: "Wellness",
@@ -237,7 +237,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
         color: "emerald",
       },
       created_at: "2025-01-26T23:42:24.957Z",
-      max_time: 900,
+      max_seconds: 900,
       name: "Snack",
       updated_at: "2025-01-26T23:42:24.957Z",
       user_id: 1,
@@ -254,7 +254,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     id: 3412,
     activity: {
       id: 39,
-      avg_time: 420,
+      exp_seconds: 420,
       category: {
         id: 2,
         name: "Wellness",
@@ -264,7 +264,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
         color: "emerald",
       },
       created_at: "2025-01-26T22:24:10.985Z",
-      max_time: 480,
+      max_seconds: 480,
       name: "Brush Teeth",
       updated_at: "2025-01-26T22:24:10.985Z",
       user_id: 1,
@@ -284,7 +284,7 @@ export const inProgressTasks: InProgressTaskAPI[] = [
     id: 3424,
     activity: {
       id: 59,
-      avg_time: 3600,
+      exp_seconds: 3600,
       category: {
         id: 1,
         name: "Productive",
@@ -294,7 +294,7 @@ export const inProgressTasks: InProgressTaskAPI[] = [
         color: "blue",
       },
       created_at: "2025-01-26T23:40:54.779Z",
-      max_time: 5400,
+      max_seconds: 5400,
       name: "React",
       updated_at: "2025-01-26T23:40:54.779Z",
       user_id: 1,
