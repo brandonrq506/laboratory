@@ -15,7 +15,7 @@ import { ActivityActionMenu } from "./ActivityActionMenu";
 import { CategoryBadge } from "@/features/categories/components";
 import { StateInputText } from "@/components/form";
 import { clsx } from "clsx";
-import { displayTableDuration } from "../utils/displayTableDuration";
+import { secondsToHHmm } from "@/utils";
 
 const columnHelper = createColumnHelper<ActivityAPI>();
 
@@ -32,12 +32,12 @@ export const ActivityTable = () => {
         header: "Name",
         sortingFn: "text",
       }),
-      columnHelper.accessor((row) => displayTableDuration(row.exp_seconds), {
+      columnHelper.accessor((row) => secondsToHHmm(row.exp_seconds), {
         id: "exp_time",
         header: "Exp. Duration",
         meta: { className: "hidden sm:table-cell" },
       }),
-      columnHelper.accessor((row) => displayTableDuration(row.max_seconds), {
+      columnHelper.accessor((row) => secondsToHHmm(row.max_seconds), {
         id: "max_time",
         header: "Max. Duration",
         meta: { className: "hidden sm:table-cell" },
