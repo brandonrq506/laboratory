@@ -36,15 +36,15 @@ describe("secondsToHHmmss", () => {
     expect(result).toBe(expected);
   });
 
-  it("throws an error when seconds is negative", () => {
-    const seconds = -1;
-    expect(() => secondsToHHmmss(seconds)).toThrow(
-      "Seconds must be a positive number",
-    );
-  });
-
   it("returns '01:30:00' when seconds is a float", () => {
     const seconds = 5400.345;
     expect(secondsToHHmmss(seconds)).toBe("01:30:00");
+  });
+
+  it("should convert -3661 seconds to -01:01:01", () => {
+    const seconds = -3661;
+    const expected = "-01:01:01";
+    const result = secondsToHHmmss(seconds);
+    expect(result).toBe(expected);
   });
 });
