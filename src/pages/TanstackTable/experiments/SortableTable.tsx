@@ -21,11 +21,6 @@ import { activities } from "../helpers/activityData";
 import { clsx } from "clsx";
 import { secondsToHHmmss } from "@/utils";
 
-const formatDuration = (avg_time: number | null) => {
-  if (avg_time === null) return "N/A";
-  return secondsToHHmmss(avg_time);
-};
-
 const displaySortIcon = (column: SortDirection | false, canSort: boolean) => {
   if (!canSort) return null;
   if (column === false)
@@ -46,11 +41,11 @@ export const SortableTable = () => {
         header: "Name",
         sortingFn: "text",
       }),
-      columnHelper.accessor((row) => formatDuration(row.avg_time), {
-        id: "avg_time",
-        header: "Avg. Duration",
+      columnHelper.accessor((row) => secondsToHHmmss(row.exp_seconds), {
+        id: "exp_time",
+        header: "Exp. Duration",
       }),
-      columnHelper.accessor((row) => formatDuration(row.max_time), {
+      columnHelper.accessor((row) => secondsToHHmmss(row.max_seconds), {
         id: "max_time",
         header: "Max. Duration",
       }),

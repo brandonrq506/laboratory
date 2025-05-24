@@ -1,6 +1,6 @@
 export type PostActivity = {
-  avg_time: number;
+  exp_seconds: number;
   category_id: number;
-  max_time: number;
+  max_seconds: number;
   name: string;
 };

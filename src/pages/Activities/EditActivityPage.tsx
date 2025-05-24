@@ -35,16 +35,16 @@ export const EditActivityPage = () => {
     );
   }
 
-  const max_time = convertSecondsToHHandMM(data.max_time!);
-  const avg_time = convertSecondsToHHandMM(data.avg_time!);
+  const max_time = convertSecondsToHHandMM(data.max_seconds!);
+  const expected_time = convertSecondsToHHandMM(data.exp_seconds!);
 
   return (
     <Modal isOpen={isOpen} onClose={() => navigate("..")}>
       <EditActivityForm
         activityId={parseInt(activityId)}
         initialValues={{
-          avg_time_hours: avg_time.hours,
-          avg_time_minutes: avg_time.minutes,
+          exp_time_hours: expected_time.hours,
+          exp_time_minutes: expected_time.minutes,
           name: data.name,
           category_id: { value: data.category.id, label: data.category.name },
           max_time_hours: max_time.hours,

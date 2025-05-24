@@ -7,8 +7,8 @@ import { CreateForm } from "../types/createForm";
 
 const defaultActivity: CreateForm = {
   name: "",
-  avg_time_hours: 0,
-  avg_time_minutes: 0,
+  exp_time_hours: 0,
+  exp_time_minutes: 0,
   max_time_hours: 0,
   max_time_minutes: 0,
   category_id: null,
@@ -54,12 +54,12 @@ export const ActivityForm = ({
         <div>
           <div className="flex gap-1">
             <NumberInput
-              label="Avg. Hours"
+              label="Exp. Hours"
               placeholder="00"
               hideErrorMessage
               className="flex-auto"
-              error={errors.avg_time_hours?.message}
-              registration={register("avg_time_hours", {
+              error={errors.exp_time_hours?.message}
+              registration={register("exp_time_hours", {
                 required: "At least 0 is required",
                 valueAsNumber: true,
                 min: {
@@ -73,12 +73,12 @@ export const ActivityForm = ({
               })}
             />
             <NumberInput
-              label="Avg. Minutes"
+              label="Exp. Minutes"
               placeholder="30"
               hideErrorMessage
               className="flex-auto"
-              error={errors.avg_time_minutes?.message}
-              registration={register("avg_time_minutes", {
+              error={errors.exp_time_minutes?.message}
+              registration={register("exp_time_minutes", {
                 required: "At least 0 is required",
                 valueAsNumber: true,
                 min: {
@@ -91,8 +91,8 @@ export const ActivityForm = ({
                 },
                 validate: {
                   isNotZero: (value) => {
-                    const { avg_time_hours } = getValues();
-                    if (avg_time_hours === 0 && value === 0) {
+                    const { exp_time_hours } = getValues();
+                    if (exp_time_hours === 0 && value === 0) {
                       return "Activities should take at least 1 minute";
                     }
                   },
@@ -101,7 +101,7 @@ export const ActivityForm = ({
             />
           </div>
           <div role="alert" className="mt-2 text-sm font-light text-red-600">
-            {errors.avg_time_hours?.message || errors.avg_time_minutes?.message}
+            {errors.exp_time_hours?.message || errors.exp_time_minutes?.message}
           </div>
         </div>
 

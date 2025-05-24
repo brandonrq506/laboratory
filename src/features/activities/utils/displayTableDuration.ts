@@ -1,6 +1,6 @@
 import { secondsToHHmm } from "@/utils";
 
-export const displayTableDuration = (avg_time: number | null) => {
-  if (avg_time === null) return "N/A";
-  return secondsToHHmm(avg_time);
+export const displayTableDuration = (exp_seconds: number | null) => {
+  if (exp_seconds === null) return "N/A";
+  return secondsToHHmm(exp_seconds);
 };

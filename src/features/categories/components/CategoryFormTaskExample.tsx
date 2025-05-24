@@ -16,7 +16,7 @@ export const CategoryFormTaskExample = ({ control }: Props) => {
     <ExampleCompletedTask
       task={{
         activity: {
-          avg_time: null,
+          exp_seconds: 3800,
           category: {
             id: 1,
             name: "Productive",
@@ -25,7 +25,7 @@ export const CategoryFormTaskExample = ({ control }: Props) => {
             updated_at: "2024-01-01T00:00:00Z",
             user_id: 1,
           },
-          max_time: null,
+          max_seconds: 4350,
           name: "Study",
           user_id: 1,
           created_at: "2024-01-01T00:00:00Z",

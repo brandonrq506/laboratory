@@ -15,14 +15,14 @@ describe("calculateExpectedStartTimes", () => {
   });
 
   it("handles when scheduled tasks go beyond the end of the day", () => {
-    // Using large avg_time values to ensure tasks extend past midnight
+    // Using large exp_seconds values to ensure tasks extend past midnight
     const longTasks = [
       {
         ...scheduledTasks[0],
         activity: {
           ...scheduledTasks[0].activity,
           // 3 hours
-          avg_time: 3600 * 3,
+          exp_seconds: 3600 * 3,
         },
       },
       {
@@ -30,7 +30,7 @@ describe("calculateExpectedStartTimes", () => {
         activity: {
           ...scheduledTasks[1].activity,
           // 4 hours
-          avg_time: 3600 * 4,
+          exp_seconds: 3600 * 4,
         },
       },
     ];

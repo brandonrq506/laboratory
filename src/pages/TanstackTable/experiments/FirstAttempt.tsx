@@ -21,11 +21,6 @@ IMPORTANT NOTES:
 - Code Guides > Column Defs > Grouping Columns. This may be what we need to handle both a desktiop and mobile view.
 */
 
-const formatDuration = (avg_time: number | null) => {
-  if (avg_time === null) return "N/A";
-  return secondsToHHmmss(avg_time);
-};
-
 const columnHelper = createColumnHelper<ActivityAPI>();
 
 export const FirstTableAttempt = () => {
@@ -36,13 +31,13 @@ export const FirstTableAttempt = () => {
       columnHelper.accessor("name", {
         header: "Name",
       }),
-      columnHelper.accessor("avg_time", {
-        header: "Avg. Duration",
-        cell: (props) => formatDuration(props.getValue()),
+      columnHelper.accessor("exp_seconds", {
+        header: "Exp. Duration",
+        cell: (props) => secondsToHHmmss(props.getValue()),
       }),
-      columnHelper.accessor("max_time", {
+      columnHelper.accessor("max_seconds", {
         header: "Max. Duration",
-        cell: (props) => formatDuration(props.getValue()),
+        cell: (props) => secondsToHHmmss(props.getValue()),
       }),
       columnHelper.accessor("category.name", {
         header: "Category",

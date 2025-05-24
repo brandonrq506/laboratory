@@ -38,7 +38,7 @@ export const RunningTimer = ({ task }: Props) => {
       <div className="flex gap-x-1.5 text-sm">
         <TimerTime start_time={task.start_time} />
         <p className="font-light text-gray-700">/</p>
-        {task.activity.avg_time && secondsToHHmmss(task.activity.avg_time)}
+        {secondsToHHmmss(task.activity.exp_seconds)}
       </div>
 
       <RunningTimerButton task={task} />

@@ -25,16 +25,16 @@ export const calculateExpectedStartTimes: FnDef = (
   // If there's an in-progress task, calculate its expected end time
   if (inProgressTask) {
     const startTime = new Date(inProgressTask.start_time);
-    const avgTimeSeconds = inProgressTask.activity.avg_time || 0;
+    const expectedTimeSeconds = inProgressTask.activity.exp_seconds;
 
     // Calculate elapsed time from start to now
     const elapsedMilliseconds = nextStartTime.getTime() - startTime.getTime();
     const elapsedSeconds = Math.floor(elapsedMilliseconds / 1000);
 
-    // If the avg_time exists and the task is still in progress according to avg_time
-    if (avgTimeSeconds > 0 && elapsedSeconds < avgTimeSeconds) {
+    // If the exp_time exists and the task is still in progress according to exp_time
+    if (expectedTimeSeconds > 0 && elapsedSeconds < expectedTimeSeconds) {
       // Task still has time left, add the remaining time to the current time
-      const remainingSeconds = (avgTimeSeconds - elapsedSeconds) * 1000;
+      const remainingSeconds = (expectedTimeSeconds - elapsedSeconds) * 1000;
       nextStartTime = new Date(nextStartTime.getTime() + remainingSeconds);
     }
     // Otherwise, use the current time as next start time
@@ -53,8 +53,8 @@ export const calculateExpectedStartTimes: FnDef = (
       });
 
       // bump nextStartTime by this task’s duration (or default 30m)
-      const avgSec = task.activity.avg_time || 0;
-      const incrementMs = avgSec > 0 ? avgSec * 1000 : 30 * 60 * 1000;
+      const expSecs = task.activity.exp_seconds;
+      const incrementMs = expSecs > 0 ? expSecs * 1000 : 30 * 60 * 1000;
       nextStartTime = new Date(nextStartTime.getTime() + incrementMs);
 
       return acc;

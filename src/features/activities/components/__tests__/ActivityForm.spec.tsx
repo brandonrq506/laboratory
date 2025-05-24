@@ -15,8 +15,8 @@ describe("ActivityForm", () => {
         onSubmit={vi.fn()}
         submitButtonText="Submit"
         initialValues={{
-          avg_time_hours: 0,
-          avg_time_minutes: 30,
+          exp_time_hours: 0,
+          exp_time_minutes: 30,
           category_id: { value: 1, label: "Productive" },
           max_time_hours: 1,
           max_time_minutes: 0,
@@ -27,8 +27,8 @@ describe("ActivityForm", () => {
 
     expect(screen.getByLabelText("Name *")).toHaveValue("Test");
     expect(screen.getByLabelText("Category *")).toHaveTextContent("Productive");
-    expect(screen.getByLabelText("Avg. Hours")).toHaveValue(0);
-    expect(screen.getByLabelText("Avg. Minutes")).toHaveValue(30);
+    expect(screen.getByLabelText("Exp. Hours")).toHaveValue(0);
+    expect(screen.getByLabelText("Exp. Minutes")).toHaveValue(30);
     expect(screen.getByLabelText("Max. Hours")).toHaveValue(1);
     expect(screen.getByLabelText("Max. Minutes")).toHaveValue(0);
   });
@@ -57,16 +57,16 @@ describe("ActivityForm", () => {
         initialValues={{
           name: "Test",
           category_id: { value: 1, label: "Productive" },
-          avg_time_hours: 0,
-          avg_time_minutes: 30,
+          exp_time_hours: 0,
+          exp_time_minutes: 30,
           max_time_hours: 1,
           max_time_minutes: 0,
         }}
       />,
     );
 
-    await user.clear(screen.getByLabelText("Avg. Hours"));
-    await user.type(screen.getByLabelText("Avg. Hours"), "24");
+    await user.clear(screen.getByLabelText("Exp. Hours"));
+    await user.type(screen.getByLabelText("Exp. Hours"), "24");
 
     await user.clear(screen.getByLabelText("Max. Hours"));
     await user.type(screen.getByLabelText("Max. Hours"), "24");
@@ -87,16 +87,16 @@ describe("ActivityForm", () => {
         initialValues={{
           name: "Test",
           category_id: { value: 1, label: "Productive" },
-          avg_time_hours: 0,
-          avg_time_minutes: 30,
+          exp_time_hours: 0,
+          exp_time_minutes: 30,
           max_time_hours: 1,
           max_time_minutes: 0,
         }}
       />,
     );
 
-    await user.clear(screen.getByLabelText("Avg. Minutes"));
-    await user.type(screen.getByLabelText("Avg. Minutes"), "60");
+    await user.clear(screen.getByLabelText("Exp. Minutes"));
+    await user.type(screen.getByLabelText("Exp. Minutes"), "60");
 
     await user.clear(screen.getByLabelText("Max. Minutes"));
     await user.type(screen.getByLabelText("Max. Minutes"), "60");
@@ -119,22 +119,22 @@ describe("ActivityForm", () => {
         initialValues={{
           name: "Test",
           category_id: { value: 1, label: "Productive" },
-          avg_time_hours: 0,
-          avg_time_minutes: 30,
+          exp_time_hours: 0,
+          exp_time_minutes: 30,
           max_time_hours: 1,
           max_time_minutes: 0,
         }}
       />,
     );
 
-    await user.clear(screen.getByLabelText("Avg. Hours"));
-    await user.type(screen.getByLabelText("Avg. Hours"), "-1");
+    await user.clear(screen.getByLabelText("Exp. Hours"));
+    await user.type(screen.getByLabelText("Exp. Hours"), "-1");
 
     await user.clear(screen.getByLabelText("Max. Hours"));
     await user.type(screen.getByLabelText("Max. Hours"), "-1");
 
-    await user.clear(screen.getByLabelText("Avg. Minutes"));
-    await user.type(screen.getByLabelText("Avg. Minutes"), "-1");
+    await user.clear(screen.getByLabelText("Exp. Minutes"));
+    await user.type(screen.getByLabelText("Exp. Minutes"), "-1");
 
     await user.clear(screen.getByLabelText("Max. Minutes"));
     await user.type(screen.getByLabelText("Max. Minutes"), "-1");
@@ -144,8 +144,8 @@ describe("ActivityForm", () => {
     expect(onSubmit).not.toHaveBeenCalled();
     expect(screen.getAllByText("Hours can't be negative")).toHaveLength(2);
 
-    await user.clear(screen.getByLabelText("Avg. Hours"));
-    await user.type(screen.getByLabelText("Avg. Hours"), "2");
+    await user.clear(screen.getByLabelText("Exp. Hours"));
+    await user.type(screen.getByLabelText("Exp. Hours"), "2");
 
     await user.clear(screen.getByLabelText("Max. Hours"));
     await user.type(screen.getByLabelText("Max. Hours"), "2");
@@ -163,8 +163,8 @@ describe("ActivityForm", () => {
         initialValues={{
           name: "Test",
           category_id: { value: 1, label: "Productive" },
-          avg_time_hours: 0,
-          avg_time_minutes: 0,
+          exp_time_hours: 0,
+          exp_time_minutes: 0,
           max_time_hours: 1,
           max_time_minutes: 30,
         }}
@@ -174,7 +174,7 @@ describe("ActivityForm", () => {
     await user.click(screen.getByRole("button", { name: "Submit" }));
 
     expect(onSubmit).not.toHaveBeenCalled();
-    expect(screen.getByLabelText("Avg. Minutes")).toHaveFocus();
+    expect(screen.getByLabelText("Exp. Minutes")).toHaveFocus();
     expect(
       screen.getByText("Activities should take at least 1 minute"),
     ).toBeInTheDocument();

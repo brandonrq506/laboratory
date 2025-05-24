@@ -37,7 +37,7 @@ export const RoutineActivityList = () => {
                   {routine_activity.activity_name}
                 </Badge>
                 <span className="text-xs">
-                  {secondsToTime(routine_activity.activity_avg_time)}
+                  {secondsToTime(routine_activity.activity_exp_seconds)}
                 </span>
               </div>
 

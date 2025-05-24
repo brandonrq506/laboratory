@@ -17,12 +17,12 @@ export const CreateActivityForm = ({ initialValues }: Props) => {
 
   const onSubmit = async (values: CreateForm) => {
     await mutateAsync({
-      avg_time: hhmmToSeconds({
-        hours: values.avg_time_hours,
-        minutes: values.avg_time_minutes,
+      exp_seconds: hhmmToSeconds({
+        hours: values.exp_time_hours,
+        minutes: values.exp_time_minutes,
       }),
       category_id: values.category_id!.value,
-      max_time: hhmmToSeconds({
+      max_seconds: hhmmToSeconds({
         hours: values.max_time_hours,
         minutes: values.max_time_minutes,
       }),

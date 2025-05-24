@@ -32,14 +32,12 @@ export const ScheduledTask = ({ task }: Props) => {
               </p>
             </div>
           )}
-          {task.activity.avg_time && (
-            <div className="flex gap-1 text-xs text-gray-600">
-              <ClockIcon className="size-4" />
-              <p className="tabular-nums">
-                {secondsToTime(task.activity.avg_time)}
-              </p>
-            </div>
-          )}
+          <div className="flex gap-1 text-xs text-gray-600">
+            <ClockIcon className="size-4" />
+            <p className="tabular-nums">
+              {secondsToTime(task.activity.exp_seconds)}
+            </p>
+          </div>
         </div>
       </div>
 

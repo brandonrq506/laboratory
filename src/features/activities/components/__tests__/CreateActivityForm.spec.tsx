@@ -14,8 +14,8 @@ describe("CreateActivityForm", () => {
             initialValues={{
               name: "Test",
               category_id: { value: 1, label: "Productive" },
-              avg_time_hours: 1,
-              avg_time_minutes: 0,
+              exp_time_hours: 1,
+              exp_time_minutes: 0,
               max_time_hours: 2,
               max_time_minutes: 0,
             }}
