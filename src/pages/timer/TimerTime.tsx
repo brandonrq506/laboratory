@@ -16,7 +16,7 @@ export const TimerTime = ({ start_time, exp_seconds }: Props) => {
       <span className={clsx(seconds < 0 && "text-red-800")}>
         {secondsToHHmmss(seconds)}
       </span>
-      <p className="font-light text-gray-700">/</p>
+      <span className="font-light text-gray-700">/</span>
       {secondsToHHmmss(exp_seconds)}
     </div>
   );
