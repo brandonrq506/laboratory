@@ -1,31 +1,23 @@
-import { useEffect, useState } from "react";
+import { useTimer } from "@/hooks";
 
+import { clsx } from "clsx";
 import { secondsToHHmmss } from "@/utils";
 
-const DELAY = 1000;
-const MILI_TO_SEC = 1000;
-
-const elapsedTime = (start_time: string) => {
-  const start = new Date(start_time);
-  const now = new Date();
-  const elapsed = (now.getTime() - start.getTime()) / MILI_TO_SEC;
-  return Math.max(0, elapsed);
-};
-
-type Props = {
+interface Props {
   start_time: string;
-};
+  exp_seconds: number;
+}
 
-export const TimerTime = ({ start_time }: Props) => {
-  const [, setTime] = useState(0);
-  const elapsedSeconds = elapsedTime(start_time);
+export const TimerTime = ({ start_time, exp_seconds }: Props) => {
+  const seconds = useTimer({ start_time, exp_seconds });
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      setTime((c) => c + 1);
-    }, DELAY);
-    return () => clearInterval(id);
-  }, []);
-
-  return <div>{secondsToHHmmss(elapsedSeconds)}</div>;
+  return (
+    <div className="flex gap-x-1.5 text-sm">
+      <span className={clsx(seconds < 0 && "text-red-800")}>
+        {secondsToHHmmss(seconds)}
+      </span>
+      <span className="font-light text-gray-700">/</span>
+      {secondsToHHmmss(exp_seconds)}
+    </div>
+  );
 };

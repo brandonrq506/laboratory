@@ -7,7 +7,6 @@ import { RunningTimerButton } from "./RunningTimerButton";
 import { TimerTime } from "./TimerTime";
 
 import { getColorByName } from "@/features/colors/utils/getColorByName";
-import { secondsToHHmmss } from "@/utils";
 
 type Props = {
   task: InProgressTaskAPI;
@@ -35,11 +34,10 @@ export const RunningTimer = ({ task }: Props) => {
           {new Date(task.start_time).toLocaleTimeString()}
         </p>
       </Link>
-      <div className="flex gap-x-1.5 text-sm">
-        <TimerTime start_time={task.start_time} />
-        <p className="font-light text-gray-700">/</p>
-        {secondsToHHmmss(task.activity.exp_seconds)}
-      </div>
+      <TimerTime
+        start_time={task.start_time}
+        exp_seconds={task.activity.exp_seconds}
+      />
 
       <RunningTimerButton task={task} />
     </div>

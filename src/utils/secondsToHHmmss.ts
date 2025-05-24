@@ -1,9 +1,18 @@
-import { addSeconds, format, startOfToday } from "date-fns";
+import { secondsInHour, secondsInMinute } from "date-fns/constants";
 
-export const secondsToHHmmss = (seconds: number) => {
-  if (seconds < 0)
-    throw new Error(`Seconds must be a positive number. Received: ${seconds}`);
+const PADDING = 2;
 
-  const date = addSeconds(startOfToday(), seconds);
-  return format(date, "HH:mm:ss");
+export const secondsToHHmmss = (totalSeconds: number) => {
+  const sign = totalSeconds < 0 ? "-" : "";
+  const secs = Math.abs(totalSeconds);
+
+  const hours = Math.floor(secs / secondsInHour);
+  const minutes = Math.floor((secs % secondsInHour) / secondsInMinute);
+  const seconds = Math.floor(secs % secondsInMinute);
+
+  const hh = String(hours).padStart(PADDING, "0");
+  const mm = String(minutes).padStart(PADDING, "0");
+  const ss = String(seconds).padStart(PADDING, "0");
+
+  return `${sign}${hh}:${mm}:${ss}`;
 };
