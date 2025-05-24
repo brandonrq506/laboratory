@@ -5,6 +5,7 @@ import { CompletedTaskAPI } from "../types/completedTask";
 import { EditForm } from "../types/editForm";
 import { InProgressTaskAPI } from "../types/inProgressTast";
 import { TaskForm } from "./TaskForm";
+import { floorSeconds } from "@/utils";
 
 type Props = {
   task: CompletedTaskAPI | InProgressTaskAPI;
@@ -19,7 +20,7 @@ export const EditTaskForm = ({ task }: Props) => {
       taskId: task.id,
       task: {
         activity_id: data.activity.value,
-        start_time: data.start_time,
+        start_time: floorSeconds(data.start_time).toISOString(),
         end_time: data.end_time,
       },
     });
