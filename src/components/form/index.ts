@@ -8,3 +8,4 @@ export * from "./Select/Select";
 export * from "./TextInput/TextInput";
 export * from "./TextInput/StateInputText";
 export * from "./TimeInput/TimeInputV2";
+export * from "./TimeInput/TimeInputV3";

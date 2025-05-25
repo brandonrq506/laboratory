@@ -4,4 +4,5 @@ export * from "./floorSeconds";
 export * from "./formatDatetimeTo12hTime";
 export * from "./secondsToHHmm";
 export * from "./secondsToHHmmss";
+export * from "./splitHHMM";
 export * from "./transformToOption";
