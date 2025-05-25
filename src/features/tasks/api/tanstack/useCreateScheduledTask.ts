@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { createTask } from "../axios/createTask";
+import { createQuickTask } from "../axios/createQuickTask";
 import { scheduledTasksOptions } from "../queryOptions";
 import { taskKeys } from "../queryKeys";
 
@@ -10,7 +10,7 @@ export const useCreateScheduledTask = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: createTask,
+    mutationFn: createQuickTask,
 
     onMutate: async (activity) => {
       await queryClient.cancelQueries({ queryKey: taskKeys.lists() });
