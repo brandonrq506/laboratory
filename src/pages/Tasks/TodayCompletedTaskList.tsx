@@ -2,9 +2,10 @@ import { usePrefetchTask } from "@/features/tasks/api/tanstack/usePrefetchTask";
 import { useQuery } from "@tanstack/react-query";
 
 import { CompletedTask, TaskList } from "@/features/tasks/components";
+import { AddTaskButton } from "./AddTaskButton";
 import { Link } from "react-router";
 import { Loading } from "@/components/core";
-import { SectionHeader } from "@/components/layout";
+import { SectionHeaderWithAction } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
 import { todayCompletedTasksOptions } from "@/features/tasks/api/queryOptions";
 
@@ -17,7 +18,11 @@ export const TodayCompletedTaskList = () => {
   if (isPending)
     return (
       <div>
-        <SectionHeader title="Today's Completed Tasks" className="pr-2.5" />
+        <SectionHeaderWithAction
+          title="Today's Completed Tasks"
+          className="pr-2.5"
+          action={<AddTaskButton />}
+        />
         <Loading className="mx-auto my-10" sizeStyles="size-10" />
       </div>
     );
@@ -26,7 +31,11 @@ export const TodayCompletedTaskList = () => {
 
   return (
     <div>
-      <SectionHeader title="Today's Completed Tasks" className="pr-2.5" />
+      <SectionHeaderWithAction
+        title="Today's Completed Tasks"
+        className="pr-2.5"
+        action={<AddTaskButton />}
+      />
       <TaskList
         tasks={data}
         renderItem={(task) => (

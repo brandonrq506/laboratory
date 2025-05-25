@@ -1,3 +1,4 @@
+import { AddTaskButton } from "./AddTaskButton";
 import { AdminProtectedContent } from "@/features/user/components";
 import { DateFilter } from "@/components/core/Date";
 import { ExcelLink } from "./ExcelLink";
@@ -16,8 +17,9 @@ export const HistoryPage = () => {
           </AdminProtectedContent>
         }
       />
-      <div className="mb-2 w-2/3 md:w-1/3">
+      <div className="mb-2 flex w-full items-center justify-between">
         <DateFilter label="Date Filter" hideLabel className="w-full" />
+        <AddTaskButton />
       </div>
       <FilterableTaskList />
       <Outlet />
