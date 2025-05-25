@@ -41,7 +41,7 @@ export const LinkButton = ({
     <Link
       {...props}
       className={clsx(
-        "inline-flex items-center font-semibold shadow-xs focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+        "inline-flex items-center font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2",
         variants[variant],
         sizes[size],
         className,

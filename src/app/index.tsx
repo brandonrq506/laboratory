@@ -37,7 +37,7 @@ import {
   NewRoutinePage,
   RoutinesPage,
 } from "@/pages/routines";
-import { EditTaskPage, HistoryPage } from "@/pages/Tasks";
+import { EditTaskPage, HistoryPage, NewTaskPage } from "@/pages/Tasks";
 import { MainErrorPage, MainLayout } from "@/components/layout";
 import { Navigate, createBrowserRouter } from "react-router";
 import { AppProvider } from "./provider";
@@ -69,7 +69,10 @@ const router = createBrowserRouter([
       {
         path: "history",
         element: <HistoryPage />,
-        children: [{ path: "edit/:taskId", element: <EditTaskPage /> }],
+        children: [
+          { path: "edit/:taskId", element: <EditTaskPage /> },
+          { path: "new", element: <NewTaskPage /> },
+        ],
       },
       {
         path: "routines",
@@ -101,7 +104,10 @@ const router = createBrowserRouter([
       {
         path: "timer",
         element: <TimerPage />,
-        children: [{ path: "edit/:taskId", element: <EditTaskPage /> }],
+        children: [
+          { path: "edit/:taskId", element: <EditTaskPage /> },
+          { path: "new", element: <NewTaskPage /> },
+        ],
       },
       { path: "projects", element: <Projects /> },
       { path: "modal-testing", element: <TestingModal /> },
