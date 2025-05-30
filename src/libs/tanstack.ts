@@ -1,8 +1,9 @@
 import { DefaultOptions, QueryClient } from "@tanstack/react-query";
+import { millisecondsInMinute } from "date-fns/constants";
 
 const options: DefaultOptions = {
   queries: {
-    staleTime: 10000,
+    staleTime: millisecondsInMinute,
   },
 };
 
