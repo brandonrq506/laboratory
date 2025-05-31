@@ -4,7 +4,9 @@ import { UserPreferenceKeys } from "../types/userPreferenceKeys";
 import { matchUserPreference } from "../utils/matchUserPreference";
 
 export function useUserPreference(preferenceKey: UserPreferenceKeys) {
-  const { data } = useUserPreferences();
+  const { data, isPending } = useUserPreferences();
+
+  console.log(isPending);
 
   if (!data) return undefined;
 
