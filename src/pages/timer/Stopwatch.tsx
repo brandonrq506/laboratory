@@ -11,7 +11,7 @@ export const Stopwatch = ({ start_at }: Props) => {
 
   return (
     <div>
-      <span>{secondsToHHmmss(stopWatchSeconds)}</span>
+      <span className="tabular-nums">{secondsToHHmmss(stopWatchSeconds)}</span>
     </div>
   );
 };
