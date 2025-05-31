@@ -17,4 +17,5 @@ export const ME_ENDPOINT = "/me";
 export const ROUTINES_ENDPOINT = "/routines";
 export const SESSION_ENDPOINT = "/session";
 export const TASKS_ENDPOINT = "/tasks";
+export const USER_PREFERENCES_ENDPOINT = "/user_preferences";
 export const USERS_ENDPOINT = "/users";
