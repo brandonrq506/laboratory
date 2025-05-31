@@ -7,22 +7,22 @@ export const TimerTimeTab = ({ children }: PropsWithChildren) => {
   const preference = useUserPreference("show_remaining_time");
   const { mutate } = useUpdateUserPreference();
 
-  const show_remaining_time = preference?.value === "true";
+  const showRemainingTime = preference?.value === "true";
 
   const handleToggle = () => {
     if (!preference) return;
     mutate({
       key: "show_remaining_time",
-      value: String(!show_remaining_time),
+      value: String(!showRemainingTime),
     });
   };
 
   return (
-    <div
+    <button
       className="flex cursor-pointer gap-x-1.5 text-sm select-none"
       onClick={handleToggle}
       title="Click to toggle between remaining and elapsed time">
       {children}
-    </div>
+    </button>
   );
 };
