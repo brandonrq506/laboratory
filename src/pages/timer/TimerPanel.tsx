@@ -6,7 +6,7 @@ import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTast";
 import { RunningTimer } from "./RunningTimer";
 import { inProgressTaskOptions } from "@/features/tasks/api/queryOptions";
 
-export const Timer = () => {
+export const TimerPanel = () => {
   const { data } = useQuery(inProgressTaskOptions());
 
   const status = data === undefined || data.length === 0 ? "idle" : "active";
