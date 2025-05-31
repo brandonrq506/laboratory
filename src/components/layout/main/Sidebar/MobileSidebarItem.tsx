@@ -23,8 +23,8 @@ export const MobileSidebarItem = ({
         className={({ isActive }) =>
           clsx(
             isActive
-              ? "bg-gray-50 text-indigo-600 *:text-indigo-600"
-              : "text-gray-700 *:text-gray-400 hover:bg-gray-50 hover:text-indigo-600",
+              ? "bg-gray-50 text-indigo-600 group-hover:text-indigo-600"
+              : "text-gray-700 group-hover:text-gray-400 hover:bg-gray-50 hover:text-indigo-600",
             "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold",
           )
         }>
