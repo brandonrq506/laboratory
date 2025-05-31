@@ -4,7 +4,8 @@ import {
   RectangleStackIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
-import { SidebarItem } from "./SidebarItem";
+import { DesktopSidebarItem } from "./DesktopSidebarItem";
+import { MobileSidebarItem } from "./MobileSidebarItem";
 
 const IS_DEV = import.meta.env.DEV;
 
@@ -17,19 +18,21 @@ const experiments = [
 
 interface Props {
   onClose: () => void;
+  isMobile?: boolean;
 }
 
-export const Experiments = ({ onClose }: Props) => {
+export const Experiments = ({ onClose, isMobile = false }: Props) => {
   if (!IS_DEV) return null;
+
+  const SidebarItemComponent = isMobile
+    ? MobileSidebarItem
+    : DesktopSidebarItem;
 
   return (
     <li>
-      <div className="text-xs/6 font-semibold text-gray-400">
-        My experiments
-      </div>
       <ul role="list" className="-mx-2 mt-2 space-y-1">
         {experiments.map((experiment) => (
-          <SidebarItem
+          <SidebarItemComponent
             key={experiment.name}
             {...experiment}
             onClose={onClose}

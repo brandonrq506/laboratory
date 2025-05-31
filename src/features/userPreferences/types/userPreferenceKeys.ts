@@ -1,1 +1,4 @@
-export type UserPreferenceKeys = "theme" | "show_remaining_time" | "round_time";
+export type UserPreferenceKeys =
+  | "show_remaining_time"
+  | "sidebar_open"
+  | "theme";

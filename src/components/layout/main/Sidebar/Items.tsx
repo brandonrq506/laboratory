@@ -5,7 +5,8 @@ import {
   RectangleStackIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
-import { SidebarItem } from "./SidebarItem";
+import { DesktopSidebarItem } from "./DesktopSidebarItem";
+import { MobileSidebarItem } from "./MobileSidebarItem";
 
 const items = [
   { name: "Activities", href: "/activities", icon: UsersIcon },
@@ -17,14 +18,19 @@ const items = [
 
 interface Props {
   onClose: () => void;
+  isMobile?: boolean;
 }
 
-export const Items = ({ onClose }: Props) => {
+export const Items = ({ onClose, isMobile = false }: Props) => {
+  const SidebarItemComponent = isMobile
+    ? MobileSidebarItem
+    : DesktopSidebarItem;
+
   return (
     <li>
       <ul role="list" className="-mx-2 space-y-1">
         {items.map((item) => (
-          <SidebarItem key={item.name} {...item} onClose={onClose} />
+          <SidebarItemComponent key={item.name} {...item} onClose={onClose} />
         ))}
       </ul>
     </li>
