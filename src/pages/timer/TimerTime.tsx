@@ -11,7 +11,7 @@ interface Props {
 
 export const TimerTime = ({ start_time, exp_seconds }: Props) => {
   const preference = useUserPreference("show_remaining_time");
-  const show_remaining_time = preference?.value !== "false";
+  const show_remaining_time = preference?.value === "true";
 
   return (
     <div className="flex gap-x-1.5 text-sm">
