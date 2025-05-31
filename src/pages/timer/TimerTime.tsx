@@ -3,6 +3,7 @@ import { useUserPreference } from "@/features/userPreferences/hooks";
 
 import { Stopwatch } from "./Stopwatch";
 import { Timer } from "./Timer";
+import { TimerTimeTab } from "./TimerTimeTab";
 
 interface Props {
   start_time: string;
@@ -14,7 +15,7 @@ export const TimerTime = ({ start_time, exp_seconds }: Props) => {
   const show_remaining_time = preference?.value === "true";
 
   return (
-    <div className="flex gap-x-1.5 text-sm">
+    <TimerTimeTab>
       {show_remaining_time ? (
         <Timer start_time={start_time} exp_seconds={exp_seconds} />
       ) : (
@@ -22,6 +23,6 @@ export const TimerTime = ({ start_time, exp_seconds }: Props) => {
       )}
       <span className="font-light text-gray-700">/</span>
       {secondsToHHmmss(exp_seconds)}
-    </div>
+    </TimerTimeTab>
   );
 };
