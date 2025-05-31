@@ -1,4 +1,5 @@
 import { useDisclosure } from "@/hooks/useDisclosure";
+import { useUserPreference } from "@/features/userPreferences/hooks";
 
 import { IconButton, LinkedInProfile, NetworkBadge } from "../../core";
 import { AuthGuard } from "./AuthGuard";
@@ -6,9 +7,13 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Header } from "./Header";
 import { Outlet } from "react-router";
 import { Sidebar } from "./Sidebar/Sidebar";
+import clsx from "clsx";
 
 export const MainLayout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const sidebarPreference = useUserPreference("sidebar_open");
+  const isDesktopSidebarOpen = sidebarPreference?.value === "true";
+
   return (
     <AuthGuard>
       <Sidebar isOpen={isOpen} onClose={onClose} />
@@ -26,7 +31,11 @@ export const MainLayout = () => {
         <LinkedInProfile />
       </Header>
 
-      <main className="py-6 lg:pl-72">
+      <main
+        className={clsx(
+          "py-6 transition-all",
+          isDesktopSidebarOpen ? "lg:pl-72" : "lg:pl-20",
+        )}>
         <div className="px-4 sm:px-6">{<Outlet />}</div>
         <NetworkBadge />
       </main>

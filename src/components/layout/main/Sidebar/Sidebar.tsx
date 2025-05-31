@@ -1,3 +1,5 @@
+import { useUserPreference } from "@/features/userPreferences/hooks";
+
 import {
   Dialog,
   DialogBackdrop,
@@ -5,6 +7,7 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 
+import { DesktopSidebarToggle } from "@/features/userPreferences/components";
 import { Experiments } from "./Experiments";
 import { Items } from "./Items";
 import { LinkedInProfile } from "@/components/core";
@@ -12,6 +15,7 @@ import { LogoutButton } from "@/features/auth/components";
 import { Username } from "@/features/user/components";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import appLogo from "@/assets/app_logo.png";
+import clsx from "clsx";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -19,6 +23,9 @@ type SidebarProps = {
 };
 
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
+  const sidebarPreference = useUserPreference("sidebar_open");
+  const isDesktopSidebarOpen = sidebarPreference?.value === "true";
+
   return (
     <>
       {/* Mobile Sidebar */}
@@ -60,8 +67,8 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
               </div>
               <nav className="flex flex-1 flex-col">
                 <ul role="list" className="flex flex-1 flex-col gap-y-7">
-                  <Items onClose={onClose} />
-                  <Experiments onClose={onClose} />
+                  <Items onClose={onClose} isMobile={true} />
+                  <Experiments onClose={onClose} isMobile={true} />
                   <li className="mt-auto mb-4 flex items-center justify-between">
                     <div className="flex gap-2">
                       <LinkedInProfile />
@@ -77,10 +84,18 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
       </Dialog>
 
       {/* Desktop Sidebar */}
-      <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-72 lg:flex-col">
+      <div
+        className={clsx(
+          "relative hidden lg:fixed lg:inset-y-0 lg:flex lg:flex-col",
+          isDesktopSidebarOpen ? "lg:w-72" : "lg:w-20",
+        )}>
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
-          <div className="flex h-16 shrink-0 items-center">
+        <div
+          className={clsx(
+            "flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white transition-all",
+            isDesktopSidebarOpen ? "px-6" : "px-3",
+          )}>
+          <div className="flex h-16 shrink-0 items-center justify-center">
             <img
               alt="App Logo"
               src={appLogo}
@@ -89,10 +104,18 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           </div>
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
-              <Items onClose={onClose} />
-              <Experiments onClose={onClose} />
-              <li className="mt-auto mb-4 flex items-center justify-between">
-                <div className="flex gap-2">
+              <Items onClose={onClose} isMobile={false} />
+              <Experiments onClose={onClose} isMobile={false} />
+              <li
+                className={clsx(
+                  "mt-auto mb-4 flex items-center",
+                  isDesktopSidebarOpen ? "justify-between" : "justify-center",
+                )}>
+                <div
+                  className={clsx(
+                    "flex gap-2",
+                    !isDesktopSidebarOpen && "hidden",
+                  )}>
                   <LinkedInProfile />
                   <Username />
                 </div>
@@ -101,6 +124,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             </ul>
           </nav>
         </div>
+        <DesktopSidebarToggle />
       </div>
     </>
   );
