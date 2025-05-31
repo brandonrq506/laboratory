@@ -1,24 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
+import { useTimer } from "@/hooks";
 
-import { Card } from "@/components/layout";
-import { IdleTimer } from "./IdleTimer";
-import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTast";
-import { RunningTimer } from "./RunningTimer";
-import { inProgressTaskOptions } from "@/features/tasks/api/queryOptions";
+import clsx from "clsx";
+import { secondsToHHmmss } from "@/utils";
 
-export const Timer = () => {
-  const { data } = useQuery(inProgressTaskOptions());
+interface Props {
+  start_time: string;
+  exp_seconds: number;
+}
 
-  const status = data === undefined || data.length === 0 ? "idle" : "active";
-  const isIdle = status === "idle";
-  const isActive = status === "active";
-
-  const task = data?.[0] as InProgressTaskAPI;
+export const Timer = ({ start_time, exp_seconds }: Props) => {
+  const seconds = useTimer({ start_time, exp_seconds });
 
   return (
-    <Card className="sticky top-16 z-[1] lg:top-4">
-      {isIdle && <IdleTimer />}
-      {isActive && <RunningTimer task={task} />}
-    </Card>
+    <span className={clsx(seconds < 0 && "text-red-800")}>
+      {secondsToHHmmss(seconds)}
+    </span>
   );
 };
