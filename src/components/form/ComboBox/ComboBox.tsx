@@ -17,11 +17,7 @@ import {
 import { ComboBoxType } from "./types";
 import { Option } from "@/types/core";
 import { clsx } from "clsx";
-
-const filterOptions = (query: string, options: Option[]) => {
-  const trimmedQuery = query.trim().toLowerCase();
-  return options.filter((op) => op.label.toLowerCase().includes(trimmedQuery));
-};
+import { filterOptions } from "./utils/filterOptions";
 
 type ComboBoxRHFProps = {
   value: Option | null;
