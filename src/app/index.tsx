@@ -37,7 +37,12 @@ import {
   NewRoutinePage,
   RoutinesPage,
 } from "@/pages/routines";
-import { EditTaskPage, HistoryPage, NewTaskPage } from "@/pages/Tasks";
+import {
+  EditTaskPage,
+  HistoryPage,
+  NewTaskPage,
+  NewTodayCompletedTaskPage,
+} from "@/pages/Tasks";
 import { MainErrorPage, MainLayout } from "@/components/layout";
 import { Navigate, createBrowserRouter } from "react-router";
 import { AppProvider } from "./provider";
@@ -106,7 +111,7 @@ const router = createBrowserRouter([
         element: <TimerPage />,
         children: [
           { path: "edit/:taskId", element: <EditTaskPage /> },
-          { path: "new", element: <NewTaskPage /> },
+          { path: "new", element: <NewTodayCompletedTaskPage /> },
         ],
       },
       { path: "projects", element: <Projects /> },
