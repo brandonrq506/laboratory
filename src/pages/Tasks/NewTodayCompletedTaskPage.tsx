@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { Modal } from "@/components/core";
 import { NewTodayCompletedTaskForm } from "./NewTodayCompletedTaskForm";
 
-export const NewTodayCompletedTask = () => {
+export const NewTodayCompletedTaskPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 

@@ -41,7 +41,7 @@ import {
   EditTaskPage,
   HistoryPage,
   NewTaskPage,
-  NewTodayCompletedTask,
+  NewTodayCompletedTaskPage,
 } from "@/pages/Tasks";
 import { MainErrorPage, MainLayout } from "@/components/layout";
 import { Navigate, createBrowserRouter } from "react-router";
@@ -111,7 +111,7 @@ const router = createBrowserRouter([
         element: <TimerPage />,
         children: [
           { path: "edit/:taskId", element: <EditTaskPage /> },
-          { path: "new", element: <NewTodayCompletedTask /> },
+          { path: "new", element: <NewTodayCompletedTaskPage /> },
         ],
       },
       { path: "projects", element: <Projects /> },
