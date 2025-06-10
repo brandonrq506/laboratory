@@ -48,7 +48,7 @@
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.5.1",
     "@vitest/coverage-istanbul": "^3.2.1",
-    "@vitest/ui": "^3.2.2",
+    "@vitest/ui": "^3.2.3",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-jest-dom": "^5.5.0",
