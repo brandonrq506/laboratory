@@ -47,11 +47,11 @@ This enables users to improve their time management, find areas for productivity
 - When testing components with API calls, use the `msw` library to mock those calls in `src/test/handlers`.
 - When testing functions, you may need to import dummy data from `src/test/store` to use as test data.
 
-## Typescript
+## TypeScript
 
 - Create types in the src/features/[feature]/types directory
 - Use `interface` for defining object shapes and `type` for unions or more complex types.
-- Rely on Typescript to infer types when possible.
+- Rely on TypeScript to infer types when possible.
 - Never use `any` type.
 
 ## General programming notes
