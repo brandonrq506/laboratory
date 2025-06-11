@@ -4,7 +4,7 @@
 
 Laboratory is a Web Application directed to people wanting to track their daily activities.
 They can do so through the use of Routines and Tasks.
-Users can define a list of Scheduled tasks, have one in_progress task, and a list of completed tasks.
+Users can define a list of `scheduled` tasks, have one `in_progress` task, and a list of `completed` tasks.
 This enables users to improve their time management, find areas for productivity improvement, and track their progress over time.
 
 ## Project Structure
@@ -17,15 +17,15 @@ This enables users to improve their time management, find areas for productivity
       - `form`: Contains form components used across the application.
       - `layout`: Contains layout components used across the application.
     - `constants`: Contains text constants used across the application.
-    - `features`: Contains feature-specific.
-      - `activities`: Contains components, hooks, types and API calls/hooks
-      - `auth`: Contains components, hooks, types and API calls/hooks.
-      - `categories`: Contains components, hooks, types and API calls/hooks.
+    - `features`: Contains feature-specific code.
+      - `activities`: Contains components, hooks, types and API calls and hooks.
+      - `auth`: Contains components, hooks, types and API calls and hooks.
+      - `categories`: Contains components, hooks, types and API calls and hooks.
       - `colors`: Contains components, hooks and utils.
-      - `routines`: Contains components, hooks, types and API calls/hooks.
-      - `tasks`: Contains components, hooks, types and API calls/hooks.
-      - `user`: Contains components, hooks, types and API calls/hooks.
-      - `userPreferences`: Contains components, hooks, types and API calls/hooks.
+      - `routines`: Contains components, hooks, types and API calls and hooks.
+      - `tasks`: Contains components, hooks, types and API calls and hooks.
+      - `user`: Contains components, hooks, types and API calls and hooks.
+      - `userPreferences`: Contains components, hooks, types and API calls and hooks.
     - `hooks`: Contains custom hooks used across the application.
     - `libs`: Contains library configuration. Tanstack QUery and Axios configuration files are located here.
     - `pages`: Contains the main pages of the application and components only used in those pages.
