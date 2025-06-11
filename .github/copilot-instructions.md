@@ -40,12 +40,7 @@ This enables users to improve their time management, find areas for productivity
 
 ### Vitest
 
-- Create your test files in the `__tests__` directory next to the file being tested.
-- If there is no `__tests__` directory, create a new one.
-- Use `describe` for grouping tests and `it` for individual test cases.
-- Use `userEvent` for simulating user interactions in tests, instead of `fireEvent`.
-- When testing components with API calls, use the `msw` library to mock those calls in `src/test/handlers`.
-- When testing functions, you may need to import dummy data from `src/test/store` to use as test data.
+- Please reference [Testing Instructions](./instructions/testing.instructions.md) for more details.
 
 ## TypeScript
 
