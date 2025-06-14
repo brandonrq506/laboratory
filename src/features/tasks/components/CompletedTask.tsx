@@ -7,6 +7,8 @@ import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 import { getDurationInSeconds } from "../utils/getDurationInSeconds";
 
+import { getPerformanceEmoji } from "../utils/getPerformanceEmoji";
+
 type Props = { task: CompletedTaskAPI };
 
 export const CompletedTask = ({ task }: Props) => {
@@ -35,7 +37,15 @@ export const CompletedTask = ({ task }: Props) => {
         </div>
       </div>
 
-      <DeleteTask taskId={task.id} />
+      <div className="flex items-center gap-2">
+        <span className="text-xs">
+          {getPerformanceEmoji({
+            activity: task.activity,
+            duration_seconds: durationSeconds,
+          })}
+        </span>
+        <DeleteTask taskId={task.id} />
+      </div>
     </Card>
   );
 };
