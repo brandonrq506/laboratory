@@ -39,12 +39,13 @@ export const SortableTask = ({ task }: Props) => {
   return (
     <div ref={setNodeRef} style={style} className="relative">
       <Card className="flex justify-between shadow-xs">
-        <div className="flex items-center gap-2">
-          <DragHandle
-            attributes={attributes}
-            listeners={listeners}
-            setActivatorNodeRef={setActivatorNodeRef}
-          />
+        <div
+          className="flex grow items-center gap-2"
+          style={{ touchAction: "none" }}
+          ref={setActivatorNodeRef}
+          {...attributes}
+          {...listeners}>
+          <DragHandle />
 
           <div>
             <div className="flex items-center gap-1.5">
