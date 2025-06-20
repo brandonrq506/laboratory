@@ -22,7 +22,7 @@ export const useCreateScheduledTask = () => {
       const newScheduledTask: ScheduledTaskAPI = {
         activity,
         status: "scheduled",
-        position: null,
+        position: "9999",
         start_time: null,
         end_time: null,
         optional_name: null,
