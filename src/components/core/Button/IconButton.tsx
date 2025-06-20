@@ -34,6 +34,7 @@ type IconButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   shape?: keyof typeof shapes;
   variant?: keyof typeof variants;
   className?: string;
+  ref?: React.Ref<HTMLButtonElement>;
 };
 
 export const IconButton = ({
@@ -44,9 +45,7 @@ export const IconButton = ({
   className,
   children,
   ...props
-}: IconButtonProps & {
-  ref?: React.RefObject<HTMLButtonElement>;
-}) => {
+}: IconButtonProps) => {
   return (
     <button
       ref={ref}
