@@ -1,8 +1,4 @@
-import {
-  AnimateLayoutChanges,
-  defaultAnimateLayoutChanges,
-  useSortable,
-} from "@dnd-kit/sortable";
+import { useSortable } from "@dnd-kit/sortable";
 
 import { CSS } from "@dnd-kit/utilities";
 import { Card } from "@/components/layout";
@@ -17,14 +13,6 @@ import { getColorByName } from "@/features/colors/utils/getColorByName";
 
 const HALF = 0.5;
 
-const animateLayoutChanges: AnimateLayoutChanges = (args) => {
-  const { isSorting } = args;
-
-  if (isSorting) return defaultAnimateLayoutChanges(args);
-
-  return true;
-};
-
 type Props = {
   task: ScheduledTaskWithExpectedStartTime;
 };
@@ -38,7 +26,7 @@ export const SortableTask = ({ task }: Props) => {
     transition,
     setActivatorNodeRef,
     isDragging,
-  } = useSortable({ id: task.id, animateLayoutChanges });
+  } = useSortable({ id: task.id });
   const color = getColorByName(task.activity.category.color);
 
   const style = {

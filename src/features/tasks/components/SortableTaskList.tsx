@@ -2,7 +2,6 @@ import {
   DndContext,
   DragEndEvent,
   KeyboardSensor,
-  MeasuringStrategy,
   MouseSensor,
   TouchSensor,
   closestCenter,
@@ -25,12 +24,6 @@ import { ScheduledTaskWithExpectedStartTime } from "../types/scheduledTaskWithEx
 import { SortableTask } from "./";
 import { TaskEmptyList } from "./TaskEmptyList";
 import { useMoveTask } from "../api/tanstack/useMoveTask";
-
-const measuringConfig = {
-  droppable: {
-    strategy: MeasuringStrategy.Always,
-  },
-};
 
 type Props = {
   tasks: ScheduledTaskWithExpectedStartTime[];
@@ -94,7 +87,6 @@ export const SortableTaskList = ({ tasks }: Props) => {
     <div className="space-y-3">
       <DndContext
         sensors={sensors}
-        measuring={measuringConfig}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
         modifiers={[restrictToVerticalAxis, restrictToParentElement]}>
