@@ -16,7 +16,11 @@ export const DragHandle = ({
   setActivatorNodeRef,
 }: Props) => {
   return (
-    <IconButton {...attributes} {...listeners} ref={setActivatorNodeRef}>
+    <IconButton
+      {...attributes}
+      {...listeners}
+      ref={setActivatorNodeRef}
+      style={{ touchAction: "none" }}>
       <AdjustmentsHorizontalIcon className="size-5 cursor-grab text-gray-400 hover:text-gray-600" />
       <span className="sr-only">Drag handle</span>
     </IconButton>
