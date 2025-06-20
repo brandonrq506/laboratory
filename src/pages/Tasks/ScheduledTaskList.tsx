@@ -2,8 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import {
   DeleteAllScheduledTasks,
-  ScheduledTask,
-  TaskList,
+  SortableTaskList,
 } from "@/features/tasks/components";
 import {
   inProgressTaskOptions,
@@ -51,10 +50,7 @@ export const ScheduledTaskList = () => {
         className="pr-2.5"
         action={<AddScheduledTaskMenu />}
       />
-      <TaskList
-        tasks={tasksWithExpectedStartTime}
-        renderItem={(task) => <ScheduledTask task={task} />}
-      />
+      <SortableTaskList tasks={tasksWithExpectedStartTime} />
       {displayDeleteAll && (
         <div className="mt-2 text-center">
           <DeleteAllScheduledTasks />

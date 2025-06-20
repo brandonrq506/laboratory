@@ -5,3 +5,5 @@ export * from "./ScheduledTask";
 export * from "./TaskList";
 export * from "./TaskStatusSelectFilter";
 export * from "./QuickCreateTaskMenu";
+export * from "./SortableTask";
+export * from "./SortableTaskList";
