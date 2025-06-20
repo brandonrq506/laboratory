@@ -7,10 +7,11 @@ import { Dot } from "@/components/core";
 import { DragHandle } from "./DragHandle";
 import { QuickDeleteTask } from "./QuickDeleteTask";
 import { ScheduledTaskWithExpectedStartTime } from "../types/scheduledTaskWithExpectedStartTime";
-import { getColorByName } from "@/features/colors/utils/getColorByName";
+import { StartTaskBtn } from "./StartTaskBtn";
 
 import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import clsx from "clsx";
+import { getColorByName } from "@/features/colors/utils/getColorByName";
 
 type Props = {
   task: ScheduledTaskWithExpectedStartTime;
@@ -74,7 +75,10 @@ export const SortableTask = ({ task }: Props) => {
           </div>
         </div>
 
-        <QuickDeleteTask taskId={task.id} />
+        <div className="flex items-center gap-2.5">
+          <StartTaskBtn task={task} />
+          <QuickDeleteTask taskId={task.id} />
+        </div>
       </Card>
     </div>
   );
