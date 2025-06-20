@@ -75,9 +75,11 @@ export const SortableTask = ({ task }: Props) => {
           </div>
         </div>
 
-        <div className="flex items-center gap-2.5">
-          <StartTaskBtn task={task} />
+        <div className="flex items-center gap-3">
           <QuickDeleteTask taskId={task.id} />
+          <div className="size-8">
+            <StartTaskBtn task={task} />
+          </div>
         </div>
       </Card>
     </div>
