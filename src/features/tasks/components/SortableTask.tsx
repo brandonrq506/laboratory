@@ -7,11 +7,10 @@ import { Dot } from "@/components/core";
 import { DragHandle } from "./DragHandle";
 import { QuickDeleteTask } from "./QuickDeleteTask";
 import { ScheduledTaskWithExpectedStartTime } from "../types/scheduledTaskWithExpectedStartTime";
-
-import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
-const HALF = 0.5;
+import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
+import clsx from "clsx";
 
 type Props = {
   task: ScheduledTaskWithExpectedStartTime;
@@ -32,13 +31,16 @@ export const SortableTask = ({ task }: Props) => {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? HALF : 1,
     zIndex: isDragging ? 1 : 0,
   };
 
   return (
     <div ref={setNodeRef} style={style} className="relative">
-      <Card className="flex justify-between shadow-xs">
+      <Card
+        className={clsx(
+          "flex justify-between shadow-xs transition-transform duration-100",
+          isDragging && ["z-20 scale-105 border border-indigo-700 shadow-2xl"],
+        )}>
         <div
           className="flex grow items-center gap-2"
           style={{ touchAction: "none" }}
