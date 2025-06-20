@@ -21,9 +21,9 @@ export const SortableTask = ({ task }: Props) => {
     attributes,
     listeners,
     setNodeRef,
+    setActivatorNodeRef,
     transform,
     transition,
-    setActivatorNodeRef,
     isDragging,
   } = useSortable({ id: task.id });
   const color = getColorByName(task.activity.category.color);
@@ -41,13 +41,12 @@ export const SortableTask = ({ task }: Props) => {
           "flex justify-between shadow-xs transition-transform duration-100",
           isDragging && ["z-20 scale-105 border border-indigo-700 shadow-2xl"],
         )}>
-        <div
-          className="flex grow items-center gap-2"
-          style={{ touchAction: "none" }}
-          ref={setActivatorNodeRef}
-          {...attributes}
-          {...listeners}>
-          <DragHandle />
+        <div className="flex grow items-center gap-2">
+          <DragHandle
+            attributes={attributes}
+            listeners={listeners}
+            setActivatorNodeRef={setActivatorNodeRef}
+          />
 
           <div>
             <div className="flex items-center gap-1.5">
