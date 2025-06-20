@@ -3,7 +3,8 @@ import {
   DragEndEvent,
   KeyboardSensor,
   MeasuringStrategy,
-  PointerSensor,
+  MouseSensor,
+  TouchSensor,
   closestCenter,
   useSensor,
   useSensors,
@@ -45,7 +46,14 @@ export const SortableTaskList = ({ tasks }: Props) => {
   }, [tasks]);
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(MouseSensor),
+    useSensor(TouchSensor, {
+      // Add a small delay to prevent accidental drags
+      activationConstraint: {
+        delay: 100,
+        tolerance: 5,
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
