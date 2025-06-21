@@ -18,8 +18,6 @@ export const StartTaskBtn = ({ task }: Props) => {
 
   const inProgressTask = data?.length;
 
-  if (inProgressTask) return null;
-
   const handleStartTask = () =>
     mutate({
       ...task,
@@ -29,8 +27,11 @@ export const StartTaskBtn = ({ task }: Props) => {
     });
 
   return (
-    <IconButton onClick={handleStartTask}>
-      <PlayIcon className="size-5 text-gray-400 hover:text-gray-600" />
+    <IconButton
+      onClick={handleStartTask}
+      disabled={Boolean(inProgressTask)}
+      className="disabled:text-gray-400 disabled:hover:text-gray-600">
+      <PlayIcon className="size-5" />
       <span className="sr-only">Start task</span>
     </IconButton>
   );
