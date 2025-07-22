@@ -1,15 +1,16 @@
-import { useCreateCompletedTodayTask } from "../../features/tasks/api/tanstack/useCreateCompletedTodayTask";
+import { set } from "date-fns";
 import { useNavigate } from "react-router";
 
+import { getNewTaskDefaultTimes, splitHHMM } from "@/utils";
 import { NewTaskForm as FormType } from "../../features/tasks/types/newTaskForm";
 import { NewTaskForm } from "../../features/tasks/components/NewTaskForm";
-
-import { set } from "date-fns";
-import { splitHHMM } from "@/utils";
+import { useCreateCompletedTodayTask } from "../../features/tasks/api/tanstack/useCreateCompletedTodayTask";
 
 export const NewTodayCompletedTaskForm = () => {
   const navigate = useNavigate();
   const { mutate } = useCreateCompletedTodayTask();
+
+  const defaultTime = getNewTaskDefaultTimes();
 
   const handleSubmit = (data: FormType) => {
     const [startHours, startMinutes] = splitHHMM(data.start_time);
@@ -43,8 +44,8 @@ export const NewTodayCompletedTaskForm = () => {
       onSubmit={handleSubmit}
       initialValues={{
         activity: null,
-        end_time: "00:00",
-        start_time: "00:00",
+        end_time: defaultTime,
+        start_time: defaultTime,
         status: "completed",
       }}
     />
