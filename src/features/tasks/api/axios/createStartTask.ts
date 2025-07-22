@@ -1,5 +1,5 @@
 import { TASKS_ENDPOINT, apiV1 } from "@/libs/axios";
-import { InProgressTaskAPI } from "../../types/inProgressTast";
+import { InProgressTaskAPI } from "../../types/inProgressTask";
 import { TaskModel } from "../../types/taskModel";
 
 type Props = Pick<TaskModel, "activity_id" | "start_time" | "status">;

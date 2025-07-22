@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
-import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTast";
+import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
 import { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 
 export const completedTasks: CompletedTaskAPI[] = [

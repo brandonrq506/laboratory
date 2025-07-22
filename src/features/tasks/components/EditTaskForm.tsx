@@ -3,7 +3,7 @@ import { useUpdateTask } from "../api/tanstack/useUpdateTask";
 
 import { CompletedTaskAPI } from "../types/completedTask";
 import { EditForm } from "../types/editForm";
-import { InProgressTaskAPI } from "../types/inProgressTast";
+import { InProgressTaskAPI } from "../types/inProgressTask";
 import { TaskForm } from "./TaskForm";
 import { floorSeconds } from "@/utils";
 

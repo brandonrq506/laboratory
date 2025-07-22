@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { Card } from "@/components/layout";
 import { IdleTimer } from "./IdleTimer";
-import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTast";
+import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
 import { RunningTimer } from "./RunningTimer";
 import { inProgressTaskOptions } from "@/features/tasks/api/queryOptions";
 

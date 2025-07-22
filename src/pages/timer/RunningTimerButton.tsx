@@ -8,7 +8,7 @@ import {
   WifiIcon,
 } from "@heroicons/react/24/solid";
 import { IconButton } from "@/components/core";
-import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTast";
+import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
 import { roundToNearestMinutes } from "date-fns";
 
 interface Props {

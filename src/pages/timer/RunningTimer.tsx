@@ -1,7 +1,7 @@
 import { usePrefetchTask } from "@/features/tasks/api/tanstack/usePrefetchTask";
 
 import { Dot } from "@/components/core";
-import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTast";
+import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
 import { Link } from "react-router";
 import { RunningTimerButton } from "./RunningTimerButton";
 import { TimerTime } from "./TimerTime";

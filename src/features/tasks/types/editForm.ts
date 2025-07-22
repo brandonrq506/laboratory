@@ -1,5 +1,5 @@
 import { CompletedTaskAPI } from "./completedTask";
-import { InProgressTaskAPI } from "./inProgressTast";
+import { InProgressTaskAPI } from "./inProgressTask";
 import { Option } from "@/types/core";
 
 type EditableTask = CompletedTaskAPI | InProgressTaskAPI;
