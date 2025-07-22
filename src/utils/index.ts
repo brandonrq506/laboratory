@@ -2,6 +2,7 @@ export * from "./secondsToTime";
 export * from "./floorMilliseconds";
 export * from "./floorSeconds";
 export * from "./formatDatetimeTo12hTime";
+export * from "./getNewTaskDefaultTimes";
 export * from "./secondsToHHmm";
 export * from "./secondsToHHmmss";
 export * from "./splitHHMM";
