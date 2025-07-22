@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-import { InProgressTaskAPI } from "../types/inProgressTast";
+import { InProgressTaskAPI } from "../types/inProgressTask";
 import { ScheduledTaskAPI } from "../types/scheduledTask";
 import { ScheduledTaskWithExpectedStartTime } from "../types/scheduledTaskWithExpectedStartTime";
 import { floorMilliseconds } from "@/utils";

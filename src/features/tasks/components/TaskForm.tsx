@@ -5,7 +5,7 @@ import { Button } from "@/components/core";
 import { CategoryBadge } from "@/features/categories/components";
 import { CompletedTaskAPI } from "../types/completedTask";
 import { EditForm } from "../types/editForm";
-import { InProgressTaskAPI } from "../types/inProgressTast";
+import { InProgressTaskAPI } from "../types/inProgressTask";
 import { TimeInputV2 } from "@/components/form";
 
 import { TASK } from "@/constants/entities";

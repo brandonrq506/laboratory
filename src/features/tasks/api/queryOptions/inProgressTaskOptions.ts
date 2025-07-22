@@ -1,4 +1,4 @@
-import { InProgressTaskAPI } from "../../types/inProgressTast";
+import { InProgressTaskAPI } from "../../types/inProgressTask";
 import { getTasks } from "../axios/getTasks";
 import { queryOptions } from "@tanstack/react-query";
 import { taskKeys } from "../queryKeys";
