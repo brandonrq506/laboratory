@@ -9,7 +9,8 @@ import {
 } from "@heroicons/react/24/solid";
 import { IconButton } from "@/components/core";
 import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
-import { roundToNearestMinutes } from "date-fns";
+
+import { calculateTimesOnCompletion } from "@/features/timer/utils/calculateTimesOnCompletion";
 
 interface Props {
   task: InProgressTaskAPI;
@@ -18,8 +19,6 @@ interface Props {
 export const RunningTimerButton = ({ task }: Props) => {
   const { mutate, isError } = useCompleteTask();
   const isOnline = useOnlineStatus();
-
-  const startTime = new Date(task.start_time);
 
   if (!isOnline) {
     return (
@@ -42,9 +41,8 @@ export const RunningTimerButton = ({ task }: Props) => {
       onClick={() =>
         mutate({
           ...task,
-          start_time: roundToNearestMinutes(startTime).toISOString(),
           status: "completed",
-          end_time: roundToNearestMinutes(new Date()).toISOString(),
+          ...calculateTimesOnCompletion(task.start_time),
         })
       }
       className="relative overflow-visible before:absolute before:-inset-2 before:content-['']">
