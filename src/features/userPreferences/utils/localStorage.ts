@@ -18,12 +18,14 @@ export const savePreferencesToLocalStorage = (
 /**
  * Gets user preferences from local storage
  */
-export const getPreferencesFromLocalStorage = (): UserPreference[] | null => {
+export const getPreferencesFromLocalStorage = ():
+  | UserPreference[]
+  | undefined => {
   try {
     const preferences = localStorage.getItem(PREFERENCES_KEY);
-    return preferences ? JSON.parse(preferences) : null;
+    return preferences ? JSON.parse(preferences) : undefined;
   } catch (error) {
     console.error("Error retrieving preferences from localStorage:", error);
-    return null;
+    return undefined;
   }
 };

@@ -22,6 +22,6 @@ export const useUserPreferences = () => {
       return data;
     },
     staleTime: MINUTES * millisecondsInMinute,
-    initialData: getPreferencesFromLocalStorage,
+    placeholderData: getPreferencesFromLocalStorage,
   });
 };
