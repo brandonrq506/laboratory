@@ -12,6 +12,7 @@ import { TASK } from "@/constants/entities";
 import { UPDATE } from "@/constants/actions";
 
 import { isAfter, isBefore, parseISO } from "date-fns";
+import { floorSeconds } from "@/utils";
 
 type Props = {
   initialValues: EditForm;
@@ -46,8 +47,10 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
             required: "Start time is required.",
             validate: {
               isPast: (v) => {
-                const startTime = parseISO(v as string);
+                // Flooring startTime and not 'now' to ensure even within the same minute, it is in the past.
+                const startTime = floorSeconds(parseISO(v as string));
                 const now = new Date();
+
                 return (
                   isBefore(startTime, now) || "Start time must be in the past"
                 );
