@@ -38,6 +38,7 @@ export const useCreateCompletedTodayTask = () => {
         activity,
         optional_name: null,
         position: null,
+        note: newTask.note || "",
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
         id: -1,
@@ -69,9 +70,8 @@ export const useCreateCompletedTodayTask = () => {
       return { prevTasks };
     },
     onError: (_, __, context) => {
-      if (context?.prevTasks) {
+      if (context?.prevTasks)
         queryClient.setQueryData(completedTaskKeys, context.prevTasks);
-      }
     },
     onSettled: () => {
       queryClient.invalidateQueries(todayCompletedTasksOptions());

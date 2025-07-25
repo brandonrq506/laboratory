@@ -51,6 +51,7 @@ export const CreateTaskForm = () => {
         end_time: "00:00",
         start_time: "00:00",
         status: "completed",
+        note: "",
       }}
     />
   );

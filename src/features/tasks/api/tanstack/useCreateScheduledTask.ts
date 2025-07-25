@@ -25,6 +25,7 @@ export const useCreateScheduledTask = () => {
         position: "9999",
         start_time: null,
         end_time: null,
+        note: "",
         optional_name: null,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
