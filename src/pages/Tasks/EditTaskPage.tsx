@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 
 import { Button, Loading, Modal } from "@/components/core";
+import { EditScheduledTaskForm } from "@/features/tasks/components";
 import { EditTaskForm } from "@/features/tasks/components/EditTaskForm";
 import { RETRY } from "@/constants/actions";
 import { taskDetailsOptions } from "@/features/tasks/api/queryOptions";
@@ -38,7 +39,12 @@ export const EditTaskPage = () => {
     );
   }
 
-  if (data.status === "scheduled") throw new Error("Can't edit scheduled task");
+  if (data.status === "scheduled")
+    return (
+      <Modal isOpen={isOpen} onClose={() => navigate(-1)}>
+        <EditScheduledTaskForm task={data} />
+      </Modal>
+    );
 
   return (
     <Modal isOpen={isOpen} onClose={() => navigate(-1)}>
