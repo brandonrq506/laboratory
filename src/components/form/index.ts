@@ -5,6 +5,7 @@ export * from "./Select/ControlledStringSelect";
 export * from "./Select/ControlledSelect";
 export * from "./Select/StringSelect";
 export * from "./Select/Select";
+export * from "./Textarea/TextArea";
 export * from "./TextInput/TextInput";
 export * from "./TextInput/StateInputText";
 export * from "./TimeInput/TimeInputV2";
