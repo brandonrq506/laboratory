@@ -3,6 +3,7 @@ import { TaskStatus } from "./task-status";
 export type TaskModel = {
   id: number;
   end_time: string | null;
+  note: string;
   optional_name: string | null;
   start_time: string;
   status: TaskStatus;

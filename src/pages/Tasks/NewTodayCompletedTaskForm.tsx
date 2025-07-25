@@ -34,6 +34,7 @@ export const NewTodayCompletedTaskForm = () => {
       start_time: startTime.toISOString(),
       end_time: endTime.toISOString(),
       status: data.status,
+      note: data.note,
     });
 
     navigate(-1);
@@ -45,6 +46,7 @@ export const NewTodayCompletedTaskForm = () => {
       initialValues={{
         activity: null,
         end_time: defaultTime,
+        note: "",
         start_time: defaultTime,
         status: "completed",
       }}

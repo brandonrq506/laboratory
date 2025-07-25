@@ -30,6 +30,7 @@ export const completedTasks: CompletedTaskAPI[] = [
     start_time: "2025-05-02T21:16:02.000Z",
     status: "completed",
     updated_at: "2025-05-02T21:22:36.000Z",
+    note: "",
   },
   {
     id: 3398,
@@ -57,6 +58,7 @@ export const completedTasks: CompletedTaskAPI[] = [
     start_time: "2025-05-02T21:08:00.000Z",
     status: "completed",
     updated_at: "2025-05-02T21:16:00.427Z",
+    note: "Make sure you get all the plaque!",
   },
   {
     id: 3405,
@@ -84,6 +86,7 @@ export const completedTasks: CompletedTaskAPI[] = [
     start_time: "2025-05-02T21:05:00.000Z",
     status: "completed",
     updated_at: "2025-05-02T21:15:24.030Z",
+    note: "Don't forget to wash your hands!",
   },
   {
     id: 3404,
@@ -111,6 +114,7 @@ export const completedTasks: CompletedTaskAPI[] = [
     start_time: "2025-05-02T21:00:00.000Z",
     status: "completed",
     updated_at: "2025-05-02T21:14:48.299Z",
+    note: "",
   },
 ];
 
@@ -141,6 +145,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     start_time: null,
     status: "scheduled",
     updated_at: "2025-05-02T21:43:03.772Z",
+    note: "Ultra focus mode activated!",
   },
   {
     id: 3408,
@@ -168,6 +173,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     start_time: null,
     status: "scheduled",
     updated_at: "2025-05-02T21:43:03.783Z",
+    note: "Don't forget to stretch those muscles!",
   },
   {
     id: 3409,
@@ -195,6 +201,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     start_time: null,
     status: "scheduled",
     updated_at: "2025-05-02T21:43:03.786Z",
+    note: "",
   },
   {
     id: 3410,
@@ -222,6 +229,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     start_time: null,
     status: "scheduled",
     updated_at: "2025-05-02T21:43:03.791Z",
+    note: "",
   },
   {
     id: 3411,
@@ -249,6 +257,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     start_time: null,
     status: "scheduled",
     updated_at: "2025-05-02T21:43:03.795Z",
+    note: "",
   },
   {
     id: 3412,
@@ -276,6 +285,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     start_time: null,
     status: "scheduled",
     updated_at: "2025-05-02T21:43:03.798Z",
+    note: "Make sure you get all the plaque!",
   },
 ];
 
@@ -306,5 +316,6 @@ export const inProgressTasks: InProgressTaskAPI[] = [
     start_time: "2025-05-03T03:35:00.000Z",
     status: "in_progress",
     updated_at: "2025-05-03T03:45:02.079Z",
+    note: "Focus on the core concepts and hooks!",
   },
 ];
