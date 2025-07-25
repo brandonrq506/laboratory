@@ -38,6 +38,7 @@ export const CreateTaskForm = () => {
       start_time: startTime.toISOString(),
       end_time: endTime.toISOString(),
       status: data.status,
+      note: data.note,
     });
 
     navigate(-1);

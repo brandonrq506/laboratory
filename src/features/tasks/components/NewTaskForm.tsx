@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 
+import { TextArea, TimeInputV3 } from "@/components/form";
 import { ActivityComboBox } from "@/features/activities/components";
 import { NewTaskForm as FormType } from "../types/newTaskForm";
-import { TimeInputV3 } from "@/components/form";
 
 import { Button } from "@/components/core";
 import { CREATE } from "@/constants/actions";
@@ -16,11 +16,11 @@ interface Props {
 }
 
 export const NewTaskForm = ({ initialValues, onSubmit }: Props) => {
-  const { control, formState, getValues, handleSubmit, setFocus } =
+  const { control, formState, getValues, handleSubmit, register, setFocus } =
     useForm<FormType>({
       values: initialValues,
     });
-  const { isSubmitting } = formState;
+  const { isSubmitting, errors } = formState;
 
   useEffect(() => setFocus("activity"), [setFocus]);
 
@@ -33,6 +33,19 @@ export const NewTaskForm = ({ initialValues, onSubmit }: Props) => {
         name="activity"
         hideLabel
         rules={{ required: "Please select an activity" }}
+      />
+
+      <TextArea
+        label="Notes:"
+        autoComplete="off"
+        registration={register("note", {
+          maxLength: {
+            value: 100,
+            message: "Max 100 characters",
+          },
+        })}
+        description="Max 100 characters"
+        error={errors.note?.message}
       />
 
       <TimeInputV3
