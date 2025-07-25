@@ -1,10 +1,14 @@
 import { useSortable } from "@dnd-kit/sortable";
 
+import {
+  ChatBubbleLeftEllipsisIcon,
+  ClockIcon,
+} from "@heroicons/react/24/outline";
 import { CSS } from "@dnd-kit/utilities";
 import { Card } from "@/components/layout";
-import { ClockIcon } from "@heroicons/react/24/outline";
 import { Dot } from "@/components/core";
 import { DragHandle } from "./DragHandle";
+import { Link } from "react-router";
 import { QuickDeleteTask } from "./QuickDeleteTask";
 import { ScheduledTaskWithExpectedStartTime } from "../types/scheduledTaskWithExpectedStartTime";
 import { StartTaskBtn } from "./StartTaskBtn";
@@ -12,6 +16,7 @@ import { StartTaskBtn } from "./StartTaskBtn";
 import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import clsx from "clsx";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
+import { usePrefetchTask } from "../api/tanstack/usePrefetchTask";
 
 type Props = {
   task: ScheduledTaskWithExpectedStartTime;
@@ -27,6 +32,7 @@ export const SortableTask = ({ task }: Props) => {
     transition,
     isDragging,
   } = useSortable({ id: task.id });
+  const prefetchTask = usePrefetchTask();
   const color = getColorByName(task.activity.category.color);
 
   const style = {
@@ -49,15 +55,19 @@ export const SortableTask = ({ task }: Props) => {
             setActivatorNodeRef={setActivatorNodeRef}
           />
 
-          <div>
+          <Link
+            className="grow"
+            to={`edit/${task.id}`}
+            onFocus={() => prefetchTask(task.id)}
+            onMouseEnter={() => prefetchTask(task.id)}>
             <div className="flex items-center gap-1.5">
               <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
               <p className="text-sm font-semibold">{task.activity.name}</p>
             </div>
 
-            <div className="flex gap-2.5">
+            <div className="flex gap-2.5 text-gray-600">
               {task.expected_start_time && (
-                <div className="flex gap-1 text-xs text-gray-600">
+                <div className="flex gap-1 text-xs">
                   <p className="tabular-nums">
                     {formatDatetimeTo12hTime(
                       task.expected_start_time.toISOString(),
@@ -65,14 +75,15 @@ export const SortableTask = ({ task }: Props) => {
                   </p>
                 </div>
               )}
-              <div className="flex gap-1 text-xs text-gray-600">
+              <div className="flex gap-1 text-xs">
                 <ClockIcon className="size-4" />
                 <p className="tabular-nums">
                   {secondsToTime(task.activity.exp_seconds)}
                 </p>
               </div>
+              {task.note && <ChatBubbleLeftEllipsisIcon className="size-4" />}
             </div>
-          </div>
+          </Link>
         </div>
 
         <div className="flex items-center gap-3">

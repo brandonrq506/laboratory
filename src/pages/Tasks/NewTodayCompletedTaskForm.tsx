@@ -46,9 +46,9 @@ export const NewTodayCompletedTaskForm = () => {
       initialValues={{
         activity: null,
         end_time: defaultTime,
-        note: "",
         start_time: defaultTime,
         status: "completed",
+        note: "",
       }}
     />
   );

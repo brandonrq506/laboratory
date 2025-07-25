@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { ActivityComboBox } from "@/features/activities/components";
 import { Button } from "@/components/core";
 import { CategoryBadge } from "@/features/categories/components";
+import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/outline";
 import { CompletedTaskAPI } from "../types/completedTask";
 import { EditForm } from "../types/editForm";
 import { InProgressTaskAPI } from "../types/inProgressTask";
@@ -37,6 +38,13 @@ export const TaskForm = ({ initialValues, task, onSubmit }: Props) => {
         <ActivityComboBox control={control} name="activity" hideLabel />
         <CategoryBadge category={task.activity.category} />
       </div>
+
+      {task.note && (
+        <div className="flex items-center gap-2 rounded-md bg-gray-50 p-2 text-sm text-gray-700 shadow-sm ring-1 ring-gray-200">
+          <ChatBubbleLeftEllipsisIcon className="size-4 flex-none text-gray-400" />
+          <p className="leading-snug whitespace-pre-line">{task.note}</p>
+        </div>
+      )}
 
       {isInProgressTask && (
         <TimeInputV2
