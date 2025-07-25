@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from "@/test/test-utils";
+import { createRoutesStub } from "react-router";
 
 import { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 import { ScheduledTaskList } from "../ScheduledTaskList";
@@ -22,7 +23,14 @@ describe("ScheduledTaskList", () => {
   it("displays delete all button when more than 3 tasks are present", async () => {
     setupServer(scheduledTasks);
 
-    render(<ScheduledTaskList />);
+    const Stub = createRoutesStub([
+      {
+        path: "/",
+        Component: () => <ScheduledTaskList />,
+      },
+    ]);
+
+    render(<Stub />);
 
     await waitFor(() => {
       expect(
