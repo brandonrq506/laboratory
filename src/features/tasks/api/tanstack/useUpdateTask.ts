@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { BaseTaskAPI } from "../../types/baseTask";
+import { TaskAPI } from "../../types/task";
+import { taskDetailsOptions } from "../queryOptions";
 import { taskKeys } from "../queryKeys";
 import { updateTask } from "../axios/updateTask";
 
@@ -10,31 +12,55 @@ export const useUpdateTask = () => {
   return useMutation({
     mutationFn: updateTask,
     onMutate: async ({ task, taskId }) => {
-      const queryKey = { queryKey: taskKeys.lists() };
+      const listsQuery = { queryKey: taskKeys.lists() };
+      const detailQuery = { queryKey: taskKeys.detail(taskId) };
 
-      await queryClient.cancelQueries(queryKey);
+      await queryClient.cancelQueries(listsQuery);
+      await queryClient.cancelQueries(detailQuery);
 
-      const prevQueries = queryClient.getQueriesData(queryKey);
+      const prevQueries = queryClient.getQueriesData(listsQuery);
+      const prevDetail = queryClient.getQueryData(
+        taskDetailsOptions(taskId).queryKey,
+      );
 
-      queryClient.setQueriesData(queryKey, (oldTasks: BaseTaskAPI[]) => {
+      queryClient.setQueriesData(listsQuery, (oldTasks: BaseTaskAPI[]) => {
         return oldTasks.map((oldTask) =>
           oldTask.id === taskId ? { ...oldTask, ...task } : oldTask,
         );
       });
 
-      return { prevQueries };
+      // Update details in case user clicks on task
+      queryClient.setQueryData(
+        taskDetailsOptions(taskId).queryKey,
+        (prevData) =>
+          prevData ? ({ ...prevData, ...task } as TaskAPI) : undefined,
+      );
+
+      return { prevQueries, prevDetail };
     },
+
     onError: (_, __, context) => {
       if (context?.prevQueries) {
         context.prevQueries.forEach(([queryKey, prevData]) => {
           queryClient.setQueryData(queryKey, prevData);
         });
       }
+
+      if (context?.prevDetail) {
+        queryClient.setQueryData(
+          taskDetailsOptions(context.prevDetail.id).queryKey,
+          context.prevDetail,
+        );
+      }
     },
 
-    onSettled: () => {
+    onSettled: (newUpdatedTask) => {
       // Could be better by just invalidating either scheduled, in_progress or completed
       queryClient.invalidateQueries({ queryKey: taskKeys.all });
+
+      // Invalid detail query
+      if (newUpdatedTask)
+        queryClient.invalidateQueries(taskDetailsOptions(newUpdatedTask.id));
     },
   });
 };
