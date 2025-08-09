@@ -58,7 +58,7 @@ export const useUpdateTask = () => {
       // Could be better by just invalidating either scheduled, in_progress or completed
       queryClient.invalidateQueries({ queryKey: taskKeys.all });
 
-      // Invalid detail query
+      // Invalidate detail query
       if (newUpdatedTask)
         queryClient.invalidateQueries(taskDetailsOptions(newUpdatedTask.id));
     },
