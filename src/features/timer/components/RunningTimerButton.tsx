@@ -10,7 +10,7 @@ import {
 import { IconButton } from "@/components/core";
 import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
 
-import { calculateTimesOnCompletion } from "@/features/timer/utils/calculateTimesOnCompletion";
+import { calculateTimesOnCompletion } from "../utils/calculateTimesOnCompletion";
 
 interface Props {
   task: InProgressTaskAPI;
