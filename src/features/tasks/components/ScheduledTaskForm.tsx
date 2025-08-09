@@ -19,7 +19,7 @@ interface Props {
 
 export const ScheduledTaskForm = ({ initialValues, task, onSubmit }: Props) => {
   const { formState, handleSubmit, register } = useForm<EditNoteForm>({
-    defaultValues: initialValues,
+    values: initialValues,
   });
   const { isSubmitting, errors } = formState;
 
@@ -43,6 +43,7 @@ export const ScheduledTaskForm = ({ initialValues, task, onSubmit }: Props) => {
       <br />
 
       <TextArea
+        autoFocus
         label="Notes:"
         autoComplete="off"
         registration={register("note", {
