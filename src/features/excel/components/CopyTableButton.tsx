@@ -1,5 +1,5 @@
-import { ExcelTableRow } from "../types/excelTableRow";
 import { CopyToClipboardButton } from "@/components/core";
+import { ExcelTableRow } from "../types/excelTableRow";
 import { sanitizeExcelCell } from "../utils/sanitizeExcelCell";
 
 interface Props {
