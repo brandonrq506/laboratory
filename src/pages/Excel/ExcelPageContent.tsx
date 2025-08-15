@@ -1,9 +1,9 @@
 import { useExcel } from "@/features/excel/api/tanstack/useExcel";
 import { useSearchParams } from "react-router";
 
-import { ExcelCategoryHeaders } from "./ExcelCategoryHeaders";
-import { ExcelTable } from "@/features/excel/components/ExcelTable";
 import { Loading } from "@/components/core";
+import { ExcelCategoryHeaders } from "./ExcelCategoryHeaders";
+import { CopyTableButton, ExcelTable } from "@/features/excel/components";
 
 export const ExcelPageContent = () => {
   const [params] = useSearchParams();
@@ -28,6 +28,7 @@ export const ExcelPageContent = () => {
   return (
     <div>
       <ExcelCategoryHeaders excelData={data} />
+      <CopyTableButton data={data} />
       <ExcelTable excelData={data} />
     </div>
   );
