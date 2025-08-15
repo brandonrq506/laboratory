@@ -1,4 +1,4 @@
-import { useKeywordVisible } from "@/hooks";
+import { useKeyboardVisible } from "@/hooks";
 
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import clsx from "clsx";
@@ -10,7 +10,7 @@ export type ModalProps = {
 };
 
 export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
-  const isKeyboardVisible = useKeywordVisible();
+  const isKeyboardVisible = useKeyboardVisible();
 
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-10">

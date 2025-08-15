@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 // 100px is a heuristic
 const KEYBOARD_HEIGHT = 100;
 
-export const useKeywordVisible = () => {
+export const useKeyboardVisible = () => {
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
 
   useEffect(() => {

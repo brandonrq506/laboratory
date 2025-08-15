@@ -2,6 +2,7 @@ export * from "./Badge/Badge";
 export * from "./Button/Button";
 export * from "./Button/IconButton";
 export * from "./Button/LinkButton";
+export { CopyToClipboardButton } from "./Button/CopyToClipboardButton";
 export * from "./Dot/Dot";
 export * from "./List/EmptyList";
 export * from "./Loading/Loading";
