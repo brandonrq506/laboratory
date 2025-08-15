@@ -1,14 +1,14 @@
 import { useCategories } from "@/features/categories/api/tanstack/useCategories";
 
 import { CategoryBadge } from "@/features/categories/components";
-import { ExcelTable } from "@/features/excel/types/excelTable";
+import { ExcelTableRow } from "@/features/excel/types/excelTableRow";
 import { calculatePercentageByCategory } from "@/features/excel/utils/calculatePercentageByCategory";
 
 const HUNDREDTH = 100;
 const PRECISION = 4;
 
 type Props = {
-  excelData: ExcelTable[];
+  excelData: ExcelTableRow[];
 };
 
 export const ExcelCategoryHeaders = ({ excelData }: Props) => {

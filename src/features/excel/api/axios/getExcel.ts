@@ -1,5 +1,5 @@
 import { EXCEL_ENDPOINT, apiV1 } from "@/libs/axios";
-import { ExcelTable } from "../../types/excelTable";
+import { ExcelTableRow } from "../../types/excelTableRow";
 
 type Props = {
   signal: AbortSignal;
@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const getExcel = async ({ signal, date }: Props) => {
-  const { data } = await apiV1.get<ExcelTable[]>(EXCEL_ENDPOINT, {
+  const { data } = await apiV1.get<ExcelTableRow[]>(EXCEL_ENDPOINT, {
     signal,
     params: {
       date,

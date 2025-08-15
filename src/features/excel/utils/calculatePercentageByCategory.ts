@@ -1,8 +1,8 @@
 import { Category } from "@/features/categories/types/category";
-import { ExcelTable } from "../types/excelTable";
+import { ExcelTableRow } from "../types/excelTableRow";
 
 export const calculatePercentageByCategory = (
-  data: ExcelTable[],
+  data: ExcelTableRow[],
   user_categories: Category[] | undefined,
 ) => {
   if (!user_categories) {
