@@ -7,7 +7,7 @@ interface Props {
   data: ExcelTableRow[];
 }
 
-export const CopyTableButton = ({ data }: Props) => {
+export const CopyTableButton = ({ className, data }: Props) => {
   if (data.length === 0) return null;
 
   const handleCopy = async () => {
@@ -34,5 +34,5 @@ export const CopyTableButton = ({ data }: Props) => {
     await navigator.clipboard.writeText(text);
   };
 
-  return <CopyToClipboardButton onCopy={handleCopy} />;
+  return <CopyToClipboardButton onCopy={handleCopy} className={className} />;
 };
