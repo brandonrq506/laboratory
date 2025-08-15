@@ -1,4 +1,4 @@
-export type ExcelTable = {
+export type ExcelTableRow = {
   activity: string;
   category: string;
   start_time: string;

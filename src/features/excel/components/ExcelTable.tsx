@@ -1,7 +1,7 @@
-import { ExcelTable as ExcelTableType } from "../types/excelTable";
+import { ExcelTableRow } from "../types/excelTableRow";
 
 type Props = {
-  excelData: ExcelTableType[];
+  excelData: ExcelTableRow[];
 };
 
 export const ExcelTable = ({ excelData }: Props) => {
