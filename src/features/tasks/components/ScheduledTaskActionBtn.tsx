@@ -17,7 +17,7 @@ export const ScheduledTaskActionBtn = ({ task }: Props) => {
   const { data } = useQuery(inProgressTaskOptions());
   const { mutate: startTask } = useStartTask();
 
-  // TODO: Remove this `isPending` once I have implement optimistic updates for this hook
+  // TODO: Remove this `isPending` once I have implemented optimistic updates for this hook
   const { mutate: activateTask, isPending } = useActivateTask();
 
   const hasInProgress = Boolean(data?.length);
