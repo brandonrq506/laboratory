@@ -2,8 +2,8 @@ import { useActivateTask } from "../api/tanstack/useActivateTask";
 import { useQuery } from "@tanstack/react-query";
 import { useStartTask } from "../api/tanstack/useStartTask";
 
+import { ForwardIcon, PlayIcon } from "@heroicons/react/24/outline";
 import { IconButton } from "@/components/core";
-import { PlayIcon } from "@heroicons/react/24/outline";
 import { ScheduledTaskAPI } from "../types/scheduledTask";
 import { inProgressTaskOptions } from "../api/queryOptions";
 
@@ -37,7 +37,7 @@ export const ScheduledTaskActionBtn = ({ task }: Props) => {
   if (hasInProgress) {
     return (
       <IconButton onClick={handleActivate} aria-label="Activate task">
-        <PlayIcon className="size-5" />
+        <ForwardIcon className="size-5" />
       </IconButton>
     );
   }
