@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useOnlineStatus } from "@/hooks";
+import { useTimeout } from "@/hooks/useTimeout";
 
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
@@ -16,37 +17,46 @@ export const NetworkBadge = () => {
   // Controls translation for slide in/out
   const [visible, setVisible] = useState(false);
 
+  // Timer to hide badge (slide out)
+  const { start: scheduleHide, clear: clearHide } = useTimeout(() =>
+    setVisible(false),
+  );
+
+  // Timer to unmount after exit animation completes
+  const { start: scheduleUnmount, clear: clearUnmount } = useTimeout(() =>
+    setShouldRender(false),
+  );
+
   useEffect(() => {
     const wasOnline = prevOnlineRef.current;
     prevOnlineRef.current = isOnline;
 
-    // Trigger on online -> offline
+    // Clear any pending timers when status changes
+    clearHide();
+    clearUnmount();
+
+    // online -> offline: mount + show immediately
     if (wasOnline && !isOnline) {
       setShouldRender(true);
-      // Allow browser to apply initial styles before animating in
       requestAnimationFrame(() => setVisible(true));
+      // Wait for offline -> online transition next
+      return;
     }
 
-    // Trigger on offline -> online
+    // offline -> online: ensure shown, then schedule hide & unmount
     if (!wasOnline && isOnline && shouldRender) {
-      // Already rendered, just ensure visible
       setVisible(true);
-
-      // After 5s, animate out
-      const hideTimer = setTimeout(() => setVisible(false), FIVE_SECONDS);
-      // After animation, unmount
-      const unmountTimer = setTimeout(
-        () => setShouldRender(false),
-        // display duration + exit animation duration
-        FIVE_SECONDS + THREE_HUNDRED_MS,
-      );
-
-      return () => {
-        clearTimeout(hideTimer);
-        clearTimeout(unmountTimer);
-      };
+      scheduleHide(FIVE_SECONDS);
+      scheduleUnmount(FIVE_SECONDS + THREE_HUNDRED_MS);
     }
-  }, [isOnline, shouldRender]);
+  }, [
+    isOnline,
+    shouldRender,
+    clearHide,
+    clearUnmount,
+    scheduleHide,
+    scheduleUnmount,
+  ]);
 
   // Don't render until triggered
   if (!shouldRender) return null;

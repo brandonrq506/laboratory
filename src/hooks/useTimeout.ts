@@ -34,7 +34,6 @@ export const useTimeout = (callback: () => void) => {
     setIsActive(true);
   }, []);
 
-  // Auto-clean on unmount (and during React 18 Strict Mode re-mount cycle)
   useEffect(() => clear, [clear]);
 
   return { start, clear, isActive };
