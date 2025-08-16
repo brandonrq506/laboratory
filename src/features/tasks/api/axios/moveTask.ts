@@ -6,7 +6,7 @@ const URL = `${TASKS_ENDPOINT}/move_drag`;
 type Props = {
   taskId: number;
   newPosition: number;
-  // This is not used, just for optimistic UI update.
+  // This is not used, it is just for optimistic UI update.
   tasks: ScheduledTaskWithExpectedStartTime[];
 };
 
