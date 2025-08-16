@@ -1,12 +1,13 @@
+import { useActivateTask } from "../api/tanstack/useActivateTask";
 import { useQuery } from "@tanstack/react-query";
 import { useStartTask } from "../api/tanstack/useStartTask";
-import { useActivateTask } from "../api/tanstack/useActivateTask";
 
-import { ScheduledTaskAPI } from "../types/scheduledTask";
-import { inProgressTaskOptions } from "../api/queryOptions";
-import { floorMilliseconds } from "@/utils";
 import { IconButton } from "@/components/core";
 import { PlayIcon } from "@heroicons/react/24/outline";
+import { ScheduledTaskAPI } from "../types/scheduledTask";
+import { inProgressTaskOptions } from "../api/queryOptions";
+
+import { floorMilliseconds } from "@/utils";
 
 interface Props {
   task: ScheduledTaskAPI;

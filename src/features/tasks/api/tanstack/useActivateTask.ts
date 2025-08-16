@@ -1,10 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { activateTask } from "../axios/activateTask";
+
 import {
   inProgressTaskOptions,
   scheduledTasksOptions,
   todayCompletedTasksOptions,
 } from "../queryOptions";
+import { activateTask } from "../axios/activateTask";
 
 export const useActivateTask = () => {
   const queryClient = useQueryClient();
