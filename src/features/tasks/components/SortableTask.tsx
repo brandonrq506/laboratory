@@ -10,8 +10,8 @@ import { Dot } from "@/components/core";
 import { DragHandle } from "./DragHandle";
 import { Link } from "react-router";
 import { QuickDeleteTask } from "./QuickDeleteTask";
+import { ScheduledTaskActionBtn } from "./ScheduledTaskActionBtn";
 import { ScheduledTaskWithExpectedStartTime } from "../types/scheduledTaskWithExpectedStartTime";
-import { StartTaskBtn } from "./StartTaskBtn";
 
 import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import clsx from "clsx";
@@ -88,7 +88,7 @@ export const SortableTask = ({ task }: Props) => {
 
         <div className="flex items-center gap-3">
           <QuickDeleteTask taskId={task.id} />
-          <StartTaskBtn task={task} />
+          <ScheduledTaskActionBtn task={task} />
         </div>
       </Card>
     </div>
