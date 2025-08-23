@@ -2,18 +2,18 @@ import { render, screen } from "@/test/test-utils";
 import { createRoutesStub } from "react-router";
 import userEvent from "@testing-library/user-event";
 
-import { EditTaskForm } from "../EditTaskForm";
+import { EditCompletedTaskForm } from "../EditCompletedTaskForm";
 
 import { completedTasks } from "@/test/store/tasks";
 
-describe("EditTaskForm", () => {
+describe("EditCompletedTaskForm", () => {
   it("renders the component with initial values", () => {
     const task = completedTasks[0];
 
     const Stub = createRoutesStub([
       {
         path: "/timer/edit/:taskId",
-        Component: () => <EditTaskForm task={task} />,
+        Component: () => <EditCompletedTaskForm task={task} />,
       },
     ]);
 
@@ -29,7 +29,7 @@ describe("EditTaskForm", () => {
     const Stub = createRoutesStub([
       {
         path: "/timer/edit/:taskId",
-        Component: () => <EditTaskForm task={task} />,
+        Component: () => <EditCompletedTaskForm task={task} />,
       },
       {
         path: "/timer",

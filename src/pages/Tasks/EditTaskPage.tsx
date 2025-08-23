@@ -4,10 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 
 import { Button, Loading, Modal } from "@/components/core";
 import {
+  EditCompletedTaskForm,
   EditInProgressTaskForm,
   EditScheduledTaskForm,
 } from "@/features/tasks/components";
-import { EditTaskForm } from "@/features/tasks/components/EditTaskForm";
 import { RETRY } from "@/constants/actions";
 import { taskDetailsOptions } from "@/features/tasks/api/queryOptions";
 
@@ -59,7 +59,7 @@ export const EditTaskPage = () => {
 
   return (
     <Modal isOpen={isOpen} onClose={() => navigate(-1)}>
-      <EditTaskForm task={data} />
+      <EditCompletedTaskForm task={data} />
     </Modal>
   );
 };
