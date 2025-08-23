@@ -1,5 +1,6 @@
 export * from "./CompletedTask";
 export * from "./DeleteAllScheduledTasks";
+export * from "./EditInProgressTaskForm";
 export * from "./EditScheduledTaskForm";
 export * from "./ExampleCompletedTask";
 export * from "./ScheduledTask";
