@@ -2,25 +2,23 @@ import { useNavigate } from "react-router";
 import { useUpdateTask } from "../api/tanstack/useUpdateTask";
 
 import { CompletedTaskAPI } from "../types/completedTask";
-import { EditForm } from "../types/editForm";
-import { TaskForm } from "./TaskForm";
-import { floorSeconds } from "@/utils";
+import { CompletedTaskForm } from "./CompletedTaskForm";
+import { CompletedTaskFormType } from "../types/completedTaskFormType";
 
 type Props = {
   task: CompletedTaskAPI;
 };
 
-export const EditTaskForm = ({ task }: Props) => {
+export const EditCompletedTaskForm = ({ task }: Props) => {
   const navigate = useNavigate();
   const { mutate } = useUpdateTask();
 
-  const handleCompletedSubmit = (data: EditForm) => {
+  const handleSubmit = (data: CompletedTaskFormType) => {
     mutate({
       taskId: task.id,
       task: {
         activity_id: data.activity.value,
-        //TODO: Why do I need to floor seconds when updating a completed task? This should be handled in the transition from in_progress -> completed. Either on the request to API or API itself.
-        start_time: floorSeconds(data.start_time).toISOString(),
+        start_time: data.start_time,
         end_time: data.end_time,
       },
     });
@@ -29,9 +27,9 @@ export const EditTaskForm = ({ task }: Props) => {
   };
 
   return (
-    <TaskForm
+    <CompletedTaskForm
       task={task}
-      onSubmit={handleCompletedSubmit}
+      onSubmit={handleSubmit}
       initialValues={{
         end_time: task.end_time,
         start_time: task.start_time,
