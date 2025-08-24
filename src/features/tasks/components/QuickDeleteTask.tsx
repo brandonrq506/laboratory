@@ -1,6 +1,6 @@
 import { useDeleteTask } from "../api/tanstack/useDeleteTask";
 
-import { IconButton, Loading } from "@/components/core";
+import { IconButton } from "@/components/core";
 import { TrashIcon } from "@heroicons/react/24/outline";
 
 import { DELETE } from "@/constants/actions";
@@ -11,15 +11,7 @@ interface Props {
 }
 
 export const QuickDeleteTask = ({ taskId }: Props) => {
-  const { mutate, isPending } = useDeleteTask();
-
-  if (isPending) {
-    return (
-      <IconButton disabled>
-        <Loading sizeStyles="size-4" />
-      </IconButton>
-    );
-  }
+  const { mutate } = useDeleteTask();
 
   return (
     <IconButton variant="dangerOutline" onClick={() => mutate(taskId)}>
