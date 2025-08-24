@@ -39,7 +39,7 @@ export const useUpdateTask = () => {
       return { prevQueries, prevDetail };
     },
 
-    onError: (_, __, context) => {
+    onError: (_, { taskId }, context) => {
       if (context?.prevQueries) {
         context.prevQueries.forEach(([queryKey, prevData]) => {
           queryClient.setQueryData(queryKey, prevData);
@@ -48,7 +48,7 @@ export const useUpdateTask = () => {
 
       if (context?.prevDetail) {
         queryClient.setQueryData(
-          taskDetailsOptions(context.prevDetail.id).queryKey,
+          taskDetailsOptions(taskId).queryKey,
           context.prevDetail,
         );
       }
