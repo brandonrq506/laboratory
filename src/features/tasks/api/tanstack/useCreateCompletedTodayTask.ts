@@ -7,11 +7,13 @@ import { CompletedTaskAPI } from "../../types/completedTask";
 import { createTask } from "../axios/createTask";
 import { isBefore } from "date-fns";
 import { todayCompletedTasksOptions } from "../queryOptions";
+import { useToast } from "@/components/core";
 
 const completedTaskKeys = todayCompletedTasksOptions().queryKey;
 
 export const useCreateCompletedTodayTask = () => {
   const queryClient = useQueryClient();
+  const { showToast } = useToast();
 
   return useMutation({
     mutationFn: createTask,
@@ -72,6 +74,8 @@ export const useCreateCompletedTodayTask = () => {
     onError: (_, __, context) => {
       if (context?.prevTasks)
         queryClient.setQueryData(completedTaskKeys, context.prevTasks);
+        
+      showToast("error", "Task Creation Failed", "Unable to create the task. Please try again.");
     },
     onSettled: () => {
       queryClient.invalidateQueries(todayCompletedTasksOptions());
