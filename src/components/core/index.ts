@@ -14,4 +14,5 @@ export * from "./Network/NetworkBadge";
 export * from "./Social/LinkedInProfile";
 export * from "./Table/EmptyState";
 export * from "./Table/SortIcon";
+export * from "./Toast";
 export * from "./Toggle/Toggle";

@@ -5,9 +5,11 @@ import { TaskAPI } from "../../types/task";
 import { taskDetailsOptions } from "../queryOptions";
 import { taskKeys } from "../queryKeys";
 import { updateTask } from "../axios/updateTask";
+import { useToast } from "@/components/core";
 
 export const useUpdateTask = () => {
   const queryClient = useQueryClient();
+  const { showToast } = useToast();
 
   return useMutation({
     mutationFn: updateTask,
@@ -52,6 +54,8 @@ export const useUpdateTask = () => {
           context.prevDetail,
         );
       }
+      
+      showToast("error", "Task Update Failed", "Unable to update the task. Please try again.");
     },
 
     onSettled: (newUpdatedTask) => {

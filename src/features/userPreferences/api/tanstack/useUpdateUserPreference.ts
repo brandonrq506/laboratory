@@ -3,9 +3,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { USER_PREFERENCES_ENDPOINT } from "@/libs/axios";
 import { UserPreference } from "../../types/userPreference";
 import { updateUserPreference } from "../axios/updateUserPreference";
+import { useToast } from "@/components/core";
 
 export const useUpdateUserPreference = () => {
   const queryClient = useQueryClient();
+  const { showToast } = useToast();
 
   return useMutation({
     mutationFn: updateUserPreference,
@@ -36,6 +38,8 @@ export const useUpdateUserPreference = () => {
           context.previousPreferences,
         );
       }
+      
+      showToast("error", "Update Failed", "Unable to save your preference. Please try again.");
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [USER_PREFERENCES_ENDPOINT] });

@@ -8,9 +8,11 @@ import {
 } from "../queryOptions";
 import { startTask } from "../axios/startTask";
 import { taskKeys } from "../queryKeys";
+import { useToast } from "@/components/core";
 
 export const useStartTask = () => {
   const queryClient = useQueryClient();
+  const { showToast } = useToast();
 
   return useMutation({
     mutationFn: startTask,
@@ -68,6 +70,8 @@ export const useStartTask = () => {
 
       // Guaranteed there was no in_progres task before this, so this is the prev state.
       queryClient.setQueryData(inProgressTaskOptions().queryKey, []);
+      
+      showToast("error", "Task Start Failed", "Unable to start the task. Please try again.");
     },
     onSettled: (newCompletedTask) => {
       queryClient.invalidateQueries(inProgressTaskOptions());
