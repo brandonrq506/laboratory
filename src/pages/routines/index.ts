@@ -1,4 +1,4 @@
-export * from "./DeleteRoutinePage";
-export * from "./EditRoutinePage/EditRoutinePage";
-export * from "./NewRoutinePage";
-export * from "./RoutinesPage";
+export { DeleteRoutinePage } from "./DeleteRoutinePage";
+export { EditRoutinePage } from "./EditRoutinePage/EditRoutinePage";
+export { NewRoutinePage } from "./NewRoutinePage";
+export { RoutinesPage } from "./RoutinesPage";

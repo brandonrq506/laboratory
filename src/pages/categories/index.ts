@@ -1,3 +1,3 @@
-export * from "./DeleteCategoryPage";
-export * from "./EditCategoryPage";
-export * from "./NewCategoryPage";
+export { DeleteCategoryPage } from "./DeleteCategoryPage";
+export { EditCategoryPage } from "./EditCategoryPage";
+export { NewCategoryPage } from "./NewCategoryPage";

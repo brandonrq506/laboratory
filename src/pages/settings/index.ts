@@ -1,4 +1,4 @@
-export * from "./AccountSettingsPage";
-export * from "./CategorySettingsPage";
-export * from "./NotificationSettingsPage";
-export * from "./SettingsPage";
+export { AccountSettingsPage } from "./AccountSettingsPage";
+export { CategorySettingsPage } from "./CategorySettingsPage";
+export { NotificationSettingsPage } from "./NotificationSettingsPage";
+export { SettingsPage } from "./SettingsPage";

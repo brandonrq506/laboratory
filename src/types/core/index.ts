@@ -1,4 +1,4 @@
-export * from "./baseEntity";
-export * from "./option";
-export * from "./sortParams";
-export * from "./stringOption";
+export type { BaseEntity } from "./baseEntity";
+export type { Option } from "./option";
+export type { SortParams } from "./sortParams";
+export type { StringOption } from "./stringOption";

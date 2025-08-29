@@ -1,1 +1,1 @@
-export * from "./useUserPreference";
+export { useUserPreference } from "./useUserPreference";

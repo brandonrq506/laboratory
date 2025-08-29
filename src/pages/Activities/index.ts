@@ -1,3 +1,3 @@
-export * from "./ActivitiesPage";
-export * from "./EditActivityPage";
-export * from "./NewActivityPage";
+export { ActivitiesPage } from "./ActivitiesPage";
+export { EditActivityPage } from "./EditActivityPage";
+export { NewActivityPage } from "./NewActivityPage";

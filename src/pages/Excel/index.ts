@@ -1,1 +1,1 @@
-export * from "./ExcelPage";
+export { ExcelPage } from "./ExcelPage";

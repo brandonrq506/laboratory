@@ -1,2 +1,2 @@
-export * from "./FavoritesInfo";
-export * from "./PersonalInfo";
+export { FavoritesInfo } from "./FavoritesInfo";
+export { PersonalInfo } from "./PersonalInfo";

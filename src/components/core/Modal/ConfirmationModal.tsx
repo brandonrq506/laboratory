@@ -4,7 +4,7 @@ import {
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Description, DialogTitle } from "@headlessui/react";
-import { Modal, ModalProps } from "..";
+import { Modal, ModalProps } from "./Modal";
 import clsx from "clsx";
 
 const icons = {
