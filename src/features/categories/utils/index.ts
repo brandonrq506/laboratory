@@ -1,1 +1,1 @@
-export * from "./getFirstCategoryAsOption";
+export { getFirstCategoryAsOption } from "./getFirstCategoryAsOption";

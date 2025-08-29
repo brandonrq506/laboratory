@@ -1,2 +1,2 @@
-export * from "./getUser";
-export * from "./getUserByPhone";
+export { getUser } from "./getUser";
+export { getUserByPhone } from "./getUserByPhone";

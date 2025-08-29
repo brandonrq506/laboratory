@@ -1,4 +1,4 @@
-export * from "./inProgressTaskOptions";
-export * from "./scheduledTasksOptions";
-export * from "./taskDetailsOptions";
-export * from "./todayCompletedTasksOptions";
+export { inProgressTaskOptions } from "./inProgressTaskOptions";
+export { scheduledTasksOptions } from "./scheduledTasksOptions";
+export { taskDetailsOptions } from "./taskDetailsOptions";
+export { todayCompletedTasksOptions } from "./todayCompletedTasksOptions";

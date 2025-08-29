@@ -1,2 +1,2 @@
-export * from "./LoginForm";
-export * from "./LogoutButton";
+export { LoginForm } from "./LoginForm";
+export { LogoutButton } from "./LogoutButton";

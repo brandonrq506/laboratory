@@ -1,8 +1,8 @@
-export * from "./main/MainErrorPage";
-export * from "./main/MainLayout";
-export * from "./Card";
-export * from "./headings/PageHeader";
-export * from "./headings/PageHeaderWithActions";
-export * from "./headings/SectionHeader";
-export * from "./headings/SectionHeaderWithAction";
-export * from "./SectionUnderConstruction";
+export { MainErrorPage } from "./main/MainErrorPage";
+export { MainLayout } from "./main/MainLayout";
+export { Card } from "./Card";
+export { PageHeader } from "./headings/PageHeader";
+export { PageHeaderWithActions } from "./headings/PageHeaderWithActions";
+export { SectionHeader } from "./headings/SectionHeader";
+export { SectionHeaderWithAction } from "./headings/SectionHeaderWithAction";
+export { SectionUnderConstruction } from "./SectionUnderConstruction";

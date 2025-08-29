@@ -1,5 +1,5 @@
-export * from "./ActivityComboBox";
-export * from "./ActivityTable";
-export * from "./CreateActivityForm";
-export * from "./DeleteActivity";
-export * from "./EditActivityForm";
+export { ActivityComboBox } from "./ActivityComboBox";
+export { ActivityTable } from "./ActivityTable";
+export { CreateActivityForm } from "./CreateActivityForm";
+export { DeleteActivity } from "./DeleteActivity";
+export { EditActivityForm } from "./EditActivityForm";

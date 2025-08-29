@@ -1,4 +1,4 @@
-export * from "./ComboBox";
-export * from "./ComboBoxV2";
-export * from "./ComboBoxV3";
-export * from "./DialogComboBox";
+export { ComboBox } from "./ComboBox";
+export { ComboBoxV2 } from "./ComboBoxV2";
+export { ComboBoxV3 } from "./ComboBoxV3";
+export { DialogComboBox } from "./DialogComboBox";
