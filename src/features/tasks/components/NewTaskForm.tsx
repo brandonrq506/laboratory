@@ -40,11 +40,11 @@ export const NewTaskForm = ({ initialValues, onSubmit }: Props) => {
         autoComplete="off"
         registration={register("note", {
           maxLength: {
-            value: 100,
-            message: "Max 100 characters",
+            value: 250,
+            message: "Max 250 characters",
           },
         })}
-        description="Max 100 characters"
+        description="Max 250 characters"
         error={errors.note?.message}
       />
 

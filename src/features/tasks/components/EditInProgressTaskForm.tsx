@@ -20,6 +20,7 @@ export const EditInProgressTaskForm = ({ task }: Props) => {
       task: {
         activity_id: data.activity.value,
         start_time: adjustInProgressStartTime(data.start_time).toISOString(),
+        note: data.note,
       },
     });
     navigate(-1);
@@ -30,6 +31,7 @@ export const EditInProgressTaskForm = ({ task }: Props) => {
       initialValues={{
         start_time: task.start_time,
         activity: { label: task.activity.name, value: task.activity.id },
+        note: task.note,
       }}
       task={task}
       onSubmit={handleSubmit}
