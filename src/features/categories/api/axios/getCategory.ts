@@ -8,6 +8,6 @@ type Props = {
 
 export const getCategory = async ({ categoryId, signal }: Props) => {
   const URL = `${CATEGORIES_ENDPOINT}/${categoryId}`;
-  const { data } = await apiV1.get<Category>(URL, { signal });
-  return data;
+  const response = await apiV1.get<Category>(URL, { signal });
+  return response.data;
 };

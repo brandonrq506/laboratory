@@ -12,6 +12,6 @@ export const activateTask = async ({
   timestamp,
 }: ActivateTaskInput) => {
   const URL = `${TASKS_ENDPOINT}/${taskId}/activate`;
-  const { data } = await apiV1.post<TaskActivateResponse>(URL, { timestamp });
-  return data;
+  const response = await apiV1.post<TaskActivateResponse>(URL, { timestamp });
+  return response.data;
 };

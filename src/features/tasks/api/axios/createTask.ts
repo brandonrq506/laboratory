@@ -3,6 +3,6 @@ import { TaskAPI } from "../../types/task";
 import { TaskModel } from "../../types/taskModel";
 
 export const createTask = async (task: Partial<TaskModel>) => {
-  const { data } = await apiV1.post<TaskAPI>(TASKS_ENDPOINT, task);
-  return data;
+  const response = await apiV1.post<TaskAPI>(TASKS_ENDPOINT, task);
+  return response.data;
 };

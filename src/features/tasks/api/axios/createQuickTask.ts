@@ -3,8 +3,8 @@ import { ActivityAPI } from "@/features/activities/types/activityAPI";
 import { TaskAPI } from "../../types/task";
 
 export const createQuickTask = async (activity: ActivityAPI) => {
-  const { data } = await apiV1.post<TaskAPI>(TASKS_ENDPOINT, {
+  const response = await apiV1.post<TaskAPI>(TASKS_ENDPOINT, {
     activity_id: activity.id,
   });
-  return data;
+  return response.data;
 };

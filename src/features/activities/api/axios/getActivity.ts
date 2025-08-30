@@ -1,13 +1,15 @@
-import { ACTIVITIES_ENDPOINT, apiV1 } from "@/libs/axios";
 import { ActivityAPI } from "../../types/activityAPI";
+import { QueryFunctionContext } from "@tanstack/react-query";
+import { activityKeys } from "../queryKeys";
+import { apiV1 } from "@/libs/axios";
 
-type Props = {
-  activityId: number;
-  signal: AbortSignal;
-};
+export const getActivity = async ({
+  signal,
+  queryKey,
+}: QueryFunctionContext<ReturnType<(typeof activityKeys)["detail"]>>) => {
+  const [{ endpoint, activityId }] = queryKey;
+  const URL = `${endpoint}/${activityId}`;
 
-export const getActivity = async ({ activityId, signal }: Props) => {
-  const URL = `${ACTIVITIES_ENDPOINT}/${activityId}`;
   const response = await apiV1.get<ActivityAPI>(URL, { signal });
   return response.data;
 };

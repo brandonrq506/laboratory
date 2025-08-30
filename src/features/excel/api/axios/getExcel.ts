@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const getExcel = async ({ signal, date }: Props) => {
-  const { data } = await apiV1.get<ExcelTableRow[]>(EXCEL_ENDPOINT, {
+  const response = await apiV1.get<ExcelTableRow[]>(EXCEL_ENDPOINT, {
     signal,
     params: {
       date,
@@ -15,5 +15,5 @@ export const getExcel = async ({ signal, date }: Props) => {
     },
   });
 
-  return data;
+  return response.data;
 };

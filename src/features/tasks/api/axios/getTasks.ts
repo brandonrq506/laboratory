@@ -1,14 +1,14 @@
-import { TASKS_ENDPOINT, apiV1 } from "@/libs/axios";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import { TaskAPI } from "../../types/task";
+import { apiV1 } from "@/libs/axios";
 import { taskKeys } from "../queryKeys";
 
 export async function getTasks<T = TaskAPI[]>({
   signal,
   queryKey,
 }: QueryFunctionContext<ReturnType<typeof taskKeys.list>>): Promise<T> {
-  const [{ filter, sort }] = queryKey;
-  const { data } = await apiV1.get<T>(TASKS_ENDPOINT, {
+  const [{ endpoint, filter, sort }] = queryKey;
+  const response = await apiV1.get<T>(endpoint, {
     signal,
     params: {
       filter,
@@ -18,5 +18,5 @@ export async function getTasks<T = TaskAPI[]>({
       },
     },
   });
-  return data;
+  return response.data;
 }

@@ -10,6 +10,6 @@ type Props = {
 export const updateRoutine = async ({ routineId, routine }: Props) => {
   const URL = `${ROUTINES_ENDPOINT}/${routineId}`;
 
-  const { data } = await apiV1.patch<Routine>(URL, routine);
-  return data;
+  const response = await apiV1.patch<Routine>(URL, routine);
+  return response.data;
 };
