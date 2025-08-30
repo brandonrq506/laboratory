@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { ACTIVITIES_ENDPOINT } from "@/libs/axios";
+import { activityKeys } from "../queryKeys";
 import { createActivity } from "../axios/createActivity";
 
 export const useCreateActivity = () => {
@@ -9,7 +9,7 @@ export const useCreateActivity = () => {
   return useMutation({
     mutationFn: createActivity,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [ACTIVITIES_ENDPOINT] });
+      queryClient.invalidateQueries({ queryKey: activityKeys.lists() });
     },
   });
 };
