@@ -10,6 +10,6 @@ export const getActivity = async ({
   const [{ endpoint, activityId }] = queryKey;
   const URL = `${endpoint}/${activityId}`;
 
-  const { data } = await apiV1.get<ActivityAPI>(URL, { signal });
-  return data;
+  const response = await apiV1.get<ActivityAPI>(URL, { signal });
+  return response.data;
 };

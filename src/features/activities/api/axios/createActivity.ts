@@ -3,6 +3,6 @@ import { ActivityAPI } from "../../types/activityAPI";
 import { PostActivity } from "../../types/postActivity";
 
 export const createActivity = async (activity: PostActivity) => {
-  const { data } = await apiV1.post<ActivityAPI>(ACTIVITIES_ENDPOINT, activity);
-  return data;
+  const response = await apiV1.post<ActivityAPI>(ACTIVITIES_ENDPOINT, activity);
+  return response.data;
 };

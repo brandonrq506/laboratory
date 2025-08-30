@@ -9,6 +9,6 @@ export const getActivities = async ({
 }: QueryFunctionContext<ReturnType<typeof activityKeys.lists>>) => {
   const [{ endpoint }] = queryKey;
 
-  const { data } = await apiV1.get<ActivityAPI[]>(endpoint, { signal });
-  return data;
+  const response = await apiV1.get<ActivityAPI[]>(endpoint, { signal });
+  return response.data;
 };

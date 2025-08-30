@@ -4,6 +4,6 @@ import { CompletedTaskAPI } from "../../types/completedTask";
 export const completeTask = async (task: CompletedTaskAPI) => {
   const URL = `${TASKS_ENDPOINT}/${task.id}`;
 
-  const { data } = await apiV1.patch<CompletedTaskAPI>(URL, task);
-  return data;
+  const response = await apiV1.patch<CompletedTaskAPI>(URL, task);
+  return response.data;
 };

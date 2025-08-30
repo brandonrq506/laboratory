@@ -10,7 +10,7 @@ export const createActivityRoutine = async ({
   routineId,
 }: Props) => {
   const URL = `${ROUTINES_ENDPOINT}/${routineId}${ACTIVITIES_ENDPOINT}`;
-  const { data } = await apiV1.post(URL, { activity_id: activityId });
+  const response = await apiV1.post(URL, { activity_id: activityId });
 
-  return data;
+  return response.data;
 };

@@ -10,6 +10,6 @@ export const getTask = async ({
   const [{ endpoint, taskId }] = queryKey;
   const URL = `${endpoint}/${taskId}`;
 
-  const { data } = await apiV1.get<TaskAPI>(URL, { signal });
-  return data;
+  const response = await apiV1.get<TaskAPI>(URL, { signal });
+  return response.data;
 };
