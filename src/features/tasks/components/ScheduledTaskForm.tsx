@@ -43,7 +43,7 @@ export const ScheduledTaskForm = ({ initialValues, task, onSubmit }: Props) => {
       <br />
 
       <TextArea
-        autoFocus
+        autoFocus={Boolean(!initialValues.note)}
         label="Notes:"
         autoComplete="off"
         registration={register("note", {
