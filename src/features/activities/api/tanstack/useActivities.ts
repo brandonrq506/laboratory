@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { ACTIVITIES_ENDPOINT } from "@/libs/axios";
+import { activityKeys } from "../queryKeys";
 import { getActivities } from "../axios/getActivities";
 
 export const useActivities = () => {
   return useQuery({
-    queryKey: [ACTIVITIES_ENDPOINT],
+    queryKey: activityKeys.lists(),
     queryFn: getActivities,
   });
 };
