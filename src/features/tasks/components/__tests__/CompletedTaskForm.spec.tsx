@@ -17,6 +17,7 @@ describe("CompletedTaskForm", () => {
           start_time: task.start_time,
           end_time: task.end_time,
           activity: { label: task.activity.name, value: task.activity.id },
+          note: task.note,
         }}
       />,
     );
@@ -36,6 +37,7 @@ describe("CompletedTaskForm", () => {
           end_time: task.end_time,
           start_time: task.start_time,
           activity: { label: task.activity.name, value: task.activity.id },
+          note: task.note,
         }}
       />,
     );
@@ -59,6 +61,7 @@ describe("CompletedTaskForm", () => {
           start_time: now,
           end_time: pastTime,
           activity: { label: task.activity.name, value: task.activity.id },
+          note: task.note,
         }}
       />,
     );

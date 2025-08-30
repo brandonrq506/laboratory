@@ -6,4 +6,5 @@ export type CompletedTaskFormType = Pick<
   "start_time" | "end_time"
 > & {
   activity: Option;
+  note: string;
 };

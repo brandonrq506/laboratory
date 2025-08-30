@@ -1,12 +1,11 @@
 import { useForm } from "react-hook-form";
 
+import { TextArea, TimeInputV2 } from "@/components/form";
 import { ActivityComboBox } from "@/features/activities/components";
 import { Button } from "@/components/core";
 import { CategoryBadge } from "@/features/categories/components";
-import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/outline";
 import { InProgressFormType } from "../types/inProgressFormType";
 import { InProgressTaskAPI } from "../types/inProgressTask";
-import { TimeInputV2 } from "@/components/form";
 
 import { TASK } from "@/constants/entities";
 import { UPDATE } from "@/constants/actions";
@@ -25,10 +24,11 @@ export const InProgressTaskForm = ({
   task,
   onSubmit,
 }: Props) => {
-  const { control, formState, handleSubmit } = useForm<InProgressFormType>({
-    values: initialValues,
-  });
-  const { isSubmitting } = formState;
+  const { control, formState, handleSubmit, register } =
+    useForm<InProgressFormType>({
+      values: initialValues,
+    });
+  const { isSubmitting, errors } = formState;
 
   return (
     <form
@@ -39,12 +39,18 @@ export const InProgressTaskForm = ({
         <CategoryBadge category={task.activity.category} />
       </div>
 
-      {task.note && (
-        <div className="flex items-center gap-2 rounded-md bg-gray-50 p-2 text-sm text-gray-700 shadow-sm ring-1 ring-gray-200">
-          <ChatBubbleLeftEllipsisIcon className="size-4 flex-none text-gray-400" />
-          <p className="leading-snug whitespace-pre-line">{task.note}</p>
-        </div>
-      )}
+      <TextArea
+        label="Notes:"
+        autoComplete="off"
+        registration={register("note", {
+          maxLength: {
+            value: 250,
+            message: "Note cannot exceed 250 characters.",
+          },
+        })}
+        description="Max 250 characters"
+        error={errors.note?.message}
+      />
 
       <TimeInputV2
         control={control}
