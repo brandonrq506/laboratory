@@ -38,4 +38,19 @@ describe("ScheduledTaskForm", () => {
     expect(notes).toBeInTheDocument();
     expect(notes).toHaveFocus();
   });
+
+  it("sets the notes textarea to have 4 rows", () => {
+    const task = scheduledTasks[0];
+
+    render(
+      <ScheduledTaskForm
+        task={task}
+        onSubmit={vi.fn()}
+        initialValues={{ note: task.note }}
+      />,
+    );
+
+    const notesTextArea = screen.getByLabelText("Notes:");
+    expect(notesTextArea).toHaveAttribute("rows", "4");
+  });
 });

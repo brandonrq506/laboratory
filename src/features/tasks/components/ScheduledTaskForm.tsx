@@ -46,6 +46,7 @@ export const ScheduledTaskForm = ({ initialValues, task, onSubmit }: Props) => {
         autoFocus={Boolean(!initialValues.note)}
         label="Notes:"
         autoComplete="off"
+        rows={4}
         registration={register("note", {
           maxLength: {
             value: 250,
