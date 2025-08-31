@@ -1,3 +1,5 @@
+/* eslint-disable max-lines-per-function */
+
 import { useForm } from "react-hook-form";
 
 import { NumberInput, TextInput } from "@/components/form";
@@ -6,11 +8,12 @@ import { CategorySelect } from "@/features/categories/components";
 import { CreateForm } from "../types/createForm";
 
 const defaultActivity: CreateForm = {
-  name: "",
+  display_name: "",
   exp_time_hours: 0,
   exp_time_minutes: 0,
   max_time_hours: 0,
   max_time_minutes: 0,
+  name: "",
   category_id: null,
 };
 
@@ -39,10 +42,19 @@ export const ActivityForm = ({
           showAsterisk
           label="Name"
           placeholder="Shower"
+          description="Used for reports and exports."
           error={errors.name?.message}
           registration={register("name", {
             required: "Name is required",
           })}
+        />
+
+        <TextInput
+          label="Display Name"
+          placeholder="Shower"
+          description="What you will see on the UI."
+          error={errors.display_name?.message}
+          registration={register("display_name")}
         />
 
         <CategorySelect
