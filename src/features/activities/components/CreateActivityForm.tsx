@@ -17,16 +17,16 @@ export const CreateActivityForm = ({ initialValues }: Props) => {
 
   const onSubmit = async (values: CreateForm) => {
     await mutateAsync({
+      display_name: values.display_name || values.name,
+      category_id: values.category_id!.value,
       exp_seconds: hhmmToSeconds({
         hours: values.exp_time_hours,
         minutes: values.exp_time_minutes,
       }),
-      category_id: values.category_id!.value,
       max_seconds: hhmmToSeconds({
         hours: values.max_time_hours,
         minutes: values.max_time_minutes,
       }),
-      display_name: values.display_name,
       name: values.name,
     });
 
