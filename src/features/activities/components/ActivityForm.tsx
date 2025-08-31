@@ -8,13 +8,13 @@ import { CategorySelect } from "@/features/categories/components";
 import { CreateForm } from "../types/createForm";
 
 const defaultActivity: CreateForm = {
+  category_id: null,
   display_name: "",
   exp_time_hours: 0,
   exp_time_minutes: 0,
   max_time_hours: 0,
   max_time_minutes: 0,
   name: "",
-  category_id: null,
 };
 
 type Props = {
