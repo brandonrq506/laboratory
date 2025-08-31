@@ -36,7 +36,9 @@ describe("DeleteActivity", () => {
     await user.click(screen.getByRole("button", { name: "Delete Activity" }));
 
     expect(
-      screen.getByText(`Are you sure you want to delete "${activity.name}"?`),
+      screen.getByText(
+        `Are you sure you want to delete "${activity.display_name}"?`,
+      ),
     ).toBeInTheDocument();
   });
 });

@@ -28,8 +28,8 @@ export const ActivityTable = () => {
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor("name", {
-        header: "Name",
+      columnHelper.accessor("display_name", {
+        header: "Display Name",
         sortingFn: "text",
       }),
       columnHelper.accessor((row) => secondsToHHmm(row.exp_seconds), {
@@ -70,7 +70,7 @@ export const ActivityTable = () => {
     globalFilterFn: "includesString",
     enableSortingRemoval: false,
     maxMultiSortColCount: 3,
-    initialState: { sorting: [{ id: "name", desc: false }] },
+    initialState: { sorting: [{ id: "display_name", desc: false }] },
   });
 
   return (

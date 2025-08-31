@@ -8,8 +8,11 @@ export const useUpdateActivity = () => {
 
   return useMutation({
     mutationFn: updateActivity,
-    onSuccess: () => {
+    onSuccess: (_, { activityId }) => {
       queryClient.invalidateQueries({ queryKey: activityKeys.lists() });
+      queryClient.invalidateQueries({
+        queryKey: activityKeys.detail(activityId),
+      });
     },
   });
 };

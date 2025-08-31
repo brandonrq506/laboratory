@@ -27,7 +27,7 @@ export const RunningTimer = ({ task }: Props) => {
         <div className="flex items-center gap-1.5">
           <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
           <p className="line-clamp-1 text-sm font-semibold">
-            {task.activity.name}
+            {task.activity.display_name}
           </p>
         </div>
         <p className="text-xs">

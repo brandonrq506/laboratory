@@ -26,7 +26,7 @@ export const DeleteActivityDialog = ({ isOpen, onClose, activity }: Props) => {
       onClose={onClose}
       icon="danger"
       title={`${DELETE} ${ACTIVITY}`}
-      description={`Are you sure you want to delete "${activity.name}"?`}
+      description={`Are you sure you want to delete "${activity.display_name}"?`}
       actions={
         <>
           <Button

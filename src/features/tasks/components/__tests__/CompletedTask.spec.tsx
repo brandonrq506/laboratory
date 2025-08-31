@@ -9,6 +9,6 @@ describe("CompletedTask", () => {
     render(<CompletedTask task={task} />);
 
     expect(screen.getByRole("button", { name: "Delete Task" }));
-    expect(screen.getByText(task.activity.name)).toBeInTheDocument();
+    expect(screen.getByText(task.activity.display_name)).toBeInTheDocument();
   });
 });

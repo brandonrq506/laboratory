@@ -30,7 +30,10 @@ export const EditInProgressTaskForm = ({ task }: Props) => {
     <InProgressTaskForm
       initialValues={{
         start_time: task.start_time,
-        activity: { label: task.activity.name, value: task.activity.id },
+        activity: {
+          label: task.activity.display_name,
+          value: task.activity.id,
+        },
         note: task.note,
       }}
       task={task}

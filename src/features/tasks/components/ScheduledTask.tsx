@@ -17,7 +17,7 @@ export const ScheduledTask = ({ task }: Props) => {
     <Card className="shadow-xs">
       <div className="flex items-center gap-1.5">
         <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
-        <p className="text-sm font-semibold">{task.activity.name}</p>
+        <p className="text-sm font-semibold">{task.activity.display_name}</p>
       </div>
 
       <div className="flex gap-2.5">

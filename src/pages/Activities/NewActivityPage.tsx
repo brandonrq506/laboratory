@@ -20,11 +20,9 @@ export const NewActivityPage = () => {
       <Modal isOpen={isOpen} onClose={() => navigate("..")}>
         <CreateActivityForm
           initialValues={{
-            exp_time_hours: 0,
             exp_time_minutes: 30,
             category_id: defaultCategory,
             max_time_hours: 1,
-            max_time_minutes: 0,
           }}
         />
       </Modal>

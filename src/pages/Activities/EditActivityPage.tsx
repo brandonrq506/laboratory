@@ -46,6 +46,7 @@ export const EditActivityPage = () => {
           exp_time_hours: expected_time.hours,
           exp_time_minutes: expected_time.minutes,
           name: data.name,
+          display_name: data.display_name,
           category_id: { value: data.category.id, label: data.category.name },
           max_time_hours: max_time.hours,
           max_time_minutes: max_time.minutes,
