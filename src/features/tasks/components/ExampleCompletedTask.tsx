@@ -18,7 +18,7 @@ export const ExampleCompletedTask = ({ task }: Props) => {
       <div className="flex flex-col justify-between">
         <div className="flex items-center gap-1.5">
           <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
-          <p className="text-sm font-semibold">{task.activity.name}</p>
+          <p className="text-sm font-semibold">{task.activity.display_name}</p>
           <p className="text-xs text-gray-600 tabular-nums">
             {secondsToTime(durationSeconds)}
           </p>

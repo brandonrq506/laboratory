@@ -29,9 +29,9 @@ it("displays the options when clicked", async () => {
   await user.click(screen.getByRole("button", { name: /combobox button/i }));
 
   expect(
-    screen.getByRole("option", { name: activities[0].name }),
+    screen.getByRole("option", { name: activities[0].display_name }),
   ).toBeInTheDocument();
   expect(
-    screen.getByRole("option", { name: activities[8].name }),
+    screen.getByRole("option", { name: activities[8].display_name }),
   ).toBeInTheDocument();
 });

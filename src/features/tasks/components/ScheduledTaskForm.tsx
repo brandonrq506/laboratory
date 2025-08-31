@@ -27,7 +27,7 @@ export const ScheduledTaskForm = ({ initialValues, task, onSubmit }: Props) => {
     <form onSubmit={handleSubmit((data) => onSubmit(data))}>
       <div className="flex items-center justify-between">
         <div className="flex items-baseline gap-2">
-          <PageHeader title={task.activity.name} />
+          <PageHeader title={task.activity.display_name} />
           <div className="flex gap-1 text-xs">
             <ClockIcon className="size-4" />
             <p className="tabular-nums">

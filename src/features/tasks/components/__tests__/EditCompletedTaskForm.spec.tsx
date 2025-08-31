@@ -19,7 +19,9 @@ describe("EditCompletedTaskForm", () => {
 
     render(<Stub initialEntries={[`/timer/edit/${task.id}`]} />);
 
-    expect(screen.getByLabelText("Activities")).toHaveValue(task.activity.name);
+    expect(screen.getByLabelText("Activities")).toHaveValue(
+      task.activity.display_name,
+    );
   });
 
   it("navigates to the timer page after submitting the form", async () => {

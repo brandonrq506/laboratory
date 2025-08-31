@@ -16,7 +16,10 @@ describe("CompletedTaskForm", () => {
         initialValues={{
           start_time: task.start_time,
           end_time: task.end_time,
-          activity: { label: task.activity.name, value: task.activity.id },
+          activity: {
+            label: task.activity.display_name,
+            value: task.activity.id,
+          },
           note: task.note,
         }}
       />,
@@ -36,7 +39,10 @@ describe("CompletedTaskForm", () => {
         initialValues={{
           end_time: task.end_time,
           start_time: task.start_time,
-          activity: { label: task.activity.name, value: task.activity.id },
+          activity: {
+            label: task.activity.display_name,
+            value: task.activity.id,
+          },
           note: task.note,
         }}
       />,
@@ -60,7 +66,10 @@ describe("CompletedTaskForm", () => {
         initialValues={{
           start_time: now,
           end_time: pastTime,
-          activity: { label: task.activity.name, value: task.activity.id },
+          activity: {
+            label: task.activity.display_name,
+            value: task.activity.id,
+          },
           note: task.note,
         }}
       />,

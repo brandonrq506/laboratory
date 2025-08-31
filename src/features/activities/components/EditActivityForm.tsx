@@ -30,6 +30,7 @@ export const EditActivityForm = ({ activityId, initialValues }: Props) => {
           hours: values.max_time_hours,
           minutes: values.max_time_minutes,
         }),
+        display_name: values.display_name,
         name: values.name,
       },
     });

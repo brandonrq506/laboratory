@@ -40,7 +40,8 @@ export const QuickCreateTaskMenu = () => {
               e.preventDefault();
               mutate(activity);
             }}>
-            {activity.name} <CategoryBadge category={activity.category} />
+            {activity.display_name}{" "}
+            <CategoryBadge category={activity.category} />
           </button>
         </MenuItem>
       ))}

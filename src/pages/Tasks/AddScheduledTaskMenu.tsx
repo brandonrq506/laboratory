@@ -63,7 +63,8 @@ export const AddScheduledTaskMenu = () => {
                 e.preventDefault();
                 mutateTask(activity);
               }}>
-              {activity.name} <CategoryBadge category={activity.category} />
+              {activity.display_name}{" "}
+              <CategoryBadge category={activity.category} />
             </button>
           </MenuItem>
         ))}

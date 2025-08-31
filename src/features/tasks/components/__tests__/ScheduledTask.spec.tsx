@@ -11,6 +11,6 @@ describe("ScheduledTask", () => {
       <ScheduledTask task={{ ...task, expected_start_time: new Date() }} />,
     );
 
-    expect(screen.getByText(task.activity.name)).toBeInTheDocument();
+    expect(screen.getByText(task.activity.display_name)).toBeInTheDocument();
   });
 });

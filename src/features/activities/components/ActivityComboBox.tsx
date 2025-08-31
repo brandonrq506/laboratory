@@ -15,7 +15,8 @@ export const ActivityComboBox = <T extends FieldValues>({
 }: UseControllerProps<T> & ActivityComboBoxProps) => {
   const { data } = useActivities();
 
-  const options = data?.map((c) => transformToOption(c, "id", "name")) ?? [];
+  const options =
+    data?.map((c) => transformToOption(c, "id", "display_name")) ?? [];
 
   return (
     <ControlComboBox
