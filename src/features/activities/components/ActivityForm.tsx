@@ -1,5 +1,3 @@
-/* eslint-disable max-lines-per-function */
-
 import { useForm } from "react-hook-form";
 
 import { NumberInput, TextInput } from "@/components/form";
@@ -44,9 +42,7 @@ export const ActivityForm = ({
           placeholder="Shower"
           description="Used for reports and exports."
           error={errors.name?.message}
-          registration={register("name", {
-            required: "Name is required",
-          })}
+          registration={register("name", { required: "Name is required" })}
         />
 
         <TextInput
