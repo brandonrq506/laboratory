@@ -37,6 +37,7 @@ export const CompletedTaskForm = ({ initialValues, task, onSubmit }: Props) => {
       <TextArea
         label="Notes:"
         autoComplete="off"
+        rows={4}
         registration={register("note", {
           maxLength: {
             value: 250,

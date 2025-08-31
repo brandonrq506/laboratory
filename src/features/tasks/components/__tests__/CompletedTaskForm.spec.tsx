@@ -81,4 +81,27 @@ describe("CompletedTaskForm", () => {
       await screen.findByText("End time must be after start time"),
     ).toBeInTheDocument();
   });
+
+  it("sets the notes textarea to have 4 rows", () => {
+    const task = completedTasks[0];
+
+    render(
+      <CompletedTaskForm
+        task={task}
+        onSubmit={vi.fn()}
+        initialValues={{
+          start_time: task.start_time,
+          end_time: task.end_time,
+          activity: {
+            label: task.activity.display_name,
+            value: task.activity.id,
+          },
+          note: task.note,
+        }}
+      />,
+    );
+
+    const notesTextArea = screen.getByLabelText("Notes:");
+    expect(notesTextArea).toHaveAttribute("rows", "4");
+  });
 });
