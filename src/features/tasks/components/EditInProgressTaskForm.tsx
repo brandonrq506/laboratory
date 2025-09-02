@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router";
 import { useUpdateTask } from "../api/tanstack/useUpdateTask";
 
+import { DirtyFields } from "@/types/core";
 import { InProgressFormType } from "../types/inProgressFormType";
 import { InProgressTaskAPI } from "../types/inProgressTask";
 import { InProgressTaskForm } from "./InProgressTaskForm";
 import { adjustInProgressStartTime } from "../utils/adjustInProgressStartTime";
+import { floorSeconds } from "@/utils";
 
 type Props = {
   task: InProgressTaskAPI;
@@ -14,12 +16,17 @@ export const EditInProgressTaskForm = ({ task }: Props) => {
   const navigate = useNavigate();
   const { mutate } = useUpdateTask();
 
-  const handleSubmit = (data: InProgressFormType) => {
+  const handleSubmit = (
+    data: InProgressFormType,
+    dirtyFields: DirtyFields<InProgressFormType>,
+  ) => {
     mutate({
       taskId: task.id,
       task: {
         activity_id: data.activity.value,
-        start_time: adjustInProgressStartTime(data.start_time).toISOString(),
+        start_time: dirtyFields.start_time
+          ? floorSeconds(data.start_time).toISOString()
+          : adjustInProgressStartTime(data.start_time).toISOString(),
         note: data.note,
       },
     });
