@@ -4,6 +4,7 @@ import { TextArea, TimeInputV2 } from "@/components/form";
 import { ActivityComboBox } from "@/features/activities/components";
 import { Button } from "@/components/core";
 import { CategoryBadge } from "@/features/categories/components";
+import { DirtyFields } from "@/types/core";
 import { InProgressFormType } from "../types/inProgressFormType";
 import { InProgressTaskAPI } from "../types/inProgressTask";
 
@@ -15,7 +16,10 @@ import { floorSeconds } from "@/utils";
 
 type Props = {
   initialValues: InProgressFormType;
-  onSubmit: (data: InProgressFormType) => void;
+  onSubmit: (
+    data: InProgressFormType,
+    dirtyFields: DirtyFields<InProgressFormType>,
+  ) => void;
   task: InProgressTaskAPI;
 };
 
@@ -28,11 +32,11 @@ export const InProgressTaskForm = ({
     useForm<InProgressFormType>({
       values: initialValues,
     });
-  const { isSubmitting, errors } = formState;
+  const { isSubmitting, errors, dirtyFields } = formState;
 
   return (
     <form
-      onSubmit={handleSubmit((data) => onSubmit(data))}
+      onSubmit={handleSubmit((data) => onSubmit(data, dirtyFields))}
       className="flex flex-col gap-y-2">
       <div className="flex items-center justify-between gap-2">
         <ActivityComboBox control={control} name="activity" hideLabel />
