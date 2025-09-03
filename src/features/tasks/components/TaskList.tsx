@@ -11,11 +11,9 @@ export const TaskList = <T extends BaseEntity>({
   renderItem,
 }: Props<T>) => {
   return (
-    <ul>
+    <ul className="space-y-3">
       {tasks.map((task) => (
-        <li key={task.id} className="my-1">
-          {renderItem(task)}
-        </li>
+        <li key={task.id}>{renderItem(task)}</li>
       ))}
 
       {tasks.length === 0 && <TaskEmptyList />}
