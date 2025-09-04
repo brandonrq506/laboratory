@@ -1,11 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { ACTIVITIES_ENDPOINT } from "@/libs/axios";
 import { ActivityAPI } from "@/features/activities/types/activityAPI";
-import { CompletedTaskAPI } from "../../types/completedTask";
 
+import { activityKeys } from "@/features/activities/api/queryKeys";
+import { buildTemporaryCompletedTask } from "../../utils/buildTemporaryCompletedTask";
 import { createTask } from "../axios/createTask";
 import { isBefore } from "date-fns";
+import { snapshotQueries } from "@/utils/tanstack/helpers";
 import { todayCompletedTasksOptions } from "../queryOptions";
 
 const completedTaskKeys = todayCompletedTasksOptions().queryKey;
@@ -18,11 +19,11 @@ export const useCreateCompletedTodayTask = () => {
     onMutate: async (newTask) => {
       await queryClient.cancelQueries(todayCompletedTasksOptions());
 
-      const prevTasks = queryClient.getQueryData(completedTaskKeys);
+      const { rollback } = snapshotQueries(queryClient, [completedTaskKeys]);
 
-      const activities = queryClient.getQueryData<ActivityAPI[]>([
-        ACTIVITIES_ENDPOINT,
-      ]);
+      const activities = queryClient.getQueryData<ActivityAPI[]>(
+        activityKeys.lists(),
+      );
 
       const activity = activities?.find((a) => a.id === newTask.activity_id);
 
@@ -31,18 +32,12 @@ export const useCreateCompletedTodayTask = () => {
         return;
       }
 
-      const newCompletedTask: CompletedTaskAPI = {
-        status: "completed",
-        start_time: newTask.start_time!,
-        end_time: newTask.end_time!,
+      const newCompletedTask = buildTemporaryCompletedTask(
         activity,
-        optional_name: null,
-        position: null,
-        note: newTask.note || "",
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        id: -1,
-      };
+        newTask.start_time ?? new Date().toISOString(),
+        newTask.end_time ?? new Date().toISOString(),
+        newTask.note || "",
+      );
 
       /*
           Add new completed task to today's completed tasks cache
@@ -67,11 +62,10 @@ export const useCreateCompletedTodayTask = () => {
         ];
       });
 
-      return { prevTasks };
+      return { rollback };
     },
     onError: (_, __, context) => {
-      if (context?.prevTasks)
-        queryClient.setQueryData(completedTaskKeys, context.prevTasks);
+      context?.rollback();
     },
     onSettled: () => {
       queryClient.invalidateQueries(todayCompletedTasksOptions());
