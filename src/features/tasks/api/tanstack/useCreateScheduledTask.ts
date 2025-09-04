@@ -1,10 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import { addEnd } from "@/utils/array";
+import { buildTemporaryScheduledTask } from "../../utils/buildTemporaryScheduledTask";
 import { createQuickTask } from "../axios/createQuickTask";
 import { scheduledTasksOptions } from "../queryOptions";
-import { taskKeys } from "../queryKeys";
+import { snapshotQueries } from "@/utils/tanstack/helpers";
 
-import { ScheduledTaskAPI } from "../../types/scheduledTask";
+const scheduledKey = scheduledTasksOptions().queryKey;
 
 export const useCreateScheduledTask = () => {
   const queryClient = useQueryClient();
@@ -13,43 +15,21 @@ export const useCreateScheduledTask = () => {
     mutationFn: createQuickTask,
 
     onMutate: async (activity) => {
-      await queryClient.cancelQueries({ queryKey: taskKeys.lists() });
+      await queryClient.cancelQueries(scheduledTasksOptions());
 
-      const previousTasks = queryClient.getQueryData(
-        scheduledTasksOptions().queryKey,
-      );
+      const { rollback } = snapshotQueries(queryClient, [scheduledKey]);
 
-      const newScheduledTask: ScheduledTaskAPI = {
-        activity,
-        status: "scheduled",
-        position: "9999",
-        start_time: null,
-        end_time: null,
-        note: "",
-        optional_name: null,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        // This is a temporary ID for optimistic updates
-        id: Math.random(),
-      };
+      const newScheduledTask = buildTemporaryScheduledTask(activity);
 
       // Add new scheduled task to the end of scheduled tasks cache
-      queryClient.setQueryData(scheduledTasksOptions().queryKey, (old) => {
-        if (old) {
-          return [...old, newScheduledTask];
-        }
-        return [newScheduledTask];
-      });
+      queryClient.setQueryData(scheduledTasksOptions().queryKey, (old) =>
+        addEnd(old, newScheduledTask),
+      );
 
-      return { previousTasks };
+      return { rollback };
     },
     onError: (_, __, context) => {
-      if (context?.previousTasks) {
-        queryClient.setQueryData(
-          scheduledTasksOptions().queryKey,
-          context.previousTasks,
-        );
-      }
+      context?.rollback();
     },
     onSettled: () => {
       queryClient.invalidateQueries(scheduledTasksOptions());

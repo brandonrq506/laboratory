@@ -5,6 +5,8 @@ import {
   taskDetailsOptions,
   todayCompletedTasksOptions,
 } from "../queryOptions";
+import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
+import { completeInProgressTask } from "../orchestrator";
 import { completeTask } from "../axios/completeTask";
 import { taskKeys } from "../queryKeys";
 
@@ -19,59 +21,31 @@ export const useCompleteTask = () => {
     onMutate: async (newCompletedTask) => {
       await queryClient.cancelQueries({ queryKey: taskKeys.lists() });
 
-      const prevInProgress = queryClient.getQueryData(inProgressTaskKeys)!;
+      const detailKey = taskDetailsOptions(newCompletedTask.id).queryKey;
 
-      const prevCompleted = queryClient.getQueryData(completedTaskKeys);
+      const { rollback } = snapshotQueries(queryClient, [
+        inProgressTaskKeys,
+        completedTaskKeys,
+        detailKey,
+      ]);
 
-      const prevDetail = queryClient.getQueryData(
-        taskDetailsOptions(newCompletedTask.id).queryKey,
-      );
-
-      // Add in_progress to the completed tasks
-      queryClient.setQueryData(completedTaskKeys, (previousTasks) => {
-        if (previousTasks) {
-          return [newCompletedTask, ...previousTasks];
-        }
-        return [newCompletedTask];
+      completeInProgressTask({
+        qc: queryClient,
+        task: newCompletedTask,
       });
 
-      // Set in_progress to empty array
-      queryClient.setQueryData(inProgressTaskKeys, []);
-
-      // Set detail to the new completed task
-      queryClient.setQueryData(
-        taskDetailsOptions(newCompletedTask.id).queryKey,
-        newCompletedTask,
-      );
-
-      return { prevInProgress, prevCompleted, prevDetail };
+      return { rollback };
     },
     onError: (_, __, context) => {
-      if (context?.prevInProgress) {
-        queryClient.setQueryData(inProgressTaskKeys, context.prevInProgress);
-      }
-
-      if (context?.prevCompleted) {
-        queryClient.setQueryData(completedTaskKeys, context.prevCompleted);
-      }
-
-      if (context?.prevDetail) {
-        queryClient.setQueryData(
-          taskDetailsOptions(context.prevDetail.id).queryKey,
-          context.prevDetail,
-        );
-      }
+      context?.rollback();
     },
-    onSettled: (newCompletedTask) => {
-      // Invalidate in progress query
-      queryClient.invalidateQueries(inProgressTaskOptions());
-
-      // Invalidate completed query
-      queryClient.invalidateQueries(todayCompletedTasksOptions());
-
-      // Invalidate detail query
-      if (newCompletedTask)
-        queryClient.invalidateQueries(taskDetailsOptions(newCompletedTask.id));
+    onSettled: (_, __, newCompletedTask) => {
+      invalidateQueries(
+        queryClient,
+        inProgressTaskOptions(),
+        todayCompletedTasksOptions(),
+        taskDetailsOptions(newCompletedTask.id),
+      );
     },
   });
 };

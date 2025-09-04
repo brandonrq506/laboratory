@@ -6,6 +6,7 @@ import {
   todayCompletedTasksOptions,
 } from "../queryOptions";
 import { activateTask } from "../axios/activateTask";
+import { invalidateQueries } from "@/utils/tanstack/helpers";
 
 export const useActivateTask = () => {
   const queryClient = useQueryClient();
@@ -13,9 +14,12 @@ export const useActivateTask = () => {
   return useMutation({
     mutationFn: activateTask,
     onSuccess: () => {
-      queryClient.invalidateQueries(inProgressTaskOptions());
-      queryClient.invalidateQueries(scheduledTasksOptions());
-      queryClient.invalidateQueries(todayCompletedTasksOptions());
+      invalidateQueries(
+        queryClient,
+        inProgressTaskOptions(),
+        scheduledTasksOptions(),
+        todayCompletedTasksOptions(),
+      );
     },
   });
 };

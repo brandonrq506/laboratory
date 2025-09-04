@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { BaseTaskAPI } from "../../types/baseTask";
 import { TaskAPI } from "../../types/task";
+import { snapshotQueries } from "@/utils/tanstack/helpers";
 import { taskDetailsOptions } from "../queryOptions";
 import { taskKeys } from "../queryKeys";
 import { updateTask } from "../axios/updateTask";
@@ -18,49 +19,29 @@ export const useUpdateTask = () => {
       await queryClient.cancelQueries(listsQuery);
       await queryClient.cancelQueries(detailQuery);
 
-      const prevQueries = queryClient.getQueriesData(listsQuery);
-      const prevDetail = queryClient.getQueryData(
-        taskDetailsOptions(taskId).queryKey,
-      );
+      const { rollback } = snapshotQueries(queryClient, [
+        listsQuery.queryKey,
+        detailQuery.queryKey,
+      ]);
 
-      queryClient.setQueriesData(listsQuery, (oldTasks: BaseTaskAPI[]) => {
-        return oldTasks.map((oldTask) =>
-          oldTask.id === taskId ? { ...oldTask, ...task } : oldTask,
-        );
-      });
+      // Update task on all lists optimistically
+      queryClient.setQueriesData(listsQuery, (oldTasks: BaseTaskAPI[]) =>
+        oldTasks.map((ot) => (ot.id === taskId ? { ...ot, ...task } : ot)),
+      );
 
       // Update details in case user clicks on task
-      queryClient.setQueryData(
-        taskDetailsOptions(taskId).queryKey,
-        (prevData) =>
-          prevData ? ({ ...prevData, ...task } as TaskAPI) : undefined,
+      queryClient.setQueryData(taskDetailsOptions(taskId).queryKey, (prev) =>
+        prev ? ({ ...prev, ...task } as TaskAPI) : undefined,
       );
 
-      return { prevQueries, prevDetail };
+      return { rollback };
     },
-
-    onError: (_, { taskId }, context) => {
-      if (context?.prevQueries) {
-        context.prevQueries.forEach(([queryKey, prevData]) => {
-          queryClient.setQueryData(queryKey, prevData);
-        });
-      }
-
-      if (context?.prevDetail) {
-        queryClient.setQueryData(
-          taskDetailsOptions(taskId).queryKey,
-          context.prevDetail,
-        );
-      }
+    onError: (_, __, context) => {
+      context?.rollback();
     },
-
-    onSettled: (newUpdatedTask) => {
-      // Could be better by just invalidating either scheduled, in_progress or completed
+    onSettled: (_, __, { taskId }) => {
       queryClient.invalidateQueries({ queryKey: taskKeys.all });
-
-      // Invalidate detail query
-      if (newUpdatedTask)
-        queryClient.invalidateQueries(taskDetailsOptions(newUpdatedTask.id));
+      queryClient.invalidateQueries(taskDetailsOptions(taskId));
     },
   });
 };
