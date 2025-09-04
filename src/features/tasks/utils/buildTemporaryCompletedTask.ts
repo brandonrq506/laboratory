@@ -1,5 +1,6 @@
 import { ActivityAPI } from "@/features/activities/types/activityAPI";
 import { CompletedTaskAPI } from "../types/completedTask";
+import { roundToNearestMinutes } from "date-fns";
 
 let tempIdCounter = -1;
 
@@ -16,8 +17,8 @@ export const buildTemporaryCompletedTask = (
     activity,
     status: "completed",
     position: null,
-    start_time: start,
-    end_time: end,
+    start_time: roundToNearestMinutes(start).toISOString(),
+    end_time: roundToNearestMinutes(end).toISOString(),
     note,
     optional_name: null,
     created_at: now,
