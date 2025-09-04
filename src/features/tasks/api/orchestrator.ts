@@ -8,6 +8,7 @@ import {
 import { CompletedTaskAPI } from "../types/completedTask";
 import { InProgressTaskAPI } from "../types/inProgressTask";
 import { QueryClient } from "@tanstack/react-query";
+import { buildTemporaryCompletedTask } from "../utils/buildTemporaryCompletedTask";
 
 const inProgressKey = inProgressTaskOptions().queryKey;
 const scheduledKey = scheduledTasksOptions().queryKey;
@@ -47,4 +48,46 @@ export const completeInProgressTask = ({ qc, task }: CompleteParams) => {
 
   // Update details cache in case user click on this task
   qc.setQueryData(detailKey, task);
+};
+
+interface ActivateParams {
+  qc: QueryClient;
+  taskIdToActivate: number;
+  timestamp: string;
+}
+
+export const activateScheduledTask = ({
+  qc,
+  taskIdToActivate,
+  timestamp,
+}: ActivateParams) => {
+  const inProgressCache = qc.getQueryData(inProgressKey);
+  const inProgressTask = inProgressCache?.[0];
+
+  if (inProgressTask) {
+    const tempCompleted = buildTemporaryCompletedTask(
+      inProgressTask.activity,
+      inProgressTask.start_time,
+      timestamp,
+    );
+
+    // Move current in_progress to the start of completed
+    completeInProgressTask({ qc, task: tempCompleted });
+  }
+
+  const scheduledCache = qc.getQueryData(scheduledKey);
+  const taskToActivate = scheduledCache?.find((t) => t.id === taskIdToActivate);
+
+  if (taskToActivate) {
+    const promoted: InProgressTaskAPI = {
+      ...taskToActivate,
+      status: "in_progress",
+      start_time: timestamp,
+      end_time: null,
+      position: null,
+    };
+
+    // Add activated task to in_progress and remove from scheduled
+    promoteScheduledToInProgress({ qc, task: promoted });
+  }
 };
