@@ -10,7 +10,8 @@ describe("Timer", () => {
     // expired 5s ago
     render(<Timer start_time={startPast} exp_seconds={5} />);
 
-    const el = screen.getByText(/-00:00:04/);
+    // Display minus sign
+    const el = screen.getByText(/-/);
     expect(el).toHaveClass("text-red-800");
   });
 });

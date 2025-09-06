@@ -4,17 +4,16 @@ import userEvent from "@testing-library/user-event";
 import { RunningTimerButton } from "../RunningTimerButton";
 import { inProgressTasks } from "@/test/store/tasks";
 
-// Mutable flags to control mocked hook behavior per test (avoids dynamic re-imports)
-let onlineMock = true;
-let isErrorMock = false;
+const useOnlineStatusMock = vi.fn();
 const mutateSpy = vi.fn();
+const useCompleteTaskMock = vi.fn();
 
 vi.mock("@/hooks", () => ({
-  useOnlineStatus: () => onlineMock,
+  useOnlineStatus: () => useOnlineStatusMock(),
 }));
 
 vi.mock("@/features/tasks/api/tanstack/useCompleteTask", () => ({
-  useCompleteTask: () => ({ mutate: mutateSpy, isError: isErrorMock }),
+  useCompleteTask: () => useCompleteTaskMock(),
 }));
 
 const task = inProgressTasks[0];
@@ -22,16 +21,21 @@ const task = inProgressTasks[0];
 describe("RunningTimerButton", () => {
   beforeEach(() => {
     mutateSpy.mockReset();
-    onlineMock = true;
-    isErrorMock = false;
+    useOnlineStatusMock.mockReset();
+    useCompleteTaskMock.mockReset();
+
+    // Default happy path values
+    useOnlineStatusMock.mockReturnValue(true);
+    useCompleteTaskMock.mockReturnValue({ mutate: mutateSpy, isError: false });
   });
 
   it("calls mutate with completed payload on click", async () => {
     const user = userEvent.setup();
+    const btnText = "Stop button";
 
     render(<RunningTimerButton task={task} />);
 
-    const btn = screen.getByRole("button", { name: /stop button/i });
+    const btn = screen.getByRole("button", { name: btnText });
     await user.click(btn);
 
     expect(mutateSpy).toHaveBeenCalledTimes(1);
@@ -42,18 +46,20 @@ describe("RunningTimerButton", () => {
   });
 
   it("renders retry state when isError", () => {
-    isErrorMock = true;
+    useCompleteTaskMock.mockReturnValue({ mutate: mutateSpy, isError: true });
+    const btnText = "Retry button";
+
     render(<RunningTimerButton task={task} />);
-    expect(
-      screen.getByRole("button", { name: /retry button/i }),
-    ).toBeInTheDocument();
+
+    expect(screen.getByRole("button", { name: btnText })).toBeInTheDocument();
   });
 
   it("shows offline icon when offline", () => {
-    onlineMock = false;
+    useOnlineStatusMock.mockReturnValue(false);
+    const btnText = "No Network button";
+
     render(<RunningTimerButton task={task} />);
-    expect(
-      screen.getByRole("button", { name: /no network button/i }),
-    ).toBeInTheDocument();
+
+    expect(screen.getByRole("button", { name: btnText })).toBeInTheDocument();
   });
 });
