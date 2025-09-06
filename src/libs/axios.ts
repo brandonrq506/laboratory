@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { isHtmlResponse } from "@/utils";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -8,6 +9,28 @@ export const apiV1 = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+// Response interceptor to reject HTML responses
+apiV1.interceptors.response.use(
+  (response: AxiosResponse) => {
+    if (isHtmlResponse(response.headers)) {
+      return Promise.reject(
+        new Error("Received HTML response when JSON was expected"),
+      );
+    }
+
+    return response;
+  },
+  (error: AxiosError) => {
+    if (error.response && isHtmlResponse(error.response.headers)) {
+      return Promise.reject(
+        new Error("Received HTML error response when JSON was expected"),
+      );
+    }
+
+    return Promise.reject(error);
+  },
+);
 
 // ENDPOINTS
 export const ACTIVITIES_ENDPOINT = "/activities";
