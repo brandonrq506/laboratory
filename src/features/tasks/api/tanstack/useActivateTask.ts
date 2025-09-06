@@ -35,7 +35,7 @@ export const useActivateTask = () => {
         scheduledKey,
         completedKey,
         taskDetailsOptions(variables.taskId).queryKey,
-        taskDetailsOptions(inProgressTask!.id).queryKey,
+        taskDetailsOptions(inProgressTask.id).queryKey,
       ]);
 
       activateScheduledTask({
