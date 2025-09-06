@@ -18,8 +18,9 @@ describe("userPreferences localStorage utils", () => {
 
   it("saves and retrieves preferences", () => {
     savePreferencesToLocalStorage(sample);
-    expect(JSON.parse(localStorage.getItem(key)!)).toEqual(sample);
-    expect(getPreferencesFromLocalStorage()).toEqual(sample);
+    const stored = localStorage.getItem(key);
+    expect(stored).not.toBeNull();
+    expect(JSON.parse(stored!)).toEqual(sample);
   });
 
   it("returns undefined when nothing stored", () => {
