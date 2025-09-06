@@ -5,6 +5,7 @@ import { categoryHandlers } from "./category";
 import { routineHandlers } from "./routine";
 import { taskHandlers } from "./task";
 import { userHandlers } from "./user";
+import { userPreferenceHandlers } from "./userPreference";
 
 export const handlers = [
   ...activityHandlers,
@@ -14,4 +15,5 @@ export const handlers = [
   ...routineHandlers,
   ...userHandlers,
   ...taskHandlers,
+  ...userPreferenceHandlers,
 ];
