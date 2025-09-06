@@ -16,4 +16,14 @@ describe("splitHHMM", () => {
   it("returns [12, 34] for leading zeroes '012:034'", () => {
     expect(splitHHMM("012:034")).toEqual([12, 34]);
   });
+
+  it("logs error when format is invalid but still returns parts", () => {
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
+    // invalid string won't split on ':' giving length !== 2
+    const result = splitHHMM("12-34-56");
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy.mock.calls[0][0]).toContain("Invalid format");
+    expect(result).toEqual([NaN, undefined]);
+    spy.mockRestore();
+  });
 });

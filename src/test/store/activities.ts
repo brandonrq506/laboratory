@@ -13,7 +13,7 @@ export const activities: ActivityAPI[] = [
       color: "blue",
     },
     created_at: "2024-08-31T18:18:41.851Z",
-    max_seconds: 3600,
+    max_seconds: 3601,
     name: "Angular",
     display_name: "Angular",
     updated_at: "2024-08-31T18:18:41.851Z",
