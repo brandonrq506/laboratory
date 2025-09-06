@@ -4,11 +4,11 @@ applyTo: "**/*.spec.{tsx,ts}"
 
 # Testing Instructions
 
-This project uses [Vitest](https://vitest.dev/) as the test runner and assertion library.
-This project uses [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for testing React components.
-This project uses [testing-library/jest-dom](https://github.com/testing-library/jest-dom) for custom matchers.
-This project uses [UserEvent](https://testing-library.com/docs/user-event/intro/) for simulating user interactions.
-This project uses [MSW](https://mswjs.io/) for mocking API requests.
+This project uses `Vitest` as the test runner and assertion library.
+This project uses `React Testing Library` for testing react components.
+This project uses `testing-library/jest-dom` for custom matchers.
+This project uses `UserEvent` for simulating user interactions.
+This project uses `MSW` for mocking API requests.
 
 ## General
 
