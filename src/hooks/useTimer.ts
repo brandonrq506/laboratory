@@ -17,7 +17,7 @@ export const useTimer = ({ start_time, exp_seconds }: Props) => {
   const [seconds, setSeconds] = useState(() => {
     const start = parseISO(start_time);
     const expectedEnd = addSeconds(start, exp_seconds);
-    return differenceInSeconds(expectedEnd, new Date());
+    return differenceInSeconds(expectedEnd, setMilliseconds(new Date(), 0));
   });
 
   useEffect(() => {
