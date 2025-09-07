@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { queryOptions } from "@tanstack/react-query";
 
 import {
   getPreferencesFromLocalStorage,
@@ -11,8 +11,8 @@ import { millisecondsInMinute } from "date-fns/constants";
 
 const MINUTES = 20;
 
-export const useUserPreferences = () => {
-  return useQuery({
+export const userPreferencesOptions = () => {
+  return queryOptions({
     queryKey: [USER_PREFERENCES_ENDPOINT],
     queryFn: async () => {
       const data = await getUserPreferences();

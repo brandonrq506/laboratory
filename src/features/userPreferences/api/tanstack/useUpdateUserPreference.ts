@@ -1,8 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { USER_PREFERENCES_ENDPOINT } from "@/libs/axios";
-import { UserPreference } from "../../types/userPreference";
+import { snapshotQueries } from "@/utils/tanstack/helpers/snapshotQueries";
 import { updateUserPreference } from "../axios/updateUserPreference";
+import { userPreferencesOptions } from "../queryOptions/userPreferencesOptions";
+
+const preferencesKey = userPreferencesOptions().queryKey;
 
 export const useUpdateUserPreference = () => {
   const queryClient = useQueryClient();
@@ -10,35 +12,24 @@ export const useUpdateUserPreference = () => {
   return useMutation({
     mutationFn: updateUserPreference,
     onMutate: async ({ key, value }) => {
-      await queryClient.cancelQueries({
-        queryKey: [USER_PREFERENCES_ENDPOINT],
+      await queryClient.cancelQueries({ queryKey: preferencesKey });
+
+      const { rollback } = snapshotQueries(queryClient, [preferencesKey]);
+
+      queryClient.setQueryData(preferencesKey, (old) => {
+        if (!old) return old;
+        return old.map((pref) =>
+          pref.key === key ? { ...pref, value } : pref,
+        );
       });
 
-      const previousPreferences = queryClient.getQueryData<UserPreference[]>([
-        USER_PREFERENCES_ENDPOINT,
-      ]);
-
-      if (previousPreferences) {
-        queryClient.setQueryData<UserPreference[]>(
-          [USER_PREFERENCES_ENDPOINT],
-          previousPreferences.map((pref) =>
-            pref.key === key ? { ...pref, value } : pref,
-          ),
-        );
-      }
-
-      return { previousPreferences };
+      return { rollback };
     },
     onError: (_, __, context) => {
-      if (context?.previousPreferences) {
-        queryClient.setQueryData(
-          [USER_PREFERENCES_ENDPOINT],
-          context.previousPreferences,
-        );
-      }
+      context?.rollback();
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [USER_PREFERENCES_ENDPOINT] });
+      queryClient.invalidateQueries({ queryKey: preferencesKey });
     },
   });
 };
