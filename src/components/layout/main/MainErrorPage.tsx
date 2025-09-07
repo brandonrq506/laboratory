@@ -37,9 +37,7 @@ export const MainErrorPage = () => {
           <h1 className="mt-4 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">
             {error.message}
           </h1>
-          <p>
-            <pre>{error.stack}</pre>
-          </p>
+          <pre>{error.stack}</pre>
           <p>{error.name}</p>
           <p className="mt-6 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
             This issue will be reported to our support team. Please try again
