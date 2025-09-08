@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const DeleteTaskDialog = ({ isOpen, onClose, taskId }: Props) => {
-  const { mutate, isPending } = useDeleteTask();
+  const { mutate } = useDeleteTask();
 
   const handleDelete = () => {
     mutate(taskId, {
@@ -30,7 +30,6 @@ export const DeleteTaskDialog = ({ isOpen, onClose, taskId }: Props) => {
         <>
           <Button
             variant="danger"
-            isLoading={isPending}
             onClick={handleDelete}
             className="inline-flex w-full justify-center sm:ml-3 sm:w-auto">
             {CONFIRM}

@@ -8,7 +8,7 @@ import { SCHEDULED, TASKS } from "@/constants/entities";
 
 export const DeleteAllScheduledTasks = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { mutate, isPending } = useDeleteScheduledTasks();
+  const { mutate } = useDeleteScheduledTasks();
 
   return (
     <>
@@ -26,7 +26,6 @@ export const DeleteAllScheduledTasks = () => {
           <>
             <Button
               variant="danger"
-              isLoading={isPending}
               onClick={() => mutate()}
               className="inline-flex w-full justify-center sm:ml-3 sm:w-auto">
               {DELETE} {TASKS}

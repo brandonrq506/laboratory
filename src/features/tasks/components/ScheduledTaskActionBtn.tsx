@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useStartTask } from "../api/tanstack/useStartTask";
 
 import { ForwardIcon, PlayIcon } from "@heroicons/react/24/outline";
-import { IconButton, Loading } from "@/components/core";
+import { IconButton } from "@/components/core";
 import { ScheduledTaskAPI } from "../types/scheduledTask";
 import { inProgressTaskOptions } from "../api/queryOptions";
 
@@ -16,9 +16,7 @@ interface Props {
 export const ScheduledTaskActionBtn = ({ task }: Props) => {
   const { data } = useQuery(inProgressTaskOptions());
   const { mutate: startTask } = useStartTask();
-
-  // TODO: Remove this `isPending` once I have implemented optimistic updates for this hook
-  const { mutate: activateTask, isPending } = useActivateTask();
+  const { mutate: activateTask } = useActivateTask();
 
   const hasInProgress = Boolean(data?.length);
 
@@ -37,14 +35,6 @@ export const ScheduledTaskActionBtn = ({ task }: Props) => {
     });
 
   if (hasInProgress) {
-    if (isPending) {
-      return (
-        <IconButton aria-label="Activating task" disabled>
-          <Loading sizeStyles="size-5" />
-        </IconButton>
-      );
-    }
-
     return (
       <IconButton onClick={handleActivate} aria-label="Activate task">
         <ForwardIcon className="size-5" />

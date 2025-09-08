@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@/test/test-utils";
+import { render, screen } from "@/test/test-utils";
 import userEvent from "@testing-library/user-event";
 
 import { DeleteAllScheduledTasks } from "../DeleteAllScheduledTasks";
@@ -38,23 +38,5 @@ describe("DeleteAllScheduledTasks", () => {
     expect(
       screen.getByText("Are you sure you want to delete all scheduled tasks?"),
     ).toBeInTheDocument();
-  });
-
-  it("displays loading indicator when confirm button clicked", async () => {
-    const user = userEvent.setup();
-    render(<DeleteAllScheduledTasks />);
-
-    const btn_text = "Delete Scheduled Tasks";
-    await user.click(screen.getByRole("button", { name: btn_text }));
-
-    expect(screen.getByRole("dialog")).toBeInTheDocument();
-
-    const delete_btn = screen.getByRole("button", { name: /delete tasks/i });
-
-    await user.click(delete_btn);
-
-    await waitFor(() => {
-      expect(screen.getByRole("status")).toBeInTheDocument();
-    });
   });
 });
