@@ -6,7 +6,7 @@
 - [ ] New Feature
 - [ ] Refactor
 - [ ] Documentation Improvement
-- [ ] Other (specify: **\_\_\_**)
+- [ ] Other:
 
 ## Verification
 - [ ] The pull request depends on another pull request
