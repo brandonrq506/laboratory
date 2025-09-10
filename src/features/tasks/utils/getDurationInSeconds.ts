@@ -1,8 +1,8 @@
-const MILLIS_IN_SECOND = 1000;
+import { millisecondsInSecond } from "date-fns/constants";
 
 export const getDurationInSeconds = (start: string, end: string) => {
   const startTime = new Date(start).getTime();
   const endTime = new Date(end).getTime();
 
-  return (endTime - startTime) / MILLIS_IN_SECOND;
+  return (endTime - startTime) / millisecondsInSecond;
 };
