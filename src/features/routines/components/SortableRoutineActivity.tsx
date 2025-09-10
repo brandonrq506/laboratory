@@ -36,7 +36,7 @@ export const SortableRoutineActivity = ({ routineId, activity }: Props) => {
     <div ref={setNodeRef} style={style} className="relative">
       <Card
         className={clsx(
-          "flex items-center justify-between shadow-xs transition-transform duration-100",
+          "flex items-center justify-between shadow-2xs inset-shadow-xs transition-transform duration-100",
           isDragging && ["z-20 scale-105 border border-indigo-700 shadow-2xl"],
         )}>
         <div className="flex items-center gap-2">
