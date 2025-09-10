@@ -1,4 +1,5 @@
 export { ComboBox } from "./ComboBox/ComboBox";
+export { ComboBoxWithRenderer } from "./ComboBox/ComboBoxWithRenderer";
 export { ControlComboBox } from "./ComboBox/ControlComboBox";
 export { NumberInput } from "./NumerInput/NumberInput";
 export { ControlledStringSelect } from "./Select/ControlledStringSelect";
