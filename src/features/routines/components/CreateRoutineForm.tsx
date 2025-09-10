@@ -12,8 +12,14 @@ export const CreateRoutineForm = () => {
   const { mutateAsync } = useCreateRoutine();
 
   const onSubmit = async (values: RoutineFormType) => {
-    await mutateAsync({ name: values.name });
-    navigate("..");
+    await mutateAsync(
+      { name: values.name },
+      {
+        onSuccess(data) {
+          navigate(`/routines/edit/${data.id}`);
+        },
+      },
+    );
   };
 
   return (
