@@ -29,13 +29,13 @@ type ComboBoxRHFProps = {
   error?: string;
 };
 
-type ComboBoxWithRendererProps = ComboBoxRHFProps &
+type ComboBoxWithRendererProps<T = unknown> = ComboBoxRHFProps &
   Omit<ComboBoxType, "options"> & {
-    options: EnhancedOption[];
-    renderOption?: (option: EnhancedOption) => ReactNode;
+    options: EnhancedOption<T>[];
+    renderOption?: (option: EnhancedOption<T>) => ReactNode;
   };
 
-export const ComboBoxWithRenderer = ({
+export function ComboBoxWithRenderer<T = unknown>({
   ref,
   description,
   hideErrorMessage = false,
@@ -49,7 +49,7 @@ export const ComboBoxWithRenderer = ({
   name,
   error,
   renderOption,
-}: ComboBoxWithRendererProps) => {
+}: ComboBoxWithRendererProps<T>) {
   const [query, setQuery] = useState("");
 
   const finalOptions = filterOptions(query, options);
@@ -141,4 +141,4 @@ export const ComboBoxWithRenderer = ({
       )}
     </Field>
   );
-};
+}

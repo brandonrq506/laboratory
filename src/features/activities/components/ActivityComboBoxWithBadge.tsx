@@ -3,7 +3,6 @@ import {
   UseControllerProps,
   useController,
 } from "react-hook-form";
-
 import { useActivities } from "../api/tanstack/useActivities";
 
 import { ActivityAPI } from "../types/activityAPI";
@@ -15,6 +14,11 @@ import { getColorByName } from "@/features/colors/utils/getColorByName";
 
 type ActivityComboBoxWithBadgeProps = Omit<ComboBoxType, "options" | "label">;
 
+/*
+  It may be tempting to create a more generic version of this component that accepts a `renderOption` prop. However, that means that the options conversion must also be done outside.
+  While that would work and the ideal use-case is to have `renderBadgeOptions` and `transformToBadgeOptions` utilities to minimize boilerplate further up, the current approach is good enough for what is likely to be a one-off.
+*/
+
 export const ActivityComboBoxWithBadge = <T extends FieldValues>({
   description,
   hideLabel,
@@ -25,29 +29,17 @@ export const ActivityComboBoxWithBadge = <T extends FieldValues>({
   const { data } = useActivities();
   const { field, fieldState } = useController(controllerProps);
 
-  // Transform activities to enhanced options with category data
-  const options: EnhancedOption[] =
-    data?.map((activity) => ({
-      value: activity.id,
-      label: activity.display_name,
-      disabled: false,
-      // Store the full activity object for rendering
-      data: activity,
-    })) ?? [];
+  const options = (data ?? []).map((activity) => ({
+    value: activity.id,
+    label: activity.display_name,
+    disabled: false,
+    data: activity,
+  })) satisfies EnhancedOption<ActivityAPI>[];
 
-  const renderOption = (option: EnhancedOption) => {
-    /*
-    Extract activity data from the option.
-    We know this is an ActivityAPI because we created the options.
-    */
-    const activity = option.data as ActivityAPI;
+  const renderOption = (option: EnhancedOption<ActivityAPI>) => {
+    const activity = option.data;
     const color = getColorByName(activity.category.color);
 
-    if (!activity?.category) {
-      return <span>{option.label}</span>;
-    }
-
-    // return <Badge color={activity.category.color}>{option.label}</Badge>;
     return (
       <div className="flex items-center gap-2">
         <Dot colorStyles={color.fillClass} sizeStyles="size-2" />
