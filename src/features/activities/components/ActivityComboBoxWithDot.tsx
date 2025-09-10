@@ -12,20 +12,20 @@ import { Dot } from "@/components/core";
 import { EnhancedOption } from "@/types/core";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
-type ActivityComboBoxWithBadgeProps = Omit<ComboBoxType, "options" | "label">;
+type ActivityComboBoxWithDotProps = Omit<ComboBoxType, "options" | "label">;
 
 /*
   It may be tempting to create a more generic version of this component that accepts a `renderOption` prop. However, that means that the options conversion must also be done outside.
   While that would work and the ideal use-case is to have `renderBadgeOptions` and `transformToBadgeOptions` utilities to minimize boilerplate further up, the current approach is good enough for what is likely to be a one-off.
 */
 
-export const ActivityComboBoxWithBadge = <T extends FieldValues>({
+export const ActivityComboBoxWithDot = <T extends FieldValues>({
   description,
   hideLabel,
   showAsterisk,
   hideErrorMessage,
   ...controllerProps
-}: UseControllerProps<T> & ActivityComboBoxWithBadgeProps) => {
+}: UseControllerProps<T> & ActivityComboBoxWithDotProps) => {
   const { data } = useActivities();
   const { field, fieldState } = useController(controllerProps);
 

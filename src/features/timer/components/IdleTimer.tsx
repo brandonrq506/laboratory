@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useOnlineStatus } from "@/hooks";
 
-import { ActivityComboBoxWithBadge } from "@/features/activities/components";
+import { ActivityComboBoxWithDot } from "@/features/activities/components";
 import { IdleTimerButton } from "./IdleTimerButton";
 import { Option } from "@/types/core";
 import { floorMilliseconds } from "@/utils";
@@ -40,7 +40,7 @@ export const IdleTimer = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-2">
       <div className="w-full">
-        <ActivityComboBoxWithBadge
+        <ActivityComboBoxWithDot
           hideErrorMessage
           hideLabel
           control={control}

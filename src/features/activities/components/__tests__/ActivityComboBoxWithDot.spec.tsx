@@ -2,15 +2,15 @@ import { render, screen } from "@/test/test-utils";
 import { useForm } from "react-hook-form";
 import userEvent from "@testing-library/user-event";
 
-import { ActivityComboBoxWithBadge } from "../ActivityComboBoxWithBadge";
+import { ActivityComboBoxWithDot } from "../ActivityComboBoxWithDot";
 
-describe("ActivityComboBoxWithBadge", () => {
+describe("ActivityComboBoxWithDot", () => {
   const TestWrapper = () => {
     const { control } = useForm({
       defaultValues: { activity: null },
     });
 
-    return <ActivityComboBoxWithBadge name="activity" control={control} />;
+    return <ActivityComboBoxWithDot name="activity" control={control} />;
   };
 
   it("renders the component with activities label", () => {
