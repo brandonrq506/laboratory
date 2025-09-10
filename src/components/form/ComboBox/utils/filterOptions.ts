@@ -1,9 +1,12 @@
 import { Option } from "@/types/core";
 
-export const filterOptions = (query: string, options: Option[]) => {
+export const filterOptions = <T extends Option>(
+  query: string,
+  options: T[],
+): T[] => {
   const trimmedQuery = query.trim().toLowerCase();
-  const startsWithMatches: Option[] = [];
-  const includesMatches = new Map<string, Option>();
+  const startsWithMatches: T[] = [];
+  const includesMatches = new Map<string, T>();
 
   for (const option of options) {
     const label = option.label.toLowerCase();
