@@ -20,7 +20,7 @@ describe("CreateRoutineForm", () => {
     expect(button).toBeInTheDocument();
   });
 
-  it("navigates to the previous page on submit", async () => {
+  it("navigates to the Routine edit page on submit", async () => {
     const user = userEvent.setup();
     const Stub = createRoutesStub([
       {
