@@ -1,11 +1,8 @@
 import { useParams } from "react-router";
 import { useRoutine } from "../api/tanstack/useRoutine";
 
-import { Badge, EmptyList, Loading } from "@/components/core";
-import { Card } from "@/components/layout";
-import { DeleteActivityRoutine } from "./DeleteActivityRoutine";
-
-import { secondsToTime } from "@/utils";
+import { EmptyList, Loading } from "@/components/core";
+import { SortableRoutineActivityList } from "./SortableRoutineActivityList";
 
 export const RoutineActivityList = () => {
   const { routineId } = useParams();
@@ -28,27 +25,10 @@ export const RoutineActivityList = () => {
   return (
     <div>
       <h2 className="text-lg font-semibold">Routine:</h2>
-      <ul>
-        {routine_activities.map((routine_activity) => (
-          <li key={routine_activity.id} className="my-1">
-            <Card className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Badge color={routine_activity.category_color}>
-                  {routine_activity.activity_name}
-                </Badge>
-                <span className="text-xs">
-                  {secondsToTime(routine_activity.activity_exp_seconds)}
-                </span>
-              </div>
-
-              <DeleteActivityRoutine
-                activityId={routine_activity.id}
-                routineId={routineNumber}
-              />
-            </Card>
-          </li>
-        ))}
-      </ul>
+      <SortableRoutineActivityList
+        routineId={routineNumber}
+        activities={routine_activities}
+      />
     </div>
   );
 };
