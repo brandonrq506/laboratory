@@ -28,8 +28,8 @@ describe("CreateRoutineForm", () => {
         Component: () => <CreateRoutineForm />,
       },
       {
-        path: "/",
-        Component: () => <div>Routines</div>,
+        path: "/routines/edit/:routineId",
+        Component: () => <div>Routines Edit Page</div>,
       },
     ]);
 
@@ -41,6 +41,6 @@ describe("CreateRoutineForm", () => {
 
     await user.click(button);
 
-    expect(screen.getByText("Routines")).toBeInTheDocument();
+    expect(screen.getByText("Routines Edit Page")).toBeInTheDocument();
   });
 });
