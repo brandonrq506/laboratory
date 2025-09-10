@@ -63,9 +63,7 @@ describe("ComboBoxWithRenderer", () => {
   it("uses custom renderOption when provided", async () => {
     const user = userEvent.setup();
     const renderOption = (option: EnhancedOption) => (
-      <div data-testid={`custom-option-${option.value}`}>
-        Custom: {option.label}
-      </div>
+      <div>Custom: {option.label}</div>
     );
 
     render(<TestWrapper renderOption={renderOption} />);
@@ -73,9 +71,8 @@ describe("ComboBoxWithRenderer", () => {
     const button = screen.getByRole("button", { name: /combobox button/i });
     await user.click(button);
 
-    expect(screen.getByTestId("custom-option-1")).toBeInTheDocument();
-    expect(screen.getByTestId("custom-option-2")).toBeInTheDocument();
     expect(screen.getByText("Custom: Option 1")).toBeInTheDocument();
+    expect(screen.getByText("Custom: Option 2")).toBeInTheDocument();
   });
 
   it("filters options based on search query", async () => {
