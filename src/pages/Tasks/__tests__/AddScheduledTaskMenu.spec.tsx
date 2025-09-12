@@ -1,10 +1,10 @@
+import { HttpResponse, http } from "msw";
 import { render, screen, waitFor } from "@/test/test-utils";
 import userEvent from "@testing-library/user-event";
-import { HttpResponse, http } from "msw";
-import { server } from "@/test/server";
 
 import { AddScheduledTaskMenu } from "../AddScheduledTaskMenu";
 import { ROUTINES_ENDPOINT } from "@/libs/axios";
+import { server } from "@/test/server";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -20,9 +20,9 @@ describe("AddScheduledTaskMenu", () => {
 
     await waitFor(() => {
       expect(screen.getByText("Morning")).toBeInTheDocument();
-      expect(screen.getByText("Workout")).toBeInTheDocument();
     });
-
+    
+    expect(screen.getByText("Workout")).toBeInTheDocument();
     expect(screen.getByText("Routines")).toBeInTheDocument();
     expect(screen.getByText("Activities")).toBeInTheDocument();
   });
@@ -49,11 +49,10 @@ describe("AddScheduledTaskMenu", () => {
       expect(screen.getByText("Morning")).toBeInTheDocument();
     });
 
-    // Get the routine button by text instead of role
-    const morningRoutineButton = screen.getByText("Morning").closest("button");
-    expect(morningRoutineButton).not.toBeNull();
+    // Get the routine button using the aria label
+    const morningRoutineButton = screen.getByLabelText("Apply Morning routine");
 
-    await user.click(morningRoutineButton!);
+    await user.click(morningRoutineButton);
     
     // Re-open the menu to see the loading state
     await user.click(menuButton);
@@ -89,13 +88,12 @@ describe("AddScheduledTaskMenu", () => {
 
     await waitFor(() => {
       expect(screen.getByText("Morning")).toBeInTheDocument();
-      expect(screen.getByText("Workout")).toBeInTheDocument();
     });
+    expect(screen.getByText("Workout")).toBeInTheDocument();
 
-    const morningButton = screen.getByText("Morning").closest("button");
-    expect(morningButton).not.toBeNull();
+    const morningButton = screen.getByLabelText("Apply Morning routine");
     
-    await user.click(morningButton!);
+    await user.click(morningButton);
 
     // Re-open the menu to see the loading state
     await user.click(menuButton);
@@ -138,10 +136,9 @@ describe("AddScheduledTaskMenu", () => {
       expect(screen.getByText("Morning")).toBeInTheDocument();
     });
 
-    const morningButton = screen.getByText("Morning").closest("button");
-    expect(morningButton).not.toBeNull();
+    const morningButton = screen.getByLabelText("Apply Morning routine");
     
-    await user.click(morningButton!);
+    await user.click(morningButton);
 
     // Re-open the menu to check loading state
     await user.click(menuButton);

@@ -46,6 +46,7 @@ export const AddScheduledTaskMenu = () => {
             <MenuItem key={routine.id}>
               <button
                 className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
+                aria-label={`Apply ${routine.name} routine`}
                 onClick={(e) => {
                   e.preventDefault();
                   handleApplyRoutine(routine.id);
