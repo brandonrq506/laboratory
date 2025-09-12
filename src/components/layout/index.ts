@@ -6,4 +6,7 @@ export { PageHeaderWithActions } from "./headings/PageHeaderWithActions";
 export { PageSubheader } from "./headings/PageSubheader";
 export { SectionHeader } from "./headings/SectionHeader";
 export { SectionHeaderWithAction } from "./headings/SectionHeaderWithAction";
+export { HeadingLarge } from "./headings/HeadingLarge";
+export { HeadingMedium } from "./headings/HeadingMedium";
+export { HeadingSmall } from "./headings/HeadingSmall";
 export { SectionUnderConstruction } from "./SectionUnderConstruction";
