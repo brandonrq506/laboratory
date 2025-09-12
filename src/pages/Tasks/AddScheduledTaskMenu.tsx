@@ -3,7 +3,7 @@ import { useApplyRoutine } from "@/features/routines/api/tanstack/useApplyRoutin
 import { useCreateScheduledTask } from "@/features/tasks/api/tanstack/useCreateScheduledTask";
 import { useRoutines } from "@/features/routines/api/tanstack/useRoutines";
 
-import { Badge, FloatingMenu } from "@/components/core";
+import { Badge, FloatingMenu, Loading } from "@/components/core";
 import { MenuHeading, MenuItem, MenuSection } from "@headlessui/react";
 import { CategoryBadge } from "@/features/categories/components";
 import { PlusIcon } from "@heroicons/react/24/solid";
@@ -11,6 +11,7 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import { ADD } from "@/constants/actions";
 import { TASKS } from "@/constants/entities";
 import clsx from "clsx";
+import { useState } from "react";
 
 // Todo: Maybe it is better to have a <MenuItem> custom component (think of better name)
 export const AddScheduledTaskMenu = () => {
@@ -18,7 +19,17 @@ export const AddScheduledTaskMenu = () => {
   const { data: routines } = useRoutines();
 
   const { mutate: mutateTask } = useCreateScheduledTask();
-  const { mutate: applyRoutine } = useApplyRoutine();
+  const { mutate: applyRoutine, isPending } = useApplyRoutine();
+
+  const [pendingRoutineId, setPendingRoutineId] = useState<number | null>(null);
+
+  const handleApplyRoutine = (routineId: number) => {
+    setPendingRoutineId(routineId);
+    applyRoutine(routineId, {
+      onSuccess: () => setPendingRoutineId(null),
+      onError: () => setPendingRoutineId(null),
+    });
+  };
 
   const hasRoutines = routines && routines.length > 0;
 
@@ -37,9 +48,15 @@ export const AddScheduledTaskMenu = () => {
                 className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
                 onClick={(e) => {
                   e.preventDefault();
-                  applyRoutine(routine.id);
+                  handleApplyRoutine(routine.id);
                 }}>
-                {routine.name} <Badge color="white">Routine</Badge>
+                <div className="flex items-center gap-2">
+                  {routine.name}
+                  {isPending && pendingRoutineId === routine.id && (
+                    <Loading sizeStyles="size-4" />
+                  )}
+                </div>
+                <Badge color="white">Routine</Badge>
               </button>
             </MenuItem>
           ))}
