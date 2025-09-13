@@ -6,8 +6,8 @@ import {
   RoutineActivityList,
   RoutineNameForm,
 } from "@/features/routines/components";
-import { PageHeader, PageSubheader } from "@/components/layout";
 import { EditRoutineActions } from "./EditRoutineActions";
+import { HeadingMedium } from "@/components/layout";
 import { Modal } from "@/components/core";
 
 export const EditRoutinePage = () => {
@@ -21,8 +21,10 @@ export const EditRoutinePage = () => {
 
   return (
     <Modal isOpen={isOpen} onClose={() => navigate("..")}>
-      <PageHeader title="Edit Routine" />
-      <PageSubheader text="Customize your routine by updating the name and managing activities" />
+      <HeadingMedium
+        title="Edit Routine"
+        description="Customize your routine by updating the name and managing activities"
+      />
       <br />
       <RoutineNameForm />
       <div className="my-2.5">

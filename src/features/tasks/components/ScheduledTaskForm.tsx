@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Badge, Button } from "@/components/core";
 import { ClockIcon } from "@heroicons/react/24/outline";
 import { EditNoteForm } from "../types/editNoteForm";
-import { PageHeader } from "@/components/layout";
+import { HeadingLarge } from "@/components/layout";
 import { ScheduledTaskAPI } from "../types/scheduledTask";
 import { TextArea } from "@/components/form";
 import { secondsToTime } from "@/utils";
@@ -27,7 +27,7 @@ export const ScheduledTaskForm = ({ initialValues, task, onSubmit }: Props) => {
     <form onSubmit={handleSubmit((data) => onSubmit(data))}>
       <div className="flex items-center justify-between">
         <div className="flex items-baseline gap-2">
-          <PageHeader title={task.activity.display_name} />
+          <HeadingLarge title={task.activity.display_name} />
           <div className="flex gap-1 text-xs">
             <ClockIcon className="size-4" />
             <p className="tabular-nums">
