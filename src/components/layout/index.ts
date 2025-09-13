@@ -1,9 +1,7 @@
 export { MainErrorPage } from "./main/MainErrorPage";
 export { MainLayout } from "./main/MainLayout";
 export { Card } from "./Card";
-export { PageHeader } from "./headings/PageHeader";
 export { PageHeaderWithActions } from "./headings/PageHeaderWithActions";
-export { PageSubheader } from "./headings/PageSubheader";
 export { SectionHeader } from "./headings/SectionHeader";
 export { SectionHeaderWithAction } from "./headings/SectionHeaderWithAction";
 export { HeadingLarge } from "./headings/HeadingLarge";
