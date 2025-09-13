@@ -1,20 +1,16 @@
 import { useApplyRoutine } from "@/features/routines/api/tanstack/useApplyRoutine";
 
 import { Badge, Loading } from "@/components/core";
+import { Routine } from "@/features/routines/types/routine";
 
-interface RoutineMenuItemContentProps {
-  routine: {
-    id: number;
-    name: string;
-  };
+interface Props {
+  routine: Routine;
 }
 
-export const RoutineMenuItemContent = ({ routine }: RoutineMenuItemContentProps) => {
-  const { mutate: applyRoutine, isPending } = useApplyRoutine();
+export const RoutineMenuItemContent = ({ routine }: Props) => {
+  const { mutate, isPending } = useApplyRoutine();
 
-  const handleApplyRoutine = () => {
-    applyRoutine(routine.id);
-  };
+  const handleApplyRoutine = () => mutate(routine.id);
 
   return (
     <button

@@ -4,22 +4,20 @@ import userEvent from "@testing-library/user-event";
 
 import { ROUTINES_ENDPOINT } from "@/libs/axios";
 import { RoutineMenuItemContent } from "../RoutineMenuItem";
+import { routines } from "@/test/store/routines";
 import { server } from "@/test/server";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const mockRoutine = {
-  id: 1,
-  name: "Morning Routine",
-};
+const routine = routines[0];
 
 describe("RoutineMenuItemContent", () => {
   it("renders routine name and badge", () => {
-    render(<RoutineMenuItemContent routine={mockRoutine} />);
+    render(<RoutineMenuItemContent routine={routine} />);
 
-    expect(screen.getByText("Morning Routine")).toBeInTheDocument();
+    expect(screen.getByText("Morning")).toBeInTheDocument();
     expect(screen.getByText("Routine")).toBeInTheDocument();
-    expect(screen.getByLabelText("Apply Morning Routine routine")).toBeInTheDocument();
+    expect(screen.getByLabelText("Apply Morning routine")).toBeInTheDocument();
   });
 
   it("shows loading indicator when applying routine", async () => {
@@ -27,15 +25,18 @@ describe("RoutineMenuItemContent", () => {
 
     // Create a delayed response to simulate the loading state
     server.use(
-      http.post(`${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`, async () => {
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        return HttpResponse.json(null, { status: 201 });
-      }),
+      http.post(
+        `${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`,
+        async () => {
+          await new Promise((resolve) => setTimeout(resolve, 500));
+          return HttpResponse.json(null, { status: 201 });
+        },
+      ),
     );
 
-    render(<RoutineMenuItemContent routine={mockRoutine} />);
+    render(<RoutineMenuItemContent routine={routine} />);
 
-    const button = screen.getByLabelText("Apply Morning Routine routine");
+    const button = screen.getByLabelText("Apply Morning routine");
     await user.click(button);
 
     // Check that loading indicator appears
@@ -46,7 +47,7 @@ describe("RoutineMenuItemContent", () => {
       () => {
         expect(screen.queryByRole("status")).not.toBeInTheDocument();
       },
-      { timeout: 1000 }
+      { timeout: 1000 },
     );
   });
 
@@ -55,15 +56,18 @@ describe("RoutineMenuItemContent", () => {
 
     // Create an error response
     server.use(
-      http.post(`${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`, async () => {
-        await new Promise((resolve) => setTimeout(resolve, 100));
-        return HttpResponse.json({ error: "Server error" }, { status: 500 });
-      }),
+      http.post(
+        `${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`,
+        async () => {
+          await new Promise((resolve) => setTimeout(resolve, 100));
+          return HttpResponse.json({ error: "Server error" }, { status: 500 });
+        },
+      ),
     );
 
-    render(<RoutineMenuItemContent routine={mockRoutine} />);
+    render(<RoutineMenuItemContent routine={routine} />);
 
-    const button = screen.getByLabelText("Apply Morning Routine routine");
+    const button = screen.getByLabelText("Apply Morning routine");
     await user.click(button);
 
     // Check that loading indicator appears
@@ -74,7 +78,7 @@ describe("RoutineMenuItemContent", () => {
       () => {
         expect(screen.queryByRole("status")).not.toBeInTheDocument();
       },
-      { timeout: 1000 }
+      { timeout: 1000 },
     );
   });
 
@@ -83,15 +87,18 @@ describe("RoutineMenuItemContent", () => {
 
     // Create a delayed response to simulate the loading state
     server.use(
-      http.post(`${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`, async () => {
-        await new Promise((resolve) => setTimeout(resolve, 100));
-        return HttpResponse.json(null, { status: 201 });
-      }),
+      http.post(
+        `${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`,
+        async () => {
+          await new Promise((resolve) => setTimeout(resolve, 100));
+          return HttpResponse.json(null, { status: 201 });
+        },
+      ),
     );
 
-    render(<RoutineMenuItemContent routine={mockRoutine} />);
+    render(<RoutineMenuItemContent routine={routine} />);
 
-    const button = screen.getByLabelText("Apply Morning Routine routine");
+    const button = screen.getByLabelText("Apply Morning routine");
     await user.click(button);
 
     // Wait for the loading indicator to appear
@@ -104,7 +111,7 @@ describe("RoutineMenuItemContent", () => {
       () => {
         expect(screen.queryByRole("status")).not.toBeInTheDocument();
       },
-      { timeout: 1000 }
+      { timeout: 1000 },
     );
   });
 });
