@@ -11,7 +11,7 @@ concurrency:
 jobs:
   validate:
     # Run on any PR except those authored by brandonrq506
-    if: github.event.pull_request.user.login != 'brandonrq506'
+    if: github.event.pull_request.author.login != 'brandonrq506'
     runs-on: ubuntu-latest
 
     steps:
