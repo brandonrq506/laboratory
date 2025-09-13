@@ -179,4 +179,164 @@ describe("ActivityForm", () => {
       screen.getByText("Activities should take at least 1 minute"),
     ).toBeInTheDocument();
   });
+
+  describe("Auto-populate Display Name", () => {
+    it("auto-fills Display Name when Name field is changed and loses focus if Display Name is empty", async () => {
+      const user = userEvent.setup();
+      const onSubmit = vi.fn();
+      render(<ActivityForm onSubmit={onSubmit} submitButtonText="Submit" />);
+
+      const nameInput = screen.getByLabelText("Name *");
+      const displayNameInput = screen.getByLabelText("Display Name");
+
+      await user.type(nameInput, "Morning Run");
+      await user.tab();
+
+      expect(displayNameInput).toHaveValue("Morning Run");
+    });
+
+    it("treats whitespace-only Display Name as empty and auto-fills", async () => {
+      const user = userEvent.setup();
+      const onSubmit = vi.fn();
+      render(<ActivityForm onSubmit={onSubmit} submitButtonText="Submit" />);
+
+      const nameInput = screen.getByLabelText("Name *");
+      const displayNameInput = screen.getByLabelText("Display Name");
+
+      await user.type(displayNameInput, "   ");
+      await user.type(nameInput, "Workout");
+      await user.tab();
+
+      expect(displayNameInput).toHaveValue("Workout");
+    });
+
+    it("only auto-fills if Name field was changed during current session", async () => {
+      const user = userEvent.setup();
+      const onSubmit = vi.fn();
+      render(
+        <ActivityForm
+          onSubmit={onSubmit}
+          submitButtonText="Submit"
+          initialValues={{ name: "Initial Name" }}
+        />,
+      );
+
+      const nameInput = screen.getByLabelText("Name *");
+      const displayNameInput = screen.getByLabelText("Display Name");
+
+      // Focus and blur without changing anything
+      await user.click(nameInput);
+      await user.tab();
+
+      expect(displayNameInput).toHaveValue("");
+    });
+
+    it("does not overwrite existing Display Name content", async () => {
+      const user = userEvent.setup();
+      const onSubmit = vi.fn();
+      render(<ActivityForm onSubmit={onSubmit} submitButtonText="Submit" />);
+
+      const nameInput = screen.getByLabelText("Name *");
+      const displayNameInput = screen.getByLabelText("Display Name");
+
+      await user.type(displayNameInput, "Custom Display");
+      await user.type(nameInput, "Original Name");
+      await user.tab();
+
+      expect(displayNameInput).toHaveValue("Custom Display");
+    });
+
+    it("allows free editing of Display Name after auto-fill", async () => {
+      const user = userEvent.setup();
+      const onSubmit = vi.fn();
+      render(<ActivityForm onSubmit={onSubmit} submitButtonText="Submit" />);
+
+      const nameInput = screen.getByLabelText("Name *");
+      const displayNameInput = screen.getByLabelText("Display Name");
+
+      // Auto-fill first
+      await user.type(nameInput, "Swimming");
+      await user.tab();
+      expect(displayNameInput).toHaveValue("Swimming");
+
+      // Then edit Display Name
+      await user.clear(displayNameInput);
+      await user.type(displayNameInput, "Pool Workout");
+
+      // Change Name again and blur
+      await user.clear(nameInput);
+      await user.type(nameInput, "New Name");
+      await user.tab();
+
+      // Display Name should not change
+      expect(displayNameInput).toHaveValue("Pool Workout");
+    });
+
+    it("auto-fills again if Display Name is cleared and Name is changed", async () => {
+      const user = userEvent.setup();
+      const onSubmit = vi.fn();
+      render(<ActivityForm onSubmit={onSubmit} submitButtonText="Submit" />);
+
+      const nameInput = screen.getByLabelText("Name *");
+      const displayNameInput = screen.getByLabelText("Display Name");
+
+      // First auto-fill
+      await user.type(nameInput, "Cycling");
+      await user.tab();
+      expect(displayNameInput).toHaveValue("Cycling");
+
+      // Clear Display Name
+      await user.clear(displayNameInput);
+
+      // Change Name and blur again
+      await user.clear(nameInput);
+      await user.type(nameInput, "Road Cycling");
+      await user.tab();
+
+      expect(displayNameInput).toHaveValue("Road Cycling");
+    });
+
+    it("does not auto-fill if Name is cleared", async () => {
+      const user = userEvent.setup();
+      const onSubmit = vi.fn();
+      render(<ActivityForm onSubmit={onSubmit} submitButtonText="Submit" />);
+
+      const nameInput = screen.getByLabelText("Name *");
+      const displayNameInput = screen.getByLabelText("Display Name");
+
+      await user.type(nameInput, "Running");
+      await user.clear(nameInput);
+      await user.tab();
+
+      expect(displayNameInput).toHaveValue("");
+    });
+
+    it("works with keyboard navigation (Tab)", async () => {
+      const user = userEvent.setup();
+      const onSubmit = vi.fn();
+      render(<ActivityForm onSubmit={onSubmit} submitButtonText="Submit" />);
+
+      const nameInput = screen.getByLabelText("Name *");
+      const displayNameInput = screen.getByLabelText("Display Name");
+
+      await user.type(nameInput, "Keyboard Test");
+      await user.keyboard("{Tab}");
+
+      expect(displayNameInput).toHaveValue("Keyboard Test");
+    });
+
+    it("works with mouse click to change focus", async () => {
+      const user = userEvent.setup();
+      const onSubmit = vi.fn();
+      render(<ActivityForm onSubmit={onSubmit} submitButtonText="Submit" />);
+
+      const nameInput = screen.getByLabelText("Name *");
+      const displayNameInput = screen.getByLabelText("Display Name");
+
+      await user.type(nameInput, "Mouse Test");
+      await user.click(displayNameInput);
+
+      expect(displayNameInput).toHaveValue("Mouse Test");
+    });
+  });
 });
