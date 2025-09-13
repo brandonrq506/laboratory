@@ -2,8 +2,9 @@ import { useActivities } from "@/features/activities/api/tanstack/useActivities"
 import { useApplyRoutine } from "@/features/routines/api/tanstack/useApplyRoutine";
 import { useCreateScheduledTask } from "@/features/tasks/api/tanstack/useCreateScheduledTask";
 import { useRoutines } from "@/features/routines/api/tanstack/useRoutines";
+import { useState } from "react";
 
-import { Badge, FloatingMenu } from "@/components/core";
+import { Badge, FloatingMenu, Loading } from "@/components/core";
 import { MenuHeading, MenuItem, MenuSection } from "@headlessui/react";
 import { CategoryBadge } from "@/features/categories/components";
 import { PlusIcon } from "@heroicons/react/24/solid";
@@ -19,6 +20,15 @@ export const AddScheduledTaskMenu = () => {
 
   const { mutate: mutateTask } = useCreateScheduledTask();
   const { mutate: applyRoutine } = useApplyRoutine();
+
+  const [pendingRoutineId, setPendingRoutineId] = useState<number | null>(null);
+
+  const handleApplyRoutine = (routineId: number) => {
+    setPendingRoutineId(routineId);
+    applyRoutine(routineId, {
+      onSettled: () => setPendingRoutineId(null),
+    });
+  };
 
   const hasRoutines = routines && routines.length > 0;
 
@@ -37,9 +47,13 @@ export const AddScheduledTaskMenu = () => {
                 className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
                 onClick={(e) => {
                   e.preventDefault();
-                  applyRoutine(routine.id);
+                  handleApplyRoutine(routine.id);
                 }}>
-                {routine.name} <Badge color="white">Routine</Badge>
+                <div className="flex items-center gap-2">
+                  {routine.name}
+                  {pendingRoutineId === routine.id && <Loading />}
+                </div>
+                <Badge color="white">Routine</Badge>
               </button>
             </MenuItem>
           ))}
