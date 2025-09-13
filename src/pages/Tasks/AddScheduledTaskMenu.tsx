@@ -13,7 +13,7 @@ import { TASKS } from "@/constants/entities";
 import { FloatingMenu } from "@/components/core";
 import clsx from "clsx";
 
-import { RoutineMenuItem } from "./RoutineMenuItem";
+import { RoutineMenuItemContent } from "./RoutineMenuItem";
 
 export const AddScheduledTaskMenu = () => {
   const { data: activities } = useActivities();
@@ -33,7 +33,9 @@ export const AddScheduledTaskMenu = () => {
             Routines
           </MenuHeading>
           {routines?.map((routine) => (
-            <RoutineMenuItem key={routine.id} routine={routine} />
+            <MenuItem key={routine.id}>
+              <RoutineMenuItemContent routine={routine} />
+            </MenuItem>
           ))}
         </MenuSection>
       )}
