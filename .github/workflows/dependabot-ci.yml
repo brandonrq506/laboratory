@@ -1,4 +1,4 @@
-name: Dependabot CI
+name: Pull Request CI
 
 on:
   pull_request:
@@ -10,7 +10,8 @@ concurrency:
 
 jobs:
   validate:
-    if: github.actor == 'dependabot[bot]' # Run only for Dependabot PRs
+    # Run on any PR except those authored by brandonrq506
+    if: github.event.pull_request.user.login != 'brandonrq506'
     runs-on: ubuntu-latest
 
     steps:
