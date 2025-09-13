@@ -1,35 +1,25 @@
 import { useActivities } from "@/features/activities/api/tanstack/useActivities";
-import { useApplyRoutine } from "@/features/routines/api/tanstack/useApplyRoutine";
 import { useCreateScheduledTask } from "@/features/tasks/api/tanstack/useCreateScheduledTask";
 import { useRoutines } from "@/features/routines/api/tanstack/useRoutines";
 
-import { Badge, FloatingMenu, Loading } from "@/components/core";
 import { MenuHeading, MenuItem, MenuSection } from "@headlessui/react";
-import { CategoryBadge } from "@/features/categories/components";
 import { PlusIcon } from "@heroicons/react/24/solid";
+
+import { CategoryBadge } from "@/features/categories/components";
 
 import { ADD } from "@/constants/actions";
 import { TASKS } from "@/constants/entities";
-import clsx from "clsx";
-import { useState } from "react";
 
-// Todo: Maybe it is better to have a <MenuItem> custom component (think of better name)
+import { FloatingMenu } from "@/components/core";
+import clsx from "clsx";
+
+import { RoutineMenuItem } from "./RoutineMenuItem";
+
 export const AddScheduledTaskMenu = () => {
   const { data: activities } = useActivities();
   const { data: routines } = useRoutines();
 
   const { mutate: mutateTask } = useCreateScheduledTask();
-  const { mutate: applyRoutine, isPending } = useApplyRoutine();
-
-  const [pendingRoutineId, setPendingRoutineId] = useState<number | null>(null);
-
-  const handleApplyRoutine = (routineId: number) => {
-    setPendingRoutineId(routineId);
-    applyRoutine(routineId, {
-      onSuccess: () => setPendingRoutineId(null),
-      onError: () => setPendingRoutineId(null),
-    });
-  };
 
   const hasRoutines = routines && routines.length > 0;
 
@@ -43,23 +33,7 @@ export const AddScheduledTaskMenu = () => {
             Routines
           </MenuHeading>
           {routines?.map((routine) => (
-            <MenuItem key={routine.id}>
-              <button
-                className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
-                aria-label={`Apply ${routine.name} routine`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleApplyRoutine(routine.id);
-                }}>
-                <div className="flex items-center gap-2">
-                  {routine.name}
-                  {isPending && pendingRoutineId === routine.id && (
-                    <Loading sizeStyles="size-4" />
-                  )}
-                </div>
-                <Badge color="white">Routine</Badge>
-              </button>
-            </MenuItem>
+            <RoutineMenuItem key={routine.id} routine={routine} />
           ))}
         </MenuSection>
       )}
