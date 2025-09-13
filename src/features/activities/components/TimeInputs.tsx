@@ -1,17 +1,14 @@
-import { Control, FieldErrors, UseFormRegisterReturn } from "react-hook-form";
+import { Control, FieldErrors, UseFormGetValues, UseFormRegister } from "react-hook-form";
 
 import { NumberInput } from "@/components/form";
 
-import { CreateForm } from "../../types/createForm";
+import { CreateForm } from "../types/createForm";
 
 type Props = {
   control: Control<CreateForm>;
   errors: FieldErrors<CreateForm>;
-  getValues: () => CreateForm;
-  register: (
-    name: keyof CreateForm,
-    options?: Record<string, unknown>
-  ) => UseFormRegisterReturn;
+  getValues: UseFormGetValues<CreateForm>;
+  register: UseFormRegister<CreateForm>;
 };
 
 export const TimeInputs = ({ errors, getValues, register }: Props) => {
@@ -56,7 +53,7 @@ export const TimeInputs = ({ errors, getValues, register }: Props) => {
                 message: "Minutes must be less than an hour",
               },
               validate: {
-                isNotZero: (value) => {
+                isNotZero: (value: number) => {
                   const { exp_time_hours } = getValues();
                   if (exp_time_hours === 0 && value === 0) {
                     return "Activities should take at least 1 minute";
@@ -111,7 +108,7 @@ export const TimeInputs = ({ errors, getValues, register }: Props) => {
                 message: "Minutes must be less than an hour",
               },
               validate: {
-                isNotZero: (value) => {
+                isNotZero: (value: number) => {
                   const { max_time_hours } = getValues();
                   if (max_time_hours === 0 && value === 0) {
                     return "Activities should take at least 1 minute";

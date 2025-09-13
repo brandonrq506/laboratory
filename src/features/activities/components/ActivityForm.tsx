@@ -35,7 +35,7 @@ export const ActivityForm = ({
     });
   const { errors, isSubmitting, dirtyFields } = formState;
 
-  const handleNameBlur = () => {
+  const handleNameBlur = async () => {
     autoPopulateDisplayName({
       getValues,
       setValue,
@@ -54,8 +54,10 @@ export const ActivityForm = ({
           description="Used for reports and exports."
           error={errors.name?.message}
           registration={{
-            ...register("name", { required: "Name is required" }),
-            onBlur: handleNameBlur,
+            ...register("name", { 
+              required: "Name is required",
+              onBlur: handleNameBlur,
+            }),
           }}
         />
 

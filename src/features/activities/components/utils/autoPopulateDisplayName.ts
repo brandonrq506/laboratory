@@ -1,10 +1,11 @@
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { FieldValues, UseFormGetValues, UseFormSetValue } from "react-hook-form";
+
 import { CreateForm } from "../../types/createForm";
 
 type AutoPopulateConfig = {
   getValues: UseFormGetValues<CreateForm>;
   setValue: UseFormSetValue<CreateForm>;
-  dirtyFields: Partial<Record<keyof CreateForm, boolean>>;
+  dirtyFields: Partial<FieldValues>;
 };
 
 export const autoPopulateDisplayName = ({
