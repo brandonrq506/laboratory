@@ -13,7 +13,7 @@ import { StringSelectType } from "./types";
 import { clsx } from "clsx";
 
 type SelectRHFProps = {
-  value: StringOption | null;
+  value: StringOption | undefined;
   onChange: (value: StringOption) => void;
   onBlur: () => void;
   name: string;

@@ -24,7 +24,7 @@ export const TaskStatusSelectFilter = () => {
   const param = params.get("status") ?? defaultOptionValue;
   const options = [defaultOption, ...status];
 
-  const selectedOption = options.find((o) => o.value === param) ?? null;
+  const selectedOption = options.find((o) => o.value === param) ?? undefined;
 
   return (
     <StringSelect
