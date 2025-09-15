@@ -5,9 +5,30 @@ import { TextInput } from "@/components/form";
 
 export const ActivityNameFields = () => {
   const {
-    formState: { errors },
+    formState: { errors, dirtyFields },
+    getValues,
     register,
+    setValue,
   } = useFormContext<CreateForm>();
+
+  const handleNameBlur = () => {
+    if (!dirtyFields.name) {
+      return;
+    }
+
+    const displayName = getValues("display_name");
+    if (displayName.trim().length > 0) {
+      return;
+    }
+
+    const nameValue = getValues("name");
+
+    if (nameValue.trim().length === 0) {
+      return;
+    }
+
+    setValue("display_name", nameValue, { shouldDirty: true });
+  };
 
   return (
     <>
@@ -18,7 +39,10 @@ export const ActivityNameFields = () => {
         placeholder="Shower"
         description="Used for reports and exports."
         error={errors.name?.message}
-        registration={register("name", { required: "Name is required" })}
+        registration={register("name", {
+          required: "Name is required",
+          onBlur: handleNameBlur,
+        })}
       />
 
       <TextInput
