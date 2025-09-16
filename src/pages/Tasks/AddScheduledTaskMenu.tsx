@@ -13,7 +13,6 @@ import { ADD } from "@/constants/actions";
 import { TASKS } from "@/constants/entities";
 import clsx from "clsx";
 
-// Todo: Maybe it is better to have a <MenuItem> custom component (think of better name)
 export const AddScheduledTaskMenu = () => {
   const { data: activities } = useActivities();
   const { data: routines } = useRoutines();
@@ -30,11 +29,9 @@ export const AddScheduledTaskMenu = () => {
     });
   };
 
-  const hasRoutines = routines && routines.length > 0;
+  const nonEmptyRoutines = routines?.filter((r) => r.activities.length > 0);
 
-  const routinesWithActivities = routines?.filter(
-    (r) => r.activities.length > 0,
-  );
+  const hasRoutines = nonEmptyRoutines && nonEmptyRoutines.length > 0;
 
   return (
     <FloatingMenu
@@ -45,7 +42,7 @@ export const AddScheduledTaskMenu = () => {
           <MenuHeading className="bg-gray-100 px-2 py-1.5 text-sm opacity-50">
             Routines
           </MenuHeading>
-          {routinesWithActivities?.map((routine) => (
+          {nonEmptyRoutines?.map((routine) => (
             <MenuItem key={routine.id}>
               <button
                 className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
