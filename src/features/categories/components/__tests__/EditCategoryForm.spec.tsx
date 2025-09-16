@@ -1,6 +1,7 @@
-import { render, screen } from "@/test/test-utils";
-import { createRoutesStub } from "react-router";
+import { render, screen, waitFor } from "@/test/test-utils";
 import userEvent from "@testing-library/user-event";
+
+import { Outlet, createRoutesStub } from "react-router";
 
 import { EditCategoryForm } from "../EditCategoryForm";
 
@@ -28,19 +29,37 @@ describe("EditCategoryForm", () => {
     const user = userEvent.setup();
     const Stub = createRoutesStub([
       {
-        path: "settings/categories/edit/:categoryId",
-        Component: () => (
-          <EditCategoryForm
-            categoryId={1}
-            initialValues={{
-              color: { value: 1, label: "white" },
-            }}
-          />
-        ),
-      },
-      {
         path: "/",
-        Component: () => <div>Categories Page</div>,
+        Component: () => <Outlet />,
+        children: [
+          {
+            path: "settings",
+            Component: () => <Outlet />,
+            children: [
+              {
+                path: "categories",
+                Component: () => <Outlet />,
+                children: [
+                  {
+                    path: "edit/:categoryId",
+                    Component: () => (
+                      <EditCategoryForm
+                        categoryId={1}
+                        initialValues={{
+                          color: { value: 1, label: "white" },
+                        }}
+                      />
+                    ),
+                  },
+                  {
+                    index: true,
+                    Component: () => <div>Categories Page</div>,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
     ]);
 
@@ -52,7 +71,9 @@ describe("EditCategoryForm", () => {
 
     await user.click(button);
 
-    expect(screen.getByText("Categories Page")).toBeInTheDocument();
-    expect(screen.queryByLabelText("Name *")).not.toBeInTheDocument();
+    expect(await screen.findByText("Categories Page")).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.queryByLabelText("Name *")).not.toBeInTheDocument(),
+    );
   });
 });

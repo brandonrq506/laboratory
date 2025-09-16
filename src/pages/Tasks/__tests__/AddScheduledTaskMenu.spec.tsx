@@ -1,5 +1,6 @@
 import { HttpResponse, http } from "msw";
-import { render, screen, waitFor } from "@/test/test-utils";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { AddScheduledTaskMenu } from "../AddScheduledTaskMenu";
@@ -9,10 +10,31 @@ import { server } from "@/test/server";
 const API_URL = import.meta.env.VITE_API_URL;
 
 describe("AddScheduledTaskMenu", () => {
-  it("displays routines list", async () => {
+  const createTestQueryClient = () =>
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          retry: false,
+        },
+      },
+    });
+
+  const renderAddScheduledTaskMenu = () => {
+    const queryClient = createTestQueryClient();
+
+    const utils = render(
+      <QueryClientProvider client={queryClient}>
+        <AddScheduledTaskMenu />
+      </QueryClientProvider>,
+    );
+
     const user = userEvent.setup();
 
-    render(<AddScheduledTaskMenu />);
+    return { ...utils, user, queryClient };
+  };
+
+  it("displays routines list", async () => {
+    const { user } = renderAddScheduledTaskMenu();
 
     const menuButton = screen.getByRole("button", { name: "Add Tasks" });
 
@@ -24,7 +46,7 @@ describe("AddScheduledTaskMenu", () => {
   });
 
   it("shows loading indicator when applying routine", async () => {
-    const user = userEvent.setup();
+    const { user } = renderAddScheduledTaskMenu();
 
     server.use(
       http.post(
@@ -35,8 +57,6 @@ describe("AddScheduledTaskMenu", () => {
         },
       ),
     );
-
-    render(<AddScheduledTaskMenu />);
 
     const menuButton = screen.getByRole("button", { name: "Add Tasks" });
 
@@ -63,7 +83,7 @@ describe("AddScheduledTaskMenu", () => {
   });
 
   it("shows loading indicator only for the clicked routine", async () => {
-    const user = userEvent.setup();
+    const { user } = renderAddScheduledTaskMenu();
 
     server.use(
       http.post(
@@ -74,8 +94,6 @@ describe("AddScheduledTaskMenu", () => {
         },
       ),
     );
-
-    render(<AddScheduledTaskMenu />);
 
     const menuButton = screen.getByRole("button", { name: "Add Tasks" });
 
@@ -101,7 +119,7 @@ describe("AddScheduledTaskMenu", () => {
   });
 
   it("clears loading state on error", async () => {
-    const user = userEvent.setup();
+    const { user } = renderAddScheduledTaskMenu();
 
     server.use(
       http.post(
@@ -112,8 +130,6 @@ describe("AddScheduledTaskMenu", () => {
         },
       ),
     );
-
-    render(<AddScheduledTaskMenu />);
 
     const menuButton = screen.getByRole("button", { name: "Add Tasks" });
 
@@ -137,5 +153,19 @@ describe("AddScheduledTaskMenu", () => {
       },
       { timeout: 1000 },
     );
+  });
+
+  it("hides routines without activities", async () => {
+    const { user } = renderAddScheduledTaskMenu();
+
+    const menuButton = screen.getByRole("button", { name: "Add Tasks" });
+
+    await user.click(menuButton);
+
+    await waitFor(() => {
+      expect(screen.getByText("Morning")).toBeInTheDocument();
+    });
+
+    expect(screen.queryByText("Swimming")).not.toBeInTheDocument();
   });
 });
