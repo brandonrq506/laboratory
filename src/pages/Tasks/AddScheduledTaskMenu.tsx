@@ -32,6 +32,10 @@ export const AddScheduledTaskMenu = () => {
 
   const hasRoutines = routines && routines.length > 0;
 
+  const routinesWithActivities = routines?.filter(
+    (r) => r.activities.length > 0,
+  );
+
   return (
     <FloatingMenu
       srBtnText={`${ADD} ${TASKS}`}
@@ -41,7 +45,7 @@ export const AddScheduledTaskMenu = () => {
           <MenuHeading className="bg-gray-100 px-2 py-1.5 text-sm opacity-50">
             Routines
           </MenuHeading>
-          {routines?.map((routine) => (
+          {routinesWithActivities?.map((routine) => (
             <MenuItem key={routine.id}>
               <button
                 className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
