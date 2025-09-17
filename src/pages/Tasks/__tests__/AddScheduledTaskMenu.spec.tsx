@@ -52,7 +52,7 @@ describe("AddScheduledTaskMenu", () => {
       http.post(
         `${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`,
         async () => {
-          await new Promise((resolve) => setTimeout(resolve, 10));
+          await new Promise((resolve) => setTimeout(resolve, 100));
           return HttpResponse.json(null, { status: 201 });
         },
       ),
@@ -89,7 +89,7 @@ describe("AddScheduledTaskMenu", () => {
       http.post(
         `${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`,
         async () => {
-          await new Promise((resolve) => setTimeout(resolve, 10));
+          await new Promise((resolve) => setTimeout(resolve, 100));
           return HttpResponse.json(null, { status: 201 });
         },
       ),
@@ -125,7 +125,7 @@ describe("AddScheduledTaskMenu", () => {
       http.post(
         `${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`,
         async () => {
-          await new Promise((resolve) => setTimeout(resolve, 10));
+          await new Promise((resolve) => setTimeout(resolve, 100));
           return HttpResponse.json({ error: "Server error" }, { status: 500 });
         },
       ),
