@@ -41,9 +41,9 @@ export const WeekView = () => {
     <section
       className={clsx(
         "rounded-3xl border border-slate-200/60 bg-slate-50/90",
-        "p-8 shadow-[0_32px_120px_-48px_rgba(15,23,42,0.55)] backdrop-blur",
+        "p-4 shadow-[0_32px_120px_-48px_rgba(15,23,42,0.55)] backdrop-blur",
       )}>
-      <div className="grid grid-cols-7 gap-5">
+      <div className="grid grid-cols-7 gap-4">
         {Array.from({ length: WEEK_DAYS }).map((_, index) => {
           const date = format(addDays(startOfWeekDate, index), "yyyy-MM-dd");
           return <DayColumn key={date} date={date} />;
