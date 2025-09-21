@@ -1,8 +1,11 @@
 import { useSearchParams } from "react-router";
 
 import { addDays, format, startOfWeek } from "date-fns";
-import { DayColumn } from "./day-column";
 import { clsx } from "clsx";
+
+import { PIXELS_PER_HOUR, TIMELINE_HEIGHT } from "../constants";
+import { DayColumn } from "./day-column";
+import { TimeAxis } from "./time-axis";
 
 const MONDAY = 1;
 const WEEK_DAYS = 7;
@@ -43,7 +46,18 @@ export const WeekView = () => {
         "rounded-3xl border border-slate-200/60 bg-slate-50/90",
         "p-4 shadow-[0_32px_120px_-48px_rgba(15,23,42,0.55)] backdrop-blur",
       )}>
-      <div className="grid grid-cols-7 gap-4">
+      <div
+        className={clsx(
+          "grid grid-cols-[88px_repeat(7,minmax(0,1fr))] gap-4",
+          "rounded-2xl border border-slate-200/70 bg-white/70 p-2",
+          "overflow-auto",
+        )}
+        style={{
+          minHeight: TIMELINE_HEIGHT,
+          backgroundImage: `repeating-linear-gradient(180deg, rgba(148, 163, 184, 0.35) 0, rgba(148, 163, 184, 0.35) 1px, transparent 1px, transparent ${PIXELS_PER_HOUR}px)`,
+          backgroundPosition: "0px 96px",
+        }}>
+        <TimeAxis />
         {Array.from({ length: WEEK_DAYS }).map((_, index) => {
           const date = format(addDays(startOfWeekDate, index), "yyyy-MM-dd");
           return <DayColumn key={date} date={date} />;
