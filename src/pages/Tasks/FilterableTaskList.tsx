@@ -1,20 +1,20 @@
 import { Link, useSearchParams } from "react-router";
 import { usePrefetchTask } from "@/features/tasks/api/tanstack/usePrefetchTask";
-import { useTasks } from "@/features/tasks/api/tanstack/useTasks";
+import { useQuery } from "@tanstack/react-query";
 
 import { CompletedTask, TaskList } from "@/features/tasks/components";
 import { Button } from "@/components/core";
 import { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
+import { historyTasksOptions } from "@/features/tasks/api/queryOptions";
 
 export const FilterableTaskList = () => {
   const prefetchTask = usePrefetchTask();
   const [params] = useSearchParams();
   const dateParam = params.get("date") ?? "today";
 
-  const { data, isPending, isError, refetch } = useTasks({
-    filter: { status: "completed", start_time: dateParam },
-    sort: { sort_by: "start_time", sort_order: "asc" },
-  });
+  const { data, isPending, isError, refetch } = useQuery(
+    historyTasksOptions(dateParam),
+  );
 
   if (isPending) return <div>Loading...</div>;
 
