@@ -11,9 +11,7 @@ interface Props {
 }
 
 export const DayColumn = ({ date }: Props) => {
-  const { data, isPending } = useQuery(
-    historyTasksOptions({ date, sort_order: "asc" }),
-  );
+  const { data, isPending } = useQuery(historyTasksOptions(date));
 
   const columnDate = parseISO(date);
   const dayLabel = format(columnDate, "EEE").toUpperCase();
