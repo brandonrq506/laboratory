@@ -1,8 +1,4 @@
-import {
-  secondsInDay,
-  secondsInHour,
-  secondsInMinute,
-} from "date-fns/constants";
+import { secondsInHour, secondsInMinute } from "date-fns/constants";
 
 const padNumber = (number: number) => {
   const PADDING = 2;
@@ -22,8 +18,6 @@ const displayMinutes = (minutes: number, seconds: number) => {
 
 export const secondsToTime = (seconds: number) => {
   if (seconds < 0) throw new Error("Seconds must be a positive number");
-  if (seconds > secondsInDay)
-    throw new Error("Seconds must be less than a day");
 
   const hours = Math.floor(seconds / secondsInHour);
   const minutes = Math.floor((seconds % secondsInHour) / secondsInMinute);

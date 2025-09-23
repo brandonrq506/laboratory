@@ -7,12 +7,6 @@ describe("secondsToTime", () => {
     expect(() => secondsToTime(seconds)).toThrow(expected);
   });
 
-  it("throws an error when seconds is greater than a day", () => {
-    const seconds = 86401;
-    const expected = "Seconds must be less than a day";
-    expect(() => secondsToTime(seconds)).toThrow(expected);
-  });
-
   it("returns '0s' when seconds is 0", () => {
     const seconds = 0;
     expect(secondsToTime(seconds)).toBe("0s");
