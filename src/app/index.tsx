@@ -54,6 +54,7 @@ import { Projects } from "@/pages/Projects";
 import { RouterProvider } from "react-router/dom";
 import { TestingModal } from "@/pages/TestingModal";
 import { TimerPage } from "@/pages/timer";
+import { WeeklyPage } from "@/pages/weekly";
 
 const router = createBrowserRouter([
   {
@@ -105,6 +106,10 @@ const router = createBrowserRouter([
           },
           { path: "notifications", element: <NotificationSettingsPage /> },
         ],
+      },
+      {
+        path: "weekly",
+        element: <WeeklyPage />,
       },
       {
         path: "timer",
