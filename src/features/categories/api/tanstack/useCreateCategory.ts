@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { CATEGORIES_ENDPOINT } from "@/libs/axios";
+import { categoryListQueryOptions } from "../queries";
 import { createCategory } from "../axios/createCategory";
 
 export const useCreateCategory = () => {
@@ -9,7 +9,7 @@ export const useCreateCategory = () => {
   return useMutation({
     mutationFn: createCategory,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [CATEGORIES_ENDPOINT] });
+      queryClient.invalidateQueries(categoryListQueryOptions());
     },
   });
 };

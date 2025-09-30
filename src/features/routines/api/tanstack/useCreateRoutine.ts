@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { ROUTINES_ENDPOINT } from "@/libs/axios";
 import { createRoutine } from "../axios/createRoutine";
+import { routineListQueryOptions } from "../queries";
 
 export const useCreateRoutine = () => {
   const queryClient = useQueryClient();
@@ -9,7 +9,7 @@ export const useCreateRoutine = () => {
   return useMutation({
     mutationFn: createRoutine,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [ROUTINES_ENDPOINT] });
+      queryClient.invalidateQueries(routineListQueryOptions());
     },
   });
 };

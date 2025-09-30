@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
+import { routineByIdQueryOptions, routineListQueryOptions } from "../queries";
 import { MoveActivityRoutine } from "../axios/moveActivityRoutine";
 import { ROUTINES_ENDPOINT } from "@/libs/axios";
 import type { Routine } from "../../types/routine";
@@ -40,8 +41,8 @@ export const useMoveActivityRoutine = () => {
     onSettled: (_, __, { routine_id }) => {
       invalidateQueries(
         queryClient,
-        { queryKey: [ROUTINES_ENDPOINT, routine_id] },
-        { queryKey: [ROUTINES_ENDPOINT] },
+        routineListQueryOptions(),
+        routineByIdQueryOptions(routine_id),
       );
     },
   });

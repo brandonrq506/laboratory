@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { activityKeys } from "../queries";
+import { activityByIdQueryOptions, activityListQueryOptions } from "../queries";
 import { updateActivity } from "../axios/updateActivity";
 
 export const useUpdateActivity = () => {
@@ -9,10 +9,8 @@ export const useUpdateActivity = () => {
   return useMutation({
     mutationFn: updateActivity,
     onSuccess: (_, { activityId }) => {
-      queryClient.invalidateQueries({ queryKey: activityKeys.lists() });
-      queryClient.invalidateQueries({
-        queryKey: activityKeys.detail(activityId),
-      });
+      queryClient.invalidateQueries(activityListQueryOptions());
+      queryClient.removeQueries(activityByIdQueryOptions(activityId));
     },
   });
 };
