@@ -38,9 +38,8 @@ export const useUpdateTask = () => {
     onError: (_, __, context) => {
       context?.rollback();
     },
-    onSettled: (_, __, { taskId }) => {
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: taskKeys.all });
-      queryClient.invalidateQueries(taskByIdQueryOptions(taskId));
     },
   });
 };

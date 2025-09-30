@@ -49,19 +49,8 @@ export const useActivateTask = () => {
     onError: (_, __, context) => {
       context?.rollback();
     },
-    onSettled: (data) => {
-      invalidateQueries(
-        queryClient,
-        inProgressTasksQueryOptions(),
-        scheduledTasksQueryOptions(),
-        todayCompletedTasksQueryOptions(),
-        ...(data
-          ? [
-              taskByIdQueryOptions(data.previous_task.id),
-              taskByIdQueryOptions(data.current_task.id),
-            ]
-          : []),
-      );
+    onSettled: () => {
+      invalidateQueries(queryClient, { queryKey: taskKeys.all });
     },
   });
 };

@@ -39,13 +39,8 @@ export const useCompleteTask = () => {
     onError: (_, __, context) => {
       context?.rollback();
     },
-    onSettled: (_, __, newCompletedTask) => {
-      invalidateQueries(
-        queryClient,
-        inProgressTasksQueryOptions(),
-        todayCompletedTasksQueryOptions(),
-        taskByIdQueryOptions(newCompletedTask.id),
-      );
+    onSettled: () => {
+      invalidateQueries(queryClient, { queryKey: taskKeys.all });
     },
   });
 };
