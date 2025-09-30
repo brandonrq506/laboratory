@@ -1,21 +1,22 @@
-import { useActivities } from "@/features/activities/api/tanstack/useActivities";
 import { useApplyRoutine } from "@/features/routines/api/tanstack/useApplyRoutine";
 import { useCreateScheduledTask } from "@/features/tasks/api/tanstack/useCreateScheduledTask";
-import { useRoutines } from "@/features/routines/api/tanstack/useRoutines";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { Badge, FloatingMenu, Loading } from "@/components/core";
 import { MenuHeading, MenuItem, MenuSection } from "@headlessui/react";
 import { CategoryBadge } from "@/features/categories/components";
 import { PlusIcon } from "@heroicons/react/24/solid";
+import { activityListQueryOptions } from "@/features/activities/api/queries";
+import { routineListQueryOptions } from "@/features/routines/api/queries";
 
 import { ADD } from "@/constants/actions";
 import { TASKS } from "@/constants/entities";
 import clsx from "clsx";
 
 export const AddScheduledTaskMenu = () => {
-  const { data: activities } = useActivities();
-  const { data: routines } = useRoutines();
+  const { data: activities } = useQuery(activityListQueryOptions());
+  const { data: routines } = useQuery(routineListQueryOptions());
 
   const { mutate: mutateTask } = useCreateScheduledTask();
   const { mutate: applyRoutine } = useApplyRoutine();

@@ -2,14 +2,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { ActivityAPI } from "@/features/activities/types/activityAPI";
 
-import { activityKeys } from "@/features/activities/api/queryKeys";
+import { activityKeys } from "@/features/activities/api/queries";
 import { buildTemporaryCompletedTask } from "../../utils/buildTemporaryCompletedTask";
 import { createTask } from "../axios/createTask";
 import { isBefore } from "date-fns";
 import { snapshotQueries } from "@/utils/tanstack/helpers";
-import { todayCompletedTasksOptions } from "../queryOptions";
+import { todayCompletedTasksQueryOptions } from "../queries";
 
-const completedTaskKeys = todayCompletedTasksOptions().queryKey;
+const completedTaskKeys = todayCompletedTasksQueryOptions().queryKey;
 
 export const useCreateCompletedTodayTask = () => {
   const queryClient = useQueryClient();
@@ -17,7 +17,7 @@ export const useCreateCompletedTodayTask = () => {
   return useMutation({
     mutationFn: createTask,
     onMutate: async (newTask) => {
-      await queryClient.cancelQueries(todayCompletedTasksOptions());
+      await queryClient.cancelQueries(todayCompletedTasksQueryOptions());
 
       const { rollback } = snapshotQueries(queryClient, [completedTaskKeys]);
 
@@ -68,7 +68,7 @@ export const useCreateCompletedTodayTask = () => {
       context?.rollback();
     },
     onSettled: () => {
-      queryClient.invalidateQueries(todayCompletedTasksOptions());
+      queryClient.invalidateQueries(todayCompletedTasksQueryOptions());
     },
   });
 };

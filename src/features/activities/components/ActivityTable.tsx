@@ -6,21 +6,22 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useActivities } from "../api/tanstack/useActivities";
 import { useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import { EmptyState, Loading, SortIcon } from "@/components/core";
 import { ActivityAPI } from "../types/activityAPI";
 import { ActivityActionMenu } from "./ActivityActionMenu";
 import { CategoryBadge } from "@/features/categories/components";
 import { StateInputText } from "@/components/form";
+import { activityListQueryOptions } from "../api/queries";
 import { clsx } from "clsx";
 import { secondsToHHmm } from "@/utils";
 
 const columnHelper = createColumnHelper<ActivityAPI>();
 
 export const ActivityTable = () => {
-  const { data, isPending, isSuccess } = useActivities();
+  const { data, isPending, isSuccess } = useQuery(activityListQueryOptions());
 
   const activities = useMemo(() => data ?? [], [data]);
 

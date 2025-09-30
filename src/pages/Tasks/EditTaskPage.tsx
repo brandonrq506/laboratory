@@ -9,15 +9,14 @@ import {
   EditScheduledTaskForm,
 } from "@/features/tasks/components";
 import { RETRY } from "@/constants/actions";
-import { taskDetailsOptions } from "@/features/tasks/api/queryOptions";
+import { taskByIdQueryOptions } from "@/features/tasks/api/queries";
 
 export const EditTaskPage = () => {
   const navigate = useNavigate();
   const { taskId } = useParams();
-  const taskIdInt = parseInt(taskId!);
   const [isOpen, setIsOpen] = useState(false);
   const { data, error, isError, isPending, refetch } = useQuery(
-    taskDetailsOptions(taskIdInt),
+    taskByIdQueryOptions(taskId!),
   );
 
   useEffect(() => setIsOpen(true), []);

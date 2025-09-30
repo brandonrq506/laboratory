@@ -1,9 +1,15 @@
-import { ROUTINES_ENDPOINT, apiV1 } from "@/libs/axios";
+import { QueryFunctionContext } from "@tanstack/react-query";
+import { apiV1 } from "@/libs/axios";
+
 import { Routine } from "../../types/routine";
+import { routineKeys } from "../queries";
 
-type Props = { signal: AbortSignal };
+export const getRoutines = async ({
+  signal,
+  queryKey,
+}: QueryFunctionContext<ReturnType<typeof routineKeys.lists>>) => {
+  const [{ endpoint }] = queryKey;
 
-export const getRoutines = async ({ signal }: Props) => {
-  const response = await apiV1.get<Routine[]>(ROUTINES_ENDPOINT, { signal });
+  const response = await apiV1.get<Routine[]>(endpoint, { signal });
   return response.data;
 };

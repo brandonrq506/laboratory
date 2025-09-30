@@ -7,12 +7,12 @@ import { Link } from "react-router";
 import { Loading } from "@/components/core";
 import { SectionHeaderWithAction } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
-import { todayCompletedTasksOptions } from "@/features/tasks/api/queryOptions";
+import { todayCompletedTasksQueryOptions } from "@/features/tasks/api/queries";
 
 export const TodayCompletedTaskList = () => {
   const prefetchTask = usePrefetchTask();
   const { data, isPending, isError, refetch } = useQuery(
-    todayCompletedTasksOptions(),
+    todayCompletedTasksQueryOptions(),
   );
 
   if (isPending)

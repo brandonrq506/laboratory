@@ -1,18 +1,18 @@
 import { addStart, removeById } from "@/utils/array";
 import {
-  inProgressTaskOptions,
-  scheduledTasksOptions,
-  taskDetailsOptions,
-  todayCompletedTasksOptions,
-} from "./queryOptions";
+  inProgressTasksQueryOptions,
+  scheduledTasksQueryOptions,
+  taskByIdQueryOptions,
+  todayCompletedTasksQueryOptions,
+} from "./queries";
 import { CompletedTaskAPI } from "../types/completedTask";
 import { InProgressTaskAPI } from "../types/inProgressTask";
 import { QueryClient } from "@tanstack/react-query";
 import { buildTemporaryCompletedTask } from "../utils/buildTemporaryCompletedTask";
 
-const inProgressKey = inProgressTaskOptions().queryKey;
-const scheduledKey = scheduledTasksOptions().queryKey;
-const completedKey = todayCompletedTasksOptions().queryKey;
+const inProgressKey = inProgressTasksQueryOptions().queryKey;
+const scheduledKey = scheduledTasksQueryOptions().queryKey;
+const completedKey = todayCompletedTasksQueryOptions().queryKey;
 
 interface StartParams {
   qc: QueryClient;
@@ -20,7 +20,7 @@ interface StartParams {
 }
 
 export const promoteScheduledToInProgress = ({ qc, task }: StartParams) => {
-  const detailKey = taskDetailsOptions(task.id).queryKey;
+  const detailKey = taskByIdQueryOptions(task.id).queryKey;
 
   // Add new in_progress task to in_progress cache
   qc.setQueryData(inProgressKey, [task]);
@@ -38,7 +38,7 @@ interface CompleteParams {
 }
 
 export const completeInProgressTask = ({ qc, task }: CompleteParams) => {
-  const detailKey = taskDetailsOptions(task.id).queryKey;
+  const detailKey = taskByIdQueryOptions(task.id).queryKey;
 
   // Add new completed task to the start of completed-tasks cache
   qc.setQueryData(completedKey, (tasks) => addStart(tasks, task));

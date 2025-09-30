@@ -4,10 +4,10 @@ import { Card } from "@/components/layout";
 import { IdleTimer } from "./IdleTimer";
 import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
 import { RunningTimer } from "./RunningTimer";
-import { inProgressTaskOptions } from "@/features/tasks/api/queryOptions";
+import { inProgressTasksQueryOptions } from "@/features/tasks/api/queries";
 
 export const TimerPanel = () => {
-  const { data } = useQuery(inProgressTaskOptions());
+  const { data } = useQuery(inProgressTasksQueryOptions());
 
   const status = data === undefined || data.length === 0 ? "idle" : "active";
   const isIdle = status === "idle";

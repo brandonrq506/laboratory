@@ -1,9 +1,14 @@
-import { CATEGORIES_ENDPOINT, apiV1 } from "@/libs/axios";
 import { Category } from "../../types/category";
+import { QueryFunctionContext } from "@tanstack/react-query";
+import { apiV1 } from "@/libs/axios";
+import { categoryKeys } from "../queries";
 
-type Props = { signal: AbortSignal };
+export const getCategories = async ({
+  signal,
+  queryKey,
+}: QueryFunctionContext<ReturnType<typeof categoryKeys.lists>>) => {
+  const [{ endpoint }] = queryKey;
 
-export const getCategories = async ({ signal }: Props) => {
-  const response = await apiV1.get<Category[]>(CATEGORIES_ENDPOINT, { signal });
+  const response = await apiV1.get<Category[]>(endpoint, { signal });
   return response.data;
 };

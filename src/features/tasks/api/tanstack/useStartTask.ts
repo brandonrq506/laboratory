@@ -1,17 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import {
-  inProgressTaskOptions,
-  scheduledTasksOptions,
-  taskDetailsOptions,
-} from "../queryOptions";
+  inProgressTasksQueryOptions,
+  scheduledTasksQueryOptions,
+  taskByIdQueryOptions,
+  taskKeys,
+} from "../queries";
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { promoteScheduledToInProgress } from "../orchestrator";
 import { startTask } from "../axios/startTask";
-import { taskKeys } from "../queryKeys";
 
-const inProgressKey = inProgressTaskOptions().queryKey;
-const scheduledKey = scheduledTasksOptions().queryKey;
+const inProgressKey = inProgressTasksQueryOptions().queryKey;
+const scheduledKey = scheduledTasksQueryOptions().queryKey;
 
 export const useStartTask = () => {
   const queryClient = useQueryClient();
@@ -21,7 +21,7 @@ export const useStartTask = () => {
     onMutate: async (newInProgressTask) => {
       await queryClient.cancelQueries({ queryKey: taskKeys.lists() });
 
-      const detailKey = taskDetailsOptions(newInProgressTask.id).queryKey;
+      const detailKey = taskByIdQueryOptions(newInProgressTask.id).queryKey;
 
       const { rollback } = snapshotQueries(queryClient, [
         scheduledKey,
@@ -42,9 +42,9 @@ export const useStartTask = () => {
     onSettled: (_, __, newTask) => {
       invalidateQueries(
         queryClient,
-        inProgressTaskOptions(),
-        scheduledTasksOptions(),
-        taskDetailsOptions(newTask.id),
+        inProgressTasksQueryOptions(),
+        scheduledTasksQueryOptions(),
+        taskByIdQueryOptions(newTask.id),
       );
     },
   });

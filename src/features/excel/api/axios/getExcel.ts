@@ -1,12 +1,13 @@
-import { EXCEL_ENDPOINT, apiV1 } from "@/libs/axios";
+import { EXCEL_ENDPOINT, TASKS_ENDPOINT, apiV1 } from "@/libs/axios";
 import { ExcelTableRow } from "../../types/excelTableRow";
+import { QueryFunctionContext } from "@tanstack/react-query";
 
-type Props = {
-  signal: AbortSignal;
-  date: string;
-};
+export const getExcel = async ({
+  signal,
+  queryKey,
+}: QueryFunctionContext<[typeof TASKS_ENDPOINT, { date: string }]>) => {
+  const [, { date }] = queryKey;
 
-export const getExcel = async ({ signal, date }: Props) => {
   const response = await apiV1.get<ExcelTableRow[]>(EXCEL_ENDPOINT, {
     signal,
     params: {

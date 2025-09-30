@@ -1,10 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import { taskByIdQueryOptions, taskKeys } from "../queries";
 import { BaseTaskAPI } from "../../types/baseTask";
 import { TaskAPI } from "../../types/task";
 import { snapshotQueries } from "@/utils/tanstack/helpers";
-import { taskDetailsOptions } from "../queryOptions";
-import { taskKeys } from "../queryKeys";
 import { updateTask } from "../axios/updateTask";
 
 export const useUpdateTask = () => {
@@ -30,7 +29,7 @@ export const useUpdateTask = () => {
       );
 
       // Update details in case user clicks on task
-      queryClient.setQueryData(taskDetailsOptions(taskId).queryKey, (prev) =>
+      queryClient.setQueryData(taskByIdQueryOptions(taskId).queryKey, (prev) =>
         prev ? ({ ...prev, ...task } as TaskAPI) : undefined,
       );
 
@@ -39,9 +38,8 @@ export const useUpdateTask = () => {
     onError: (_, __, context) => {
       context?.rollback();
     },
-    onSettled: (_, __, { taskId }) => {
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: taskKeys.all });
-      queryClient.invalidateQueries(taskDetailsOptions(taskId));
     },
   });
 };

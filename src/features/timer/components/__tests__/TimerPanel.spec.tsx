@@ -5,14 +5,14 @@ import { MemoryRouter } from "react-router";
 import { TimerPanel } from "../TimerPanel";
 
 import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
-import { inProgressTaskOptions } from "@/features/tasks/api/queryOptions";
 import { inProgressTasks } from "@/test/store/tasks";
+import { inProgressTasksQueryOptions } from "@/features/tasks/api/queries";
 
 const task = inProgressTasks[0];
 
 const renderWithData = (data: InProgressTaskAPI[]) => {
   const qc = new QueryClient();
-  qc.setQueryData(inProgressTaskOptions().queryKey, data);
+  qc.setQueryData(inProgressTasksQueryOptions().queryKey, data);
   return render(
     <MemoryRouter>
       <QueryClientProvider client={qc}>

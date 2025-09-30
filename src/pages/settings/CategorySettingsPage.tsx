@@ -1,4 +1,4 @@
-import { useCategories } from "@/features/categories/api/tanstack/useCategories";
+import { useQuery } from "@tanstack/react-query";
 
 import {
   CategoryBadge,
@@ -6,9 +6,10 @@ import {
 } from "@/features/categories/components";
 import { Link, Outlet } from "react-router";
 import { PageHeaderWithActions } from "@/components/layout";
+import { categoryListQueryOptions } from "@/features/categories/api/queries";
 
 export const CategorySettingsPage = () => {
-  const { data, isSuccess } = useCategories();
+  const { data, isSuccess } = useQuery(categoryListQueryOptions());
 
   return (
     <div>
