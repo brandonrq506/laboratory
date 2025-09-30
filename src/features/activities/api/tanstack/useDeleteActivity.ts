@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { activityKeys } from "../queryKeys";
+import { activityKeys } from "../queries";
 import { deleteActivity } from "../axios/deleteActivity";
 
 export const useDeleteActivity = () => {

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { activityKeys } from "../queryKeys";
+import { activityKeys } from "../queries";
 import { updateActivity } from "../axios/updateActivity";
 
 export const useUpdateActivity = () => {

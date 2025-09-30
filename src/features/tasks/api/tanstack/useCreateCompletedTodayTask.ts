@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { ActivityAPI } from "@/features/activities/types/activityAPI";
 
-import { activityKeys } from "@/features/activities/api/queryKeys";
+import { activityKeys } from "@/features/activities/api/queries";
 import { buildTemporaryCompletedTask } from "../../utils/buildTemporaryCompletedTask";
 import { createTask } from "../axios/createTask";
 import { isBefore } from "date-fns";

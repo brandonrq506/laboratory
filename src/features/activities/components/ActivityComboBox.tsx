@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FieldValues, UseControllerProps } from "react-hook-form";
 import { ComboBoxType } from "@/components/form/ComboBox/types";
 import { ControlComboBox } from "@/components/form";
-import { activityListQueryOptions } from "../api/queryKeys";
+import { activityListQueryOptions } from "../api/queries";
 import { transformToOption } from "@/utils";
 
 type ActivityComboBoxProps = Omit<ComboBoxType, "options" | "label">;

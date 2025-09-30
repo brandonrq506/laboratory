@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { Loading, Modal } from "@/components/core";
 import { EditActivityForm } from "@/features/activities/components";
-import { activityByIdQueryOptions } from "@/features/activities/api/queryKeys";
+import { activityByIdQueryOptions } from "@/features/activities/api/queries";
 import { convertSecondsToHHandMM } from "@/features/activities/utils/convertSecondsToHHandMM";
 
 export const EditActivityPage = () => {

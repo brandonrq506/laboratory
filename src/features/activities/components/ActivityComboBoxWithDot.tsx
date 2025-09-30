@@ -10,7 +10,7 @@ import { ComboBoxType } from "@/components/form/ComboBox/types";
 import { ComboBoxWithRenderer } from "@/components/form";
 import { Dot } from "@/components/core";
 import { EnhancedOption } from "@/types/core";
-import { activityListQueryOptions } from "../api/queryKeys";
+import { activityListQueryOptions } from "../api/queries";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
 type ActivityComboBoxWithDotProps = Omit<ComboBoxType, "options" | "label">;

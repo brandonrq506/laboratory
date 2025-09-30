@@ -8,7 +8,7 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 
 import { ADD } from "@/constants/actions";
 import { TASKS } from "@/constants/entities";
-import { activityListQueryOptions } from "@/features/activities/api/queryKeys";
+import { activityListQueryOptions } from "@/features/activities/api/queries";
 
 export const QuickCreateTaskMenu = () => {
   const { data, isPending, isError } = useQuery(activityListQueryOptions());

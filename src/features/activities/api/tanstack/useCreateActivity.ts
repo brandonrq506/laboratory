@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { activityKeys } from "../queryKeys";
+import { activityKeys } from "../queries";
 import { createActivity } from "../axios/createActivity";
 
 export const useCreateActivity = () => {
