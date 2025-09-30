@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
-import { useRoutine } from "../api/tanstack/useRoutine";
+import { useQuery } from "@tanstack/react-query";
+
+import { routineByIdQueryOptions } from "../api/queries";
 import { useUpdateRoutine } from "../api/tanstack/useUpdateRoutine";
 
 import { Button } from "@/components/core";
@@ -20,7 +22,9 @@ export const RoutineNameForm = ({ routineId }: Props) => {
   const { routineId: routineIdFromParams } = useParams();
   const routineIdToUse = routineId || Number(routineIdFromParams);
 
-  const { data, isPending: isDataPending } = useRoutine(routineIdToUse);
+  const { data, isPending: isDataPending } = useQuery(
+    routineByIdQueryOptions(routineIdToUse),
+  );
   const nameToUse = data?.name ?? defaultValues.name;
 
   const { formState, handleSubmit, register } = useForm<EditNameForm>({

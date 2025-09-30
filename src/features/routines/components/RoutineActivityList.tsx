@@ -1,13 +1,16 @@
 import { useParams } from "react-router";
-import { useRoutine } from "../api/tanstack/useRoutine";
+import { useQuery } from "@tanstack/react-query";
 
 import { EmptyList, Loading } from "@/components/core";
 import { SortableRoutineActivityList } from "./SortableRoutineActivityList";
+import { routineByIdQueryOptions } from "../api/queries";
 
 export const RoutineActivityList = () => {
   const { routineId } = useParams();
   const routineNumber = Number(routineId);
-  const { data, isPending, isError } = useRoutine(routineNumber);
+  const { data, isPending, isError } = useQuery(
+    routineByIdQueryOptions(routineNumber),
+  );
   const routine_activities = data?.activities;
 
   if (isPending) {

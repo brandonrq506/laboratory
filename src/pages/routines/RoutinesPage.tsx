@@ -1,10 +1,11 @@
 import { usePrefetchRoutine } from "@/features/routines/api/tanstack/usePrefetchRoutine";
-import { useRoutines } from "@/features/routines/api/tanstack/useRoutines";
+import { useQuery } from "@tanstack/react-query";
 
 import { Link, Outlet } from "react-router";
 import { LinkButton } from "@/components/core";
 import { PageHeaderWithActions } from "@/components/layout";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import { routineListQueryOptions } from "@/features/routines/api/queries";
 
 import { ADD } from "@/constants/actions";
 import { ROUTINE } from "@/constants/entities";
@@ -12,7 +13,7 @@ import { RoutineCard } from "@/features/routines/components";
 
 export const RoutinesPage = () => {
   const prefetchRoutine = usePrefetchRoutine();
-  const { data, isSuccess } = useRoutines();
+  const { data, isSuccess } = useQuery(routineListQueryOptions());
 
   return (
     <div>
