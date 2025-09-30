@@ -3,13 +3,14 @@ import {
   UseControllerProps,
   useController,
 } from "react-hook-form";
-import { useActivities } from "../api/tanstack/useActivities";
+import { useQuery } from "@tanstack/react-query";
 
 import { ActivityAPI } from "../types/activityAPI";
 import { ComboBoxType } from "@/components/form/ComboBox/types";
 import { ComboBoxWithRenderer } from "@/components/form";
 import { Dot } from "@/components/core";
 import { EnhancedOption } from "@/types/core";
+import { activityListQueryOptions } from "../api/queryKeys";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
 type ActivityComboBoxWithDotProps = Omit<ComboBoxType, "options" | "label">;
@@ -26,7 +27,7 @@ export const ActivityComboBoxWithDot = <T extends FieldValues>({
   hideErrorMessage,
   ...controllerProps
 }: UseControllerProps<T> & ActivityComboBoxWithDotProps) => {
-  const { data } = useActivities();
+  const { data } = useQuery(activityListQueryOptions());
   const { field, fieldState } = useController(controllerProps);
 
   const options = (data ?? []).map((activity) => ({

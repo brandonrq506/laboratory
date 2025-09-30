@@ -1,5 +1,5 @@
-import { useActivities } from "@/features/activities/api/tanstack/useActivities";
 import { useCreateScheduledTask } from "../api/tanstack/useCreateScheduledTask";
+import { useQuery } from "@tanstack/react-query";
 
 import { FloatingMenu, Loading } from "@/components/core";
 import { CategoryBadge } from "@/features/categories/components";
@@ -8,9 +8,10 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 
 import { ADD } from "@/constants/actions";
 import { TASKS } from "@/constants/entities";
+import { activityListQueryOptions } from "@/features/activities/api/queryKeys";
 
 export const QuickCreateTaskMenu = () => {
-  const { data, isPending, isError } = useActivities();
+  const { data, isPending, isError } = useQuery(activityListQueryOptions());
   const { mutate } = useCreateScheduledTask();
 
   if (isPending)

@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { useActivity } from "@/features/activities/api/tanstack/useActivity";
+import { useQuery } from "@tanstack/react-query";
 
 import { Loading, Modal } from "@/components/core";
 import { EditActivityForm } from "@/features/activities/components";
+import { activityByIdQueryOptions } from "@/features/activities/api/queryKeys";
 import { convertSecondsToHHandMM } from "@/features/activities/utils/convertSecondsToHHandMM";
 
 export const EditActivityPage = () => {
   const navigate = useNavigate();
   const { activityId } = useParams();
-  const { data, isPending, isError } = useActivity(parseInt(activityId!));
+  const { data, isPending, isError } = useQuery(
+    activityByIdQueryOptions(activityId!),
+  );
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => setIsOpen(true), []);
