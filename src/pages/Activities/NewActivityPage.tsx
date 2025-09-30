@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { useCategories } from "@/features/categories/api/tanstack/useCategories";
 import { useNavigate } from "react-router";
+import { useQuery } from "@tanstack/react-query";
 
 import { CreateActivityForm } from "@/features/activities/components";
 import { Modal } from "@/components/core";
+import { categoryListQueryOptions } from "@/features/categories/api/queries";
 import { getFirstCategoryAsOption } from "@/features/categories/utils";
 
 export const NewActivityPage = () => {
-  const { data } = useCategories();
+  const { data } = useQuery(categoryListQueryOptions());
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 

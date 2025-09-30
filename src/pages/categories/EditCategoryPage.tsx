@@ -1,11 +1,12 @@
 import { Link, useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
-import { useCategory } from "@/features/categories/api/tanstack/useCategory";
+import { useQuery } from "@tanstack/react-query";
 
 import { Loading, Modal } from "@/components/core";
 import { EditCategoryForm } from "@/features/categories/components";
 import { SectionHeaderWithAction } from "@/components/layout";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import { categoryByIdQueryOptions } from "@/features/categories/api/queries";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
 export const EditCategoryPage = () => {
@@ -13,7 +14,9 @@ export const EditCategoryPage = () => {
   const { categoryId } = useParams();
   const categoryNumber = parseInt(categoryId!);
   const [isOpen, setIsOpen] = useState(false);
-  const { data, isPending, isError, error } = useCategory(categoryNumber);
+  const { data, isPending, isError, error } = useQuery(
+    categoryByIdQueryOptions(categoryNumber),
+  );
 
   useEffect(() => setIsOpen(true), []);
 

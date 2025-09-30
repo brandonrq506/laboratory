@@ -1,8 +1,9 @@
-import { useCategories } from "@/features/categories/api/tanstack/useCategories";
+import { useQuery } from "@tanstack/react-query";
 
 import { CategoryBadge } from "@/features/categories/components";
 import { ExcelTableRow } from "@/features/excel/types/excelTableRow";
 import { calculatePercentageByCategory } from "@/features/excel/utils/calculatePercentageByCategory";
+import { categoryListQueryOptions } from "@/features/categories/api/queries";
 
 const HUNDREDTH = 100;
 const PRECISION = 4;
@@ -12,7 +13,7 @@ type Props = {
 };
 
 export const ExcelCategoryHeaders = ({ excelData }: Props) => {
-  const { data } = useCategories();
+  const { data } = useQuery(categoryListQueryOptions());
   const result = calculatePercentageByCategory(excelData, data);
 
   return (
