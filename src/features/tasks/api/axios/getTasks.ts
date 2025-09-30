@@ -1,7 +1,7 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 import { TaskAPI } from "../../types/task";
 import { apiV1 } from "@/libs/axios";
-import { taskKeys } from "../queryKeys";
+import { taskKeys } from "../queries";
 
 export async function getTasks<T = TaskAPI[]>({
   signal,

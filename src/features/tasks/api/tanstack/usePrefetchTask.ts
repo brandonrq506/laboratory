@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 
 import { getTask } from "../axios/getTask";
-import { taskKeys } from "../queryKeys";
+import { taskKeys } from "../queries";
 
 import { millisecondsInMinute } from "date-fns/constants";
 

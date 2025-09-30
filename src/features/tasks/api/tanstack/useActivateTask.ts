@@ -1,19 +1,19 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import {
-  inProgressTaskOptions,
-  scheduledTasksOptions,
-  taskDetailsOptions,
-  todayCompletedTasksOptions,
-} from "../queryOptions";
+  inProgressTasksQueryOptions,
+  scheduledTasksQueryOptions,
+  taskByIdQueryOptions,
+  taskKeys,
+  todayCompletedTasksQueryOptions,
+} from "../queries";
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { activateScheduledTask } from "../orchestrator";
 import { activateTask } from "../axios/activateTask";
-import { taskKeys } from "../queryKeys";
 
-const inProgressKey = inProgressTaskOptions().queryKey;
-const scheduledKey = scheduledTasksOptions().queryKey;
-const completedKey = todayCompletedTasksOptions().queryKey;
+const inProgressKey = inProgressTasksQueryOptions().queryKey;
+const scheduledKey = scheduledTasksQueryOptions().queryKey;
+const completedKey = todayCompletedTasksQueryOptions().queryKey;
 
 export const useActivateTask = () => {
   const queryClient = useQueryClient();
@@ -34,8 +34,8 @@ export const useActivateTask = () => {
         inProgressKey,
         scheduledKey,
         completedKey,
-        taskDetailsOptions(variables.taskId).queryKey,
-        taskDetailsOptions(inProgressTask.id).queryKey,
+        taskByIdQueryOptions(variables.taskId).queryKey,
+        taskByIdQueryOptions(inProgressTask.id).queryKey,
       ]);
 
       activateScheduledTask({
@@ -52,13 +52,13 @@ export const useActivateTask = () => {
     onSettled: (data) => {
       invalidateQueries(
         queryClient,
-        inProgressTaskOptions(),
-        scheduledTasksOptions(),
-        todayCompletedTasksOptions(),
+        inProgressTasksQueryOptions(),
+        scheduledTasksQueryOptions(),
+        todayCompletedTasksQueryOptions(),
         ...(data
           ? [
-              taskDetailsOptions(data.previous_task.id),
-              taskDetailsOptions(data.current_task.id),
+              taskByIdQueryOptions(data.previous_task.id),
+              taskByIdQueryOptions(data.current_task.id),
             ]
           : []),
       );

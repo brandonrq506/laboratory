@@ -5,7 +5,7 @@ import { useStartTask } from "../api/tanstack/useStartTask";
 import { ForwardIcon, PlayIcon } from "@heroicons/react/24/outline";
 import { IconButton } from "@/components/core";
 import { ScheduledTaskAPI } from "../types/scheduledTask";
-import { inProgressTaskOptions } from "../api/queryOptions";
+import { inProgressTasksQueryOptions } from "../api/queries";
 
 import { floorMilliseconds } from "@/utils";
 
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const ScheduledTaskActionBtn = ({ task }: Props) => {
-  const { data } = useQuery(inProgressTaskOptions());
+  const { data } = useQuery(inProgressTasksQueryOptions());
   const { mutate: startTask } = useStartTask();
   const { mutate: activateTask } = useActivateTask();
 

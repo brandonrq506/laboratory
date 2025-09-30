@@ -2,9 +2,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { moveTask } from "../axios/moveTask";
-import { scheduledTasksOptions } from "../queryOptions";
+import { scheduledTasksQueryOptions } from "../queries";
 
-const scheduledTaskKeys = scheduledTasksOptions().queryKey;
+const scheduledTaskKeys = scheduledTasksQueryOptions().queryKey;
 
 export const useMoveTask = () => {
   const queryClient = useQueryClient();
@@ -24,7 +24,7 @@ export const useMoveTask = () => {
       context?.rollback();
     },
     onSettled: () => {
-      invalidateQueries(queryClient, scheduledTasksOptions());
+      invalidateQueries(queryClient, scheduledTasksQueryOptions());
     },
   });
 };

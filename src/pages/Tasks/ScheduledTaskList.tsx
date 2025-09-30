@@ -5,9 +5,9 @@ import {
   SortableTaskList,
 } from "@/features/tasks/components";
 import {
-  inProgressTaskOptions,
-  scheduledTasksOptions,
-} from "@/features/tasks/api/queryOptions";
+  inProgressTasksQueryOptions,
+  scheduledTasksQueryOptions,
+} from "@/features/tasks/api/queries";
 import { AddScheduledTaskMenu } from "./AddScheduledTaskMenu";
 import { Loading } from "@/components/core";
 import { SectionHeaderWithAction } from "@/components/layout";
@@ -17,9 +17,9 @@ import { calculateExpectedStartTimes } from "@/features/tasks/utils/calculateExp
 const MIN_WORTH_TRIGGERING_THRESHOLD = 3;
 
 export const ScheduledTaskList = () => {
-  const { data: inProgressTask } = useQuery(inProgressTaskOptions());
+  const { data: inProgressTask } = useQuery(inProgressTasksQueryOptions());
   const { data, isPending, isError, refetch } = useQuery(
-    scheduledTasksOptions(),
+    scheduledTasksQueryOptions(),
   );
 
   if (isPending)

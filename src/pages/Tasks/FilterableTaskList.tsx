@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { CompletedTask, TaskList } from "@/features/tasks/components";
 import { Button } from "@/components/core";
 import { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
-import { historyTasksOptions } from "@/features/tasks/api/queryOptions";
+import { historyTasksQueryOptions } from "@/features/tasks/api/queries";
 
 export const FilterableTaskList = () => {
   const prefetchTask = usePrefetchTask();
@@ -13,7 +13,7 @@ export const FilterableTaskList = () => {
   const dateParam = params.get("date") ?? "today";
 
   const { data, isPending, isError, refetch } = useQuery(
-    historyTasksOptions(dateParam),
+    historyTasksQueryOptions(dateParam),
   );
 
   if (isPending) return <div>Loading...</div>;

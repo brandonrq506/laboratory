@@ -1,17 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import {
-  inProgressTaskOptions,
-  taskDetailsOptions,
-  todayCompletedTasksOptions,
-} from "../queryOptions";
+  inProgressTasksQueryOptions,
+  taskByIdQueryOptions,
+  taskKeys,
+  todayCompletedTasksQueryOptions,
+} from "../queries";
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { completeInProgressTask } from "../orchestrator";
 import { completeTask } from "../axios/completeTask";
-import { taskKeys } from "../queryKeys";
 
-const inProgressTaskKeys = inProgressTaskOptions().queryKey;
-const completedTaskKeys = todayCompletedTasksOptions().queryKey;
+const inProgressTaskKeys = inProgressTasksQueryOptions().queryKey;
+const completedTaskKeys = todayCompletedTasksQueryOptions().queryKey;
 
 export const useCompleteTask = () => {
   const queryClient = useQueryClient();
@@ -21,7 +21,7 @@ export const useCompleteTask = () => {
     onMutate: async (newCompletedTask) => {
       await queryClient.cancelQueries({ queryKey: taskKeys.lists() });
 
-      const detailKey = taskDetailsOptions(newCompletedTask.id).queryKey;
+      const detailKey = taskByIdQueryOptions(newCompletedTask.id).queryKey;
 
       const { rollback } = snapshotQueries(queryClient, [
         inProgressTaskKeys,
@@ -42,9 +42,9 @@ export const useCompleteTask = () => {
     onSettled: (_, __, newCompletedTask) => {
       invalidateQueries(
         queryClient,
-        inProgressTaskOptions(),
-        todayCompletedTasksOptions(),
-        taskDetailsOptions(newCompletedTask.id),
+        inProgressTasksQueryOptions(),
+        todayCompletedTasksQueryOptions(),
+        taskByIdQueryOptions(newCompletedTask.id),
       );
     },
   });

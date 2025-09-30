@@ -4,7 +4,7 @@ import { BaseTaskAPI } from "../../types/baseTask";
 import { deleteTask } from "../axios/deleteTask";
 import { removeById } from "@/utils/array";
 import { snapshotQueries } from "@/utils/tanstack/helpers";
-import { taskKeys } from "../queryKeys";
+import { taskKeys } from "../queries";
 
 export const useDeleteTask = () => {
   const queryClient = useQueryClient();

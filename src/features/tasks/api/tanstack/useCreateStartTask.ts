@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { createStartTask } from "../axios/createStartTask";
-import { inProgressTaskOptions } from "../queryOptions";
+import { inProgressTasksQueryOptions } from "../queries";
 
 export const useCreateStartTask = () => {
   const queryClient = useQueryClient();
@@ -9,7 +9,7 @@ export const useCreateStartTask = () => {
   return useMutation({
     mutationFn: createStartTask,
     onSuccess: () => {
-      queryClient.invalidateQueries(inProgressTaskOptions());
+      queryClient.invalidateQueries(inProgressTasksQueryOptions());
     },
   });
 };

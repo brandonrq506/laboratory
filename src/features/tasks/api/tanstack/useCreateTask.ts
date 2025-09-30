@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createTask } from "../axios/createTask";
-import { taskKeys } from "../queryKeys";
+import { taskKeys } from "../queries";
 
 export const useCreateTask = () => {
   const queryClient = useQueryClient();
