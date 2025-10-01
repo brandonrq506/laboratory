@@ -26,12 +26,9 @@ export const RoutineActivityList = () => {
   }
 
   return (
-    <div>
-      <h2 className="text-lg font-semibold">Routine:</h2>
-      <SortableRoutineActivityList
-        routineId={routineNumber}
-        activities={routine_activities}
-      />
-    </div>
+    <SortableRoutineActivityList
+      routineId={routineNumber}
+      activities={routine_activities}
+    />
   );
 };
