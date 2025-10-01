@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router";
 
 import { DeleteRoutineDialog } from "@/features/routines/components";
 
-const BACK_TO_ROUTINES = -2;
 const BACK_TO_EDIT_MODAL = -1;
 
 export const DeleteRoutinePage = () => {
@@ -18,7 +17,7 @@ export const DeleteRoutinePage = () => {
     <DeleteRoutineDialog
       isOpen={isOpen}
       onClose={() => navigate(BACK_TO_EDIT_MODAL)}
-      onDelete={() => navigate(BACK_TO_ROUTINES)}
+      onDelete={() => navigate("/routines")}
       routineId={routineNumber}
     />
   );
