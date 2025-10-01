@@ -1,8 +1,6 @@
-import { useApplyRoutine } from "@/features/routines/api/tanstack/useApplyRoutine";
 import { useCreateScheduledTask } from "@/features/tasks/api/tanstack/useCreateScheduledTask";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { useTimeout } from "@/hooks/useTimeout";
+import { useRoutineApplyFeedback } from "@/features/routines/hooks/useRoutineApplyFeedback";
 
 import { Badge, FloatingMenu, Loading } from "@/components/core";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
@@ -16,44 +14,16 @@ import { ADD } from "@/constants/actions";
 import { TASKS } from "@/constants/entities";
 import clsx from "clsx";
 
-type RoutineFeedbackStatus = "success" | "error";
-
-interface RoutineFeedbackState {
-  routineId: number;
-  status: RoutineFeedbackStatus;
-}
-
-const FEEDBACK_DURATION_MS = 2000;
-
 export const AddScheduledTaskMenu = () => {
   const { data: activities } = useQuery(activityListQueryOptions());
   const { data: routines } = useQuery(routineListQueryOptions());
 
   const { mutate: mutateTask } = useCreateScheduledTask();
-  const { mutate: applyRoutine } = useApplyRoutine();
-
-  const [pendingRoutineId, setPendingRoutineId] = useState<number | null>(null);
-  const [routineFeedback, setRoutineFeedback] =
-    useState<RoutineFeedbackState | null>(null);
-  const { start: scheduleFeedbackReset } = useTimeout(() =>
-    setRoutineFeedback(null),
-  );
+  const { applyRoutine, pendingRoutineId, routineFeedback } =
+    useRoutineApplyFeedback();
 
   const handleApplyRoutine = (routineId: number) => {
-    setPendingRoutineId(routineId);
-    applyRoutine(routineId, {
-      onSuccess: () => {
-        setPendingRoutineId(null);
-        setRoutineFeedback({ routineId, status: "success" });
-        scheduleFeedbackReset(FEEDBACK_DURATION_MS);
-      },
-      onError: () => {
-        setPendingRoutineId(null);
-        setRoutineFeedback({ routineId, status: "error" });
-        scheduleFeedbackReset(FEEDBACK_DURATION_MS);
-      },
-      onSettled: () => setPendingRoutineId(null),
-    });
+    applyRoutine(routineId);
   };
 
   const nonEmptyRoutines = routines?.filter((r) => r.activities.length > 0);
