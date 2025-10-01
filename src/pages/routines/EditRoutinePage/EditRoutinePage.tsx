@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
 import {
-  AddActivityRoutineCombobox,
+  AddActivityRoutineMenu,
   RoutineActivityList,
   RoutineNameForm,
 } from "@/features/routines/components";
+import { HeadingMedium, SectionHeaderWithAction } from "@/components/layout";
 import { EditRoutineActions } from "./EditRoutineActions";
-import { HeadingMedium } from "@/components/layout";
 import { Modal } from "@/components/core";
 
 export const EditRoutinePage = () => {
@@ -27,10 +27,11 @@ export const EditRoutinePage = () => {
       />
       <br />
       <RoutineNameForm />
-      <div className="my-2.5">
-        <AddActivityRoutineCombobox routineId={routineNumber} />
-      </div>
       <br />
+      <SectionHeaderWithAction
+        title="Activities"
+        action={<AddActivityRoutineMenu routineId={routineNumber} />}
+      />
       <RoutineActivityList />
       <br />
       <EditRoutineActions />

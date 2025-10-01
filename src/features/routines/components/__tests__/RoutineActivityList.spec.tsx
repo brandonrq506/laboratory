@@ -60,7 +60,6 @@ describe("RoutineActivityList", () => {
       expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
     });
 
-    expect(screen.getByText("Routine:")).toBeInTheDocument();
     expect(screen.getByText("PreWorkout")).toBeInTheDocument();
     expect(screen.getByText("Workout")).toBeInTheDocument();
   });
