@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { ActivityAPI } from "@/features/activities/types/activityAPI";
-
-import { activityKeys } from "@/features/activities/api/queries";
+import {
+  getActivityFromCache,
+  snapshotQueries,
+} from "@/utils/tanstack/helpers";
 import { buildTemporaryCompletedTask } from "../../utils/buildTemporaryCompletedTask";
 import { createTask } from "../axios/createTask";
 import { isBefore } from "date-fns";
-import { snapshotQueries } from "@/utils/tanstack/helpers";
 import { todayCompletedTasksQueryOptions } from "../queries";
 
 const completedTaskKeys = todayCompletedTasksQueryOptions().queryKey;
@@ -21,16 +21,8 @@ export const useCreateCompletedTodayTask = () => {
 
       const { rollback } = snapshotQueries(queryClient, [completedTaskKeys]);
 
-      const activities = queryClient.getQueryData<ActivityAPI[]>(
-        activityKeys.lists(),
-      );
-
-      const activity = activities?.find((a) => a.id === newTask.activity_id);
-
-      if (!activity) {
-        console.error("Activity should always be defined here.");
-        return;
-      }
+      const activity = getActivityFromCache(queryClient, newTask.activity_id);
+      if (!activity) return { rollback };
 
       const newCompletedTask = buildTemporaryCompletedTask(
         activity,
