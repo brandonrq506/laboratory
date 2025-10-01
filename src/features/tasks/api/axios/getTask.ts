@@ -7,8 +7,8 @@ export const getTask = async ({
   signal,
   queryKey,
 }: QueryFunctionContext<ReturnType<(typeof taskKeys)["detail"]>>) => {
-  const [{ endpoint, taskId }] = queryKey;
-  const URL = `${endpoint}/${taskId}`;
+  const [{ feature, taskId }] = queryKey;
+  const URL = `${feature}/${taskId}`;
 
   const response = await apiV1.get<TaskAPI>(URL, { signal });
   return response.data;

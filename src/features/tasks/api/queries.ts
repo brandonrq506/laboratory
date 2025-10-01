@@ -10,7 +10,7 @@ import { InProgressTaskAPI } from "../types/inProgressTask";
 import { ScheduledTaskAPI } from "../types/scheduledTask";
 
 export const taskKeys = {
-  all: [{ endpoint: TASKS_ENDPOINT }] as const,
+  all: [{ feature: TASKS_ENDPOINT }] as const,
   lists: () => [{ ...taskKeys.all[0], entity: "list" }] as const,
   list: ({ filter = {}, sort = {} }: TaskOptions) =>
     [{ ...taskKeys.lists()[0], filter, sort }] as const,

@@ -7,8 +7,8 @@ export const getActivity = async ({
   signal,
   queryKey,
 }: QueryFunctionContext<ReturnType<(typeof activityKeys)["detail"]>>) => {
-  const [{ endpoint, activityId }] = queryKey;
-  const URL = `${endpoint}/${activityId}`;
+  const [{ feature, activityId }] = queryKey;
+  const URL = `${feature}/${activityId}`;
 
   const response = await apiV1.get<ActivityAPI>(URL, { signal });
   return response.data;

@@ -5,7 +5,7 @@ import { getCategories } from "./axios/getCategories";
 import { getCategory } from "./axios/getCategory";
 
 export const categoryKeys = {
-  all: [{ endpoint: CATEGORIES_ENDPOINT }] as const,
+  all: [{ feature: CATEGORIES_ENDPOINT }] as const,
   lists: () => [{ ...categoryKeys.all[0], entity: "list" }] as const,
   details: () => [{ ...categoryKeys.all[0], entity: "details" }] as const,
   detail: (categoryId: string | number) =>
