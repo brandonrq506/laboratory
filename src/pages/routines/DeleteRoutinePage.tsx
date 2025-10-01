@@ -17,7 +17,7 @@ export const DeleteRoutinePage = () => {
     <DeleteRoutineDialog
       isOpen={isOpen}
       onClose={() => navigate(BACK_TO_EDIT_MODAL)}
-      onDelete={() => navigate("/routines")}
+      onDelete={() => navigate("/routines", { replace: true })}
       routineId={routineNumber}
     />
   );
