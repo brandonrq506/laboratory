@@ -5,7 +5,7 @@ import { getRoutine } from "./axios/getRoutine";
 import { getRoutines } from "./axios/getRoutines";
 
 export const routineKeys = {
-  all: [{ endpoint: ROUTINES_ENDPOINT }] as const,
+  all: [{ feature: ROUTINES_ENDPOINT }] as const,
   lists: () => [{ ...routineKeys.all[0], entity: "list" }] as const,
   details: () => [{ ...routineKeys.all[0], entity: "details" }] as const,
   detail: (routineId: string | number) =>

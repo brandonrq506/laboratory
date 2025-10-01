@@ -8,8 +8,8 @@ export const getRoutine = async ({
   signal,
   queryKey,
 }: QueryFunctionContext<ReturnType<(typeof routineKeys)["detail"]>>) => {
-  const [{ endpoint, routineId }] = queryKey;
-  const URL = `${endpoint}/${routineId}`;
+  const [{ feature, routineId }] = queryKey;
+  const URL = `${feature}/${routineId}`;
 
   const response = await apiV1.get<Routine>(URL, { signal });
   return response.data;

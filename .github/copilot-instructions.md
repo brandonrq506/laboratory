@@ -161,6 +161,10 @@ VITE_API_URL=http://127.0.0.1:3000  # API base URL
 - Follow the structure of the project when creating new files / folders.
 - Make smart choices that enhance and supports code readability and maintainability.
 - When creating types for something related to a library, consider extending / using the library own types.
+- Imports must be grouped in the following order, with a blank line between each group:
+  1. Hooks first.
+  2. Components second.
+  3. Helpers, utils, types, constants.
 
 ### Typescript
 

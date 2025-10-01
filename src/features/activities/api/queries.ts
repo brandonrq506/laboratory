@@ -5,7 +5,7 @@ import { getActivities } from "./axios/getActivities";
 import { getActivity } from "./axios/getActivity";
 
 export const activityKeys = {
-  all: [{ endpoint: ACTIVITIES_ENDPOINT }] as const,
+  all: [{ feature: ACTIVITIES_ENDPOINT }] as const,
   lists: () => [{ ...activityKeys.all[0], entity: "list" }] as const,
   details: () => [{ ...activityKeys.all[0], entity: "details" }] as const,
   detail: (activityId: string | number) =>

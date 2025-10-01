@@ -7,8 +7,8 @@ export async function getTasks<T = TaskAPI[]>({
   signal,
   queryKey,
 }: QueryFunctionContext<ReturnType<typeof taskKeys.list>>): Promise<T> {
-  const [{ endpoint, filter, sort }] = queryKey;
-  const response = await apiV1.get<T>(endpoint, {
+  const [{ feature, filter, sort }] = queryKey;
+  const response = await apiV1.get<T>(feature, {
     signal,
     params: {
       filter,

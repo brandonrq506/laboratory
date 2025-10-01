@@ -7,8 +7,8 @@ export const getCategories = async ({
   signal,
   queryKey,
 }: QueryFunctionContext<ReturnType<typeof categoryKeys.lists>>) => {
-  const [{ endpoint }] = queryKey;
+  const [{ feature }] = queryKey;
 
-  const response = await apiV1.get<Category[]>(endpoint, { signal });
+  const response = await apiV1.get<Category[]>(feature, { signal });
   return response.data;
 };
