@@ -45,7 +45,7 @@ export const AddActivityRoutineMenu = ({ routineId }: Props) => {
               e.preventDefault();
               mutate({ activityId: activity.id, routineId });
             }}>
-            {activity.display_name}{" "}
+            {activity.display_name}
             <CategoryBadge category={activity.category} />
           </button>
         </MenuItem>
