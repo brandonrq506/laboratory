@@ -2,8 +2,10 @@ import { useApplyRoutine } from "@/features/routines/api/tanstack/useApplyRoutin
 import { useCreateScheduledTask } from "@/features/tasks/api/tanstack/useCreateScheduledTask";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useTimeout } from "@/hooks/useTimeout";
 
 import { Badge, FloatingMenu, Loading } from "@/components/core";
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { MenuHeading, MenuItem, MenuSection } from "@headlessui/react";
 import { CategoryBadge } from "@/features/categories/components";
 import { PlusIcon } from "@heroicons/react/24/solid";
@@ -14,6 +16,15 @@ import { ADD } from "@/constants/actions";
 import { TASKS } from "@/constants/entities";
 import clsx from "clsx";
 
+type RoutineFeedbackStatus = "success" | "error";
+
+interface RoutineFeedbackState {
+  routineId: number;
+  status: RoutineFeedbackStatus;
+}
+
+const FEEDBACK_DURATION_MS = 2000;
+
 export const AddScheduledTaskMenu = () => {
   const { data: activities } = useQuery(activityListQueryOptions());
   const { data: routines } = useQuery(routineListQueryOptions());
@@ -22,10 +33,25 @@ export const AddScheduledTaskMenu = () => {
   const { mutate: applyRoutine } = useApplyRoutine();
 
   const [pendingRoutineId, setPendingRoutineId] = useState<number | null>(null);
+  const [routineFeedback, setRoutineFeedback] =
+    useState<RoutineFeedbackState | null>(null);
+  const { start: scheduleFeedbackReset } = useTimeout(() =>
+    setRoutineFeedback(null),
+  );
 
   const handleApplyRoutine = (routineId: number) => {
     setPendingRoutineId(routineId);
     applyRoutine(routineId, {
+      onSuccess: () => {
+        setPendingRoutineId(null);
+        setRoutineFeedback({ routineId, status: "success" });
+        scheduleFeedbackReset(FEEDBACK_DURATION_MS);
+      },
+      onError: () => {
+        setPendingRoutineId(null);
+        setRoutineFeedback({ routineId, status: "error" });
+        scheduleFeedbackReset(FEEDBACK_DURATION_MS);
+      },
       onSettled: () => setPendingRoutineId(null),
     });
   };
@@ -54,6 +80,20 @@ export const AddScheduledTaskMenu = () => {
                 <div className="flex items-center gap-2">
                   {routine.name}
                   {pendingRoutineId === routine.id && <Loading />}
+                  {routineFeedback?.routineId === routine.id &&
+                    (routineFeedback.status === "success" ? (
+                      <CheckCircleIcon
+                        className="size-5 text-green-500"
+                        aria-hidden
+                        data-testid="routine-feedback-success"
+                      />
+                    ) : (
+                      <XCircleIcon
+                        className="size-5 text-red-500"
+                        aria-hidden
+                        data-testid="routine-feedback-error"
+                      />
+                    ))}
                 </div>
                 <Badge color="white">Routine</Badge>
               </button>
