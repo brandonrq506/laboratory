@@ -92,14 +92,14 @@ src/
 ### General coding guidelines
 
 - Promote DRY code.
-- Do not use magic numbers or strings.
-- Promote Single Responsibility Principle is followed.
+- Promote Single Responsibility Principle design.
 - Promote the use of Single Source of Truth for data, types, constants.
+- Do not use magic numbers or strings.
 - Component files .tsx should only contain the component code.
 - Do not declare utils functions or types in .tsx files.
 - Specify utils in the `utils` directory next to your component / feature.
 - Common utils / types must be declared in the `utils` or `types` directory within `src/`.
-- Date / time functioality should rely / use the `date-fns` library.
+- Date / time functionality should rely / use the `date-fns` library when possible.
 - Never use interpolation in className. Use `clsx` library instead.
 - Use `useMemo` and `useCallback` to optimize performance when necessary.
 - Ask permission before using `useEffect` in a component.
