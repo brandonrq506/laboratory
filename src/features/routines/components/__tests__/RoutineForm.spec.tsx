@@ -4,6 +4,14 @@ import userEvent from "@testing-library/user-event";
 import { RoutineForm } from "../RoutineForm";
 
 describe("RoutineForm", () => {
+  it("focuses on the 'Name' input by default", () => {
+    render(
+      <RoutineForm onSubmit={vi.fn()} submitButtonText="Save" />,
+    );
+
+    expect(screen.getByLabelText(/name/i)).toHaveFocus();
+  });
+
   it("renders the form with initial values", () => {
     const initialValues = { name: "Morning Routine" };
     render(

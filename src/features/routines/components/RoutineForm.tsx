@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/core";
@@ -20,15 +21,17 @@ export const RoutineForm = ({
   onSubmit,
   submitButtonText,
 }: Props) => {
-  const { formState, handleSubmit, register } = useForm<RoutineFormType>({
-    values: { ...defaultRoutine, ...initialValues },
-  });
+  const { formState, handleSubmit, register, setFocus } =
+    useForm<RoutineFormType>({
+      values: { ...defaultRoutine, ...initialValues },
+    });
   const { errors, isSubmitting } = formState;
+
+  useEffect(() => setFocus("name"), [setFocus]);
 
   return (
     <form onSubmit={handleSubmit((data) => onSubmit(data))}>
       <TextInput
-        autoFocus
         showAsterisk
         label="Name"
         placeholder="Before Sleep"
