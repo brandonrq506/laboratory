@@ -17,12 +17,11 @@ export const DeleteRoutineDialog = ({
   onDelete = onClose,
   routineId,
 }: Props) => {
-  const { mutate, isPending } = useDeleteRoutine();
+  const { mutate } = useDeleteRoutine();
 
   const handleDelete = () => {
-    mutate(routineId, {
-      onSuccess: () => onDelete(),
-    });
+    mutate(routineId);
+    onDelete();
   };
 
   return (
@@ -36,7 +35,6 @@ export const DeleteRoutineDialog = ({
         <>
           <Button
             variant="danger"
-            isLoading={isPending}
             onClick={handleDelete}
             className="inline-flex w-full justify-center sm:ml-3 sm:w-auto">
             {CONFIRM}
