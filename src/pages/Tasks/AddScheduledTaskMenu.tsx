@@ -1,9 +1,9 @@
-import { useApplyRoutine } from "@/features/routines/api/tanstack/useApplyRoutine";
 import { useCreateScheduledTask } from "@/features/tasks/api/tanstack/useCreateScheduledTask";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useRoutineApplyFeedback } from "@/features/routines/hooks/useRoutineApplyFeedback";
 
 import { Badge, FloatingMenu, Loading } from "@/components/core";
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import { MenuHeading, MenuItem, MenuSection } from "@headlessui/react";
 import { CategoryBadge } from "@/features/categories/components";
 import { PlusIcon } from "@heroicons/react/24/solid";
@@ -19,15 +19,11 @@ export const AddScheduledTaskMenu = () => {
   const { data: routines } = useQuery(routineListQueryOptions());
 
   const { mutate: mutateTask } = useCreateScheduledTask();
-  const { mutate: applyRoutine } = useApplyRoutine();
-
-  const [pendingRoutineId, setPendingRoutineId] = useState<number | null>(null);
+  const { applyRoutine, pendingRoutineId, routineFeedback } =
+    useRoutineApplyFeedback();
 
   const handleApplyRoutine = (routineId: number) => {
-    setPendingRoutineId(routineId);
-    applyRoutine(routineId, {
-      onSettled: () => setPendingRoutineId(null),
-    });
+    applyRoutine(routineId);
   };
 
   const nonEmptyRoutines = routines?.filter((r) => r.activities.length > 0);
@@ -54,6 +50,20 @@ export const AddScheduledTaskMenu = () => {
                 <div className="flex items-center gap-2">
                   {routine.name}
                   {pendingRoutineId === routine.id && <Loading />}
+                  {routineFeedback?.routineId === routine.id &&
+                    (routineFeedback.status === "success" ? (
+                      <CheckCircleIcon
+                        className="size-5 text-green-500"
+                        aria-hidden
+                        data-testid="routine-feedback-success"
+                      />
+                    ) : (
+                      <XCircleIcon
+                        className="size-5 text-red-500"
+                        aria-hidden
+                        data-testid="routine-feedback-error"
+                      />
+                    ))}
                 </div>
                 <Badge color="white">Routine</Badge>
               </button>
