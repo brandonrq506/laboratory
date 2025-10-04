@@ -9,9 +9,11 @@ import pluginReactHooks from "eslint-plugin-react-hooks";
 import reactCompiler from "eslint-plugin-react-compiler";
 import reactRefresh from "eslint-plugin-react-refresh";
 import jestDom from 'eslint-plugin-jest-dom';
+import pluginRouter from '@tanstack/eslint-plugin-router'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
+  ...pluginRouter.configs['flat/recommended'],
   ...pluginQuery.configs["flat/recommended"],
   reactRefresh.configs.recommended,
   {
@@ -126,4 +128,10 @@ export default [
       "no-magic-numbers": "off",
     },
   },
+  {
+    files: ["src/routes/**/*.tsx"],
+    rules: {
+      "no-use-before-define": "off",
+    }
+  }
 ];
