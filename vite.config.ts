@@ -8,7 +8,11 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [
-    tanstackRouter({ autoCodeSplitting: true }),
+    tanstackRouter({
+      autoCodeSplitting: true,
+      quoteStyle: "double",
+      semicolons: true,
+    }),
     react(),
     tsconfigPaths(),
     tailwindcss(),
