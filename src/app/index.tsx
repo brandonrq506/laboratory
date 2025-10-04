@@ -1,21 +1,4 @@
 import {
-  AsyncFormState,
-  ControllerOne,
-  ControllerTwo,
-  DynamicPassword,
-  FormState,
-  FormsPage,
-  GetFieldState,
-  LastName,
-  ProviderForm,
-  ResetPartial,
-  ResetSubmit,
-  SetError,
-  Trigger,
-  Unregister,
-} from "@/pages/forms";
-
-import {
   AccountSettingsPage,
   CategorySettingsPage,
   NotificationSettingsPage,
@@ -46,7 +29,6 @@ import {
 import { MainErrorPage, MainLayout } from "@/components/layout";
 import { Navigate, createBrowserRouter } from "react-router";
 import { AppProvider } from "./provider";
-import { AsyncValidation } from "@/experiments/forms";
 import { ExcelPage } from "@/pages/Excel";
 import { LoginPage } from "@/pages/auth";
 import { NotFoundPage } from "@/pages/NotFoundPage";
@@ -116,21 +98,6 @@ const router = createBrowserRouter([
       },
       { path: "projects", element: <Projects /> },
       { path: "modal-testing", element: <TestingModal /> },
-      { path: "form-projects", element: <FormsPage /> },
-      { path: "form-projects/shouldunregister-1", element: <LastName /> },
-      { path: "form-projects/deps-1", element: <DynamicPassword /> },
-      { path: "form-projects/unregister", element: <Unregister /> },
-      { path: "form-projects/formstate", element: <FormState /> },
-      { path: "form-projects/formstate-async", element: <AsyncFormState /> },
-      { path: "form-projects/reset-partial", element: <ResetPartial /> },
-      { path: "form-projects/reset-submit", element: <ResetSubmit /> },
-      { path: "form-projects/set-error", element: <SetError /> },
-      { path: "form-projects/get-field-state", element: <GetFieldState /> },
-      { path: "form-projects/trigger", element: <Trigger /> },
-      { path: "form-projects/controller-one", element: <ControllerOne /> },
-      { path: "form-projects/controller-two", element: <ControllerTwo /> },
-      { path: "form-projects/context-provider", element: <ProviderForm /> },
-      { path: "form-projects/async-validation", element: <AsyncValidation /> },
       { path: "*", element: <NotFoundPage /> },
     ],
   },

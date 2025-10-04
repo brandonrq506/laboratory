@@ -8,7 +8,6 @@ import {
 } from "@headlessui/react";
 
 import { DesktopSidebarToggle } from "@/features/userPreferences/components";
-import { Experiments } from "./Experiments";
 import { Items } from "./Items";
 import { LinkedInProfile } from "@/components/core";
 import { LogoutButton } from "@/features/auth/components";
@@ -68,7 +67,6 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
               <nav className="flex flex-1 flex-col">
                 <ul role="list" className="flex flex-1 flex-col gap-y-7">
                   <Items onClose={onClose} isMobile={true} />
-                  <Experiments onClose={onClose} isMobile={true} />
                   <li className="mt-auto mb-4 flex items-center justify-between">
                     <div className="flex gap-2">
                       <LinkedInProfile />
@@ -105,7 +103,6 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <Items onClose={onClose} isMobile={false} />
-              <Experiments onClose={onClose} isMobile={false} />
               <li
                 className={clsx(
                   "mt-auto mb-4 flex items-center",
