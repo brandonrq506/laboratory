@@ -77,7 +77,6 @@ src/
 │   ├── store/             # Test data by feature
 │   └── test-utils.ts      # Custom RTL render
 ├── utils/                 # Utility functions
-└── experiments/           # Learning/experimental code (excluded from coverage)
 ```
 
 ## Code style guidelines
