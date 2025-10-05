@@ -3,7 +3,7 @@ import { AdminProtectedContent } from "@/features/user/components";
 import { DateFilter } from "@/components/core/Date";
 import { ExcelLink } from "./ExcelLink";
 import { FilterableTaskList } from "./FilterableTaskList";
-import { Outlet } from "react-router";
+import { Outlet } from "@tanstack/react-router";
 import { PageHeaderWithActions } from "@/components/layout";
 
 export const HistoryPage = () => {

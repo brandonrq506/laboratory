@@ -1,7 +1,17 @@
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { MainLayout } from "@/components/layout";
-import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/__protected")({
+  beforeLoad: ({ context, location }) => {
+    if (!context.auth.isAuth) {
+      throw redirect({
+        to: "/login",
+        search: {
+          redirect: location.href,
+        },
+      });
+    }
+  },
   component: RouteComponent,
 });
 

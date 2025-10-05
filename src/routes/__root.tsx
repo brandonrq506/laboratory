@@ -1,5 +1,6 @@
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 
+import { Fragment } from "react/jsx-runtime";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { TanStackQueryDevtools } from "@/libs/tanstack-query/dev-tools";
 import { TanStackRouterDevtools } from "@/libs/tanstack-router/dev-tools";
@@ -14,11 +15,12 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
-    <>
+    <Fragment>
       <Outlet />
       <TanStackDevtools
         plugins={[TanStackRouterDevtools, TanStackQueryDevtools]}
       />
-    </>
+    </Fragment>
   ),
+  errorComponent: ({ error }) => <div>Route Error: {error.message}</div>,
 });

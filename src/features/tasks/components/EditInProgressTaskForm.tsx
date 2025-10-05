@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useUpdateTask } from "../api/tanstack/useUpdateTask";
 
 import { DirtyFields } from "@/types/core";

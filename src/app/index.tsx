@@ -41,27 +41,27 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <MainErrorPage />,
+    // errorElement: <MainErrorPage />,
     children: [
       { index: true, element: <Navigate to="/timer" /> },
-      {
+      /*       {
         path: "activities",
         element: <ActivitiesPage />,
         children: [
           { path: "new", element: <NewActivityPage /> },
           { path: "edit/:activityId", element: <EditActivityPage /> },
         ],
-      },
-      { path: "excel", element: <ExcelPage /> },
-      {
+      }, */
+      // { path: "excel", element: <ExcelPage /> },
+      /*       {
         path: "history",
         element: <HistoryPage />,
         children: [
           { path: "edit/:taskId", element: <EditTaskPage /> },
           { path: "new", element: <NewTaskPage /> },
         ],
-      },
-      {
+      }, */
+      /*       {
         path: "routines",
         element: <RoutinesPage />,
         children: [
@@ -69,8 +69,8 @@ const router = createBrowserRouter([
           { path: "edit/:routineId", element: <EditRoutinePage /> },
           { path: "delete/:routineId", element: <DeleteRoutinePage /> },
         ],
-      },
-      {
+      }, */
+      /*       {
         path: "settings",
         element: <SettingsPage />,
         children: [
@@ -87,15 +87,15 @@ const router = createBrowserRouter([
           },
           { path: "notifications", element: <NotificationSettingsPage /> },
         ],
-      },
-      {
+      }, */
+      /*       {
         path: "timer",
         element: <TimerPage />,
         children: [
           { path: "edit/:taskId", element: <EditTaskPage /> },
           { path: "new", element: <NewTodayCompletedTaskPage /> },
         ],
-      },
+      } */
       { path: "projects", element: <Projects /> },
       { path: "modal-testing", element: <TestingModal /> },
       { path: "*", element: <NotFoundPage /> },
@@ -106,11 +106,3 @@ const router = createBrowserRouter([
     element: <LoginPage />,
   },
 ]);
-
-export const App = () => {
-  return (
-    <AppProvider>
-      <RouterProvider router={router} />
-    </AppProvider>
-  );
-};

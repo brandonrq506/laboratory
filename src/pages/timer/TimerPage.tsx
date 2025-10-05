@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Outlet } from "@tanstack/react-router";
 import { ScheduledTaskList } from "../Tasks/ScheduledTaskList";
 import { TimerPanel } from "@/features/timer/components";
 import { TodayCompletedTaskList } from "../Tasks/TodayCompletedTaskList";

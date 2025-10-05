@@ -5,6 +5,7 @@ import { transformToOption } from "@/utils";
 
 type fnType = (categories: Category[] | undefined) => Option | null;
 
+// Todo: This no longer needs to accept null or undefined.
 export const getFirstCategoryAsOption: fnType = (categories) => {
   if (categories === undefined) return null;
 

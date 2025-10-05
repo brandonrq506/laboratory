@@ -1,4 +1,4 @@
-import { Link, LinkProps } from "react-router";
+import { Link, LinkProps } from "@tanstack/react-router";
 import clsx from "clsx";
 
 const sizes = {
@@ -27,7 +27,12 @@ type StyleProps = {
   size?: keyof typeof sizes;
 } & IconProps;
 
-type Props = StyleProps & LinkProps;
+type OtherProps = {
+  children: React.ReactNode;
+  className?: string;
+};
+
+type Props = StyleProps & LinkProps & OtherProps;
 
 export const LinkButton = ({
   size = "md",

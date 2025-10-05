@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useUpdateActivity } from "../api/tanstack/useUpdateActivity";
 
 import { ActivityForm } from "./ActivityForm";
@@ -35,7 +35,7 @@ export const EditActivityForm = ({ activityId, initialValues }: Props) => {
       },
     });
 
-    navigate("..");
+    navigate({ to: "/activities" });
   };
 
   return (

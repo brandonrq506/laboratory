@@ -1,56 +1,77 @@
-import { useLayoutEffect, useState } from "react";
+import { PropsWithChildren, useCallback, useState } from "react";
 
 import { AuthContext } from "./AuthContext";
 import { AuthContextType } from "./AuthContextType";
+import { AxiosHeaders } from "axios";
 import { apiV1 } from "@/libs/axios";
 
-const LS_TOKEN = localStorage.getItem("token");
+const KEY = "token";
 
-type Props = {
-  children: React.ReactNode;
+const getStoredToken = () => localStorage.getItem(KEY);
+
+const setStoredToken = (token: string | null) => {
+  if (token) localStorage.setItem(KEY, token);
+  else localStorage.removeItem(KEY);
 };
 
-export const AuthProvider = ({ children }: Props) => {
-  const [isAuth, setIsAuth] = useState(Boolean(LS_TOKEN));
+const logoutRef: { current: () => void } = {
+  current: () => {},
+};
 
-  const login = (token: string) => {
-    localStorage.setItem("token", token);
-    setIsAuth(true);
-  };
+let interceptorsRegistered = false;
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    setIsAuth(false);
-  };
+const ensureAuthInterceptors = () => {
+  if (interceptorsRegistered) return;
 
-  useLayoutEffect(() => {
-    const requestInterceptor = apiV1.interceptors.request.use((config) => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
+  apiV1.interceptors.request.use((config) => {
+    const token = getStoredToken();
+    if (!token) return config;
+
+    if (!config.headers) {
+      config.headers = new AxiosHeaders();
+    }
+
+    if (config.headers instanceof AxiosHeaders) {
+      config.headers.set("Authorization", `Bearer ${token}`);
       return config;
-    });
+    }
 
-    const responseInterceptor = apiV1.interceptors.response.use(
-      (response) => response,
-      (error) => {
-        const UNAUTHORIZED = 401;
-        if (error.response.status === UNAUTHORIZED) {
-          logout();
-        }
-        return Promise.reject(error);
-      },
-    );
+    (config.headers as Record<string, string>).Authorization =
+      `Bearer ${token}`;
+    return config;
+  });
 
-    return () => {
-      apiV1.interceptors.request.eject(requestInterceptor);
-      apiV1.interceptors.response.eject(responseInterceptor);
-    };
+  apiV1.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      const UNAUTHORIZED = 401;
+      if (error.response?.status === UNAUTHORIZED) {
+        logoutRef.current();
+      }
+      return Promise.reject(error);
+    },
+  );
+
+  interceptorsRegistered = true;
+};
+
+ensureAuthInterceptors();
+
+export const AuthProvider = ({ children }: PropsWithChildren) => {
+  const [token, setToken] = useState(getStoredToken());
+
+  const login = useCallback((token: string) => {
+    setStoredToken(token);
+    setToken(token);
+  }, []);
+
+  const logout = useCallback(() => {
+    setStoredToken(null);
+    setToken(null);
   }, []);
 
   const initialAuthState: AuthContextType = {
-    isAuth,
+    isAuth: Boolean(token),
     login,
     logout,
   };
