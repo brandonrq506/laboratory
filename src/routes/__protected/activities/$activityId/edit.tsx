@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigateBack } from "@/hooks";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { EditActivityForm } from "@/features/activities/components";
@@ -14,9 +15,9 @@ export const Route = createFileRoute(
 });
 
 function RouteComponent() {
-  const navigate = Route.useNavigate();
   const { activityId } = Route.useParams();
   const [isOpen, setIsOpen] = useState(false);
+  const navigateBack = useNavigateBack({ fallback: "/activities" });
   const { data } = useSuspenseQuery(activityByIdQueryOptions(activityId));
 
   useEffect(() => setIsOpen(true), []);
@@ -25,7 +26,7 @@ function RouteComponent() {
   const expected_time = convertSecondsToHHandMM(data.exp_seconds!);
 
   return (
-    <Modal isOpen={isOpen} onClose={() => navigate({ to: "/activities" })}>
+    <Modal isOpen={isOpen} onClose={() => navigateBack()}>
       <EditActivityForm
         activityId={parseInt(activityId)}
         initialValues={{

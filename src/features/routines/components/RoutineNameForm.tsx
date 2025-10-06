@@ -1,41 +1,30 @@
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router";
-import { useQuery } from "@tanstack/react-query";
-
-import { routineByIdQueryOptions } from "../api/queries";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { useUpdateRoutine } from "../api/tanstack/useUpdateRoutine";
+
+import { getRouteApi } from "@tanstack/react-router";
+import { routineByIdQueryOptions } from "../api/queries";
 
 import { Button } from "@/components/core";
 import { EditNameForm } from "../types/editNameForm";
 import { TextInput } from "@/components/form";
 import { UPDATE } from "@/constants/actions";
 
-const defaultValues: EditNameForm = {
-  name: "",
-};
+const routeApi = getRouteApi("/__protected/routines/$routineId/edit");
 
-interface Props {
-  routineId?: number;
-}
-
-export const RoutineNameForm = ({ routineId }: Props) => {
-  const { routineId: routineIdFromParams } = useParams();
-  const routineIdToUse = routineId || Number(routineIdFromParams);
-
-  const { data, isPending: isDataPending } = useQuery(
-    routineByIdQueryOptions(routineIdToUse),
-  );
-  const nameToUse = data?.name ?? defaultValues.name;
+export const RoutineNameForm = () => {
+  const { routineId } = routeApi.useParams();
+  const { data } = useSuspenseQuery(routineByIdQueryOptions(routineId));
+  const { mutateAsync, isPending } = useUpdateRoutine();
 
   const { formState, handleSubmit, register } = useForm<EditNameForm>({
-    values: { name: nameToUse },
+    values: { name: data.name },
   });
   const { errors, isSubmitting } = formState;
-  const { mutateAsync, isPending } = useUpdateRoutine();
 
   const onSubmit = async (values: EditNameForm) => {
     await mutateAsync({
-      routineId: routineIdToUse,
+      routineId,
       routine: values,
     });
   };
@@ -56,7 +45,7 @@ export const RoutineNameForm = ({ routineId }: Props) => {
       />
 
       <Button type="submit" disabled={isSubmitting} isLoading={isPending}>
-        {isDataPending ? "Loading..." : UPDATE}
+        {UPDATE}
       </Button>
     </form>
   );
