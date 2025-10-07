@@ -3,6 +3,7 @@ import { useNavigateBack } from "@/hooks";
 
 import { DeleteRoutineDialog } from "@/features/routines/components";
 import { createFileRoute } from "@tanstack/react-router";
+import { ensureValidId } from "@/utils";
 
 export const Route = createFileRoute("/__protected/routines/$routineId/delete")(
   {
@@ -17,12 +18,15 @@ function RouteComponent() {
   const { routineId } = Route.useParams();
 
   useEffect(() => setIsOpen(true), []);
+
+  const routineNumber = ensureValidId(routineId);
+
   return (
     <DeleteRoutineDialog
       isOpen={isOpen}
       onClose={navigateBack}
       onDelete={() => navigate({ to: "/routines", replace: true })}
-      routineId={Number(routineId)}
+      routineId={routineNumber}
     />
   );
 }

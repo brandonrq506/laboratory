@@ -21,7 +21,7 @@ export const CreateCategoryForm = ({ initialValues }: Props) => {
     const color = isColor(possiblyColor.label) ? possiblyColor.label : "white";
 
     await mutateAsync({ name, color });
-    navigate({ to: ".." });
+    navigate({ to: "/settings/categories" });
   };
 
   return (

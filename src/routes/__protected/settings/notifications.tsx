@@ -1,3 +1,4 @@
+import { HeadingLarge, SectionUnderConstruction } from "@/components/layout";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/__protected/settings/notifications")({
@@ -5,5 +6,11 @@ export const Route = createFileRoute("/__protected/settings/notifications")({
 });
 
 function RouteComponent() {
-  return <div>Hello "/__protected/settings/notifications"!</div>;
+  return (
+    <div>
+      <HeadingLarge title="Notification Settings" />
+      <br />
+      <SectionUnderConstruction />
+    </div>
+  );
 }

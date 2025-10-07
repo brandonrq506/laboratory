@@ -31,7 +31,6 @@ import { Route as _protectedSettingsCategoriesRouteRouteImport } from "./routes/
 import { Route as _protectedRoutinesRoutineIdRouteRouteImport } from "./routes/__protected/routines/$routineId/route";
 import { Route as _protectedHistoryTaskIdRouteRouteImport } from "./routes/__protected/history/$taskId/route";
 import { Route as _protectedActivitiesActivityIdRouteRouteImport } from "./routes/__protected/activities/$activityId/route";
-import { Route as _protectedSettingsCategoriesIndexRouteImport } from "./routes/__protected/settings/categories/index";
 import { Route as _protectedHistoryTaskIdIndexRouteImport } from "./routes/__protected/history/$taskId/index";
 import { Route as _protectedActivitiesActivityIdIndexRouteImport } from "./routes/__protected/activities/$activityId/index";
 import { Route as _protectedTimerTaskIdEditRouteImport } from "./routes/__protected/timer/$taskId/edit";
@@ -40,6 +39,7 @@ import { Route as _protectedRoutinesRoutineIdEditRouteImport } from "./routes/__
 import { Route as _protectedRoutinesRoutineIdDeleteRouteImport } from "./routes/__protected/routines/$routineId/delete";
 import { Route as _protectedActivitiesActivityIdEditRouteImport } from "./routes/__protected/activities/$activityId/edit";
 import { Route as _protectedActivitiesActivityIdDeleteRouteImport } from "./routes/__protected/activities/$activityId/delete";
+import { Route as _protectedSettingsCategoriesCategoryIdRouteRouteImport } from "./routes/__protected/settings/categories/$categoryId/route";
 import { Route as _protectedSettingsCategoriesCategoryIdEditRouteImport } from "./routes/__protected/settings/categories/$categoryId/edit";
 import { Route as _protectedSettingsCategoriesCategoryIdDeleteRouteImport } from "./routes/__protected/settings/categories/$categoryId/delete";
 
@@ -160,12 +160,6 @@ const _protectedActivitiesActivityIdRouteRoute =
     path: "/$activityId",
     getParentRoute: () => _protectedActivitiesRouteRoute,
   } as any);
-const _protectedSettingsCategoriesIndexRoute =
-  _protectedSettingsCategoriesIndexRouteImport.update({
-    id: "/",
-    path: "/",
-    getParentRoute: () => _protectedSettingsCategoriesRouteRoute,
-  } as any);
 const _protectedHistoryTaskIdIndexRoute =
   _protectedHistoryTaskIdIndexRouteImport.update({
     id: "/",
@@ -214,17 +208,23 @@ const _protectedActivitiesActivityIdDeleteRoute =
     path: "/delete",
     getParentRoute: () => _protectedActivitiesActivityIdRouteRoute,
   } as any);
+const _protectedSettingsCategoriesCategoryIdRouteRoute =
+  _protectedSettingsCategoriesCategoryIdRouteRouteImport.update({
+    id: "/$categoryId",
+    path: "/$categoryId",
+    getParentRoute: () => _protectedSettingsCategoriesRouteRoute,
+  } as any);
 const _protectedSettingsCategoriesCategoryIdEditRoute =
   _protectedSettingsCategoriesCategoryIdEditRouteImport.update({
-    id: "/$categoryId/edit",
-    path: "/$categoryId/edit",
-    getParentRoute: () => _protectedSettingsCategoriesRouteRoute,
+    id: "/edit",
+    path: "/edit",
+    getParentRoute: () => _protectedSettingsCategoriesCategoryIdRouteRoute,
   } as any);
 const _protectedSettingsCategoriesCategoryIdDeleteRoute =
   _protectedSettingsCategoriesCategoryIdDeleteRouteImport.update({
-    id: "/$categoryId/delete",
-    path: "/$categoryId/delete",
-    getParentRoute: () => _protectedSettingsCategoriesRouteRoute,
+    id: "/delete",
+    path: "/delete",
+    getParentRoute: () => _protectedSettingsCategoriesCategoryIdRouteRoute,
   } as any);
 
 export interface FileRoutesByFullPath {
@@ -249,6 +249,7 @@ export interface FileRoutesByFullPath {
   "/excel": typeof _protectedExcelIndexRoute;
   "/settings/": typeof _protectedSettingsIndexRoute;
   "/timer/": typeof _protectedTimerIndexRoute;
+  "/settings/categories/$categoryId": typeof _protectedSettingsCategoriesCategoryIdRouteRouteWithChildren;
   "/activities/$activityId/delete": typeof _protectedActivitiesActivityIdDeleteRoute;
   "/activities/$activityId/edit": typeof _protectedActivitiesActivityIdEditRoute;
   "/routines/$routineId/delete": typeof _protectedRoutinesRoutineIdDeleteRoute;
@@ -257,7 +258,6 @@ export interface FileRoutesByFullPath {
   "/timer/$taskId/edit": typeof _protectedTimerTaskIdEditRoute;
   "/activities/$activityId/": typeof _protectedActivitiesActivityIdIndexRoute;
   "/history/$taskId/": typeof _protectedHistoryTaskIdIndexRoute;
-  "/settings/categories/": typeof _protectedSettingsCategoriesIndexRoute;
   "/settings/categories/$categoryId/delete": typeof _protectedSettingsCategoriesCategoryIdDeleteRoute;
   "/settings/categories/$categoryId/edit": typeof _protectedSettingsCategoriesCategoryIdEditRoute;
 }
@@ -268,6 +268,7 @@ export interface FileRoutesByTo {
   "/routines": typeof _protectedRoutinesRouteRouteWithChildren;
   "/": typeof _protectedIndexRoute;
   "/routines/$routineId": typeof _protectedRoutinesRoutineIdRouteRouteWithChildren;
+  "/settings/categories": typeof _protectedSettingsCategoriesRouteRouteWithChildren;
   "/timer/$taskId": typeof _protectedTimerTaskIdRouteRouteWithChildren;
   "/activities/new": typeof _protectedActivitiesNewRoute;
   "/history/new": typeof _protectedHistoryNewRoute;
@@ -278,6 +279,7 @@ export interface FileRoutesByTo {
   "/excel": typeof _protectedExcelIndexRoute;
   "/settings": typeof _protectedSettingsIndexRoute;
   "/timer": typeof _protectedTimerIndexRoute;
+  "/settings/categories/$categoryId": typeof _protectedSettingsCategoriesCategoryIdRouteRouteWithChildren;
   "/activities/$activityId/delete": typeof _protectedActivitiesActivityIdDeleteRoute;
   "/activities/$activityId/edit": typeof _protectedActivitiesActivityIdEditRoute;
   "/routines/$routineId/delete": typeof _protectedRoutinesRoutineIdDeleteRoute;
@@ -286,7 +288,6 @@ export interface FileRoutesByTo {
   "/timer/$taskId/edit": typeof _protectedTimerTaskIdEditRoute;
   "/activities/$activityId": typeof _protectedActivitiesActivityIdIndexRoute;
   "/history/$taskId": typeof _protectedHistoryTaskIdIndexRoute;
-  "/settings/categories": typeof _protectedSettingsCategoriesIndexRoute;
   "/settings/categories/$categoryId/delete": typeof _protectedSettingsCategoriesCategoryIdDeleteRoute;
   "/settings/categories/$categoryId/edit": typeof _protectedSettingsCategoriesCategoryIdEditRoute;
 }
@@ -314,6 +315,7 @@ export interface FileRoutesById {
   "/__protected/excel/": typeof _protectedExcelIndexRoute;
   "/__protected/settings/": typeof _protectedSettingsIndexRoute;
   "/__protected/timer/": typeof _protectedTimerIndexRoute;
+  "/__protected/settings/categories/$categoryId": typeof _protectedSettingsCategoriesCategoryIdRouteRouteWithChildren;
   "/__protected/activities/$activityId/delete": typeof _protectedActivitiesActivityIdDeleteRoute;
   "/__protected/activities/$activityId/edit": typeof _protectedActivitiesActivityIdEditRoute;
   "/__protected/routines/$routineId/delete": typeof _protectedRoutinesRoutineIdDeleteRoute;
@@ -322,7 +324,6 @@ export interface FileRoutesById {
   "/__protected/timer/$taskId/edit": typeof _protectedTimerTaskIdEditRoute;
   "/__protected/activities/$activityId/": typeof _protectedActivitiesActivityIdIndexRoute;
   "/__protected/history/$taskId/": typeof _protectedHistoryTaskIdIndexRoute;
-  "/__protected/settings/categories/": typeof _protectedSettingsCategoriesIndexRoute;
   "/__protected/settings/categories/$categoryId/delete": typeof _protectedSettingsCategoriesCategoryIdDeleteRoute;
   "/__protected/settings/categories/$categoryId/edit": typeof _protectedSettingsCategoriesCategoryIdEditRoute;
 }
@@ -350,6 +351,7 @@ export interface FileRouteTypes {
     | "/excel"
     | "/settings/"
     | "/timer/"
+    | "/settings/categories/$categoryId"
     | "/activities/$activityId/delete"
     | "/activities/$activityId/edit"
     | "/routines/$routineId/delete"
@@ -358,7 +360,6 @@ export interface FileRouteTypes {
     | "/timer/$taskId/edit"
     | "/activities/$activityId/"
     | "/history/$taskId/"
-    | "/settings/categories/"
     | "/settings/categories/$categoryId/delete"
     | "/settings/categories/$categoryId/edit";
   fileRoutesByTo: FileRoutesByTo;
@@ -369,6 +370,7 @@ export interface FileRouteTypes {
     | "/routines"
     | "/"
     | "/routines/$routineId"
+    | "/settings/categories"
     | "/timer/$taskId"
     | "/activities/new"
     | "/history/new"
@@ -379,6 +381,7 @@ export interface FileRouteTypes {
     | "/excel"
     | "/settings"
     | "/timer"
+    | "/settings/categories/$categoryId"
     | "/activities/$activityId/delete"
     | "/activities/$activityId/edit"
     | "/routines/$routineId/delete"
@@ -387,7 +390,6 @@ export interface FileRouteTypes {
     | "/timer/$taskId/edit"
     | "/activities/$activityId"
     | "/history/$taskId"
-    | "/settings/categories"
     | "/settings/categories/$categoryId/delete"
     | "/settings/categories/$categoryId/edit";
   id:
@@ -414,6 +416,7 @@ export interface FileRouteTypes {
     | "/__protected/excel/"
     | "/__protected/settings/"
     | "/__protected/timer/"
+    | "/__protected/settings/categories/$categoryId"
     | "/__protected/activities/$activityId/delete"
     | "/__protected/activities/$activityId/edit"
     | "/__protected/routines/$routineId/delete"
@@ -422,7 +425,6 @@ export interface FileRouteTypes {
     | "/__protected/timer/$taskId/edit"
     | "/__protected/activities/$activityId/"
     | "/__protected/history/$taskId/"
-    | "/__protected/settings/categories/"
     | "/__protected/settings/categories/$categoryId/delete"
     | "/__protected/settings/categories/$categoryId/edit";
   fileRoutesById: FileRoutesById;
@@ -588,13 +590,6 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof _protectedActivitiesActivityIdRouteRouteImport;
       parentRoute: typeof _protectedActivitiesRouteRoute;
     };
-    "/__protected/settings/categories/": {
-      id: "/__protected/settings/categories/";
-      path: "/";
-      fullPath: "/settings/categories/";
-      preLoaderRoute: typeof _protectedSettingsCategoriesIndexRouteImport;
-      parentRoute: typeof _protectedSettingsCategoriesRouteRoute;
-    };
     "/__protected/history/$taskId/": {
       id: "/__protected/history/$taskId/";
       path: "/";
@@ -651,19 +646,26 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof _protectedActivitiesActivityIdDeleteRouteImport;
       parentRoute: typeof _protectedActivitiesActivityIdRouteRoute;
     };
+    "/__protected/settings/categories/$categoryId": {
+      id: "/__protected/settings/categories/$categoryId";
+      path: "/$categoryId";
+      fullPath: "/settings/categories/$categoryId";
+      preLoaderRoute: typeof _protectedSettingsCategoriesCategoryIdRouteRouteImport;
+      parentRoute: typeof _protectedSettingsCategoriesRouteRoute;
+    };
     "/__protected/settings/categories/$categoryId/edit": {
       id: "/__protected/settings/categories/$categoryId/edit";
-      path: "/$categoryId/edit";
+      path: "/edit";
       fullPath: "/settings/categories/$categoryId/edit";
       preLoaderRoute: typeof _protectedSettingsCategoriesCategoryIdEditRouteImport;
-      parentRoute: typeof _protectedSettingsCategoriesRouteRoute;
+      parentRoute: typeof _protectedSettingsCategoriesCategoryIdRouteRoute;
     };
     "/__protected/settings/categories/$categoryId/delete": {
       id: "/__protected/settings/categories/$categoryId/delete";
-      path: "/$categoryId/delete";
+      path: "/delete";
       fullPath: "/settings/categories/$categoryId/delete";
       preLoaderRoute: typeof _protectedSettingsCategoriesCategoryIdDeleteRouteImport;
-      parentRoute: typeof _protectedSettingsCategoriesRouteRoute;
+      parentRoute: typeof _protectedSettingsCategoriesCategoryIdRouteRoute;
     };
   }
 }
@@ -771,22 +773,34 @@ const _protectedRoutinesRouteRouteWithChildren =
     _protectedRoutinesRouteRouteChildren,
   );
 
-interface _protectedSettingsCategoriesRouteRouteChildren {
-  _protectedSettingsCategoriesNewRoute: typeof _protectedSettingsCategoriesNewRoute;
-  _protectedSettingsCategoriesIndexRoute: typeof _protectedSettingsCategoriesIndexRoute;
+interface _protectedSettingsCategoriesCategoryIdRouteRouteChildren {
   _protectedSettingsCategoriesCategoryIdDeleteRoute: typeof _protectedSettingsCategoriesCategoryIdDeleteRoute;
   _protectedSettingsCategoriesCategoryIdEditRoute: typeof _protectedSettingsCategoriesCategoryIdEditRoute;
 }
 
-const _protectedSettingsCategoriesRouteRouteChildren: _protectedSettingsCategoriesRouteRouteChildren =
+const _protectedSettingsCategoriesCategoryIdRouteRouteChildren: _protectedSettingsCategoriesCategoryIdRouteRouteChildren =
   {
-    _protectedSettingsCategoriesNewRoute: _protectedSettingsCategoriesNewRoute,
-    _protectedSettingsCategoriesIndexRoute:
-      _protectedSettingsCategoriesIndexRoute,
     _protectedSettingsCategoriesCategoryIdDeleteRoute:
       _protectedSettingsCategoriesCategoryIdDeleteRoute,
     _protectedSettingsCategoriesCategoryIdEditRoute:
       _protectedSettingsCategoriesCategoryIdEditRoute,
+  };
+
+const _protectedSettingsCategoriesCategoryIdRouteRouteWithChildren =
+  _protectedSettingsCategoriesCategoryIdRouteRoute._addFileChildren(
+    _protectedSettingsCategoriesCategoryIdRouteRouteChildren,
+  );
+
+interface _protectedSettingsCategoriesRouteRouteChildren {
+  _protectedSettingsCategoriesCategoryIdRouteRoute: typeof _protectedSettingsCategoriesCategoryIdRouteRouteWithChildren;
+  _protectedSettingsCategoriesNewRoute: typeof _protectedSettingsCategoriesNewRoute;
+}
+
+const _protectedSettingsCategoriesRouteRouteChildren: _protectedSettingsCategoriesRouteRouteChildren =
+  {
+    _protectedSettingsCategoriesCategoryIdRouteRoute:
+      _protectedSettingsCategoriesCategoryIdRouteRouteWithChildren,
+    _protectedSettingsCategoriesNewRoute: _protectedSettingsCategoriesNewRoute,
   };
 
 const _protectedSettingsCategoriesRouteRouteWithChildren =

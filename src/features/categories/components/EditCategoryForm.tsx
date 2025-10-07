@@ -26,7 +26,7 @@ export const EditCategoryForm = ({ categoryId, initialValues }: Props) => {
       categoryId,
     });
 
-    navigate({ to: ".." });
+    navigate({ to: "/settings/categories" });
   };
 
   return (

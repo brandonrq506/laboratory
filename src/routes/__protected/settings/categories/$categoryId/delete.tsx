@@ -1,4 +1,9 @@
+import { useEffect, useState } from "react";
+import { useNavigateBack } from "@/hooks";
+
+import { DeleteCategoryDialog } from "@/features/categories/components";
 import { createFileRoute } from "@tanstack/react-router";
+import { ensureValidId } from "@/utils";
 
 export const Route = createFileRoute(
   "/__protected/settings/categories/$categoryId/delete",
@@ -7,7 +12,21 @@ export const Route = createFileRoute(
 });
 
 function RouteComponent() {
+  const navigateBack = useNavigateBack({ fallback: "/settings/categories" });
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = Route.useNavigate();
+  const { categoryId } = Route.useParams();
+
+  useEffect(() => setIsOpen(true), []);
+
+  const categoryNumber = ensureValidId(categoryId);
+
   return (
-    <div>Hello "/__protected/settings/categories/@categoryId/delete"!</div>
+    <DeleteCategoryDialog
+      isOpen={isOpen}
+      onClose={navigateBack}
+      onDelete={() => navigate({ to: "/settings/categories", replace: true })}
+      categoryId={categoryNumber}
+    />
   );
 }

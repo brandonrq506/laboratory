@@ -1,3 +1,8 @@
+import { useEffect, useState } from "react";
+import { useNavigateBack } from "@/hooks";
+
+import { CreateCategoryForm } from "@/features/categories/components/CreateCategoryForm";
+import { Modal } from "@/components/core/Modal/Modal";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/__protected/settings/categories/new")({
@@ -5,5 +10,16 @@ export const Route = createFileRoute("/__protected/settings/categories/new")({
 });
 
 function RouteComponent() {
-  return <div>Hello "/__protected/settings/categories/new"!</div>;
+  const [isOpen, setIsOpen] = useState(false);
+  const navigateBack = useNavigateBack({ fallback: "/settings/categories" });
+
+  useEffect(() => setIsOpen(true), []);
+
+  return (
+    <div>
+      <Modal isOpen={isOpen} onClose={navigateBack}>
+        <CreateCategoryForm />
+      </Modal>
+    </div>
+  );
 }
