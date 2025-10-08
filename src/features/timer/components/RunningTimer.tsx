@@ -2,7 +2,7 @@ import { usePrefetchTask } from "@/features/tasks/api/tanstack/usePrefetchTask";
 
 import { Dot } from "@/components/core";
 import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
-import { Link } from "react-router";
+import { Link } from "@tanstack/react-router";
 import { RunningTimerButton } from "./RunningTimerButton";
 import { TimerTime } from "./TimerTime";
 
@@ -20,7 +20,8 @@ export const RunningTimer = ({ task }: Props) => {
   return (
     <div className="flex items-center gap-2">
       <Link
-        to={`edit/${task.id}`}
+        to="/timer/$taskId/edit"
+        params={{ taskId: String(task.id) }}
         className="w-full"
         onFocus={() => prefetchTask(task.id)}
         onMouseEnter={() => prefetchTask(task.id)}>

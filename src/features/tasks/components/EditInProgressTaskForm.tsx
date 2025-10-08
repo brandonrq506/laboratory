@@ -30,7 +30,8 @@ export const EditInProgressTaskForm = ({ task }: Props) => {
         note: data.note,
       },
     });
-    navigate(-1);
+
+    navigate({ to: "/timer" });
   };
 
   return (

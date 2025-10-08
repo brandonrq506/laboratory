@@ -1,17 +1,19 @@
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigateBack } from "@/hooks";
 import { useUpdateTask } from "../api/tanstack/useUpdateTask";
 
 import { CompletedTaskAPI } from "../types/completedTask";
 import { CompletedTaskForm } from "./CompletedTaskForm";
 import { CompletedTaskFormType } from "../types/completedTaskFormType";
+import { NavigateOptions } from "@tanstack/react-router";
 
 type Props = {
   task: CompletedTaskAPI;
+  fallbackNavigation: NavigateOptions["to"];
 };
 
-export const EditCompletedTaskForm = ({ task }: Props) => {
-  const navigate = useNavigate();
+export const EditCompletedTaskForm = ({ task, fallbackNavigation }: Props) => {
   const { mutate } = useUpdateTask();
+  const navigateBack = useNavigateBack({ fallback: fallbackNavigation });
 
   const handleSubmit = (data: CompletedTaskFormType) => {
     mutate({
@@ -24,7 +26,7 @@ export const EditCompletedTaskForm = ({ task }: Props) => {
       },
     });
 
-    navigate(-1);
+    navigateBack();
   };
 
   return (
