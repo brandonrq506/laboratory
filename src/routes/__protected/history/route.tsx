@@ -1,13 +1,67 @@
-import { Outlet, createFileRoute } from "@tanstack/react-router";
+import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
+import { format, isValid, parse } from "date-fns";
+import { AdminProtectedContent } from "@/features/user/components";
+import { DateFilter } from "@/components/core/Date";
+import { ExcelLink } from "@/pages/Tasks/ExcelLink";
+import { HistoryTaskList } from "@/pages/Tasks";
+import { PageHeaderWithActions } from "@/components/layout";
+import { PlusIcon } from "@heroicons/react/24/solid";
+import { historyTasksQueryOptions } from "@/features/tasks/api/queries";
+
+const today = () => format(new Date(), "yyyy-MM-dd");
+
+type HistorySearch = {
+  date: string;
+};
 
 export const Route = createFileRoute("/__protected/history")({
+  validateSearch: (search): HistorySearch => {
+    const param = search.date as string | undefined;
+
+    if (!param) return { date: today() };
+
+    if (param === "today") return { date: today() };
+
+    const parsed = parse(param, "yyyy-MM-dd", new Date());
+    if (!isValid(parsed)) return { date: today() };
+    if (format(parsed, "yyyy-MM-dd") !== param) return { date: today() };
+
+    return {
+      date: param,
+    };
+  },
+  loaderDeps: ({ search: { date } }) => ({ date }),
+  beforeLoad: ({ context: { queryClient }, search: { date } }) =>
+    queryClient.ensureQueryData(historyTasksQueryOptions(date)),
   component: RouteComponent,
 });
 
 function RouteComponent() {
+  const { date } = Route.useSearch();
+
   return (
     <div>
-      <p>Hello "/__protected/history"!</p>
+      <PageHeaderWithActions
+        title="Tasks"
+        actions={
+          <AdminProtectedContent>
+            <ExcelLink />
+          </AdminProtectedContent>
+        }
+      />
+      <div className="mb-2 flex w-full items-center justify-between">
+        <DateFilter
+          label="Date Filter"
+          hideLabel
+          className="w-full"
+          value={date}
+        />
+        <Link from={Route.path} to="new" search={{ date }}>
+          <span className="sr-only">Add Task</span>
+          <PlusIcon className="size-5 text-blue-600" aria-hidden />
+        </Link>
+      </div>
+      <HistoryTaskList />
       <Outlet />
     </div>
   );
