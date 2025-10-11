@@ -40,7 +40,7 @@ export const CreateTaskForm = () => {
       note: data.note,
     });
 
-    navigate({ from: "/history", search: { date } });
+    navigate({ from: "/history", search: { date: dateParam } });
   };
 
   return (

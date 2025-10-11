@@ -7,7 +7,7 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 export const NewCategoryButton = () => {
   return (
     <LinkButton
-      to="new"
+      to="/settings/categories/new"
       size="lg"
       startIcon={<PlusIcon className="size-5" aria-hidden />}>
       {`${ADD} ${CATEGORY}`}

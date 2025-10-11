@@ -37,7 +37,7 @@ function RouteComponent() {
       <div className="mb-2 flex w-full items-center justify-between">
         <DateFilter label="Date" hideLabel className="w-full" value={date} />
       </div>
-        <Outlet />
+      <Outlet />
     </div>
   );
 }
