@@ -1,5 +1,4 @@
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
-import { format, isValid, parse } from "date-fns";
 import { AdminProtectedContent } from "@/features/user/components";
 import { DateFilter } from "@/components/core/Date";
 import { ExcelLink } from "@/pages/Tasks/ExcelLink";
@@ -7,8 +6,7 @@ import { HistoryTaskList } from "@/pages/Tasks";
 import { PageHeaderWithActions } from "@/components/layout";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { historyTasksQueryOptions } from "@/features/tasks/api/queries";
-
-const today = () => format(new Date(), "yyyy-MM-dd");
+import { validateDateSearch } from "@/utils/search";
 
 type HistorySearch = {
   date: string;
@@ -16,19 +14,7 @@ type HistorySearch = {
 
 export const Route = createFileRoute("/__protected/history")({
   validateSearch: (search): HistorySearch => {
-    const param = search.date as string | undefined;
-
-    if (!param) return { date: today() };
-
-    if (param === "today") return { date: today() };
-
-    const parsed = parse(param, "yyyy-MM-dd", new Date());
-    if (!isValid(parsed)) return { date: today() };
-    if (format(parsed, "yyyy-MM-dd") !== param) return { date: today() };
-
-    return {
-      date: param,
-    };
+    return validateDateSearch(search.date as string | undefined);
   },
   loaderDeps: ({ search: { date } }) => ({ date }),
   beforeLoad: ({ context: { queryClient }, search: { date } }) =>

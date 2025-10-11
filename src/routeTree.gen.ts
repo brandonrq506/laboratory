@@ -16,6 +16,7 @@ import { Route as _protectedTimerRouteRouteImport } from "./routes/__protected/t
 import { Route as _protectedSettingsRouteRouteImport } from "./routes/__protected/settings/route";
 import { Route as _protectedRoutinesRouteRouteImport } from "./routes/__protected/routines/route";
 import { Route as _protectedHistoryRouteRouteImport } from "./routes/__protected/history/route";
+import { Route as _protectedExcelRouteRouteImport } from "./routes/__protected/excel/route";
 import { Route as _protectedActivitiesRouteRouteImport } from "./routes/__protected/activities/route";
 import { Route as _protectedSettingsIndexRouteImport } from "./routes/__protected/settings/index";
 import { Route as _protectedExcelIndexRouteImport } from "./routes/__protected/excel/index";
@@ -76,6 +77,11 @@ const _protectedHistoryRouteRoute = _protectedHistoryRouteRouteImport.update({
   path: "/history",
   getParentRoute: () => _protectedRouteRoute,
 } as any);
+const _protectedExcelRouteRoute = _protectedExcelRouteRouteImport.update({
+  id: "/excel",
+  path: "/excel",
+  getParentRoute: () => _protectedRouteRoute,
+} as any);
 const _protectedActivitiesRouteRoute =
   _protectedActivitiesRouteRouteImport.update({
     id: "/activities",
@@ -88,9 +94,9 @@ const _protectedSettingsIndexRoute = _protectedSettingsIndexRouteImport.update({
   getParentRoute: () => _protectedSettingsRouteRoute,
 } as any);
 const _protectedExcelIndexRoute = _protectedExcelIndexRouteImport.update({
-  id: "/excel/",
-  path: "/excel/",
-  getParentRoute: () => _protectedRouteRoute,
+  id: "/",
+  path: "/",
+  getParentRoute: () => _protectedExcelRouteRoute,
 } as any);
 const _protectedTimerNewRoute = _protectedTimerNewRouteImport.update({
   id: "/new",
@@ -224,6 +230,7 @@ const _protectedSettingsCategoriesCategoryIdDeleteRoute =
 export interface FileRoutesByFullPath {
   "/login": typeof LoginRoute;
   "/activities": typeof _protectedActivitiesRouteRouteWithChildren;
+  "/excel": typeof _protectedExcelRouteRouteWithChildren;
   "/history": typeof _protectedHistoryRouteRouteWithChildren;
   "/routines": typeof _protectedRoutinesRouteRouteWithChildren;
   "/settings": typeof _protectedSettingsRouteRouteWithChildren;
@@ -240,7 +247,7 @@ export interface FileRoutesByFullPath {
   "/settings/account": typeof _protectedSettingsAccountRoute;
   "/settings/notifications": typeof _protectedSettingsNotificationsRoute;
   "/timer/new": typeof _protectedTimerNewRoute;
-  "/excel": typeof _protectedExcelIndexRoute;
+  "/excel/": typeof _protectedExcelIndexRoute;
   "/settings/": typeof _protectedSettingsIndexRoute;
   "/settings/categories/$categoryId": typeof _protectedSettingsCategoriesCategoryIdRouteRouteWithChildren;
   "/activities/$activityId/delete": typeof _protectedActivitiesActivityIdDeleteRoute;
@@ -289,6 +296,7 @@ export interface FileRoutesById {
   "/__protected": typeof _protectedRouteRouteWithChildren;
   "/login": typeof LoginRoute;
   "/__protected/activities": typeof _protectedActivitiesRouteRouteWithChildren;
+  "/__protected/excel": typeof _protectedExcelRouteRouteWithChildren;
   "/__protected/history": typeof _protectedHistoryRouteRouteWithChildren;
   "/__protected/routines": typeof _protectedRoutinesRouteRouteWithChildren;
   "/__protected/settings": typeof _protectedSettingsRouteRouteWithChildren;
@@ -324,6 +332,7 @@ export interface FileRouteTypes {
   fullPaths:
     | "/login"
     | "/activities"
+    | "/excel"
     | "/history"
     | "/routines"
     | "/settings"
@@ -340,7 +349,7 @@ export interface FileRouteTypes {
     | "/settings/account"
     | "/settings/notifications"
     | "/timer/new"
-    | "/excel"
+    | "/excel/"
     | "/settings/"
     | "/settings/categories/$categoryId"
     | "/activities/$activityId/delete"
@@ -388,6 +397,7 @@ export interface FileRouteTypes {
     | "/__protected"
     | "/login"
     | "/__protected/activities"
+    | "/__protected/excel"
     | "/__protected/history"
     | "/__protected/routines"
     | "/__protected/settings"
@@ -475,6 +485,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof _protectedHistoryRouteRouteImport;
       parentRoute: typeof _protectedRouteRoute;
     };
+    "/__protected/excel": {
+      id: "/__protected/excel";
+      path: "/excel";
+      fullPath: "/excel";
+      preLoaderRoute: typeof _protectedExcelRouteRouteImport;
+      parentRoute: typeof _protectedRouteRoute;
+    };
     "/__protected/activities": {
       id: "/__protected/activities";
       path: "/activities";
@@ -491,10 +508,10 @@ declare module "@tanstack/react-router" {
     };
     "/__protected/excel/": {
       id: "/__protected/excel/";
-      path: "/excel";
-      fullPath: "/excel";
+      path: "/";
+      fullPath: "/excel/";
       preLoaderRoute: typeof _protectedExcelIndexRouteImport;
-      parentRoute: typeof _protectedRouteRoute;
+      parentRoute: typeof _protectedExcelRouteRoute;
     };
     "/__protected/timer/new": {
       id: "/__protected/timer/new";
@@ -691,6 +708,17 @@ const _protectedActivitiesRouteRouteWithChildren =
     _protectedActivitiesRouteRouteChildren,
   );
 
+interface _protectedExcelRouteRouteChildren {
+  _protectedExcelIndexRoute: typeof _protectedExcelIndexRoute;
+}
+
+const _protectedExcelRouteRouteChildren: _protectedExcelRouteRouteChildren = {
+  _protectedExcelIndexRoute: _protectedExcelIndexRoute,
+};
+
+const _protectedExcelRouteRouteWithChildren =
+  _protectedExcelRouteRoute._addFileChildren(_protectedExcelRouteRouteChildren);
+
 interface _protectedHistoryTaskIdRouteRouteChildren {
   _protectedHistoryTaskIdIndexRoute: typeof _protectedHistoryTaskIdIndexRoute;
 }
@@ -841,22 +869,22 @@ const _protectedTimerRouteRouteWithChildren =
 
 interface _protectedRouteRouteChildren {
   _protectedActivitiesRouteRoute: typeof _protectedActivitiesRouteRouteWithChildren;
+  _protectedExcelRouteRoute: typeof _protectedExcelRouteRouteWithChildren;
   _protectedHistoryRouteRoute: typeof _protectedHistoryRouteRouteWithChildren;
   _protectedRoutinesRouteRoute: typeof _protectedRoutinesRouteRouteWithChildren;
   _protectedSettingsRouteRoute: typeof _protectedSettingsRouteRouteWithChildren;
   _protectedTimerRouteRoute: typeof _protectedTimerRouteRouteWithChildren;
   _protectedIndexRoute: typeof _protectedIndexRoute;
-  _protectedExcelIndexRoute: typeof _protectedExcelIndexRoute;
 }
 
 const _protectedRouteRouteChildren: _protectedRouteRouteChildren = {
   _protectedActivitiesRouteRoute: _protectedActivitiesRouteRouteWithChildren,
+  _protectedExcelRouteRoute: _protectedExcelRouteRouteWithChildren,
   _protectedHistoryRouteRoute: _protectedHistoryRouteRouteWithChildren,
   _protectedRoutinesRouteRoute: _protectedRoutinesRouteRouteWithChildren,
   _protectedSettingsRouteRoute: _protectedSettingsRouteRouteWithChildren,
   _protectedTimerRouteRoute: _protectedTimerRouteRouteWithChildren,
   _protectedIndexRoute: _protectedIndexRoute,
-  _protectedExcelIndexRoute: _protectedExcelIndexRoute,
 };
 
 const _protectedRouteRouteWithChildren = _protectedRouteRoute._addFileChildren(

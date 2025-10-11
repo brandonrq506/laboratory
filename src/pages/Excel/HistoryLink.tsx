@@ -1,13 +1,13 @@
-import { Link, useSearchParams } from "react-router";
+import { Link, getRouteApi } from "@tanstack/react-router";
 import { RectangleStackIcon } from "@heroicons/react/24/outline";
 
-export const HistoryLink = () => {
-  const [params] = useSearchParams();
+const routeApi = getRouteApi("/__protected/excel");
 
-  const date = params.get("date") ?? "";
+export const HistoryLink = () => {
+  const { date } = routeApi.useSearch();
 
   return (
-    <Link to={{ pathname: "/history", search: date && `?date=${date}` }}>
+    <Link to="/history" search={{ date }} className="flex items-center">
       <RectangleStackIcon className="size-5" />
     </Link>
   );
