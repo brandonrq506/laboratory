@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { EmptyState, Loading, SortIcon } from "@/components/core";
 import { ActivityAPI } from "../types/activityAPI";
@@ -21,7 +21,9 @@ import { secondsToHHmm } from "@/utils";
 const columnHelper = createColumnHelper<ActivityAPI>();
 
 export const ActivityTable = () => {
-  const { data, isPending, isSuccess } = useQuery(activityListQueryOptions());
+  const { data, isPending, isSuccess } = useSuspenseQuery(
+    activityListQueryOptions(),
+  );
 
   const activities = useMemo(() => data ?? [], [data]);
 
