@@ -19,6 +19,7 @@ export const CreateRoutineForm = () => {
           navigate({
             to: "/routines/$routineId/edit",
             params: { routineId: String(data.id) },
+            replace: true,
           });
         },
       },
