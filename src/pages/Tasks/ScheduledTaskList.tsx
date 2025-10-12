@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import {
   DeleteAllScheduledTasks,
@@ -17,10 +17,8 @@ import { calculateExpectedStartTimes } from "@/features/tasks/utils/calculateExp
 const MIN_WORTH_TRIGGERING_THRESHOLD = 3;
 
 export const ScheduledTaskList = () => {
-  const { data: inProgressTask } = useSuspenseQuery(
-    inProgressTasksQueryOptions(),
-  );
-  const { data, isPending, isError, refetch } = useSuspenseQuery(
+  const { data: inProgressTask } = useQuery(inProgressTasksQueryOptions());
+  const { data, isPending, isError, refetch } = useQuery(
     scheduledTasksQueryOptions(),
   );
 
