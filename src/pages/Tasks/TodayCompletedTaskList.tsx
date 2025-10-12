@@ -1,4 +1,3 @@
-import { usePrefetchTask } from "@/features/tasks/api/tanstack/usePrefetchTask";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { CompletedTask, TaskList } from "@/features/tasks/components";
@@ -9,7 +8,6 @@ import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
 import { todayCompletedTasksQueryOptions } from "@/features/tasks/api/queries";
 
 export const TodayCompletedTaskList = () => {
-  const prefetchTask = usePrefetchTask();
   const { data, isError, refetch } = useSuspenseQuery(
     todayCompletedTasksQueryOptions(),
   );
@@ -33,11 +31,8 @@ export const TodayCompletedTaskList = () => {
         renderItem={(task) => (
           <Link
             key={task.id}
-            // Previously I was sending with a `date` search param. Let's wait and see how it affects not having it.
             to="/timer/$taskId/edit"
-            params={{ taskId: String(task.id) }}
-            onFocus={() => prefetchTask(task.id)}
-            onMouseEnter={() => prefetchTask(task.id)}>
+            params={{ taskId: String(task.id) }}>
             <CompletedTask task={task} />
           </Link>
         )}
