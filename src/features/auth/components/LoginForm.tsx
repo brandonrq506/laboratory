@@ -11,7 +11,11 @@ import { isAxiosError } from "axios";
 const UNAUTHORIZED_CODE = 401;
 const SERVER_ERROR_CODE = 500;
 
-export const LoginForm = () => {
+interface Props {
+  onLoginSuccess: () => Promise<void>;
+}
+
+export const LoginForm = ({ onLoginSuccess }: Props) => {
   const { mutate, isError, isPending, error } = useLogin();
   const { formState, handleSubmit, register } = useForm<LoginFormType>({
     defaultValues: {
@@ -19,11 +23,12 @@ export const LoginForm = () => {
       password: "",
     },
   });
-
   const { errors } = formState;
 
   const onSubmit = (data: LoginFormType) => {
-    mutate(data);
+    mutate(data, {
+      onSuccess: onLoginSuccess,
+    });
   };
 
   return (
