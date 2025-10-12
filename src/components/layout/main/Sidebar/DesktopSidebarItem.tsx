@@ -11,9 +11,9 @@ type SidebarItemProps = SidebarLink & {
 
 export const DesktopSidebarItem = ({
   label,
-  to,
   icon: Icon,
   onClose,
+  ...linkProps
 }: SidebarItemProps) => {
   const sidebarPreference = useUserPreference("sidebar_open");
   const isOpen = sidebarPreference?.value === "true";
@@ -33,11 +33,11 @@ export const DesktopSidebarItem = ({
   return (
     <li>
       <Link
-        to={to}
         onClick={onClose}
         title={label}
         activeProps={{ className: clsx(baseClasses, activeClasses) }}
-        inactiveProps={{ className: clsx(baseClasses, inactiveClasses) }}>
+        inactiveProps={{ className: clsx(baseClasses, inactiveClasses) }}
+        {...linkProps}>
         <Icon
           className={clsx(
             "shrink-0 transition-all group-hover:text-indigo-600",

@@ -9,9 +9,9 @@ type SidebarItemProps = SidebarLink & {
 
 export const MobileSidebarItem = ({
   label,
-  to,
   icon: Icon,
   onClose,
+  ...linkProps
 }: SidebarItemProps) => {
   // Base classes shared by active & inactive states
   const baseClasses =
@@ -25,10 +25,10 @@ export const MobileSidebarItem = ({
   return (
     <li>
       <Link
-        to={to}
         onClick={onClose}
         activeProps={{ className: clsx(baseClasses, activeClasses) }}
-        inactiveProps={{ className: clsx(baseClasses, inactiveClasses) }}>
+        inactiveProps={{ className: clsx(baseClasses, inactiveClasses) }}
+        {...linkProps}>
         <Icon
           className="size-6 shrink-0 group-hover:text-indigo-600"
           aria-hidden="true"
