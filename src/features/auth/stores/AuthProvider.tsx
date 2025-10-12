@@ -1,4 +1,4 @@
-import { PropsWithChildren, useCallback, useState } from "react";
+import { PropsWithChildren, useCallback, useEffect, useState } from "react";
 
 import { AuthContext } from "./AuthContext";
 import { AuthContextType } from "./AuthContextType";
@@ -69,6 +69,10 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     setStoredToken(null);
     setToken(null);
   }, []);
+
+  useEffect(() => {
+    logoutRef.current = logout;
+  }, [logout]);
 
   const initialAuthState: AuthContextType = {
     isAuth: Boolean(token),
