@@ -8,7 +8,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { Card } from "@/components/layout";
 import { Dot } from "@/components/core";
 import { DragHandle } from "./DragHandle";
-import { Link } from "react-router";
+import { Link } from "@tanstack/react-router";
 import { QuickDeleteTask } from "./QuickDeleteTask";
 import { ScheduledTaskActionBtn } from "./ScheduledTaskActionBtn";
 import { ScheduledTaskWithExpectedStartTime } from "../types/scheduledTaskWithExpectedStartTime";
@@ -16,7 +16,6 @@ import { ScheduledTaskWithExpectedStartTime } from "../types/scheduledTaskWithEx
 import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import clsx from "clsx";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
-import { usePrefetchTask } from "../api/tanstack/usePrefetchTask";
 
 type Props = {
   task: ScheduledTaskWithExpectedStartTime;
@@ -32,7 +31,6 @@ export const SortableTask = ({ task }: Props) => {
     transition,
     isDragging,
   } = useSortable({ id: task.id });
-  const prefetchTask = usePrefetchTask();
   const color = getColorByName(task.activity.category.color);
 
   const style = {
@@ -57,9 +55,9 @@ export const SortableTask = ({ task }: Props) => {
 
           <Link
             className="grow"
-            to={`edit/${task.id}`}
-            onFocus={() => prefetchTask(task.id)}
-            onMouseEnter={() => prefetchTask(task.id)}>
+            from="/timer"
+            to="$taskId/edit"
+            params={{ taskId: String(task.id) }}>
             <div className="flex items-center gap-1.5">
               <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
               <p className="text-sm font-semibold">

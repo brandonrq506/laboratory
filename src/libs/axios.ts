@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { type AxiosError, type AxiosResponse } from "axios";
 import { isHtmlResponse } from "@/utils";
 
 const API_URL = import.meta.env.VITE_API_URL;

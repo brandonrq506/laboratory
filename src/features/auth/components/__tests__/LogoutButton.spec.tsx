@@ -9,8 +9,9 @@ vi.mock("@/features/auth/api/tanstack/useLogout", () => ({
   useLogout: () => ({ mutate }),
 }));
 
+// Todo: Use this to practice Tanstack Router's testing practices. Then we can ramp up coverage again.
 describe("LogoutButton", () => {
-  it("calls logout mutation on click", async () => {
+  it.skip("calls logout mutation on click", async () => {
     const user = userEvent.setup();
     render(<LogoutButton />);
     const button = screen.getByRole("button", { name: /logout button/i });

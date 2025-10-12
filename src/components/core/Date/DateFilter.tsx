@@ -1,10 +1,9 @@
-import { useSearchParams } from "react-router";
-
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { addDays, format, isAfter, isToday, parseISO } from "date-fns";
 import { DateInput } from "./DateInput";
 import { IconButton } from "../Button/IconButton";
 import { InputProps } from "@headlessui/react";
+import { useNavigate } from "@tanstack/react-router";
 
 const today = () => format(new Date(), "yyyy-MM-dd");
 
@@ -17,6 +16,7 @@ type Props = DateField & {
   inputClassName?: string;
   showAsterisk?: boolean;
   label: string;
+  value: string;
 };
 
 export const DateFilter = ({
@@ -26,18 +26,15 @@ export const DateFilter = ({
   inputClassName,
   showAsterisk = false,
   label,
+  value,
 }: Props) => {
-  const [params, setParams] = useSearchParams({
-    date: today(),
-  });
-
-  const date = params.get("date") ?? today();
+  const navigate = useNavigate();
 
   const shiftDate = (delta: number) => {
-    const newDateObj = addDays(parseISO(date), delta);
+    const newDateObj = addDays(parseISO(value), delta);
     if (isAfter(newDateObj, new Date())) return;
 
-    setParams({ date: format(newDateObj, "yyyy-MM-dd") });
+    navigate({ to: ".", search: { date: format(newDateObj, "yyyy-MM-dd") } });
   };
 
   return (
@@ -52,13 +49,15 @@ export const DateFilter = ({
         inputClassName={inputClassName}
         label={label}
         max={today()}
-        onChange={(e) => setParams({ date: e.target.value })}
+        onChange={(e) =>
+          navigate({ to: ".", search: { date: e.target.value } })
+        }
         showAsterisk={showAsterisk}
-        value={date}
+        value={value}
       />
       <IconButton
         onClick={() => shiftDate(1)}
-        disabled={isToday(parseISO(date))}
+        disabled={isToday(parseISO(value))}
         variant="blackOutline"
         className="disabled:text-gray-600">
         <ChevronRightIcon className="size-5" />

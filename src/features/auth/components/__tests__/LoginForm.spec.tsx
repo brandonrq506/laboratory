@@ -7,7 +7,7 @@ describe("LoginForm", () => {
   it("focuses on the 'Email' input by default", () => {
     render(
       <AuthProvider>
-        <LoginForm />
+        <LoginForm onLoginSuccess={async () => {}} />
       </AuthProvider>,
     );
 
@@ -17,7 +17,7 @@ describe("LoginForm", () => {
   it("requires necessary values before submitting", async () => {
     render(
       <AuthProvider>
-        <LoginForm />
+        <LoginForm onLoginSuccess={async () => {}} />
       </AuthProvider>,
     );
 
@@ -30,7 +30,7 @@ describe("LoginForm", () => {
   it("validates email format", async () => {
     render(
       <AuthProvider>
-        <LoginForm />
+        <LoginForm onLoginSuccess={async () => {}} />
       </AuthProvider>,
     );
 

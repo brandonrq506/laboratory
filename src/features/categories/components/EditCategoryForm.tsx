@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useUpdateCategory } from "../api/tanstack/useUpdateCategory";
 
 import { CategoryForm } from "./CategoryForm";
@@ -26,7 +26,7 @@ export const EditCategoryForm = ({ categoryId, initialValues }: Props) => {
       categoryId,
     });
 
-    navigate("..");
+    navigate({ to: "/settings/categories" });
   };
 
   return (

@@ -1,4 +1,3 @@
-export { MainErrorPage } from "./main/MainErrorPage";
 export { MainLayout } from "./main/MainLayout";
 export { Card } from "./Card";
 export { PageHeaderWithActions } from "./headings/PageHeaderWithActions";

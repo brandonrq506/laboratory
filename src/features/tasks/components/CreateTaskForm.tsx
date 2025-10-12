@@ -1,21 +1,20 @@
-import { useNavigate, useSearchParams } from "react-router";
 import { useCreateTask } from "../api/tanstack/useCreateTask";
 
 import { NewTaskForm as FormType } from "../types/newTaskForm";
 import { NewTaskForm } from "./NewTaskForm";
 
 import { parse, set } from "date-fns";
+import { getRouteApi } from "@tanstack/react-router";
 import { splitHHMM } from "@/utils";
 
+const routeApi = getRouteApi("/__protected/history/new");
+
 export const CreateTaskForm = () => {
-  const navigate = useNavigate();
+  const navigate = routeApi.useNavigate();
+  const { date: dateParam } = routeApi.useSearch();
   const { mutateAsync } = useCreateTask();
 
-  const [params] = useSearchParams();
-  const dateParam = params.get("date");
-  const date = dateParam
-    ? parse(dateParam, "yyyy-MM-dd", new Date())
-    : new Date();
+  const date = parse(dateParam, "yyyy-MM-dd", new Date());
 
   const handleSubmit = async (data: FormType) => {
     const [startHours, startMinutes] = splitHHMM(data.start_time);
@@ -41,7 +40,7 @@ export const CreateTaskForm = () => {
       note: data.note,
     });
 
-    navigate(-1);
+    navigate({ from: "/history", search: { date: dateParam } });
   };
 
   return (

@@ -1,5 +1,5 @@
 import { set } from "date-fns";
-import { useNavigate } from "react-router";
+import { useNavigate } from "@tanstack/react-router";
 
 import { getNewTaskDefaultTimes, splitHHMM } from "@/utils";
 import { NewTaskForm as FormType } from "../../features/tasks/types/newTaskForm";
@@ -37,7 +37,7 @@ export const NewTodayCompletedTaskForm = () => {
       note: data.note,
     });
 
-    navigate(-1);
+    navigate({ to: "/timer" });
   };
 
   return (

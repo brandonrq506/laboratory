@@ -2,10 +2,10 @@ import { useDisclosure } from "@/hooks/useDisclosure";
 import { useUserPreference } from "@/features/userPreferences/hooks";
 
 import { IconButton, LinkedInProfile, NetworkBadge } from "../../core";
-import { AuthGuard } from "./AuthGuard";
 import { Bars3Icon } from "@heroicons/react/24/outline";
+import { Fragment } from "react/jsx-runtime";
 import { Header } from "./Header";
-import { Outlet } from "react-router";
+import { Outlet } from "@tanstack/react-router";
 import { Sidebar } from "./Sidebar/Sidebar";
 import clsx from "clsx";
 
@@ -15,7 +15,7 @@ export const MainLayout = () => {
   const isDesktopSidebarOpen = sidebarPreference?.value === "true";
 
   return (
-    <AuthGuard>
+    <Fragment>
       <Sidebar isOpen={isOpen} onClose={onClose} />
 
       <Header>
@@ -39,6 +39,6 @@ export const MainLayout = () => {
         <div className="px-4 sm:px-6">{<Outlet />}</div>
         <NetworkBadge />
       </main>
-    </AuthGuard>
+    </Fragment>
   );
 };

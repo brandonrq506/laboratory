@@ -4,7 +4,7 @@ import { Routine } from "../../types/routine";
 
 type Props = {
   routine: Partial<EditNameForm>;
-  routineId: number;
+  routineId: string;
 };
 
 export const updateRoutine = async ({ routineId, routine }: Props) => {

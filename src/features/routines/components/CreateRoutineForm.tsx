@@ -1,5 +1,5 @@
 import { useCreateRoutine } from "../api/tanstack/useCreateRoutine";
-import { useNavigate } from "react-router";
+import { useNavigate } from "@tanstack/react-router";
 
 import { ADD } from "@/constants/actions";
 import { ROUTINE } from "@/constants/entities";
@@ -16,7 +16,11 @@ export const CreateRoutineForm = () => {
       { name: values.name },
       {
         onSuccess(data) {
-          navigate(`/routines/edit/${data.id}`);
+          navigate({
+            to: "/routines/$routineId/edit",
+            params: { routineId: String(data.id) },
+            replace: true,
+          });
         },
       },
     );

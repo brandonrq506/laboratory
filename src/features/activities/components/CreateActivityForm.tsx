@@ -1,5 +1,5 @@
 import { useCreateActivity } from "../api/tanstack/useCreateActivity";
-import { useNavigate } from "react-router";
+import { useNavigate } from "@tanstack/react-router";
 
 import { ACTIVITY } from "@/constants/entities";
 import { ADD } from "@/constants/actions";
@@ -30,7 +30,7 @@ export const CreateActivityForm = ({ initialValues }: Props) => {
       name: values.name,
     });
 
-    navigate("..");
+    navigate({ to: "/activities" });
   };
 
   return (

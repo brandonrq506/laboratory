@@ -1,8 +1,6 @@
-import { usePrefetchTask } from "@/features/tasks/api/tanstack/usePrefetchTask";
-
 import { Dot } from "@/components/core";
 import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
-import { Link } from "react-router";
+import { Link } from "@tanstack/react-router";
 import { RunningTimerButton } from "./RunningTimerButton";
 import { TimerTime } from "./TimerTime";
 
@@ -13,17 +11,14 @@ type Props = {
 };
 
 export const RunningTimer = ({ task }: Props) => {
-  const prefetchTask = usePrefetchTask();
-
   const color = getColorByName(task.activity.category.color);
 
   return (
     <div className="flex items-center gap-2">
       <Link
-        to={`edit/${task.id}`}
-        className="w-full"
-        onFocus={() => prefetchTask(task.id)}
-        onMouseEnter={() => prefetchTask(task.id)}>
+        to="/timer/$taskId/edit"
+        params={{ taskId: String(task.id) }}
+        className="w-full">
         <div className="flex items-center gap-1.5">
           <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
           <p className="line-clamp-1 text-sm font-semibold">

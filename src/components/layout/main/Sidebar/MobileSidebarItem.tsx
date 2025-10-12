@@ -1,39 +1,40 @@
-import { FolderIcon } from "@heroicons/react/24/outline";
-import { NavLink } from "react-router";
+import { Link } from "@tanstack/react-router";
 import clsx from "clsx";
 
-type Props = {
-  name: string;
-  href: string;
-  icon: typeof FolderIcon;
-  onClose?: () => void;
+import type { SidebarLink } from "./links";
+
+type SidebarItemProps = SidebarLink & {
+  onClose: () => void;
 };
 
 export const MobileSidebarItem = ({
-  name,
-  href,
+  label,
   icon: Icon,
   onClose,
-}: Props) => {
+  ...linkProps
+}: SidebarItemProps) => {
+  // Base classes shared by active & inactive states
+  const baseClasses =
+    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-colors";
+
+  const inactiveClasses =
+    "text-gray-700 group-hover:text-gray-400 hover:bg-gray-50 hover:text-indigo-600";
+  const activeClasses =
+    "bg-gray-50 text-indigo-600 group-hover:text-indigo-600";
+
   return (
     <li>
-      <NavLink
-        to={href}
+      <Link
         onClick={onClose}
-        className={({ isActive }) =>
-          clsx(
-            isActive
-              ? "bg-gray-50 text-indigo-600 group-hover:text-indigo-600"
-              : "text-gray-700 group-hover:text-gray-400 hover:bg-gray-50 hover:text-indigo-600",
-            "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold",
-          )
-        }>
+        activeProps={{ className: clsx(baseClasses, activeClasses) }}
+        inactiveProps={{ className: clsx(baseClasses, inactiveClasses) }}
+        {...linkProps}>
         <Icon
           className="size-6 shrink-0 group-hover:text-indigo-600"
           aria-hidden="true"
         />
-        {name}
-      </NavLink>
+        {label}
+      </Link>
     </li>
   );
 };

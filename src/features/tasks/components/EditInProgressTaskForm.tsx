@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useUpdateTask } from "../api/tanstack/useUpdateTask";
 
 import { DirtyFields } from "@/types/core";
@@ -30,7 +30,8 @@ export const EditInProgressTaskForm = ({ task }: Props) => {
         note: data.note,
       },
     });
-    navigate(-1);
+
+    navigate({ to: "/timer" });
   };
 
   return (

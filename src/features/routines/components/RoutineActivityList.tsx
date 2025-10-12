@@ -1,25 +1,19 @@
-import { useParams } from "react-router";
-import { useQuery } from "@tanstack/react-query";
+import { getRouteApi } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
-import { EmptyList, Loading } from "@/components/core";
+import { EmptyList } from "@/components/core";
 import { SortableRoutineActivityList } from "./SortableRoutineActivityList";
 import { routineByIdQueryOptions } from "../api/queries";
 
+const routeApi = getRouteApi("/__protected/routines/$routineId/edit");
+
 export const RoutineActivityList = () => {
-  const { routineId } = useParams();
+  const { routineId } = routeApi.useParams();
+  const { data } = useSuspenseQuery(routineByIdQueryOptions(routineId));
+
   const routineNumber = Number(routineId);
-  const { data, isPending, isError } = useQuery(
-    routineByIdQueryOptions(routineNumber),
-  );
+
   const routine_activities = data?.activities;
-
-  if (isPending) {
-    return <Loading className="mx-auto" />;
-  }
-
-  if (isError) {
-    return <div>Error loading routine activities</div>;
-  }
 
   if (!routine_activities || routine_activities.length === 0) {
     return <EmptyList title="No activities found" />;

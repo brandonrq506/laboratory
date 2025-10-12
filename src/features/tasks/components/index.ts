@@ -6,7 +6,6 @@ export { EditScheduledTaskForm } from "./EditScheduledTaskForm";
 export { ExampleCompletedTask } from "./ExampleCompletedTask";
 export { ScheduledTask } from "./ScheduledTask";
 export { TaskList } from "./TaskList";
-export { TaskStatusSelectFilter } from "./TaskStatusSelectFilter";
 export { QuickCreateTaskMenu } from "./QuickCreateTaskMenu";
 export { SortableTask } from "./SortableTask";
 export { SortableTaskList } from "./SortableTaskList";

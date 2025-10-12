@@ -1,5 +1,5 @@
 import { useCreateCategory } from "../api/tanstack/useCreateCategory";
-import { useNavigate } from "react-router";
+import { useNavigate } from "@tanstack/react-router";
 
 import { CategoryForm } from "./CategoryForm";
 import { EditForm } from "../types/editForm";
@@ -21,7 +21,7 @@ export const CreateCategoryForm = ({ initialValues }: Props) => {
     const color = isColor(possiblyColor.label) ? possiblyColor.label : "white";
 
     await mutateAsync({ name, color });
-    navigate("..");
+    navigate({ to: "/settings/categories" });
   };
 
   return (
