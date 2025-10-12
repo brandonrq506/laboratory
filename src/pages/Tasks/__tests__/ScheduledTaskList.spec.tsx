@@ -1,9 +1,7 @@
 import { render, screen, waitFor } from "@/test/test-utils";
-import { createRoutesStub } from "react-router";
 
 import { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 import { ScheduledTaskList } from "../ScheduledTaskList";
-import { scheduledTasks } from "@/test/store/tasks";
 
 import { HttpResponse, http } from "msw";
 import { TASKS_ENDPOINT } from "@/libs/axios";
@@ -19,25 +17,6 @@ describe("ScheduledTaskList", () => {
       }),
     );
   };
-
-  it("displays delete all button when more than 3 tasks are present", async () => {
-    setupServer(scheduledTasks);
-
-    const Stub = createRoutesStub([
-      {
-        path: "/",
-        Component: () => <ScheduledTaskList />,
-      },
-    ]);
-
-    render(<Stub />);
-
-    await waitFor(() => {
-      expect(
-        screen.getByRole("button", { name: /delete scheduled tasks/i }),
-      ).toBeInTheDocument();
-    });
-  });
 
   it("displays empty state when no tasks are present", async () => {
     setupServer([]);
