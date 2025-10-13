@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigateBack } from "@/hooks";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import { EditCompletedTaskForm } from "@/features/tasks/components";
+import { EditCompletedTaskForm } from "@/features/tasks/components/EditCompletedTaskForm";
 import { Modal } from "@/components/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { taskByIdQueryOptions } from "@/features/tasks/api/queries";
