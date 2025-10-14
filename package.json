@@ -28,7 +28,7 @@
     "@heroicons/react": "^2.2.0",
     "@tailwindcss/vite": "^4.1.13",
     "@tanstack/react-devtools": "^0.7.2",
-    "@tanstack/react-query": "^5.90.2",
+    "@tanstack/react-query": "^5.90.3",
     "@tanstack/react-query-devtools": "^5.90.2",
     "@tanstack/react-router": "^1.132.33",
     "@tanstack/react-router-devtools": "^1.132.33",
