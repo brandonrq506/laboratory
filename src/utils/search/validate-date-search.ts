@@ -1,16 +1,15 @@
 import { format, isValid, parse } from "date-fns";
+import { getToday } from "../getToday";
 
 // Validates date search parameters
-const today = () => format(new Date(), "yyyy-MM-dd");
-
 export const validateDateSearch = (param: string | undefined) => {
-  if (!param) return { date: today() };
+  if (!param) return { date: getToday() };
 
-  if (param === "today") return { date: today() };
+  if (param === "today") return { date: getToday() };
 
   const parsed = parse(param, "yyyy-MM-dd", new Date());
-  if (!isValid(parsed)) return { date: today() };
-  if (format(parsed, "yyyy-MM-dd") !== param) return { date: today() };
+  if (!isValid(parsed)) return { date: getToday() };
+  if (format(parsed, "yyyy-MM-dd") !== param) return { date: getToday() };
 
   return {
     date: param,
