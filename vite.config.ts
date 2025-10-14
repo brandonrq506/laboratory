@@ -1,6 +1,10 @@
 /// <reference types="vitest" />
 
-import { ViteUserConfig, defineConfig } from "vitest/config";
+import {
+  ViteUserConfig,
+  coverageConfigDefaults,
+  defineConfig,
+} from "vitest/config";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
@@ -25,6 +29,7 @@ export default defineConfig({
       enabled: true,
       reporter: ["text", "html", "clover", "json"],
       extension: ["ts", "tsx"],
+      exclude: ["src/routes", ...coverageConfigDefaults.exclude],
     },
     setupFiles: ["./src/test/setup.ts"],
   },
