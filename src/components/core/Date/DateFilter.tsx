@@ -1,11 +1,11 @@
+import { useNavigate } from "@tanstack/react-router";
+
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { addDays, format, isAfter, isToday, parseISO } from "date-fns";
 import { DateInput } from "./DateInput";
 import { IconButton } from "../Button/IconButton";
 import { InputProps } from "@headlessui/react";
-import { useNavigate } from "@tanstack/react-router";
-
-const today = () => format(new Date(), "yyyy-MM-dd");
+import { getToday } from "@/utils";
 
 type DateField = Omit<InputProps, "onChange" | "value" | "max" | "type">;
 
@@ -48,7 +48,7 @@ export const DateFilter = ({
         hideLabel={hideLabel}
         inputClassName={inputClassName}
         label={label}
-        max={today()}
+        max={getToday()}
         onChange={(e) =>
           navigate({ to: ".", search: { date: e.target.value } })
         }
