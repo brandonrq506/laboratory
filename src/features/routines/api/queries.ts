@@ -8,11 +8,11 @@ export const routineKeys = {
   all: [{ feature: ROUTINES_ENDPOINT }] as const,
   lists: () => [{ ...routineKeys.all[0], entity: "list" }] as const,
   details: () => [{ ...routineKeys.all[0], entity: "details" }] as const,
-  detail: (routineId: string | number) =>
-    [{ ...routineKeys.details()[0], routineId: String(routineId) }] as const,
+  detail: (routineId: number) =>
+    [{ ...routineKeys.details()[0], routineId }] as const,
 };
 
-export const routineByIdQueryOptions = (routineId: string | number) => {
+export const routineByIdQueryOptions = (routineId: number) => {
   return queryOptions({
     queryKey: routineKeys.detail(routineId),
     queryFn: getRoutine,
