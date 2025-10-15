@@ -1,4 +1,3 @@
-export { ensureValidId } from "./ensure-valid-id";
 export { floorMilliseconds } from "./floorMilliseconds";
 export { floorSeconds } from "./floorSeconds";
 export { formatDatetimeTo12hTime } from "./formatDatetimeTo12hTime";
@@ -10,3 +9,4 @@ export { secondsToHHmmss } from "./secondsToHHmmss";
 export { secondsToTime } from "./secondsToTime";
 export { splitHHMM } from "./splitHHMM";
 export { transformToOption } from "./transformToOption";
+export { validateIdParam } from "./validate-id-param";
