@@ -15,7 +15,7 @@ export const sidebarLinks = linkOptions([
     label: "History",
     to: "/history",
     icon: RectangleStackIcon,
-    search: { date: getToday() },
+    search: () => ({ date: getToday() }),
   },
   { label: "Routines", to: "/routines", icon: DocumentTextIcon },
   { label: "Settings", to: "/settings", icon: Cog6ToothIcon },
