@@ -8,7 +8,6 @@ import { Modal } from "@/components/core";
 import { SectionHeaderWithAction } from "@/components/layout";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { categoryByIdQueryOptions } from "@/features/categories/api/queries";
-import { ensureValidId } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
 export const Route = createFileRoute(
@@ -24,8 +23,6 @@ function RouteComponent() {
   const navigateBack = useNavigateBack({ fallback: "/settings/categories" });
 
   useEffect(() => setIsOpen(true), []);
-
-  const categoryNumber = ensureValidId(categoryId);
 
   const color = getColorByName(data.color);
 
@@ -44,7 +41,7 @@ function RouteComponent() {
         }
       />
       <EditCategoryForm
-        categoryId={categoryNumber}
+        categoryId={categoryId}
         initialValues={{
           name: data.name,
           color: { value: color.id, label: color.name },

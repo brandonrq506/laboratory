@@ -31,7 +31,7 @@ function RouteComponent() {
             <Link
               from="/settings/categories"
               to="$categoryId/edit"
-              params={{ categoryId: String(category.id) }}
+              params={{ categoryId: category.id }}
               key={category.id}>
               <CategoryBadge category={category} />
             </Link>

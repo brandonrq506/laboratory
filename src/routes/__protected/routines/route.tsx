@@ -40,7 +40,7 @@ function RouteComponent() {
             <Link
               key={routine.id}
               to="/routines/$routineId/edit"
-              params={{ routineId: String(routine.id) }}
+              params={{ routineId: routine.id }}
               className="max-h-56 w-full xl:max-w-md">
               <RoutineCard routine={routine} />
             </Link>

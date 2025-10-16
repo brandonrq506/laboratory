@@ -17,7 +17,7 @@ export const RunningTimer = ({ task }: Props) => {
     <div className="flex items-center gap-2">
       <Link
         to="/timer/$taskId/edit"
-        params={{ taskId: String(task.id) }}
+        params={{ taskId: task.id }}
         className="w-full">
         <div className="flex items-center gap-1.5">
           <Dot sizeStyles="size-2" colorStyles={color.fillClass} />

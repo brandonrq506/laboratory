@@ -33,7 +33,7 @@ function RouteComponent() {
       <br />
       <SectionHeaderWithAction
         title="Activities"
-        action={<AddActivityRoutineMenu routineId={Number(routineId)} />}
+        action={<AddActivityRoutineMenu routineId={routineId} />}
       />
       <RoutineActivityList />
       <br />

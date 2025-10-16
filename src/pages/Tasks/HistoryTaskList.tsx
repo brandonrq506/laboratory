@@ -18,7 +18,7 @@ export const HistoryTaskList = () => {
         <Link
           key={task.id}
           to="/history/$taskId"
-          params={{ taskId: String(task.id) }}
+          params={{ taskId: task.id }}
           search={{ date }}>
           <CompletedTask task={task as CompletedTaskAPI} />
         </Link>

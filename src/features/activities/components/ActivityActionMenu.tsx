@@ -18,7 +18,7 @@ export const ActivityActionMenu = ({ activity }: Props) => {
         <MenuItem>
           <Link
             to="/activities/$activityId/edit"
-            params={{ activityId: String(activity.id) }}
+            params={{ activityId: activity.id }}
             className="group flex w-full items-center gap-2 px-4 py-2 text-sm text-nowrap text-blue-600 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
             <PencilIcon aria-hidden className="size-4" />
             {UPDATE} {ACTIVITY}
@@ -30,7 +30,7 @@ export const ActivityActionMenu = ({ activity }: Props) => {
         <MenuItem>
           <Link
             to="/activities/$activityId/delete"
-            params={{ activityId: String(activity.id) }}
+            params={{ activityId: activity.id }}
             className="group flex w-full items-center gap-2 px-4 py-2 text-sm text-nowrap text-red-600 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
             <TrashIcon aria-hidden className="size-4" />
             {DELETE} {ACTIVITY}

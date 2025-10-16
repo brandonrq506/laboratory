@@ -32,7 +32,7 @@ export const TodayCompletedTaskList = () => {
           <Link
             key={task.id}
             to="/timer/$taskId/edit"
-            params={{ taskId: String(task.id) }}>
+            params={{ taskId: task.id }}>
             <CompletedTask task={task} />
           </Link>
         )}
