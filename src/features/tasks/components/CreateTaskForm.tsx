@@ -3,7 +3,7 @@ import { useCreateTask } from "../api/tanstack/useCreateTask";
 import { NewTaskForm as FormType } from "../types/newTaskForm";
 import { NewTaskForm } from "./NewTaskForm";
 
-import { parse, set } from "date-fns";
+import { parse, set, startOfToday } from "date-fns";
 import { getRouteApi } from "@tanstack/react-router";
 import { splitHHMM } from "@/utils";
 
@@ -14,7 +14,7 @@ export const CreateTaskForm = () => {
   const { date: dateParam } = routeApi.useSearch();
   const { mutateAsync } = useCreateTask();
 
-  const date = parse(dateParam, "yyyy-MM-dd", new Date());
+  const date = parse(dateParam, "yyyy-MM-dd", startOfToday());
 
   const handleSubmit = async (data: FormType) => {
     const [startHours, startMinutes] = splitHHMM(data.start_time);
