@@ -9,7 +9,7 @@ import { PageHeaderWithActions } from "@/components/layout";
 import { categoryListQueryOptions } from "@/features/categories/api/queries";
 
 export const Route = createFileRoute("/__protected/settings/categories")({
-  beforeLoad: ({ context: { queryClient } }) =>
+  loader: ({ context: { queryClient } }) =>
     queryClient.ensureQueryData(categoryListQueryOptions()),
   component: RouteComponent,
 });
@@ -31,7 +31,7 @@ function RouteComponent() {
             <Link
               from="/settings/categories"
               to="$categoryId/edit"
-              params={{ categoryId: String(category.id) }}
+              params={{ categoryId: category.id }}
               key={category.id}>
               <CategoryBadge category={category} />
             </Link>

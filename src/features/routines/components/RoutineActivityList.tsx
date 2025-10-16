@@ -11,8 +11,6 @@ export const RoutineActivityList = () => {
   const { routineId } = routeApi.useParams();
   const { data } = useSuspenseQuery(routineByIdQueryOptions(routineId));
 
-  const routineNumber = Number(routineId);
-
   const routine_activities = data?.activities;
 
   if (!routine_activities || routine_activities.length === 0) {
@@ -21,7 +19,7 @@ export const RoutineActivityList = () => {
 
   return (
     <SortableRoutineActivityList
-      routineId={routineNumber}
+      routineId={routineId}
       activities={routine_activities}
     />
   );

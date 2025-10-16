@@ -8,11 +8,11 @@ export const categoryKeys = {
   all: [{ feature: CATEGORIES_ENDPOINT }] as const,
   lists: () => [{ ...categoryKeys.all[0], entity: "list" }] as const,
   details: () => [{ ...categoryKeys.all[0], entity: "details" }] as const,
-  detail: (categoryId: string | number) =>
-    [{ ...categoryKeys.details()[0], categoryId: String(categoryId) }] as const,
+  detail: (categoryId: number) =>
+    [{ ...categoryKeys.details()[0], categoryId }] as const,
 };
 
-export const categoryByIdQueryOptions = (categoryId: string | number) => {
+export const categoryByIdQueryOptions = (categoryId: number) => {
   return queryOptions({
     queryKey: categoryKeys.detail(categoryId),
     queryFn: getCategory,

@@ -8,11 +8,11 @@ export const activityKeys = {
   all: [{ feature: ACTIVITIES_ENDPOINT }] as const,
   lists: () => [{ ...activityKeys.all[0], entity: "list" }] as const,
   details: () => [{ ...activityKeys.all[0], entity: "details" }] as const,
-  detail: (activityId: string | number) =>
-    [{ ...activityKeys.details()[0], activityId: String(activityId) }] as const,
+  detail: (activityId: number) =>
+    [{ ...activityKeys.details()[0], activityId }] as const,
 };
 
-export const activityByIdQueryOptions = (activityId: string | number) => {
+export const activityByIdQueryOptions = (activityId: number) => {
   return queryOptions({
     queryKey: activityKeys.detail(activityId),
     queryFn: getActivity,

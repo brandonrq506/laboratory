@@ -9,7 +9,7 @@ import { HeadingLarge } from "@/components/layout";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/__protected/settings/account")({
-  beforeLoad: ({ context: { queryClient } }) =>
+  loader: ({ context: { queryClient } }) =>
     queryClient.ensureQueryData(userPreferencesOptions()),
   component: RouteComponent,
 });

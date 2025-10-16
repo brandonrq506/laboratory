@@ -57,7 +57,7 @@ export const SortableTask = ({ task }: Props) => {
             className="grow"
             from="/timer"
             to="$taskId/edit"
-            params={{ taskId: String(task.id) }}>
+            params={{ taskId: task.id }}>
             <div className="flex items-center gap-1.5">
               <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
               <p className="text-sm font-semibold">

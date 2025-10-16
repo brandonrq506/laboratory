@@ -28,7 +28,7 @@ function RouteComponent() {
   return (
     <Modal isOpen={isOpen} onClose={() => navigateBack()}>
       <EditActivityForm
-        activityId={parseInt(activityId)}
+        activityId={activityId}
         initialValues={{
           exp_time_hours: expected_time.hours,
           exp_time_minutes: expected_time.minutes,

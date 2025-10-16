@@ -1,7 +1,9 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/__protected/")({
-  beforeLoad: () => redirect({ to: "/timer" }),
+  beforeLoad: () => {
+    throw redirect({ to: "/timer" });
+  },
   component: RouteComponent,
 });
 

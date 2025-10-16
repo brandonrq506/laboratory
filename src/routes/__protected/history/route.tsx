@@ -17,7 +17,7 @@ export const Route = createFileRoute("/__protected/history")({
     return validateDateSearch(search.date as string | undefined);
   },
   loaderDeps: ({ search: { date } }) => ({ date }),
-  beforeLoad: ({ context: { queryClient }, search: { date } }) =>
+  loader: ({ context: { queryClient }, deps: { date } }) =>
     queryClient.ensureQueryData(historyTasksQueryOptions(date)),
   component: RouteComponent,
 });

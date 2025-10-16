@@ -13,7 +13,7 @@ export const EditRoutineActions = () => {
         <span className="sr-only">Delete Routine</span>
         <TrashIcon className="size-5 text-red-600" />
       </Link>
-      <PlayRoutineButton routineId={Number(routineId)} />
+      <PlayRoutineButton routineId={routineId} />
     </div>
   );
 };
