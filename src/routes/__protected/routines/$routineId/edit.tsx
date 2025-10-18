@@ -23,21 +23,29 @@ function RouteComponent() {
   useEffect(() => setIsOpen(true), []);
 
   return (
-    <FullHeightModal isOpen={isOpen} onClose={navigateBack}>
-      <HeadingMedium
-        title="Edit Routine"
-        description="Customize your routine by updating the name and managing activities"
-      />
-      <br />
-      <RoutineNameForm />
-      <br />
-      <SectionHeaderWithAction
-        title="Activities"
-        action={<AddActivityRoutineMenu routineId={routineId} />}
-      />
-      <RoutineActivityList />
-      <br />
-      <EditRoutineActions />
+    <FullHeightModal
+      isOpen={isOpen}
+      onClose={navigateBack}
+      className="flex max-h-[calc(100dvh-2rem)] min-h-0 flex-col overflow-visible sm:max-h-[calc(100dvh-4rem)]">
+      <div className="flex flex-1 min-h-0 flex-col gap-6">
+        <div className="flex flex-col gap-4">
+          <HeadingMedium
+            title="Edit Routine"
+            description="Customize your routine by updating the name and managing activities"
+          />
+          <RoutineNameForm />
+          <SectionHeaderWithAction
+            title="Activities"
+            action={<AddActivityRoutineMenu routineId={routineId} />}
+          />
+        </div>
+        <div className="flex flex-1 min-h-0 flex-col gap-6">
+          <div className="flex-1 overflow-y-auto px-3 [scrollbar-gutter:stable]">
+            <RoutineActivityList />
+          </div>
+          <EditRoutineActions />
+        </div>
+      </div>
     </FullHeightModal>
   );
 }
