@@ -1,5 +1,6 @@
 export { Badge } from "./Badge/Badge";
 export { Button } from "./Button/Button";
+export { FullHeightModal } from "./Modal/FullHeightModal";
 export { IconButton } from "./Button/IconButton";
 export { LinkButton } from "./Button/LinkButton";
 export { CopyToClipboardButton } from "./Button/CopyToClipboardButton";
