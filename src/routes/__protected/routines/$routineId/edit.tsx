@@ -8,7 +8,7 @@ import {
 } from "@/features/routines/components";
 import { HeadingMedium, SectionHeaderWithAction } from "@/components/layout";
 import { EditRoutineActions } from "@/pages/routines/EditRoutinePage/EditRoutineActions";
-import { Modal } from "@/components/core";
+import { FullHeightModal } from "@/components/core";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/__protected/routines/$routineId/edit")({
@@ -23,21 +23,29 @@ function RouteComponent() {
   useEffect(() => setIsOpen(true), []);
 
   return (
-    <Modal isOpen={isOpen} onClose={navigateBack}>
-      <HeadingMedium
-        title="Edit Routine"
-        description="Customize your routine by updating the name and managing activities"
-      />
-      <br />
-      <RoutineNameForm />
-      <br />
-      <SectionHeaderWithAction
-        title="Activities"
-        action={<AddActivityRoutineMenu routineId={routineId} />}
-      />
-      <RoutineActivityList />
-      <br />
-      <EditRoutineActions />
-    </Modal>
+    <FullHeightModal
+      isOpen={isOpen}
+      onClose={navigateBack}
+      className="flex max-h-[calc(100dvh-2rem)] min-h-0 flex-col sm:max-h-[calc(100dvh-4rem)]">
+      <div className="flex min-h-0 flex-1 flex-col gap-6">
+        <div className="flex flex-col gap-4">
+          <HeadingMedium
+            title="Edit Routine"
+            description="Customize your routine by updating the name and managing activities"
+          />
+          <RoutineNameForm />
+          <SectionHeaderWithAction
+            title="Activities"
+            action={<AddActivityRoutineMenu routineId={routineId} />}
+          />
+        </div>
+        <div className="flex min-h-0 flex-1 flex-col gap-6">
+          <div className="flex-1 overflow-y-auto px-3 [scrollbar-gutter:stable]">
+            <RoutineActivityList />
+          </div>
+          <EditRoutineActions />
+        </div>
+      </div>
+    </FullHeightModal>
   );
 }
