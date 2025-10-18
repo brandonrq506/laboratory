@@ -26,7 +26,7 @@ function RouteComponent() {
     <FullHeightModal
       isOpen={isOpen}
       onClose={navigateBack}
-      className="flex max-h-[calc(100dvh-2rem)] min-h-0 flex-col overflow-visible sm:max-h-[calc(100dvh-4rem)]">
+      className="flex max-h-[calc(100dvh-2rem)] min-h-0 flex-col sm:max-h-[calc(100dvh-4rem)]">
       <div className="flex min-h-0 flex-1 flex-col gap-6">
         <div className="flex flex-col gap-4">
           <HeadingMedium
