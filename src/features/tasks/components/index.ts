@@ -4,8 +4,6 @@ export { DeleteAllScheduledTasks } from "./DeleteAllScheduledTasks";
 export { EditInProgressTaskForm } from "./EditInProgressTaskForm";
 export { EditScheduledTaskForm } from "./EditScheduledTaskForm";
 export { ExampleCompletedTask } from "./ExampleCompletedTask";
-export { ScheduledTask } from "./ScheduledTask";
 export { TaskList } from "./TaskList";
-export { QuickCreateTaskMenu } from "./QuickCreateTaskMenu";
 export { SortableTask } from "./SortableTask";
 export { SortableTaskList } from "./SortableTaskList";

@@ -1,4 +1,3 @@
-export { AddActivityRoutineCombobox } from "./AddActivityRoutineCombobox";
 export { AddActivityRoutineMenu } from "./AddActivityRoutineMenu";
 export { DeleteActivityRoutine } from "./DeleteActivityRoutine";
 export { DeleteRoutineDialog } from "./DeleteRoutineDialog";
