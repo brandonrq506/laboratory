@@ -8,7 +8,7 @@ import {
 } from "@/features/routines/components";
 import { HeadingMedium, SectionHeaderWithAction } from "@/components/layout";
 import { EditRoutineActions } from "@/pages/routines/EditRoutinePage/EditRoutineActions";
-import { Modal } from "@/components/core";
+import { FullHeightModal } from "@/components/core";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/__protected/routines/$routineId/edit")({
@@ -23,7 +23,7 @@ function RouteComponent() {
   useEffect(() => setIsOpen(true), []);
 
   return (
-    <Modal isOpen={isOpen} onClose={navigateBack}>
+    <FullHeightModal isOpen={isOpen} onClose={navigateBack}>
       <HeadingMedium
         title="Edit Routine"
         description="Customize your routine by updating the name and managing activities"
@@ -38,6 +38,6 @@ function RouteComponent() {
       <RoutineActivityList />
       <br />
       <EditRoutineActions />
-    </Modal>
+    </FullHeightModal>
   );
 }
