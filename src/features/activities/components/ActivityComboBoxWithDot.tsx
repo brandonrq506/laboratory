@@ -28,7 +28,10 @@ export const ActivityComboBoxWithDot = <T extends FieldValues>({
   ...controllerProps
 }: UseControllerProps<T> & ActivityComboBoxWithDotProps) => {
   const { data } = useQuery(activityListQueryOptions());
-  const { field, fieldState } = useController(controllerProps);
+  const {
+    field: { onChange, onBlur, value, name, ref },
+    fieldState,
+  } = useController(controllerProps);
 
   const options = (data ?? []).map((activity) => ({
     value: activity.id,
@@ -57,11 +60,11 @@ export const ActivityComboBoxWithDot = <T extends FieldValues>({
       label="Activities"
       options={options}
       showAsterisk={showAsterisk}
-      onChange={field.onChange}
-      onBlur={field.onBlur}
-      value={field.value}
-      name={field.name}
-      ref={field.ref}
+      onChange={onChange}
+      onBlur={onBlur}
+      value={value}
+      name={name}
+      ref={ref}
       error={fieldState.error?.message}
       renderOption={renderOption}
     />

@@ -18,7 +18,10 @@ export const ControlComboBox = <T extends FieldValues>({
   showAsterisk,
   ...controllerProps
 }: ControlledComboBoxProps<T>) => {
-  const { field, fieldState } = useController(controllerProps);
+  const {
+    field: { onChange, onBlur, value, name, ref },
+    fieldState,
+  } = useController(controllerProps);
   return (
     <ComboBox
       description={description}
@@ -27,11 +30,11 @@ export const ControlComboBox = <T extends FieldValues>({
       label={label}
       options={options}
       showAsterisk={showAsterisk}
-      onChange={field.onChange}
-      onBlur={field.onBlur}
-      value={field.value}
-      name={field.name}
-      ref={field.ref}
+      onChange={onChange}
+      onBlur={onBlur}
+      value={value}
+      name={name}
+      ref={ref}
       error={fieldState.error?.message}
     />
   );

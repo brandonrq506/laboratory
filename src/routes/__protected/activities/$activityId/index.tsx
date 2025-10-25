@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigateBack } from "@/hooks";
 
 import { Modal } from "@/components/core";
@@ -11,12 +10,9 @@ export const Route = createFileRoute("/__protected/activities/$activityId/")({
 
 function RouteComponent() {
   const navigateBack = useNavigateBack({ fallback: "/activities" });
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => setIsOpen(true), []);
 
   return (
-    <Modal isOpen={isOpen} onClose={navigateBack}>
+    <Modal isOpen={true} onClose={navigateBack}>
       <SectionUnderConstruction />
     </Modal>
   );

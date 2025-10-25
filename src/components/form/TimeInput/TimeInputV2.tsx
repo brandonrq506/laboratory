@@ -56,7 +56,10 @@ export const TimeInputV2 = <T extends FieldValues>({
   showAsterisk = false,
   ...props
 }: ControlledTimeInputProps<T>) => {
-  const { field, fieldState } = useController({
+  const {
+    field: { onChange, onBlur, value, name: rhfName, ref },
+    fieldState,
+  } = useController({
     defaultValue,
     disabled,
     name,
@@ -66,11 +69,11 @@ export const TimeInputV2 = <T extends FieldValues>({
   });
   const error = fieldState.error;
 
-  const localized_24h_value = format(field.value, "HH:mm");
+  const localized_24h_value = format(value, "HH:mm");
 
   const convertBackToUTC = (hhmmss: string) => {
     const [hours, minutes] = hhmmss.split(":");
-    const localDate = new Date(field.value);
+    const localDate = new Date(value);
     localDate.setHours(Number(hours), Number(minutes));
     return localDate.toISOString();
   };
@@ -88,12 +91,12 @@ export const TimeInputV2 = <T extends FieldValues>({
         type="time"
         onChange={(event) => {
           const utcString = convertBackToUTC(event.target.value);
-          field.onChange(utcString);
+          onChange(utcString);
         }}
-        onBlur={field.onBlur}
+        onBlur={onBlur}
         value={localized_24h_value}
-        name={field.name}
-        ref={field.ref}
+        name={rhfName}
+        ref={ref}
         aria-invalid={Boolean(error)}
         invalid={Boolean(error)}
         {...props}

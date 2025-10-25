@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigateBack } from "@/hooks";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -18,16 +17,13 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const { categoryId } = Route.useParams();
-  const [isOpen, setIsOpen] = useState(false);
   const { data } = useSuspenseQuery(categoryByIdQueryOptions(categoryId));
   const navigateBack = useNavigateBack({ fallback: "/settings/categories" });
-
-  useEffect(() => setIsOpen(true), []);
 
   const color = getColorByName(data.color);
 
   return (
-    <Modal isOpen={isOpen} onClose={navigateBack}>
+    <Modal isOpen={true} onClose={navigateBack}>
       <SectionHeaderWithAction
         className="mb-4"
         title="Edit Category"

@@ -18,7 +18,10 @@ export const ControlledSelect = <T extends FieldValues>({
   showAsterisk,
   ...controllerProps
 }: ControlledSelectType<T>) => {
-  const { field, fieldState } = useController(controllerProps);
+  const {
+    field: { onChange, onBlur, value, name, ref },
+    fieldState,
+  } = useController(controllerProps);
 
   return (
     <Select
@@ -29,11 +32,11 @@ export const ControlledSelect = <T extends FieldValues>({
       options={options}
       showAsterisk={showAsterisk}
       error={fieldState.error?.message}
-      onChange={field.onChange}
-      onBlur={field.onBlur}
-      value={field.value}
-      name={field.name}
-      ref={field.ref}
+      onChange={onChange}
+      onBlur={onBlur}
+      value={value}
+      name={name}
+      ref={ref}
     />
   );
 };

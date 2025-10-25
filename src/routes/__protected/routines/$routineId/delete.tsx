@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigateBack } from "@/hooks";
 
 import { DeleteRoutineDialog } from "@/features/routines/components";
@@ -12,15 +11,12 @@ export const Route = createFileRoute("/__protected/routines/$routineId/delete")(
 
 function RouteComponent() {
   const navigateBack = useNavigateBack({ fallback: "/routines" });
-  const [isOpen, setIsOpen] = useState(false);
   const navigate = Route.useNavigate();
   const { routineId } = Route.useParams();
 
-  useEffect(() => setIsOpen(true), []);
-
   return (
     <DeleteRoutineDialog
-      isOpen={isOpen}
+      isOpen={true}
       onClose={navigateBack}
       onDelete={() => navigate({ to: "/routines", replace: true })}
       routineId={routineId}

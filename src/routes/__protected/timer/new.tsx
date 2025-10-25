@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigateBack } from "@/hooks";
 
 import { Modal } from "@/components/core";
@@ -10,14 +9,11 @@ export const Route = createFileRoute("/__protected/timer/new")({
 });
 
 function RouteComponent() {
-  const [isOpen, setIsOpen] = useState(false);
   const navigateBack = useNavigateBack({ fallback: "/timer" });
-
-  useEffect(() => setIsOpen(true), []);
 
   return (
     <div>
-      <Modal isOpen={isOpen} onClose={navigateBack}>
+      <Modal isOpen={true} onClose={navigateBack}>
         <NewTodayCompletedTaskForm />
       </Modal>
     </div>
