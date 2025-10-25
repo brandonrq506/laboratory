@@ -1,4 +1,3 @@
-"use no memo";
 import {
   createColumnHelper,
   flexRender,
@@ -22,6 +21,8 @@ import { secondsToHHmm } from "@/utils";
 const columnHelper = createColumnHelper<ActivityAPI>();
 
 export const ActivityTable = () => {
+  // eslint-disable-next-line react-compiler/react-compiler
+  "use no memo";
   const { data, isPending, isSuccess } = useQuery(activityListQueryOptions());
 
   const activities = useMemo(() => data ?? [], [data]);
