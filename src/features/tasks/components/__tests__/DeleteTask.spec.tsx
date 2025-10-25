@@ -10,6 +10,8 @@ describe("DeleteTaskDialog", () => {
 
     await user.click(screen.getByRole("button", { name: "Delete Task" }));
 
+    await screen.findByRole("dialog", { name: "Delete Task" });
+
     expect(
       screen.getByRole("dialog", { name: "Delete Task" }),
     ).toBeInTheDocument();

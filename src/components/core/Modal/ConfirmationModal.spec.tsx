@@ -16,6 +16,8 @@ describe("ConfirmationModal", () => {
       />,
     );
 
+    await screen.findByRole("dialog", { name: "Title" });
+
     expect(await screen.findByText("Title")).toBeInTheDocument();
     expect(await screen.findByText("Description")).toBeInTheDocument();
     expect(await screen.findByText("Close")).toBeInTheDocument();
@@ -52,6 +54,8 @@ describe("ConfirmationModal", () => {
         actions={<button>Close</button>}
       />,
     );
+
+    await screen.findByRole("dialog", { name: "Title" });
 
     await user.keyboard("{Escape}");
 

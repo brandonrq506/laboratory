@@ -19,6 +19,8 @@ describe("DeleteActivityDialog", () => {
       />,
     );
 
+    await screen.findByRole("button", { name: "Cancel" });
+
     const cancelBtn = screen.getByRole("button", { name: "Cancel" });
     await user.click(cancelBtn);
 
@@ -36,6 +38,8 @@ describe("DeleteActivityDialog", () => {
         activity={activity}
       />,
     );
+
+    await screen.findByRole("button", { name: "Confirm" });
 
     const deleteBtn = screen.getByRole("button", { name: "Confirm" });
     await user.click(deleteBtn);

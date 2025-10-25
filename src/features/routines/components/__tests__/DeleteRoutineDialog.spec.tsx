@@ -12,6 +12,8 @@ describe("DeleteRoutineDialog", () => {
       <DeleteRoutineDialog isOpen={true} onClose={onClose} routineId={1} />,
     );
 
+    await screen.findByRole("dialog", { name: "Delete Routine" });
+
     const cancelBtn = screen.getByRole("button", { name: "Cancel" });
     await user.click(cancelBtn);
 
@@ -25,6 +27,8 @@ describe("DeleteRoutineDialog", () => {
     render(
       <DeleteRoutineDialog isOpen={true} onClose={onClose} routineId={1} />,
     );
+
+    await screen.findByRole("dialog", { name: "Delete Routine" });
 
     const deleteBtn = screen.getByRole("button", { name: "Confirm" });
     await user.click(deleteBtn);
