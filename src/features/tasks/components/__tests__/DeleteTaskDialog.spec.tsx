@@ -10,6 +10,8 @@ describe("DeleteTaskDialog", () => {
 
     render(<DeleteTaskDialog isOpen={true} onClose={onClose} taskId={3407} />);
 
+    await screen.findByRole("button", { name: "Cancel" });
+
     const cancelBtn = screen.getByRole("button", { name: "Cancel" });
     await user.click(cancelBtn);
 
@@ -21,6 +23,8 @@ describe("DeleteTaskDialog", () => {
     const onClose = vi.fn();
 
     render(<DeleteTaskDialog isOpen={true} onClose={onClose} taskId={3407} />);
+
+    await screen.findByRole("button", { name: "Confirm" });
 
     const deleteBtn = screen.getByRole("button", { name: "Confirm" });
     await user.click(deleteBtn);

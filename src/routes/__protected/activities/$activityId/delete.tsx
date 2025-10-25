@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigateBack } from "@/hooks";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -14,15 +13,12 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const { activityId } = Route.useParams();
-  const [isOpen, setIsOpen] = useState(false);
   const navigateBack = useNavigateBack({ fallback: "/activities" });
   const { data } = useSuspenseQuery(activityByIdQueryOptions(activityId));
 
-  useEffect(() => setIsOpen(true), []);
-
   return (
     <DeleteActivityDialog
-      isOpen={isOpen}
+      isOpen={true}
       onClose={navigateBack}
       activity={data}
     />

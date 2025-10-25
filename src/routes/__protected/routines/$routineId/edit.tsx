@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigateBack } from "@/hooks";
 
 import {
@@ -17,14 +16,11 @@ export const Route = createFileRoute("/__protected/routines/$routineId/edit")({
 
 function RouteComponent() {
   const { routineId } = Route.useParams();
-  const [isOpen, setIsOpen] = useState(false);
   const navigateBack = useNavigateBack({ fallback: "/routines" });
-
-  useEffect(() => setIsOpen(true), []);
 
   return (
     <FullHeightModal
-      isOpen={isOpen}
+      isOpen={true}
       onClose={navigateBack}
       className="flex max-h-[calc(100dvh-2rem)] min-h-0 flex-col sm:max-h-[calc(100dvh-4rem)]">
       <div className="flex min-h-0 flex-1 flex-col gap-6">

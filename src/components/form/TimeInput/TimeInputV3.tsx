@@ -55,7 +55,10 @@ export const TimeInputV3 = <T extends FieldValues>({
   showAsterisk = false,
   ...props
 }: ControlledTimeInputProps<T>) => {
-  const { field, fieldState } = useController({
+  const {
+    field: { onChange, onBlur, value, name: rhfName, ref },
+    fieldState,
+  } = useController({
     defaultValue,
     disabled,
     name,
@@ -63,6 +66,7 @@ export const TimeInputV3 = <T extends FieldValues>({
     rules,
     shouldUnregister,
   });
+
   const error = fieldState.error;
 
   return (
@@ -76,11 +80,11 @@ export const TimeInputV3 = <T extends FieldValues>({
       </Label>
       <Input
         type="time"
-        onChange={field.onChange}
-        onBlur={field.onBlur}
-        value={field.value}
-        name={field.name}
-        ref={field.ref}
+        onChange={onChange}
+        onBlur={onBlur}
+        value={value}
+        name={rhfName}
+        ref={ref}
         aria-invalid={Boolean(error)}
         invalid={Boolean(error)}
         {...props}

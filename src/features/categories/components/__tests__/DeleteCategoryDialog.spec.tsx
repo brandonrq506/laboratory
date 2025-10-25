@@ -18,6 +18,8 @@ describe("DeleteCategoryDialog", () => {
       />,
     );
 
+    await screen.findByRole("button", { name: "Confirm" });
+
     const deleteBtn = screen.getByRole("button", { name: "Confirm" });
     await user.click(deleteBtn);
 

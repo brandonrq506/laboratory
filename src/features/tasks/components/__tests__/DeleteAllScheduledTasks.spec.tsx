@@ -25,6 +25,8 @@ describe("DeleteAllScheduledTasks", () => {
     const btn_text = "Delete Scheduled Tasks";
     await user.click(screen.getByRole("button", { name: btn_text }));
 
+    await screen.findByRole("dialog");
+
     expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
 
@@ -34,6 +36,8 @@ describe("DeleteAllScheduledTasks", () => {
 
     const btn_text = "Delete Scheduled Tasks";
     await user.click(screen.getByRole("button", { name: btn_text }));
+
+    await screen.findByRole("dialog");
 
     expect(
       screen.getByText("Are you sure you want to delete all scheduled tasks?"),

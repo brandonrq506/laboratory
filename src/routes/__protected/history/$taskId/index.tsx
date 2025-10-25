@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigateBack } from "@/hooks";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -12,17 +11,14 @@ export const Route = createFileRoute("/__protected/history/$taskId/")({
 });
 
 function RouteComponent() {
-  const [isOpen, setIsOpen] = useState(false);
   const { taskId } = Route.useParams();
   const { data } = useSuspenseQuery(taskByIdQueryOptions(taskId));
   const navigateBack = useNavigateBack({ fallback: "/history" });
 
-  useEffect(() => setIsOpen(true), []);
-
   if (data.status !== "completed") return null;
 
   return (
-    <Modal isOpen={isOpen} onClose={navigateBack}>
+    <Modal isOpen={true} onClose={navigateBack}>
       <EditCompletedTaskForm task={data} fallbackNavigation="/history" />
     </Modal>
   );

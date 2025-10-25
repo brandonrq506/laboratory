@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigateBack } from "@/hooks";
 
 import { CreateRoutineForm } from "@/features/routines/components/CreateRoutineForm";
@@ -10,13 +9,10 @@ export const Route = createFileRoute("/__protected/routines/new")({
 });
 
 function RouteComponent() {
-  const [isOpen, setIsOpen] = useState(false);
   const navigateBack = useNavigateBack({ fallback: "/routines" });
 
-  useEffect(() => setIsOpen(true), []);
-
   return (
-    <Modal isOpen={isOpen} onClose={navigateBack}>
+    <Modal isOpen={true} onClose={navigateBack}>
       <CreateRoutineForm />
     </Modal>
   );

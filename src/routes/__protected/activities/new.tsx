@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigateBack } from "@/hooks";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -15,17 +14,14 @@ export const Route = createFileRoute("/__protected/activities/new")({
 });
 
 function RouteComponent() {
-  const [isOpen, setIsOpen] = useState(false);
   const { data } = useSuspenseQuery(categoryListQueryOptions());
   const navigateBack = useNavigateBack({ fallback: "/activities" });
-
-  useEffect(() => setIsOpen(true), []);
 
   const defaultCategory = getFirstCategoryAsOption(data);
 
   return (
     <div>
-      <Modal isOpen={isOpen} onClose={navigateBack}>
+      <Modal isOpen={true} onClose={navigateBack}>
         <CreateActivityForm
           initialValues={{
             exp_time_minutes: 30,

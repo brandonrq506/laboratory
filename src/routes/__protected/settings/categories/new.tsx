@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigateBack } from "@/hooks";
 
 import { CreateCategoryForm } from "@/features/categories/components/CreateCategoryForm";
@@ -10,14 +9,11 @@ export const Route = createFileRoute("/__protected/settings/categories/new")({
 });
 
 function RouteComponent() {
-  const [isOpen, setIsOpen] = useState(false);
   const navigateBack = useNavigateBack({ fallback: "/settings/categories" });
-
-  useEffect(() => setIsOpen(true), []);
 
   return (
     <div>
-      <Modal isOpen={isOpen} onClose={navigateBack}>
+      <Modal isOpen={true} onClose={navigateBack}>
         <CreateCategoryForm />
       </Modal>
     </div>

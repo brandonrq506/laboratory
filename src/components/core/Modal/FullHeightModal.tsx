@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import clsx from "clsx";
 
@@ -14,8 +16,26 @@ export const FullHeightModal = ({
   children,
   className,
 }: ModalProps) => {
+  const [internalOpen, setInternalOpen] = useState(false);
+
+  /**
+   * Synchronize with HeadlessUI's Dialog animation system by delaying the open state.
+   * This ensures the enter animation is visible when used with client-side routing
+   * where components may mount before being visible to the user.
+   */
+  useEffect(() => {
+    if (isOpen) {
+      const ANIMATION_DELAY_MS = 10;
+      const timer = setTimeout(() => setInternalOpen(true), ANIMATION_DELAY_MS);
+      return () => clearTimeout(timer);
+    }
+
+    const timer = setTimeout(() => setInternalOpen(false), 0);
+    return () => clearTimeout(timer);
+  }, [isOpen]);
+
   return (
-    <Dialog open={isOpen} onClose={onClose} className="relative z-10">
+    <Dialog open={internalOpen} onClose={onClose} className="relative z-10">
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-slate-800/50 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
