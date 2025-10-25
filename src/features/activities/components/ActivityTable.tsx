@@ -1,3 +1,4 @@
+"use no memo";
 import {
   createColumnHelper,
   flexRender,
@@ -62,6 +63,7 @@ export const ActivityTable = () => {
     [],
   );
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable<ActivityAPI>({
     columns,
     data: activities,
