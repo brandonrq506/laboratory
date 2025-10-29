@@ -28,10 +28,8 @@ export default defineConfig({
       provider: "istanbul",
       enabled: true,
       reporter: ["text", "html", "clover", "json"],
-      extension: ["ts", "tsx"],
       exclude: ["src/routes", ...coverageConfigDefaults.exclude],
     },
     setupFiles: ["./src/test/setup.ts"],
   },
 });
-// include: ['src/**/__tests__/*'], should test if this really applies to __tests__ deep nested.
