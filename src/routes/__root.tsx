@@ -3,13 +3,13 @@ import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import { Fragment } from "react/jsx-runtime";
 import { TanStackDevtoolsWrapper } from "@/libs/tanstack-devtools";
 
-import type { AuthContextType } from "@/features/auth/stores/AuthContextType";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import type { QueryClient } from "@tanstack/react-query";
+import type { useClerkAuth } from "@/features/auth/clerk/use-clerk-auth";
 
 interface MyRouterContext {
   queryClient: QueryClient;
-  auth: AuthContextType;
+  auth: ReturnType<typeof useClerkAuth>;
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
