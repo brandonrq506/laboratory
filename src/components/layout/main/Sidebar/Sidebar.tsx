@@ -9,9 +9,7 @@ import {
 
 import { DesktopSidebarToggle } from "@/features/userPreferences/components";
 import { Items } from "./Items";
-import { LinkedInProfile } from "@/components/core";
 import { LogoutButton } from "@/features/auth/components";
-import { Username } from "@/features/user/components";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import appLogo from "@/assets/app_logo.png";
 import clsx from "clsx";
@@ -67,11 +65,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
               <nav className="flex flex-1 flex-col">
                 <ul role="list" className="flex flex-1 flex-col gap-y-7">
                   <Items onClose={onClose} isMobile={true} />
-                  <li className="mt-auto mb-4 flex items-center justify-between">
-                    <div className="flex gap-2">
-                      <LinkedInProfile />
-                      <Username />
-                    </div>
+                  <li className="mt-auto mb-4">
                     <LogoutButton />
                   </li>
                 </ul>
@@ -108,14 +102,6 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                   "mt-auto mb-4 flex items-center",
                   isDesktopSidebarOpen ? "justify-between" : "justify-center",
                 )}>
-                <div
-                  className={clsx(
-                    "flex gap-2",
-                    !isDesktopSidebarOpen && "hidden",
-                  )}>
-                  <LinkedInProfile />
-                  <Username />
-                </div>
                 <LogoutButton />
               </li>
             </ul>
