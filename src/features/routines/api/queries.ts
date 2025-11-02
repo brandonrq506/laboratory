@@ -3,10 +3,12 @@ import { queryOptions } from "@tanstack/react-query";
 
 import { getRoutine } from "./axios/getRoutine";
 import { getRoutines } from "./axios/getRoutines";
+import { getVisibleRoutines } from "./axios/get-visible-routines";
 
 export const routineKeys = {
   all: [{ feature: ROUTINES_ENDPOINT }] as const,
   lists: () => [{ ...routineKeys.all[0], entity: "list" }] as const,
+  visible: () => [{ ...routineKeys.lists()[0], filter: "visible" }] as const,
   details: () => [{ ...routineKeys.all[0], entity: "details" }] as const,
   detail: (routineId: number) =>
     [{ ...routineKeys.details()[0], routineId }] as const,
@@ -23,5 +25,12 @@ export const routineListQueryOptions = () => {
   return queryOptions({
     queryKey: routineKeys.lists(),
     queryFn: getRoutines,
+  });
+};
+
+export const routineVisibleListQueryOptions = () => {
+  return queryOptions({
+    queryKey: routineKeys.visible(),
+    queryFn: getVisibleRoutines,
   });
 };
