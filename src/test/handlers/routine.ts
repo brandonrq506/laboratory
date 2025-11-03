@@ -10,6 +10,12 @@ export const routineHandlers = [
   http.get(BASE_URL, () => {
     return HttpResponse.json(routines, { status: 200 });
   }),
+  http.get(`${BASE_URL}/visible`, () => {
+    return HttpResponse.json(
+      routines.filter((r) => !r.hidden_at),
+      { status: 200 },
+    );
+  }),
   http.get(`${BASE_URL}/:routineId`, ({ params }) => {
     const { routineId } = params;
 

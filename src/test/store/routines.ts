@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { Routine } from "@/features/routines/types/routine";
 
 export const routines: Routine[] = [
@@ -6,6 +7,8 @@ export const routines: Routine[] = [
     created_at: "2025-04-10T18:23:05.736Z",
     name: "Morning",
     updated_at: "2025-04-10T18:23:05.736Z",
+    hidden_at: null,
+    user_id: 1,
     activities: [
       {
         id: 1,
@@ -68,6 +71,8 @@ export const routines: Routine[] = [
     created_at: "2025-04-10T19:18:23.972Z",
     name: "Workout",
     updated_at: "2025-04-10T19:18:23.972Z",
+    hidden_at: null,
+    user_id: 1,
     activities: [
       {
         id: 5,
@@ -130,6 +135,8 @@ export const routines: Routine[] = [
     created_at: "2025-04-10T19:18:23.972Z",
     name: "Swimming",
     updated_at: "2025-04-10T19:18:23.972Z",
+    hidden_at: null,
+    user_id: 1,
     activities: [],
   },
   {
@@ -137,6 +144,8 @@ export const routines: Routine[] = [
     created_at: "2025-04-13T17:32:36.646Z",
     name: "Shower",
     updated_at: "2025-04-13T17:32:36.646Z",
+    hidden_at: null,
+    user_id: 1,
     activities: [
       {
         id: 21,
