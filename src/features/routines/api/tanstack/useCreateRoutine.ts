@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { createRoutine } from "../axios/createRoutine";
-import { routineListQueryOptions } from "../queries";
+import { routineKeys } from "../queries";
 
 export const useCreateRoutine = () => {
   const queryClient = useQueryClient();
@@ -9,7 +9,7 @@ export const useCreateRoutine = () => {
   return useMutation({
     mutationFn: createRoutine,
     onSuccess: () => {
-      queryClient.invalidateQueries(routineListQueryOptions());
+      queryClient.invalidateQueries({ queryKey: routineKeys.lists() });
     },
   });
 };

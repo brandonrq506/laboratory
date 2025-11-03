@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { routineByIdQueryOptions, routineListQueryOptions } from "../queries";
+import { routineByIdQueryOptions, routineKeys } from "../queries";
 import { updateRoutine } from "../axios/updateRoutine";
 
 export const useUpdateRoutine = () => {
@@ -9,7 +9,7 @@ export const useUpdateRoutine = () => {
   return useMutation({
     mutationFn: updateRoutine,
     onSuccess: (_, { routineId }) => {
-      queryClient.invalidateQueries(routineListQueryOptions());
+      queryClient.invalidateQueries({ queryKey: routineKeys.lists() });
       queryClient.invalidateQueries(routineByIdQueryOptions(routineId));
     },
   });
