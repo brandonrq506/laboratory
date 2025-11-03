@@ -1,4 +1,5 @@
 import { ROUTINES_ENDPOINT } from "@/libs/axios";
+import { RoutineApiOptions } from "../types/routine-api-options";
 import { queryOptions } from "@tanstack/react-query";
 
 import { getRoutine } from "./axios/getRoutine";
@@ -8,7 +9,8 @@ import { getVisibleRoutines } from "./axios/get-visible-routines";
 export const routineKeys = {
   all: [{ feature: ROUTINES_ENDPOINT }] as const,
   lists: () => [{ ...routineKeys.all[0], entity: "list" }] as const,
-  visible: () => [{ ...routineKeys.lists()[0], filter: "visible" }] as const,
+  list: ({ filter = {} }: RoutineApiOptions) =>
+    [{ ...routineKeys.lists()[0], filter }] as const,
   details: () => [{ ...routineKeys.all[0], entity: "details" }] as const,
   detail: (routineId: number) =>
     [{ ...routineKeys.details()[0], routineId }] as const,
@@ -23,14 +25,14 @@ export const routineByIdQueryOptions = (routineId: number) => {
 
 export const routineListQueryOptions = () => {
   return queryOptions({
-    queryKey: routineKeys.lists(),
+    queryKey: routineKeys.list({ filter: { endpoint: "all" } }),
     queryFn: getRoutines,
   });
 };
 
 export const routineVisibleListQueryOptions = () => {
   return queryOptions({
-    queryKey: routineKeys.visible(),
+    queryKey: routineKeys.list({ filter: { endpoint: "visible" } }),
     queryFn: getVisibleRoutines,
   });
 };

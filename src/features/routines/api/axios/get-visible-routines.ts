@@ -7,9 +7,9 @@ import { routineKeys } from "../queries";
 export const getVisibleRoutines = async ({
   signal,
   queryKey,
-}: QueryFunctionContext<ReturnType<typeof routineKeys.visible>>) => {
+}: QueryFunctionContext<ReturnType<typeof routineKeys.list>>) => {
   const [{ feature, filter }] = queryKey;
-  const URL = `${feature}/${filter}`;
+  const URL = `${feature}/${filter.endpoint}`;
 
   const response = await apiV1.get<Routine[]>(URL, { signal });
   return response.data;
