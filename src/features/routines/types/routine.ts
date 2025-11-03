@@ -2,6 +2,8 @@ import { BaseEntity } from "@/types/core";
 import { RoutineActivity } from "./routineActivity";
 
 export interface Routine extends BaseEntity {
-  name: string;
   activities: RoutineActivity[];
+  hidden_at: string | null;
+  name: string;
+  user_id: number;
 }

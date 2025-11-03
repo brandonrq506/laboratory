@@ -8,7 +8,7 @@ import { MenuHeading, MenuItem, MenuSection } from "@headlessui/react";
 import { CategoryBadge } from "@/features/categories/components";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { activityListQueryOptions } from "@/features/activities/api/queries";
-import { routineListQueryOptions } from "@/features/routines/api/queries";
+import { routineVisibleListQueryOptions } from "@/features/routines/api/queries";
 
 import { ADD } from "@/constants/actions";
 import { TASKS } from "@/constants/entities";
@@ -16,7 +16,7 @@ import clsx from "clsx";
 
 export const AddScheduledTaskMenu = () => {
   const { data: activities } = useQuery(activityListQueryOptions());
-  const { data: routines } = useQuery(routineListQueryOptions());
+  const { data: routines } = useQuery(routineVisibleListQueryOptions());
 
   const { mutate: mutateTask } = useCreateScheduledTask();
   const { mutate: applyRoutine } = useApplyRoutine();

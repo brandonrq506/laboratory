@@ -1,7 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
-import { routineByIdQueryOptions, routineListQueryOptions } from "../queries";
+import {
+  routineByIdQueryOptions,
+  routineKeys,
+  routineListQueryOptions,
+} from "../queries";
 import type { Routine } from "../../types/routine";
 import { deleteRoutine } from "../axios/deleteRoutine";
 import { removeById } from "@/utils/array";
@@ -35,7 +39,7 @@ export const useDeleteRoutine = () => {
       context?.rollback();
     },
     onSettled: (_, __, routineId) => {
-      invalidateQueries(queryClient, routineListQueryOptions());
+      invalidateQueries(queryClient, { queryKey: routineKeys.lists() });
       queryClient.removeQueries(routineByIdQueryOptions(routineId));
     },
   });
