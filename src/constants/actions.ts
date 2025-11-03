@@ -37,3 +37,7 @@ export const REGISTER = "Register";
 export const SIGN_IN = "Sign In";
 export const SIGN_OUT = "Sign Out";
 export const CREATE_ACCOUNT = "Create Account";
+
+/* RESOURCE HANDLING */
+export const HIDE = "Hide";
+export const UNHIDE = "Unhide";
