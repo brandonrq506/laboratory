@@ -1,9 +1,9 @@
 import { CATEGORIES_ENDPOINT, apiV1 } from "@/libs/axios";
 import type { CategoryModel } from "../../types/category-model";
-import { PatchCategory } from "../../types/patchCategory";
+import type { CategoryPatchPayload } from "../../types/category-patch-payload";
 
 type Props = {
-  category: PatchCategory;
+  category: CategoryPatchPayload;
   categoryId: number;
 };
 
