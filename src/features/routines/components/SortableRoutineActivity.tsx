@@ -8,7 +8,7 @@ import { DragHandle } from "@/features/tasks/components/DragHandle";
 import clsx from "clsx";
 import { secondsToTime } from "@/utils";
 
-import { RoutineActivity } from "../types/routineActivity";
+import { RoutineActivity } from "../types/routine-activity";
 
 type Props = {
   routineId: number;

@@ -1,10 +1,11 @@
+import type { RoutineWithActivities } from "../../types/routine-with-activities";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { routineByIdQueryOptions, routineListQueryOptions } from "../queries";
 import { MoveActivityRoutine } from "../axios/moveActivityRoutine";
 import { ROUTINES_ENDPOINT } from "@/libs/axios";
-import type { Routine } from "../../types/routine";
 
 export const useMoveActivityRoutine = () => {
   const queryClient = useQueryClient();
@@ -21,17 +22,22 @@ export const useMoveActivityRoutine = () => {
       const { rollback } = snapshotQueries(queryClient, [singleKey, listKey]);
 
       // Update the activities of this routine optimistically in the single routine cache
-      queryClient.setQueryData(singleKey, (prev: Routine | undefined) =>
-        prev ? { ...prev, activities } : undefined,
+      queryClient.setQueryData(
+        singleKey,
+        (prev: RoutineWithActivities | undefined) =>
+          prev ? { ...prev, activities } : undefined,
       );
 
       // Update the routines list cache to keep the card in sync
-      queryClient.setQueryData(listKey, (prev: Routine[] | undefined) => {
-        if (!prev) return prev;
-        return prev.map((routine) =>
-          routine.id === routine_id ? { ...routine, activities } : routine,
-        );
-      });
+      queryClient.setQueryData(
+        listKey,
+        (prev: RoutineWithActivities[] | undefined) => {
+          if (!prev) return prev;
+          return prev.map((routine) =>
+            routine.id === routine_id ? { ...routine, activities } : routine,
+          );
+        },
+      );
 
       return { rollback };
     },

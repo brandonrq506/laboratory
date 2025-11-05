@@ -1,8 +1,9 @@
+import type { RoutineWithActivities } from "../../types/routine-with-activities";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { routineByIdQueryOptions, routineKeys } from "../queries";
-import type { Routine } from "../../types/routine";
 import { hideRoutine } from "../axios/hide-routine";
 
 export const useHideRoutine = () => {
@@ -18,13 +19,16 @@ export const useHideRoutine = () => {
       const { rollback } = snapshotQueries(queryClient, [singleKey]);
 
       // Optimistically update routine detail cache
-      queryClient.setQueryData(singleKey, (prev: Routine | undefined) => {
-        if (!prev) return prev;
-        return {
-          ...prev,
-          hidden_at: new Date().toISOString(),
-        };
-      });
+      queryClient.setQueryData(
+        singleKey,
+        (prev: RoutineWithActivities | undefined) => {
+          if (!prev) return prev;
+          return {
+            ...prev,
+            hidden_at: new Date().toISOString(),
+          };
+        },
+      );
 
       return { rollback };
     },

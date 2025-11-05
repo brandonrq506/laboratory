@@ -1,6 +1,7 @@
+import type { RoutineWithActivities } from "../types/routine-with-activities";
+
 import { Card, SectionHeaderWithAction } from "@/components/layout";
 import { Badge } from "@/components/core";
-import { Routine } from "../types/routine";
 
 import { calculateTotalExpTime } from "../utils/calculateTotalExpTime";
 import { secondsToTime } from "@/utils";
@@ -8,7 +9,7 @@ import { secondsToTime } from "@/utils";
 const MAX_VISIBLE_ACTIVITIES = 5;
 
 interface Props {
-  routine: Routine;
+  routine: RoutineWithActivities;
 }
 
 export const RoutineCard = ({ routine }: Props) => {
@@ -48,7 +49,7 @@ export const RoutineCard = ({ routine }: Props) => {
         </div>
       )}
       {routine.activities.length > MAX_VISIBLE_ACTIVITIES && (
-        <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-8 bg-gradient-to-t from-white to-transparent">
+        <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-8 bg-linear-to-t from-white to-transparent">
           <span className="sr-only">Blurred section</span>
         </div>
       )}

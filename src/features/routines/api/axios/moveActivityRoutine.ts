@@ -1,5 +1,5 @@
 import { ACTIVITIES_ENDPOINT, ROUTINES_ENDPOINT, apiV1 } from "@/libs/axios";
-import { RoutineActivity } from "../../types/routineActivity";
+import { RoutineActivity } from "../../types/routine-activity";
 
 interface Props {
   routine_id: number;

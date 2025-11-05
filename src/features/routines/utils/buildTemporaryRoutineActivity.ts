@@ -1,5 +1,5 @@
 import type { ActivityWithCategory } from "@/features/activities/types/activity-with-category";
-import type { RoutineActivity } from "../types/routineActivity";
+import type { RoutineActivity } from "../types/routine-activity";
 
 let tempRoutineActivityIdCounter = -1;
 

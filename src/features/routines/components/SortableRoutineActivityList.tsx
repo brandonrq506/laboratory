@@ -21,7 +21,7 @@ import {
   restrictToVerticalAxis,
 } from "@dnd-kit/modifiers";
 
-import { RoutineActivity } from "../types/routineActivity";
+import { RoutineActivity } from "../types/routine-activity";
 import { SortableRoutineActivity } from "./SortableRoutineActivity";
 import { useMoveActivityRoutine } from "../api/tanstack/useMoveActivityRoutine";
 
