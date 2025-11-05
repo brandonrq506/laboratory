@@ -1,4 +1,4 @@
-import { Category } from "../../types/category";
+import type { CategoryModel } from "../../types/category-model";
 import { getFirstCategoryAsOption } from "../getFirstCategoryAsOption";
 
 describe("getFirstCategoryAsOption", () => {
@@ -9,13 +9,13 @@ describe("getFirstCategoryAsOption", () => {
   });
 
   it("should return null if categories is empty", () => {
-    const categories: Category[] = [];
+    const categories: CategoryModel[] = [];
     const result = getFirstCategoryAsOption(categories);
     expect(result).toBeNull();
   });
 
   it("should return the first category as an Option", () => {
-    const categories: Category[] = [
+    const categories: CategoryModel[] = [
       {
         id: 1,
         name: "Category 1",

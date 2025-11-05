@@ -1,14 +1,14 @@
-import { Category } from "@/features/categories/types/category";
+import type { CategoryModel } from "@/features/categories/types/category-model";
 import { ExcelTableRow } from "../types/excelTableRow";
 
 export const calculatePercentageByCategory = (
   data: ExcelTableRow[],
-  user_categories: Category[] | undefined,
+  user_categories: CategoryModel[] | undefined,
 ) => {
   if (!user_categories) {
     return [];
   }
-  const categoryMap = new Map<Category, number>();
+  const categoryMap = new Map<CategoryModel, number>();
 
   for (const { category, percentage } of data) {
     const foundCategory = user_categories.find((c) => c.name === category);

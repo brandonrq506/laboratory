@@ -1,3 +1,3 @@
-import { Category } from "./category";
+import type { CategoryModel } from "./category-model";
 
-export type PatchCategory = Partial<Pick<Category, "color" | "name">>;
+export type PatchCategory = Partial<Pick<CategoryModel, "color" | "name">>;

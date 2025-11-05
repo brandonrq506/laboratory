@@ -1,10 +1,10 @@
-import { Category } from "../types/category";
+import type { CategoryModel } from "../types/category-model";
 
 import { clsx } from "clsx";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
 type Props = {
-  category: Category;
+  category: CategoryModel;
 };
 
 export const CategoryBadge = ({ category }: Props) => {

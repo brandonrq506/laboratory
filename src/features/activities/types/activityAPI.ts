@@ -1,8 +1,8 @@
 import { BaseEntity } from "@/types/core";
-import { Category } from "@/features/categories/types/category";
+import type { CategoryModel } from "@/features/categories/types/category-model";
 
 export type ActivityAPI = BaseEntity & {
-  category: Category;
+  category: CategoryModel;
   display_name: string;
   exp_seconds: number;
   max_seconds: number;
