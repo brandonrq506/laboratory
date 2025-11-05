@@ -1,7 +1,7 @@
-import { ActivityAPI } from "@/features/activities/types/activityAPI";
+import type { ActivityWithCategory } from "@/features/activities/types/activity-with-category";
 
 interface Props {
-  activity: ActivityAPI;
+  activity: ActivityWithCategory;
   duration_seconds: number;
 }
 

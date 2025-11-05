@@ -4,7 +4,7 @@ import { ActivityDurationFields } from "./ActivityDurationFields";
 import { ActivityNameFields } from "./ActivityNameFields";
 import { Button } from "@/components/core";
 import { CategorySelect } from "@/features/categories/components";
-import { CreateForm } from "../types/createForm";
+import { CreateForm } from "../types/create-form";
 
 const defaultActivity: CreateForm = {
   category_id: null,

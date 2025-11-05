@@ -10,7 +10,6 @@ import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { EmptyState, Loading, SortIcon } from "@/components/core";
-import { ActivityAPI } from "../types/activityAPI";
 import { ActivityActionMenu } from "./ActivityActionMenu";
 import { CategoryBadge } from "@/features/categories/components";
 import { StateInputText } from "@/components/form";
@@ -18,7 +17,9 @@ import { activityListQueryOptions } from "../api/queries";
 import { clsx } from "clsx";
 import { secondsToHHmm } from "@/utils";
 
-const columnHelper = createColumnHelper<ActivityAPI>();
+import type { ActivityWithCategory } from "../types/activity-with-category";
+
+const columnHelper = createColumnHelper<ActivityWithCategory>();
 
 export const ActivityTable = () => {
   // eslint-disable-next-line react-compiler/react-compiler
@@ -65,7 +66,7 @@ export const ActivityTable = () => {
   );
 
   // eslint-disable-next-line react-hooks/incompatible-library
-  const table = useReactTable<ActivityAPI>({
+  const table = useReactTable<ActivityWithCategory>({
     columns,
     data: activities,
     getCoreRowModel: getCoreRowModel(),

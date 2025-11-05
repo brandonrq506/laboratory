@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
 
-import { CreateForm } from "../types/createForm";
+import { CreateForm } from "../types/create-form";
 import { NumberInput } from "@/components/form";
 
 export const ActivityDurationFields = () => {

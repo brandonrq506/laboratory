@@ -1,10 +1,10 @@
-import type { ActivityAPI } from "@/features/activities/types/activityAPI";
+import type { ActivityWithCategory } from "@/features/activities/types/activity-with-category";
 import type { RoutineActivity } from "../types/routineActivity";
 
 let tempRoutineActivityIdCounter = -1;
 
 export const buildTemporaryRoutineActivity = (
-  activity: ActivityAPI,
+  activity: ActivityWithCategory,
   position: number,
 ): RoutineActivity => ({
   id: tempRoutineActivityIdCounter--,

@@ -3,12 +3,13 @@ import { useDeleteActivity } from "../api/tanstack/useDeleteActivity";
 import { Button, ConfirmationModal } from "@/components/core";
 import { CANCEL, CONFIRM, DELETE } from "@/constants/actions";
 import { ACTIVITY } from "@/constants/entities";
-import { ActivityAPI } from "../types/activityAPI";
+
+import type { ActivityWithCategory } from "../types/activity-with-category";
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  activity: ActivityAPI;
+  activity: ActivityWithCategory;
 };
 
 export const DeleteActivityDialog = ({ isOpen, onClose, activity }: Props) => {

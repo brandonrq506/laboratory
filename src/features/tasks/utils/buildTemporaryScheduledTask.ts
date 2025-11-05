@@ -1,10 +1,10 @@
-import { ActivityAPI } from "@/features/activities/types/activityAPI";
-import { ScheduledTaskAPI } from "../types/scheduledTask";
+import type { ActivityWithCategory } from "@/features/activities/types/activity-with-category";
+import type { ScheduledTaskAPI } from "../types/scheduledTask";
 
 let tempIdCounter = -1;
 
 export const buildTemporaryScheduledTask = (
-  activity: ActivityAPI,
+  activity: ActivityWithCategory,
 ): ScheduledTaskAPI => {
   const now = new Date().toISOString();
 

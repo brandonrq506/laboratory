@@ -1,11 +1,11 @@
-import { ActivityAPI } from "@/features/activities/types/activityAPI";
+import type { ActivityWithCategory } from "@/features/activities/types/activity-with-category";
 import { CompletedTaskAPI } from "../types/completedTask";
 import { roundToNearestMinutes } from "date-fns";
 
 let tempIdCounter = -1;
 
 export const buildTemporaryCompletedTask = (
-  activity: ActivityAPI,
+  activity: ActivityWithCategory,
   start: string,
   end: string,
   note = "",

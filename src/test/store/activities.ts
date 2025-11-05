@@ -1,6 +1,6 @@
-import { ActivityAPI } from "@/features/activities/types/activityAPI";
+import { ActivityWithCategory } from "@/features/activities/types/activity-with-category";
 
-export const activities: ActivityAPI[] = [
+export const activities: ActivityWithCategory[] = [
   {
     id: 5,
     exp_seconds: 3600,
