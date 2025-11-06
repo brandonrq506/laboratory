@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
-import { Routine } from "@/features/routines/types/routine";
+import type { RoutineWithActivities } from "@/features/routines/types/routine-with-activities";
 
-export const routines: Routine[] = [
+export const routines: RoutineWithActivities[] = [
   {
     id: 1,
     created_at: "2025-04-10T18:23:05.736Z",

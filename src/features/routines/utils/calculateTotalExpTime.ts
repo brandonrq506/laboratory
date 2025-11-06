@@ -1,4 +1,4 @@
-import { RoutineActivity } from "../types/routineActivity";
+import { RoutineActivity } from "../types/routine-activity";
 
 export const calculateTotalExpTime = (routineActivities: RoutineActivity[]) => {
   return routineActivities.reduce((total, activity) => {

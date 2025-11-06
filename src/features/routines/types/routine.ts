@@ -1,5 +1,5 @@
 import { BaseEntity } from "@/types/core";
-import { RoutineActivity } from "./routineActivity";
+import { RoutineActivity } from "./routine-activity";
 
 export interface Routine extends BaseEntity {
   activities: RoutineActivity[];

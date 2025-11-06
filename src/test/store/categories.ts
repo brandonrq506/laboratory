@@ -1,6 +1,6 @@
-import { Category } from "@/features/categories/types/category";
+import type { CategoryModel } from "@/features/categories/types/category-model";
 
-export const categories: Category[] = [
+export const categories: CategoryModel[] = [
   {
     id: 1,
     created_at: "2024-08-11T23:33:11.193Z",

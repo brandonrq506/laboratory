@@ -1,7 +1,8 @@
-import { ActivityAPI } from "../../types/activityAPI";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import { activityKeys } from "../queries";
 import { apiV1 } from "@/libs/axios";
+
+import type { ActivityWithCategory } from "../../types/activity-with-category";
 
 export const getActivities = async ({
   signal,
@@ -9,6 +10,6 @@ export const getActivities = async ({
 }: QueryFunctionContext<ReturnType<typeof activityKeys.lists>>) => {
   const [{ feature }] = queryKey;
 
-  const response = await apiV1.get<ActivityAPI[]>(feature, { signal });
+  const response = await apiV1.get<ActivityWithCategory[]>(feature, { signal });
   return response.data;
 };

@@ -4,7 +4,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { ACTIVITY } from "@/constants/entities";
 import { ADD } from "@/constants/actions";
 import { ActivityForm } from "./ActivityForm";
-import { CreateForm } from "../types/createForm";
+import { CreateForm } from "../types/create-form";
 import { hhmmToSeconds } from "../utils/hhmmToSeconds";
 
 type Props = {

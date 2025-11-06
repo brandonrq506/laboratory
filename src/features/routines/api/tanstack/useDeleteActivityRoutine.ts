@@ -1,8 +1,9 @@
+import type { RoutineWithActivities } from "../../types/routine-with-activities";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { routineByIdQueryOptions, routineListQueryOptions } from "../queries";
-import type { Routine } from "../../types/routine";
 import { deleteActivityRoutine } from "../axios/deleteActivityRoutine";
 import { removeById } from "@/utils/array";
 
@@ -21,26 +22,32 @@ export const useDeleteActivityRoutine = () => {
       const { rollback } = snapshotQueries(queryClient, [singleKey, listKey]);
 
       // Remove activity from single routine cache optimistically
-      queryClient.setQueryData(singleKey, (prev: Routine | undefined) => {
-        if (!prev) return prev;
-        return {
-          ...prev,
-          activities: removeById(prev.activities, activityId),
-        };
-      });
+      queryClient.setQueryData(
+        singleKey,
+        (prev: RoutineWithActivities | undefined) => {
+          if (!prev) return prev;
+          return {
+            ...prev,
+            activities: removeById(prev.activities, activityId),
+          };
+        },
+      );
 
       // Remove activity from routine list cache optimistically
-      queryClient.setQueryData(listKey, (prev: Routine[] | undefined) => {
-        if (!prev) return prev;
-        return prev.map((routine) =>
-          routine.id === routineId
-            ? {
-                ...routine,
-                activities: removeById(routine.activities, activityId),
-              }
-            : routine,
-        );
-      });
+      queryClient.setQueryData(
+        listKey,
+        (prev: RoutineWithActivities[] | undefined) => {
+          if (!prev) return prev;
+          return prev.map((routine) =>
+            routine.id === routineId
+              ? {
+                  ...routine,
+                  activities: removeById(routine.activities, activityId),
+                }
+              : routine,
+          );
+        },
+      );
 
       return { rollback };
     },

@@ -4,11 +4,12 @@ import { ThreeDotsMenu } from "@/components/core";
 
 import { DELETE, UPDATE } from "@/constants/actions";
 import { ACTIVITY } from "@/constants/entities";
-import { ActivityAPI } from "../types/activityAPI";
 import { Link } from "@tanstack/react-router";
 
+import type { ActivityWithCategory } from "../types/activity-with-category";
+
 type Props = {
-  activity: ActivityAPI;
+  activity: ActivityWithCategory;
 };
 
 export const ActivityActionMenu = ({ activity }: Props) => {

@@ -5,13 +5,14 @@ import {
 } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 
-import { ActivityAPI } from "../types/activityAPI";
 import { ComboBoxType } from "@/components/form/ComboBox/types";
 import { ComboBoxWithRenderer } from "@/components/form";
 import { Dot } from "@/components/core";
 import { EnhancedOption } from "@/types/core";
 import { activityListQueryOptions } from "../api/queries";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
+
+import type { ActivityWithCategory } from "../types/activity-with-category";
 
 type ActivityComboBoxWithDotProps = Omit<ComboBoxType, "options" | "label">;
 
@@ -38,9 +39,9 @@ export const ActivityComboBoxWithDot = <T extends FieldValues>({
     label: activity.display_name,
     disabled: false,
     data: activity,
-  })) satisfies EnhancedOption<ActivityAPI>[];
+  })) satisfies EnhancedOption<ActivityWithCategory>[];
 
-  const renderOption = (option: EnhancedOption<ActivityAPI>) => {
+  const renderOption = (option: EnhancedOption<ActivityWithCategory>) => {
     const activity = option.data;
     const color = getColorByName(activity.category.color);
 
