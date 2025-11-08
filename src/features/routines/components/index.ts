@@ -1,9 +1,9 @@
 export { AddActivityRoutineMenu } from "./AddActivityRoutineMenu";
 export { DeleteActivityRoutine } from "./DeleteActivityRoutine";
 export { DeleteRoutineDialog } from "./DeleteRoutineDialog";
+export { EditRoutineForm } from "./EditRoutineForm";
 export { HideRoutineButton } from "./hide-routine-btn";
 export { PlayRoutineButton } from "./PlayRoutineButton";
 export { RoutineActivityList } from "./RoutineActivityList";
 export { RoutineCard } from "./RoutineCard";
-export { RoutineNameForm } from "./RoutineNameForm";
 export { UnhideRoutineButton } from "./unhide-routine-btn";

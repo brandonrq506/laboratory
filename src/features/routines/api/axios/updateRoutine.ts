@@ -1,10 +1,10 @@
 import type { RoutineWithActivities } from "../../types/routine-with-activities";
 
 import { ROUTINES_ENDPOINT, apiV1 } from "@/libs/axios";
-import { EditNameForm } from "../../types/editNameForm";
+import { PostRoutineForm } from "../../types/routine-form";
 
 type Props = {
-  routine: Partial<EditNameForm>;
+  routine: Partial<PostRoutineForm>;
   routineId: number;
 };
 

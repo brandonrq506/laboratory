@@ -5,9 +5,10 @@ export const routines: RoutineWithActivities[] = [
   {
     id: 1,
     created_at: "2025-04-10T18:23:05.736Z",
-    name: "Morning",
-    updated_at: "2025-04-10T18:23:05.736Z",
     hidden_at: null,
+    name: "Morning",
+    start_time: "06:30",
+    updated_at: "2025-04-10T18:23:05.736Z",
     user_id: 1,
     activities: [
       {
@@ -69,9 +70,10 @@ export const routines: RoutineWithActivities[] = [
   {
     id: 2,
     created_at: "2025-04-10T19:18:23.972Z",
-    name: "Workout",
-    updated_at: "2025-04-10T19:18:23.972Z",
     hidden_at: null,
+    name: "Workout",
+    start_time: "18:50",
+    updated_at: "2025-04-10T19:18:23.972Z",
     user_id: 1,
     activities: [
       {
@@ -133,18 +135,20 @@ export const routines: RoutineWithActivities[] = [
   {
     id: 3,
     created_at: "2025-04-10T19:18:23.972Z",
-    name: "Swimming",
-    updated_at: "2025-04-10T19:18:23.972Z",
     hidden_at: null,
+    name: "Swimming",
+    start_time: null,
+    updated_at: "2025-04-10T19:18:23.972Z",
     user_id: 1,
     activities: [],
   },
   {
     id: 6,
     created_at: "2025-04-13T17:32:36.646Z",
-    name: "Shower",
-    updated_at: "2025-04-13T17:32:36.646Z",
     hidden_at: null,
+    name: "Shower",
+    start_time: "04:00",
+    updated_at: "2025-04-13T17:32:36.646Z",
     user_id: 1,
     activities: [
       {
