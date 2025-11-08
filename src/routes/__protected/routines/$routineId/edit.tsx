@@ -2,8 +2,8 @@ import { useNavigateBack } from "@/hooks";
 
 import {
   AddActivityRoutineMenu,
+  EditRoutineForm,
   RoutineActivityList,
-  RoutineNameForm,
 } from "@/features/routines/components";
 import { HeadingMedium, SectionHeaderWithAction } from "@/components/layout";
 import { EditRoutineActions } from "@/pages/routines/EditRoutinePage/EditRoutineActions";
@@ -29,7 +29,7 @@ function RouteComponent() {
             title="Edit Routine"
             description="Customize your routine by updating the name and managing activities"
           />
-          <RoutineNameForm />
+          <EditRoutineForm />
           <SectionHeaderWithAction
             title="Activities"
             action={<AddActivityRoutineMenu routineId={routineId} />}

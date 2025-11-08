@@ -5,27 +5,31 @@ import { useUpdateRoutine } from "../api/tanstack/useUpdateRoutine";
 import { getRouteApi } from "@tanstack/react-router";
 import { routineByIdQueryOptions } from "../api/queries";
 
+import type { EditRoutineForm as FormType } from "../types/routine-form";
+
+import { TextInput, TimeInputV3 } from "@/components/form";
 import { Button } from "@/components/core";
-import { EditNameForm } from "../types/editNameForm";
-import { TextInput } from "@/components/form";
 import { UPDATE } from "@/constants/actions";
 
 const routeApi = getRouteApi("/__protected/routines/$routineId/edit");
 
-export const RoutineNameForm = () => {
+export const EditRoutineForm = () => {
   const { routineId } = routeApi.useParams();
   const { data } = useSuspenseQuery(routineByIdQueryOptions(routineId));
   const { mutateAsync, isPending } = useUpdateRoutine();
 
-  const { formState, handleSubmit, register } = useForm<EditNameForm>({
-    values: { name: data.name },
+  const { control, formState, handleSubmit, register } = useForm<FormType>({
+    values: { name: data.name, start_time: data.start_time ?? "" },
   });
   const { errors, isSubmitting } = formState;
 
-  const onSubmit = async (values: EditNameForm) => {
+  const onSubmit = async (values: FormType) => {
     await mutateAsync({
       routineId,
-      routine: values,
+      routine: {
+        name: values.name,
+        start_time: values.start_time === "" ? null : values.start_time,
+      },
     });
   };
 
@@ -34,7 +38,6 @@ export const RoutineNameForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex w-full justify-between">
       <TextInput
-        hideLabel
         showAsterisk
         label="Name"
         placeholder="Morning Routine"
@@ -43,6 +46,8 @@ export const RoutineNameForm = () => {
           required: "Name is required",
         })}
       />
+
+      <TimeInputV3 control={control} name="start_time" label="Start Time" />
 
       <Button type="submit" disabled={isSubmitting} isLoading={isPending}>
         {UPDATE}
