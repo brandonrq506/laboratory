@@ -1,4 +1,4 @@
 export interface RoutineEditableColumns {
-  hidden_at: string | null;
   name: string;
+  start_time: `${number}${number}:${number}${number}` | null;
 }
