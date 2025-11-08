@@ -34,22 +34,32 @@ export const EditRoutineForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full justify-between">
-      <TextInput
-        showAsterisk
-        label="Name"
-        placeholder="Morning Routine"
-        error={errors.name?.message}
-        registration={register("name", {
-          required: "Name is required",
-        })}
-      />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="flex w-full justify-between">
+        <TextInput
+          showAsterisk
+          hideLabel
+          label="Name"
+          placeholder="Routine Name"
+          error={errors.name?.message}
+          registration={register("name", {
+            required: "Name is required",
+          })}
+        />
 
-      <TimeInputV3 control={control} name="start_time" label="Start Time" />
+        <TimeInputV3
+          control={control}
+          name="start_time"
+          label="Start Time"
+          hideLabel
+        />
+      </div>
 
-      <Button type="submit" disabled={isSubmitting} isLoading={isPending}>
+      <Button
+        type="submit"
+        disabled={isSubmitting}
+        isLoading={isPending}
+        className="mt-2">
         {UPDATE}
       </Button>
     </form>
