@@ -3,16 +3,18 @@ import { useSortable } from "@dnd-kit/sortable";
 import { Badge } from "@/components/core";
 import { CSS } from "@dnd-kit/utilities";
 import { Card } from "@/components/layout";
+import { ClockIcon } from "@heroicons/react/24/outline";
 import { DeleteActivityRoutine } from "./DeleteActivityRoutine";
 import { DragHandle } from "@/features/tasks/components/DragHandle";
-import clsx from "clsx";
-import { secondsToTime } from "@/utils";
 
-import { RoutineActivity } from "../types/routine-activity";
+import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
+import clsx from "clsx";
+
+import type { RoutineActivityWithExpectedStartTime } from "../types/routine-with-expected-time";
 
 type Props = {
   routineId: number;
-  activity: RoutineActivity;
+  activity: RoutineActivityWithExpectedStartTime;
 };
 
 export const SortableRoutineActivity = ({ routineId, activity }: Props) => {
@@ -50,9 +52,22 @@ export const SortableRoutineActivity = ({ routineId, activity }: Props) => {
             <Badge color={activity.category_color}>
               {activity.activity_name}
             </Badge>
-            <span className="text-xs">
-              {secondsToTime(activity.activity_exp_seconds)}
-            </span>
+
+            <div className="flex gap-2 text-gray-600">
+              <div className="flex gap-1 text-xs">
+                <p className="tabular-nums">
+                  {formatDatetimeTo12hTime(
+                    activity.expected_start_time.toISOString(),
+                  )}
+                </p>
+              </div>
+              <div className="flex gap-1 text-xs">
+                <ClockIcon className="size-4" />
+                <p className="tabular-nums">
+                  {secondsToTime(activity.activity_exp_seconds)}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 

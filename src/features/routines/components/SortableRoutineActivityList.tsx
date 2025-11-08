@@ -9,6 +9,7 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { useEffect, useState } from "react";
+import { useMoveActivityRoutine } from "../api/tanstack/useMoveActivityRoutine";
 
 import {
   SortableContext,
@@ -21,13 +22,12 @@ import {
   restrictToVerticalAxis,
 } from "@dnd-kit/modifiers";
 
-import { RoutineActivity } from "../types/routine-activity";
+import type { RoutineActivityWithExpectedStartTime } from "../types/routine-with-expected-time";
 import { SortableRoutineActivity } from "./SortableRoutineActivity";
-import { useMoveActivityRoutine } from "../api/tanstack/useMoveActivityRoutine";
 
 type Props = {
   routineId: number;
-  activities: RoutineActivity[];
+  activities: RoutineActivityWithExpectedStartTime[];
 };
 
 export const SortableRoutineActivityList = ({
@@ -36,7 +36,7 @@ export const SortableRoutineActivityList = ({
 }: Props) => {
   const { mutate: moveActivity } = useMoveActivityRoutine();
   const [sortedActivities, setSortedActivities] =
-    useState<RoutineActivity[]>(activities);
+    useState<RoutineActivityWithExpectedStartTime[]>(activities);
 
   useEffect(() => {
     setSortedActivities(activities);
