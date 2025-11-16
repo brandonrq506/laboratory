@@ -1,8 +1,8 @@
 import { set } from "date-fns";
 
 import { floorMilliseconds, splitHHMM } from "@/utils";
-import { RoutineActivity } from "../types/routine-activity";
-import { RoutineActivityWithExpectedStartTime } from "../types/routine-with-expected-time";
+import type { RoutineItem } from "../types/routine-activity";
+import type { RoutineItemWithExpectedStartTime } from "../types/routine-with-expected-time";
 
 const MS_PER_SECOND = 1000;
 
@@ -22,25 +22,27 @@ const deriveInitialStartTime = (startTime: string | null) => {
   });
 };
 
-export const calculateRoutineActivityStartTime = (
-  activities: RoutineActivity[],
+const getDurationIncrementMs = (item: RoutineItem) => {
+  const durationSeconds = Math.max(0, item.item_exp_seconds ?? 0);
+  return durationSeconds * MS_PER_SECOND;
+};
+
+export const calculateRoutineItemStartTime = (
+  routineItems: RoutineItem[],
   start_time: string | null,
-): RoutineActivityWithExpectedStartTime[] => {
-  if (!activities || activities.length === 0) return [];
+): RoutineItemWithExpectedStartTime[] => {
+  if (!routineItems || routineItems.length === 0) return [];
 
   let nextStartTime = deriveInitialStartTime(start_time);
 
-  return activities.map((activity) => {
+  return routineItems.map((item) => {
     const expected_start_time = new Date(nextStartTime);
-    const incrementMs =
-      activity.activity_exp_seconds > 0
-        ? activity.activity_exp_seconds * MS_PER_SECOND
-        : 0;
+    const incrementMs = getDurationIncrementMs(item);
 
     nextStartTime = new Date(nextStartTime.getTime() + incrementMs);
 
     return {
-      ...activity,
+      ...item,
       expected_start_time,
     };
   });

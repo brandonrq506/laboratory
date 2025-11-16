@@ -1,18 +1,19 @@
-import type { RoutineWithActivities } from "../../types/routine-with-activities";
+import type { RoutineWithItems } from "../../types/routine-with-items";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { routineByIdQueryOptions, routineListQueryOptions } from "../queries";
-import { MoveActivityRoutine } from "../axios/moveActivityRoutine";
 import { ROUTINES_ENDPOINT } from "@/libs/axios";
+import { moveActivityRoutine } from "../axios/moveActivityRoutine";
 
 export const useMoveActivityRoutine = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: MoveActivityRoutine,
-    onMutate: async ({ routine_id, activities }) => {
+    mutationFn: moveActivityRoutine,
+    onMutate: async ({ routine_id, routine_items }) => {
+      // Why not use routineByIdQueryOptions here? And get the type-safety benefit.
       const singleKey = [ROUTINES_ENDPOINT, routine_id];
       const listKey = [ROUTINES_ENDPOINT];
 
@@ -24,17 +25,17 @@ export const useMoveActivityRoutine = () => {
       // Update the activities of this routine optimistically in the single routine cache
       queryClient.setQueryData(
         singleKey,
-        (prev: RoutineWithActivities | undefined) =>
-          prev ? { ...prev, activities } : undefined,
+        (prev: RoutineWithItems | undefined) =>
+          prev ? { ...prev, routine_items } : undefined,
       );
 
       // Update the routines list cache to keep the card in sync
       queryClient.setQueryData(
         listKey,
-        (prev: RoutineWithActivities[] | undefined) => {
+        (prev: RoutineWithItems[] | undefined) => {
           if (!prev) return prev;
           return prev.map((routine) =>
-            routine.id === routine_id ? { ...routine, activities } : routine,
+            routine.id === routine_id ? { ...routine, routine_items } : routine,
           );
         },
       );

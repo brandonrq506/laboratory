@@ -1,18 +1,16 @@
-import type { RoutineWithActivities } from "../../types/routine-with-activities";
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { routineByIdQueryOptions, routineListQueryOptions } from "../queries";
-import { deleteActivityRoutine } from "../axios/deleteActivityRoutine";
+import { deleteRoutineItem } from "../axios/deleteRoutineItem";
 import { removeById } from "@/utils/array";
 
 export const useDeleteActivityRoutine = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: deleteActivityRoutine,
-    onMutate: async ({ activityId, routineId }) => {
+    mutationFn: deleteRoutineItem,
+    onMutate: async ({ itemId, routineId }) => {
       const singleKey = routineByIdQueryOptions(routineId).queryKey;
       const listKey = routineListQueryOptions().queryKey;
 
@@ -22,32 +20,26 @@ export const useDeleteActivityRoutine = () => {
       const { rollback } = snapshotQueries(queryClient, [singleKey, listKey]);
 
       // Remove activity from single routine cache optimistically
-      queryClient.setQueryData(
-        singleKey,
-        (prev: RoutineWithActivities | undefined) => {
-          if (!prev) return prev;
-          return {
-            ...prev,
-            activities: removeById(prev.activities, activityId),
-          };
-        },
-      );
+      queryClient.setQueryData(singleKey, (prev) => {
+        if (!prev) return prev;
+        return {
+          ...prev,
+          routine_items: removeById(prev.routine_items, itemId),
+        };
+      });
 
       // Remove activity from routine list cache optimistically
-      queryClient.setQueryData(
-        listKey,
-        (prev: RoutineWithActivities[] | undefined) => {
-          if (!prev) return prev;
-          return prev.map((routine) =>
-            routine.id === routineId
-              ? {
-                  ...routine,
-                  activities: removeById(routine.activities, activityId),
-                }
-              : routine,
-          );
-        },
-      );
+      queryClient.setQueryData(listKey, (prev) => {
+        if (!prev) return prev;
+        return prev.map((routine) =>
+          routine.id === routineId
+            ? {
+                ...routine,
+                routine_items: removeById(routine.routine_items, itemId),
+              }
+            : routine,
+        );
+      });
 
       return { rollback };
     },

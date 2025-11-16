@@ -5,7 +5,7 @@ import { EmptyList } from "@/components/core";
 import { SortableRoutineActivityList } from "./SortableRoutineActivityList";
 import { routineByIdQueryOptions } from "../api/queries";
 
-import { calculateRoutineActivityStartTime } from "../utils/calculateRoutineActivityStartTime";
+import { calculateRoutineItemStartTime } from "../utils/calculateRoutineItemStartTime";
 
 const routeApi = getRouteApi("/__protected/routines/$routineId/edit");
 
@@ -13,19 +13,19 @@ export const RoutineActivityList = () => {
   const { routineId } = routeApi.useParams();
   const { data } = useSuspenseQuery(routineByIdQueryOptions(routineId));
 
-  if (!data.activities || data.activities.length === 0) {
+  if (!data.routine_items || data.routine_items.length === 0) {
     return <EmptyList title="No activities found" />;
   }
 
-  const activitiesWithExpectedStartTime = calculateRoutineActivityStartTime(
-    data.activities,
+  const itemsWithExpectedStartTime = calculateRoutineItemStartTime(
+    data.routine_items,
     data.start_time,
   );
 
   return (
     <SortableRoutineActivityList
       routineId={routineId}
-      activities={activitiesWithExpectedStartTime}
+      items={itemsWithExpectedStartTime}
     />
   );
 };

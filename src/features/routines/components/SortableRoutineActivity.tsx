@@ -1,6 +1,6 @@
 import { useSortable } from "@dnd-kit/sortable";
 
-import { Badge } from "@/components/core";
+import { Badge, RainbowBadge } from "@/components/core";
 import { CSS } from "@dnd-kit/utilities";
 import { Card } from "@/components/layout";
 import { ClockIcon } from "@heroicons/react/24/outline";
@@ -10,14 +10,15 @@ import { DragHandle } from "@/features/tasks/components/DragHandle";
 import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import clsx from "clsx";
 
-import type { RoutineActivityWithExpectedStartTime } from "../types/routine-with-expected-time";
+import type { RoutineItemWithExpectedStartTime } from "../types/routine-with-expected-time";
 
 type Props = {
   routineId: number;
-  activity: RoutineActivityWithExpectedStartTime;
+  item: RoutineItemWithExpectedStartTime;
 };
 
-export const SortableRoutineActivity = ({ routineId, activity }: Props) => {
+// Todo: Rename to SortableRoutineItem and handle both activity and routine cases
+export const SortableRoutineActivity = ({ routineId, item }: Props) => {
   const {
     attributes,
     listeners,
@@ -26,7 +27,7 @@ export const SortableRoutineActivity = ({ routineId, activity }: Props) => {
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: activity.id });
+  } = useSortable({ id: item.id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -49,29 +50,32 @@ export const SortableRoutineActivity = ({ routineId, activity }: Props) => {
           />
 
           <div className="flex items-center gap-2">
-            <Badge color={activity.category_color}>
-              {activity.activity_name}
-            </Badge>
+            {/* I need to find a better way to do this */}
+            {item.type === "activity" ? (
+              <Badge color={item.category_color}>{item.item_name}</Badge>
+            ) : (
+              <RainbowBadge>{item.item_name}</RainbowBadge>
+            )}
 
             <div className="flex gap-2 text-gray-600">
               <div className="flex gap-1 text-xs">
                 <p className="tabular-nums">
                   {formatDatetimeTo12hTime(
-                    activity.expected_start_time.toISOString(),
+                    item.expected_start_time.toISOString(),
                   )}
                 </p>
               </div>
               <div className="flex gap-1 text-xs">
                 <ClockIcon className="size-4" />
                 <p className="tabular-nums">
-                  {secondsToTime(activity.activity_exp_seconds)}
+                  {secondsToTime(item.item_exp_seconds)}
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        <DeleteActivityRoutine activityId={activity.id} routineId={routineId} />
+        <DeleteActivityRoutine itemId={item.id} routineId={routineId} />
       </Card>
     </div>
   );

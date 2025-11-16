@@ -2,13 +2,13 @@ import type { QueryClient, QueryKey } from "@tanstack/react-query";
 
 import { addEnd } from "@/utils/array";
 
-import type { RoutineActivity } from "../types/routine-activity";
-import type { RoutineWithActivities } from "../types/routine-with-activities";
+import type { RoutineItem } from "../types/routine-activity";
+import type { RoutineWithItems } from "../types/routine-with-items";
 
 interface UpdateRoutineCacheParams {
   queryClient: QueryClient;
   routineId: number;
-  newActivity: RoutineActivity;
+  newItem: RoutineItem;
   singleQueryKey: QueryKey;
   listQueryKey: QueryKey;
 }
@@ -16,18 +16,18 @@ interface UpdateRoutineCacheParams {
 export const updateRoutineCacheOptimistically = ({
   queryClient,
   routineId,
-  newActivity,
+  newItem,
   singleQueryKey,
   listQueryKey,
 }: UpdateRoutineCacheParams): void => {
   // Update single routine cache
   queryClient.setQueryData(
     singleQueryKey,
-    (prev: RoutineWithActivities | undefined) =>
+    (prev: RoutineWithItems | undefined) =>
       prev
         ? {
             ...prev,
-            activities: addEnd(prev.activities, newActivity),
+            routine_items: addEnd(prev.routine_items, newItem),
           }
         : prev,
   );
@@ -35,15 +35,15 @@ export const updateRoutineCacheOptimistically = ({
   // Update routine list cache
   queryClient.setQueryData(
     listQueryKey,
-    (prev: RoutineWithActivities[] | undefined) => {
+    (prev: RoutineWithItems[] | undefined) => {
       if (!prev) return prev;
-      return prev.map((item) =>
-        item.id === routineId
+      return prev.map((routine) =>
+        routine.id === routineId
           ? {
-              ...item,
-              activities: addEnd(item.activities, newActivity),
+              ...routine,
+              routine_items: addEnd(routine.routine_items, newItem),
             }
-          : item,
+          : routine,
       );
     },
   );

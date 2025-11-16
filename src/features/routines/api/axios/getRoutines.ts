@@ -1,4 +1,4 @@
-import type { RoutineWithActivities } from "../../types/routine-with-activities";
+import type { RoutineWithItems } from "../../types/routine-with-items";
 
 import { QueryFunctionContext } from "@tanstack/react-query";
 import { apiV1 } from "@/libs/axios";
@@ -11,7 +11,7 @@ export const getRoutines = async ({
 }: QueryFunctionContext<ReturnType<typeof routineKeys.lists>>) => {
   const [{ feature }] = queryKey;
 
-  const response = await apiV1.get<RoutineWithActivities[]>(feature, {
+  const response = await apiV1.get<RoutineWithItems[]>(feature, {
     signal,
   });
   return response.data;

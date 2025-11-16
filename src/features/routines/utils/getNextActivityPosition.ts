@@ -1,8 +1,8 @@
-import type { RoutineWithActivities } from "../types/routine-with-activities";
+import type { RoutineWithItems } from "../types/routine-with-items";
 
 export const getNextActivityPosition = (
-  activities: RoutineWithActivities["activities"] | undefined,
+  items: RoutineWithItems["routine_items"] | undefined,
 ): number => {
-  if (!activities?.length) return 1;
-  return Math.max(...activities.map((activity) => activity.position)) + 1;
+  if (!items?.length) return 1;
+  return Math.max(...items.map((item) => item.position)) + 1;
 };
