@@ -1,22 +1,23 @@
-import { ACTIVITIES_ENDPOINT, ROUTINES_ENDPOINT, apiV1 } from "@/libs/axios";
+import { ROUTINES_ENDPOINT, apiV1 } from "@/libs/axios";
 import type { RoutineItem } from "../../types/routine-activity";
 
+// This is wrong, we are not moving them this way anymore.
 interface Props {
   routine_id: number;
-  activity_routine_id: number;
+  routine_item_id: number;
   new_position: number;
   // This is not used, it is just for optimistic UI update.
   routine_items: RoutineItem[];
 }
 
 export const moveActivityRoutine = async ({
-  activity_routine_id,
+  routine_item_id,
   new_position,
   routine_id,
 }: Props) => {
-  const URL = `${ROUTINES_ENDPOINT}/${routine_id}${ACTIVITIES_ENDPOINT}/move_drag`;
+  const URL = `${ROUTINES_ENDPOINT}/${routine_id}/items/move_drag`;
   const response = await apiV1.patch(URL, {
-    activity_routine_id,
+    routine_item_id,
     new_position,
   });
   return response.data;

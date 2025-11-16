@@ -22,25 +22,22 @@ import {
   restrictToVerticalAxis,
 } from "@dnd-kit/modifiers";
 
-import type { RoutineActivityWithExpectedStartTime } from "../types/routine-with-expected-time";
+import type { RoutineItemWithExpectedStartTime } from "../types/routine-with-expected-time";
 import { SortableRoutineActivity } from "./SortableRoutineActivity";
 
 type Props = {
   routineId: number;
-  activities: RoutineActivityWithExpectedStartTime[];
+  items: RoutineItemWithExpectedStartTime[];
 };
 
-export const SortableRoutineActivityList = ({
-  routineId,
-  activities,
-}: Props) => {
+export const SortableRoutineActivityList = ({ routineId, items }: Props) => {
   const { mutate: moveActivity } = useMoveActivityRoutine();
-  const [sortedActivities, setSortedActivities] =
-    useState<RoutineActivityWithExpectedStartTime[]>(activities);
+  const [sortedItems, setSortedItems] =
+    useState<RoutineItemWithExpectedStartTime[]>(items);
 
   useEffect(() => {
-    setSortedActivities(activities);
-  }, [activities]);
+    setSortedItems(items);
+  }, [items]);
 
   const sensors = useSensors(
     useSensor(MouseSensor),
@@ -61,11 +58,11 @@ export const SortableRoutineActivityList = ({
     if (!over) return;
     if (active.id === over.id) return;
 
-    const oldIndex = sortedActivities.findIndex((a) => a.id === active.id);
-    const newIndex = sortedActivities.findIndex((a) => a.id === over.id);
+    const oldIndex = sortedItems.findIndex((a) => a.id === active.id);
+    const newIndex = sortedItems.findIndex((a) => a.id === over.id);
 
-    const newActivities = arrayMove(sortedActivities, oldIndex, newIndex);
-    setSortedActivities(newActivities);
+    const newItems = arrayMove(sortedItems, oldIndex, newIndex);
+    setSortedItems(newItems);
 
     const destination = over.data as {
       current: { sortable: { index: number } };
@@ -73,9 +70,9 @@ export const SortableRoutineActivityList = ({
 
     moveActivity({
       routine_id: routineId,
-      activity_routine_id: active.id as number,
+      routine_item_id: active.id as number,
       new_position: destination.current.sortable.index,
-      activities: newActivities,
+      routine_items: newItems,
     });
   };
 
@@ -87,13 +84,13 @@ export const SortableRoutineActivityList = ({
         onDragEnd={handleDragEnd}
         modifiers={[restrictToVerticalAxis, restrictToParentElement]}>
         <SortableContext
-          items={sortedActivities.map((a) => a.id)}
+          items={sortedItems.map((a) => a.id)}
           strategy={verticalListSortingStrategy}>
-          {sortedActivities.map((activity) => (
+          {sortedItems.map((item) => (
             <SortableRoutineActivity
-              key={activity.id}
+              key={item.id}
               routineId={routineId}
-              activity={activity}
+              item={item}
             />
           ))}
         </SortableContext>

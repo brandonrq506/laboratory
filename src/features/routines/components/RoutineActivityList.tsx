@@ -17,7 +17,7 @@ export const RoutineActivityList = () => {
     return <EmptyList title="No activities found" />;
   }
 
-  const activitiesWithExpectedStartTime = calculateRoutineItemStartTime(
+  const itemsWithExpectedStartTime = calculateRoutineItemStartTime(
     data.routine_items,
     data.start_time,
   );
@@ -25,7 +25,7 @@ export const RoutineActivityList = () => {
   return (
     <SortableRoutineActivityList
       routineId={routineId}
-      activities={activitiesWithExpectedStartTime}
+      items={itemsWithExpectedStartTime}
     />
   );
 };

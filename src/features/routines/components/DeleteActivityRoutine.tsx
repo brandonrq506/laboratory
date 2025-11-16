@@ -7,7 +7,7 @@ import { ACTIVITY, ROUTINE } from "@/constants/entities";
 import { DELETE } from "@/constants/actions";
 
 interface Props {
-  activityId: number;
+  itemId: number;
   routineId: number;
 }
 
@@ -15,7 +15,7 @@ const trashIcon = <TrashIcon className="size-5" aria-hidden />;
 const loadingIcon = <Loading className="size-5" />;
 const BTN_TEXT = `${DELETE} ${ACTIVITY} ${ROUTINE}`;
 
-export const DeleteActivityRoutine = ({ activityId, routineId }: Props) => {
+export const DeleteActivityRoutine = ({ itemId, routineId }: Props) => {
   const { mutate, isPending } = useDeleteActivityRoutine();
 
   return (
@@ -23,7 +23,7 @@ export const DeleteActivityRoutine = ({ activityId, routineId }: Props) => {
       shape="circle"
       aria-label={BTN_TEXT}
       variant="dangerOutline"
-      onClick={() => mutate({ activityId, routineId })}>
+      onClick={() => mutate({ itemId, routineId })}>
       {isPending ? loadingIcon : trashIcon}
     </IconButton>
   );
