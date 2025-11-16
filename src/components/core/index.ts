@@ -16,3 +16,4 @@ export { LinkedInProfile } from "./Social/LinkedInProfile";
 export { EmptyState } from "./Table/EmptyState";
 export { SortIcon } from "./Table/SortIcon";
 export { Toggle } from "./Toggle/Toggle";
+export { RainbowBadge } from "./Badge/rainbow-badge";
