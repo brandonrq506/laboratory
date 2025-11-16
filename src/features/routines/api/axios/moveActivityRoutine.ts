@@ -1,7 +1,6 @@
 import { ROUTINES_ENDPOINT, apiV1 } from "@/libs/axios";
 import type { RoutineItem } from "../../types/routine-activity";
 
-// This is wrong, we are not moving them this way anymore.
 interface Props {
   routine_id: number;
   routine_item_id: number;
