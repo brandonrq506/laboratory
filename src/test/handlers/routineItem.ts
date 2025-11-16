@@ -4,7 +4,7 @@ import { ROUTINES_ENDPOINT } from "@/libs/axios";
 const API_URL = import.meta.env.VITE_API_URL;
 const URL = `${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/items`;
 
-export const activityRoutineHandlers = [
+export const routineItemHandlers = [
   http.post(`${URL}`, async (req) => {
     await delay();
 

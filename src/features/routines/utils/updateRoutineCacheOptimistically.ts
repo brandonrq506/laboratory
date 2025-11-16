@@ -2,7 +2,7 @@ import type { QueryClient, QueryKey } from "@tanstack/react-query";
 
 import { addEnd } from "@/utils/array";
 
-import type { RoutineItem } from "../types/routine-activity";
+import type { RoutineItem } from "../types/routine-item";
 import type { RoutineWithItems } from "../types/routine-with-items";
 
 interface UpdateRoutineCacheParams {

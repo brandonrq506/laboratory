@@ -4,7 +4,7 @@ import { Badge, RainbowBadge } from "@/components/core";
 import { CSS } from "@dnd-kit/utilities";
 import { Card } from "@/components/layout";
 import { ClockIcon } from "@heroicons/react/24/outline";
-import { DeleteActivityRoutine } from "./DeleteActivityRoutine";
+import { DeleteRoutineItem } from "./delete-routine-item";
 import { DragHandle } from "@/features/tasks/components/DragHandle";
 
 import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
@@ -17,8 +17,7 @@ type Props = {
   item: RoutineItemWithExpectedStartTime;
 };
 
-// Todo: Rename to SortableRoutineItem and handle both activity and routine cases
-export const SortableRoutineActivity = ({ routineId, item }: Props) => {
+export const SortableRoutineItem = ({ routineId, item }: Props) => {
   const {
     attributes,
     listeners,
@@ -75,7 +74,7 @@ export const SortableRoutineActivity = ({ routineId, item }: Props) => {
           </div>
         </div>
 
-        <DeleteActivityRoutine itemId={item.id} routineId={routineId} />
+        <DeleteRoutineItem itemId={item.id} routineId={routineId} />
       </Card>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useDeleteActivityRoutine } from "../api/tanstack/useDeleteActivityRoutine";
+import { useDeleteRoutineItem } from "../api/tanstack/use-delete-routine-item";
 
 import { IconButton, Loading } from "@/components/core";
 import { TrashIcon } from "@heroicons/react/24/outline";
@@ -15,8 +15,8 @@ const trashIcon = <TrashIcon className="size-5" aria-hidden />;
 const loadingIcon = <Loading className="size-5" />;
 const BTN_TEXT = `${DELETE} ${ACTIVITY} ${ROUTINE}`;
 
-export const DeleteActivityRoutine = ({ itemId, routineId }: Props) => {
-  const { mutate, isPending } = useDeleteActivityRoutine();
+export const DeleteRoutineItem = ({ itemId, routineId }: Props) => {
+  const { mutate, isPending } = useDeleteRoutineItem();
 
   return (
     <IconButton

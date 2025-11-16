@@ -1,11 +1,11 @@
 import { render, screen } from "@/test/test-utils";
 import userEvent from "@testing-library/user-event";
 
-import { DeleteActivityRoutine } from "../DeleteActivityRoutine";
+import { DeleteRoutineItem } from "../delete-routine-item";
 
-describe("DeleteActivityRoutine", () => {
+describe("DeleteRoutineItem", () => {
   it("renders trash icon when not pending", () => {
-    render(<DeleteActivityRoutine itemId={1} routineId={1} />);
+    render(<DeleteRoutineItem itemId={1} routineId={1} />);
 
     const trashIcon = screen.getByRole("button", {
       name: /delete activity routine/i,
@@ -15,7 +15,7 @@ describe("DeleteActivityRoutine", () => {
 
   it("renders loading icon when pending", async () => {
     const user = userEvent.setup();
-    render(<DeleteActivityRoutine itemId={1} routineId={1} />);
+    render(<DeleteRoutineItem itemId={1} routineId={1} />);
 
     const trashIcon = screen.getByRole("button", {
       name: /delete activity routine/i,

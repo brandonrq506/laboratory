@@ -1,7 +1,7 @@
 import { set } from "date-fns";
 
 import { floorMilliseconds, splitHHMM } from "@/utils";
-import type { RoutineItem } from "../types/routine-activity";
+import type { RoutineItem } from "../types/routine-item";
 import type { RoutineItemWithExpectedStartTime } from "../types/routine-with-expected-time";
 
 const MS_PER_SECOND = 1000;

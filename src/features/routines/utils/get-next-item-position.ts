@@ -1,6 +1,6 @@
 import type { RoutineWithItems } from "../types/routine-with-items";
 
-export const getNextActivityPosition = (
+export const getNextItemPosition = (
   items: RoutineWithItems["routine_items"] | undefined,
 ): number => {
   if (!items?.length) return 1;

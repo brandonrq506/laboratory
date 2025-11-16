@@ -3,18 +3,18 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import {
   type CreateRoutineItemPayload,
-  createActivityRoutine,
-} from "../axios/createActivityRoutine";
+  createRoutineItem,
+} from "../axios/create-routine-item";
 import {
   getActivityFromCache,
   invalidateQueries,
   snapshotQueries,
 } from "@/utils/tanstack/helpers";
 import { routineByIdQueryOptions, routineListQueryOptions } from "../queries";
-import type { RoutineItem } from "../../types/routine-activity";
+import type { RoutineItem } from "../../types/routine-item";
 import type { RoutineWithItems } from "../../types/routine-with-items";
 import { buildTemporaryRoutineItem } from "../../utils/buildTemporaryRoutineItem";
-import { getNextActivityPosition } from "../../utils/getNextActivityPosition";
+import { getNextItemPosition } from "../../utils/get-next-item-position";
 import { updateRoutineCacheOptimistically } from "../../utils/updateRoutineCacheOptimistically";
 
 type ActivityMutationVariables = Extract<
@@ -26,11 +26,11 @@ const isActivityMutation = (
   variables: CreateRoutineItemPayload,
 ): variables is ActivityMutationVariables => "activityId" in variables;
 
-export const useCreateActivityRoutine = () => {
+export const useCreateRoutineItem = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: createActivityRoutine,
+    mutationFn: createRoutineItem,
     onMutate: async (variables) => {
       const { routineId } = variables;
       const singleQuery = routineByIdQueryOptions(routineId);
@@ -54,7 +54,7 @@ export const useCreateActivityRoutine = () => {
         (item) => item.id === routineId,
       );
 
-      const nextPosition = getNextActivityPosition(
+      const nextPosition = getNextItemPosition(
         routine?.routine_items ?? routineFromList?.routine_items,
       );
 
