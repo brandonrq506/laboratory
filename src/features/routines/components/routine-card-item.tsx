@@ -1,5 +1,5 @@
 import { Badge, RainbowBadge } from "@/components/core";
-import type { RoutineItem } from "../types/routine-activity";
+import type { RoutineItem } from "../types/routine-item";
 import { secondsToTime } from "@/utils";
 
 interface Props {

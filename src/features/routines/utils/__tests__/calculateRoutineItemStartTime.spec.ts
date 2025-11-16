@@ -84,7 +84,7 @@ describe("calculateRoutineItemStartTime", () => {
     expect(result[2].expected_start_time).toEqual(expectedThirdStart);
   });
 
-  it("returns an empty array when no activities exist", () => {
+  it("returns an empty array when no routine items exist", () => {
     const result = calculateRoutineItemStartTime([], "05:00");
     expect(result).toEqual([]);
   });

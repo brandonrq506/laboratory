@@ -1,9 +1,9 @@
 import { useNavigateBack } from "@/hooks";
 
 import {
-  AddActivityRoutineMenu,
+  AddRoutineItemMenu,
   EditRoutineForm,
-  RoutineActivityList,
+  RoutineItemList,
 } from "@/features/routines/components";
 import { HeadingMedium, SectionHeaderWithAction } from "@/components/layout";
 import { EditRoutineActions } from "@/pages/routines/EditRoutinePage/EditRoutineActions";
@@ -32,12 +32,12 @@ function RouteComponent() {
           <EditRoutineForm />
           <SectionHeaderWithAction
             title="Activities"
-            action={<AddActivityRoutineMenu routineId={routineId} />}
+            action={<AddRoutineItemMenu routineId={routineId} />}
           />
         </div>
         <div className="flex min-h-0 flex-1 flex-col gap-6">
           <div className="flex-1 overflow-y-auto px-3 [scrollbar-gutter:stable]">
-            <RoutineActivityList />
+            <RoutineItemList />
           </div>
           <EditRoutineActions />
         </div>

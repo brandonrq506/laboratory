@@ -2,10 +2,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { routineByIdQueryOptions, routineListQueryOptions } from "../queries";
-import { deleteRoutineItem } from "../axios/deleteRoutineItem";
+import { deleteRoutineItem } from "../axios/delete-routine-item";
 import { removeById } from "@/utils/array";
 
-export const useDeleteActivityRoutine = () => {
+export const useDeleteRoutineItem = () => {
   const queryClient = useQueryClient();
 
   return useMutation({

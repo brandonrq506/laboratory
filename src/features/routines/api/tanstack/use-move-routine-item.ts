@@ -5,13 +5,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { routineByIdQueryOptions, routineListQueryOptions } from "../queries";
 import { ROUTINES_ENDPOINT } from "@/libs/axios";
-import { moveActivityRoutine } from "../axios/moveActivityRoutine";
+import { moveRoutineItem } from "../axios/move-routine-item";
 
-export const useMoveActivityRoutine = () => {
+export const useMoveRoutineItem = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: moveActivityRoutine,
+    mutationFn: moveRoutineItem,
     onMutate: async ({ routine_id, routine_items }) => {
       // Why not use routineByIdQueryOptions here? And get the type-safety benefit.
       const singleKey = [ROUTINES_ENDPOINT, routine_id];
@@ -22,7 +22,7 @@ export const useMoveActivityRoutine = () => {
 
       const { rollback } = snapshotQueries(queryClient, [singleKey, listKey]);
 
-      // Update the activities of this routine optimistically in the single routine cache
+      // Update the items of this routine optimistically in the single routine cache
       queryClient.setQueryData(
         singleKey,
         (prev: RoutineWithItems | undefined) =>

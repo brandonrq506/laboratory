@@ -1,15 +1,15 @@
 import { activityHandlers } from "./activity";
-import { activityRoutineHandlers } from "./activityRoutine";
 import { authHandlers } from "./auth";
 import { categoryHandlers } from "./category";
 import { routineHandlers } from "./routine";
+import { routineItemHandlers } from "./routineItem";
 import { taskHandlers } from "./task";
 import { userHandlers } from "./user";
 import { userPreferenceHandlers } from "./userPreference";
 
 export const handlers = [
   ...activityHandlers,
-  ...activityRoutineHandlers,
+  ...routineItemHandlers,
   ...categoryHandlers,
   ...authHandlers,
   ...routineHandlers,

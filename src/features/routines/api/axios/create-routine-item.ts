@@ -18,9 +18,7 @@ export type CreateRoutineItemPayload =
   | CreateRoutineActivityPayload
   | CreateNestedRoutineItemPayload;
 
-export const createActivityRoutine = async (
-  payload: CreateRoutineItemPayload,
-) => {
+export const createRoutineItem = async (payload: CreateRoutineItemPayload) => {
   const URL = `${ROUTINES_ENDPOINT}/${payload.routineId}/items`;
   const body =
     "activityId" in payload

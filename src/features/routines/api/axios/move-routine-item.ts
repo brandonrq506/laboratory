@@ -1,5 +1,5 @@
 import { ROUTINES_ENDPOINT, apiV1 } from "@/libs/axios";
-import type { RoutineItem } from "../../types/routine-activity";
+import type { RoutineItem } from "../../types/routine-item";
 
 interface Props {
   routine_id: number;
@@ -9,7 +9,7 @@ interface Props {
   routine_items: RoutineItem[];
 }
 
-export const moveActivityRoutine = async ({
+export const moveRoutineItem = async ({
   routine_item_id,
   new_position,
   routine_id,

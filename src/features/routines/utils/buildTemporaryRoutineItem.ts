@@ -1,5 +1,5 @@
 import type { ActivityWithCategory } from "@/features/activities/types/activity-with-category";
-import type { RoutineItem } from "../types/routine-activity";
+import type { RoutineItem } from "../types/routine-item";
 import type { RoutineWithItems } from "../types/routine-with-items";
 
 import { calculateTotalExpTime } from "./calculateTotalExpTime";

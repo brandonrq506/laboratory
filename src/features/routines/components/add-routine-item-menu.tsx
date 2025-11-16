@@ -1,4 +1,4 @@
-import { useCreateActivityRoutine } from "../api/tanstack/useCreateActivityRoutine";
+import { useCreateRoutineItem } from "../api/tanstack/use-create-routine-item";
 import { useQuery } from "@tanstack/react-query";
 
 import { FloatingMenu, Loading } from "@/components/core";
@@ -6,22 +6,22 @@ import { CategoryBadge } from "@/features/categories/components";
 import { MenuItem } from "@headlessui/react";
 import { PlusIcon } from "@heroicons/react/24/solid";
 
-import { ACTIVITIES } from "@/constants/entities";
 import { ADD } from "@/constants/actions";
+import { ITEMS } from "@/constants/entities";
 import { activityListQueryOptions } from "@/features/activities/api/queries";
 
 interface Props {
   routineId: number;
 }
 
-export const AddActivityRoutineMenu = ({ routineId }: Props) => {
+export const AddRoutineItemMenu = ({ routineId }: Props) => {
   const { data, isPending, isError } = useQuery(activityListQueryOptions());
-  const { mutate } = useCreateActivityRoutine();
+  const { mutate } = useCreateRoutineItem();
 
   if (isPending)
     return (
       <FloatingMenu
-        srBtnText={`${ADD} ${ACTIVITIES}`}
+        srBtnText={`${ADD} ${ITEMS}`}
         iconBtn={<Loading sizeStyles="size-5" />}>
         <MenuItem>
           <div className="py-10">
@@ -31,11 +31,11 @@ export const AddActivityRoutineMenu = ({ routineId }: Props) => {
       </FloatingMenu>
     );
 
-  if (isError) return <div>Error loading activities</div>;
+  if (isError) return <div>Error loading items</div>;
 
   return (
     <FloatingMenu
-      srBtnText={`${ADD} ${ACTIVITIES}`}
+      srBtnText={`${ADD} ${ITEMS}`}
       iconBtn={<PlusIcon className="size-5" aria-hidden />}>
       {data.map((activity) => (
         <MenuItem key={activity.id}>
