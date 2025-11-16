@@ -4,14 +4,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { routineByIdQueryOptions, routineListQueryOptions } from "../queries";
-import { MoveActivityRoutine } from "../axios/moveActivityRoutine";
 import { ROUTINES_ENDPOINT } from "@/libs/axios";
+import { moveActivityRoutine } from "../axios/moveActivityRoutine";
 
 export const useMoveActivityRoutine = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: MoveActivityRoutine,
+    mutationFn: moveActivityRoutine,
     onMutate: async ({ routine_id, activities }) => {
       const singleKey = [ROUTINES_ENDPOINT, routine_id];
       const listKey = [ROUTINES_ENDPOINT];

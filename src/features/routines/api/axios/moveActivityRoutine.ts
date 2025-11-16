@@ -9,7 +9,7 @@ interface Props {
   activities: RoutineActivity[];
 }
 
-export const MoveActivityRoutine = async ({
+export const moveActivityRoutine = async ({
   activity_routine_id,
   new_position,
   routine_id,
