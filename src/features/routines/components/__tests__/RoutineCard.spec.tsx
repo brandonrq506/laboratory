@@ -15,21 +15,21 @@ describe("RoutineCard", () => {
     expect(screen.getByText("34m")).toBeInTheDocument();
   });
 
-  it("renders card properly when there are no items", () => {
+  it("renders card properly when there are no routine items", () => {
     render(<RoutineCard routine={emptyRoutine} />);
 
-    expect(screen.getByText("No items")).toBeInTheDocument();
+    expect(screen.getByText("No routine items")).toBeInTheDocument();
     expect(screen.getByText("0s")).toBeInTheDocument();
   });
 
-  it("blurs the bottom of the card when there are more than 5 items", () => {
+  it("blurs the bottom of the card when there are more than 5 routine items", () => {
     render(<RoutineCard routine={morningRoutine} />);
 
     const blurredSection = screen.getByText("Blurred section");
     expect(blurredSection).toBeInTheDocument();
   });
 
-  it("does not blur the bottom of the card when there are 5 or fewer items", () => {
+  it("does not blur the bottom of the card when there are 5 or fewer routine items", () => {
     render(<RoutineCard routine={showerRoutine} />);
 
     const blurredSection = screen.queryByText("Blurred section");

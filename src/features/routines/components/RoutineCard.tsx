@@ -30,7 +30,7 @@ export const RoutineCard = ({ routine }: Props) => {
 
       {routine.routine_items.length === 0 && (
         <div className="flex h-20 items-center justify-center">
-          <span className="text-sm text-gray-500">No items</span>
+          <span className="text-sm text-gray-500">No routine items</span>
         </div>
       )}
       {routine.routine_items.length > MAX_VISIBLE_ITEMS && (
