@@ -1,6 +1,7 @@
-import type { RoutineActivity } from "./routine-activity";
+import type { RoutineItem } from "./routine-activity";
 import type { RoutineModel } from "./routine-model";
 
+// Todo: Rename to RoutineWithItems
 export interface RoutineWithActivities extends RoutineModel {
-  activities: RoutineActivity[];
+  routine_items: RoutineItem[];
 }

@@ -30,7 +30,7 @@ export const AddScheduledTaskMenu = () => {
     });
   };
 
-  const nonEmptyRoutines = routines?.filter((r) => r.activities.length > 0);
+  const nonEmptyRoutines = routines?.filter((r) => r.routine_items.length > 0);
 
   const hasRoutines = nonEmptyRoutines && nonEmptyRoutines.length > 0;
 

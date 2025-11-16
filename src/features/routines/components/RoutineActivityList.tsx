@@ -13,12 +13,12 @@ export const RoutineActivityList = () => {
   const { routineId } = routeApi.useParams();
   const { data } = useSuspenseQuery(routineByIdQueryOptions(routineId));
 
-  if (!data.activities || data.activities.length === 0) {
+  if (!data.routine_items || data.routine_items.length === 0) {
     return <EmptyList title="No activities found" />;
   }
 
   const activitiesWithExpectedStartTime = calculateRoutineActivityStartTime(
-    data.activities,
+    data.routine_items,
     data.start_time,
   );
 
