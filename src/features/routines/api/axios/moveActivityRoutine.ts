@@ -1,12 +1,12 @@
 import { ACTIVITIES_ENDPOINT, ROUTINES_ENDPOINT, apiV1 } from "@/libs/axios";
-import { RoutineActivity } from "../../types/routine-activity";
+import type { RoutineItem } from "../../types/routine-activity";
 
 interface Props {
   routine_id: number;
   activity_routine_id: number;
   new_position: number;
   // This is not used, it is just for optimistic UI update.
-  activities: RoutineActivity[];
+  routine_items: RoutineItem[];
 }
 
 export const moveActivityRoutine = async ({

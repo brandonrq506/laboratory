@@ -1,8 +1,8 @@
 import { set } from "date-fns";
 
 import { floorMilliseconds, splitHHMM } from "@/utils";
-import { RoutineActivityWithExpectedStartTime } from "../types/routine-with-expected-time";
 import type { RoutineItem } from "../types/routine-activity";
+import type { RoutineItemWithExpectedStartTime } from "../types/routine-with-expected-time";
 
 const MS_PER_SECOND = 1000;
 
@@ -30,7 +30,7 @@ const getDurationIncrementMs = (item: RoutineItem) => {
 export const calculateRoutineItemStartTime = (
   routineItems: RoutineItem[],
   start_time: string | null,
-): RoutineActivityWithExpectedStartTime[] => {
+): RoutineItemWithExpectedStartTime[] => {
   if (!routineItems || routineItems.length === 0) return [];
 
   let nextStartTime = deriveInitialStartTime(start_time);

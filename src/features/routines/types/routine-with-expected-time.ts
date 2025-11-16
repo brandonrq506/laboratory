@@ -1,5 +1,5 @@
-import type { RoutineActivity } from "./routine-activity";
+import type { RoutineItem } from "./routine-activity";
 
-export interface RoutineActivityWithExpectedStartTime extends RoutineActivity {
+export type RoutineItemWithExpectedStartTime = RoutineItem & {
   expected_start_time: Date;
-}
+};

@@ -1,5 +1,3 @@
-import type { RoutineWithActivities } from "../../types/routine-with-activities";
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
@@ -26,13 +24,10 @@ export const useDeleteRoutine = () => {
       const { rollback } = snapshotQueries(queryClient, [singleKey, listKey]);
 
       // Remove routine from list cache optimistically
-      queryClient.setQueryData(
-        listKey,
-        (prev: RoutineWithActivities[] | undefined) => {
-          if (!prev) return prev;
-          return removeById(prev, routineId);
-        },
-      );
+      queryClient.setQueryData(listKey, (prev) => {
+        if (!prev) return prev;
+        return removeById(prev, routineId);
+      });
 
       // Remove routine detail cache
       queryClient.removeQueries({ queryKey: singleKey });

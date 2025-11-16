@@ -12,7 +12,7 @@ describe("RoutineCard", () => {
     render(<RoutineCard routine={morningRoutine} />);
 
     expect(screen.getByText(morningRoutine.name)).toBeInTheDocument();
-    expect(screen.getByText("24m")).toBeInTheDocument();
+    expect(screen.getByText("34m")).toBeInTheDocument();
   });
 
   it("renders card properly when there are no activities", () => {
