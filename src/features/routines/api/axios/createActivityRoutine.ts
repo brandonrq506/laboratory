@@ -1,16 +1,33 @@
-import { ACTIVITIES_ENDPOINT, ROUTINES_ENDPOINT, apiV1 } from "@/libs/axios";
+import { ROUTINES_ENDPOINT, apiV1 } from "@/libs/axios";
 
-interface Props {
-  activityId: number;
+interface BaseCreateRoutineItemPayload {
   routineId: number;
 }
 
-export const createActivityRoutine = async ({
-  activityId,
-  routineId,
-}: Props) => {
-  const URL = `${ROUTINES_ENDPOINT}/${routineId}${ACTIVITIES_ENDPOINT}`;
-  const response = await apiV1.post(URL, { activity_id: activityId });
+interface CreateRoutineActivityPayload extends BaseCreateRoutineItemPayload {
+  activityId: number;
+  nestedRoutineId?: never;
+}
+
+interface CreateNestedRoutineItemPayload extends BaseCreateRoutineItemPayload {
+  nestedRoutineId: number;
+  activityId?: never;
+}
+
+export type CreateRoutineItemPayload =
+  | CreateRoutineActivityPayload
+  | CreateNestedRoutineItemPayload;
+
+export const createActivityRoutine = async (
+  payload: CreateRoutineItemPayload,
+) => {
+  const URL = `${ROUTINES_ENDPOINT}/${payload.routineId}/items`;
+  const body =
+    "activityId" in payload
+      ? { activity_id: payload.activityId }
+      : { nested_routine_id: payload.nestedRoutineId };
+
+  const response = await apiV1.post(URL, body);
 
   return response.data;
 };
