@@ -11,7 +11,7 @@ export interface ActivityRoutineItem {
 export interface NestedRoutineItem {
   id: number;
   type: "routine";
-  item_name: string | null;
+  item_name: string;
   item_exp_seconds: number;
   category_name: null;
   category_color: null;

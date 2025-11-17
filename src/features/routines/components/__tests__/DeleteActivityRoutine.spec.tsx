@@ -8,7 +8,7 @@ describe("DeleteRoutineItem", () => {
     render(<DeleteRoutineItem itemId={1} routineId={1} />);
 
     const trashIcon = screen.getByRole("button", {
-      name: /delete activity routine/i,
+      name: /delete routine item/i,
     });
     expect(trashIcon).toBeInTheDocument();
   });
@@ -18,7 +18,7 @@ describe("DeleteRoutineItem", () => {
     render(<DeleteRoutineItem itemId={1} routineId={1} />);
 
     const trashIcon = screen.getByRole("button", {
-      name: /delete activity routine/i,
+      name: /delete routine item/i,
     });
 
     await user.click(trashIcon);
