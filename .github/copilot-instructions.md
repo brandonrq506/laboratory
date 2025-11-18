@@ -1,5 +1,7 @@
 # Copilot Instructions for Laboratory Repository
 
+In all interactions and commit messages, be extremely concise and sacrifice grammar for the sake of concision.
+
 ## Repository Overview
 
 Laboratory is a Web Application directed to people wanting to improve their productivity and efficiency. They can do so through the use of Routines and Tasks. Users can define a list of `scheduled` tasks, have one `in_progress` task at any given point, and a list of `completed` tasks.
