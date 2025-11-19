@@ -16,9 +16,13 @@ export const ExcelCategoryHeaders = ({ excelData }: Props) => {
   const { data } = useQuery(categoryListQueryOptions());
   const result = calculatePercentageByCategory(excelData, data);
 
+  const sortedResult = [...result].sort(([a], [b]) =>
+    a.name.localeCompare(b.name),
+  );
+
   return (
     <div className="mt-4 flex flex-wrap gap-x-6">
-      {result.map(([category, percentage]) => (
+      {sortedResult.map(([category, percentage]) => (
         <div key={category.id} className="my-1 flex items-center gap-2">
           <CategoryBadge category={category} />
           <p className="text-sm font-light">
