@@ -8,4 +8,11 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    groups:
+      testing-libraries:
+        patterns:
+          - "vitest"
+          - "@vitest/ui"
+          - "@vitest/coverage-*"
+        dependency-type: "development"
