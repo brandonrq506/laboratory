@@ -9,7 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from "./routes/__root";
-import { Route as LoginRouteImport } from "./routes/login";
+import { Route as SignUpRouteImport } from "./routes/sign-up";
+import { Route as SignInRouteImport } from "./routes/sign-in";
 import { Route as _protectedRouteRouteImport } from "./routes/__protected/route";
 import { Route as _protectedIndexRouteImport } from "./routes/__protected/index";
 import { Route as _protectedTimerRouteRouteImport } from "./routes/__protected/timer/route";
@@ -43,9 +44,14 @@ import { Route as _protectedSettingsCategoriesCategoryIdRouteRouteImport } from 
 import { Route as _protectedSettingsCategoriesCategoryIdEditRouteImport } from "./routes/__protected/settings/categories/$categoryId/edit";
 import { Route as _protectedSettingsCategoriesCategoryIdDeleteRouteImport } from "./routes/__protected/settings/categories/$categoryId/delete";
 
-const LoginRoute = LoginRouteImport.update({
-  id: "/login",
-  path: "/login",
+const SignUpRoute = SignUpRouteImport.update({
+  id: "/sign-up",
+  path: "/sign-up",
+  getParentRoute: () => rootRouteImport,
+} as any);
+const SignInRoute = SignInRouteImport.update({
+  id: "/sign-in",
+  path: "/sign-in",
   getParentRoute: () => rootRouteImport,
 } as any);
 const _protectedRouteRoute = _protectedRouteRouteImport.update({
@@ -228,7 +234,8 @@ const _protectedSettingsCategoriesCategoryIdDeleteRoute =
   } as any);
 
 export interface FileRoutesByFullPath {
-  "/login": typeof LoginRoute;
+  "/sign-in": typeof SignInRoute;
+  "/sign-up": typeof SignUpRoute;
   "/activities": typeof _protectedActivitiesRouteRouteWithChildren;
   "/excel": typeof _protectedExcelRouteRouteWithChildren;
   "/history": typeof _protectedHistoryRouteRouteWithChildren;
@@ -262,7 +269,8 @@ export interface FileRoutesByFullPath {
   "/settings/categories/$categoryId/edit": typeof _protectedSettingsCategoriesCategoryIdEditRoute;
 }
 export interface FileRoutesByTo {
-  "/login": typeof LoginRoute;
+  "/sign-in": typeof SignInRoute;
+  "/sign-up": typeof SignUpRoute;
   "/activities": typeof _protectedActivitiesRouteRouteWithChildren;
   "/history": typeof _protectedHistoryRouteRouteWithChildren;
   "/routines": typeof _protectedRoutinesRouteRouteWithChildren;
@@ -294,7 +302,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   "/__protected": typeof _protectedRouteRouteWithChildren;
-  "/login": typeof LoginRoute;
+  "/sign-in": typeof SignInRoute;
+  "/sign-up": typeof SignUpRoute;
   "/__protected/activities": typeof _protectedActivitiesRouteRouteWithChildren;
   "/__protected/excel": typeof _protectedExcelRouteRouteWithChildren;
   "/__protected/history": typeof _protectedHistoryRouteRouteWithChildren;
@@ -330,7 +339,8 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
-    | "/login"
+    | "/sign-in"
+    | "/sign-up"
     | "/activities"
     | "/excel"
     | "/history"
@@ -364,7 +374,8 @@ export interface FileRouteTypes {
     | "/settings/categories/$categoryId/edit";
   fileRoutesByTo: FileRoutesByTo;
   to:
-    | "/login"
+    | "/sign-in"
+    | "/sign-up"
     | "/activities"
     | "/history"
     | "/routines"
@@ -395,7 +406,8 @@ export interface FileRouteTypes {
   id:
     | "__root__"
     | "/__protected"
-    | "/login"
+    | "/sign-in"
+    | "/sign-up"
     | "/__protected/activities"
     | "/__protected/excel"
     | "/__protected/history"
@@ -431,16 +443,24 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   _protectedRouteRoute: typeof _protectedRouteRouteWithChildren;
-  LoginRoute: typeof LoginRoute;
+  SignInRoute: typeof SignInRoute;
+  SignUpRoute: typeof SignUpRoute;
 }
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    "/login": {
-      id: "/login";
-      path: "/login";
-      fullPath: "/login";
-      preLoaderRoute: typeof LoginRouteImport;
+    "/sign-up": {
+      id: "/sign-up";
+      path: "/sign-up";
+      fullPath: "/sign-up";
+      preLoaderRoute: typeof SignUpRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/sign-in": {
+      id: "/sign-in";
+      path: "/sign-in";
+      fullPath: "/sign-in";
+      preLoaderRoute: typeof SignInRouteImport;
       parentRoute: typeof rootRouteImport;
     };
     "/__protected": {
@@ -893,7 +913,8 @@ const _protectedRouteRouteWithChildren = _protectedRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   _protectedRouteRoute: _protectedRouteRouteWithChildren,
-  LoginRoute: LoginRoute,
+  SignInRoute: SignInRoute,
+  SignUpRoute: SignUpRoute,
 };
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
