@@ -35,7 +35,7 @@ export const EditRoutineForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex w-full justify-between">
+      <div className="flex w-full justify-between gap-4">
         <TextInput
           showAsterisk
           hideLabel
