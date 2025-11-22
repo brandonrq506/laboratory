@@ -10,7 +10,11 @@ import {
   invalidateQueries,
   snapshotQueries,
 } from "@/utils/tanstack/helpers";
-import { routineByIdQueryOptions, routineListQueryOptions } from "../queries";
+import {
+  routineByIdQueryOptions,
+  routineKeys,
+  routineListQueryOptions,
+} from "../queries";
 import type { RoutineItem } from "../../types/routine-item";
 import type { RoutineWithItems } from "../../types/routine-with-items";
 import { buildTemporaryRoutineItem } from "../../utils/buildTemporaryRoutineItem";
@@ -112,11 +116,8 @@ export const useCreateRoutineItem = () => {
       context?.rollback();
     },
     onSettled: (_, __, { routineId }) => {
-      invalidateQueries(
-        queryClient,
-        routineListQueryOptions(),
-        routineByIdQueryOptions(routineId),
-      );
+      invalidateQueries(queryClient, routineByIdQueryOptions(routineId));
+      queryClient.invalidateQueries({ queryKey: routineKeys.lists() });
     },
   });
 };

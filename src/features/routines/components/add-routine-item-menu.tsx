@@ -1,7 +1,7 @@
 import { useCreateRoutineItem } from "../api/tanstack/use-create-routine-item";
 import { useQuery } from "@tanstack/react-query";
 
-import { FloatingMenu, Loading } from "@/components/core";
+import { FloatingMenu, Loading, RainbowBadge } from "@/components/core";
 import { CategoryBadge } from "@/features/categories/components";
 import { MenuItem } from "@headlessui/react";
 import { PlusIcon } from "@heroicons/react/24/solid";
@@ -9,16 +9,26 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import { ADD } from "@/constants/actions";
 import { ITEMS } from "@/constants/entities";
 import { activityListQueryOptions } from "@/features/activities/api/queries";
+import { routineNestableCandidateListQueryOptions } from "../api/queries";
 
 interface Props {
   routineId: number;
 }
 
 export const AddRoutineItemMenu = ({ routineId }: Props) => {
-  const { data, isPending, isError } = useQuery(activityListQueryOptions());
+  const {
+    data: activities,
+    isPending: isPendingActivities,
+    isError: isErrorActivities,
+  } = useQuery(activityListQueryOptions());
+  const {
+    data: routines,
+    isPending: isPendingRoutines,
+    isError: isErrorRoutines,
+  } = useQuery(routineNestableCandidateListQueryOptions(routineId));
   const { mutate } = useCreateRoutineItem();
 
-  if (isPending)
+  if (isPendingActivities || isPendingRoutines)
     return (
       <FloatingMenu
         srBtnText={`${ADD} ${ITEMS}`}
@@ -31,13 +41,28 @@ export const AddRoutineItemMenu = ({ routineId }: Props) => {
       </FloatingMenu>
     );
 
-  if (isError) return <div>Error loading items</div>;
+  if (isErrorActivities || isErrorRoutines)
+    return <div>Error loading items</div>;
 
   return (
     <FloatingMenu
       srBtnText={`${ADD} ${ITEMS}`}
       iconBtn={<PlusIcon className="size-5" aria-hidden />}>
-      {data.map((activity) => (
+      {routines.map((routine) => (
+        <MenuItem key={routine.id}>
+          <button
+            className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
+            onClick={(e) => {
+              e.preventDefault();
+              mutate({ nestedRoutineId: routine.id, routineId });
+            }}>
+            {routine.name}
+            <RainbowBadge>Routine</RainbowBadge>
+          </button>
+        </MenuItem>
+      ))}
+
+      {activities.map((activity) => (
         <MenuItem key={activity.id}>
           <button
             className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
