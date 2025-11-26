@@ -1,7 +1,7 @@
 import { useDisclosure } from "@/hooks/useDisclosure";
 import { useUserPreference } from "@/features/userPreferences/hooks";
 
-import { IconButton, LinkedInProfile, NetworkBadge } from "../../core";
+import { IconButton, NetworkBadge } from "../../core";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Fragment } from "react/jsx-runtime";
 import { Header } from "./Header";
@@ -28,7 +28,6 @@ export const MainLayout = () => {
         <div className="flex-1 text-sm leading-6 font-semibold text-gray-900">
           Laboratory
         </div>
-        <LinkedInProfile />
       </Header>
 
       <main
