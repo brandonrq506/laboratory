@@ -16,3 +16,7 @@ updates:
           - "@vitest/ui"
           - "@vitest/coverage-*"
         dependency-type: "development"
+      tanstack-libraries:
+        patterns:
+          - "@tanstack/*"
+        dependency-type: "all"
