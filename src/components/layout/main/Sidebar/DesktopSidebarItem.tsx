@@ -35,6 +35,7 @@ export const DesktopSidebarItem = ({
       <Link
         onClick={onClose}
         title={label}
+        resetScroll={true}
         activeProps={{ className: clsx(baseClasses, activeClasses) }}
         inactiveProps={{ className: clsx(baseClasses, inactiveClasses) }}
         {...linkProps}>
