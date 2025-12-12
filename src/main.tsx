@@ -16,7 +16,6 @@ const TanStackQueryProviderContext = { queryClient };
 const router = createRouter({
   routeTree,
   defaultPreload: "intent",
-  scrollRestoration: true,
   defaultStructuralSharing: true,
   defaultPreloadStaleTime: 0,
   context: {
