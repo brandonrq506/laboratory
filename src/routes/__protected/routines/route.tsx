@@ -40,7 +40,7 @@ function RouteComponent() {
               startIcon={<PlusIcon className="size-5" aria-hidden />}>
               {`${ADD} ${ROUTINE}`}
             </LinkButton>
-            <Button onClick={() => setShowHidden(!showHidden)}>
+            <Button onClick={() => setShowHidden((prev) => !prev)}>
               {btnText}
             </Button>
           </>
