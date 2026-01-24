@@ -2,6 +2,7 @@ import { ROUTINES_ENDPOINT } from "@/libs/axios";
 import { RoutineApiOptions } from "../types/routine-api-options";
 import { queryOptions } from "@tanstack/react-query";
 
+import { getHiddenRoutines } from "./axios/get-hidden-routines";
 import { getNestableCandidateRoutines } from "./axios/get-nestable-candidate-routines";
 import { getRoutine } from "./axios/getRoutine";
 import { getRoutines } from "./axios/getRoutines";
@@ -37,6 +38,13 @@ export const routineVisibleListQueryOptions = () => {
   return queryOptions({
     queryKey: routineKeys.list({ filter: { endpoint: "visible" } }),
     queryFn: getVisibleRoutines,
+  });
+};
+
+export const routineHiddenListQueryOptions = () => {
+  return queryOptions({
+    queryKey: routineKeys.list({ filter: { endpoint: "hidden" } }),
+    queryFn: getHiddenRoutines,
   });
 };
 
