@@ -1,6 +1,6 @@
 import type { RoutineWithItems } from "../../types/routine-with-items";
 
-import { QueryFunctionContext } from "@tanstack/react-query";
+import type { QueryFunctionContext } from "@tanstack/react-query";
 import { apiV1 } from "@/libs/axios";
 
 import { routineKeys } from "../queries";
