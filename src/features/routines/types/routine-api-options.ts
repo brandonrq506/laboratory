@@ -1,4 +1,4 @@
-type RoutineEndpoints = "all" | "visible";
+type RoutineEndpoints = "all" | "visible" | "hidden";
 
 export type RoutineApiOptions = {
   filter?: { endpoint?: RoutineEndpoints };
