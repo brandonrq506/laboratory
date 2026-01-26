@@ -26,6 +26,7 @@ export const MobileSidebarItem = ({
     <li>
       <Link
         onClick={onClose}
+        resetScroll={true}
         activeProps={{ className: clsx(baseClasses, activeClasses) }}
         inactiveProps={{ className: clsx(baseClasses, inactiveClasses) }}
         {...linkProps}>
