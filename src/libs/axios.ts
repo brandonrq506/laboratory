@@ -10,6 +10,24 @@ export const apiV1 = axios.create({
   },
 });
 
+// Function to set up authentication interceptor with Clerk
+export const setupAuthInterceptor = (
+  getToken: () => Promise<string | null>,
+) => {
+  apiV1.interceptors.request.use(
+    async (config) => {
+      const token = await getToken();
+      console.log(token);
+
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    },
+    (error) => Promise.reject(error),
+  );
+};
+
 // Response interceptor to reject HTML responses
 apiV1.interceptors.response.use(
   (response: AxiosResponse) => {
