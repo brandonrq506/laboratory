@@ -12,7 +12,6 @@ export { ThreeDotsMenu } from "./Menu/ThreeDotsMenu";
 export { Modal } from "./Modal/Modal";
 export { ConfirmationModal } from "./Modal/ConfirmationModal";
 export { NetworkBadge } from "./Network/NetworkBadge";
-export { LinkedInProfile } from "./Social/LinkedInProfile";
 export { EmptyState } from "./Table/EmptyState";
 export { SortIcon } from "./Table/SortIcon";
 export { Toggle } from "./Toggle/Toggle";
