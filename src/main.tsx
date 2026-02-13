@@ -1,14 +1,18 @@
 import "./index.css";
+
 import ReactDOM from "react-dom/client";
 import { StrictMode } from "react";
 
-// Import the generated route tree
-import { routeTree } from "./routeTree.gen";
+import { useAuth } from "@clerk/clerk-react";
+import { useClerkAuth } from "./features/auth/clerk/use-clerk-auth";
 
-import { AuthProvider, useAuth } from "./features/auth/stores";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { ClerkWrapper } from "./features/auth/clerk";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./libs/tanstack-query/query-client";
+
+import { routeTree } from "./routeTree.gen";
+import { setupAuthInterceptor } from "./libs/axios";
 
 // Create a new router instance
 const TanStackQueryProviderContext = { queryClient };
@@ -32,7 +36,18 @@ declare module "@tanstack/react-router" {
 }
 
 function InnerApp() {
-  const auth = useAuth();
+  const auth = useClerkAuth();
+  const { getToken } = useAuth();
+
+  if (auth.isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
+  setupAuthInterceptor(getToken);
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} context={{ auth }} />
@@ -42,9 +57,9 @@ function InnerApp() {
 
 export function App() {
   return (
-    <AuthProvider>
+    <ClerkWrapper>
       <InnerApp />
-    </AuthProvider>
+    </ClerkWrapper>
   );
 }
 
