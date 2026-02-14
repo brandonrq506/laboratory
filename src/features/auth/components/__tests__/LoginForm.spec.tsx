@@ -4,14 +4,14 @@ import { LoginForm } from "../LoginForm";
 import userEvent from "@testing-library/user-event";
 
 describe("LoginForm", () => {
-  it("focuses on the 'Email' input by default", () => {
+  it("focuses on the 'Email' input by default", async () => {
     render(
       <AuthProvider>
         <LoginForm onLoginSuccess={async () => {}} />
       </AuthProvider>,
     );
 
-    expect(screen.getByLabelText("Email")).toHaveFocus();
+    expect(await screen.findByLabelText("Email")).toHaveFocus();
   });
 
   it("requires necessary values before submitting", async () => {
@@ -20,6 +20,8 @@ describe("LoginForm", () => {
         <LoginForm onLoginSuccess={async () => {}} />
       </AuthProvider>,
     );
+
+    await screen.findByLabelText("Email");
 
     await userEvent.click(screen.getByRole("button", { name: "Sign In" }));
 
@@ -33,6 +35,8 @@ describe("LoginForm", () => {
         <LoginForm onLoginSuccess={async () => {}} />
       </AuthProvider>,
     );
+
+    await screen.findByLabelText("Email");
 
     await userEvent.type(screen.getByLabelText("Email"), "test");
     await userEvent.click(screen.getByRole("button", { name: "Sign In" }));

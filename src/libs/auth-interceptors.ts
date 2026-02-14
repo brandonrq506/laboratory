@@ -35,9 +35,7 @@ const processQueue = (error: unknown, token: string | null) => {
 };
 
 const refreshToken = async (): Promise<string> => {
-  const response = await apiV1.post<{ access_token: string }>(
-    REFRESH_ENDPOINT,
-  );
+  const response = await apiV1.post<{ access_token: string }>(REFRESH_ENDPOINT);
   return response.data.access_token;
 };
 
