@@ -1,84 +1,86 @@
-import { PropsWithChildren, useCallback, useEffect, useState } from "react";
+import {
+  type PropsWithChildren,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
+import { REFRESH_ENDPOINT, apiV1 } from "@/libs/axios";
+import { setAccessToken, setLogoutHandler } from "@/libs/auth-interceptors";
 import { AuthContext } from "./AuthContext";
-import { AuthContextType } from "./AuthContextType";
-import { AxiosHeaders } from "axios";
-import { apiV1 } from "@/libs/axios";
+import { type AuthLossReason } from "./AuthContextType";
+import { Loading } from "@/components/core";
 
-const KEY = "token";
+interface AuthProviderProps extends PropsWithChildren {
+  onAuthLost?: (reason: AuthLossReason) => Promise<void> | void;
+}
 
-const getStoredToken = () => localStorage.getItem(KEY);
+let refreshInFlightPromise: Promise<string | null> | null = null;
 
-const setStoredToken = (token: string | null) => {
-  if (token) localStorage.setItem(KEY, token);
-  else localStorage.removeItem(KEY);
+const getRefreshTokenPromise = () => {
+  if (!refreshInFlightPromise) {
+    refreshInFlightPromise = apiV1
+      .post<{ access_token: string }>(REFRESH_ENDPOINT)
+      .then((response) => response.data.access_token)
+      .catch(() => null)
+      .finally(() => {
+        refreshInFlightPromise = null;
+      });
+  }
+
+  return refreshInFlightPromise;
 };
 
-const logoutRef: { current: () => void } = {
-  current: () => {},
-};
-
-let interceptorsRegistered = false;
-
-const ensureAuthInterceptors = () => {
-  if (interceptorsRegistered) return;
-
-  apiV1.interceptors.request.use((config) => {
-    const token = getStoredToken();
-    if (!token) return config;
-
-    if (!config.headers) {
-      config.headers = new AxiosHeaders();
-    }
-
-    if (config.headers instanceof AxiosHeaders) {
-      config.headers.set("Authorization", `Bearer ${token}`);
-      return config;
-    }
-
-    (config.headers as Record<string, string>).Authorization =
-      `Bearer ${token}`;
-    return config;
-  });
-
-  apiV1.interceptors.response.use(
-    (response) => response,
-    (error) => {
-      const UNAUTHORIZED = 401;
-      if (error.response?.status === UNAUTHORIZED) {
-        logoutRef.current();
-      }
-      return Promise.reject(error);
-    },
-  );
-
-  interceptorsRegistered = true;
-};
-
-ensureAuthInterceptors();
-
-export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [token, setToken] = useState(getStoredToken());
+export const AuthProvider = ({ children, onAuthLost }: AuthProviderProps) => {
+  const [isAuth, setIsAuth] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const login = useCallback((token: string) => {
-    setStoredToken(token);
-    setToken(token);
+    setAccessToken(token);
+    setIsAuth(true);
   }, []);
 
-  const logout = useCallback(() => {
-    setStoredToken(null);
-    setToken(null);
-  }, []);
+  const logout = useCallback(
+    (reason: AuthLossReason = "manual") => {
+      setAccessToken(null);
+      setIsAuth(false);
+      void onAuthLost?.(reason);
+    },
+    [onAuthLost],
+  );
 
   useEffect(() => {
-    logoutRef.current = logout;
+    setLogoutHandler(() => logout("refresh-failed"));
   }, [logout]);
 
-  const initialAuthState: AuthContextType = {
-    isAuth: Boolean(token),
-    login,
-    logout,
-  };
+  useEffect(() => {
+    let isMounted = true;
 
-  return <AuthContext value={initialAuthState}>{children}</AuthContext>;
+    getRefreshTokenPromise()
+      .then((accessToken) => {
+        if (!isMounted || !accessToken) return;
+        login(accessToken);
+      })
+      .finally(() => {
+        if (!isMounted) return;
+        setIsLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [login]);
+
+  if (isLoading)
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Loading sizeStyles="size-10" />
+      </div>
+    );
+
+  return (
+    <AuthContext value={{ isAuth, isLoading, login, logout }}>
+      {children}
+    </AuthContext>
+  );
 };

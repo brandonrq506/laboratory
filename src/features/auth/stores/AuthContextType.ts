@@ -1,5 +1,8 @@
+export type AuthLossReason = "manual" | "refresh-failed";
+
 export type AuthContextType = {
   isAuth: boolean;
-  login: (token: string) => void;
-  logout: () => void;
+  isLoading: boolean;
+  login: (accessToken: string) => void;
+  logout: (reason?: AuthLossReason) => void;
 };

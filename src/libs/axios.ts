@@ -8,6 +8,7 @@ export const apiV1 = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 // Response interceptor to reject HTML responses
@@ -39,6 +40,7 @@ export const EXCEL_ENDPOINT = "/excel";
 export const ME_ENDPOINT = "/me";
 export const ROUTINES_ENDPOINT = "/routines";
 export const SESSION_ENDPOINT = "/session";
+export const REFRESH_ENDPOINT = "/session/refresh";
 export const TASKS_ENDPOINT = "/tasks";
 export const USER_PREFERENCES_ENDPOINT = "/user_preferences";
 export const USERS_ENDPOINT = "/users";
