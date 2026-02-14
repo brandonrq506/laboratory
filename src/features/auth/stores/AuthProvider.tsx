@@ -16,8 +16,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [isLoading, setIsLoading] = useState(true);
   const hasAttemptedRefresh = useRef(false);
 
-  const login = useCallback((token: string) => {
-    setAccessToken(token);
+  const login = useCallback((accessToken: string) => {
+    setAccessToken(accessToken);
     setIsAuth(true);
   }, []);
 
@@ -37,7 +37,11 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     apiV1
       .post<{ access_token: string }>(REFRESH_ENDPOINT)
       .then((res) => login(res.data.access_token))
-      .catch(() => {})
+      .catch((error: unknown) => {
+        if (import.meta.env.DEV) {
+          console.error("Initial token refresh failed:", error);
+        }
+      })
       .finally(() => setIsLoading(false));
   }, [login]);
 

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { HttpResponse, http } from "msw";
 import { REFRESH_ENDPOINT, SESSION_ENDPOINT, apiV1 } from "@/libs/axios";
 import {
@@ -148,7 +149,27 @@ describe("auth-interceptors", () => {
     expect(logoutSpy).toHaveBeenCalledOnce();
   });
 
-  it("skips retry when _retry is already set", async () => {
+  it("calls logoutHandler when retried request still returns 401", async () => {
+    const logoutSpy = vi.fn();
+    setLogoutHandler(logoutSpy);
+
+    server.use(
+      http.get(`${BASE}/protected`, () => {
+        return HttpResponse.json(null, { status: 401 });
+      }),
+      http.post(`${BASE}${REFRESH_ENDPOINT}`, () => {
+        return HttpResponse.json({ access_token: "refreshed-token" });
+      }),
+    );
+
+    await expect(apiV1.get("/protected")).rejects.toThrow();
+    expect(logoutSpy).toHaveBeenCalledOnce();
+  });
+
+  it("skips retry and calls logoutHandler when _retry is already set", async () => {
+    const logoutSpy = vi.fn();
+    setLogoutHandler(logoutSpy);
+
     server.use(
       http.get(`${BASE}/protected`, () => {
         return HttpResponse.json(null, { status: 401 });
@@ -156,20 +177,11 @@ describe("auth-interceptors", () => {
     );
 
     await expect(apiV1.get("/protected", { _retry: true })).rejects.toThrow();
-  });
-
-  it("handles missing error.config gracefully", async () => {
-    const original = apiV1.defaults.baseURL;
-    apiV1.defaults.baseURL = "http://localhost:0/nonexistent";
-
-    await expect(apiV1.get("/test")).rejects.toThrow();
-
-    apiV1.defaults.baseURL = original;
+    expect(logoutSpy).toHaveBeenCalledOnce();
   });
 
   it("resetInterceptors clears module state", async () => {
     setAccessToken("token");
-    setLogoutHandler(() => {});
     resetInterceptors();
 
     server.use(

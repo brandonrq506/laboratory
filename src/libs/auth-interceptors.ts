@@ -57,6 +57,9 @@ const handleResponseError = async (error: AxiosError) => {
     originalRequest._skipAuthRefresh;
 
   if (shouldSkip) {
+    if (originalRequest._retry && error.response?.status === UNAUTHORIZED) {
+      logoutHandler();
+    }
     return Promise.reject(error);
   }
 
