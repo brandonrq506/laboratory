@@ -1,0 +1,108 @@
+import { AxiosError } from "axios";
+
+import { REFRESH_ENDPOINT, apiV1 } from "./axios";
+
+declare module "axios" {
+  interface AxiosRequestConfig {
+    _retry?: boolean;
+    _skipAuthRefresh?: boolean;
+  }
+}
+
+const UNAUTHORIZED = 401;
+
+type FailedRequest = {
+  resolve: (token: string) => void;
+  reject: (error: unknown) => void;
+};
+
+let accessToken: string | null = null;
+let logoutHandler: () => void = () => {};
+let isRefreshing = false;
+let failedQueue: FailedRequest[] = [];
+
+export const setAccessToken = (token: string | null) => {
+  accessToken = token;
+};
+
+export const setLogoutHandler = (handler: () => void) => {
+  logoutHandler = handler;
+};
+
+const processQueue = (error: unknown, token: string | null) => {
+  failedQueue.forEach(({ resolve, reject }) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(token!);
+    }
+  });
+  failedQueue = [];
+};
+
+const refreshToken = async (): Promise<string> => {
+  const response = await apiV1.post<{ access_token: string }>(REFRESH_ENDPOINT);
+  return response.data.access_token;
+};
+
+const handleResponseError = async (error: AxiosError) => {
+  if (!error.config) return Promise.reject(error);
+
+  const originalRequest = error.config;
+
+  const shouldSkip =
+    error.response?.status !== UNAUTHORIZED ||
+    originalRequest._retry ||
+    originalRequest.url === REFRESH_ENDPOINT ||
+    originalRequest._skipAuthRefresh;
+
+  if (shouldSkip) {
+    if (originalRequest._retry && error.response?.status === UNAUTHORIZED) {
+      logoutHandler();
+    }
+    return Promise.reject(error);
+  }
+
+  if (isRefreshing) {
+    originalRequest._retry = true;
+    return new Promise<string>((resolve, reject) => {
+      failedQueue.push({ resolve, reject });
+    }).then((newToken) => {
+      originalRequest.headers.set("Authorization", `Bearer ${newToken}`);
+      return apiV1(originalRequest);
+    });
+  }
+
+  originalRequest._retry = true;
+  isRefreshing = true;
+
+  try {
+    const newToken = await refreshToken();
+    accessToken = newToken;
+    processQueue(null, newToken);
+    originalRequest.headers.set("Authorization", `Bearer ${newToken}`);
+    return apiV1(originalRequest);
+  } catch (refreshError) {
+    processQueue(refreshError, null);
+    logoutHandler();
+    return Promise.reject(refreshError);
+  } finally {
+    isRefreshing = false;
+  }
+};
+
+apiV1.interceptors.request.use((config) => {
+  if (accessToken) {
+    config.headers.set("Authorization", `Bearer ${accessToken}`);
+  }
+  return config;
+});
+
+apiV1.interceptors.response.use((response) => response, handleResponseError);
+
+export const resetInterceptors = () => {
+  accessToken = null;
+  logoutHandler = () => {};
+  isRefreshing = false;
+  failedQueue = [];
+};

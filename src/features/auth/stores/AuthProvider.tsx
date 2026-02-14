@@ -1,84 +1,60 @@
-import { PropsWithChildren, useCallback, useEffect, useState } from "react";
+import {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
+import { REFRESH_ENDPOINT, apiV1 } from "@/libs/axios";
+import { setAccessToken, setLogoutHandler } from "@/libs/auth-interceptors";
 import { AuthContext } from "./AuthContext";
-import { AuthContextType } from "./AuthContextType";
-import { AxiosHeaders } from "axios";
-import { apiV1 } from "@/libs/axios";
-
-const KEY = "token";
-
-const getStoredToken = () => localStorage.getItem(KEY);
-
-const setStoredToken = (token: string | null) => {
-  if (token) localStorage.setItem(KEY, token);
-  else localStorage.removeItem(KEY);
-};
-
-const logoutRef: { current: () => void } = {
-  current: () => {},
-};
-
-let interceptorsRegistered = false;
-
-const ensureAuthInterceptors = () => {
-  if (interceptorsRegistered) return;
-
-  apiV1.interceptors.request.use((config) => {
-    const token = getStoredToken();
-    if (!token) return config;
-
-    if (!config.headers) {
-      config.headers = new AxiosHeaders();
-    }
-
-    if (config.headers instanceof AxiosHeaders) {
-      config.headers.set("Authorization", `Bearer ${token}`);
-      return config;
-    }
-
-    (config.headers as Record<string, string>).Authorization =
-      `Bearer ${token}`;
-    return config;
-  });
-
-  apiV1.interceptors.response.use(
-    (response) => response,
-    (error) => {
-      const UNAUTHORIZED = 401;
-      if (error.response?.status === UNAUTHORIZED) {
-        logoutRef.current();
-      }
-      return Promise.reject(error);
-    },
-  );
-
-  interceptorsRegistered = true;
-};
-
-ensureAuthInterceptors();
+import { Loading } from "@/components/core";
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [token, setToken] = useState(getStoredToken());
+  const [isAuth, setIsAuth] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const hasAttemptedRefresh = useRef(false);
 
-  const login = useCallback((token: string) => {
-    setStoredToken(token);
-    setToken(token);
+  const login = useCallback((accessToken: string) => {
+    setAccessToken(accessToken);
+    setIsAuth(true);
   }, []);
 
   const logout = useCallback(() => {
-    setStoredToken(null);
-    setToken(null);
+    setAccessToken(null);
+    setIsAuth(false);
   }, []);
 
   useEffect(() => {
-    logoutRef.current = logout;
+    setLogoutHandler(logout);
   }, [logout]);
 
-  const initialAuthState: AuthContextType = {
-    isAuth: Boolean(token),
-    login,
-    logout,
-  };
+  useEffect(() => {
+    if (hasAttemptedRefresh.current) return;
+    hasAttemptedRefresh.current = true;
 
-  return <AuthContext value={initialAuthState}>{children}</AuthContext>;
+    apiV1
+      .post<{ access_token: string }>(REFRESH_ENDPOINT)
+      .then((res) => login(res.data.access_token))
+      .catch((error: unknown) => {
+        if (import.meta.env.DEV) {
+          console.error("Initial token refresh failed:", error);
+        }
+      })
+      .finally(() => setIsLoading(false));
+  }, [login]);
+
+  if (isLoading)
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Loading sizeStyles="size-10" />
+      </div>
+    );
+
+  return (
+    <AuthContext value={{ isAuth, isLoading, login, logout }}>
+      {children}
+    </AuthContext>
+  );
 };

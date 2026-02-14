@@ -5,6 +5,7 @@ import { StrictMode } from "react";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 
+import "@/libs/auth-interceptors";
 import { AuthProvider, useAuth } from "./features/auth/stores";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { QueryClientProvider } from "@tanstack/react-query";

@@ -8,6 +8,6 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: loginFn,
-    onSuccess: (data) => login(data.token),
+    onSuccess: (data) => login(data.access_token),
   });
 };
