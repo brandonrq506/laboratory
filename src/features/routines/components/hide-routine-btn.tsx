@@ -1,6 +1,6 @@
 import { useHideRoutine } from "../api/tanstack/use-hide-routine";
 
-import { EyeSlashIcon } from "@heroicons/react/24/outline";
+import { EyeIcon } from "@heroicons/react/24/outline";
 import { IconButton } from "@/components/core";
 
 import { HIDE } from "@/constants/actions";
@@ -21,7 +21,7 @@ export const HideRoutineButton = ({ routineId }: Props) => {
       aria-label={BTN_TEXT}
       variant="primaryOutline"
       onClick={() => mutate(routineId)}>
-      <EyeSlashIcon className="size-5" aria-hidden />
+      <EyeIcon className="size-5" aria-hidden />
     </IconButton>
   );
 };

@@ -21,7 +21,7 @@ function RouteComponent() {
   const { data } = useSuspenseQuery(routineListQueryOptions());
   const [showHidden, setShowHidden] = useState(false);
 
-  const btnText = showHidden ? "Show Visible" : "Show Hidden";
+  const btnText = showHidden ? "Visible" : "Hidden";
 
   const routinesToShow = showHidden
     ? data.filter((routine) => routine.hidden_at)
