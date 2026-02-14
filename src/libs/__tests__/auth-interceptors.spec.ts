@@ -30,7 +30,7 @@ describe("auth-interceptors", () => {
     expect(res.data.auth).toBe("Bearer test-token");
   });
 
-  it("does NOT refresh on login 401 (/session)", async () => {
+  it("does NOT refresh on login 401 (/session POST)", async () => {
     server.use(
       http.post(`${BASE}${SESSION_ENDPOINT}`, () => {
         return HttpResponse.json(
@@ -50,6 +50,26 @@ describe("auth-interceptors", () => {
 
     await expect(apiV1.post(SESSION_ENDPOINT)).rejects.toThrow();
     expect(refreshSpy).not.toHaveBeenCalled();
+  });
+
+  it("calls logoutHandler on logout 401 (/session DELETE)", async () => {
+    const logoutSpy = vi.fn();
+    setLogoutHandler(logoutSpy);
+
+    server.use(
+      http.delete(`${BASE}${SESSION_ENDPOINT}`, () => {
+        return HttpResponse.json(
+          { error: "Session expired" },
+          { status: 401 },
+        );
+      }),
+      http.post(`${BASE}${REFRESH_ENDPOINT}`, () => {
+        return HttpResponse.json(null, { status: 401 });
+      }),
+    );
+
+    await expect(apiV1.delete(SESSION_ENDPOINT)).rejects.toThrow();
+    expect(logoutSpy).toHaveBeenCalledOnce();
   });
 
   it("refreshes on 401 from protected endpoint and retries", async () => {

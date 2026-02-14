@@ -46,11 +46,15 @@ const handleResponseError = async (error: AxiosError) => {
     _retry?: boolean;
   };
 
+  const isLoginRequest =
+    originalRequest.url === SESSION_ENDPOINT &&
+    originalRequest.method?.toUpperCase() === "POST";
+
   const shouldSkip =
     error.response?.status !== UNAUTHORIZED ||
     originalRequest._retry ||
     originalRequest.url === REFRESH_ENDPOINT ||
-    originalRequest.url === SESSION_ENDPOINT;
+    isLoginRequest;
 
   if (shouldSkip) {
     return Promise.reject(error);
