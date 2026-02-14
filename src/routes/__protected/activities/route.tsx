@@ -2,8 +2,8 @@ import { PageHeaderWithActions } from "@/components/layout";
 
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { ActivityTable } from "@/features/activities/components";
-import { LinkButton } from "@/components/core";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import { ResponsiveLinkButton } from "@/components/core";
 import { activityListQueryOptions } from "@/features/activities/api/queries";
 
 import { ACTIVITIES, ACTIVITY } from "@/constants/entities";
@@ -21,12 +21,12 @@ function RouteComponent() {
       <PageHeaderWithActions
         title={ACTIVITIES}
         actions={
-          <LinkButton
+          <ResponsiveLinkButton
             to="/activities/new"
             size="lg"
             startIcon={
               <PlusIcon className="size-5" aria-hidden />
-            }>{`${ADD} ${ACTIVITY}`}</LinkButton>
+            }>{`${ADD} ${ACTIVITY}`}</ResponsiveLinkButton>
         }
       />
 

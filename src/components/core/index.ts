@@ -17,3 +17,5 @@ export { EmptyState } from "./Table/EmptyState";
 export { SortIcon } from "./Table/SortIcon";
 export { Toggle } from "./Toggle/Toggle";
 export { RainbowBadge } from "./Badge/rainbow-badge";
+export { ResponsiveButton } from "./Button/responsive-button";
+export { ResponsiveLinkButton } from "./Button/responsive-link-button";
