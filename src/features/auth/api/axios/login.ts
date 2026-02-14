@@ -2,7 +2,7 @@ import { SESSION_ENDPOINT, apiV1 } from "@/libs/axios";
 import { LoginFormType } from "../../types/loginForm";
 
 type Response = {
-  token: string;
+  access_token: string;
 };
 
 export const login = async (formValues: LoginFormType) => {
