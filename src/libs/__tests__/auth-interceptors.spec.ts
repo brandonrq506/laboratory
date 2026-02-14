@@ -58,10 +58,7 @@ describe("auth-interceptors", () => {
 
     server.use(
       http.delete(`${BASE}${SESSION_ENDPOINT}`, () => {
-        return HttpResponse.json(
-          { error: "Session expired" },
-          { status: 401 },
-        );
+        return HttpResponse.json({ error: "Session expired" }, { status: 401 });
       }),
       http.post(`${BASE}${REFRESH_ENDPOINT}`, () => {
         return HttpResponse.json(null, { status: 401 });
