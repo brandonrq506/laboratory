@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import { Button, LinkButton } from "@/components/core";
+import { EyeIcon, EyeSlashIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
+import { ResponsiveButton, ResponsiveLinkButton } from "@/components/core";
 import { PageHeaderWithActions } from "@/components/layout";
-import { PlusIcon } from "@heroicons/react/24/outline";
 import { routineListQueryOptions } from "@/features/routines/api/queries";
 
 import { ADD } from "@/constants/actions";
@@ -21,7 +21,9 @@ function RouteComponent() {
   const { data } = useSuspenseQuery(routineListQueryOptions());
   const [showHidden, setShowHidden] = useState(false);
 
-  const btnText = showHidden ? "Visible" : "Hidden";
+  const btnText = showHidden ? "Show Visible" : "Show Hidden";
+  const Icon = showHidden ? EyeIcon : EyeSlashIcon;
+  const title = showHidden ? "Hidden Routines" : "Routines";
 
   const routinesToShow = showHidden
     ? data.filter((routine) => routine.hidden_at)
@@ -30,19 +32,21 @@ function RouteComponent() {
   return (
     <div>
       <PageHeaderWithActions
-        title="Routines"
+        title={title}
         className="mb-2"
         actions={
           <>
-            <LinkButton
+            <ResponsiveLinkButton
               to="/routines/new"
               size="lg"
               startIcon={<PlusIcon className="size-5" aria-hidden />}>
               {`${ADD} ${ROUTINE}`}
-            </LinkButton>
-            <Button onClick={() => setShowHidden((prev) => !prev)}>
+            </ResponsiveLinkButton>
+            <ResponsiveButton
+              onClick={() => setShowHidden((prev) => !prev)}
+              startIcon={<Icon className="size-5" aria-hidden />}>
               {btnText}
-            </Button>
+            </ResponsiveButton>
           </>
         }
       />
