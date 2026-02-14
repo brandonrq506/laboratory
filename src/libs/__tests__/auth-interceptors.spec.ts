@@ -136,6 +136,29 @@ describe("auth-interceptors", () => {
     apiV1.defaults.baseURL = original;
   });
 
+  it("resetInterceptors ejects handlers until initInterceptors runs again", async () => {
+    server.use(
+      http.get(`${BASE}/test`, ({ request }) => {
+        const auth = request.headers.get("Authorization");
+        return HttpResponse.json({ auth });
+      }),
+    );
+
+    setAccessToken("before-reset");
+    const beforeReset = await apiV1.get("/test");
+    expect(beforeReset.data.auth).toBe("Bearer before-reset");
+
+    resetInterceptors();
+
+    setAccessToken("after-reset");
+    const afterReset = await apiV1.get("/test");
+    expect(afterReset.data.auth).toBeNull();
+
+    initInterceptors();
+    const afterReinit = await apiV1.get("/test");
+    expect(afterReinit.data.auth).toBe("Bearer after-reset");
+  });
+
   it("resetInterceptors clears all module state", () => {
     setAccessToken("token");
     setLogoutHandler(() => {});

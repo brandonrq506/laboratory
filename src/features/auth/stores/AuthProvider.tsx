@@ -1,44 +1,74 @@
 import {
-  PropsWithChildren,
+  type PropsWithChildren,
   useCallback,
   useEffect,
-  useRef,
   useState,
 } from "react";
 
 import { REFRESH_ENDPOINT, apiV1 } from "@/libs/axios";
 import { setAccessToken, setLogoutHandler } from "@/libs/auth-interceptors";
 import { AuthContext } from "./AuthContext";
+import { type AuthLossReason } from "./AuthContextType";
 import { Loading } from "@/components/core";
 
-export const AuthProvider = ({ children }: PropsWithChildren) => {
+interface AuthProviderProps extends PropsWithChildren {
+  onAuthLost?: (reason: AuthLossReason) => Promise<void> | void;
+}
+
+let refreshInFlightPromise: Promise<string | null> | null = null;
+
+const getRefreshTokenPromise = () => {
+  if (!refreshInFlightPromise) {
+    refreshInFlightPromise = apiV1
+      .post<{ access_token: string }>(REFRESH_ENDPOINT)
+      .then((response) => response.data.access_token)
+      .catch(() => null)
+      .finally(() => {
+        refreshInFlightPromise = null;
+      });
+  }
+
+  return refreshInFlightPromise;
+};
+
+export const AuthProvider = ({ children, onAuthLost }: AuthProviderProps) => {
   const [isAuth, setIsAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const hasAttemptedRefresh = useRef(false);
 
   const login = useCallback((token: string) => {
     setAccessToken(token);
     setIsAuth(true);
   }, []);
 
-  const logout = useCallback(() => {
-    setAccessToken(null);
-    setIsAuth(false);
-  }, []);
+  const logout = useCallback(
+    (reason: AuthLossReason = "manual") => {
+      setAccessToken(null);
+      setIsAuth(false);
+      void onAuthLost?.(reason);
+    },
+    [onAuthLost],
+  );
 
   useEffect(() => {
-    setLogoutHandler(logout);
+    setLogoutHandler(() => logout("refresh-failed"));
   }, [logout]);
 
   useEffect(() => {
-    if (hasAttemptedRefresh.current) return;
-    hasAttemptedRefresh.current = true;
+    let isMounted = true;
 
-    apiV1
-      .post<{ access_token: string }>(REFRESH_ENDPOINT)
-      .then((res) => login(res.data.access_token))
-      .catch(() => {})
-      .finally(() => setIsLoading(false));
+    getRefreshTokenPromise()
+      .then((accessToken) => {
+        if (!isMounted || !accessToken) return;
+        login(accessToken);
+      })
+      .finally(() => {
+        if (!isMounted) return;
+        setIsLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [login]);
 
   if (isLoading)

@@ -10,16 +10,18 @@ type FailedRequest = {
 };
 
 let accessToken: string | null = null;
-let logoutHandler: () => void = () => {};
+let logoutHandler: () => void | Promise<void> = () => {};
 let isRefreshing = false;
 let failedQueue: FailedRequest[] = [];
 let initialized = false;
+let requestInterceptorId: number | null = null;
+let responseInterceptorId: number | null = null;
 
 export const setAccessToken = (token: string | null) => {
   accessToken = token;
 };
 
-export const setLogoutHandler = (handler: () => void) => {
+export const setLogoutHandler = (handler: () => void | Promise<void>) => {
   logoutHandler = handler;
 };
 
@@ -77,7 +79,7 @@ const handleResponseError = async (error: AxiosError) => {
     return apiV1(originalRequest);
   } catch (refreshError) {
     processQueue(refreshError, null);
-    logoutHandler();
+    void logoutHandler();
     return Promise.reject(refreshError);
   } finally {
     isRefreshing = false;
@@ -88,20 +90,32 @@ export const initInterceptors = () => {
   if (initialized) return;
   initialized = true;
 
-  apiV1.interceptors.request.use((config) => {
+  requestInterceptorId = apiV1.interceptors.request.use((config) => {
     if (accessToken) {
       config.headers.set("Authorization", `Bearer ${accessToken}`);
     }
     return config;
   });
 
-  apiV1.interceptors.response.use((response) => response, handleResponseError);
+  responseInterceptorId = apiV1.interceptors.response.use(
+    (response) => response,
+    handleResponseError,
+  );
 };
 
 export const resetInterceptors = () => {
+  if (requestInterceptorId !== null) {
+    apiV1.interceptors.request.eject(requestInterceptorId);
+  }
+  if (responseInterceptorId !== null) {
+    apiV1.interceptors.response.eject(responseInterceptorId);
+  }
+
   accessToken = null;
   logoutHandler = () => {};
   isRefreshing = false;
   failedQueue = [];
   initialized = false;
+  requestInterceptorId = null;
+  responseInterceptorId = null;
 };
