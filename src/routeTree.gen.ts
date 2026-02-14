@@ -228,6 +228,7 @@ const _protectedSettingsCategoriesCategoryIdDeleteRoute =
   } as any);
 
 export interface FileRoutesByFullPath {
+  "/": typeof _protectedIndexRoute;
   "/login": typeof LoginRoute;
   "/activities": typeof _protectedActivitiesRouteRouteWithChildren;
   "/excel": typeof _protectedExcelRouteRouteWithChildren;
@@ -235,7 +236,6 @@ export interface FileRoutesByFullPath {
   "/routines": typeof _protectedRoutinesRouteRouteWithChildren;
   "/settings": typeof _protectedSettingsRouteRouteWithChildren;
   "/timer": typeof _protectedTimerRouteRouteWithChildren;
-  "/": typeof _protectedIndexRoute;
   "/activities/$activityId": typeof _protectedActivitiesActivityIdRouteRouteWithChildren;
   "/history/$taskId": typeof _protectedHistoryTaskIdRouteRouteWithChildren;
   "/routines/$routineId": typeof _protectedRoutinesRoutineIdRouteRouteWithChildren;
@@ -330,6 +330,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
+    | "/"
     | "/login"
     | "/activities"
     | "/excel"
@@ -337,7 +338,6 @@ export interface FileRouteTypes {
     | "/routines"
     | "/settings"
     | "/timer"
-    | "/"
     | "/activities/$activityId"
     | "/history/$taskId"
     | "/routines/$routineId"
@@ -446,7 +446,7 @@ declare module "@tanstack/react-router" {
     "/__protected": {
       id: "/__protected";
       path: "";
-      fullPath: "";
+      fullPath: "/";
       preLoaderRoute: typeof _protectedRouteRouteImport;
       parentRoute: typeof rootRouteImport;
     };

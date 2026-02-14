@@ -1,4 +1,4 @@
-import { render, screen } from "@/test/test-utils";
+import { render, screen, waitFor } from "@/test/test-utils";
 import userEvent from "@testing-library/user-event";
 
 import { IdleTimer } from "../IdleTimer";
@@ -10,7 +10,9 @@ describe("IdleTimer", () => {
 
     const input = screen.getByRole("combobox", { name: "Activities" });
 
-    expect(input).toHaveFocus();
+    await waitFor(() => {
+      expect(input).toHaveFocus();
+    });
 
     await user.type(input, "Test");
 
