@@ -5,10 +5,10 @@ import { StrictMode } from "react";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 
+import "@/libs/auth-interceptors";
 import { AuthProvider, useAuth } from "./features/auth/stores";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { initInterceptors } from "@/libs/auth-interceptors";
 import { queryClient } from "./libs/tanstack-query/query-client";
 
 // Create a new router instance
@@ -24,8 +24,6 @@ const router = createRouter({
     auth: undefined!,
   },
 });
-
-initInterceptors();
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {

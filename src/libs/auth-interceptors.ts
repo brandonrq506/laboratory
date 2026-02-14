@@ -1,6 +1,13 @@
-import { AxiosError, InternalAxiosRequestConfig } from "axios";
+import { AxiosError } from "axios";
 
-import { REFRESH_ENDPOINT, SESSION_ENDPOINT, apiV1 } from "./axios";
+import { REFRESH_ENDPOINT, apiV1 } from "./axios";
+
+declare module "axios" {
+  interface AxiosRequestConfig {
+    _retry?: boolean;
+    _skipAuthRefresh?: boolean;
+  }
+}
 
 const UNAUTHORIZED = 401;
 
@@ -13,7 +20,6 @@ let accessToken: string | null = null;
 let logoutHandler: () => void = () => {};
 let isRefreshing = false;
 let failedQueue: FailedRequest[] = [];
-let initialized = false;
 
 export const setAccessToken = (token: string | null) => {
   accessToken = token;
@@ -42,15 +48,13 @@ const refreshToken = async (): Promise<string> => {
 const handleResponseError = async (error: AxiosError) => {
   if (!error.config) return Promise.reject(error);
 
-  const originalRequest = error.config as InternalAxiosRequestConfig & {
-    _retry?: boolean;
-  };
+  const originalRequest = error.config;
 
   const shouldSkip =
     error.response?.status !== UNAUTHORIZED ||
     originalRequest._retry ||
     originalRequest.url === REFRESH_ENDPOINT ||
-    originalRequest.url === SESSION_ENDPOINT;
+    originalRequest._skipAuthRefresh;
 
   if (shouldSkip) {
     return Promise.reject(error);
@@ -84,24 +88,18 @@ const handleResponseError = async (error: AxiosError) => {
   }
 };
 
-export const initInterceptors = () => {
-  if (initialized) return;
-  initialized = true;
+apiV1.interceptors.request.use((config) => {
+  if (accessToken) {
+    config.headers.set("Authorization", `Bearer ${accessToken}`);
+  }
+  return config;
+});
 
-  apiV1.interceptors.request.use((config) => {
-    if (accessToken) {
-      config.headers.set("Authorization", `Bearer ${accessToken}`);
-    }
-    return config;
-  });
-
-  apiV1.interceptors.response.use((response) => response, handleResponseError);
-};
+apiV1.interceptors.response.use((response) => response, handleResponseError);
 
 export const resetInterceptors = () => {
   accessToken = null;
   logoutHandler = () => {};
   isRefreshing = false;
   failedQueue = [];
-  initialized = false;
 };

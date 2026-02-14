@@ -6,6 +6,8 @@ type Response = {
 };
 
 export const login = async (formValues: LoginFormType) => {
-  const response = await apiV1.post<Response>(SESSION_ENDPOINT, formValues);
+  const response = await apiV1.post<Response>(SESSION_ENDPOINT, formValues, {
+    _skipAuthRefresh: true,
+  });
   return response.data;
 };

@@ -1,7 +1,6 @@
 import { HttpResponse, http } from "msw";
 import { REFRESH_ENDPOINT, SESSION_ENDPOINT, apiV1 } from "@/libs/axios";
 import {
-  initInterceptors,
   resetInterceptors,
   setAccessToken,
   setLogoutHandler,
@@ -13,7 +12,6 @@ const BASE = `${API_URL}/v1`;
 
 beforeEach(() => {
   resetInterceptors();
-  initInterceptors();
 });
 
 describe("auth-interceptors", () => {
@@ -30,7 +28,8 @@ describe("auth-interceptors", () => {
     expect(res.data.auth).toBe("Bearer test-token");
   });
 
-  it("does NOT refresh on login 401 (/session)", async () => {
+  it("does NOT refresh on 401 when _skipAuthRefresh is set", async () => {
+    const refreshSpy = vi.fn();
     server.use(
       http.post(`${BASE}${SESSION_ENDPOINT}`, () => {
         return HttpResponse.json(
@@ -38,18 +37,53 @@ describe("auth-interceptors", () => {
           { status: 401 },
         );
       }),
-    );
-
-    const refreshSpy = vi.fn();
-    server.use(
       http.post(`${BASE}${REFRESH_ENDPOINT}`, () => {
         refreshSpy();
         return HttpResponse.json({ access_token: "new" });
       }),
     );
 
-    await expect(apiV1.post(SESSION_ENDPOINT)).rejects.toThrow();
+    await expect(
+      apiV1.post(SESSION_ENDPOINT, {}, { _skipAuthRefresh: true }),
+    ).rejects.toThrow();
     expect(refreshSpy).not.toHaveBeenCalled();
+  });
+
+  it("attempts refresh on logout 401, calls logoutHandler on failure", async () => {
+    const logoutSpy = vi.fn();
+    setLogoutHandler(logoutSpy);
+
+    server.use(
+      http.delete(`${BASE}${SESSION_ENDPOINT}`, () => {
+        return HttpResponse.json(null, { status: 401 });
+      }),
+      http.post(`${BASE}${REFRESH_ENDPOINT}`, () => {
+        return HttpResponse.json(null, { status: 401 });
+      }),
+    );
+
+    await expect(apiV1.delete(SESSION_ENDPOINT)).rejects.toThrow();
+    expect(logoutSpy).toHaveBeenCalledOnce();
+  });
+
+  it("attempts refresh on logout 401 and retries on success", async () => {
+    let deleteCount = 0;
+    server.use(
+      http.delete(`${BASE}${SESSION_ENDPOINT}`, () => {
+        deleteCount++;
+        if (deleteCount === 1) {
+          return HttpResponse.json(null, { status: 401 });
+        }
+        return HttpResponse.json({ ok: true });
+      }),
+      http.post(`${BASE}${REFRESH_ENDPOINT}`, () => {
+        return HttpResponse.json({ access_token: "refreshed-token" });
+      }),
+    );
+
+    const res = await apiV1.delete(SESSION_ENDPOINT);
+    expect(res.data).toEqual({ ok: true });
+    expect(deleteCount).toBe(2);
   });
 
   it("refreshes on 401 from protected endpoint and retries", async () => {
@@ -121,13 +155,10 @@ describe("auth-interceptors", () => {
       }),
     );
 
-    await expect(
-      apiV1.get("/protected", { _retry: true } as never),
-    ).rejects.toThrow();
+    await expect(apiV1.get("/protected", { _retry: true })).rejects.toThrow();
   });
 
   it("handles missing error.config gracefully", async () => {
-    // Trigger a network error scenario by using an invalid baseURL temporarily
     const original = apiV1.defaults.baseURL;
     apiV1.defaults.baseURL = "http://localhost:0/nonexistent";
 
@@ -136,13 +167,19 @@ describe("auth-interceptors", () => {
     apiV1.defaults.baseURL = original;
   });
 
-  it("resetInterceptors clears all module state", () => {
+  it("resetInterceptors clears module state", async () => {
     setAccessToken("token");
     setLogoutHandler(() => {});
     resetInterceptors();
 
-    /* After reset, initInterceptors can be called again (initialized = false).
-       This would no-op if initialized was still true. */
-    initInterceptors();
+    server.use(
+      http.get(`${BASE}/test`, ({ request }) => {
+        const auth = request.headers.get("Authorization");
+        return HttpResponse.json({ auth });
+      }),
+    );
+
+    const res = await apiV1.get("/test");
+    expect(res.data.auth).toBeNull();
   });
 });
