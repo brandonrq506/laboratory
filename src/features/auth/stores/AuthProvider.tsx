@@ -7,14 +7,9 @@ import {
 } from "react";
 
 import { REFRESH_ENDPOINT, apiV1 } from "@/libs/axios";
-import {
-  initInterceptors,
-  setAccessToken,
-  setLogoutHandler,
-} from "@/libs/auth-interceptors";
+import { setAccessToken, setLogoutHandler } from "@/libs/auth-interceptors";
 import { AuthContext } from "./AuthContext";
-
-initInterceptors();
+import { Loading } from "@/components/core";
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [isAuth, setIsAuth] = useState(false);
@@ -46,7 +41,12 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       .finally(() => setIsLoading(false));
   }, [login]);
 
-  if (isLoading) return null;
+  if (isLoading)
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Loading sizeStyles="size-10" />
+      </div>
+    );
 
   return (
     <AuthContext value={{ isAuth, isLoading, login, logout }}>

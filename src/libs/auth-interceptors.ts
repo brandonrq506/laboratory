@@ -1,6 +1,6 @@
 import { AxiosError, InternalAxiosRequestConfig } from "axios";
 
-import { REFRESH_ENDPOINT, apiV1 } from "./axios";
+import { REFRESH_ENDPOINT, SESSION_ENDPOINT, apiV1 } from "./axios";
 
 const UNAUTHORIZED = 401;
 
@@ -39,6 +39,51 @@ const refreshToken = async (): Promise<string> => {
   return response.data.access_token;
 };
 
+const handleResponseError = async (error: AxiosError) => {
+  if (!error.config) return Promise.reject(error);
+
+  const originalRequest = error.config as InternalAxiosRequestConfig & {
+    _retry?: boolean;
+  };
+
+  const shouldSkip =
+    error.response?.status !== UNAUTHORIZED ||
+    originalRequest._retry ||
+    originalRequest.url === REFRESH_ENDPOINT ||
+    originalRequest.url === SESSION_ENDPOINT;
+
+  if (shouldSkip) {
+    return Promise.reject(error);
+  }
+
+  if (isRefreshing) {
+    originalRequest._retry = true;
+    return new Promise<string>((resolve, reject) => {
+      failedQueue.push({ resolve, reject });
+    }).then((newToken) => {
+      originalRequest.headers.set("Authorization", `Bearer ${newToken}`);
+      return apiV1(originalRequest);
+    });
+  }
+
+  originalRequest._retry = true;
+  isRefreshing = true;
+
+  try {
+    const newToken = await refreshToken();
+    accessToken = newToken;
+    processQueue(null, newToken);
+    originalRequest.headers.set("Authorization", `Bearer ${newToken}`);
+    return apiV1(originalRequest);
+  } catch (refreshError) {
+    processQueue(refreshError, null);
+    logoutHandler();
+    return Promise.reject(refreshError);
+  } finally {
+    isRefreshing = false;
+  }
+};
+
 export const initInterceptors = () => {
   if (initialized) return;
   initialized = true;
@@ -50,47 +95,13 @@ export const initInterceptors = () => {
     return config;
   });
 
-  apiV1.interceptors.response.use(
-    (response) => response,
-    async (error: AxiosError) => {
-      const originalRequest = error.config as InternalAxiosRequestConfig & {
-        _retry?: boolean;
-      };
+  apiV1.interceptors.response.use((response) => response, handleResponseError);
+};
 
-      const shouldSkip =
-        error.response?.status !== UNAUTHORIZED ||
-        originalRequest._retry ||
-        originalRequest.url === REFRESH_ENDPOINT;
-
-      if (shouldSkip) {
-        return Promise.reject(error);
-      }
-
-      if (isRefreshing) {
-        return new Promise<string>((resolve, reject) => {
-          failedQueue.push({ resolve, reject });
-        }).then((newToken) => {
-          originalRequest.headers.set("Authorization", `Bearer ${newToken}`);
-          return apiV1(originalRequest);
-        });
-      }
-
-      originalRequest._retry = true;
-      isRefreshing = true;
-
-      try {
-        const newToken = await refreshToken();
-        accessToken = newToken;
-        processQueue(null, newToken);
-        originalRequest.headers.set("Authorization", `Bearer ${newToken}`);
-        return apiV1(originalRequest);
-      } catch (refreshError) {
-        processQueue(refreshError, null);
-        logoutHandler();
-        return Promise.reject(refreshError);
-      } finally {
-        isRefreshing = false;
-      }
-    },
-  );
+export const resetInterceptors = () => {
+  accessToken = null;
+  logoutHandler = () => {};
+  isRefreshing = false;
+  failedQueue = [];
+  initialized = false;
 };
