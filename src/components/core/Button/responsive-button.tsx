@@ -56,7 +56,7 @@ export const ResponsiveButton = ({
       {...props}>
       {isLoading && <Loading />}
       {!isLoading && startIcon}
-      <span className="mx-2 hidden sm:inline">{props.children}</span>{" "}
+      <span className="sr-only mx-2 sm:not-sr-only">{props.children}</span>{" "}
       {!isLoading && endIcon}
     </HButton>
   );

@@ -52,7 +52,7 @@ export const ResponsiveLinkButton = ({
         className,
       )}>
       {startIcon}
-      <span className="mx-2 hidden sm:inline">{props.children}</span>
+      <span className="sr-only mx-2 sm:not-sr-only">{props.children}</span>
       {endIcon}
     </Link>
   );
