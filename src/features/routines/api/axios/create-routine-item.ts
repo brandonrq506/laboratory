@@ -14,7 +14,7 @@ interface CreateNestedRoutineItemPayload extends BaseCreateRoutineItemPayload {
   activityId?: never;
 }
 
-export type CreateRoutineItemPayload =
+type CreateRoutineItemPayload =
   | CreateRoutineActivityPayload
   | CreateNestedRoutineItemPayload;
 

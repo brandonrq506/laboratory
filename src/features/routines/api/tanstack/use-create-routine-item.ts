@@ -1,121 +1,16 @@
-/* eslint-disable max-lines-per-function */
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import {
-  type CreateRoutineItemPayload,
-  createRoutineItem,
-} from "../axios/create-routine-item";
-import {
-  getActivityFromCache,
-  invalidateQueries,
-  snapshotQueries,
-} from "@/utils/tanstack/helpers";
-import {
-  routineByIdQueryOptions,
-  routineKeys,
-  routineListQueryOptions,
-} from "../queries";
-import type { RoutineItem } from "../../types/routine-item";
-import type { RoutineWithItems } from "../../types/routine-with-items";
-import { buildTemporaryRoutineItem } from "../../utils/buildTemporaryRoutineItem";
-import { getNextItemPosition } from "../../utils/get-next-item-position";
-import { updateRoutineCacheOptimistically } from "../../utils/updateRoutineCacheOptimistically";
-
-type ActivityMutationVariables = Extract<
-  CreateRoutineItemPayload,
-  { activityId: number }
->;
-
-const isActivityMutation = (
-  variables: CreateRoutineItemPayload,
-): variables is ActivityMutationVariables => "activityId" in variables;
+import { routineByIdQueryOptions, routineKeys } from "../queries";
+import { createRoutineItem } from "../axios/create-routine-item";
+import { invalidateQueries } from "@/utils/tanstack/helpers";
 
 export const useCreateRoutineItem = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: createRoutineItem,
-    onMutate: async (variables) => {
+    onSuccess(_, variables) {
       const { routineId } = variables;
-      const singleQuery = routineByIdQueryOptions(routineId);
-      const listQuery = routineListQueryOptions();
-
-      await queryClient.cancelQueries(singleQuery);
-      await queryClient.cancelQueries(listQuery);
-
-      const { rollback } = snapshotQueries(queryClient, [
-        singleQuery.queryKey,
-        listQuery.queryKey,
-      ]);
-
-      const routine = queryClient.getQueryData<RoutineWithItems>(
-        singleQuery.queryKey,
-      );
-      const routineList = queryClient.getQueryData<RoutineWithItems[]>(
-        listQuery.queryKey,
-      );
-      const routineFromList = routineList?.find(
-        (item) => item.id === routineId,
-      );
-
-      const nextPosition = getNextItemPosition(
-        routine?.routine_items ?? routineFromList?.routine_items,
-      );
-
-      let temporaryItem: RoutineItem | null = null;
-
-      if (isActivityMutation(variables)) {
-        const activity = getActivityFromCache(
-          queryClient,
-          variables.activityId,
-        );
-        if (!activity) return { rollback };
-
-        temporaryItem = buildTemporaryRoutineItem({
-          source: "activity",
-          activity,
-          position: nextPosition,
-        });
-      } else {
-        const nestedRoutineFromList = routineList?.find(
-          (item) => item.id === variables.nestedRoutineId,
-        );
-        const nestedRoutine =
-          nestedRoutineFromList ??
-          queryClient.getQueryData<RoutineWithItems>(
-            routineByIdQueryOptions(variables.nestedRoutineId).queryKey,
-          );
-
-        if (!nestedRoutine) {
-          console.error(
-            `Routine ${variables.nestedRoutineId} should exist in cache before creating a nested routine item.`,
-          );
-          return { rollback };
-        }
-
-        temporaryItem = buildTemporaryRoutineItem({
-          source: "routine",
-          routine: nestedRoutine,
-          position: nextPosition,
-        });
-      }
-
-      if (!temporaryItem) return { rollback };
-
-      updateRoutineCacheOptimistically({
-        queryClient,
-        routineId,
-        newItem: temporaryItem,
-        singleQueryKey: singleQuery.queryKey,
-        listQueryKey: listQuery.queryKey,
-      });
-
-      return { rollback };
-    },
-    onError: (_, __, context) => {
-      context?.rollback();
-    },
-    onSettled: (_, __, { routineId }) => {
       invalidateQueries(queryClient, routineByIdQueryOptions(routineId));
       queryClient.invalidateQueries({ queryKey: routineKeys.lists() });
     },
