@@ -1,9 +1,14 @@
 import { useCreateRoutineItem } from "../api/tanstack/use-create-routine-item";
 import { useQuery } from "@tanstack/react-query";
 
-import { FloatingMenu, Loading, RainbowBadge } from "@/components/core";
+import {
+  FloatingMenu,
+  Loading,
+  QueryStatusIndicator,
+  RainbowBadge,
+} from "@/components/core";
+import { MenuItem, MenuSection } from "@headlessui/react";
 import { CategoryBadge } from "@/features/categories/components";
-import { MenuItem } from "@headlessui/react";
 import { PlusIcon } from "@heroicons/react/24/solid";
 
 import { ADD } from "@/constants/actions";
@@ -26,7 +31,7 @@ export const AddRoutineItemMenu = ({ routineId }: Props) => {
     isPending: isPendingRoutines,
     isError: isErrorRoutines,
   } = useQuery(routineNestableCandidateListQueryOptions(routineId));
-  const { mutate } = useCreateRoutineItem();
+  const { mutate, status, reset } = useCreateRoutineItem();
 
   if (isPendingActivities || isPendingRoutines)
     return (
@@ -48,6 +53,14 @@ export const AddRoutineItemMenu = ({ routineId }: Props) => {
     <FloatingMenu
       srBtnText={`${ADD} ${ITEMS}`}
       iconBtn={<PlusIcon className="size-5" aria-hidden />}>
+      <MenuSection>
+        <MenuItem disabled>
+          <div className="flex w-full items-center justify-between gap-2 px-2 py-2 text-sm font-light data-focus:bg-gray-100">
+            Options
+            <QueryStatusIndicator status={status} reset={reset} />
+          </div>
+        </MenuItem>
+      </MenuSection>
       {routines.map((routine) => (
         <MenuItem key={routine.id}>
           <button

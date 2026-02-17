@@ -7,6 +7,7 @@ export { CopyToClipboardButton } from "./Button/CopyToClipboardButton";
 export { Dot } from "./Dot/Dot";
 export { EmptyList } from "./List/EmptyList";
 export { Loading } from "./Loading/Loading";
+export { QueryStatusIndicator } from "./QueryStatusIndicator/QueryStatusIndicator";
 export { FloatingMenu } from "./Menu/FloatingMenu";
 export { ThreeDotsMenu } from "./Menu/ThreeDotsMenu";
 export { Modal } from "./Modal/Modal";
