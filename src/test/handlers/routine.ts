@@ -7,20 +7,18 @@ const API_URL = import.meta.env.VITE_API_URL;
 const BASE_URL = `${API_URL}/v1${ROUTINES_ENDPOINT}`;
 
 export const routineHandlers = [
-  http.get(BASE_URL, () => {
-    return HttpResponse.json(routines, { status: 200 });
-  }),
-  http.get(`${BASE_URL}/visible`, () => {
-    return HttpResponse.json(
-      routines.filter((r) => !r.hidden_at),
-      { status: 200 },
-    );
-  }),
-  http.get(`${BASE_URL}/hidden`, () => {
-    return HttpResponse.json(
-      routines.filter((r) => r.hidden_at),
-      { status: 200 },
-    );
+  http.get(BASE_URL, ({ request }) => {
+    const url = new URL(request.url);
+    const hiddenAtIsNull = url.searchParams.get("filter[hidden_at][is_null]");
+
+    let result = routines;
+    if (hiddenAtIsNull === "true") {
+      result = routines.filter((r) => r.hidden_at === null);
+    } else if (hiddenAtIsNull === "false") {
+      result = routines.filter((r) => r.hidden_at !== null);
+    }
+
+    return HttpResponse.json(result, { status: 200 });
   }),
   http.get(`${BASE_URL}/:routineId`, ({ params }) => {
     const { routineId } = params;
