@@ -6,8 +6,6 @@ import { createQuickTask } from "../axios/createQuickTask";
 import { scheduledTasksQueryOptions } from "../queries";
 import { snapshotQueries } from "@/utils/tanstack/helpers";
 
-const scheduledKey = scheduledTasksQueryOptions().queryKey;
-
 export const useCreateScheduledTask = () => {
   const queryClient = useQueryClient();
 
@@ -15,6 +13,8 @@ export const useCreateScheduledTask = () => {
     mutationFn: createQuickTask,
 
     onMutate: async (activity) => {
+      const scheduledKey = scheduledTasksQueryOptions().queryKey;
+
       await queryClient.cancelQueries(scheduledTasksQueryOptions());
 
       const { rollback } = snapshotQueries(queryClient, [scheduledKey]);

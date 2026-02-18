@@ -11,16 +11,16 @@ import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { activateScheduledTask } from "../orchestrator";
 import { activateTask } from "../axios/activateTask";
 
-const inProgressKey = inProgressTasksQueryOptions().queryKey;
-const scheduledKey = scheduledTasksQueryOptions().queryKey;
-const completedKey = todayCompletedTasksQueryOptions().queryKey;
-
 export const useActivateTask = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: activateTask,
     onMutate: async (variables) => {
+      const inProgressKey = inProgressTasksQueryOptions().queryKey;
+      const scheduledKey = scheduledTasksQueryOptions().queryKey;
+      const completedKey = todayCompletedTasksQueryOptions().queryKey;
+
       await queryClient.cancelQueries({ queryKey: taskKeys.lists() });
 
       const inProgressTask = queryClient.getQueryData(inProgressKey)?.[0];
