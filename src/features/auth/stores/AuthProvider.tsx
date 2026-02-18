@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       .post<{ access_token: string }>(REFRESH_ENDPOINT)
       .then((res) => login(res.data.access_token))
       .catch((error: unknown) => {
-        if (import.meta.env.DEV) {
+        if (import.meta.env.DEV && import.meta.env.MODE !== "test") {
           console.error("Initial token refresh failed:", error);
         }
       })
