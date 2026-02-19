@@ -4,14 +4,14 @@ import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { deleteScheduledTasks } from "../axios/deleteScheduledTasks";
 import { scheduledTasksQueryOptions } from "../queries";
 
-const scheduledKey = scheduledTasksQueryOptions().queryKey;
-
 export const useDeleteScheduledTasks = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: deleteScheduledTasks,
     onMutate: async () => {
+      const scheduledKey = scheduledTasksQueryOptions().queryKey;
+
       await queryClient.cancelQueries(scheduledTasksQueryOptions());
 
       const { rollback } = snapshotQueries(queryClient, [scheduledKey]);

@@ -13,7 +13,7 @@ const BASE_URL = `${API_URL}/v1${TASKS_ENDPOINT}`;
 export const taskHandlers = [
   http.get(BASE_URL, ({ request }) => {
     const url = new URL(request.url);
-    const status = url.searchParams.get("filter[status]") ?? "";
+    const status = url.searchParams.get("filter[status][eq]") ?? "";
 
     if (status === "in_progress") {
       return HttpResponse.json(inProgressTasks, { status: 200 });

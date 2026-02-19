@@ -8,11 +8,15 @@ import { routineKeys } from "../queries";
 export const getRoutines = async ({
   signal,
   queryKey,
-}: QueryFunctionContext<ReturnType<typeof routineKeys.lists>>) => {
-  const [{ feature }] = queryKey;
+}: QueryFunctionContext<ReturnType<typeof routineKeys.list>>) => {
+  const [{ feature, filter, sort }] = queryKey;
 
   const response = await apiV1.get<RoutineWithItems[]>(feature, {
     signal,
+    params: {
+      filter,
+      sort,
+    },
   });
   return response.data;
 };

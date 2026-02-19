@@ -13,9 +13,6 @@ export async function getTasks<T = TaskAPI[]>({
     params: {
       filter,
       sort,
-      misc: {
-        time_zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      },
     },
   });
   return response.data;

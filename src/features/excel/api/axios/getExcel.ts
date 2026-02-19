@@ -13,7 +13,6 @@ export const getExcel = async ({
     signal,
     params: {
       date,
-      time_zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     },
   });
 

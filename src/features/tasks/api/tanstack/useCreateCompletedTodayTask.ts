@@ -9,14 +9,14 @@ import { createTask } from "../axios/createTask";
 import { isBefore } from "date-fns";
 import { todayCompletedTasksQueryOptions } from "../queries";
 
-const completedTaskKeys = todayCompletedTasksQueryOptions().queryKey;
-
 export const useCreateCompletedTodayTask = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: createTask,
     onMutate: async (newTask) => {
+      const completedTaskKeys = todayCompletedTasksQueryOptions().queryKey;
+
       await queryClient.cancelQueries(todayCompletedTasksQueryOptions());
 
       const { rollback } = snapshotQueries(queryClient, [completedTaskKeys]);

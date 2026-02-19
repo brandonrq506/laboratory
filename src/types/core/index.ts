@@ -1,3 +1,4 @@
+export type { ApiQueryOptions } from "./api-query-options";
 export type { BaseEntity } from "./baseEntity";
 export type { DirtyFields } from "./form";
 export type { EnhancedOption } from "./EnhancedOption";
