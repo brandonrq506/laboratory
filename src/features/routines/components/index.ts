@@ -5,5 +5,7 @@ export { EditRoutineForm } from "./EditRoutineForm";
 export { HideRoutineButton } from "./hide-routine-btn";
 export { PlayRoutineButton } from "./PlayRoutineButton";
 export { RoutineItemList } from "./routine-item-list";
+export { RoutineActionMenu } from "./RoutineActionMenu";
 export { RoutineCard } from "./RoutineCard";
+export { RoutineTable } from "./RoutineTable";
 export { UnhideRoutineButton } from "./unhide-routine-btn";
