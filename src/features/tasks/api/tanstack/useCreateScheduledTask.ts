@@ -1,37 +1,19 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { addEnd } from "@/utils/array";
-import { buildTemporaryScheduledTask } from "../../utils/buildTemporaryScheduledTask";
-import { createQuickTask } from "../axios/createQuickTask";
+import { createScheduledTask } from "../axios/createScheduledTask";
 import { scheduledTasksQueryOptions } from "../queries";
-import { snapshotQueries } from "@/utils/tanstack/helpers";
 
 export const useCreateScheduledTask = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: createQuickTask,
+    mutationFn: createScheduledTask,
 
-    onMutate: async (activity) => {
-      const scheduledKey = scheduledTasksQueryOptions().queryKey;
-
-      await queryClient.cancelQueries(scheduledTasksQueryOptions());
-
-      const { rollback } = snapshotQueries(queryClient, [scheduledKey]);
-
-      const newScheduledTask = buildTemporaryScheduledTask(activity);
-
-      // Add new scheduled task to the end of scheduled tasks cache
+    onSuccess: (newTask) => {
       queryClient.setQueryData(scheduledTasksQueryOptions().queryKey, (old) =>
-        addEnd(old, newScheduledTask),
+        addEnd(old, newTask),
       );
-
-      return { rollback };
-    },
-    onError: (_, __, context) => {
-      context?.rollback();
-    },
-    onSettled: () => {
       queryClient.invalidateQueries(scheduledTasksQueryOptions());
     },
   });
