@@ -1,6 +1,10 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import { CompletedTask, TaskList } from "@/features/tasks/components";
+import {
+  CompletedTask,
+  PerformanceSummaryCard,
+  TaskList,
+} from "@/features/tasks/components";
 import { Link } from "@tanstack/react-router";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { SectionHeaderWithAction } from "@/components/layout";
@@ -26,17 +30,20 @@ export const TodayCompletedTaskList = () => {
           </Link>
         }
       />
-      <TaskList
-        tasks={data}
-        renderItem={(task) => (
-          <Link
-            key={task.id}
-            to="/timer/$taskId/edit"
-            params={{ taskId: task.id }}>
-            <CompletedTask task={task} />
-          </Link>
-        )}
-      />
+      <div className="space-y-3">
+        <PerformanceSummaryCard tasks={data} />
+        <TaskList
+          tasks={data}
+          renderItem={(task) => (
+            <Link
+              key={task.id}
+              to="/timer/$taskId/edit"
+              params={{ taskId: task.id }}>
+              <CompletedTask task={task} />
+            </Link>
+          )}
+        />
+      </div>
     </div>
   );
 };

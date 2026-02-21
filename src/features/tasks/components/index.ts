@@ -1,4 +1,5 @@
 export { CompletedTask } from "./CompletedTask";
+export { PerformanceSummaryCard } from "./PerformanceSummaryCard";
 export { DeleteAllScheduledTasks } from "./DeleteAllScheduledTasks";
 // export { EditCompletedTaskForm } from "./EditCompletedTaskForm";
 export { EditInProgressTaskForm } from "./EditInProgressTaskForm";
