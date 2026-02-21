@@ -24,7 +24,6 @@ import { Route as _protectedTimerNewRouteImport } from "./routes/__protected/tim
 import { Route as _protectedSettingsNotificationsRouteImport } from "./routes/__protected/settings/notifications";
 import { Route as _protectedSettingsAccountRouteImport } from "./routes/__protected/settings/account";
 import { Route as _protectedRoutinesNewRouteImport } from "./routes/__protected/routines/new";
-import { Route as _protectedHistoryNewRouteImport } from "./routes/__protected/history/new";
 import { Route as _protectedActivitiesNewRouteImport } from "./routes/__protected/activities/new";
 import { Route as _protectedTimerTaskIdRouteRouteImport } from "./routes/__protected/timer/$taskId/route";
 import { Route as _protectedSettingsCategoriesRouteRouteImport } from "./routes/__protected/settings/categories/route";
@@ -119,11 +118,6 @@ const _protectedRoutinesNewRoute = _protectedRoutinesNewRouteImport.update({
   id: "/new",
   path: "/new",
   getParentRoute: () => _protectedRoutinesRouteRoute,
-} as any);
-const _protectedHistoryNewRoute = _protectedHistoryNewRouteImport.update({
-  id: "/new",
-  path: "/new",
-  getParentRoute: () => _protectedHistoryRouteRoute,
 } as any);
 const _protectedActivitiesNewRoute = _protectedActivitiesNewRouteImport.update({
   id: "/new",
@@ -242,7 +236,6 @@ export interface FileRoutesByFullPath {
   "/settings/categories": typeof _protectedSettingsCategoriesRouteRouteWithChildren;
   "/timer/$taskId": typeof _protectedTimerTaskIdRouteRouteWithChildren;
   "/activities/new": typeof _protectedActivitiesNewRoute;
-  "/history/new": typeof _protectedHistoryNewRoute;
   "/routines/new": typeof _protectedRoutinesNewRoute;
   "/settings/account": typeof _protectedSettingsAccountRoute;
   "/settings/notifications": typeof _protectedSettingsNotificationsRoute;
@@ -272,7 +265,6 @@ export interface FileRoutesByTo {
   "/settings/categories": typeof _protectedSettingsCategoriesRouteRouteWithChildren;
   "/timer/$taskId": typeof _protectedTimerTaskIdRouteRouteWithChildren;
   "/activities/new": typeof _protectedActivitiesNewRoute;
-  "/history/new": typeof _protectedHistoryNewRoute;
   "/routines/new": typeof _protectedRoutinesNewRoute;
   "/settings/account": typeof _protectedSettingsAccountRoute;
   "/settings/notifications": typeof _protectedSettingsNotificationsRoute;
@@ -308,7 +300,6 @@ export interface FileRoutesById {
   "/__protected/settings/categories": typeof _protectedSettingsCategoriesRouteRouteWithChildren;
   "/__protected/timer/$taskId": typeof _protectedTimerTaskIdRouteRouteWithChildren;
   "/__protected/activities/new": typeof _protectedActivitiesNewRoute;
-  "/__protected/history/new": typeof _protectedHistoryNewRoute;
   "/__protected/routines/new": typeof _protectedRoutinesNewRoute;
   "/__protected/settings/account": typeof _protectedSettingsAccountRoute;
   "/__protected/settings/notifications": typeof _protectedSettingsNotificationsRoute;
@@ -344,7 +335,6 @@ export interface FileRouteTypes {
     | "/settings/categories"
     | "/timer/$taskId"
     | "/activities/new"
-    | "/history/new"
     | "/routines/new"
     | "/settings/account"
     | "/settings/notifications"
@@ -374,7 +364,6 @@ export interface FileRouteTypes {
     | "/settings/categories"
     | "/timer/$taskId"
     | "/activities/new"
-    | "/history/new"
     | "/routines/new"
     | "/settings/account"
     | "/settings/notifications"
@@ -409,7 +398,6 @@ export interface FileRouteTypes {
     | "/__protected/settings/categories"
     | "/__protected/timer/$taskId"
     | "/__protected/activities/new"
-    | "/__protected/history/new"
     | "/__protected/routines/new"
     | "/__protected/settings/account"
     | "/__protected/settings/notifications"
@@ -540,13 +528,6 @@ declare module "@tanstack/react-router" {
       fullPath: "/routines/new";
       preLoaderRoute: typeof _protectedRoutinesNewRouteImport;
       parentRoute: typeof _protectedRoutinesRouteRoute;
-    };
-    "/__protected/history/new": {
-      id: "/__protected/history/new";
-      path: "/new";
-      fullPath: "/history/new";
-      preLoaderRoute: typeof _protectedHistoryNewRouteImport;
-      parentRoute: typeof _protectedHistoryRouteRoute;
     };
     "/__protected/activities/new": {
       id: "/__protected/activities/new";
@@ -735,14 +716,12 @@ const _protectedHistoryTaskIdRouteRouteWithChildren =
 
 interface _protectedHistoryRouteRouteChildren {
   _protectedHistoryTaskIdRouteRoute: typeof _protectedHistoryTaskIdRouteRouteWithChildren;
-  _protectedHistoryNewRoute: typeof _protectedHistoryNewRoute;
 }
 
 const _protectedHistoryRouteRouteChildren: _protectedHistoryRouteRouteChildren =
   {
     _protectedHistoryTaskIdRouteRoute:
       _protectedHistoryTaskIdRouteRouteWithChildren,
-    _protectedHistoryNewRoute: _protectedHistoryNewRoute,
   };
 
 const _protectedHistoryRouteRouteWithChildren =
