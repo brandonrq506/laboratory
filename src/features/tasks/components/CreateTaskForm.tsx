@@ -4,14 +4,17 @@ import { NewTaskForm as FormType } from "../types/newTaskForm";
 import { NewTaskForm } from "./NewTaskForm";
 
 import { parse, set, startOfToday } from "date-fns";
-import { getRouteApi } from "@tanstack/react-router";
 import { splitHHMM } from "@/utils";
 
-const routeApi = getRouteApi("/__protected/history/new");
+type CreateTaskFormProps = {
+  date: string;
+  onClose: () => void;
+};
 
-export const CreateTaskForm = () => {
-  const navigate = routeApi.useNavigate();
-  const { date: dateParam } = routeApi.useSearch();
+export const CreateTaskForm = ({
+  date: dateParam,
+  onClose,
+}: CreateTaskFormProps) => {
   const { mutateAsync } = useCreateTask();
 
   const date = parse(dateParam, "yyyy-MM-dd", startOfToday());
@@ -40,7 +43,7 @@ export const CreateTaskForm = () => {
       note: data.note,
     });
 
-    navigate({ from: "/history", search: { date: dateParam } });
+    onClose();
   };
 
   return (
