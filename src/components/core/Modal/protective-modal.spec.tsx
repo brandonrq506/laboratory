@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { ProtectedConfirmationModal } from "./ProtectedConfirmationModal";
+import { ProtectiveModal } from "./protective-modal";
 
 const defaultProps = {
   isOpen: true,
@@ -12,9 +12,9 @@ const defaultProps = {
   description: "This action cannot be undone.",
 };
 
-describe("ProtectedConfirmationModal", () => {
+describe("ProtectiveModal", () => {
   it("confirm button disabled by default", async () => {
-    render(<ProtectedConfirmationModal {...defaultProps} />);
+    render(<ProtectiveModal {...defaultProps} />);
 
     await screen.findByRole("dialog", { name: "Delete Category" });
 
@@ -24,7 +24,7 @@ describe("ProtectedConfirmationModal", () => {
   it("confirm button enabled on exact match", async () => {
     const user = userEvent.setup();
 
-    render(<ProtectedConfirmationModal {...defaultProps} />);
+    render(<ProtectiveModal {...defaultProps} />);
 
     await screen.findByRole("dialog", { name: "Delete Category" });
 
@@ -37,9 +37,7 @@ describe("ProtectedConfirmationModal", () => {
     const user = userEvent.setup();
     const onConfirm = vi.fn();
 
-    render(
-      <ProtectedConfirmationModal {...defaultProps} onConfirm={onConfirm} />,
-    );
+    render(<ProtectiveModal {...defaultProps} onConfirm={onConfirm} />);
 
     await screen.findByRole("dialog", { name: "Delete Category" });
 
@@ -54,7 +52,7 @@ describe("ProtectedConfirmationModal", () => {
     const user = userEvent.setup();
     const onClose = vi.fn();
 
-    render(<ProtectedConfirmationModal {...defaultProps} onClose={onClose} />);
+    render(<ProtectiveModal {...defaultProps} onClose={onClose} />);
 
     await screen.findByRole("dialog", { name: "Delete Category" });
 
@@ -67,7 +65,7 @@ describe("ProtectedConfirmationModal", () => {
     const user = userEvent.setup();
     const onClose = vi.fn();
 
-    render(<ProtectedConfirmationModal {...defaultProps} onClose={onClose} />);
+    render(<ProtectiveModal {...defaultProps} onClose={onClose} />);
 
     await screen.findByRole("dialog", { name: "Delete Category" });
 
@@ -80,7 +78,7 @@ describe("ProtectedConfirmationModal", () => {
     const user = userEvent.setup();
     const onClose = vi.fn();
 
-    render(<ProtectedConfirmationModal {...defaultProps} onClose={onClose} />);
+    render(<ProtectiveModal {...defaultProps} onClose={onClose} />);
 
     await screen.findByRole("dialog", { name: "Delete Category" });
 
@@ -95,7 +93,7 @@ describe("ProtectedConfirmationModal", () => {
     expect(onClose).toHaveBeenCalledTimes(1);
 
     // Re-open the modal
-    render(<ProtectedConfirmationModal {...defaultProps} onClose={onClose} />);
+    render(<ProtectiveModal {...defaultProps} onClose={onClose} />);
 
     await screen.findByRole("dialog", { name: "Delete Category" });
 

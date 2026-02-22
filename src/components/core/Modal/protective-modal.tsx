@@ -9,7 +9,7 @@ import { Button } from "../Button/Button";
 
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
-type ProtectedConfirmationModalProps = {
+type ProtectiveModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
@@ -19,7 +19,7 @@ type ProtectedConfirmationModalProps = {
   description: string;
 };
 
-export const ProtectedConfirmationModal = ({
+export const ProtectiveModal = ({
   isOpen,
   onClose,
   onConfirm,
@@ -27,7 +27,7 @@ export const ProtectedConfirmationModal = ({
   isPending = false,
   title,
   description,
-}: ProtectedConfirmationModalProps) => {
+}: ProtectiveModalProps) => {
   const [confirmText, setConfirmText] = useState("");
   const isConfirmDisabled = confirmText !== confirmValue || isPending;
 

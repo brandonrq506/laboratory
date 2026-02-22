@@ -2,7 +2,7 @@ import { useDeleteCategory } from "@/features/categories/api/tanstack/useDeleteC
 import { useNavigateBack } from "@/hooks";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import { ProtectedConfirmationModal } from "@/components/core";
+import { ProtectiveModal } from "@/components/core";
 import { categoryByIdQueryOptions } from "@/features/categories/api/queries";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -27,7 +27,7 @@ function RouteComponent() {
   };
 
   return (
-    <ProtectedConfirmationModal
+    <ProtectiveModal
       isOpen={true}
       onClose={navigateBack}
       onConfirm={handleDelete}

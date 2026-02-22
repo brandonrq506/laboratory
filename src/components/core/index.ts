@@ -12,7 +12,7 @@ export { FloatingMenu } from "./Menu/FloatingMenu";
 export { ThreeDotsMenu } from "./Menu/ThreeDotsMenu";
 export { Modal } from "./Modal/Modal";
 export { ConfirmationModal } from "./Modal/ConfirmationModal";
-export { ProtectedConfirmationModal } from "./Modal/ProtectedConfirmationModal";
+export { ProtectiveModal } from "./Modal/protective-modal";
 export { NetworkBadge } from "./Network/NetworkBadge";
 export { LinkedInProfile } from "./Social/LinkedInProfile";
 export { EmptyState } from "./Table/EmptyState";
