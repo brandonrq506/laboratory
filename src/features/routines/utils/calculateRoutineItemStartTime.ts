@@ -4,7 +4,7 @@ import { floorMilliseconds, splitHHMM } from "@/utils";
 import type { RoutineItem } from "../types/routine-item";
 import type { RoutineItemWithExpectedStartTime } from "../types/routine-with-expected-time";
 
-const MS_PER_SECOND = 1000;
+import { millisecondsInSecond } from "date-fns/constants";
 
 const deriveInitialStartTime = (startTime: string | null) => {
   const now = floorMilliseconds(new Date());
@@ -24,7 +24,7 @@ const deriveInitialStartTime = (startTime: string | null) => {
 
 const getDurationIncrementMs = (item: RoutineItem) => {
   const durationSeconds = Math.max(0, item.item_exp_seconds ?? 0);
-  return durationSeconds * MS_PER_SECOND;
+  return durationSeconds * millisecondsInSecond;
 };
 
 export const calculateRoutineItemStartTime = (

@@ -5,13 +5,11 @@ import {
   ClipboardDocumentCheckIcon,
   ClipboardIcon,
 } from "@heroicons/react/24/outline";
+import { ERROR_DURATION, SUCCESS_DURATION } from "@/constants/durations";
 import { IconButton } from "./IconButton";
 import clsx from "clsx";
 
 type Status = "idle" | "copying" | "success" | "error";
-
-const SUCCESS_DURATION = 1000;
-const ERROR_DURATION = 2000;
 
 const ARIA_LABEL_MAP: Record<Status, string> = {
   idle: "Copy to clipboard",
