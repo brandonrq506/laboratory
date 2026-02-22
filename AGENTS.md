@@ -1,14 +1,16 @@
+# AGENTS.md
+
 ## Project overview
 
 This is a **React + TypeScript + Vite** personal project. The application is a productivity tool featuring activity/task management, timers, routines, categories.
 
 **Technology Stack:**
 
-- **Frontend:** React 19.1.0, TypeScript, TailwindCSS 4.1.13
-- **Build:** Vite 7.1.5 with TypeScript compilation
-- **Testing:** Vitest + React Testing Library + MSW for API mocking
-- **Routing:** React Router 7.8.2
-- **State:** TanStack Query 5.87.1, React Hook Form 7.62.0
+- **Frontend:** React 19.2+, TypeScript, TailwindCSS 4.1+
+- **Build:** Vite 7.3+ with TypeScript compilation
+- **Testing:** Vitest + React Testing Library + User Event + MSW for API mocking
+- **Routing:** @tanstack/react-router 1.160+
+- **State:** TanStack Query 5.90+, React Hook Form 7.71+
 - **Deployment:** Heroku-ready with static file serving
 
 ## Build and validation Commands
@@ -29,10 +31,9 @@ npm run build        # Full build: tsc + vite build
 ### 3. Code Quality
 
 ```bash
-npm run prettier     # Check formatting
 npm run prettier:fix # Fix formatting
 npm run lint         # ESLint with strict rules
-npm run lint:fix     # Auto-fix linting issues
+npm run lint:fix     # Auto-fix fixable linting issues
 ```
 
 ### 4. Testing
@@ -54,21 +55,20 @@ npm run validate:fix # Runs prettier:fix → lint:fix → type-check → test
 
 ```
 src/
-├── app/                    # App setup, routing configuration
-│   ├── index.tsx          # Main routing with React Router
-│   └── provider.tsx       # Root providers (TanStack Query, etc.)
 ├── components/            # Reusable UI components
 │   ├── core/              # Basic UI (Button, Modal, Toggle, etc.)
 │   ├── form/              # Form components (TextInput, ComboBox, etc.)
 │   └── layout/            # Layout components (Card, Headers, etc.)
+├── constants/             # Application-wide constants
 ├── features/              # Feature-based organization
 │   ├── activities/        # Activity management
+│   ├── auth/              # Authentication management
 │   ├── categories/        # Category management
 │   ├── routines/          # Routine management
 │   ├── tasks/             # Task management
 │   ├── timer/             # Timer functionality
 │   └── userPreferences/   # Settings management
-├── pages/                 # Page components matching routes
+├── routes/                # TanStack Router route definitions
 ├── libs/                  # External lib configurations
 │   ├── axios.ts           # API client with interceptors
 │   └── tanstack.ts        # Query client setup
@@ -80,13 +80,6 @@ src/
 ```
 
 ## Code style guidelines
-
-### Typescript
-
-- TypeScript strict mode
-- Create types in the src/features/[feature]/types directory.
-- Rely on TypeScript to infer types when possible.
-- Use `interface` by default and `type` for unions or more complex types.
 
 ### General coding guidelines
 
@@ -101,18 +94,32 @@ src/
 - Date / time functionality should rely / use the `date-fns` library when possible.
 - Never use interpolation in className. Use `clsx` library instead.
 - Use `useMemo` and `useCallback` to optimize performance when necessary.
-- Ask permission before using `useEffect` in a component.
+- Ask permission before using `useEffect` in a component. First check `You Might Not Need an Effect` knowledge.
 - Follow the structure of the project when creating new files / folders.
 - Make smart choices that enhance and supports code readability and maintainability.
 - When creating types for something related to a library, consider extending / using the library own types.
 
+### Typescript
+
+- TypeScript strict mode
+- Create types in the src/features/[feature]/types directory.
+- General types can be created in the src/types directory.
+- Rely on TypeScript to infer types when possible.
+- Use `interface` by default and `type` for unions or more complex types.
+- Never use `any` type. If you need to use it, ask for permission and justify why it's necessary, but look for alternatives first.
+
 ## Planning instructions
 
-- First make sure you understand the request. Feel free to look for ambiguities and ask for clarifications.
+- First make sure you understand the request. Explore the codebase as necessary.
 - Find relevant files by searching for keywords in the codebase / using project structure.
 - Create a plan for implementation, outlining the steps needed to complete the request in a To-Do list format.
 - Break each item in the To-Do list into actionable, manageable clear tasks (when applicable).
-- Once the implementation of each of the To-Do list items is complete, review the code for any potential improvements.
+- In all interactions and commit messages, be extremely concise and sacrifice grammar for the sake of concision.
+
+## Verification instructions
+
+- Make sure you run `npm run validate:fix` to ensure code quality and correctness.
+- Review the diff changes, consider this a 'refactor' step in the implementation process.
 - Once you have finished the whole implementation, pass your changed files through the `qa.instructions.md` file for review.
 
 ## Testing instructions
@@ -126,6 +133,6 @@ src/
 
 ## PR instructions
 
-- Title format: [ISSUE_NUMBER] Short descriptive title
+- Title format: [ISSUE_NUMBER] Short descriptive title. Fallback to [CODEX].
 - Descriptive title: Must convey that now something is different i.e. "Now only display active routines"
 - Body: Must use our `pull_request_template.md` template at the root of the repository.
