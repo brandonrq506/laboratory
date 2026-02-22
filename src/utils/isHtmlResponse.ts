@@ -24,7 +24,9 @@ const getHeaderValue = (
   return matchedHeader?.[1];
 };
 
-const getContentType = (headers: Record<string, unknown>): string | undefined => {
+const getContentType = (
+  headers: Record<string, unknown>,
+): string | undefined => {
   const contentType = hasGetter(headers)
     ? headers.get("Content-Type")
     : getHeaderValue(headers, CONTENT_TYPE_HEADER);
