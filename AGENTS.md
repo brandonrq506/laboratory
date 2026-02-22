@@ -9,7 +9,7 @@ This is a **React + TypeScript + Vite** personal project. The application is a p
 - **Frontend:** React 19.2+, TypeScript, TailwindCSS 4.1+
 - **Build:** Vite 7.3+ with TypeScript compilation
 - **Testing:** Vitest + React Testing Library + User Event + MSW for API mocking
-- **Routing:** React Router 1.160+
+- **Routing:** @tanstack/react-router 1.160+
 - **State:** TanStack Query 5.90+, React Hook Form 7.71+
 - **Deployment:** Heroku-ready with static file serving
 
