@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { EyeIcon, EyeSlashIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
+import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { ResponsiveButton, ResponsiveLinkButton } from "@/components/core";
 import { PageHeaderWithActions } from "@/components/layout";
 import { routineListQueryOptions } from "@/features/routines/api/queries";
 
 import { ADD } from "@/constants/actions";
 import { ROUTINE } from "@/constants/entities";
-import { RoutineCard } from "@/features/routines/components";
+import { RoutineTable } from "@/features/routines/components";
 
 export const Route = createFileRoute("/__protected/routines")({
   loader: ({ context: { queryClient } }) =>
@@ -51,19 +51,7 @@ function RouteComponent() {
         }
       />
 
-      <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-        {routinesToShow.map((routine) => {
-          return (
-            <Link
-              key={routine.id}
-              to="/routines/$routineId/edit"
-              params={{ routineId: routine.id }}
-              className="max-h-56 w-full xl:max-w-md">
-              <RoutineCard routine={routine} />
-            </Link>
-          );
-        })}
-      </div>
+      <RoutineTable routines={routinesToShow} />
 
       <Outlet />
     </div>
