@@ -75,4 +75,30 @@ describe("ProtectedConfirmationModal", () => {
 
     expect(onClose).toHaveBeenCalledTimes(1);
   });
+
+  it("resets input on close", async () => {
+    const user = userEvent.setup();
+    const onClose = vi.fn();
+
+    render(<ProtectedConfirmationModal {...defaultProps} onClose={onClose} />);
+
+    await screen.findByRole("dialog", { name: "Delete Category" });
+
+    const input = screen.getByRole("textbox");
+
+    await user.type(input, "my-category");
+
+    expect(input).toHaveValue("my-category");
+
+    await user.click(screen.getByRole("button", { name: "Cancel" }));
+
+    expect(onClose).toHaveBeenCalledTimes(1);
+
+    // Re-open the modal
+    render(<ProtectedConfirmationModal {...defaultProps} onClose={onClose} />);
+
+    await screen.findByRole("dialog", { name: "Delete Category" });
+
+    expect(screen.getByRole("textbox")).toHaveValue("");
+  });
 });

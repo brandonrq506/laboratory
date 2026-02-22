@@ -32,8 +32,7 @@ function RouteComponent() {
       onClose={navigateBack}
       onConfirm={handleDelete}
       confirmValue={data.name}
-      isLoading={isPending}
-      icon="danger"
+      isPending={isPending}
       title="Delete Category"
       description="Deleting a category deletes all the activities and tasks associated with it. This action cannot be undone."
     />

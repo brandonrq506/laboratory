@@ -1,23 +1,22 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import { Description, DialogTitle, Field, Label } from "@headlessui/react";
 import { Modal } from "./Modal";
-import { StateInputText } from "@/components/form/TextInput/StateInputText";
+import { StateInputText } from "@/components/form";
 
 import { CANCEL, CONFIRM } from "@/constants/actions";
-import { backgrounds, icons, promptBorders } from "./utils";
 import { Button } from "../Button/Button";
-import clsx from "clsx";
+
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 type ProtectedConfirmationModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   confirmValue: string;
-  isLoading?: boolean;
-  icon?: keyof typeof icons;
-  title?: string;
-  description?: string;
+  isPending?: boolean;
+  title: string;
+  description: string;
 };
 
 export const ProtectedConfirmationModal = ({
@@ -25,30 +24,30 @@ export const ProtectedConfirmationModal = ({
   onClose,
   onConfirm,
   confirmValue,
-  isLoading,
-  icon = "danger",
+  isPending = false,
   title,
   description,
 }: ProtectedConfirmationModalProps) => {
   const [confirmText, setConfirmText] = useState("");
+  const isConfirmDisabled = confirmText !== confirmValue || isPending;
 
-  const isConfirmDisabled = confirmText !== confirmValue || isLoading;
+  const handleClose = useCallback(() => {
+    setConfirmText("");
+    onClose();
+  }, [onClose]);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <div className="space-y-6">
         <div className="flex items-start gap-4">
-          <span
-            className={clsx(
-              "flex h-12 w-12 shrink-0 items-center justify-center rounded-full",
-              backgrounds[icon],
-            )}>
-            {icons[icon]}
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red-50">
+            <ExclamationTriangleIcon
+              aria-hidden="true"
+              className="size-6 text-red-600"
+            />
           </span>
           <div className="space-y-2 text-left">
-            <DialogTitle
-              as="h2"
-              className="text-lg font-semibold text-gray-900">
+            <DialogTitle className="text-lg font-semibold text-gray-900">
               {title}
             </DialogTitle>
             <Description className="text-sm text-gray-600">
@@ -57,11 +56,7 @@ export const ProtectedConfirmationModal = ({
           </div>
         </div>
 
-        <div
-          className={clsx(
-            "rounded-md border px-4 py-3 text-sm",
-            promptBorders[icon],
-          )}>
+        <div className="rounded-md border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-700">
           Type <span className="font-semibold">"{confirmValue}"</span> to
           confirm.
         </div>
@@ -77,12 +72,12 @@ export const ProtectedConfirmationModal = ({
         </Field>
 
         <div className="flex justify-end gap-2">
-          <Button variant="secondary" onClick={onClose}>
+          <Button variant="secondary" onClick={handleClose}>
             {CANCEL}
           </Button>
           <Button
             variant="danger"
-            isLoading={isLoading}
+            isLoading={isPending}
             onClick={onConfirm}
             disabled={isConfirmDisabled}>
             {CONFIRM}
