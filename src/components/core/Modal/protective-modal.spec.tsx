@@ -78,7 +78,9 @@ describe("ProtectiveModal", () => {
     const user = userEvent.setup();
     const onClose = vi.fn();
 
-    render(<ProtectiveModal {...defaultProps} onClose={onClose} />);
+    const { rerender } = render(
+      <ProtectiveModal {...defaultProps} onClose={onClose} />,
+    );
 
     await screen.findByRole("dialog", { name: "Delete Category" });
 
@@ -92,8 +94,7 @@ describe("ProtectiveModal", () => {
 
     expect(onClose).toHaveBeenCalledTimes(1);
 
-    // Re-open the modal
-    render(<ProtectiveModal {...defaultProps} onClose={onClose} />);
+    rerender(<ProtectiveModal {...defaultProps} onClose={onClose} />);
 
     await screen.findByRole("dialog", { name: "Delete Category" });
 
