@@ -5,12 +5,10 @@ import {
   CheckCircleIcon,
   ExclamationCircleIcon,
 } from "@heroicons/react/24/outline";
+import { ERROR_DURATION, SUCCESS_DURATION } from "@/constants/durations";
 import { Loading } from "@/components/core";
 import type { MutationStatus } from "@tanstack/react-query";
 import { clsx } from "clsx";
-
-const SUCCESS_DURATION = 1000;
-const ERROR_DURATION = 2000;
 
 interface Props {
   status: MutationStatus;

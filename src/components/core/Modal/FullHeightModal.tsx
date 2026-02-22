@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
+import { MODAL_DURATION } from "@/constants/durations";
 import clsx from "clsx";
 
 export type ModalProps = {
@@ -25,8 +26,7 @@ export const FullHeightModal = ({
    */
   useEffect(() => {
     if (isOpen) {
-      const ANIMATION_DELAY_MS = 10;
-      const timer = setTimeout(() => setInternalOpen(true), ANIMATION_DELAY_MS);
+      const timer = setTimeout(() => setInternalOpen(true), MODAL_DURATION);
       return () => clearTimeout(timer);
     }
 
