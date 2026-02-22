@@ -66,7 +66,7 @@ describe("ProtectedConfirmationModal", () => {
   it("calls onClose on Escape", async () => {
     const user = userEvent.setup();
     const onClose = vi.fn();
-    
+
     render(<ProtectedConfirmationModal {...defaultProps} onClose={onClose} />);
 
     await screen.findByRole("dialog", { name: "Delete Category" });
