@@ -89,4 +89,40 @@ describe("isHtmlResponse", () => {
 
     expect(result).toBe(false);
   });
+
+  it("should return true when content-type uses lowercase header key", () => {
+    const headers = {
+      "content-type": "text/html",
+    };
+
+    const result = isHtmlResponse(headers);
+
+    expect(result).toBe(true);
+  });
+
+  it("should return true when Content-Type uses mixed casing", () => {
+    const headers = {
+      "CoNtEnT-TyPe": "text/html",
+    };
+
+    const result = isHtmlResponse(headers);
+
+    expect(result).toBe(true);
+  });
+
+  it("should return true for axios-style headers with getter", () => {
+    const headers = {
+      get: (headerName: string) => {
+        if (headerName === "Content-Type") {
+          return "text/html; charset=utf-8";
+        }
+
+        return undefined;
+      },
+    };
+
+    const result = isHtmlResponse(headers);
+
+    expect(result).toBe(true);
+  });
 });
