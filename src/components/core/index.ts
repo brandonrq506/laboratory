@@ -13,6 +13,7 @@ export { LinkedInProfile } from "./Social/LinkedInProfile";
 export { Loading } from "./Loading/Loading";
 export { Modal } from "./Modal/Modal";
 export { NetworkBadge } from "./Network/NetworkBadge";
+export { ProtectiveModal } from "./Modal/protective-modal";
 export { QueryStatusIndicator } from "./QueryStatusIndicator/QueryStatusIndicator";
 export { RainbowBadge } from "./Badge/rainbow-badge";
 export { ResponsiveButton } from "./Button/responsive-button";
