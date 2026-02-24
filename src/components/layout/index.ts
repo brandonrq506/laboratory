@@ -1,9 +1,9 @@
-export { MainLayout } from "./main/MainLayout";
 export { Card } from "./Card";
-export { PageHeaderWithActions } from "./headings/PageHeaderWithActions";
-export { SectionHeader } from "./headings/SectionHeader";
-export { SectionHeaderWithAction } from "./headings/SectionHeaderWithAction";
 export { HeadingLarge } from "./headings/HeadingLarge";
 export { HeadingMedium } from "./headings/HeadingMedium";
 export { HeadingSmall } from "./headings/HeadingSmall";
+export { MainLayout } from "./main/MainLayout";
+export { PageHeaderWithActions } from "./headings/PageHeaderWithActions";
+export { SectionHeader } from "./headings/SectionHeader";
+export { SectionHeaderWithAction } from "./headings/SectionHeaderWithAction";
 export { SectionUnderConstruction } from "./SectionUnderConstruction";

@@ -1,13 +1,13 @@
 export { ComboBox } from "./ComboBox/ComboBox";
 export { ComboBoxWithRenderer } from "./ComboBox/ComboBoxWithRenderer";
 export { ControlComboBox } from "./ComboBox/ControlComboBox";
-export { NumberInput } from "./NumerInput/NumberInput";
-export { ControlledStringSelect } from "./Select/ControlledStringSelect";
 export { ControlledSelect } from "./Select/ControlledSelect";
-export { StringSelect } from "./Select/StringSelect";
+export { ControlledStringSelect } from "./Select/ControlledStringSelect";
+export { NumberInput } from "./NumerInput/NumberInput";
 export { Select } from "./Select/Select";
+export { StateInputText } from "./TextInput/StateInputText";
+export { StringSelect } from "./Select/StringSelect";
 export { TextArea } from "./Textarea/TextArea";
 export { TextInput } from "./TextInput/TextInput";
-export { StateInputText } from "./TextInput/StateInputText";
 export { TimeInputV2 } from "./TimeInput/TimeInputV2";
 export { TimeInputV3 } from "./TimeInput/TimeInputV3";

@@ -1,10 +1,10 @@
 export { CompletedTask } from "./CompletedTask";
-export { PerformanceSummaryCard } from "./PerformanceSummaryCard";
 export { DeleteAllScheduledTasks } from "./DeleteAllScheduledTasks";
 // export { EditCompletedTaskForm } from "./EditCompletedTaskForm";
 export { EditInProgressTaskForm } from "./EditInProgressTaskForm";
 export { EditScheduledTaskForm } from "./EditScheduledTaskForm";
 export { ExampleCompletedTask } from "./ExampleCompletedTask";
-export { TaskList } from "./TaskList";
+export { PerformanceSummaryCard } from "./PerformanceSummaryCard";
 export { SortableTask } from "./SortableTask";
 export { SortableTaskList } from "./SortableTaskList";
+export { TaskList } from "./TaskList";
