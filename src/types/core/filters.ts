@@ -9,7 +9,7 @@ type DateBetweenValue = {
   to: string;
 };
 
-// Date filter operators (string = ISO 8601 date)
+// Date filter operators (string = ISO 8601 date | 'yesterday' | 'today' | 'tomorrow')
 export type DateFilterOperators = {
   is_null?: boolean;
   is_in_the_last?: DateInTheLastValue;
