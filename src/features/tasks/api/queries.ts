@@ -1,7 +1,7 @@
 import { TASKS_ENDPOINT } from "@/libs/axios";
 import { queryOptions } from "@tanstack/react-query";
 
-import { endOfDay, formatISO, startOfDay } from "date-fns";
+import { endOfDay, formatISO } from "date-fns";
 import { getTask } from "./axios/getTask";
 import { getTasks } from "./axios/getTasks";
 
@@ -61,7 +61,7 @@ export const todayCompletedTasksQueryOptions = () => {
     queryKey: taskKeys.list({
       filter: {
         status: { eq: "completed" },
-        start_time: { is_equal_to: formatISO(startOfDay(new Date())) },
+        start_time: { is_equal_to: "today" },
       },
       sort: { sort_by: "start_time", sort_order: "desc" },
     }),
