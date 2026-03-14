@@ -1,53 +1,27 @@
 # AGENTS.md
 
+- In all interactions and commit messages, be extremely concise and sacrifice grammar for the sake of concision.
+
 ## Project overview
 
 This is a **React + TypeScript + Vite** personal project. The application is a productivity tool featuring activity/task management, timers, routines, categories.
 
 **Technology Stack:**
 
-- **Frontend:** React 19.2+, TypeScript, TailwindCSS 4.1+
+It is critial that you leverage the latest and greatest of the current libraries.
+If you need to validate versions, check the `package.json` file.
+
+- **Frontend:** React latest, TypeScript, TailwindCSS latest.
 - **Build:** Vite 7.3+ with TypeScript compilation
 - **Testing:** Vitest + React Testing Library + User Event + MSW for API mocking
-- **Routing:** @tanstack/react-router 1.160+
-- **State:** TanStack Query 5.90+, React Hook Form 7.71+
+- **Routing:** @tanstack/react-router
+- **State:** TanStack Query latest, React Hook Form latest
 - **Deployment:** Heroku-ready with static file serving
 
 ## Build and validation Commands
 
-### 1. Development
-
-```bash
-npm run dev          # Starts dev server with --host flag
-```
-
-### 2. Build & Type Checking
-
-```bash
-npm run type-check   # TypeScript checking only
-npm run build        # Full build: tsc + vite build
-```
-
-### 3. Code Quality
-
-```bash
-npm run prettier:fix # Fix formatting
-npm run lint         # ESLint with strict rules
-npm run lint:fix     # Auto-fix fixable linting issues
-```
-
-### 4. Testing
-
-```bash
-npm run test         # Vitest with coverage
-npm run test:expert  # Enhanced debugging by outputting 10_000 lines
-```
-
-### 5. Complete Validation
-
-```bash
-npm run validate:fix # Runs prettier:fix → lint:fix → type-check → test
-```
+Feel free to check the `package.json` scripts for more details.
+We use `mise`. Some commands for you may require `mise exec` prefix to ensure the correct tool versions are used.
 
 ## Project Architecture & Layout
 
@@ -78,6 +52,12 @@ src/
 │   └── test-utils.ts      # Custom RTL render
 ├── utils/                 # Utility functions
 ```
+
+## Plan guidelines
+
+- Once there is no ambiguity in the requirements, breakn down into multiple logical and sensible stages, unless the task is simple enough to be done in one stage.
+- Stages should allow for incremental progress and testing, and should be as independent as possible from each other.
+- Add a list of verifications to be done at the end of each stage, to ensure that the implementation is correct and meets the requirements before moving on to the next stage.
 
 ## Code style guidelines
 
