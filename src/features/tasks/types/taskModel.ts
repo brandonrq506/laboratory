@@ -7,6 +7,7 @@ export type TaskModel = BaseEntity & {
   note: string;
   optional_name: string | null;
   position: number | null;
+  scheduled_on: string | null;
   start_time: string;
   status: TaskStatus;
   user_id: number;
