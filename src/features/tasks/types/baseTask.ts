@@ -6,6 +6,7 @@ export interface BaseTaskAPI extends BaseEntity {
   activity: ActivityWithCategory;
   note: string;
   optional_name: string | null;
+  scheduled_on: string | null;
   status: TaskStatus;
   position: string | null;
 }

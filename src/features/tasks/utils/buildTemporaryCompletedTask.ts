@@ -17,6 +17,7 @@ export const buildTemporaryCompletedTask = (
     activity,
     status: "completed",
     position: null,
+    scheduled_on: null,
     start_time: roundToNearestMinutes(new Date(start)).toISOString(),
     end_time: roundToNearestMinutes(new Date(end)).toISOString(),
     note,
