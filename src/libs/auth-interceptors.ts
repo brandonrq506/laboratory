@@ -84,7 +84,13 @@ const handleResponseError = async (error: AxiosError) => {
     return apiV1(originalRequest);
   } catch (refreshError) {
     processQueue(refreshError, null);
-    logoutHandler();
+
+    const isInvalidToken =
+      refreshError instanceof AxiosError &&
+      refreshError.response?.status === UNAUTHORIZED;
+    if (isInvalidToken) {
+      logoutHandler();
+    }
     return Promise.reject(refreshError);
   } finally {
     isRefreshing = false;
