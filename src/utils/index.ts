@@ -1,3 +1,4 @@
+export { localDateToUtc, utcToLocalDate } from "./dateConversion";
 export { floorMilliseconds } from "./floorMilliseconds";
 export { floorSeconds } from "./floorSeconds";
 export { formatDatetimeTo12hTime } from "./formatDatetimeTo12hTime";
