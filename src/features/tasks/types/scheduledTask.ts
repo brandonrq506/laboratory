@@ -5,4 +5,5 @@ export interface ScheduledTaskAPI extends BaseTaskAPI {
   start_time: null;
   end_time: null;
   position: string;
+  scheduled_at: string;
 }
