@@ -48,7 +48,7 @@ export const ScheduledTaskForm = ({ initialValues, task, onSubmit }: Props) => {
       <br />
 
       <DateInput
-        label="Scheduled:"
+        label="Scheduled"
         min={getToday()}
         registration={register("scheduled_at", {
           required: "Scheduled date is required.",
@@ -64,7 +64,7 @@ export const ScheduledTaskForm = ({ initialValues, task, onSubmit }: Props) => {
 
       <TextArea
         autoFocus={Boolean(!initialValues.note)}
-        label="Notes:"
+        label="Notes"
         autoComplete="off"
         rows={4}
         registration={register("note", {

@@ -22,7 +22,7 @@ describe("ScheduledTaskForm", () => {
       />,
     );
 
-    const notes = screen.getByLabelText("Notes:");
+    const notes = screen.getByLabelText("Notes");
     expect(notes).toBeInTheDocument();
     expect(notes).not.toHaveFocus();
   });
@@ -41,7 +41,7 @@ describe("ScheduledTaskForm", () => {
       />,
     );
 
-    const notes = await screen.findByLabelText("Notes:");
+    const notes = await screen.findByLabelText("Notes");
     expect(notes).toBeInTheDocument();
     expect(notes).toHaveFocus();
   });
@@ -60,7 +60,7 @@ describe("ScheduledTaskForm", () => {
       />,
     );
 
-    const notesTextArea = screen.getByLabelText("Notes:");
+    const notesTextArea = screen.getByLabelText("Notes");
     expect(notesTextArea).toHaveAttribute("rows", "4");
   });
 });

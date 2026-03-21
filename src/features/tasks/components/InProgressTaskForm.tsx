@@ -44,7 +44,7 @@ export const InProgressTaskForm = ({
       </div>
 
       <TextArea
-        label="Notes:"
+        label="Notes"
         autoComplete="off"
         rows={4}
         registration={register("note", {
