@@ -3,6 +3,7 @@ import { render, screen } from "@/test/test-utils";
 import { ScheduledTaskForm } from "../ScheduledTaskForm";
 
 import { scheduledTasks } from "@/test/store/tasks";
+import { utcToLocalDate } from "@/utils";
 
 describe("ScheduledTaskForm", () => {
   it("does not focus notes when an existing note is present", () => {
@@ -16,7 +17,7 @@ describe("ScheduledTaskForm", () => {
         onSubmit={vi.fn()}
         initialValues={{
           note: taskWithNote.note,
-          scheduled_at: taskWithNote.scheduled_at,
+          scheduled_at: utcToLocalDate(taskWithNote.scheduled_at),
         }}
       />,
     );
@@ -35,7 +36,7 @@ describe("ScheduledTaskForm", () => {
         onSubmit={vi.fn()}
         initialValues={{
           note: taskWithoutNote.note,
-          scheduled_at: taskWithoutNote.scheduled_at,
+          scheduled_at: utcToLocalDate(taskWithoutNote.scheduled_at),
         }}
       />,
     );
@@ -52,7 +53,10 @@ describe("ScheduledTaskForm", () => {
       <ScheduledTaskForm
         task={task}
         onSubmit={vi.fn()}
-        initialValues={{ note: task.note, scheduled_at: task.scheduled_at }}
+        initialValues={{
+          note: task.note,
+          scheduled_at: utcToLocalDate(task.scheduled_at),
+        }}
       />,
     );
 
