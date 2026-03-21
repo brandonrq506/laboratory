@@ -1,11 +1,13 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useUpdateTask } from "../api/tanstack/useUpdateTask";
 
+import { ScheduledTaskForm } from "./ScheduledTaskForm";
+
 import { localDateToUtc, utcToLocalDate } from "@/utils";
 
-import { ScheduleForm } from "../types/schedule-form";
-import { ScheduledTaskAPI } from "../types/scheduledTask";
-import { ScheduledTaskForm } from "./ScheduledTaskForm";
+import type { DirtyFields } from "@/types/core";
+import type { ScheduleForm } from "../types/schedule-form";
+import type { ScheduledTaskAPI } from "../types/scheduledTask";
 
 interface Props {
   task: ScheduledTaskAPI;
@@ -15,12 +17,17 @@ export const EditScheduledTaskForm = ({ task }: Props) => {
   const navigate = useNavigate();
   const { mutate } = useUpdateTask();
 
-  const handleSubmit = (data: ScheduleForm) => {
+  const handleSubmit = (
+    data: ScheduleForm,
+    dirtyFields: DirtyFields<ScheduleForm>,
+  ) => {
     mutate({
       taskId: task.id,
       task: {
         note: data.note,
-        scheduled_at: localDateToUtc(data.scheduled_at),
+        scheduled_at: dirtyFields.scheduled_at
+          ? localDateToUtc(data.scheduled_at)
+          : task.scheduled_at,
       },
     });
 

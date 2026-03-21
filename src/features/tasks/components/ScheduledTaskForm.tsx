@@ -8,12 +8,17 @@ import { HeadingLarge } from "@/components/layout";
 import { ScheduleForm } from "../types/schedule-form";
 import { ScheduledTaskAPI } from "../types/scheduledTask";
 
+import type { DirtyFields } from "@/types/core/form";
+
 import { TASK } from "@/constants/entities";
 import { UPDATE } from "@/constants/actions";
 
 interface Props {
   initialValues: ScheduleForm;
-  onSubmit: (data: ScheduleForm) => void;
+  onSubmit: (
+    data: ScheduleForm,
+    dirtyFields: DirtyFields<ScheduleForm>,
+  ) => void;
   task: ScheduledTaskAPI;
 }
 
@@ -21,10 +26,10 @@ export const ScheduledTaskForm = ({ initialValues, task, onSubmit }: Props) => {
   const { formState, handleSubmit, register } = useForm<ScheduleForm>({
     values: initialValues,
   });
-  const { isSubmitting, errors } = formState;
+  const { isSubmitting, errors, dirtyFields } = formState;
 
   return (
-    <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+    <form onSubmit={handleSubmit((data) => onSubmit(data, dirtyFields))}>
       <div className="flex items-center justify-between">
         <div className="flex items-baseline gap-2">
           <HeadingLarge title={task.activity.display_name} />
