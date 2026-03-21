@@ -10,7 +10,7 @@ describe("utcToLocalDate", () => {
 describe("localDateToUtc", () => {
   it("should return an ISO string", () => {
     const result = localDateToUtc("2026-03-21");
-    expect(result).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/);
+    expect(result).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
   });
 });
 
