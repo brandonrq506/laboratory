@@ -3,6 +3,7 @@ export { ComboBoxWithRenderer } from "./ComboBox/ComboBoxWithRenderer";
 export { ControlComboBox } from "./ComboBox/ControlComboBox";
 export { ControlledSelect } from "./Select/ControlledSelect";
 export { ControlledStringSelect } from "./Select/ControlledStringSelect";
+export { DateInput } from "./DateInput/DateInput";
 export { NumberInput } from "./NumerInput/NumberInput";
 export { Select } from "./Select/Select";
 export { StateInputText } from "./TextInput/StateInputText";
