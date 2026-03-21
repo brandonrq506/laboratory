@@ -14,7 +14,10 @@ describe("ScheduledTaskForm", () => {
       <ScheduledTaskForm
         task={taskWithNote}
         onSubmit={vi.fn()}
-        initialValues={{ note: taskWithNote.note }}
+        initialValues={{
+          note: taskWithNote.note,
+          scheduled_at: taskWithNote.scheduled_at,
+        }}
       />,
     );
 
@@ -30,7 +33,10 @@ describe("ScheduledTaskForm", () => {
       <ScheduledTaskForm
         task={taskWithoutNote}
         onSubmit={vi.fn()}
-        initialValues={{ note: taskWithoutNote.note }}
+        initialValues={{
+          note: taskWithoutNote.note,
+          scheduled_at: taskWithoutNote.scheduled_at,
+        }}
       />,
     );
 
@@ -46,7 +52,7 @@ describe("ScheduledTaskForm", () => {
       <ScheduledTaskForm
         task={task}
         onSubmit={vi.fn()}
-        initialValues={{ note: task.note }}
+        initialValues={{ note: task.note, scheduled_at: task.scheduled_at }}
       />,
     );
 
