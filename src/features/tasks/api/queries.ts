@@ -22,6 +22,7 @@ export type TaskApiFilters = {
   created_at?: DateFilterOperators;
   updated_at?: DateFilterOperators;
   end_time?: DateFilterOperators;
+  scheduled_at?: DateFilterOperators;
   start_time?: DateFilterOperators;
 };
 
@@ -39,7 +40,7 @@ export const scheduledTasksQueryOptions = () => {
     queryKey: taskKeys.list({
       filter: {
         status: { eq: "scheduled" },
-        created_at: {
+        scheduled_at: {
           is_on_or_before: formatISO(endOfDay(new Date())),
         },
       },
