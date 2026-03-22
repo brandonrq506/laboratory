@@ -1,4 +1,4 @@
-/* eslint-disable max-lines-per-function */
+/* eslint-disable max-lines, max-lines-per-function */
 import { HttpResponse, http } from "msw";
 import { REFRESH_ENDPOINT, SESSION_ENDPOINT, apiV1 } from "@/libs/axios";
 import {
@@ -132,7 +132,7 @@ describe("auth-interceptors", () => {
     expect(res2.data).toBeDefined();
   });
 
-  it("calls logoutHandler on refresh failure", async () => {
+  it("calls logoutHandler on 401 refresh failure", async () => {
     const logoutSpy = vi.fn();
     setLogoutHandler(logoutSpy);
 
@@ -147,6 +147,23 @@ describe("auth-interceptors", () => {
 
     await expect(apiV1.get("/protected")).rejects.toThrow();
     expect(logoutSpy).toHaveBeenCalledOnce();
+  });
+
+  it("does NOT call logoutHandler on non-401 refresh failure", async () => {
+    const logoutSpy = vi.fn();
+    setLogoutHandler(logoutSpy);
+
+    server.use(
+      http.get(`${BASE}/protected`, () => {
+        return HttpResponse.json(null, { status: 401 });
+      }),
+      http.post(`${BASE}${REFRESH_ENDPOINT}`, () => {
+        return HttpResponse.json(null, { status: 500 });
+      }),
+    );
+
+    await expect(apiV1.get("/protected")).rejects.toThrow();
+    expect(logoutSpy).not.toHaveBeenCalled();
   });
 
   it("calls logoutHandler when retried request still returns 401", async () => {

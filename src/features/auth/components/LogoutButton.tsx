@@ -10,7 +10,11 @@ export const LogoutButton = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await mutateAsync();
+    try {
+      await mutateAsync();
+    } catch {
+      // Local logout still runs on mutation settle.
+    }
     await router.invalidate();
     await navigate({ to: "/login" });
   };
