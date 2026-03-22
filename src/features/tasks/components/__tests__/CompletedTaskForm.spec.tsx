@@ -101,7 +101,7 @@ describe("CompletedTaskForm", () => {
       />,
     );
 
-    const notesTextArea = screen.getByLabelText("Notes:");
+    const notesTextArea = screen.getByLabelText("Notes");
     expect(notesTextArea).toHaveAttribute("rows", "4");
   });
 });

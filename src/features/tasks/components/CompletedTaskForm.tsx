@@ -35,7 +35,7 @@ export const CompletedTaskForm = ({ initialValues, task, onSubmit }: Props) => {
       </div>
 
       <TextArea
-        label="Notes:"
+        label="Notes"
         autoComplete="off"
         rows={4}
         registration={register("note", {
