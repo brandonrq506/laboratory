@@ -10,6 +10,7 @@ import { getToday } from "@/utils";
 type DateField = Omit<InputProps, "onChange" | "value" | "max" | "type">;
 
 type Props = DateField & {
+  blockFutureDates?: boolean;
   className?: string;
   description?: string;
   hideLabel?: boolean;
@@ -20,6 +21,7 @@ type Props = DateField & {
 };
 
 export const DateFilter = ({
+  blockFutureDates = false,
   className,
   description,
   hideLabel = false,
@@ -32,14 +34,17 @@ export const DateFilter = ({
 
   const shiftDate = (delta: number) => {
     const newDateObj = addDays(parseISO(value), delta);
-    if (isAfter(newDateObj, new Date())) return;
+    if (blockFutureDates && isAfter(newDateObj, new Date())) return;
 
     navigate({ to: ".", search: { date: format(newDateObj, "yyyy-MM-dd") } });
   };
 
   return (
     <div className="flex items-center space-x-2">
-      <IconButton onClick={() => shiftDate(-1)} variant="blackOutline">
+      <IconButton
+        aria-label="Previous date"
+        onClick={() => shiftDate(-1)}
+        variant="blackOutline">
         <ChevronLeftIcon className="size-5" />
       </IconButton>
       <DateInput
@@ -48,7 +53,7 @@ export const DateFilter = ({
         hideLabel={hideLabel}
         inputClassName={inputClassName}
         label={label}
-        max={getToday()}
+        max={blockFutureDates ? getToday() : undefined}
         onChange={(e) =>
           navigate({ to: ".", search: { date: e.target.value } })
         }
@@ -56,8 +61,9 @@ export const DateFilter = ({
         value={value}
       />
       <IconButton
+        aria-label="Next date"
         onClick={() => shiftDate(1)}
-        disabled={isToday(parseISO(value))}
+        disabled={blockFutureDates && isToday(parseISO(value))}
         variant="blackOutline"
         className="disabled:text-gray-600">
         <ChevronRightIcon className="size-5" />
