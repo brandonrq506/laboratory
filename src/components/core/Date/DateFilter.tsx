@@ -1,16 +1,14 @@
 import { useNavigate } from "@tanstack/react-router";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import { addDays, format, isAfter, isToday, parseISO } from "date-fns";
+import { addDays, format, parseISO } from "date-fns";
 import { DateInput } from "./DateInput";
 import { IconButton } from "../Button/IconButton";
 import { InputProps } from "@headlessui/react";
-import { getToday } from "@/utils";
 
 type DateField = Omit<InputProps, "onChange" | "value" | "max" | "type">;
 
 type Props = DateField & {
-  blockFutureDates?: boolean;
   className?: string;
   description?: string;
   hideLabel?: boolean;
@@ -21,7 +19,6 @@ type Props = DateField & {
 };
 
 export const DateFilter = ({
-  blockFutureDates = false,
   className,
   description,
   hideLabel = false,
@@ -34,7 +31,6 @@ export const DateFilter = ({
 
   const shiftDate = (delta: number) => {
     const newDateObj = addDays(parseISO(value), delta);
-    if (blockFutureDates && isAfter(newDateObj, new Date())) return;
 
     navigate({ to: ".", search: { date: format(newDateObj, "yyyy-MM-dd") } });
   };
@@ -53,17 +49,17 @@ export const DateFilter = ({
         hideLabel={hideLabel}
         inputClassName={inputClassName}
         label={label}
-        max={blockFutureDates ? getToday() : undefined}
-        onChange={(e) =>
-          navigate({ to: ".", search: { date: e.target.value } })
-        }
+        onChange={(e) => {
+          const inputValue = e.target.value;
+
+          navigate({ to: ".", search: { date: inputValue } });
+        }}
         showAsterisk={showAsterisk}
         value={value}
       />
       <IconButton
         aria-label="Next date"
         onClick={() => shiftDate(1)}
-        disabled={blockFutureDates && isToday(parseISO(value))}
         variant="blackOutline"
         className="disabled:text-gray-600">
         <ChevronRightIcon className="size-5" />
