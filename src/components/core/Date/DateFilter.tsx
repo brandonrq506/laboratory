@@ -60,8 +60,7 @@ export const DateFilter = ({
       <IconButton
         aria-label="Next date"
         onClick={() => shiftDate(1)}
-        variant="blackOutline"
-        className="disabled:text-gray-600">
+        variant="blackOutline">
         <ChevronRightIcon className="size-5" />
       </IconButton>
     </div>
