@@ -50,6 +50,13 @@ export const scheduledTasksQueryOptions = () => {
   });
 };
 
+export const scheduledTasksListQueryKey = () =>
+  taskKeys.list({
+    filter: {
+      status: { eq: "scheduled" },
+    },
+  });
+
 export const inProgressTasksQueryOptions = () => {
   return queryOptions({
     queryKey: taskKeys.list({ filter: { status: { eq: "in_progress" } } }),
@@ -87,5 +94,18 @@ export const historyTasksQueryOptions = (date: string) => {
       sort: { sort_by: "start_time", sort_order: "asc" },
     }),
     queryFn: getTasks<CompletedTaskAPI[]>,
+  });
+};
+
+export const futureTasksQueryOptions = (date: string) => {
+  return queryOptions({
+    queryKey: taskKeys.list({
+      filter: {
+        status: { eq: "scheduled" },
+        scheduled_at: { is_equal_to: date },
+      },
+      sort: { sort_by: "position", sort_order: "asc" },
+    }),
+    queryFn: getTasks<ScheduledTaskAPI[]>,
   });
 };

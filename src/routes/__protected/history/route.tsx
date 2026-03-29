@@ -1,3 +1,5 @@
+import { useDisclosure } from "@/hooks";
+
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { AdminProtectedContent } from "@/features/user/components";
 import { CreateTaskForm } from "@/features/tasks/components/CreateTaskForm";
@@ -7,8 +9,9 @@ import { HistoryTaskList } from "@/pages/Tasks";
 import { Modal } from "@/components/core";
 import { PageHeaderWithActions } from "@/components/layout";
 import { PlusIcon } from "@heroicons/react/24/solid";
+
 import { historyTasksQueryOptions } from "@/features/tasks/api/queries";
-import { useDisclosure } from "@/hooks";
+import { redirectHistoryFutureDate } from "@/utils/taskDateRouting";
 import { validateDateSearch } from "@/utils/search";
 
 type HistorySearch = {
@@ -20,6 +23,7 @@ export const Route = createFileRoute("/__protected/history")({
     return validateDateSearch(search.date as string | undefined);
   },
   loaderDeps: ({ search: { date } }) => ({ date }),
+  beforeLoad: ({ search: { date } }) => redirectHistoryFutureDate(date),
   loader: ({ context: { queryClient }, deps: { date } }) =>
     queryClient.ensureQueryData(historyTasksQueryOptions(date)),
   component: RouteComponent,
