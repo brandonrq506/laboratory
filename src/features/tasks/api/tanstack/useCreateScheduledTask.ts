@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { addEnd } from "@/utils/array";
+import { addEnd, addStart } from "@/utils/array";
 import { createScheduledTask } from "../axios/createScheduledTask";
 import { scheduledTasksQueryOptions } from "../queries";
 
@@ -10,9 +10,11 @@ export const useCreateScheduledTask = () => {
   return useMutation({
     mutationFn: createScheduledTask,
 
-    onSuccess: (newTask) => {
+    onSuccess: (newTask, { insertMode }) => {
       queryClient.setQueryData(scheduledTasksQueryOptions().queryKey, (old) =>
-        addEnd(old, newTask),
+        insertMode === "prepend"
+          ? addStart(old, newTask)
+          : addEnd(old, newTask),
       );
       queryClient.invalidateQueries(scheduledTasksQueryOptions());
     },

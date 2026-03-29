@@ -4,14 +4,15 @@ import {
   DeleteAllScheduledTasks,
   SortableTaskList,
 } from "@/features/tasks/components";
+import { Loading } from "@/components/core";
+import { ScheduledTaskListActions } from "./ScheduledTaskListActions";
+import { SectionHeaderWithAction } from "@/components/layout";
+import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
+
 import {
   inProgressTasksQueryOptions,
   scheduledTasksQueryOptions,
 } from "@/features/tasks/api/queries";
-import { AddScheduledTaskMenu } from "./AddScheduledTaskMenu";
-import { Loading } from "@/components/core";
-import { SectionHeaderWithAction } from "@/components/layout";
-import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
 import { calculateExpectedStartTimes } from "@/features/tasks/utils/calculateExpectedStartTimes";
 
 const MIN_WORTH_TRIGGERING_THRESHOLD = 3;
@@ -28,7 +29,7 @@ export const ScheduledTaskList = () => {
         <SectionHeaderWithAction
           title="Scheduled Tasks"
           className="pr-2.5"
-          action={<AddScheduledTaskMenu />}
+          action={<ScheduledTaskListActions />}
         />
         <Loading className="mx-auto my-10" sizeStyles="size-10" />
       </div>
@@ -48,7 +49,7 @@ export const ScheduledTaskList = () => {
       <SectionHeaderWithAction
         title="Scheduled Tasks"
         className="pr-2.5"
-        action={<AddScheduledTaskMenu />}
+        action={<ScheduledTaskListActions />}
       />
       <SortableTaskList tasks={tasksWithExpectedStartTime} />
       {displayDeleteAll && (

@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from "@/test/test-utils";
+import userEvent from "@testing-library/user-event";
 
 import { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 import { ScheduledTaskList } from "../ScheduledTaskList";
@@ -51,5 +52,28 @@ describe("ScheduledTaskList", () => {
     expect(
       screen.getByText("There was an error loading your tasks"),
     ).toBeInTheDocument();
+  });
+
+  it("toggles insert mode button", async () => {
+    setupServer([]);
+    const user = userEvent.setup();
+
+    render(<ScheduledTaskList />);
+
+    const appendButton = screen.getByRole("button", {
+      name: "Append new tasks",
+    });
+
+    expect(appendButton).toHaveAttribute("aria-pressed", "false");
+    expect(appendButton).toHaveAttribute("title", "Append new tasks");
+
+    await user.click(appendButton);
+
+    const prependButton = screen.getByRole("button", {
+      name: "Prepend new tasks",
+    });
+
+    expect(prependButton).toHaveAttribute("aria-pressed", "true");
+    expect(prependButton).toHaveAttribute("title", "Prepend new tasks");
   });
 });
