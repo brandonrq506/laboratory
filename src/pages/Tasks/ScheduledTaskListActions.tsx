@@ -16,7 +16,6 @@ export const ScheduledTaskListActions = () => {
       {insertMode === "append" ? (
         <IconButton
           aria-label={APPEND_BUTTON_TEXT}
-          aria-pressed={false}
           className="rounded-full"
           onClick={() => setInsertMode("prepend")}
           shape="circle"
@@ -27,7 +26,6 @@ export const ScheduledTaskListActions = () => {
       ) : (
         <IconButton
           aria-label={PREPEND_BUTTON_TEXT}
-          aria-pressed={true}
           className="rounded-full"
           onClick={() => setInsertMode("append")}
           shape="circle"
