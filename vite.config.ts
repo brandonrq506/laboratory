@@ -1,16 +1,14 @@
 /// <reference types="vitest" />
 
-import {
-  ViteUserConfig,
-  coverageConfigDefaults,
-  defineConfig,
-} from "vitest/config";
+import { coverageConfigDefaults, defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
-import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
+  resolve: {
+    tsconfigPaths: true,
+  },
   plugins: [
     tanstackRouter({
       autoCodeSplitting: true,
@@ -18,9 +16,8 @@ export default defineConfig({
       semicolons: true,
     }),
     react(),
-    tsconfigPaths(),
     tailwindcss(),
-  ] as ViteUserConfig["plugins"],
+  ],
   test: {
     globals: true,
     environment: "jsdom",
