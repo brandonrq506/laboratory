@@ -1,10 +1,14 @@
+/* eslint-disable max-lines-per-function */
+/* eslint-disable max-lines */
 import { HttpResponse, http } from "msw";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
+import { activities } from "@/test/store/activities";
 import userEvent from "@testing-library/user-event";
 
+import { ROUTINES_ENDPOINT, TASKS_ENDPOINT } from "@/libs/axios";
 import { AddScheduledTaskMenu } from "../AddScheduledTaskMenu";
-import { ROUTINES_ENDPOINT } from "@/libs/axios";
+import type { InsertMode } from "@/features/tasks/types/insert-mode";
 import { server } from "@/test/server";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -19,12 +23,12 @@ describe("AddScheduledTaskMenu", () => {
       },
     });
 
-  const renderAddScheduledTaskMenu = () => {
+  const renderAddScheduledTaskMenu = (insertMode: InsertMode = "append") => {
     const queryClient = createTestQueryClient();
 
     const utils = render(
       <QueryClientProvider client={queryClient}>
-        <AddScheduledTaskMenu />
+        <AddScheduledTaskMenu insertMode={insertMode} />
       </QueryClientProvider>,
     );
 
@@ -167,5 +171,62 @@ describe("AddScheduledTaskMenu", () => {
     });
 
     expect(screen.queryByText("Swimming")).not.toBeInTheDocument();
+  });
+
+  it("sends insert_mode when creating scheduled task", async () => {
+    let requestBody: Record<string, unknown> | null = null;
+    const activity = activities[0];
+    const { user } = renderAddScheduledTaskMenu("prepend");
+
+    server.use(
+      http.post(`${API_URL}/v1${TASKS_ENDPOINT}`, async ({ request }) => {
+        requestBody = (await request.json()) as Record<string, unknown>;
+        return HttpResponse.json(null, { status: 201 });
+      }),
+    );
+
+    await user.click(screen.getByRole("button", { name: "Add Tasks" }));
+
+    await waitFor(() => {
+      expect(screen.getByText(activity.display_name)).toBeInTheDocument();
+    });
+
+    await user.click(
+      screen.getByRole("menuitem", { name: new RegExp(activity.display_name) }),
+    );
+
+    await waitFor(() => {
+      expect(requestBody).toEqual({
+        activity_id: activity.id,
+        insert_mode: "prepend",
+      });
+    });
+  });
+
+  it("sends insert_mode when applying routine", async () => {
+    let requestBody: Record<string, unknown> | null = null;
+    const { user } = renderAddScheduledTaskMenu("prepend");
+
+    server.use(
+      http.post(
+        `${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`,
+        async ({ request }) => {
+          requestBody = (await request.json()) as Record<string, unknown>;
+          return HttpResponse.json(null, { status: 201 });
+        },
+      ),
+    );
+
+    await user.click(screen.getByRole("button", { name: "Add Tasks" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Morning")).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByRole("menuitem", { name: "Morning Routine" }));
+
+    await waitFor(() => {
+      expect(requestBody).toEqual({ insert_mode: "prepend" });
+    });
   });
 });

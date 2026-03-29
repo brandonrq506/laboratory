@@ -20,7 +20,7 @@ export const PlayRoutineButton = ({ routineId }: Props) => {
       shape="circle"
       aria-label={BTN_TEXT}
       variant="primaryOutline"
-      onClick={() => mutate(routineId)}>
+      onClick={() => mutate({ routineId, insertMode: "append" })}>
       <PlayIcon className="size-5" aria-hidden />
     </IconButton>
   );

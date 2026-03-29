@@ -10,11 +10,17 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import { activityListQueryOptions } from "@/features/activities/api/queries";
 import { routineVisibleListQueryOptions } from "@/features/routines/api/queries";
 
+import type { InsertMode } from "@/features/tasks/types/insert-mode";
+
 import { ADD } from "@/constants/actions";
 import { TASKS } from "@/constants/entities";
 import clsx from "clsx";
 
-export const AddScheduledTaskMenu = () => {
+type Props = {
+  insertMode: InsertMode;
+};
+
+export const AddScheduledTaskMenu = ({ insertMode }: Props) => {
   const { data: activities } = useQuery(activityListQueryOptions());
   const { data: routines } = useQuery(routineVisibleListQueryOptions());
 
@@ -25,9 +31,10 @@ export const AddScheduledTaskMenu = () => {
 
   const handleApplyRoutine = (routineId: number) => {
     setPendingRoutineId(routineId);
-    applyRoutine(routineId, {
-      onSettled: () => setPendingRoutineId(null),
-    });
+    applyRoutine(
+      { routineId, insertMode },
+      { onSettled: () => setPendingRoutineId(null) },
+    );
   };
 
   const nonEmptyRoutines = routines?.filter((r) => r.routine_items.length > 0);
@@ -77,7 +84,7 @@ export const AddScheduledTaskMenu = () => {
               className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
               onClick={(e) => {
                 e.preventDefault();
-                mutateTask(activity);
+                mutateTask({ activity, insertMode });
               }}>
               {activity.display_name}{" "}
               <CategoryBadge category={activity.category} />
