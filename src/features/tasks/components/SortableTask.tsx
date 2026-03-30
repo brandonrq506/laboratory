@@ -21,6 +21,9 @@ type Props = {
   task: ScheduledTaskWithExpectedStartTime;
 };
 
+// TODO: Should only handle Sortable Logic, then we can have TimerScheduledTaskContent, FutureScheduledTaskContent,etc.
+
+// TODO: Once above done, we can refactor SortableFutureTask.
 export const SortableTask = ({ task }: Props) => {
   const {
     attributes,
