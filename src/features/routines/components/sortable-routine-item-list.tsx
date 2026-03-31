@@ -64,14 +64,10 @@ export const SortableRoutineItemList = ({ routineId, items }: Props) => {
     const newItems = arrayMove(sortedItems, oldIndex, newIndex);
     setSortedItems(newItems);
 
-    const destination = over.data as {
-      current: { sortable: { index: number } };
-    };
-
     moveActivity({
       routine_id: routineId,
       routine_item_id: active.id as number,
-      new_position: destination.current.sortable.index,
+      new_position: newIndex,
       routine_items: newItems,
     });
   };
