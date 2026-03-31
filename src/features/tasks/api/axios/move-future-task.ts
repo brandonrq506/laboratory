@@ -1,17 +1,21 @@
 import { TASKS_ENDPOINT, apiV1 } from "@/libs/axios";
-import type { ScheduledTaskWithExpectedStartTime } from "../../types/scheduledTaskWithExpectedStartTime";
+import type { ScheduledTaskAPI } from "../../types/scheduledTask";
 
 type Props = {
   taskId: number;
   prevTaskId: number | null;
   nextTaskId: number | null;
   // This is not used, it is just for optimistic UI update.
-  tasks: ScheduledTaskWithExpectedStartTime[];
+  tasks: ScheduledTaskAPI[];
 };
 
 const URL = `${TASKS_ENDPOINT}/move_drag`;
 
-export const moveTask = async ({ taskId, prevTaskId, nextTaskId }: Props) => {
+export const moveFutureTask = async ({
+  taskId,
+  prevTaskId,
+  nextTaskId,
+}: Props) => {
   const response = await apiV1.patch(URL, {
     task_id: taskId,
     previous_task_id: prevTaskId,
