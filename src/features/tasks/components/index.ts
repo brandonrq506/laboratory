@@ -7,4 +7,5 @@ export { ExampleCompletedTask } from "./ExampleCompletedTask";
 export { PerformanceSummaryCard } from "./PerformanceSummaryCard";
 export { SortableTask } from "./SortableTask";
 export { SortableTaskList } from "./SortableTaskList";
+export { SortableFutureTask } from "./sortable-future-task";
 export { TaskList } from "./TaskList";

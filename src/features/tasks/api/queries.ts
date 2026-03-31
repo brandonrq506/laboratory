@@ -89,3 +89,16 @@ export const historyTasksQueryOptions = (date: string) => {
     queryFn: getTasks<CompletedTaskAPI[]>,
   });
 };
+
+export const futureTasksQueryOptions = (date: string) => {
+  return queryOptions({
+    queryKey: taskKeys.list({
+      filter: {
+        status: { eq: "scheduled" },
+        scheduled_at: { is_equal_to: date },
+      },
+      sort: { sort_by: "position", sort_order: "asc" },
+    }),
+    queryFn: getTasks<ScheduledTaskAPI[]>,
+  });
+};

@@ -6,25 +6,21 @@ import {
 } from "@heroicons/react/24/outline";
 import { CSS } from "@dnd-kit/utilities";
 import { Card } from "@/components/layout";
+import { DeleteTask } from "./DeleteTask";
 import { Dot } from "@/components/core";
 import { DragHandle } from "./DragHandle";
-import { Link } from "@tanstack/react-router";
-import { QuickDeleteTask } from "./QuickDeleteTask";
-import { ScheduledTaskActionBtn } from "./ScheduledTaskActionBtn";
-import { ScheduledTaskWithExpectedStartTime } from "../types/scheduledTaskWithExpectedStartTime";
 
-import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import clsx from "clsx";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
+import { secondsToTime } from "@/utils";
+
+import type { ScheduledTaskAPI } from "../types/scheduledTask";
 
 type Props = {
-  task: ScheduledTaskWithExpectedStartTime;
+  task: ScheduledTaskAPI;
 };
 
-// TODO: Should only handle Sortable Logic, then we can have TimerScheduledTaskContent, FutureScheduledTaskContent,etc.
-
-// TODO: Once above done, we can refactor SortableFutureTask.
-export const SortableTask = ({ task }: Props) => {
+export const SortableFutureTask = ({ task }: Props) => {
   const {
     attributes,
     listeners,
@@ -56,11 +52,7 @@ export const SortableTask = ({ task }: Props) => {
             setActivatorNodeRef={setActivatorNodeRef}
           />
 
-          <Link
-            className="grow"
-            from="/timer"
-            to="$taskId/edit"
-            params={{ taskId: task.id }}>
+          <div className="grow">
             <div className="flex items-center gap-1.5">
               <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
               <p className="text-sm font-semibold">
@@ -69,15 +61,6 @@ export const SortableTask = ({ task }: Props) => {
             </div>
 
             <div className="flex gap-2.5 text-gray-600">
-              {task.expected_start_time && (
-                <div className="flex gap-1 text-xs">
-                  <p className="tabular-nums">
-                    {formatDatetimeTo12hTime(
-                      task.expected_start_time.toISOString(),
-                    )}
-                  </p>
-                </div>
-              )}
               <div className="flex gap-1 text-xs">
                 <ClockIcon className="size-4" />
                 <p className="tabular-nums">
@@ -86,12 +69,22 @@ export const SortableTask = ({ task }: Props) => {
               </div>
               {task.note && <ChatBubbleLeftEllipsisIcon className="size-4" />}
             </div>
-          </Link>
+          </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <QuickDeleteTask taskId={task.id} />
-          <ScheduledTaskActionBtn task={task} />
+          <DeleteTask taskId={task.id} />
+
+          {/* 
+          
+          TODO: fix This is what is calling the inprogress query on our History. Also:
+          
+          
+          Rendering ScheduledTaskActionBtn on the /scheduled (future-date) list exposes a broken flow: when there is no in-progress task, useStartTask runs but only invalidates/updates scheduledTasksQueryOptions() (today/past scheduled list), not futureTasksQueryOptions(date). For future dates this leaves the started task visible in-place and actionable again until a full reload, so the new page can show stale/incorrect task state after a successful start.
+          
+          */}
+
+          {/* <ScheduledTaskActionBtn task={task} /> */}
         </div>
       </Card>
     </div>
