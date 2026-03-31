@@ -32,6 +32,7 @@ export const SortableTaskList = <T extends BaseEntity>({
 }: SortableTaskListProps<T>) => {
   const [sortedTasks, setSortedTasks] = useState<T[]>(tasks);
 
+  // Ensure tasks don't jump back to original position on drag end before the mutation completes.
   useEffect(() => {
     setSortedTasks(tasks);
   }, [tasks]);
@@ -60,11 +61,6 @@ export const SortableTaskList = <T extends BaseEntity>({
     const oldIndex = sortedTasks.findIndex((task) => task.id === active.id);
     const newIndex = sortedTasks.findIndex((task) => task.id === over.id);
 
-    /*
-      useEffect -> Ensure tasks don't jump back to original position on drag end before the mutation completes
-      useMoveTask -> Ensure expected times are updated optimistically
-      Both these are necessary for a smooth user experience.
-    */
     const newTasks = arrayMove(sortedTasks, oldIndex, newIndex);
 
     const prevTaskId = newTasks[newIndex - 1]?.id ?? null;
