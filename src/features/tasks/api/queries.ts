@@ -50,16 +50,6 @@ export const scheduledTasksQueryOptions = () => {
   });
 };
 
-export const scheduledTasksListQueryKey = () => {
-  return queryOptions({
-    queryKey: taskKeys.list({
-      filter: {
-        status: { eq: "scheduled" },
-      },
-    }),
-  });
-};
-
 export const inProgressTasksQueryOptions = () => {
   return queryOptions({
     queryKey: taskKeys.list({ filter: { status: { eq: "in_progress" } } }),

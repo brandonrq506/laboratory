@@ -17,7 +17,7 @@ const routeApi = getRouteApi("/__protected/scheduled");
 export const FutureScheduledTaskList = () => {
   const { date } = routeApi.useSearch();
   const { data } = useSuspenseQuery(futureTasksQueryOptions(date));
-  const { mutate: moveTask } = useFutureMoveTask();
+  const { mutate: moveTask } = useFutureMoveTask(date);
 
   const handleDragEnd = ({
     taskId,

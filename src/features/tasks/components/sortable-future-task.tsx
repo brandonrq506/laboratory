@@ -6,9 +6,9 @@ import {
 } from "@heroicons/react/24/outline";
 import { CSS } from "@dnd-kit/utilities";
 import { Card } from "@/components/layout";
+import { DeleteTask } from "./DeleteTask";
 import { Dot } from "@/components/core";
 import { DragHandle } from "./DragHandle";
-import { QuickDeleteTask } from "./QuickDeleteTask";
 import { ScheduledTaskActionBtn } from "./ScheduledTaskActionBtn";
 
 import clsx from "clsx";
@@ -74,7 +74,7 @@ export const SortableFutureTask = ({ task }: Props) => {
         </div>
 
         <div className="flex items-center gap-3">
-          <QuickDeleteTask taskId={task.id} />
+          <DeleteTask taskId={task.id} />
           <ScheduledTaskActionBtn task={task} />
         </div>
       </Card>
