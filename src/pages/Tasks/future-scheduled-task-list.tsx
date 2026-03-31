@@ -14,7 +14,7 @@ import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 
 const routeApi = getRouteApi("/__protected/scheduled");
 
-export const ScheduledTaskList = () => {
+export const FutureScheduledTaskList = () => {
   const { date } = routeApi.useSearch();
   const { data } = useSuspenseQuery(futureTasksQueryOptions(date));
   const { mutate: moveTask } = useFutureMoveTask();

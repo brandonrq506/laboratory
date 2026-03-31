@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { DateFilter } from "@/components/core/Date";
+import { FutureScheduledTaskList } from "@/pages/Tasks/future-scheduled-task-list";
 import { HeadingLarge } from "@/components/layout";
 import { PlusIcon } from "@heroicons/react/24/solid";
-import { ScheduledTaskList } from "@/pages/Tasks/scheduled-task-list";
 
 import { futureTasksQueryOptions } from "@/features/tasks/api/queries";
 import { redirectScheduledPastDate } from "@/utils/taskDateRouting";
@@ -43,7 +43,7 @@ function RouteComponent() {
           <PlusIcon className="size-5 text-blue-600" aria-hidden />
         </button>
       </div>
-      <ScheduledTaskList />
+      <FutureScheduledTaskList />
     </div>
   );
 }
