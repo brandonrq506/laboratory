@@ -9,7 +9,6 @@ import { Card } from "@/components/layout";
 import { DeleteTask } from "./DeleteTask";
 import { Dot } from "@/components/core";
 import { DragHandle } from "./DragHandle";
-import { ScheduledTaskActionBtn } from "./ScheduledTaskActionBtn";
 
 import clsx from "clsx";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
@@ -75,7 +74,17 @@ export const SortableFutureTask = ({ task }: Props) => {
 
         <div className="flex items-center gap-3">
           <DeleteTask taskId={task.id} />
-          <ScheduledTaskActionBtn task={task} />
+
+          {/* 
+          
+          TODO: fix This is what is calling the inprogress query on our History. Also:
+          
+          
+          Rendering ScheduledTaskActionBtn on the /scheduled (future-date) list exposes a broken flow: when there is no in-progress task, useStartTask runs but only invalidates/updates scheduledTasksQueryOptions() (today/past scheduled list), not futureTasksQueryOptions(date). For future dates this leaves the started task visible in-place and actionable again until a full reload, so the new page can show stale/incorrect task state after a successful start.
+          
+          */}
+
+          {/* <ScheduledTaskActionBtn task={task} /> */}
         </div>
       </Card>
     </div>
