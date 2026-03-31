@@ -1,7 +1,9 @@
+import { useMoveTask } from "@/features/tasks/api/tanstack/useMoveTask";
 import { useQuery } from "@tanstack/react-query";
 
 import {
   DeleteAllScheduledTasks,
+  SortableTask,
   SortableTaskList,
 } from "@/features/tasks/components";
 import { Loading } from "@/components/core";
@@ -15,6 +17,9 @@ import {
 } from "@/features/tasks/api/queries";
 import { calculateExpectedStartTimes } from "@/features/tasks/utils/calculateExpectedStartTimes";
 
+import type { OnDragEndArgs } from "@/features/tasks/types/sortableTaskList";
+import type { ScheduledTaskWithExpectedStartTime } from "@/features/tasks/types/scheduledTaskWithExpectedStartTime";
+
 const MIN_WORTH_TRIGGERING_THRESHOLD = 3;
 
 export const ScheduledTaskList = () => {
@@ -22,6 +27,7 @@ export const ScheduledTaskList = () => {
   const { data, isPending, isError, refetch } = useQuery(
     scheduledTasksQueryOptions(),
   );
+  const { mutate: moveTask } = useMoveTask();
 
   if (isPending)
     return (
@@ -44,6 +50,20 @@ export const ScheduledTaskList = () => {
     inProgressTask?.[0],
   );
 
+  const handleDragEnd = ({
+    taskId,
+    prevTaskId,
+    nextTaskId,
+    tasks,
+  }: OnDragEndArgs<ScheduledTaskWithExpectedStartTime>) => {
+    moveTask({
+      taskId,
+      prevTaskId,
+      nextTaskId,
+      tasks,
+    });
+  };
+
   return (
     <div>
       <SectionHeaderWithAction
@@ -51,7 +71,11 @@ export const ScheduledTaskList = () => {
         className="pr-2.5"
         action={<ScheduledTaskListActions />}
       />
-      <SortableTaskList tasks={tasksWithExpectedStartTime} />
+      <SortableTaskList
+        onDragEnd={handleDragEnd}
+        tasks={tasksWithExpectedStartTime}
+        renderItem={(task) => <SortableTask task={task} />}
+      />
       {displayDeleteAll && (
         <div className="mt-2 text-center">
           <DeleteAllScheduledTasks />
