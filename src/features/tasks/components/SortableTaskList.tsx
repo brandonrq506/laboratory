@@ -8,6 +8,8 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
+import { Fragment, useEffect, useState } from "react";
+
 import {
   SortableContext,
   arrayMove,
@@ -18,21 +20,17 @@ import {
   restrictToParentElement,
   restrictToVerticalAxis,
 } from "@dnd-kit/modifiers";
-import { useEffect, useState } from "react";
-
-import { ScheduledTaskWithExpectedStartTime } from "../types/scheduledTaskWithExpectedStartTime";
-import { SortableTask } from "./";
 import { TaskEmptyList } from "./TaskEmptyList";
-import { useMoveTask } from "../api/tanstack/useMoveTask";
 
-type Props = {
-  tasks: ScheduledTaskWithExpectedStartTime[];
-};
+import type { BaseEntity } from "@/types/core";
+import type { SortableTaskListProps } from "../types/sortableTaskList";
 
-export const SortableTaskList = ({ tasks }: Props) => {
-  const [sortedTasks, setSortedTasks] =
-    useState<ScheduledTaskWithExpectedStartTime[]>(tasks);
-  const { mutate: moveTask } = useMoveTask();
+export const SortableTaskList = <T extends BaseEntity>({
+  tasks,
+  renderItem,
+  onDragEnd,
+}: SortableTaskListProps<T>) => {
+  const [sortedTasks, setSortedTasks] = useState<T[]>(tasks);
 
   useEffect(() => {
     setSortedTasks(tasks);
@@ -63,20 +61,21 @@ export const SortableTaskList = ({ tasks }: Props) => {
     const newIndex = sortedTasks.findIndex((task) => task.id === over.id);
 
     /*
-      This useEffect and state is to ensure UI optimistic updates.
-      The optimistic update defined in useMoveTask is to optimistically update expected times.
+      useEffect -> Ensure tasks don't jump back to original position on drag end before the mutation completes
+      useMoveTask -> Ensure expected times are updated optimistically
       Both these are necessary for a smooth user experience.
     */
     const newTasks = arrayMove(sortedTasks, oldIndex, newIndex);
+
+    const prevTaskId = newTasks[newIndex - 1]?.id ?? null;
+    const nextTaskId = newTasks[newIndex + 1]?.id ?? null;
+
     setSortedTasks(newTasks);
 
-    const destination = over.data as {
-      current: { sortable: { index: number } };
-    };
-
-    moveTask({
+    onDragEnd({
       taskId: active.id as number,
-      newPosition: destination.current.sortable.index,
+      prevTaskId,
+      nextTaskId,
       tasks: newTasks,
     });
   };
@@ -94,7 +93,7 @@ export const SortableTaskList = ({ tasks }: Props) => {
           items={sortedTasks.map((task) => task.id)}
           strategy={verticalListSortingStrategy}>
           {sortedTasks.map((task) => (
-            <SortableTask key={task.id} task={task} />
+            <Fragment key={task.id}>{renderItem(task)}</Fragment>
           ))}
         </SortableContext>
       </DndContext>
