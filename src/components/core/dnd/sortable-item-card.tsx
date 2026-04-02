@@ -38,8 +38,8 @@ export const SortableItemCard = ({
       <Card
         className={clsx(
           "flex justify-between transition-transform duration-100",
-          isDragging && ["z-20 scale-105 border border-indigo-700 shadow-2xl"],
           shadowStyle,
+          isDragging && ["z-20 scale-105 border border-indigo-700 shadow-2xl"],
         )}>
         <div className="flex grow items-center gap-2">
           <DragHandle
