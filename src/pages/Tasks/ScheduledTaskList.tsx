@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 
 import {
   DeleteAllScheduledTasks,
-  SortableTask,
   SortableTaskList,
+  TimerScheduledTaskContent,
 } from "@/features/tasks/components";
-import { Loading } from "@/components/core";
+import { Loading, SortableItemCard } from "@/components/core";
 import { ScheduledTaskListActions } from "./ScheduledTaskListActions";
 import { SectionHeaderWithAction } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
@@ -74,7 +74,11 @@ export const ScheduledTaskList = () => {
       <SortableTaskList
         onDragEnd={handleDragEnd}
         tasks={tasksWithExpectedStartTime}
-        renderItem={(task) => <SortableTask task={task} />}
+        renderItem={(task) => (
+          <SortableItemCard itemId={task.id}>
+            <TimerScheduledTaskContent task={task} />
+          </SortableItemCard>
+        )}
       />
       {displayDeleteAll && (
         <div className="mt-2 text-center">

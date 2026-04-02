@@ -21,15 +21,17 @@ import {
   restrictToParentElement,
   restrictToVerticalAxis,
 } from "@dnd-kit/modifiers";
+import { RoutineItemContent } from "./routine-item-content";
+import { SortableItemCard } from "@/components/core";
 
 import type { RoutineItemWithExpectedStartTime } from "../types/routine-with-expected-time";
-import { SortableRoutineItem } from "./sortable-routine-item";
 
 type Props = {
   routineId: number;
   items: RoutineItemWithExpectedStartTime[];
 };
 
+// TODO: Make this component adopt the sortable API used by tasks. (Then we reuse SortableTaskList)
 export const SortableRoutineItemList = ({ routineId, items }: Props) => {
   const { mutate: moveActivity } = useMoveRoutineItem();
   const [sortedItems, setSortedItems] =
@@ -83,11 +85,12 @@ export const SortableRoutineItemList = ({ routineId, items }: Props) => {
           items={sortedItems.map((a) => a.id)}
           strategy={verticalListSortingStrategy}>
           {sortedItems.map((item) => (
-            <SortableRoutineItem
+            <SortableItemCard
               key={item.id}
-              routineId={routineId}
-              item={item}
-            />
+              itemId={item.id}
+              shadowStyle="shadow-2xs">
+              <RoutineItemContent routineId={routineId} item={item} />
+            </SortableItemCard>
           ))}
         </SortableContext>
       </DndContext>
