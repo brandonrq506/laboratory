@@ -1,3 +1,4 @@
+import { Link, LinkProps } from "@tanstack/react-router";
 import { Card } from "@/components/layout";
 import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/outline";
 import { CompletedTaskAPI } from "../types/completedTask";
@@ -10,15 +11,15 @@ import { getDurationInSeconds } from "../utils/getDurationInSeconds";
 
 import { getPerformanceEmoji } from "../utils/getPerformanceEmoji";
 
-type Props = { task: CompletedTaskAPI };
+type Props = { task: CompletedTaskAPI; linkProps: LinkProps };
 
-export const CompletedTask = ({ task }: Props) => {
+export const CompletedTask = ({ task, linkProps }: Props) => {
   const color = getColorByName(task.activity.category.color);
   const durationSeconds = getDurationInSeconds(task.start_time, task.end_time);
 
   return (
     <Card className="flex justify-between shadow-xs">
-      <div className="flex flex-col justify-between">
+      <Link {...linkProps} className="grow">
         <div className="flex items-center gap-1.5">
           <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
           <p className="text-sm font-semibold">{task.activity.display_name}</p>
@@ -38,7 +39,7 @@ export const CompletedTask = ({ task }: Props) => {
 
           {task.note && <ChatBubbleLeftEllipsisIcon className="size-4" />}
         </div>
-      </div>
+      </Link>
 
       <div className="flex items-center gap-2">
         <span className="text-xs">

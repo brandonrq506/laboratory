@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { CompletedTask, TaskList } from "@/features/tasks/components";
-import { Link, getRouteApi } from "@tanstack/react-router";
+import { getRouteApi } from "@tanstack/react-router";
 import { historyTasksQueryOptions } from "@/features/tasks/api/queries";
 
 const routeApi = getRouteApi("/__protected/history");
@@ -14,13 +14,15 @@ export const HistoryTaskList = () => {
     <TaskList
       tasks={data}
       renderItem={(task) => (
-        <Link
+        <CompletedTask
           key={task.id}
-          to="/history/$taskId"
-          params={{ taskId: task.id }}
-          search={{ date }}>
-          <CompletedTask task={task} />
-        </Link>
+          task={task}
+          linkProps={{
+            to: "/history/$taskId",
+            params: { taskId: task.id },
+            search: { date },
+          }}
+        />
       )}
     />
   );
