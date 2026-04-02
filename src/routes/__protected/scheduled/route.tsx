@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Outlet, createFileRoute } from "@tanstack/react-router";
 
 import { DateFilter } from "@/components/core/Date";
 import { FutureScheduledTaskList } from "@/pages/Tasks/future-scheduled-task-list";
@@ -44,6 +44,7 @@ function RouteComponent() {
         </button>
       </div>
       <FutureScheduledTaskList />
+      <Outlet />
     </div>
   );
 }

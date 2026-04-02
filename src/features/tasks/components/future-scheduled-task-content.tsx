@@ -2,6 +2,7 @@ import {
   ChatBubbleLeftEllipsisIcon,
   ClockIcon,
 } from "@heroicons/react/24/outline";
+import { Link, getRouteApi } from "@tanstack/react-router";
 import { DeleteTask } from "./DeleteTask";
 import { Dot } from "@/components/core";
 import { Fragment } from "react/jsx-runtime";
@@ -11,16 +12,23 @@ import { secondsToTime } from "@/utils";
 
 import type { ScheduledTaskAPI } from "../types/scheduledTask";
 
+const routeApi = getRouteApi("/__protected/scheduled");
+
 type Props = {
   task: ScheduledTaskAPI;
 };
 
 export const FutureScheduledTaskContent = ({ task }: Props) => {
+  const { date } = routeApi.useSearch();
   const color = getColorByName(task.activity.category.color);
 
   return (
     <Fragment>
-      <div className="grow">
+      <Link
+        className="grow"
+        to="/scheduled/$taskId"
+        params={{ taskId: task.id }}
+        search={{ date }}>
         <div className="flex items-center gap-1.5">
           <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
           <p className="text-sm font-semibold">{task.activity.display_name}</p>
@@ -35,17 +43,8 @@ export const FutureScheduledTaskContent = ({ task }: Props) => {
           </div>
           {task.note && <ChatBubbleLeftEllipsisIcon className="size-4" />}
         </div>
-      </div>
+      </Link>
       <DeleteTask taskId={task.id} />
     </Fragment>
   );
 };
-
-/*
-TODO: fix This is what is calling the inprogress query on our History. Also:
-
-
-Rendering ScheduledTaskActionBtn on the /scheduled (future-date) list exposes a broken flow: when there is no in-progress task, useStartTask runs but only invalidates/updates scheduledTasksQueryOptions() (today/past scheduled list), not futureTasksQueryOptions(date). For future dates this leaves the started task visible in-place and actionable again until a full reload, so the new page can show stale/incorrect task state after a successful start.
-
- <ScheduledTaskActionBtn task={task} /> 
-*/
