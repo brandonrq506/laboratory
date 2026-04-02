@@ -35,12 +35,14 @@ export const TodayCompletedTaskList = () => {
         <TaskList
           tasks={data}
           renderItem={(task) => (
-            <Link
+            <CompletedTask
               key={task.id}
-              to="/timer/$taskId/edit"
-              params={{ taskId: task.id }}>
-              <CompletedTask task={task} />
-            </Link>
+              task={task}
+              linkProps={{
+                to: "/timer/$taskId/edit",
+                params: { taskId: task.id },
+              }}
+            />
           )}
         />
       </div>
