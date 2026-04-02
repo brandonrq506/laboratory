@@ -2,7 +2,7 @@ import { useFutureMoveTask } from "@/features/tasks/api/tanstack/use-move-future
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import {
-  SortableFutureTask,
+  FutureScheduledTaskContent,
   SortableTaskList,
 } from "@/features/tasks/components";
 
@@ -11,6 +11,7 @@ import { getRouteApi } from "@tanstack/react-router";
 
 import type { OnDragEndArgs } from "@/features/tasks/types/sortableTaskList";
 import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
+import { SortableItemCard } from "@/components/core";
 
 const routeApi = getRouteApi("/__protected/scheduled");
 
@@ -46,7 +47,9 @@ export const FutureScheduledTaskList = () => {
       onDragEnd={handleDragEnd}
       renderItem={(task) => (
         // Wrapped by a Link
-        <SortableFutureTask task={task} />
+        <SortableItemCard itemId={task.id}>
+          <FutureScheduledTaskContent task={task} />
+        </SortableItemCard>
         // Wrapped by a Link
       )}
     />
