@@ -22,7 +22,7 @@ function RouteComponent() {
   if (data.status === "scheduled")
     return (
       <Modal isOpen={true} onClose={navigateBack}>
-        <EditScheduledTaskForm task={data} />
+        <EditScheduledTaskForm task={data} fallbackNavigation="/timer" />
       </Modal>
     );
 
