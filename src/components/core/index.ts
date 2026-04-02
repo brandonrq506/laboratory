@@ -3,8 +3,6 @@ export { Button } from "./Button/Button";
 export { ConfirmationModal } from "./Modal/ConfirmationModal";
 export { CopyToClipboardButton } from "./Button/CopyToClipboardButton";
 export { Dot } from "./Dot/Dot";
-// TODO: Remove DragHandle from here, once everyone uses SortableItemCard.
-export { DragHandle } from "./dnd/drag-handle";
 export { EmptyList } from "./List/EmptyList";
 export { EmptyState } from "./Table/EmptyState";
 export { FloatingMenu } from "./Menu/FloatingMenu";
