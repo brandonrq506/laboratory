@@ -6,6 +6,7 @@ import { HeadingLarge } from "@/components/layout";
 import { ScheduledTaskListActions } from "@/pages/Tasks/ScheduledTaskListActions";
 
 import { futureTasksQueryOptions } from "@/features/tasks/api/queries";
+import { localDateToUtc } from "@/utils/dateConversion";
 import { redirectScheduledPastDate } from "@/utils/taskDateRouting";
 import { validateDateSearch } from "@/utils/search";
 
@@ -26,6 +27,7 @@ export const Route = createFileRoute("/__protected/scheduled")({
 
 function RouteComponent() {
   const { date } = Route.useSearch();
+  const scheduledAt = localDateToUtc(date);
 
   return (
     <div>
@@ -38,7 +40,7 @@ function RouteComponent() {
           className="w-full"
           value={date}
         />
-        <ScheduledTaskListActions scheduledAt={date} />
+        <ScheduledTaskListActions scheduledAt={scheduledAt} />
       </div>
       <FutureScheduledTaskList />
       <Outlet />
