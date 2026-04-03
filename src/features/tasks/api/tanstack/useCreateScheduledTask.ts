@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { addEnd, addStart } from "@/utils/array";
+import { scheduledTasksQueryOptions, taskKeys } from "../queries";
 import { createScheduledTask } from "../axios/createScheduledTask";
-import { scheduledTasksQueryOptions } from "../queries";
 
 export const useCreateScheduledTask = () => {
   const queryClient = useQueryClient();
@@ -16,7 +16,9 @@ export const useCreateScheduledTask = () => {
           ? addStart(old, newTask)
           : addEnd(old, newTask),
       );
-      queryClient.invalidateQueries(scheduledTasksQueryOptions());
+      queryClient.invalidateQueries({
+        queryKey: taskKeys.list({ filter: { status: { eq: "scheduled" } } }),
+      });
     },
   });
 };

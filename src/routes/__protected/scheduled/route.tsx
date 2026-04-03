@@ -3,7 +3,7 @@ import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { DateFilter } from "@/components/core/Date";
 import { FutureScheduledTaskList } from "@/pages/Tasks/future-scheduled-task-list";
 import { HeadingLarge } from "@/components/layout";
-import { PlusIcon } from "@heroicons/react/24/solid";
+import { ScheduledTaskListActions } from "@/pages/Tasks/ScheduledTaskListActions";
 
 import { futureTasksQueryOptions } from "@/features/tasks/api/queries";
 import { redirectScheduledPastDate } from "@/utils/taskDateRouting";
@@ -38,10 +38,7 @@ function RouteComponent() {
           className="w-full"
           value={date}
         />
-        <button type="button" disabled>
-          <span className="sr-only">Add Scheduled Task</span>
-          <PlusIcon className="size-5 text-blue-600" aria-hidden />
-        </button>
+        <ScheduledTaskListActions scheduledAt={date} />
       </div>
       <FutureScheduledTaskList />
       <Outlet />

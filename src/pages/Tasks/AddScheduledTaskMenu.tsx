@@ -18,9 +18,10 @@ import clsx from "clsx";
 
 type Props = {
   insertMode: InsertMode;
+  scheduledAt?: string;
 };
 
-export const AddScheduledTaskMenu = ({ insertMode }: Props) => {
+export const AddScheduledTaskMenu = ({ insertMode, scheduledAt }: Props) => {
   const { data: activities } = useQuery(activityListQueryOptions());
   const { data: routines } = useQuery(routineVisibleListQueryOptions());
 
@@ -32,7 +33,7 @@ export const AddScheduledTaskMenu = ({ insertMode }: Props) => {
   const handleApplyRoutine = (routineId: number) => {
     setPendingRoutineId(routineId);
     applyRoutine(
-      { routineId, insertMode },
+      { routineId, insertMode, scheduledAt },
       { onSettled: () => setPendingRoutineId(null) },
     );
   };
@@ -84,7 +85,7 @@ export const AddScheduledTaskMenu = ({ insertMode }: Props) => {
               className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
               onClick={(e) => {
                 e.preventDefault();
-                mutateTask({ activity, insertMode });
+                mutateTask({ activity, insertMode, scheduledAt });
               }}>
               {activity.display_name}{" "}
               <CategoryBadge category={activity.category} />

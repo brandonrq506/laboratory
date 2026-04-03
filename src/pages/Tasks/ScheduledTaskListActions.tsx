@@ -8,7 +8,11 @@ import { AddScheduledTaskMenu } from "./AddScheduledTaskMenu";
 const APPEND_BUTTON_TEXT = "Append new tasks";
 const PREPEND_BUTTON_TEXT = "Prepend new tasks";
 
-export const ScheduledTaskListActions = () => {
+type Props = {
+  scheduledAt?: string;
+};
+
+export const ScheduledTaskListActions = ({ scheduledAt }: Props) => {
   const [insertMode, setInsertMode] = useState<InsertMode>("append");
 
   return (
@@ -35,7 +39,7 @@ export const ScheduledTaskListActions = () => {
         </IconButton>
       )}
 
-      <AddScheduledTaskMenu insertMode={insertMode} />
+      <AddScheduledTaskMenu insertMode={insertMode} scheduledAt={scheduledAt} />
     </div>
   );
 };
