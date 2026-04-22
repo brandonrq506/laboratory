@@ -69,11 +69,11 @@ export const ScheduledTaskForm = ({ initialValues, task, onSubmit }: Props) => {
         rows={4}
         registration={register("note", {
           maxLength: {
-            value: 250,
-            message: "Note cannot exceed 250 characters.",
+            value: 2000,
+            message: "Note cannot exceed 2000 characters.",
           },
         })}
-        description="Max 250 characters"
+        description="Max 2000 characters"
         error={errors.note?.message}
       />
 
