@@ -1,8 +1,8 @@
 import {
+  CalendarIcon,
   ClockIcon,
   Cog6ToothIcon,
-  DocumentTextIcon,
-  RectangleStackIcon,
+  QueueListIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
 import { getToday } from "@/utils";
@@ -14,10 +14,10 @@ export const sidebarLinks = linkOptions([
   {
     label: "History",
     to: "/history",
-    icon: RectangleStackIcon,
+    icon: CalendarIcon,
     search: () => ({ date: getToday() }),
   },
-  { label: "Routines", to: "/routines", icon: DocumentTextIcon },
+  { label: "Routines", to: "/routines", icon: QueueListIcon },
   { label: "Settings", to: "/settings", icon: Cog6ToothIcon },
 ]);
 
