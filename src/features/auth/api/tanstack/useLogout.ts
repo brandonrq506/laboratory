@@ -9,7 +9,7 @@ export const useLogout = () => {
 
   return useMutation({
     mutationFn: logoutFn,
-    onSuccess: () => {
+    onSettled: () => {
       logout();
       queryClient.invalidateQueries();
     },
