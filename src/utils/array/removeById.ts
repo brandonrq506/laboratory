@@ -1,6 +1,12 @@
 interface RemoveById {
-  <T extends { id: number | string }>(list: T[] | undefined, id: T["id"]): T[];
+  <T extends { id: number | string }>(
+    list: T[] | undefined,
+    ...ids: T["id"][]
+  ): T[];
 }
 
-export const removeById: RemoveById = (list, id) =>
-  list ? list.filter((item) => item.id !== id) : [];
+export const removeById: RemoveById = (list, ...ids) => {
+  if (!list) return [];
+  const idSet = new Set(ids);
+  return list.filter((item) => !idSet.has(item.id));
+};

@@ -39,4 +39,41 @@ describe("removeById", () => {
     expect(result).toEqual(list);
     expect(result).not.toBe(list);
   });
+
+  it("removes multiple items when given multiple ids", () => {
+    const list = [
+      { id: 1, name: "a" },
+      { id: 2, name: "b" },
+      { id: 3, name: "c" },
+      { id: 4, name: "d" },
+    ];
+    const result = removeById(list, 2, 4);
+    expect(result).toEqual([
+      { id: 1, name: "a" },
+      { id: 3, name: "c" },
+    ]);
+  });
+
+  it("returns full copy when no ids are passed", () => {
+    const list = [
+      { id: 1, name: "a" },
+      { id: 2, name: "b" },
+    ];
+    const result = removeById(list);
+    expect(result).toEqual(list);
+    expect(result).not.toBe(list);
+  });
+
+  it("removes only the found ids when mixed with missing ones", () => {
+    const list = [
+      { id: 1, name: "a" },
+      { id: 2, name: "b" },
+      { id: 3, name: "c" },
+    ];
+    const result = removeById(list, 2, 999);
+    expect(result).toEqual([
+      { id: 1, name: "a" },
+      { id: 3, name: "c" },
+    ]);
+  });
 });
