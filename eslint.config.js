@@ -46,7 +46,7 @@ export default [
   eslintConfigPrettier,
   {
     rules: {
-      "sort-imports": ["error", { allowSeparatedGroups: true }],
+      // "sort-imports": ["error", { allowSeparatedGroups: true }],
       "array-callback-return": "error",
       complexity: "warn",
       "default-case": "error",

@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
-import { moveTask } from "../axios/moveTask";
-import { scheduledTasksQueryOptions } from "../queries";
+import { scheduledTasksQueryOptions } from "@/features/tasks/api/queries";
+import { spanMoveTasks } from "../axios/span-move-tasks";
 
-export const useMoveTask = () => {
+export const useMoveTaskSpan = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: moveTask,
+    mutationFn: spanMoveTasks,
     onMutate: async ({ tasks }) => {
       const scheduledTaskKeys = scheduledTasksQueryOptions().queryKey;
 

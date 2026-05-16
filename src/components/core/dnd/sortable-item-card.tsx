@@ -6,17 +6,28 @@ import { DragHandle } from "./drag-handle";
 
 import clsx from "clsx";
 
+/*
+  Why `itemId` supports both string and number?
+  If a wrapper for routine_application_id = 42 shared the integer 42 with a task of id = 42, they'd
+  collide. To ensure this never occurs, we support `wrap:${appId}` as a synthetic id for routine applications.
+
+*/
+
 type Props = {
-  itemId: number;
+  itemId: string | number;
   children: React.ReactNode;
   shadowStyle?: string;
+  className?: string;
+  isOverlay?: boolean;
 };
 
-export const SortableItemCard = ({
+const SortableItemCardInner = ({
   itemId,
   children,
-  shadowStyle = "shadow-xs",
-}: Props) => {
+  shadowStyle,
+  className,
+}: Required<Pick<Props, "itemId" | "children" | "shadowStyle">> &
+  Pick<Props, "className">) => {
   const {
     attributes,
     listeners,
@@ -34,22 +45,58 @@ export const SortableItemCard = ({
   };
 
   return (
-    <div ref={setNodeRef} style={style} className="relative">
+    <div ref={setNodeRef} style={style} className={clsx("relative", className)}>
       <Card
         className={clsx(
           "flex justify-between transition-transform duration-100",
           shadowStyle,
-          isDragging && ["z-20 scale-105 border border-indigo-700 shadow-2xl"],
+          isDragging && "opacity-40",
         )}>
         <div className="flex grow items-center gap-2">
           <DragHandle
             attributes={attributes}
             listeners={listeners}
             setActivatorNodeRef={setActivatorNodeRef}
+            isHidden={isDragging}
           />
           {children}
         </div>
       </Card>
     </div>
+  );
+};
+
+export const SortableItemCard = ({
+  itemId,
+  children,
+  shadowStyle = "shadow-xs",
+  className,
+  isOverlay = false,
+}: Props) => {
+  if (isOverlay) {
+    return (
+      <div className={clsx("relative", className)}>
+        <Card
+          className={clsx(
+            "flex justify-between",
+            shadowStyle,
+            "z-20 scale-105 border border-indigo-700 shadow-2xl",
+          )}>
+          <div className="flex grow items-center gap-2">
+            <DragHandle />
+            {children}
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
+  return (
+    <SortableItemCardInner
+      itemId={itemId}
+      shadowStyle={shadowStyle}
+      className={className}>
+      {children}
+    </SortableItemCardInner>
   );
 };

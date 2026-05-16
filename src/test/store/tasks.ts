@@ -33,6 +33,7 @@ export const completedTasks: CompletedTaskAPI[] = [
     status: "completed",
     updated_at: "2025-05-02T21:22:36.000Z",
     note: "",
+    routine_application: null,
   },
   {
     id: 3398,
@@ -63,6 +64,7 @@ export const completedTasks: CompletedTaskAPI[] = [
     status: "completed",
     updated_at: "2025-05-02T21:16:00.427Z",
     note: "Make sure you get all the plaque!",
+    routine_application: null,
   },
   {
     id: 3405,
@@ -93,6 +95,7 @@ export const completedTasks: CompletedTaskAPI[] = [
     status: "completed",
     updated_at: "2025-05-02T21:15:24.030Z",
     note: "Don't forget to wash your hands!",
+    routine_application: null,
   },
   {
     id: 3404,
@@ -123,6 +126,7 @@ export const completedTasks: CompletedTaskAPI[] = [
     status: "completed",
     updated_at: "2025-05-02T21:14:48.299Z",
     note: "",
+    routine_application: null,
   },
 ];
 
@@ -156,6 +160,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     status: "scheduled",
     updated_at: "2025-05-02T21:43:03.772Z",
     note: "Ultra focus mode activated!",
+    routine_application: null,
   },
   {
     id: 3408,
@@ -186,6 +191,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     status: "scheduled",
     updated_at: "2025-05-02T21:43:03.783Z",
     note: "Don't forget to stretch those muscles!",
+    routine_application: null,
   },
   {
     id: 3409,
@@ -216,6 +222,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     status: "scheduled",
     updated_at: "2025-05-02T21:43:03.786Z",
     note: "",
+    routine_application: null,
   },
   {
     id: 3410,
@@ -246,6 +253,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     status: "scheduled",
     updated_at: "2025-05-02T21:43:03.791Z",
     note: "",
+    routine_application: null,
   },
   {
     id: 3411,
@@ -276,6 +284,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     status: "scheduled",
     updated_at: "2025-05-02T21:43:03.795Z",
     note: "",
+    routine_application: null,
   },
   {
     id: 3412,
@@ -306,6 +315,7 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     status: "scheduled",
     updated_at: "2025-05-02T21:43:03.798Z",
     note: "Make sure you get all the plaque!",
+    routine_application: null,
   },
 ];
 
@@ -339,5 +349,6 @@ export const inProgressTasks: InProgressTaskAPI[] = [
     status: "in_progress",
     updated_at: "2025-05-03T03:45:02.079Z",
     note: "Focus on the core concepts and hooks!",
+    routine_application: null,
   },
 ];
