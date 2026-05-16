@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { moveTasks } from "../axios/move-tasks";
-import { scheduledTasksQueryOptions } from "@/features/tasks/api/queries";
+import { scheduledTasksQueryOptions } from "../queries";
 import { snapshotQueries } from "@/utils/tanstack/helpers";
 
 export const useMoveTasks = () => {

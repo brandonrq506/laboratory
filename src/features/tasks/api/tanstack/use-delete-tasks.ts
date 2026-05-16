@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 import { deleteTasks } from "../axios/delete-tasks";
-import { scheduledTasksQueryOptions } from "@/features/tasks/api/queries";
+import { scheduledTasksQueryOptions } from "../queries";
 import { snapshotQueries } from "@/utils/tanstack/helpers";
 
 // TODO: Currently only supports deleting scheduled tasks, make it generic.
