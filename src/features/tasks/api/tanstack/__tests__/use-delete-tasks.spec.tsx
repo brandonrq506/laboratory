@@ -6,14 +6,14 @@ import {
 } from "@tanstack/react-query";
 import { renderHook, waitFor } from "@testing-library/react";
 
-import { TASKS_ENDPOINT } from "@/libs/axios";
 import {
   inProgressTasksQueryOptions,
   scheduledTasksQueryOptions,
 } from "@/features/tasks/api/queries";
+import { TASKS_ENDPOINT } from "@/libs/axios";
 import { scheduledTasks } from "@/test/store/tasks";
 import { server } from "@/test/server";
-import { useBulkDeleteTasks } from "../use-bulk-delete-tasks";
+import { useDeleteTasks } from "../use-delete-tasks";
 
 import type { ReactNode } from "react";
 import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
@@ -30,7 +30,7 @@ const makeWrapper = (queryClient: QueryClient) => {
 const buildQueryClient = () =>
   new QueryClient({ defaultOptions: { queries: { retry: false } } });
 
-describe("useBulkDeleteTasks", () => {
+describe("useDeleteTasks", () => {
   const scheduledKey = scheduledTasksQueryOptions().queryKey;
   const inProgressKey = inProgressTasksQueryOptions().queryKey;
 
@@ -56,11 +56,9 @@ describe("useBulkDeleteTasks", () => {
 
     const invalidateSpy = vi.spyOn(queryClient, "invalidateQueries");
 
-    const { result } = renderHook(
-      () =>
-        useBulkDeleteTasks({ queryOptions: scheduledTasksQueryOptions() }),
-      { wrapper: makeWrapper(queryClient) },
-    );
+    const { result } = renderHook(() => useDeleteTasks(), {
+      wrapper: makeWrapper(queryClient),
+    });
 
     result.current.mutate({ task_ids: deletedIds });
 
@@ -91,11 +89,9 @@ describe("useBulkDeleteTasks", () => {
     const queryClient = buildQueryClient();
     queryClient.setQueryData(scheduledKey, initialOrder);
 
-    const { result } = renderHook(
-      () =>
-        useBulkDeleteTasks({ queryOptions: scheduledTasksQueryOptions() }),
-      { wrapper: makeWrapper(queryClient) },
-    );
+    const { result } = renderHook(() => useDeleteTasks(), {
+      wrapper: makeWrapper(queryClient),
+    });
 
     await result.current
       .mutateAsync({ task_ids: deletedIds })
@@ -117,11 +113,9 @@ describe("useBulkDeleteTasks", () => {
 
     const cancelSpy = vi.spyOn(queryClient, "cancelQueries");
 
-    const { result } = renderHook(
-      () =>
-        useBulkDeleteTasks({ queryOptions: scheduledTasksQueryOptions() }),
-      { wrapper: makeWrapper(queryClient) },
-    );
+    const { result } = renderHook(() => useDeleteTasks(), {
+      wrapper: makeWrapper(queryClient),
+    });
 
     await result.current.mutateAsync({ task_ids: deletedIds });
 

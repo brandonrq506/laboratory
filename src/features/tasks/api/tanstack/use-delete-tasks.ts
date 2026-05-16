@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
-import { scheduledTasksQueryOptions } from "@/features/tasks/api/queries";
-import { deleteTasks } from "../axios/delete-tasks";
 import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
+import { deleteTasks } from "../axios/delete-tasks";
+import { scheduledTasksQueryOptions } from "@/features/tasks/api/queries";
+import { snapshotQueries } from "@/utils/tanstack/helpers";
 
 // TODO: Currently only supports deleting scheduled tasks, make it generic.
 export const useDeleteTasks = () => {
@@ -30,7 +30,7 @@ export const useDeleteTasks = () => {
       context?.rollback();
     },
     onSettled: () => {
-      invalidateQueries(queryClient, scheduledTasksQueryOptions());
+      queryClient.invalidateQueries(scheduledTasksQueryOptions());
     },
   });
 };
