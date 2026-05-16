@@ -1,21 +1,42 @@
-import { render, screen } from "@/test/test-utils";
+import { render, screen, waitFor } from "@/test/test-utils";
+import { LogoutButton } from "../LogoutButton";
+import { apiV1 } from "@/libs/axios";
 import userEvent from "@testing-library/user-event";
 
-import { LogoutButton } from "../LogoutButton";
+const authLogout = vi.fn();
+const invalidate = vi.fn();
+const navigate = vi.fn();
 
-const mutate = vi.fn();
-
-vi.mock("@/features/auth/api/tanstack/useLogout", () => ({
-  useLogout: () => ({ mutate }),
+vi.mock("@tanstack/react-router", () => ({
+  useNavigate: () => navigate,
+  useRouter: () => ({ invalidate }),
 }));
 
-// Todo: Use this to practice Tanstack Router's testing practices. Then we can ramp up coverage again.
+vi.mock("@/features/auth/stores", () => ({
+  useAuth: () => ({ logout: authLogout }),
+}));
+
 describe("LogoutButton", () => {
-  it.skip("calls logout mutation on click", async () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    invalidate.mockResolvedValue(undefined);
+    navigate.mockResolvedValue(undefined);
+  });
+
+  it("navigates to login even when logout request fails", async () => {
     const user = userEvent.setup();
+    vi.spyOn(apiV1, "delete").mockRejectedValueOnce(new Error("offline"));
+
     render(<LogoutButton />);
+
     const button = screen.getByRole("button", { name: /logout button/i });
+
     await user.click(button);
-    expect(mutate).toHaveBeenCalledTimes(1);
+
+    await waitFor(() => {
+      expect(authLogout).toHaveBeenCalledOnce();
+      expect(invalidate).toHaveBeenCalledOnce();
+      expect(navigate).toHaveBeenCalledWith({ to: "/login" });
+    });
   });
 });
