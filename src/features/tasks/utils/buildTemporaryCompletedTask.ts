@@ -24,5 +24,6 @@ export const buildTemporaryCompletedTask = (
     optional_name: null,
     created_at: now,
     updated_at: now,
+    routine_application: null,
   };
 };

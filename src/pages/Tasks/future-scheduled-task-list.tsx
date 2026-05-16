@@ -1,57 +1,41 @@
-import { useFutureMoveTask } from "@/features/tasks/api/tanstack/use-move-future-task";
-import { useSuspenseQuery } from "@tanstack/react-query";
-
 import {
   FutureScheduledTaskContent,
   SortableTaskList,
 } from "@/features/tasks/components";
+import { Loading, SortableItemCard } from "@/components/core";
+import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
 
-import { futureTasksQueryOptions } from "@/features/tasks/api/queries";
+import { useFutureScheduledTasksSorting } from "@/features/tasks/hooks/use-future-scheduled-tasks-sorting";
+
 import { getRouteApi } from "@tanstack/react-router";
 
-import type { OnDragEndArgs } from "@/features/tasks/types/sortableTaskList";
 import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
-import { SortableItemCard } from "@/components/core";
 
 const routeApi = getRouteApi("/__protected/scheduled");
 
+const renderRow = (task: ScheduledTaskAPI) => (
+  <SortableItemCard itemId={task.id}>
+    <FutureScheduledTaskContent task={task} />
+  </SortableItemCard>
+);
+
 export const FutureScheduledTaskList = () => {
   const { date } = routeApi.useSearch();
-  const { data } = useSuspenseQuery(futureTasksQueryOptions(date));
-  const { mutate: moveTask } = useFutureMoveTask(date);
+  const sorting = useFutureScheduledTasksSorting(date);
 
-  const handleDragEnd = ({
-    taskId,
-    prevTaskId,
-    nextTaskId,
-    tasks,
-  }: OnDragEndArgs<ScheduledTaskAPI>) => {
-    moveTask({
-      taskId,
-      prevTaskId,
-      nextTaskId,
-      tasks,
-    });
-  };
+  if (sorting.isPending) {
+    return <Loading className="mx-auto my-10" sizeStyles="size-10" />;
+  }
 
-  // TODO: Create ticket
-
-  /*
-  If I wrap this in a Link, we will have the same problem of deleting modal later showing edit modal.
-  So the changes to that component should be done before we make this editable.
-  */
+  if (sorting.isError) return <TaskErrorList refetch={sorting.refetch} />;
 
   return (
     <SortableTaskList
-      tasks={data}
-      onDragEnd={handleDragEnd}
-      renderItem={(task) => (
-        // Wrapped by a Link
-        <SortableItemCard itemId={task.id}>
-          <FutureScheduledTaskContent task={task} />
-        </SortableItemCard>
-        // Wrapped by a Link
-      )}
+      items={sorting.renderItems}
+      onDragStart={sorting.handleDragStart}
+      onDragEnd={sorting.handleDragEnd}
+      onDragCancel={sorting.handleDragCancel}
+      renderItem={renderRow}
     />
   );
 };

@@ -9,4 +9,9 @@ export interface BaseTaskAPI extends BaseEntity {
   scheduled_at: string | null;
   status: TaskStatus;
   position: string | null;
+  routine_application: {
+    id: number;
+    routine_id: number | null;
+    routine_name: string;
+  } | null;
 }

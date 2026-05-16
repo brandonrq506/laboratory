@@ -1,6 +1,9 @@
 import {
   DndContext,
+  DragCancelEvent,
   DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
   KeyboardSensor,
   MouseSensor,
   TouchSensor,
@@ -8,7 +11,7 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 
 import {
   SortableContext,
@@ -22,20 +25,20 @@ import {
 } from "@dnd-kit/modifiers";
 import { TaskEmptyList } from "./TaskEmptyList";
 
-import type { BaseEntity } from "@/types/core";
-import type { SortableTaskListProps } from "../types/sortableTaskList";
+import type {
+  SortableListItem,
+  SortableTaskListProps,
+} from "../types/sortable-task-list";
 
-export const SortableTaskList = <T extends BaseEntity>({
-  tasks,
+export const SortableTaskList = <T extends SortableListItem>({
+  items,
   renderItem,
+  renderOverlay,
+  onDragStart,
   onDragEnd,
+  onDragCancel,
 }: SortableTaskListProps<T>) => {
-  const [sortedTasks, setSortedTasks] = useState<T[]>(tasks);
-
-  // Ensure tasks don't jump back to original position on drag end before the mutation completes.
-  useEffect(() => {
-    setSortedTasks(tasks);
-  }, [tasks]);
+  const [activeId, setActiveId] = useState<T["id"] | null>(null);
 
   const sensors = useSensors(
     useSensor(MouseSensor),
@@ -51,47 +54,74 @@ export const SortableTaskList = <T extends BaseEntity>({
     }),
   );
 
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveId(event.active.id as T["id"]);
+    onDragStart?.(event.active.id as T["id"]);
+  };
+
+  const handleDragCancel = (event: DragCancelEvent) => {
+    setActiveId(null);
+    onDragCancel?.(event.active.id as T["id"]);
+  };
+
   const handleDragEnd = (event: DragEndEvent) => {
+    setActiveId(null);
     const { active, over } = event;
 
-    if (!over) return;
+    if (!over) {
+      onDragCancel?.(active.id as T["id"]);
+      return;
+    }
+    if (active.id === over.id) {
+      onDragCancel?.(active.id as T["id"]);
+      return;
+    }
 
-    if (active.id === over.id) return;
+    const oldIndex = items.findIndex((item) => item.id === active.id);
+    const newIndex = items.findIndex((item) => item.id === over.id);
 
-    const oldIndex = sortedTasks.findIndex((task) => task.id === active.id);
-    const newIndex = sortedTasks.findIndex((task) => task.id === over.id);
+    if (oldIndex === -1 || newIndex === -1) {
+      onDragCancel?.(active.id as T["id"]);
+      return;
+    }
 
-    const newTasks = arrayMove(sortedTasks, oldIndex, newIndex);
+    const newItems = arrayMove(items, oldIndex, newIndex);
 
-    const prevTaskId = newTasks[newIndex - 1]?.id ?? null;
-    const nextTaskId = newTasks[newIndex + 1]?.id ?? null;
-
-    setSortedTasks(newTasks);
+    const prevItemId = newItems[newIndex - 1]?.id ?? null;
+    const nextItemId = newItems[newIndex + 1]?.id ?? null;
 
     onDragEnd({
-      taskId: active.id as number,
-      prevTaskId,
-      nextTaskId,
-      tasks: newTasks,
+      itemId: active.id as T["id"],
+      prevItemId,
+      nextItemId,
+      items: newItems,
     });
   };
 
-  if (tasks.length === 0) return <TaskEmptyList />;
+  if (items.length === 0) return <TaskEmptyList />;
+
+  const activeItem =
+    activeId === null ? null : items.find((item) => item.id === activeId);
 
   return (
     <div className="space-y-3">
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
+        onDragCancel={handleDragCancel}
         modifiers={[restrictToVerticalAxis, restrictToParentElement]}>
         <SortableContext
-          items={sortedTasks.map((task) => task.id)}
+          items={items.map((item) => item.id)}
           strategy={verticalListSortingStrategy}>
-          {sortedTasks.map((task) => (
-            <Fragment key={task.id}>{renderItem(task)}</Fragment>
+          {items.map((item) => (
+            <Fragment key={item.id}>{renderItem(item)}</Fragment>
           ))}
         </SortableContext>
+        <DragOverlay>
+          {!activeItem || !renderOverlay ? null : renderOverlay(activeItem)}
+        </DragOverlay>
       </DndContext>
     </div>
   );

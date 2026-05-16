@@ -43,6 +43,7 @@ export const CategoryFormTaskExample = ({ control }: Props) => {
         created_at: "2024-01-01T00:00:00Z",
         updated_at: "2024-01-01T00:00:00Z",
         id: 0,
+        routine_application: null,
       }}
     />
   );

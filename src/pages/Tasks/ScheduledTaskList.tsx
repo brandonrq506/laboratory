@@ -1,35 +1,24 @@
-import { useMoveTask } from "@/features/tasks/api/tanstack/useMoveTask";
-import { useQuery } from "@tanstack/react-query";
-
 import {
   DeleteAllScheduledTasks,
   SortableTaskList,
   TimerScheduledTaskContent,
 } from "@/features/tasks/components";
 import { Loading, SortableItemCard } from "@/components/core";
+import { RoutineGroupCard } from "@/features/routines/components";
 import { ScheduledTaskListActions } from "./ScheduledTaskListActions";
 import { SectionHeaderWithAction } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
 
-import {
-  inProgressTasksQueryOptions,
-  scheduledTasksQueryOptions,
-} from "@/features/tasks/api/queries";
-import { calculateExpectedStartTimes } from "@/features/tasks/utils/calculateExpectedStartTimes";
+import { useScheduledTasksSorting } from "@/features/tasks/hooks/use-scheduled-tasks-sorting";
 
-import type { OnDragEndArgs } from "@/features/tasks/types/sortableTaskList";
-import type { ScheduledTaskWithExpectedStartTime } from "@/features/tasks/types/scheduledTaskWithExpectedStartTime";
+import type { ScheduledRenderItem } from "@/features/tasks/types/scheduled-visible-item";
 
 const MIN_WORTH_TRIGGERING_THRESHOLD = 3;
 
 export const ScheduledTaskList = () => {
-  const { data: inProgressTask } = useQuery(inProgressTasksQueryOptions());
-  const { data, isPending, isError, refetch } = useQuery(
-    scheduledTasksQueryOptions(),
-  );
-  const { mutate: moveTask } = useMoveTask();
+  const sorting = useScheduledTasksSorting();
 
-  if (isPending)
+  if (sorting.isPending)
     return (
       <div>
         <SectionHeaderWithAction
@@ -41,28 +30,71 @@ export const ScheduledTaskList = () => {
       </div>
     );
 
-  if (isError) return <TaskErrorList refetch={refetch} />;
+  if (sorting.isError) return <TaskErrorList refetch={sorting.refetch} />;
 
-  const displayDeleteAll = data.length > MIN_WORTH_TRIGGERING_THRESHOLD;
-
-  const tasksWithExpectedStartTime = calculateExpectedStartTimes(
-    data,
-    inProgressTask?.[0],
-  );
-
-  const handleDragEnd = ({
-    taskId,
-    prevTaskId,
-    nextTaskId,
-    tasks,
-  }: OnDragEndArgs<ScheduledTaskWithExpectedStartTime>) => {
-    moveTask({
-      taskId,
-      prevTaskId,
-      nextTaskId,
-      tasks,
-    });
+  const renderRow = (item: ScheduledRenderItem) => {
+    switch (item.kind) {
+      case "task":
+        return (
+          <SortableItemCard itemId={item.id}>
+            <TimerScheduledTaskContent task={item.task} />
+          </SortableItemCard>
+        );
+      case "wrap":
+        return (
+          <RoutineGroupCard
+            item={item}
+            expanded={sorting.expansionByApplicationId.has(
+              item.routine_application_id,
+            )}
+            isDraggingThisCard={sorting.draggingId === item.id}
+            onToggleExpanded={sorting.toggleExpanded}
+            onBulkDelete={sorting.bulkDeleteAbsorbed}
+          />
+        );
+      case "expanded-child":
+        return (
+          <SortableItemCard itemId={item.id} className="ml-4">
+            <TimerScheduledTaskContent task={item.task} />
+          </SortableItemCard>
+        );
+      default:
+        return null;
+    }
   };
+
+  const renderOverlay = (item: ScheduledRenderItem) => {
+    switch (item.kind) {
+      case "task":
+        return (
+          <SortableItemCard itemId={item.id} isOverlay>
+            <TimerScheduledTaskContent task={item.task} />
+          </SortableItemCard>
+        );
+      case "wrap":
+        return (
+          <RoutineGroupCard
+            item={item}
+            expanded={false}
+            isDraggingThisCard={false}
+            onToggleExpanded={() => {}}
+            onBulkDelete={() => {}}
+            isOverlay
+          />
+        );
+      case "expanded-child":
+        return (
+          <SortableItemCard itemId={item.id} className="ml-4" isOverlay>
+            <TimerScheduledTaskContent task={item.task} />
+          </SortableItemCard>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const displayDeleteAll =
+    sorting.renderItems.length > MIN_WORTH_TRIGGERING_THRESHOLD;
 
   return (
     <div>
@@ -72,13 +104,12 @@ export const ScheduledTaskList = () => {
         action={<ScheduledTaskListActions />}
       />
       <SortableTaskList
-        onDragEnd={handleDragEnd}
-        tasks={tasksWithExpectedStartTime}
-        renderItem={(task) => (
-          <SortableItemCard itemId={task.id}>
-            <TimerScheduledTaskContent task={task} />
-          </SortableItemCard>
-        )}
+        items={sorting.renderItems}
+        onDragStart={sorting.handleDragStart}
+        onDragEnd={sorting.handleDragEnd}
+        onDragCancel={sorting.handleDragCancel}
+        renderItem={renderRow}
+        renderOverlay={renderOverlay}
       />
       {displayDeleteAll && (
         <div className="mt-2 text-center">
