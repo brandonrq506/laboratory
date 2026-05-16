@@ -6,11 +6,11 @@ import {
 } from "@tanstack/react-query";
 import { renderHook, waitFor } from "@testing-library/react";
 
-import { TASKS_ENDPOINT } from "@/libs/axios";
 import {
   inProgressTasksQueryOptions,
   scheduledTasksQueryOptions,
 } from "@/features/tasks/api/queries";
+import { TASKS_ENDPOINT } from "@/libs/axios";
 import { scheduledTasks } from "@/test/store/tasks";
 import { server } from "@/test/server";
 import { useMoveTasks } from "../use-move-tasks";
