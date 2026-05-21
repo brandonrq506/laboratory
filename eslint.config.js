@@ -17,7 +17,7 @@ export default [
   ...pluginQuery.configs["flat/recommended"],
   reactRefresh.configs.recommended,
   {
-    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
+    files: ["**/*.spec.{ts,tsx}", "**/*.test.{ts,tsx}"],
     ...testingLibrary.configs["flat/react"],
   },
   {
@@ -90,8 +90,6 @@ export default [
       "no-useless-return": "error",
       "no-var": "error",
       "react-compiler/react-compiler": "error",
-      "testing-library/no-debugging-utils": "error",
-      "testing-library/prefer-user-event": "error",
       "object-shorthand": "error",
       "prefer-arrow-callback": "error",
       "prefer-const": "error",
