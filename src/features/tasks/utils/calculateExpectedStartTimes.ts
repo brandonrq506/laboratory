@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { InProgressTaskAPI } from "../types/inProgressTask";
 import { ScheduledTaskAPI } from "../types/scheduledTask";
-import { ScheduledTaskWithExpectedStartTime } from "../types/scheduledTaskWithExpectedStartTime";
+import { ScheduledTaskWithEST } from "../types/scheduledTaskWithEST";
 import { floorMilliseconds } from "@/utils";
 
 /**
@@ -11,7 +11,7 @@ import { floorMilliseconds } from "@/utils";
 type FnDef = (
   scheduledTasks: ScheduledTaskAPI[] | undefined,
   inProgressTask: InProgressTaskAPI | undefined,
-) => ScheduledTaskWithExpectedStartTime[];
+) => ScheduledTaskWithEST[];
 
 export const calculateExpectedStartTimes: FnDef = (
   scheduledTasks,
@@ -41,24 +41,21 @@ export const calculateExpectedStartTimes: FnDef = (
   }
 
   // Calculate expected start times for each scheduled task
-  return scheduledTasks.reduce<ScheduledTaskWithExpectedStartTime[]>(
-    (acc, task) => {
-      // capture the current start
-      const expectedStart = new Date(nextStartTime);
+  return scheduledTasks.reduce<ScheduledTaskWithEST[]>((acc, task) => {
+    // capture the current start
+    const expectedStart = new Date(nextStartTime);
 
-      // push a new object that includes the expected start time
-      acc.push({
-        ...task,
-        expected_start_time: expectedStart,
-      });
+    // push a new object that includes the expected start time
+    acc.push({
+      ...task,
+      expected_start_time: expectedStart,
+    });
 
-      // bump nextStartTime by this task’s duration (or default 30m)
-      const expSecs = task.activity.exp_seconds;
-      const incrementMs = expSecs > 0 ? expSecs * 1000 : 30 * 60 * 1000;
-      nextStartTime = new Date(nextStartTime.getTime() + incrementMs);
+    // bump nextStartTime by this task’s duration (or default 30m)
+    const expSecs = task.activity.exp_seconds;
+    const incrementMs = expSecs > 0 ? expSecs * 1000 : 30 * 60 * 1000;
+    nextStartTime = new Date(nextStartTime.getTime() + incrementMs);
 
-      return acc;
-    },
-    [],
-  );
+    return acc;
+  }, []);
 };

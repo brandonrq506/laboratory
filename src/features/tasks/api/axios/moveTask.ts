@@ -1,12 +1,12 @@
 import { TASKS_ENDPOINT, apiV1 } from "@/libs/axios";
-import type { ScheduledTaskWithExpectedStartTime } from "../../types/scheduledTaskWithExpectedStartTime";
+import type { ScheduledTaskWithEST } from "../../types/scheduledTaskWithEST";
 
 type Props = {
   taskId: number;
   prevTaskId: number | null;
   nextTaskId: number | null;
   // This is not used, it is just for optimistic UI update.
-  tasks: ScheduledTaskWithExpectedStartTime[];
+  tasks: ScheduledTaskWithEST[];
 };
 
 const URL = `${TASKS_ENDPOINT}/move_drag`;
