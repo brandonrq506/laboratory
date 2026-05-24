@@ -18,7 +18,7 @@ import {
 import { calculateExpectedStartTimes } from "@/features/tasks/utils/calculateExpectedStartTimes";
 
 import type { OnDragEndArgs } from "@/features/tasks/types/sortableTaskList";
-import type { ScheduledTaskWithExpectedStartTime } from "@/features/tasks/types/scheduledTaskWithExpectedStartTime";
+import type { ScheduledTaskWithEST } from "@/features/tasks/types/scheduledTaskWithEST";
 
 const MIN_WORTH_TRIGGERING_THRESHOLD = 3;
 
@@ -55,7 +55,7 @@ export const ScheduledTaskList = () => {
     prevTaskId,
     nextTaskId,
     tasks,
-  }: OnDragEndArgs<ScheduledTaskWithExpectedStartTime>) => {
+  }: OnDragEndArgs<ScheduledTaskWithEST>) => {
     moveTask({
       taskId,
       prevTaskId,
