@@ -7,13 +7,13 @@ import { Fragment } from "react/jsx-runtime";
 import { Link } from "@tanstack/react-router";
 import { QuickDeleteTask } from "./QuickDeleteTask";
 import { ScheduledTaskActionBtn } from "./ScheduledTaskActionBtn";
-import { ScheduledTaskWithExpectedStartTime } from "../types/scheduledTaskWithExpectedStartTime";
+import { ScheduledTaskWithEST } from "../types/scheduledTaskWithEST";
 
 import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
 type Props = {
-  task: ScheduledTaskWithExpectedStartTime;
+  task: ScheduledTaskWithEST;
 };
 
 export const TimerScheduledTaskContent = ({ task }: Props) => {
@@ -31,17 +31,11 @@ export const TimerScheduledTaskContent = ({ task }: Props) => {
           <p className="text-sm font-semibold">{task.activity.display_name}</p>
         </div>
 
-        <div className="flex gap-2.5 text-gray-600">
-          {task.expected_start_time && (
-            <div className="flex gap-1 text-xs">
-              <p className="tabular-nums">
-                {formatDatetimeTo12hTime(
-                  task.expected_start_time.toISOString(),
-                )}
-              </p>
-            </div>
-          )}
-          <div className="flex gap-1 text-xs">
+        <div className="flex gap-2.5 text-xs text-gray-600">
+          <p className="tabular-nums">
+            {formatDatetimeTo12hTime(task.expected_start_time.toISOString())}
+          </p>
+          <div className="flex gap-1">
             <ClockIcon className="size-4" />
             <p className="tabular-nums">
               {secondsToTime(task.activity.exp_seconds)}
