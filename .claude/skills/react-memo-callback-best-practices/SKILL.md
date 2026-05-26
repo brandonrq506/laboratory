@@ -1,7 +1,7 @@
 ---
 name: react-memo-callback-best-practices
-description: 'Use when optimizing React hooks performance with useMemo and useCallback. Use for code review, writing optimized hooks, or debugging performance issues. Emphasizes: these are last-resort optimizations; prefer composition, state lifting, dependency management first.'
-argument-hint: 'Describe the performance issue or hook usage you want to review'
+description: "Use when optimizing React hooks performance with useMemo and useCallback. Use for code review, writing optimized hooks, or debugging performance issues. Emphasizes: these are last-resort optimizations; prefer composition, state lifting, dependency management first."
+argument-hint: "Describe the performance issue or hook usage you want to review"
 ---
 
 # useMemo & useCallback Best Practices
@@ -9,6 +9,7 @@ argument-hint: 'Describe the performance issue or hook usage you want to review'
 ## Philosophy
 
 **useCallback and useMemo must be a last resort.** Most performance issues are solved through:
+
 - **Composition**: Lift state to avoid prop passing to many children
 - **State management**: Separate frequently-changing state from static state
 - **Dependency discipline**: Manage arrays/objects so they don't change unnecessarily
@@ -16,11 +17,53 @@ argument-hint: 'Describe the performance issue or hook usage you want to review'
 
 Only reach for these hooks after you've measured a real perf problem and verified the hook itself will solve it.
 
+## Composition First: Lift Content (children-as-props)
+
+The single most useful composition technique — it often **replaces** a `memo` entirely.
+
+**Mechanism:** an element passed as `children` (or any element prop) is created in the _parent's_ render scope. When the receiving component re-renders because of its _own_ state, that `children` prop keeps the same referential identity. React reconciles it, sees an identical element, and bails out — the subtree does **not** re-render. No `memo`, `useMemo`, or `useCallback` required.
+
+**Rule of thumb:** push frequently-changing state _down_ into a small leaf, and pass the expensive/static tree _in_ as `children`.
+
+```tsx
+// ❌ Volatile scroll state lives where the expensive content is rendered.
+// Every scroll event re-renders TaskBoard AND the whole TaskList.
+function TaskBoard({ tasks }: { tasks: Task[] }) {
+  const scrollY = useScrollPosition();
+  return (
+    <div className={scrollY > 0 ? "board--scrolled" : "board"}>
+      <TaskList tasks={tasks} /> {/* re-created on every scroll tick */}
+    </div>
+  );
+}
+
+// ✅ Push the volatile state into a small leaf; pass the expensive tree as children.
+// ScrollShadowContainer re-renders on scroll, but `children` keeps its identity,
+// so React skips re-rendering TaskList — no memo needed.
+function ScrollShadowContainer({ children }: { children: ReactNode }) {
+  const scrollY = useScrollPosition(); // window 'scroll' listener
+  return (
+    <div className={scrollY > 0 ? "board--scrolled" : "board"}>{children}</div>
+  );
+}
+
+function TaskBoard({ tasks }: { tasks: Task[] }) {
+  return (
+    <ScrollShadowContainer>
+      <TaskList tasks={tasks} />
+    </ScrollShadowContainer>
+  );
+}
+```
+
+Try this (and state-lifting) **before** reaching for any of the hooks below.
+
 ## When to Use: Decision Tree
 
 ### useMemo
 
 **Use when:**
+
 1. **Expensive calculation** in render that truly blocks the UI (proof: Chrome DevTools profiler shows calc time > 5-10ms)
 2. **Dependency array is stable** (deps only change when the actual computation should re-run)
 3. **Inline object/array creation** passed as props causes excessive child re-renders (and you can't use composition)
@@ -30,6 +73,7 @@ Only reach for these hooks after you've measured a real perf problem and verifie
 ### useCallback
 
 **Use when:**
+
 1. **Callback passed to memoized child** (via React.memo) that needs to stay referentially equal
 2. **Callback is a dependency** in another hook (useEffect, useCallback chain)
 3. **You've measured** that the memo + callback combo actually prevents re-renders that mattered
@@ -55,19 +99,29 @@ If all answers are "no", then proceed.
 // ❌ Unnecessary: simple derived state
 const isEmpty = useMemo(() => items.length === 0, [items]);
 
-// ✅ Legitimate: expensive filtering
+// ✅ Legitimate: expensive filtering: search, filters, sort, calculations.
 const filteredItems = useMemo(
-  () => items.filter(matches criteria involving search, filters, sort),
-  [items, searchTerm, filters, sortBy]
+  () =>
+    items.filter(
+      (item) =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (filters.status === "all" || item.status === filters.status),
+    ),
+  [items, searchTerm, filters, sortBy],
 );
 
 // ❌ Wrong deps: missing dependency
-const result = useMemo(() => compute(externalVar), [/* forgot externalVar */]);
+const result = useMemo(
+  () => compute(externalVar),
+  [
+    /* forgot externalVar */
+  ],
+);
 
 // ✅ Right deps: all external variables in scope included
 const result = useMemo(
   () => compute(items, searchTerm, sortOrder),
-  [items, searchTerm, sortOrder]
+  [items, searchTerm, sortOrder],
 );
 ```
 
@@ -78,10 +132,7 @@ const result = useMemo(
 const handleClick = useCallback(() => setOpen(true), []);
 
 // ✅ Legitimate: memoized child will skip re-render
-const handleSort = useCallback(
-  (column: string) => setSortBy(column),
-  []
-);
+const handleSort = useCallback((column: string) => setSortBy(column), []);
 // Only stable if []:
 // - sortBy setter is stable (it is)
 // - column not destructured from props
@@ -89,25 +140,42 @@ const handleSort = useCallback(
 // ❌ Wrong: empty deps but uses props
 const handleChange = useCallback(
   (value) => onUpdate(value), // onUpdate from props!
-  [] // ← will stale-close over old onUpdate
+  [], // ← will stale-close over old onUpdate
 );
 
 // ✅ Right: all deps declared
 const handleChange = useCallback(
   (value) => onUpdate(value),
-  [onUpdate] // ← if onUpdate changes, callback updates
+  [onUpdate], // ← if onUpdate changes, callback updates
 );
 ```
 
 ## Common Pitfalls
 
-| Issue | Problem | Fix |
-|-------|---------|-----|
-| **False empty deps** | Deps change but deps array is `[]` | Run ESLint `exhaustive-deps`, honor warnings |
-| **Unnecessary memo on child** | Parent re-renders, child memo'd but props always new | Memoize the props, not the child (lift object creation) |
-| **Chained useCallbacks** | `useCallback(a)` has `b` in deps, then `b` is `useCallback(...)` | Stop chaining; stable deps come from props/state, not other callbacks |
-| **Premature optimization** | Added 3 hooks to save 0.5ms re-render | Measure first; most apps are fast enough with plain React |
-| **Forgetting cleanup** | useMemo holding stale reference after unmount | Unlikely if deps are correct, but consider lifecycle |
+### False empty deps
+
+- **Problem:** Deps change but deps array is `[]`.
+- **Fix:** Run ESLint `exhaustive-deps`, honor warnings.
+
+### Unnecessary memo on child
+
+- **Problem:** Parent re-renders, child memo'd but props always new.
+- **Fix:** Memoize the props, not the child (lift object creation).
+
+### Chained useCallbacks
+
+- **Problem:** `useCallback(a)` has `b` in deps, then `b` is `useCallback(...)`.
+- **Fix:** Stop chaining; stable deps come from props/state, not other callbacks.
+
+### Premature optimization
+
+- **Problem:** Added 3 hooks to save 0.5ms re-render.
+- **Fix:** Measure first; most apps are fast enough with plain React.
+
+### Forgetting cleanup
+
+- **Problem:** useMemo holding stale reference after unmount.
+- **Fix:** Unlikely if deps are correct, but consider lifecycle.
 
 ## Measurement: How to Verify
 
@@ -125,6 +193,7 @@ Given the project's emphasis on composition and state management:
 - **Validate deps** with ESLint before shipping
 
 Example from Laboratory:
+
 ```typescript
 // ❌ Before: many children re-render due to new object
 <TaskList
