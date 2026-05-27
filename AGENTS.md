@@ -98,18 +98,9 @@ src/
 
 ## Verification instructions
 
-- Make sure you run `npm run validate:fix` to ensure code quality and correctness.
+- Make sure you run `npm run linters:fix` to ensure code quality and correctness.
 - Review the diff changes, consider this a 'refactor' step in the implementation process.
 - Once you have finished the whole implementation, pass your changed files through the `qa.instructions.md` file for review.
-
-## Testing instructions
-
-- **Location:** Place test files in `__tests__` directories next to components
-- **Naming:** Use `.spec.tsx` or `.spec.ts` extensions
-- **Tools:** Import from `@/test/test-utils` not `@testing-library/react`
-- **API Mocking:** Use MSW handlers in `src/test/handlers/[feature]/`
-- **Test Data:** Use dummy data from `src/test/store/[feature]/`
-- For best practices when testing, refer to `.github/instructions/testing.instructions.md`
 
 ## PR instructions
 

@@ -51,7 +51,7 @@ npm run test:expert  # Enhanced debugging output
 ### 5. Complete Validation
 
 ```bash
-npm run validate:fix # Runs prettier:fix → lint:fix → type-check → test (~10-15s total)
+npm run linters:fix # Runs prettier:fix → lint:fix → type-check → test (~10-15s total)
 ```
 
 **IMPORTANT TIMINGS:** Most commands are fast (<5s), but initial npm install can take 20+ seconds.
@@ -119,25 +119,6 @@ VITE_API_URL=http://127.0.0.1:3000  # API base URL
 
 1. **Path Aliases:** Use `@/` prefix for imports (e.g., `import { Button } from "@/components/core"`)
 2. **TailwindCSS v4:** Uses new Vite plugin integration, not traditional config file
-
-## Testing Guidelines
-
-- **Location:** Place test files in `__tests__` directories next to components
-- **Naming:** Use `.spec.tsx` or `.spec.ts` extensions
-- **Tools:** Import from `@/test/test-utils` not `@testing-library/react`
-- **API Mocking:** Use MSW handlers in `src/test/handlers/[feature]/`
-- **Test Data:** Use dummy data from `src/test/store/[feature]/`
-
-### Testing Patterns
-
-- **Location:** Place test files in `__tests__` directories next to components
-- **Naming:** Use `.spec.tsx` or `.spec.ts` extensions
-- **Tools:** Import from `@/test/test-utils` not `@testing-library/react`
-- **API Mocking:** Use MSW handlers in `src/test/handlers/[feature]/`
-- **Test Data:** Use dummy data from `src/test/store/[feature]/`
-- For best practices when testing, refer to `.github/instructions/testing.instructions.md`
-- Use `describe` blocks to group related tests.
-- Use `it` blocks for individual test cases.
 
 ## Code Quality Standards
 
