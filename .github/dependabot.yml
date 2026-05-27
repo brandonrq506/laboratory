@@ -30,6 +30,15 @@ updates:
       tanstack-libraries:
         patterns:
           - "@tanstack/*"
+      eslint:
+        patterns:
+          - "eslint*"
+          - "@eslint/*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react*"
 
   # Keep the SHA-pinned actions in dependabot-ci.yml current.
   - package-ecosystem: "github-actions"
