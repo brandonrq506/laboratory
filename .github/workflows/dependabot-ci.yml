@@ -21,7 +21,7 @@ jobs:
     steps:
       # Actions pinned to full commit SHAs (mutable tags are a supply-chain
       # vector). Dependabot's github-actions ecosystem keeps these current.
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Setup Node.js
         uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
