@@ -8,6 +8,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Least privilege: this workflow only reads code to lint/test it.
+permissions:
+  contents: read
+
 jobs:
   validate:
     # Run on any PR except those authored by brandonrq506
@@ -15,16 +19,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
+      # Actions pinned to full commit SHAs (mutable tags are a supply-chain
+      # vector). Dependabot's github-actions ecosystem keeps these current.
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Setup Node.js
-        uses: actions/setup-node@v4.1.0
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
           node-version-file: ".tool-versions"
           cache: "npm"
 
       - name: Install dependencies
-        run: npm install
+        # `ci` installs exactly what's locked (no re-resolution); `--ignore-scripts`
+        # blocks install-time payloads. Lint/test don't need the postinstall build.
+        run: npm ci --ignore-scripts
 
       - run: npm run prettier
       - run: npm run lint

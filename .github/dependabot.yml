@@ -9,6 +9,17 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+    # Supply-chain defense: let newly published versions age before proposing
+    # them. Malicious npm releases are typically caught and pulled within hours.
+    # Only affects version updates -- security updates are still opened immediately.
+    cooldown:
+      default-days: 7
+      semver-major-days: 14
+      semver-minor-days: 7
+      semver-patch-days: 5
     groups:
       testing-libraries:
         patterns:
@@ -19,3 +30,14 @@ updates:
       tanstack-libraries:
         patterns:
           - "@tanstack/*"
+
+  # Keep the SHA-pinned actions in dependabot-ci.yml current.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    cooldown:
+      default-days: 7
