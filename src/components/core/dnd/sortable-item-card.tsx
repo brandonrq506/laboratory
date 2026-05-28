@@ -1,21 +1,31 @@
 import { useSortable } from "@dnd-kit/sortable";
 
 import { CSS } from "@dnd-kit/utilities";
-import { Card } from "@/components/layout";
-import { DragHandle } from "./drag-handle";
 
 import clsx from "clsx";
 
+import { CardShell } from "./card-shell";
+import { DragHandle } from "./drag-handle";
+
+/*
+  Why `itemId` supports both string and number?
+  If a wrapper for routine_application_id = 42 shared the integer 42 with a task of id = 42, they'd
+  collide. To ensure this never occurs, we support `wrap:${appId}` as a synthetic id for routine applications.
+
+*/
+
 type Props = {
-  itemId: number;
+  itemId: string | number;
   children: React.ReactNode;
   shadowStyle?: string;
+  className?: string;
 };
 
 export const SortableItemCard = ({
   itemId,
   children,
   shadowStyle = "shadow-xs",
+  className,
 }: Props) => {
   const {
     attributes,
@@ -34,22 +44,24 @@ export const SortableItemCard = ({
   };
 
   return (
-    <div ref={setNodeRef} style={style} className="relative">
-      <Card
-        className={clsx(
-          "flex justify-between transition-transform duration-100",
-          shadowStyle,
-          isDragging && ["z-20 scale-105 border border-indigo-700 shadow-2xl"],
-        )}>
-        <div className="flex grow items-center gap-2">
-          <DragHandle
-            attributes={attributes}
-            listeners={listeners}
-            setActivatorNodeRef={setActivatorNodeRef}
-          />
-          {children}
-        </div>
-      </Card>
-    </div>
+    <CardShell
+      outerRef={setNodeRef}
+      style={style}
+      className={className}
+      shadowStyle={shadowStyle}
+      cardClassName={clsx(
+        "transition-transform duration-100",
+        isDragging && "opacity-40",
+      )}
+      handle={
+        <DragHandle
+          attributes={attributes}
+          listeners={listeners}
+          setActivatorNodeRef={setActivatorNodeRef}
+          isHidden={isDragging}
+        />
+      }>
+      {children}
+    </CardShell>
   );
 };

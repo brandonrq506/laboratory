@@ -6,6 +6,8 @@ export { EditScheduledTaskForm } from "./EditScheduledTaskForm";
 export { ExampleCompletedTask } from "./ExampleCompletedTask";
 export { FutureScheduledTaskContent } from "./future-scheduled-task-content";
 export { PerformanceSummaryCard } from "./PerformanceSummaryCard";
+export { ScheduledTaskRow } from "./scheduled-task-row";
+export { ScheduledTaskRowOverlay } from "./scheduled-task-row-overlay";
 export { SortableTaskList } from "./SortableTaskList";
 export { TaskList } from "./TaskList";
 export { TimerScheduledTaskContent } from "./timer-scheduled-task-content";

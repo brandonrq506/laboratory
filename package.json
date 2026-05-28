@@ -20,7 +20,7 @@
     "test:expert": "DEBUG_PRINT_LIMIT=10000 npm run test",
     "test:ui": "vitest --ui",
     "type-check": "tsc --noEmit",
-    "linters:fix": "npm run prettier:fix && npm run lint:fix && npm run type-check && npm run test"
+    "linters": "npm run prettier:fix && npm run lint:fix && npm run type-check && npm run test"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
