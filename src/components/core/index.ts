@@ -19,6 +19,7 @@ export { RainbowBadge } from "./Badge/rainbow-badge";
 export { ResponsiveButton } from "./Button/responsive-button";
 export { ResponsiveLinkButton } from "./Button/responsive-link-button";
 export { SortableItemCard } from "./dnd/sortable-item-card";
+export { SortableItemCardOverlay } from "./dnd/sortable-item-card-overlay";
 export { SortIcon } from "./Table/SortIcon";
 export { ThreeDotsMenu } from "./Menu/ThreeDotsMenu";
 export { Toggle } from "./Toggle/Toggle";

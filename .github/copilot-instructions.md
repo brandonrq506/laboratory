@@ -51,7 +51,7 @@ npm run test:expert  # Enhanced debugging output
 ### 5. Complete Validation
 
 ```bash
-npm run linters:fix # Runs prettier:fix → lint:fix → type-check → test (~10-15s total)
+npm run linters # Runs prettier:fix → lint:fix → type-check → test (~10-15s total)
 ```
 
 **IMPORTANT TIMINGS:** Most commands are fast (<5s), but initial npm install can take 20+ seconds.
