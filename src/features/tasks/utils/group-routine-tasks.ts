@@ -15,8 +15,8 @@ import { wrapSortableId } from "@/features/routines/utils/wrap-sortable-id";
  */
 /** Rule 1: minimum members in a group before wrapping is worth doing. */
 export const MIN_TASKS_TO_WRAP = 2;
-/** Rule 2: earliest grouped-list position the first member is allowed to sit at. */
-export const WRAP_POINT = 4;
+/** Rule 2: earliest grouped-list position the first member is allowed to sit at. Can't be one */
+export const WRAP_POINT = 3;
 /** Rule 3: max foreign tasks tolerated in any single gap between members. */
 export const WRAP_TOLERANCE = 1;
 /** Rule 4: max total foreign tasks the wrap card can absorb in its span. */
