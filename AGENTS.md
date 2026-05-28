@@ -98,7 +98,7 @@ src/
 
 ## Verification instructions
 
-- Make sure you run `npm run linters:fix` to ensure code quality and correctness.
+- Make sure you run `npm run linters` to ensure code quality and correctness.
 - Review the diff changes, consider this a 'refactor' step in the implementation process.
 - Once you have finished the whole implementation, pass your changed files through the `qa.instructions.md` file for review.
 
