@@ -271,10 +271,10 @@ describe("groupRoutineTasks — E. Reactive re-evaluation (post-mutation arrays)
   it("E1: removing a leading manual drops group below WRAP_POINT — auto-unwrap", () => {
     const tasks = [
       makeTask({ id: 2 }),
-      makeTask({ id: 3 }),
       makeTask({ id: 4, applicationId: 1 }),
       makeTask({ id: 5, applicationId: 1 }),
       makeTask({ id: 6, applicationId: 1 }),
+      makeTask({ id: 3 }),
     ];
     const result = groupRoutineTasks(tasks);
     expect(kinds(result)).toEqual(Array(5).fill("task"));
