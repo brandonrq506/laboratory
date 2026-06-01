@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import { AxiosError, InternalAxiosRequestConfig } from "axios";
 
 import { REFRESH_ENDPOINT, apiV1 } from "./axios";
 
@@ -10,16 +10,12 @@ declare module "axios" {
 }
 
 const UNAUTHORIZED = 401;
-
-type FailedRequest = {
-  resolve: (token: string) => void;
-  reject: (error: unknown) => void;
-};
+const BEARER_PREFIX = "Bearer ";
 
 let accessToken: string | null = null;
 let logoutHandler: () => void = () => {};
-let isRefreshing = false;
-let failedQueue: FailedRequest[] = [];
+// A single in-flight refresh shared by every request that 401s concurrently.
+let refreshPromise: Promise<string> | null = null;
 
 export const setAccessToken = (token: string | null) => {
   accessToken = token;
@@ -29,71 +25,90 @@ export const setLogoutHandler = (handler: () => void) => {
   logoutHandler = handler;
 };
 
-const processQueue = (error: unknown, token: string | null) => {
-  failedQueue.forEach(({ resolve, reject }) => {
-    if (error) {
-      reject(error);
-    } else {
-      resolve(token!);
-    }
-  });
-  failedQueue = [];
+/* Single-flight refresh: concurrent callers share one request, so the backend
+   rotates tokens exactly once per expiry instead of once per pending request.
+   The backend rotates the access token on every refresh, which instantly
+   invalidates the previous one — so a second, overlapping refresh would yank a
+   just-issued token out from under an in-flight retry and trigger a spurious
+   logout. Keeping refresh single-flight removes that race. */
+export const refreshAccessToken = (): Promise<string> => {
+  if (!refreshPromise) {
+    refreshPromise = apiV1
+      .post<{ access_token: string }>(REFRESH_ENDPOINT, undefined, {
+        _skipAuthRefresh: true,
+      })
+      .then((res) => {
+        accessToken = res.data.access_token;
+        return accessToken;
+      })
+      .finally(() => {
+        refreshPromise = null;
+      });
+  }
+
+  return refreshPromise;
 };
 
-const refreshToken = async (): Promise<string> => {
-  const response = await apiV1.post<{ access_token: string }>(REFRESH_ENDPOINT);
-  return response.data.access_token;
+const tokenSentWith = (config: InternalAxiosRequestConfig): string | null => {
+  const header = config.headers.get("Authorization");
+  return typeof header === "string" && header.startsWith(BEARER_PREFIX)
+    ? header.slice(BEARER_PREFIX.length)
+    : null;
 };
 
 const handleResponseError = async (error: AxiosError) => {
-  if (!error.config) return Promise.reject(error);
-
   const originalRequest = error.config;
 
-  const shouldSkip =
-    error.response?.status !== UNAUTHORIZED ||
-    originalRequest._retry ||
-    originalRequest.url === REFRESH_ENDPOINT ||
-    originalRequest._skipAuthRefresh;
-
-  if (shouldSkip) {
-    if (originalRequest._retry && error.response?.status === UNAUTHORIZED) {
-      logoutHandler();
-    }
+  if (!originalRequest || error.response?.status !== UNAUTHORIZED) {
     return Promise.reject(error);
   }
 
-  if (isRefreshing) {
+  /* The refresh/login calls authenticate by other means; never recurse on them.
+     Their failure is surfaced to the caller, which decides whether to log out. */
+  if (
+    originalRequest._skipAuthRefresh ||
+    originalRequest.url === REFRESH_ENDPOINT
+  ) {
+    return Promise.reject(error);
+  }
+
+  /* A concurrent refresh already rotated the token after this request was sent.
+     Retry with the current token instead of forcing another rotation — this is
+     what stops a straggler from invalidating a freshly-issued token. */
+  if (
+    !originalRequest._retry &&
+    accessToken &&
+    accessToken !== tokenSentWith(originalRequest)
+  ) {
     originalRequest._retry = true;
-    return new Promise<string>((resolve, reject) => {
-      failedQueue.push({ resolve, reject });
-    }).then((newToken) => {
-      originalRequest.headers.set("Authorization", `Bearer ${newToken}`);
-      return apiV1(originalRequest);
-    });
+    originalRequest.headers.set(
+      "Authorization",
+      `${BEARER_PREFIX}${accessToken}`,
+    );
+    return apiV1(originalRequest);
+  }
+
+  // Already retried with a fresh token and still rejected → genuinely unauthorized.
+  if (originalRequest._retry) {
+    logoutHandler();
+    return Promise.reject(error);
   }
 
   originalRequest._retry = true;
-  isRefreshing = true;
 
   try {
-    const newToken = await refreshToken();
-    accessToken = newToken;
-    processQueue(null, newToken);
-    originalRequest.headers.set("Authorization", `Bearer ${newToken}`);
+    const newToken = await refreshAccessToken();
+    originalRequest.headers.set("Authorization", `${BEARER_PREFIX}${newToken}`);
     return apiV1(originalRequest);
   } catch (refreshError) {
-    processQueue(refreshError, null);
     logoutHandler();
     return Promise.reject(refreshError);
-  } finally {
-    isRefreshing = false;
   }
 };
 
 apiV1.interceptors.request.use((config) => {
   if (accessToken) {
-    config.headers.set("Authorization", `Bearer ${accessToken}`);
+    config.headers.set("Authorization", `${BEARER_PREFIX}${accessToken}`);
   }
   return config;
 });
@@ -103,6 +118,5 @@ apiV1.interceptors.response.use((response) => response, handleResponseError);
 export const resetInterceptors = () => {
   accessToken = null;
   logoutHandler = () => {};
-  isRefreshing = false;
-  failedQueue = [];
+  refreshPromise = null;
 };
