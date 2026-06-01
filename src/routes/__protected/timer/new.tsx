@@ -5,6 +5,7 @@ import { NewTodayCompletedTaskForm } from "@/pages/Tasks/NewTodayCompletedTaskFo
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/__protected/timer/new")({
+  staticData: { modal: true },
   component: RouteComponent,
 });
 

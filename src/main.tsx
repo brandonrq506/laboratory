@@ -19,16 +19,35 @@ const router = createRouter({
   defaultPreload: "intent",
   defaultStructuralSharing: true,
   defaultPreloadStaleTime: 0,
+  /*
+    Scroll behavior. Standard pages reset to the top: the default per-entry scroll key
+    makes every forward navigation a cache miss, so the window scrolls to top even on
+    revisit. Modal pages, rendered over an index page's <Outlet/>, keep scroll — returning
+    false leaves scroll untouched on open, and closing the modal (history back) restores it.
+  */
+  // eslint-disable-next-line no-use-before-define
+  scrollRestoration: ({ location }) => !isModalLocation(location.pathname),
   context: {
     ...TanStackQueryProviderContext,
     auth: undefined!,
   },
 });
 
+// True when the matched route chain is flagged `staticData: { modal: true }`.
+function isModalLocation(pathname: string): boolean {
+  return router
+    .getMatchedRoutes(pathname)
+    .matchedRoutes.some((route) => route.options.staticData?.modal === true);
+}
+
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router;
+  }
+  // Lets modal routes declare `staticData: { modal: true }` to opt out of scroll reset.
+  interface StaticDataRouteOption {
+    modal?: boolean;
   }
 }
 
