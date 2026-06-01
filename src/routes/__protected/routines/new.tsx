@@ -5,6 +5,7 @@ import { Modal } from "@/components/core";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/__protected/routines/new")({
+  staticData: { modal: true },
   component: RouteComponent,
 });
 

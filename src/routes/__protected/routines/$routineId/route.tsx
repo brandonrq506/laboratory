@@ -3,6 +3,7 @@ import { routineByIdQueryOptions } from "@/features/routines/api/queries";
 import { validateIdParam } from "@/utils";
 
 export const Route = createFileRoute("/__protected/routines/$routineId")({
+  staticData: { modal: true },
   params: validateIdParam("routineId"),
   loader: ({ context: { queryClient }, params: { routineId } }) =>
     queryClient.ensureQueryData(routineByIdQueryOptions(routineId)),

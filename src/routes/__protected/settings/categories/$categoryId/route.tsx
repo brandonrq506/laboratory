@@ -5,6 +5,7 @@ import { validateIdParam } from "@/utils";
 export const Route = createFileRoute(
   "/__protected/settings/categories/$categoryId",
 )({
+  staticData: { modal: true },
   params: validateIdParam("categoryId"),
   loader: ({ context: { queryClient }, params: { categoryId } }) =>
     queryClient.ensureQueryData(categoryByIdQueryOptions(categoryId)),

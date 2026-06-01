@@ -8,6 +8,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { getFirstCategoryAsOption } from "@/features/categories/utils";
 
 export const Route = createFileRoute("/__protected/activities/new")({
+  staticData: { modal: true },
   loader: ({ context }) =>
     context.queryClient.ensureQueryData(categoryListQueryOptions()),
   component: RouteComponent,

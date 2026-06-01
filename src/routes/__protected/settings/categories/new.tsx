@@ -5,6 +5,7 @@ import { Modal } from "@/components/core/Modal/Modal";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/__protected/settings/categories/new")({
+  staticData: { modal: true },
   component: RouteComponent,
 });
 
