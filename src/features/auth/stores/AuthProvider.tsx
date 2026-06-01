@@ -6,8 +6,11 @@ import {
   useState,
 } from "react";
 
-import { REFRESH_ENDPOINT, apiV1 } from "@/libs/axios";
-import { setAccessToken, setLogoutHandler } from "@/libs/auth-interceptors";
+import {
+  refreshAccessToken,
+  setAccessToken,
+  setLogoutHandler,
+} from "@/libs/auth-interceptors";
 import { AuthContext } from "./AuthContext";
 import { Loading } from "@/components/core";
 
@@ -34,16 +37,15 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     if (hasAttemptedRefresh.current) return;
     hasAttemptedRefresh.current = true;
 
-    apiV1
-      .post<{ access_token: string }>(REFRESH_ENDPOINT)
-      .then((res) => login(res.data.access_token))
+    refreshAccessToken()
+      .then(() => setIsAuth(true))
       .catch((error: unknown) => {
         if (import.meta.env.DEV && import.meta.env.MODE !== "test") {
           console.error("Initial token refresh failed:", error);
         }
       })
       .finally(() => setIsLoading(false));
-  }, [login]);
+  }, []);
 
   if (isLoading)
     return (
