@@ -36,7 +36,7 @@ function RouteComponent() {
           />
         </div>
         <div className="flex min-h-0 flex-1 flex-col gap-6">
-          <div className="flex-1 overflow-y-auto px-3 [scrollbar-gutter:stable]">
+          <div className="flex-1 scrollbar-gutter-stable overflow-y-auto px-3">
             <RoutineItemList />
           </div>
           <EditRoutineActions />
