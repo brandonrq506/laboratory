@@ -14,8 +14,6 @@ permissions:
 
 jobs:
   validate:
-    # Run on any PR except those authored by brandonrq506
-    if: github.event.pull_request.author.login != 'brandonrq506'
     runs-on: ubuntu-latest
 
     steps:
@@ -35,4 +33,8 @@ jobs:
 
       - run: npm run prettier
       - run: npm run lint
+      # Type-check is the gate that catches dependency bumps which break types but
+      # still pass lint/test (e.g. SemVer-minor TS changes). Critical once auto-merge
+      # is on, since green CI is the only check before main.
+      - run: npm run type-check
       - run: npm run test
