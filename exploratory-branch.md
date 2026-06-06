@@ -2,9 +2,9 @@
 
 ## First example - Stack
 
-1. You can use Claude without tests, but that's dangerous and it will bit you.
-2. You can follow conventional TDD, but that burns tokens, burns cycles and is not the best for an AI. This is more for humans.
-3. The best seems to be `bundling` when we write a few tests, then a little of code, then a little of tests, and a little of code.
+1. You can use Claude without tests, but that's dangerous and it will bite you.
+2. You can follow conventional TDD, but that burns tokens, burns cycles, and is not the best for an AI. This is more for humans.
+3. The best seems to be `bundling`: write a few tests, then a little code, then a few more tests, then a little more code.
 
 ## How to talk to Claude in an Inteligent way
 
