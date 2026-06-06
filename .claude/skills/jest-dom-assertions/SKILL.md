@@ -20,7 +20,7 @@ element. Prefer them over poking at attributes, properties, or the raw DOM — t
 matcher gives a clearer failure message and survives DOM/ARIA details changing.
 
 Matchers are auto-registered via `src/test/setup.ts`, so just use them. Tests run
-on Vitest; `expect`/`screen` are global.
+on Vitest; `expect` is global; import `screen` from `@testing-library/react` (or `src/test/test-utils`).
 
 ## The rule: assert through the element, not its internals
 
