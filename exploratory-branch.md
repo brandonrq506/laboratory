@@ -6,14 +6,14 @@
 2. You can follow conventional TDD, but that burns tokens, burns cycles, and is not the best for an AI. This is more for humans.
 3. The best seems to be `bundling`: write a few tests, then a little code, then a few more tests, then a little more code.
 
-## How to talk to Claude in an Inteligent way
+## How to talk to Claude in an intelligent way
 
-Here Bob is using a Skill called `test-driven development` and he mentioned it asked to follow TDD loosely.
+Here Bob is using a skill called `test-driven development`, and he mentioned it asked to follow TDD loosely.
 
 Notice how easy it is to just converse with Claude.
-Notice also how imprecise the directives where. Don't go to the limit of N, use a large prime, etc.
+Notice also how imprecise the directives were. Don't go to the limit of N, use a large prime, etc.
 
-Question: Where do the precision come from?
+Question: Where does the precision come from?
 
 ## Legacy code
 
