@@ -1,6 +1,6 @@
 ---
 name: react-memo-callback-best-practices
-description: "Use when optimizing React hooks performance with useMemo and useCallback. Use for code review, writing optimized hooks, or debugging performance issues. Emphasizes: these are last-resort optimizations; prefer composition, state lifting, dependency management first."
+description: "Use when adding, reviewing, or removing useMemo/useCallback/React.memo in React code. Trigger on: 'should I useMemo this', 'memoize this callback', 'too many re-renders', 'optimize this hook', code review of hook-heavy components, or debugging render performance. Emphasizes: last-resort optimizations — prefer composition, state lifting, dependency management first. Do NOT trigger for: general state structure, lifting, or context design (use react-state-handling), or writing new components with no performance concern."
 argument-hint: "Describe the performance issue or hook usage you want to review"
 ---
 
@@ -80,16 +80,21 @@ Try this (and state-lifting) **before** reaching for any of the hooks below.
 
 **Honest use case:** Preventing a useEffect from re-running needlessly, or memoizing event handlers in sorted/virtualized lists.
 
-## Before Using These Hooks: Checklist
+## Before Using These Hooks: Two Gates
 
-- [ ] Did I actually measure the perf problem? (DevTools Profiler → Ranked Chart)
-- [ ] Is the parent component heavy to re-render, or is it just the children?
+**Gate 1 — evidence (must ALL be YES):**
+
+- [ ] Did I measure the perf problem? (DevTools Profiler → Ranked Chart)
+- [ ] Did I identify which component is actually expensive — the parent itself, not just the children?
+
+**Gate 2 — alternatives exhausted (must ALL be NO):**
+
 - [ ] Can I lift state so fewer components re-render?
-- [ ] Can I restructure JSX to reduce scope of re-renders?
-- [ ] Do deps change too often? Can I stabilize them?
-- [ ] Are object/array props created inline? Can I move them outside JSX?
+- [ ] Can I restructure JSX (composition/children) to reduce re-render scope?
+- [ ] Can I stabilize deps that change too often?
+- [ ] Can I move inline object/array props outside JSX?
 
-If all answers are "no", then proceed.
+Proceed only if Gate 1 is all YES and Gate 2 is all NO.
 
 ## Usage Patterns & Pitfalls
 
@@ -107,7 +112,7 @@ const filteredItems = useMemo(
         item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
         (filters.status === "all" || item.status === filters.status),
     ),
-  [items, searchTerm, filters, sortBy],
+  [items, searchTerm, filters],
 );
 
 // ❌ Wrong deps: missing dependency
@@ -167,21 +172,23 @@ const handleChange = useCallback(
 - **Problem:** `useCallback(a)` has `b` in deps, then `b` is `useCallback(...)`.
 - **Fix:** Stop chaining; stable deps come from props/state, not other callbacks.
 
-### Premature optimization
-
-- **Problem:** Added 3 hooks to save 0.5ms re-render.
-- **Fix:** Measure first; most apps are fast enough with plain React.
-
-### Forgetting cleanup
-
-- **Problem:** useMemo holding stale reference after unmount.
-- **Fix:** Unlikely if deps are correct, but consider lifecycle.
-
 ## Measurement: How to Verify
 
 1. **Chrome DevTools** → Performance tab → Record → Interact → Check flamechart
 2. **React DevTools Profiler** → Highlight/rank → See actual component render times
 3. **Ask:** Is the re-render > 16ms? Does it cause visual stutter? If no, optimize elsewhere.
+
+## Output: When Reviewing Code
+
+For each useMemo/useCallback/memo finding:
+
+1. **Cite the line** and quote the hook usage
+2. **Verdict:** `unnecessary` | `legitimate` | `wrong-deps` | `replace-with-composition`
+3. **Alternative first:** name the non-hook fix considered (composition, state lifting, dep stabilization) and why it does/doesn't apply
+4. **Corrected snippet** when verdict is not `legitimate`
+
+Order findings: composition/state-lifting opportunities first, hook fixes second.
+Before delivering, confirm every finding has a line citation and a named alternative.
 
 ## In Laboratory Context
 
@@ -212,6 +219,13 @@ const activeFilters = useMemo(
 const filters = { active: true, category: selectedCategory };
 <TaskList filters={filters} ... />
 ```
+
+## Hard Rules
+
+- NEVER add useMemo/useCallback without measured evidence of a real perf problem
+- ALWAYS propose a composition or state-lifting alternative before any hook fix
+- NEVER silence or ignore ESLint `exhaustive-deps` warnings
+- NEVER memoize simple derived state (e.g., `items.length === 0`)
 
 ## References
 
