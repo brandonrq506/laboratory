@@ -172,13 +172,13 @@ Show the user the following. **Wait for their response before writing a single f
 > Why: [one sentence tied to Goal Statement]
 
 Before:
-```
+````
 [exact current snippet from the skill, with line reference]
-```
+````
 After:
-```
+````
 [exact proposed replacement]
-```
+````
 
 **Change 2 — ...**
 [same format]
