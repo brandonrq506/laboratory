@@ -8,8 +8,7 @@ description: |
   "improve [skill name]", "make the skill faster", "la skill está lenta",
   "mejorar la calidad de la skill", "optimiza [nombre]", "/skill-optimizer",
   or any request to improve quality, speed, clarity, or precision of a SKILL.md.
-  Do NOT trigger for: "create a new skill", "write a skill from scratch", "review
-  this PR", "evaluate my E2E tests", "run a QA audit".
+  Do NOT trigger for: "create a new skill", "write a skill from scratch", "review this PR", "evaluate my E2E tests", "run a QA audit".
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, Agent]
 ---
 
