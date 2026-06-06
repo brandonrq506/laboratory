@@ -103,7 +103,7 @@ Present the results to the user with your findings and recommendations.
 
 Use this exact structure:
 
-```markdown
+````markdown
 ## [Skill Name] Optimization Report
 
 ### Score Summary
@@ -120,7 +120,7 @@ Use this exact structure:
 ### Preserved
 - ✓ Goal: [one sentence]
 - ✓ Output: [type of artifact]
-```
+````
 
 **Before delivering, verify the report contains:**
 - [ ] Score table with all 9 dimensions filled in
