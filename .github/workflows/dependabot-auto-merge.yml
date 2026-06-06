@@ -1,0 +1,50 @@
+name: Dependabot auto-merge
+
+on: pull_request
+
+# Dependabot-triggered runs get a read-only GITHUB_TOKEN by default; enabling
+# auto-merge needs write access to contents and pull requests.
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    # Only act on Dependabot's own PRs, and only when the PR branch lives in THIS
+    # repo (not a fork). Public-repo fork PRs already get a read-only token on
+    # `pull_request`, but the head-repo check makes "same-repo only" explicit and
+    # short-circuits the whole job. Dependabot always opens same-repo branches, so
+    # this never rejects a legitimate Dependabot PR.
+    if: >-
+      github.event.pull_request.user.login == 'dependabot[bot]' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+
+    steps:
+      # Actions pinned to full commit SHAs (mutable tags are a supply-chain vector).
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
+        with:
+          github-token: "${{ github.token }}"
+
+      # Scope: npm dev dependencies, patch/minor only -- never major, never prod deps.
+      #   - dependency-type == direct:development excludes prod deps, mixed prod+dev
+      #     groups, and the github-actions ecosystem (all stay manual, the safe default).
+      #   - update-type is the HIGHEST semver bump in the PR, so a group containing any
+      #     major bump reports semver-major and is skipped.
+      # --auto queues the merge; it lands only after the required CI check passes.
+      # --match-head-commit ties enablement to the exact commit whose metadata we
+      # just read: if Dependabot pushed a newer commit while this run was in flight,
+      # the head no longer matches and the command fails (the newer run handles it),
+      # closing the check-vs-use gap.
+      - name: Enable auto-merge (dev deps, patch/minor only)
+        if: >-
+          steps.metadata.outputs.dependency-type == 'direct:development' &&
+          (steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+           steps.metadata.outputs.update-type == 'version-update:semver-minor')
+        run: gh pr merge --auto --squash --match-head-commit "$PR_SHA" "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_SHA: ${{ github.event.pull_request.head.sha }}
+          GH_TOKEN: ${{ github.token }}
