@@ -73,7 +73,7 @@
     "jsdom-testing-mocks": "^1.16.0",
     "msw": "^2.14.6",
     "prettier": "^3.8.5",
-    "prettier-plugin-tailwindcss": "^0.8.0",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.62.1",
