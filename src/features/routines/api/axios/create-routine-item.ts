@@ -15,8 +15,7 @@ interface CreateNestedRoutineItemPayload extends BaseCreateRoutineItemPayload {
 }
 
 type CreateRoutineItemPayload =
-  | CreateRoutineActivityPayload
-  | CreateNestedRoutineItemPayload;
+  CreateRoutineActivityPayload | CreateNestedRoutineItemPayload;
 
 export const createRoutineItem = async (payload: CreateRoutineItemPayload) => {
   const URL = `${ROUTINES_ENDPOINT}/${payload.routineId}/items`;

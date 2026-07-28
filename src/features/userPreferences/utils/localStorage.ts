@@ -19,8 +19,7 @@ export const savePreferencesToLocalStorage = (
  * Gets user preferences from local storage
  */
 export const getPreferencesFromLocalStorage = ():
-  | UserPreference[]
-  | undefined => {
+  UserPreference[] | undefined => {
   try {
     const preferences = localStorage.getItem(PREFERENCES_KEY);
     return preferences ? JSON.parse(preferences) : undefined;

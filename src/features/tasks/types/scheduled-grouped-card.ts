@@ -31,6 +31,4 @@ type ExpandedCard = {
 export type ScheduledGroupedItem = PlainScheduledCard | WrappedRoutineCard;
 
 export type ScheduledRenderItem =
-  | PlainScheduledCard
-  | WrappedRoutineCard
-  | ExpandedCard;
+  PlainScheduledCard | WrappedRoutineCard | ExpandedCard;
