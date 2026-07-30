@@ -9,9 +9,11 @@ import { Outlet } from "@tanstack/react-router";
 import { Sidebar } from "./Sidebar/Sidebar";
 import clsx from "clsx";
 
+import { USER_PREFERENCE_KEY } from "@/features/userPreferences/types/userPreferenceKeys";
+
 export const MainLayout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const sidebarPreference = useUserPreference("sidebar_open");
+  const sidebarPreference = useUserPreference(USER_PREFERENCE_KEY.SIDEBAR_OPEN);
   const isDesktopSidebarOpen = sidebarPreference?.value === "true";
 
   return (

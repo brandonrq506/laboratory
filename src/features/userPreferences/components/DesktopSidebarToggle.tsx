@@ -4,8 +4,10 @@ import { useUserPreference } from "../hooks";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import { IconButton } from "@/components/core/Button/IconButton";
 
+import { USER_PREFERENCE_KEY } from "@/features/userPreferences/types/userPreferenceKeys";
+
 export const DesktopSidebarToggle = () => {
-  const sidebar_open = useUserPreference("sidebar_open");
+  const sidebar_open = useUserPreference(USER_PREFERENCE_KEY.SIDEBAR_OPEN);
   const { mutate } = useUpdateUserPreference();
 
   if (sidebar_open === undefined) return null;
@@ -13,7 +15,7 @@ export const DesktopSidebarToggle = () => {
   const isOpen = sidebar_open.value === "true";
 
   const handleToggle = () => {
-    mutate({ key: "sidebar_open", value: String(!isOpen) });
+    mutate({ key: USER_PREFERENCE_KEY.SIDEBAR_OPEN, value: String(!isOpen) });
   };
 
   return (

@@ -5,7 +5,7 @@ import { ADD } from "@/constants/actions";
 import { ROUTINE } from "@/constants/entities";
 import { RoutineForm } from "./RoutineForm";
 
-import { RoutineForm as RoutineFormType } from "../types/routineForm";
+import type { RoutineForm as RoutineFormType } from "../types/routineForm";
 
 export const CreateRoutineForm = () => {
   const navigate = useNavigate();

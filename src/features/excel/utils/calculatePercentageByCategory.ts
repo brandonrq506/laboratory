@@ -1,5 +1,5 @@
 import type { CategoryModel } from "@/features/categories/types/category-model";
-import { ExcelTableRow } from "../types/excelTableRow";
+import type { ExcelTableRow } from "../types/excelTableRow";
 
 export const calculatePercentageByCategory = (
   data: ExcelTableRow[],

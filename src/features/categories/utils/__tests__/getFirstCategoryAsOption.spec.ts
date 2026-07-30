@@ -1,6 +1,8 @@
 import type { CategoryModel } from "../../types/category-model";
 import { getFirstCategoryAsOption } from "../getFirstCategoryAsOption";
 
+import { COLOR_NAME } from "@/features/colors/types/colors";
+
 describe("getFirstCategoryAsOption", () => {
   it("should return null if categories is undefined", () => {
     const categories = undefined;
@@ -19,7 +21,7 @@ describe("getFirstCategoryAsOption", () => {
       {
         id: 1,
         name: "Category 1",
-        color: "white",
+        color: COLOR_NAME.WHITE,
         created_at: "",
         updated_at: "",
         user_id: 1,
@@ -27,7 +29,7 @@ describe("getFirstCategoryAsOption", () => {
       {
         id: 2,
         name: "Category 2",
-        color: "white",
+        color: COLOR_NAME.WHITE,
         created_at: "",
         updated_at: "",
         user_id: 1,

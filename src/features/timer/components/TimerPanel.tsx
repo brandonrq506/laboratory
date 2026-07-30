@@ -2,23 +2,21 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { Card } from "@/components/layout";
 import { IdleTimer } from "./IdleTimer";
-import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
+import type { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
 import { RunningTimer } from "./RunningTimer";
 import { inProgressTasksQueryOptions } from "@/features/tasks/api/queries";
 
 export const TimerPanel = () => {
   const { data } = useSuspenseQuery(inProgressTasksQueryOptions());
 
-  const status = data === undefined || data.length === 0 ? "idle" : "active";
-  const isIdle = status === "idle";
-  const isActive = status === "active";
+  const isIdle = data === undefined || data.length === 0;
 
   const task = data[0] as InProgressTaskAPI;
 
   return (
     <Card className="sticky top-16 z-[1] lg:top-4">
       {isIdle && <IdleTimer />}
-      {isActive && <RunningTimer task={task} />}
+      {!isIdle && <RunningTimer task={task} />}
     </Card>
   );
 };

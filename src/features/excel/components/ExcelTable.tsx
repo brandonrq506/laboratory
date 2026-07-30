@@ -1,4 +1,4 @@
-import { ExcelTableRow } from "../types/excelTableRow";
+import type { ExcelTableRow } from "../types/excelTableRow";
 
 type Props = {
   excelData: ExcelTableRow[];

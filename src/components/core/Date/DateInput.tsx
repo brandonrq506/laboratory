@@ -2,7 +2,7 @@ import {
   Description,
   Field,
   Input,
-  InputProps,
+  type InputProps,
   Label,
 } from "@headlessui/react";
 import clsx from "clsx";

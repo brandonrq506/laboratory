@@ -1,5 +1,5 @@
 import { TASKS_ENDPOINT, apiV1 } from "@/libs/axios";
-import { CompletedTaskAPI } from "../../types/completedTask";
+import type { CompletedTaskAPI } from "../../types/completedTask";
 
 export const completeTask = async (task: CompletedTaskAPI) => {
   const URL = `${TASKS_ENDPOINT}/${task.id}`;

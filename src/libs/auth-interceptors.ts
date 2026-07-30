@@ -1,4 +1,4 @@
-import { AxiosError, InternalAxiosRequestConfig } from "axios";
+import type { AxiosError, InternalAxiosRequestConfig } from "axios";
 
 import { REFRESH_ENDPOINT, apiV1 } from "./axios";
 

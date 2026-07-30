@@ -1,15 +1,24 @@
-import { UseFormRegisterReturn } from "react-hook-form";
+import type { UseFormRegisterReturn } from "react-hook-form";
 
 import {
   Description,
   Field,
   Input,
-  InputProps,
+  type InputProps,
   Label,
 } from "@headlessui/react";
+import type { ObjectValues } from "@/types/core";
 import clsx from "clsx";
 
-type Types = "text" | "password" | "email" | "search" | "url";
+const INPUT_TYPE = {
+  TEXT: "text",
+  PASSWORD: "password",
+  EMAIL: "email",
+  SEARCH: "search",
+  URL: "url",
+} as const;
+
+type Types = ObjectValues<typeof INPUT_TYPE>;
 
 type TextField = InputProps;
 type CustomTextField = Omit<
@@ -49,7 +58,7 @@ export const TextInput = ({
   hideLabel = false,
   registration,
   showAsterisk = false,
-  type = "text",
+  type = INPUT_TYPE.TEXT,
   ...props
 }: Props) => {
   return (

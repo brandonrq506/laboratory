@@ -1,7 +1,7 @@
 import { EXCEL_ENDPOINT, apiV1 } from "@/libs/axios";
-import { ExcelTableRow } from "../../types/excelTableRow";
-import { QueryFunctionContext } from "@tanstack/react-query";
-import { excelKeys } from "../queries";
+import type { ExcelTableRow } from "../../types/excelTableRow";
+import type { QueryFunctionContext } from "@tanstack/react-query";
+import type { excelKeys } from "../queries";
 
 export const getExcel = async ({
   signal,

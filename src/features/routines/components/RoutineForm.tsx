@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/core";
 import { TextInput } from "@/components/form";
 
-import { RoutineForm as RoutineFormType } from "../types/routineForm";
+import type { RoutineForm as RoutineFormType } from "../types/routineForm";
 
 const defaultRoutine: RoutineFormType = {
   name: "",

@@ -1,4 +1,4 @@
-import { Option, StringOption } from "@/types/core";
+import type { Option, StringOption } from "@/types/core";
 
 export type SelectType = {
   description?: string;

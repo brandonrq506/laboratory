@@ -1,10 +1,10 @@
 import { useNavigateBack } from "@/hooks";
 import { useUpdateTask } from "../api/tanstack/useUpdateTask";
 
-import { CompletedTaskAPI } from "../types/completedTask";
+import type { CompletedTaskAPI } from "../types/completedTask";
 import { CompletedTaskForm } from "./CompletedTaskForm";
-import { CompletedTaskFormType } from "../types/completedTaskFormType";
-import { NavigateOptions } from "@tanstack/react-router";
+import type { CompletedTaskFormType } from "../types/completedTaskFormType";
+import type { NavigateOptions } from "@tanstack/react-router";
 
 type Props = {
   task: CompletedTaskAPI;

@@ -1,4 +1,4 @@
-import { BaseEntity } from "@/types/core";
+import type { BaseEntity } from "@/types/core";
 import { TaskEmptyList } from "./TaskEmptyList";
 
 type Props<T> = {

@@ -1,4 +1,4 @@
-import { Option } from "@/types/core";
+import type { Option } from "@/types/core";
 
 export const filterOptions = <T extends Option>(
   query: string,

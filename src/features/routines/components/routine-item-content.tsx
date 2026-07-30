@@ -7,6 +7,8 @@ import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 
 import type { RoutineItemWithExpectedStartTime } from "../types/routine-with-expected-time";
 
+import { ROUTINE_ITEM_TYPE } from "@/features/routines/types/routine-item";
+
 type Props = {
   routineId: number;
   item: RoutineItemWithExpectedStartTime;
@@ -17,7 +19,7 @@ export const RoutineItemContent = ({ routineId, item }: Props) => {
     <Fragment>
       <div className="flex grow items-center gap-2">
         {/* I need to find a better way to do this */}
-        {item.type === "activity" ? (
+        {item.type === ROUTINE_ITEM_TYPE.ACTIVITY ? (
           <Badge color={item.category_color}>{item.item_name}</Badge>
         ) : (
           <RainbowBadge>{item.item_name}</RainbowBadge>

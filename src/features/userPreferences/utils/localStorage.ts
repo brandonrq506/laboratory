@@ -1,4 +1,4 @@
-import { UserPreference } from "../types/userPreference";
+import type { UserPreference } from "../types/userPreference";
 
 const PREFERENCES_KEY = "preferences";
 
@@ -19,8 +19,7 @@ export const savePreferencesToLocalStorage = (
  * Gets user preferences from local storage
  */
 export const getPreferencesFromLocalStorage = ():
-  | UserPreference[]
-  | undefined => {
+  UserPreference[] | undefined => {
   try {
     const preferences = localStorage.getItem(PREFERENCES_KEY);
     return preferences ? JSON.parse(preferences) : undefined;

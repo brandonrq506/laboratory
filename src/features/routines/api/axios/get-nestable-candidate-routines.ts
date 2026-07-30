@@ -1,9 +1,9 @@
 import type { RoutineNestableCandidate } from "../../types/routine-nestable-candidates";
 
-import { QueryFunctionContext } from "@tanstack/react-query";
+import type { QueryFunctionContext } from "@tanstack/react-query";
 import { apiV1 } from "@/libs/axios";
 
-import { routineKeys } from "../queries";
+import type { routineKeys } from "../queries";
 
 export const getNestableCandidateRoutines = async ({
   signal,

@@ -1,5 +1,5 @@
 import { USER_PREFERENCES_ENDPOINT, apiV1 } from "@/libs/axios";
-import { UserPreferenceModel } from "../../types/userPreferenceModel";
+import type { UserPreferenceModel } from "../../types/userPreferenceModel";
 
 interface Props {
   key: string;

@@ -5,6 +5,8 @@ import clsx from "clsx";
 
 import type { SidebarLink } from "./links";
 
+import { USER_PREFERENCE_KEY } from "@/features/userPreferences/types/userPreferenceKeys";
+
 type SidebarItemProps = SidebarLink & {
   onClose: () => void;
 };
@@ -15,7 +17,7 @@ export const DesktopSidebarItem = ({
   onClose,
   ...linkProps
 }: SidebarItemProps) => {
-  const sidebarPreference = useUserPreference("sidebar_open");
+  const sidebarPreference = useUserPreference(USER_PREFERENCE_KEY.SIDEBAR_OPEN);
   const isOpen = sidebarPreference?.value === "true";
 
   const baseClasses = clsx(

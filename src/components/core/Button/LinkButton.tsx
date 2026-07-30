@@ -1,4 +1,4 @@
-import { Link, LinkProps } from "@tanstack/react-router";
+import { Link, type LinkProps } from "@tanstack/react-router";
 import clsx from "clsx";
 
 const sizes = {

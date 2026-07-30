@@ -1,5 +1,5 @@
 import { Badge, RainbowBadge } from "@/components/core";
-import type { RoutineItem } from "../types/routine-item";
+import { ROUTINE_ITEM_TYPE, type RoutineItem } from "../types/routine-item";
 import { secondsToTime } from "@/utils";
 
 interface Props {
@@ -11,7 +11,7 @@ export const RoutineCardItem = ({ item }: Props) => {
   return (
     <div className="my-1 flex justify-between">
       <div className="flex items-center gap-x-2">
-        {item.type === "activity" ? (
+        {item.type === ROUTINE_ITEM_TYPE.ACTIVITY ? (
           <>
             <Badge color={item.category_color}>{item.item_name}</Badge>
             <span className="text-xs text-gray-500">{item.category_name}</span>

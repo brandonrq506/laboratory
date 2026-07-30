@@ -8,8 +8,8 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
-import { Option } from "@/types/core";
-import { SelectType } from "./types";
+import type { Option } from "@/types/core";
+import type { SelectType } from "./types";
 import { clsx } from "clsx";
 
 type SelectRHFProps = {

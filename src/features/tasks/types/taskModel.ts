@@ -1,5 +1,5 @@
-import { BaseEntity } from "@/types/core";
-import { TaskStatus } from "./task-status";
+import type { BaseEntity } from "@/types/core";
+import type { TaskStatus } from "./task-status";
 
 export type TaskModel = BaseEntity & {
   activity_id: number;

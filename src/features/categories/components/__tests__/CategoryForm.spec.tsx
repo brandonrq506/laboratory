@@ -2,6 +2,8 @@ import { render, screen } from "@testing-library/react";
 import { CategoryForm } from "../CategoryForm";
 import userEvent from "@testing-library/user-event";
 
+import { COLOR_NAME } from "@/features/colors/types/colors";
+
 describe("CategoryForm", () => {
   it("shows all 14 colors as options", async () => {
     const user = userEvent.setup();
@@ -20,7 +22,7 @@ describe("CategoryForm", () => {
         onSubmit={vi.fn()}
         initialValues={{
           name: "Tester",
-          color: { value: 4, label: "emerald" },
+          color: { value: 4, label: COLOR_NAME.EMERALD },
         }}
       />,
     );
@@ -29,14 +31,13 @@ describe("CategoryForm", () => {
 
     expect(screen.getByLabelText("Name *")).toHaveValue("Tester");
 
-    expect(colorSelect).toHaveTextContent("emerald");
+    expect(colorSelect).toHaveTextContent(COLOR_NAME.EMERALD);
 
     await user.click(colorSelect);
 
-    expect(screen.getByRole("option", { name: "emerald" })).toHaveAttribute(
-      "aria-selected",
-      "true",
-    );
+    expect(
+      screen.getByRole("option", { name: COLOR_NAME.EMERALD }),
+    ).toHaveAttribute("aria-selected", "true");
   });
 
   it("requires a name", async () => {
@@ -48,7 +49,7 @@ describe("CategoryForm", () => {
 
     await user.click(screen.getByRole("button", { name: "Color" }));
 
-    await user.click(screen.getByRole("option", { name: "emerald" }));
+    await user.click(screen.getByRole("option", { name: COLOR_NAME.EMERALD }));
 
     await user.click(screen.getByRole("button", { name: /add category/i }));
 
@@ -64,7 +65,7 @@ describe("CategoryForm", () => {
     );
 
     await user.click(screen.getByRole("button", { name: "Color" }));
-    await user.click(screen.getByRole("option", { name: "emerald" }));
+    await user.click(screen.getByRole("option", { name: COLOR_NAME.EMERALD }));
 
     await user.type(screen.getByLabelText("Name *"), "Tester");
     await user.click(screen.getByRole("button", { name: /add category/i }));
@@ -72,7 +73,7 @@ describe("CategoryForm", () => {
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit).toHaveBeenCalledWith({
       name: "Tester",
-      color: { value: 4, label: "emerald", disabled: false },
+      color: { value: 4, label: COLOR_NAME.EMERALD, disabled: false },
     });
   });
 });

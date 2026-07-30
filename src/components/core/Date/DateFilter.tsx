@@ -4,7 +4,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { addDays, format, parseISO } from "date-fns";
 import { DateInput } from "./DateInput";
 import { IconButton } from "../Button/IconButton";
-import { InputProps } from "@headlessui/react";
+import type { InputProps } from "@headlessui/react";
 
 type DateField = Omit<InputProps, "onChange" | "value" | "max" | "type">;
 

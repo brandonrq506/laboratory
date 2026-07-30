@@ -9,85 +9,54 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from "./routes/__root";
-import { Route as LoginRouteImport } from "./routes/login";
 import { Route as _protectedRouteRouteImport } from "./routes/__protected/route";
+import { Route as LoginRouteImport } from "./routes/login";
 import { Route as _protectedIndexRouteImport } from "./routes/__protected/index";
-import { Route as _protectedTimerRouteRouteImport } from "./routes/__protected/timer/route";
-import { Route as _protectedSettingsRouteRouteImport } from "./routes/__protected/settings/route";
-import { Route as _protectedScheduledRouteRouteImport } from "./routes/__protected/scheduled/route";
-import { Route as _protectedRoutinesRouteRouteImport } from "./routes/__protected/routines/route";
-import { Route as _protectedHistoryRouteRouteImport } from "./routes/__protected/history/route";
-import { Route as _protectedExcelRouteRouteImport } from "./routes/__protected/excel/route";
 import { Route as _protectedActivitiesRouteRouteImport } from "./routes/__protected/activities/route";
-import { Route as _protectedSettingsIndexRouteImport } from "./routes/__protected/settings/index";
-import { Route as _protectedExcelIndexRouteImport } from "./routes/__protected/excel/index";
-import { Route as _protectedTimerNewRouteImport } from "./routes/__protected/timer/new";
-import { Route as _protectedSettingsNotificationsRouteImport } from "./routes/__protected/settings/notifications";
-import { Route as _protectedSettingsAccountRouteImport } from "./routes/__protected/settings/account";
-import { Route as _protectedRoutinesNewRouteImport } from "./routes/__protected/routines/new";
-import { Route as _protectedActivitiesNewRouteImport } from "./routes/__protected/activities/new";
-import { Route as _protectedTimerTaskIdRouteRouteImport } from "./routes/__protected/timer/$taskId/route";
-import { Route as _protectedSettingsCategoriesRouteRouteImport } from "./routes/__protected/settings/categories/route";
-import { Route as _protectedScheduledTaskIdRouteRouteImport } from "./routes/__protected/scheduled/$taskId/route";
-import { Route as _protectedRoutinesRoutineIdRouteRouteImport } from "./routes/__protected/routines/$routineId/route";
-import { Route as _protectedHistoryTaskIdRouteRouteImport } from "./routes/__protected/history/$taskId/route";
+import { Route as _protectedExcelRouteRouteImport } from "./routes/__protected/excel/route";
+import { Route as _protectedHistoryRouteRouteImport } from "./routes/__protected/history/route";
+import { Route as _protectedRoutinesRouteRouteImport } from "./routes/__protected/routines/route";
+import { Route as _protectedScheduledRouteRouteImport } from "./routes/__protected/scheduled/route";
+import { Route as _protectedSettingsRouteRouteImport } from "./routes/__protected/settings/route";
+import { Route as _protectedTimerRouteRouteImport } from "./routes/__protected/timer/route";
 import { Route as _protectedActivitiesActivityIdRouteRouteImport } from "./routes/__protected/activities/$activityId/route";
-import { Route as _protectedScheduledTaskIdIndexRouteImport } from "./routes/__protected/scheduled/$taskId/index";
-import { Route as _protectedHistoryTaskIdIndexRouteImport } from "./routes/__protected/history/$taskId/index";
+import { Route as _protectedActivitiesNewRouteImport } from "./routes/__protected/activities/new";
+import { Route as _protectedExcelIndexRouteImport } from "./routes/__protected/excel/index";
+import { Route as _protectedHistoryTaskIdRouteRouteImport } from "./routes/__protected/history/$taskId/route";
+import { Route as _protectedRoutinesRoutineIdRouteRouteImport } from "./routes/__protected/routines/$routineId/route";
+import { Route as _protectedRoutinesNewRouteImport } from "./routes/__protected/routines/new";
+import { Route as _protectedScheduledTaskIdRouteRouteImport } from "./routes/__protected/scheduled/$taskId/route";
+import { Route as _protectedSettingsIndexRouteImport } from "./routes/__protected/settings/index";
+import { Route as _protectedSettingsAccountRouteImport } from "./routes/__protected/settings/account";
+import { Route as _protectedSettingsCategoriesRouteRouteImport } from "./routes/__protected/settings/categories/route";
+import { Route as _protectedSettingsNotificationsRouteImport } from "./routes/__protected/settings/notifications";
+import { Route as _protectedTimerTaskIdRouteRouteImport } from "./routes/__protected/timer/$taskId/route";
+import { Route as _protectedTimerNewRouteImport } from "./routes/__protected/timer/new";
 import { Route as _protectedActivitiesActivityIdIndexRouteImport } from "./routes/__protected/activities/$activityId/index";
-import { Route as _protectedTimerTaskIdEditRouteImport } from "./routes/__protected/timer/$taskId/edit";
-import { Route as _protectedSettingsCategoriesNewRouteImport } from "./routes/__protected/settings/categories/new";
-import { Route as _protectedRoutinesRoutineIdEditRouteImport } from "./routes/__protected/routines/$routineId/edit";
-import { Route as _protectedRoutinesRoutineIdDeleteRouteImport } from "./routes/__protected/routines/$routineId/delete";
-import { Route as _protectedActivitiesActivityIdEditRouteImport } from "./routes/__protected/activities/$activityId/edit";
 import { Route as _protectedActivitiesActivityIdDeleteRouteImport } from "./routes/__protected/activities/$activityId/delete";
+import { Route as _protectedActivitiesActivityIdEditRouteImport } from "./routes/__protected/activities/$activityId/edit";
+import { Route as _protectedHistoryTaskIdIndexRouteImport } from "./routes/__protected/history/$taskId/index";
+import { Route as _protectedRoutinesRoutineIdDeleteRouteImport } from "./routes/__protected/routines/$routineId/delete";
+import { Route as _protectedRoutinesRoutineIdEditRouteImport } from "./routes/__protected/routines/$routineId/edit";
+import { Route as _protectedScheduledTaskIdIndexRouteImport } from "./routes/__protected/scheduled/$taskId/index";
 import { Route as _protectedSettingsCategoriesCategoryIdRouteRouteImport } from "./routes/__protected/settings/categories/$categoryId/route";
-import { Route as _protectedSettingsCategoriesCategoryIdEditRouteImport } from "./routes/__protected/settings/categories/$categoryId/edit";
+import { Route as _protectedSettingsCategoriesNewRouteImport } from "./routes/__protected/settings/categories/new";
+import { Route as _protectedTimerTaskIdEditRouteImport } from "./routes/__protected/timer/$taskId/edit";
 import { Route as _protectedSettingsCategoriesCategoryIdDeleteRouteImport } from "./routes/__protected/settings/categories/$categoryId/delete";
+import { Route as _protectedSettingsCategoriesCategoryIdEditRouteImport } from "./routes/__protected/settings/categories/$categoryId/edit";
 
+const _protectedRouteRoute = _protectedRouteRouteImport.update({
+  id: "/__protected",
+  getParentRoute: () => rootRouteImport,
+} as any);
 const LoginRoute = LoginRouteImport.update({
   id: "/login",
   path: "/login",
   getParentRoute: () => rootRouteImport,
 } as any);
-const _protectedRouteRoute = _protectedRouteRouteImport.update({
-  id: "/__protected",
-  getParentRoute: () => rootRouteImport,
-} as any);
 const _protectedIndexRoute = _protectedIndexRouteImport.update({
   id: "/",
   path: "/",
-  getParentRoute: () => _protectedRouteRoute,
-} as any);
-const _protectedTimerRouteRoute = _protectedTimerRouteRouteImport.update({
-  id: "/timer",
-  path: "/timer",
-  getParentRoute: () => _protectedRouteRoute,
-} as any);
-const _protectedSettingsRouteRoute = _protectedSettingsRouteRouteImport.update({
-  id: "/settings",
-  path: "/settings",
-  getParentRoute: () => _protectedRouteRoute,
-} as any);
-const _protectedScheduledRouteRoute =
-  _protectedScheduledRouteRouteImport.update({
-    id: "/scheduled",
-    path: "/scheduled",
-    getParentRoute: () => _protectedRouteRoute,
-  } as any);
-const _protectedRoutinesRouteRoute = _protectedRoutinesRouteRouteImport.update({
-  id: "/routines",
-  path: "/routines",
-  getParentRoute: () => _protectedRouteRoute,
-} as any);
-const _protectedHistoryRouteRoute = _protectedHistoryRouteRouteImport.update({
-  id: "/history",
-  path: "/history",
-  getParentRoute: () => _protectedRouteRoute,
-} as any);
-const _protectedExcelRouteRoute = _protectedExcelRouteRouteImport.update({
-  id: "/excel",
-  path: "/excel",
   getParentRoute: () => _protectedRouteRoute,
 } as any);
 const _protectedActivitiesRouteRoute =
@@ -96,60 +65,58 @@ const _protectedActivitiesRouteRoute =
     path: "/activities",
     getParentRoute: () => _protectedRouteRoute,
   } as any);
-const _protectedSettingsIndexRoute = _protectedSettingsIndexRouteImport.update({
-  id: "/",
-  path: "/",
-  getParentRoute: () => _protectedSettingsRouteRoute,
+const _protectedExcelRouteRoute = _protectedExcelRouteRouteImport.update({
+  id: "/excel",
+  path: "/excel",
+  getParentRoute: () => _protectedRouteRoute,
+} as any);
+const _protectedHistoryRouteRoute = _protectedHistoryRouteRouteImport.update({
+  id: "/history",
+  path: "/history",
+  getParentRoute: () => _protectedRouteRoute,
+} as any);
+const _protectedRoutinesRouteRoute = _protectedRoutinesRouteRouteImport.update({
+  id: "/routines",
+  path: "/routines",
+  getParentRoute: () => _protectedRouteRoute,
+} as any);
+const _protectedScheduledRouteRoute =
+  _protectedScheduledRouteRouteImport.update({
+    id: "/scheduled",
+    path: "/scheduled",
+    getParentRoute: () => _protectedRouteRoute,
+  } as any);
+const _protectedSettingsRouteRoute = _protectedSettingsRouteRouteImport.update({
+  id: "/settings",
+  path: "/settings",
+  getParentRoute: () => _protectedRouteRoute,
+} as any);
+const _protectedTimerRouteRoute = _protectedTimerRouteRouteImport.update({
+  id: "/timer",
+  path: "/timer",
+  getParentRoute: () => _protectedRouteRoute,
+} as any);
+const _protectedActivitiesActivityIdRouteRoute =
+  _protectedActivitiesActivityIdRouteRouteImport.update({
+    id: "/$activityId",
+    path: "/$activityId",
+    getParentRoute: () => _protectedActivitiesRouteRoute,
+  } as any);
+const _protectedActivitiesNewRoute = _protectedActivitiesNewRouteImport.update({
+  id: "/new",
+  path: "/new",
+  getParentRoute: () => _protectedActivitiesRouteRoute,
 } as any);
 const _protectedExcelIndexRoute = _protectedExcelIndexRouteImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => _protectedExcelRouteRoute,
 } as any);
-const _protectedTimerNewRoute = _protectedTimerNewRouteImport.update({
-  id: "/new",
-  path: "/new",
-  getParentRoute: () => _protectedTimerRouteRoute,
-} as any);
-const _protectedSettingsNotificationsRoute =
-  _protectedSettingsNotificationsRouteImport.update({
-    id: "/notifications",
-    path: "/notifications",
-    getParentRoute: () => _protectedSettingsRouteRoute,
-  } as any);
-const _protectedSettingsAccountRoute =
-  _protectedSettingsAccountRouteImport.update({
-    id: "/account",
-    path: "/account",
-    getParentRoute: () => _protectedSettingsRouteRoute,
-  } as any);
-const _protectedRoutinesNewRoute = _protectedRoutinesNewRouteImport.update({
-  id: "/new",
-  path: "/new",
-  getParentRoute: () => _protectedRoutinesRouteRoute,
-} as any);
-const _protectedActivitiesNewRoute = _protectedActivitiesNewRouteImport.update({
-  id: "/new",
-  path: "/new",
-  getParentRoute: () => _protectedActivitiesRouteRoute,
-} as any);
-const _protectedTimerTaskIdRouteRoute =
-  _protectedTimerTaskIdRouteRouteImport.update({
+const _protectedHistoryTaskIdRouteRoute =
+  _protectedHistoryTaskIdRouteRouteImport.update({
     id: "/$taskId",
     path: "/$taskId",
-    getParentRoute: () => _protectedTimerRouteRoute,
-  } as any);
-const _protectedSettingsCategoriesRouteRoute =
-  _protectedSettingsCategoriesRouteRouteImport.update({
-    id: "/categories",
-    path: "/categories",
-    getParentRoute: () => _protectedSettingsRouteRoute,
-  } as any);
-const _protectedScheduledTaskIdRouteRoute =
-  _protectedScheduledTaskIdRouteRouteImport.update({
-    id: "/$taskId",
-    path: "/$taskId",
-    getParentRoute: () => _protectedScheduledRouteRoute,
+    getParentRoute: () => _protectedHistoryRouteRoute,
   } as any);
 const _protectedRoutinesRoutineIdRouteRoute =
   _protectedRoutinesRoutineIdRouteRouteImport.update({
@@ -157,64 +124,55 @@ const _protectedRoutinesRoutineIdRouteRoute =
     path: "/$routineId",
     getParentRoute: () => _protectedRoutinesRouteRoute,
   } as any);
-const _protectedHistoryTaskIdRouteRoute =
-  _protectedHistoryTaskIdRouteRouteImport.update({
+const _protectedRoutinesNewRoute = _protectedRoutinesNewRouteImport.update({
+  id: "/new",
+  path: "/new",
+  getParentRoute: () => _protectedRoutinesRouteRoute,
+} as any);
+const _protectedScheduledTaskIdRouteRoute =
+  _protectedScheduledTaskIdRouteRouteImport.update({
     id: "/$taskId",
     path: "/$taskId",
-    getParentRoute: () => _protectedHistoryRouteRoute,
+    getParentRoute: () => _protectedScheduledRouteRoute,
   } as any);
-const _protectedActivitiesActivityIdRouteRoute =
-  _protectedActivitiesActivityIdRouteRouteImport.update({
-    id: "/$activityId",
-    path: "/$activityId",
-    getParentRoute: () => _protectedActivitiesRouteRoute,
+const _protectedSettingsIndexRoute = _protectedSettingsIndexRouteImport.update({
+  id: "/",
+  path: "/",
+  getParentRoute: () => _protectedSettingsRouteRoute,
+} as any);
+const _protectedSettingsAccountRoute =
+  _protectedSettingsAccountRouteImport.update({
+    id: "/account",
+    path: "/account",
+    getParentRoute: () => _protectedSettingsRouteRoute,
   } as any);
-const _protectedScheduledTaskIdIndexRoute =
-  _protectedScheduledTaskIdIndexRouteImport.update({
-    id: "/",
-    path: "/",
-    getParentRoute: () => _protectedScheduledTaskIdRouteRoute,
+const _protectedSettingsCategoriesRouteRoute =
+  _protectedSettingsCategoriesRouteRouteImport.update({
+    id: "/categories",
+    path: "/categories",
+    getParentRoute: () => _protectedSettingsRouteRoute,
   } as any);
-const _protectedHistoryTaskIdIndexRoute =
-  _protectedHistoryTaskIdIndexRouteImport.update({
-    id: "/",
-    path: "/",
-    getParentRoute: () => _protectedHistoryTaskIdRouteRoute,
+const _protectedSettingsNotificationsRoute =
+  _protectedSettingsNotificationsRouteImport.update({
+    id: "/notifications",
+    path: "/notifications",
+    getParentRoute: () => _protectedSettingsRouteRoute,
   } as any);
+const _protectedTimerTaskIdRouteRoute =
+  _protectedTimerTaskIdRouteRouteImport.update({
+    id: "/$taskId",
+    path: "/$taskId",
+    getParentRoute: () => _protectedTimerRouteRoute,
+  } as any);
+const _protectedTimerNewRoute = _protectedTimerNewRouteImport.update({
+  id: "/new",
+  path: "/new",
+  getParentRoute: () => _protectedTimerRouteRoute,
+} as any);
 const _protectedActivitiesActivityIdIndexRoute =
   _protectedActivitiesActivityIdIndexRouteImport.update({
     id: "/",
     path: "/",
-    getParentRoute: () => _protectedActivitiesActivityIdRouteRoute,
-  } as any);
-const _protectedTimerTaskIdEditRoute =
-  _protectedTimerTaskIdEditRouteImport.update({
-    id: "/edit",
-    path: "/edit",
-    getParentRoute: () => _protectedTimerTaskIdRouteRoute,
-  } as any);
-const _protectedSettingsCategoriesNewRoute =
-  _protectedSettingsCategoriesNewRouteImport.update({
-    id: "/new",
-    path: "/new",
-    getParentRoute: () => _protectedSettingsCategoriesRouteRoute,
-  } as any);
-const _protectedRoutinesRoutineIdEditRoute =
-  _protectedRoutinesRoutineIdEditRouteImport.update({
-    id: "/edit",
-    path: "/edit",
-    getParentRoute: () => _protectedRoutinesRoutineIdRouteRoute,
-  } as any);
-const _protectedRoutinesRoutineIdDeleteRoute =
-  _protectedRoutinesRoutineIdDeleteRouteImport.update({
-    id: "/delete",
-    path: "/delete",
-    getParentRoute: () => _protectedRoutinesRoutineIdRouteRoute,
-  } as any);
-const _protectedActivitiesActivityIdEditRoute =
-  _protectedActivitiesActivityIdEditRouteImport.update({
-    id: "/edit",
-    path: "/edit",
     getParentRoute: () => _protectedActivitiesActivityIdRouteRoute,
   } as any);
 const _protectedActivitiesActivityIdDeleteRoute =
@@ -223,22 +181,64 @@ const _protectedActivitiesActivityIdDeleteRoute =
     path: "/delete",
     getParentRoute: () => _protectedActivitiesActivityIdRouteRoute,
   } as any);
+const _protectedActivitiesActivityIdEditRoute =
+  _protectedActivitiesActivityIdEditRouteImport.update({
+    id: "/edit",
+    path: "/edit",
+    getParentRoute: () => _protectedActivitiesActivityIdRouteRoute,
+  } as any);
+const _protectedHistoryTaskIdIndexRoute =
+  _protectedHistoryTaskIdIndexRouteImport.update({
+    id: "/",
+    path: "/",
+    getParentRoute: () => _protectedHistoryTaskIdRouteRoute,
+  } as any);
+const _protectedRoutinesRoutineIdDeleteRoute =
+  _protectedRoutinesRoutineIdDeleteRouteImport.update({
+    id: "/delete",
+    path: "/delete",
+    getParentRoute: () => _protectedRoutinesRoutineIdRouteRoute,
+  } as any);
+const _protectedRoutinesRoutineIdEditRoute =
+  _protectedRoutinesRoutineIdEditRouteImport.update({
+    id: "/edit",
+    path: "/edit",
+    getParentRoute: () => _protectedRoutinesRoutineIdRouteRoute,
+  } as any);
+const _protectedScheduledTaskIdIndexRoute =
+  _protectedScheduledTaskIdIndexRouteImport.update({
+    id: "/",
+    path: "/",
+    getParentRoute: () => _protectedScheduledTaskIdRouteRoute,
+  } as any);
 const _protectedSettingsCategoriesCategoryIdRouteRoute =
   _protectedSettingsCategoriesCategoryIdRouteRouteImport.update({
     id: "/$categoryId",
     path: "/$categoryId",
     getParentRoute: () => _protectedSettingsCategoriesRouteRoute,
   } as any);
-const _protectedSettingsCategoriesCategoryIdEditRoute =
-  _protectedSettingsCategoriesCategoryIdEditRouteImport.update({
+const _protectedSettingsCategoriesNewRoute =
+  _protectedSettingsCategoriesNewRouteImport.update({
+    id: "/new",
+    path: "/new",
+    getParentRoute: () => _protectedSettingsCategoriesRouteRoute,
+  } as any);
+const _protectedTimerTaskIdEditRoute =
+  _protectedTimerTaskIdEditRouteImport.update({
     id: "/edit",
     path: "/edit",
-    getParentRoute: () => _protectedSettingsCategoriesCategoryIdRouteRoute,
+    getParentRoute: () => _protectedTimerTaskIdRouteRoute,
   } as any);
 const _protectedSettingsCategoriesCategoryIdDeleteRoute =
   _protectedSettingsCategoriesCategoryIdDeleteRouteImport.update({
     id: "/delete",
     path: "/delete",
+    getParentRoute: () => _protectedSettingsCategoriesCategoryIdRouteRoute,
+  } as any);
+const _protectedSettingsCategoriesCategoryIdEditRoute =
+  _protectedSettingsCategoriesCategoryIdEditRouteImport.update({
+    id: "/edit",
+    path: "/edit",
     getParentRoute: () => _protectedSettingsCategoriesCategoryIdRouteRoute,
   } as any);
 
@@ -461,18 +461,18 @@ export interface RootRouteChildren {
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    "/login": {
-      id: "/login";
-      path: "/login";
-      fullPath: "/login";
-      preLoaderRoute: typeof LoginRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
     "/__protected": {
       id: "/__protected";
       path: "";
       fullPath: "/";
       preLoaderRoute: typeof _protectedRouteRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/login": {
+      id: "/login";
+      path: "/login";
+      fullPath: "/login";
+      preLoaderRoute: typeof LoginRouteImport;
       parentRoute: typeof rootRouteImport;
     };
     "/__protected/": {
@@ -482,39 +482,11 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof _protectedIndexRouteImport;
       parentRoute: typeof _protectedRouteRoute;
     };
-    "/__protected/timer": {
-      id: "/__protected/timer";
-      path: "/timer";
-      fullPath: "/timer";
-      preLoaderRoute: typeof _protectedTimerRouteRouteImport;
-      parentRoute: typeof _protectedRouteRoute;
-    };
-    "/__protected/settings": {
-      id: "/__protected/settings";
-      path: "/settings";
-      fullPath: "/settings";
-      preLoaderRoute: typeof _protectedSettingsRouteRouteImport;
-      parentRoute: typeof _protectedRouteRoute;
-    };
-    "/__protected/scheduled": {
-      id: "/__protected/scheduled";
-      path: "/scheduled";
-      fullPath: "/scheduled";
-      preLoaderRoute: typeof _protectedScheduledRouteRouteImport;
-      parentRoute: typeof _protectedRouteRoute;
-    };
-    "/__protected/routines": {
-      id: "/__protected/routines";
-      path: "/routines";
-      fullPath: "/routines";
-      preLoaderRoute: typeof _protectedRoutinesRouteRouteImport;
-      parentRoute: typeof _protectedRouteRoute;
-    };
-    "/__protected/history": {
-      id: "/__protected/history";
-      path: "/history";
-      fullPath: "/history";
-      preLoaderRoute: typeof _protectedHistoryRouteRouteImport;
+    "/__protected/activities": {
+      id: "/__protected/activities";
+      path: "/activities";
+      fullPath: "/activities";
+      preLoaderRoute: typeof _protectedActivitiesRouteRouteImport;
       parentRoute: typeof _protectedRouteRoute;
     };
     "/__protected/excel": {
@@ -524,19 +496,54 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof _protectedExcelRouteRouteImport;
       parentRoute: typeof _protectedRouteRoute;
     };
-    "/__protected/activities": {
-      id: "/__protected/activities";
-      path: "/activities";
-      fullPath: "/activities";
-      preLoaderRoute: typeof _protectedActivitiesRouteRouteImport;
+    "/__protected/history": {
+      id: "/__protected/history";
+      path: "/history";
+      fullPath: "/history";
+      preLoaderRoute: typeof _protectedHistoryRouteRouteImport;
       parentRoute: typeof _protectedRouteRoute;
     };
-    "/__protected/settings/": {
-      id: "/__protected/settings/";
-      path: "/";
-      fullPath: "/settings/";
-      preLoaderRoute: typeof _protectedSettingsIndexRouteImport;
-      parentRoute: typeof _protectedSettingsRouteRoute;
+    "/__protected/routines": {
+      id: "/__protected/routines";
+      path: "/routines";
+      fullPath: "/routines";
+      preLoaderRoute: typeof _protectedRoutinesRouteRouteImport;
+      parentRoute: typeof _protectedRouteRoute;
+    };
+    "/__protected/scheduled": {
+      id: "/__protected/scheduled";
+      path: "/scheduled";
+      fullPath: "/scheduled";
+      preLoaderRoute: typeof _protectedScheduledRouteRouteImport;
+      parentRoute: typeof _protectedRouteRoute;
+    };
+    "/__protected/settings": {
+      id: "/__protected/settings";
+      path: "/settings";
+      fullPath: "/settings";
+      preLoaderRoute: typeof _protectedSettingsRouteRouteImport;
+      parentRoute: typeof _protectedRouteRoute;
+    };
+    "/__protected/timer": {
+      id: "/__protected/timer";
+      path: "/timer";
+      fullPath: "/timer";
+      preLoaderRoute: typeof _protectedTimerRouteRouteImport;
+      parentRoute: typeof _protectedRouteRoute;
+    };
+    "/__protected/activities/$activityId": {
+      id: "/__protected/activities/$activityId";
+      path: "/$activityId";
+      fullPath: "/activities/$activityId";
+      preLoaderRoute: typeof _protectedActivitiesActivityIdRouteRouteImport;
+      parentRoute: typeof _protectedActivitiesRouteRoute;
+    };
+    "/__protected/activities/new": {
+      id: "/__protected/activities/new";
+      path: "/new";
+      fullPath: "/activities/new";
+      preLoaderRoute: typeof _protectedActivitiesNewRouteImport;
+      parentRoute: typeof _protectedActivitiesRouteRoute;
     };
     "/__protected/excel/": {
       id: "/__protected/excel/";
@@ -545,18 +552,39 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof _protectedExcelIndexRouteImport;
       parentRoute: typeof _protectedExcelRouteRoute;
     };
-    "/__protected/timer/new": {
-      id: "/__protected/timer/new";
-      path: "/new";
-      fullPath: "/timer/new";
-      preLoaderRoute: typeof _protectedTimerNewRouteImport;
-      parentRoute: typeof _protectedTimerRouteRoute;
+    "/__protected/history/$taskId": {
+      id: "/__protected/history/$taskId";
+      path: "/$taskId";
+      fullPath: "/history/$taskId";
+      preLoaderRoute: typeof _protectedHistoryTaskIdRouteRouteImport;
+      parentRoute: typeof _protectedHistoryRouteRoute;
     };
-    "/__protected/settings/notifications": {
-      id: "/__protected/settings/notifications";
-      path: "/notifications";
-      fullPath: "/settings/notifications";
-      preLoaderRoute: typeof _protectedSettingsNotificationsRouteImport;
+    "/__protected/routines/$routineId": {
+      id: "/__protected/routines/$routineId";
+      path: "/$routineId";
+      fullPath: "/routines/$routineId";
+      preLoaderRoute: typeof _protectedRoutinesRoutineIdRouteRouteImport;
+      parentRoute: typeof _protectedRoutinesRouteRoute;
+    };
+    "/__protected/routines/new": {
+      id: "/__protected/routines/new";
+      path: "/new";
+      fullPath: "/routines/new";
+      preLoaderRoute: typeof _protectedRoutinesNewRouteImport;
+      parentRoute: typeof _protectedRoutinesRouteRoute;
+    };
+    "/__protected/scheduled/$taskId": {
+      id: "/__protected/scheduled/$taskId";
+      path: "/$taskId";
+      fullPath: "/scheduled/$taskId";
+      preLoaderRoute: typeof _protectedScheduledTaskIdRouteRouteImport;
+      parentRoute: typeof _protectedScheduledRouteRoute;
+    };
+    "/__protected/settings/": {
+      id: "/__protected/settings/";
+      path: "/";
+      fullPath: "/settings/";
+      preLoaderRoute: typeof _protectedSettingsIndexRouteImport;
       parentRoute: typeof _protectedSettingsRouteRoute;
     };
     "/__protected/settings/account": {
@@ -566,19 +594,19 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof _protectedSettingsAccountRouteImport;
       parentRoute: typeof _protectedSettingsRouteRoute;
     };
-    "/__protected/routines/new": {
-      id: "/__protected/routines/new";
-      path: "/new";
-      fullPath: "/routines/new";
-      preLoaderRoute: typeof _protectedRoutinesNewRouteImport;
-      parentRoute: typeof _protectedRoutinesRouteRoute;
+    "/__protected/settings/categories": {
+      id: "/__protected/settings/categories";
+      path: "/categories";
+      fullPath: "/settings/categories";
+      preLoaderRoute: typeof _protectedSettingsCategoriesRouteRouteImport;
+      parentRoute: typeof _protectedSettingsRouteRoute;
     };
-    "/__protected/activities/new": {
-      id: "/__protected/activities/new";
-      path: "/new";
-      fullPath: "/activities/new";
-      preLoaderRoute: typeof _protectedActivitiesNewRouteImport;
-      parentRoute: typeof _protectedActivitiesRouteRoute;
+    "/__protected/settings/notifications": {
+      id: "/__protected/settings/notifications";
+      path: "/notifications";
+      fullPath: "/settings/notifications";
+      preLoaderRoute: typeof _protectedSettingsNotificationsRouteImport;
+      parentRoute: typeof _protectedSettingsRouteRoute;
     };
     "/__protected/timer/$taskId": {
       id: "/__protected/timer/$taskId";
@@ -587,95 +615,18 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof _protectedTimerTaskIdRouteRouteImport;
       parentRoute: typeof _protectedTimerRouteRoute;
     };
-    "/__protected/settings/categories": {
-      id: "/__protected/settings/categories";
-      path: "/categories";
-      fullPath: "/settings/categories";
-      preLoaderRoute: typeof _protectedSettingsCategoriesRouteRouteImport;
-      parentRoute: typeof _protectedSettingsRouteRoute;
-    };
-    "/__protected/scheduled/$taskId": {
-      id: "/__protected/scheduled/$taskId";
-      path: "/$taskId";
-      fullPath: "/scheduled/$taskId";
-      preLoaderRoute: typeof _protectedScheduledTaskIdRouteRouteImport;
-      parentRoute: typeof _protectedScheduledRouteRoute;
-    };
-    "/__protected/routines/$routineId": {
-      id: "/__protected/routines/$routineId";
-      path: "/$routineId";
-      fullPath: "/routines/$routineId";
-      preLoaderRoute: typeof _protectedRoutinesRoutineIdRouteRouteImport;
-      parentRoute: typeof _protectedRoutinesRouteRoute;
-    };
-    "/__protected/history/$taskId": {
-      id: "/__protected/history/$taskId";
-      path: "/$taskId";
-      fullPath: "/history/$taskId";
-      preLoaderRoute: typeof _protectedHistoryTaskIdRouteRouteImport;
-      parentRoute: typeof _protectedHistoryRouteRoute;
-    };
-    "/__protected/activities/$activityId": {
-      id: "/__protected/activities/$activityId";
-      path: "/$activityId";
-      fullPath: "/activities/$activityId";
-      preLoaderRoute: typeof _protectedActivitiesActivityIdRouteRouteImport;
-      parentRoute: typeof _protectedActivitiesRouteRoute;
-    };
-    "/__protected/scheduled/$taskId/": {
-      id: "/__protected/scheduled/$taskId/";
-      path: "/";
-      fullPath: "/scheduled/$taskId/";
-      preLoaderRoute: typeof _protectedScheduledTaskIdIndexRouteImport;
-      parentRoute: typeof _protectedScheduledTaskIdRouteRoute;
-    };
-    "/__protected/history/$taskId/": {
-      id: "/__protected/history/$taskId/";
-      path: "/";
-      fullPath: "/history/$taskId/";
-      preLoaderRoute: typeof _protectedHistoryTaskIdIndexRouteImport;
-      parentRoute: typeof _protectedHistoryTaskIdRouteRoute;
+    "/__protected/timer/new": {
+      id: "/__protected/timer/new";
+      path: "/new";
+      fullPath: "/timer/new";
+      preLoaderRoute: typeof _protectedTimerNewRouteImport;
+      parentRoute: typeof _protectedTimerRouteRoute;
     };
     "/__protected/activities/$activityId/": {
       id: "/__protected/activities/$activityId/";
       path: "/";
       fullPath: "/activities/$activityId/";
       preLoaderRoute: typeof _protectedActivitiesActivityIdIndexRouteImport;
-      parentRoute: typeof _protectedActivitiesActivityIdRouteRoute;
-    };
-    "/__protected/timer/$taskId/edit": {
-      id: "/__protected/timer/$taskId/edit";
-      path: "/edit";
-      fullPath: "/timer/$taskId/edit";
-      preLoaderRoute: typeof _protectedTimerTaskIdEditRouteImport;
-      parentRoute: typeof _protectedTimerTaskIdRouteRoute;
-    };
-    "/__protected/settings/categories/new": {
-      id: "/__protected/settings/categories/new";
-      path: "/new";
-      fullPath: "/settings/categories/new";
-      preLoaderRoute: typeof _protectedSettingsCategoriesNewRouteImport;
-      parentRoute: typeof _protectedSettingsCategoriesRouteRoute;
-    };
-    "/__protected/routines/$routineId/edit": {
-      id: "/__protected/routines/$routineId/edit";
-      path: "/edit";
-      fullPath: "/routines/$routineId/edit";
-      preLoaderRoute: typeof _protectedRoutinesRoutineIdEditRouteImport;
-      parentRoute: typeof _protectedRoutinesRoutineIdRouteRoute;
-    };
-    "/__protected/routines/$routineId/delete": {
-      id: "/__protected/routines/$routineId/delete";
-      path: "/delete";
-      fullPath: "/routines/$routineId/delete";
-      preLoaderRoute: typeof _protectedRoutinesRoutineIdDeleteRouteImport;
-      parentRoute: typeof _protectedRoutinesRoutineIdRouteRoute;
-    };
-    "/__protected/activities/$activityId/edit": {
-      id: "/__protected/activities/$activityId/edit";
-      path: "/edit";
-      fullPath: "/activities/$activityId/edit";
-      preLoaderRoute: typeof _protectedActivitiesActivityIdEditRouteImport;
       parentRoute: typeof _protectedActivitiesActivityIdRouteRoute;
     };
     "/__protected/activities/$activityId/delete": {
@@ -685,6 +636,41 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof _protectedActivitiesActivityIdDeleteRouteImport;
       parentRoute: typeof _protectedActivitiesActivityIdRouteRoute;
     };
+    "/__protected/activities/$activityId/edit": {
+      id: "/__protected/activities/$activityId/edit";
+      path: "/edit";
+      fullPath: "/activities/$activityId/edit";
+      preLoaderRoute: typeof _protectedActivitiesActivityIdEditRouteImport;
+      parentRoute: typeof _protectedActivitiesActivityIdRouteRoute;
+    };
+    "/__protected/history/$taskId/": {
+      id: "/__protected/history/$taskId/";
+      path: "/";
+      fullPath: "/history/$taskId/";
+      preLoaderRoute: typeof _protectedHistoryTaskIdIndexRouteImport;
+      parentRoute: typeof _protectedHistoryTaskIdRouteRoute;
+    };
+    "/__protected/routines/$routineId/delete": {
+      id: "/__protected/routines/$routineId/delete";
+      path: "/delete";
+      fullPath: "/routines/$routineId/delete";
+      preLoaderRoute: typeof _protectedRoutinesRoutineIdDeleteRouteImport;
+      parentRoute: typeof _protectedRoutinesRoutineIdRouteRoute;
+    };
+    "/__protected/routines/$routineId/edit": {
+      id: "/__protected/routines/$routineId/edit";
+      path: "/edit";
+      fullPath: "/routines/$routineId/edit";
+      preLoaderRoute: typeof _protectedRoutinesRoutineIdEditRouteImport;
+      parentRoute: typeof _protectedRoutinesRoutineIdRouteRoute;
+    };
+    "/__protected/scheduled/$taskId/": {
+      id: "/__protected/scheduled/$taskId/";
+      path: "/";
+      fullPath: "/scheduled/$taskId/";
+      preLoaderRoute: typeof _protectedScheduledTaskIdIndexRouteImport;
+      parentRoute: typeof _protectedScheduledTaskIdRouteRoute;
+    };
     "/__protected/settings/categories/$categoryId": {
       id: "/__protected/settings/categories/$categoryId";
       path: "/$categoryId";
@@ -692,18 +678,32 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof _protectedSettingsCategoriesCategoryIdRouteRouteImport;
       parentRoute: typeof _protectedSettingsCategoriesRouteRoute;
     };
-    "/__protected/settings/categories/$categoryId/edit": {
-      id: "/__protected/settings/categories/$categoryId/edit";
+    "/__protected/settings/categories/new": {
+      id: "/__protected/settings/categories/new";
+      path: "/new";
+      fullPath: "/settings/categories/new";
+      preLoaderRoute: typeof _protectedSettingsCategoriesNewRouteImport;
+      parentRoute: typeof _protectedSettingsCategoriesRouteRoute;
+    };
+    "/__protected/timer/$taskId/edit": {
+      id: "/__protected/timer/$taskId/edit";
       path: "/edit";
-      fullPath: "/settings/categories/$categoryId/edit";
-      preLoaderRoute: typeof _protectedSettingsCategoriesCategoryIdEditRouteImport;
-      parentRoute: typeof _protectedSettingsCategoriesCategoryIdRouteRoute;
+      fullPath: "/timer/$taskId/edit";
+      preLoaderRoute: typeof _protectedTimerTaskIdEditRouteImport;
+      parentRoute: typeof _protectedTimerTaskIdRouteRoute;
     };
     "/__protected/settings/categories/$categoryId/delete": {
       id: "/__protected/settings/categories/$categoryId/delete";
       path: "/delete";
       fullPath: "/settings/categories/$categoryId/delete";
       preLoaderRoute: typeof _protectedSettingsCategoriesCategoryIdDeleteRouteImport;
+      parentRoute: typeof _protectedSettingsCategoriesCategoryIdRouteRoute;
+    };
+    "/__protected/settings/categories/$categoryId/edit": {
+      id: "/__protected/settings/categories/$categoryId/edit";
+      path: "/edit";
+      fullPath: "/settings/categories/$categoryId/edit";
+      preLoaderRoute: typeof _protectedSettingsCategoriesCategoryIdEditRouteImport;
       parentRoute: typeof _protectedSettingsCategoriesCategoryIdRouteRoute;
     };
   }

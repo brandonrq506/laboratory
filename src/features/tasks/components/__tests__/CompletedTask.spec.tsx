@@ -3,8 +3,10 @@ import { CompletedTask } from "../CompletedTask";
 
 import { completedTasks } from "@/test/store/tasks";
 
+import type * as TanStackReactRouter from "@tanstack/react-router";
+
 vi.mock("@tanstack/react-router", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@tanstack/react-router")>()),
+  ...(await importOriginal<typeof TanStackReactRouter>()),
   Link: (props: React.ComponentProps<"a">) => <a {...props} />,
 }));
 

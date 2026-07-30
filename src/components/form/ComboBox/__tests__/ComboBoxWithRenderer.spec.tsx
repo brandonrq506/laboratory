@@ -2,13 +2,15 @@ import { render, screen } from "@/test/test-utils";
 import userEvent from "@testing-library/user-event";
 
 import { ComboBoxWithRenderer } from "../ComboBoxWithRenderer";
-import { EnhancedOption } from "@/types/core";
+import type { EnhancedOption } from "@/types/core";
+
+import { COLOR_NAME } from "@/features/colors/types/colors";
 
 const testOptions: EnhancedOption[] = [
   {
     value: 1,
     label: "Option 1",
-    data: { category: { name: "Test Category", color: "blue" } },
+    data: { category: { name: "Test Category", color: COLOR_NAME.BLUE } },
   },
   {
     value: 2,

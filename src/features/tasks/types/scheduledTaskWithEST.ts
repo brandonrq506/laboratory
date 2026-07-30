@@ -1,4 +1,4 @@
-import { ScheduledTaskAPI } from "./scheduledTask";
+import type { ScheduledTaskAPI } from "./scheduledTask";
 
 export interface ScheduledTaskWithEST extends ScheduledTaskAPI {
   expected_start_time: Date;

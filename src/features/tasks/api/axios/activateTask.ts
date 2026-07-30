@@ -1,5 +1,5 @@
 import { TASKS_ENDPOINT, apiV1 } from "@/libs/axios";
-import { TaskActivateResponse } from "../../types/taskActivateResponse";
+import type { TaskActivateResponse } from "../../types/taskActivateResponse";
 
 export interface ActivateTaskInput {
   taskId: number;

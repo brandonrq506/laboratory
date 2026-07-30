@@ -3,13 +3,15 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/core";
 import { CategoryFormTaskExample } from "./CategoryFormTaskExample";
 import { ColorSelect } from "@/features/colors/components";
-import { EditForm } from "../types/editForm";
+import type { EditForm } from "../types/editForm";
 import { TextInput } from "@/components/form";
+
+import { COLOR_NAME } from "@/features/colors/types/colors";
 
 // TODO: Add type-safety to color. How do we know value 1 is white?
 const defaultCategory: EditForm = {
   name: "",
-  color: { value: 1, label: "white" },
+  color: { value: 1, label: COLOR_NAME.WHITE },
 };
 
 type Props = {

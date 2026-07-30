@@ -1,7 +1,7 @@
 import type { RoutineWithItems } from "../../types/routine-with-items";
 
 import { ROUTINES_ENDPOINT, apiV1 } from "@/libs/axios";
-import { PostRoutineForm } from "../../types/routine-form";
+import type { PostRoutineForm } from "../../types/routine-form";
 
 type Props = {
   routine: Partial<PostRoutineForm>;

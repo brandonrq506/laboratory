@@ -1,4 +1,4 @@
-import { BaseEntity } from "@/types/core";
+import type { BaseEntity } from "@/types/core";
 
 export interface UserPreferenceModel extends BaseEntity {
   user_id: number;

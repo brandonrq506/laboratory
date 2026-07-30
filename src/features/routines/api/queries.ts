@@ -1,11 +1,11 @@
 import { ROUTINES_ENDPOINT } from "@/libs/axios";
 import { queryOptions } from "@tanstack/react-query";
 
-import {
+import type {
   DateFilterOperators,
   StringFilterOperators,
 } from "@/types/core/filters";
-import { ApiQueryOptions } from "@/types/core";
+import type { ApiQueryOptions } from "@/types/core";
 import { getNestableCandidateRoutines } from "./axios/get-nestable-candidate-routines";
 import { getRoutine } from "./axios/getRoutine";
 import { getRoutines } from "./axios/getRoutines";

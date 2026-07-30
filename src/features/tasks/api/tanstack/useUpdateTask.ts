@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { taskByIdQueryOptions, taskKeys } from "../queries";
-import { BaseTaskAPI } from "../../types/baseTask";
-import { TaskAPI } from "../../types/task";
+import type { BaseTaskAPI } from "../../types/baseTask";
+import type { TaskAPI } from "../../types/task";
 import { snapshotQueries } from "@/utils/tanstack/helpers";
 import { updateTask } from "../axios/updateTask";
 

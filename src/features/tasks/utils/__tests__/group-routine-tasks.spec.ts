@@ -7,6 +7,10 @@ import type { ScheduledTaskWithEST } from "@/features/tasks/types/scheduledTaskW
 
 import { groupRoutineTasks } from "../group-routine-tasks";
 
+import { TASK_STATUS } from "@/features/tasks/types/task-status";
+
+import { COLOR_NAME } from "@/features/colors/types/colors";
+
 type MakeArgs = {
   id: number;
   applicationId?: number | null;
@@ -29,7 +33,7 @@ const makeTask = ({
     category: {
       id: 1,
       name: "Productive",
-      color: "blue",
+      color: COLOR_NAME.BLUE,
       created_at: "2025-01-01T00:00:00Z",
       updated_at: "2025-01-01T00:00:00Z",
       user_id: 1,
@@ -47,7 +51,7 @@ const makeTask = ({
   position: String(id),
   scheduled_at: "2025-01-01T00:00:00Z",
   start_time: null,
-  status: "scheduled",
+  status: TASK_STATUS.SCHEDULED,
   updated_at: "2025-01-01T00:00:00Z",
   note: "",
   expected_start_time: SENTINEL_DATE,

@@ -2,11 +2,13 @@ import { useNavigate } from "@tanstack/react-router";
 import { useUpdateCategory } from "../api/tanstack/useUpdateCategory";
 
 import { CategoryForm } from "./CategoryForm";
-import { EditForm } from "../types/editForm";
+import type { EditForm } from "../types/editForm";
 import { isColor } from "@/features/colors/utils/isColor";
 
 import { CATEGORY } from "@/constants/entities";
 import { UPDATE } from "@/constants/actions";
+
+import { COLOR_NAME } from "@/features/colors/types/colors";
 
 type Props = {
   categoryId: number;
@@ -19,7 +21,9 @@ export const EditCategoryForm = ({ categoryId, initialValues }: Props) => {
 
   const onSubmit = async (data: EditForm) => {
     const { name, color: possiblyColor } = data;
-    const color = isColor(possiblyColor.label) ? possiblyColor.label : "white";
+    const color = isColor(possiblyColor.label)
+      ? possiblyColor.label
+      : COLOR_NAME.WHITE;
 
     await mutateAsync({
       category: { name, color },

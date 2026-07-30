@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { UserPreferenceKeys } from "../types/userPreferenceKeys";
+import type { UserPreferenceKeys } from "../types/userPreferenceKeys";
 import { matchUserPreference } from "../utils/matchUserPreference";
 import { userPreferencesOptions } from "../api/queryOptions/userPreferencesOptions";
 

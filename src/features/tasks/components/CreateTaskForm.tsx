@@ -1,10 +1,12 @@
 import { useCreateTask } from "../api/tanstack/useCreateTask";
 
-import { NewTaskForm as FormType } from "../types/newTaskForm";
+import type { NewTaskForm as FormType } from "../types/newTaskForm";
 import { NewTaskForm } from "./NewTaskForm";
 
 import { parse, set, startOfToday } from "date-fns";
 import { splitHHMM } from "@/utils";
+
+import { TASK_STATUS } from "@/features/tasks/types/task-status";
 
 type CreateTaskFormProps = {
   date: string;
@@ -53,7 +55,7 @@ export const CreateTaskForm = ({
         activity: null,
         end_time: "00:00",
         start_time: "00:00",
-        status: "completed",
+        status: TASK_STATUS.COMPLETED,
         note: "",
       }}
     />

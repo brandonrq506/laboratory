@@ -1,4 +1,4 @@
-import { Option } from "@/types/core";
+import type { Option } from "@/types/core";
 
 type NumberKeys<T> = {
   [K in keyof T]: T[K] extends number ? K : never;

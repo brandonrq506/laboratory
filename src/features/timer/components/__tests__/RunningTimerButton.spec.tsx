@@ -4,6 +4,8 @@ import userEvent from "@testing-library/user-event";
 import { RunningTimerButton } from "../RunningTimerButton";
 import { inProgressTasks } from "@/test/store/tasks";
 
+import { TASK_STATUS } from "@/features/tasks/types/task-status";
+
 const useOnlineStatusMock = vi.fn();
 const mutateSpy = vi.fn();
 const useCompleteTaskMock = vi.fn();
@@ -40,7 +42,7 @@ describe("RunningTimerButton", () => {
 
     expect(mutateSpy).toHaveBeenCalledTimes(1);
     const payload = mutateSpy.mock.calls[0][0];
-    expect(payload.status).toBe("completed");
+    expect(payload.status).toBe(TASK_STATUS.COMPLETED);
     expect(payload.start_time).toBeDefined();
     expect(payload.end_time).toBeDefined();
   });

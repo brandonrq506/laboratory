@@ -5,10 +5,12 @@ import {
   taskByIdQueryOptions,
   todayCompletedTasksQueryOptions,
 } from "./queries";
-import { CompletedTaskAPI } from "../types/completedTask";
-import { InProgressTaskAPI } from "../types/inProgressTask";
-import { QueryClient } from "@tanstack/react-query";
+import type { CompletedTaskAPI } from "../types/completedTask";
+import type { InProgressTaskAPI } from "../types/inProgressTask";
+import type { QueryClient } from "@tanstack/react-query";
 import { buildTemporaryCompletedTask } from "../utils/buildTemporaryCompletedTask";
+
+import { TASK_STATUS } from "@/features/tasks/types/task-status";
 
 interface StartParams {
   qc: QueryClient;
@@ -83,7 +85,7 @@ export const activateScheduledTask = ({
   if (taskToActivate) {
     const promoted: InProgressTaskAPI = {
       ...taskToActivate,
-      status: "in_progress",
+      status: TASK_STATUS.IN_PROGRESS,
       start_time: timestamp,
       end_time: null,
       position: null,

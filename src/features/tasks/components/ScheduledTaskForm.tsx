@@ -5,8 +5,8 @@ import { DateInput, TextArea } from "@/components/form";
 import { getToday, secondsToTime } from "@/utils";
 import { ClockIcon } from "@heroicons/react/24/outline";
 import { HeadingLarge } from "@/components/layout";
-import { ScheduleForm } from "../types/schedule-form";
-import { ScheduledTaskAPI } from "../types/scheduledTask";
+import type { ScheduleForm } from "../types/schedule-form";
+import type { ScheduledTaskAPI } from "../types/scheduledTask";
 
 import type { DirtyFields } from "@/types/core/form";
 

@@ -1,5 +1,5 @@
-import { UserPreference } from "../types/userPreference";
-import { UserPreferenceKeys } from "../types/userPreferenceKeys";
+import type { UserPreference } from "../types/userPreference";
+import type { UserPreferenceKeys } from "../types/userPreferenceKeys";
 
 export function matchUserPreference(
   userPreferences: UserPreference[],

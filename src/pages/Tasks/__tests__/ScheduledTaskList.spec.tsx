@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@/test/test-utils";
 import userEvent from "@testing-library/user-event";
 
-import { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
+import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 import { ScheduledTaskList } from "../ScheduledTaskList";
 import { activities } from "@/test/store/activities";
 import { scheduledTasks } from "@/test/store/tasks";
@@ -9,6 +9,8 @@ import { scheduledTasks } from "@/test/store/tasks";
 import { HttpResponse, http } from "msw";
 import { TASKS_ENDPOINT } from "@/libs/axios";
 import { server } from "@/test/server";
+
+import { INSERT_MODE } from "@/features/tasks/types/insert-mode";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -120,7 +122,7 @@ describe("ScheduledTaskList", () => {
     await waitFor(() => {
       expect(getRequestBody()).toEqual({
         activity_id: activities[0].id,
-        insert_mode: "append",
+        insert_mode: INSERT_MODE.APPEND,
       });
     });
 
@@ -147,7 +149,7 @@ describe("ScheduledTaskList", () => {
     await waitFor(() => {
       expect(getRequestBody()).toEqual({
         activity_id: activities[0].id,
-        insert_mode: "prepend",
+        insert_mode: INSERT_MODE.PREPEND,
       });
     });
   });

@@ -7,6 +7,8 @@ import {
   scheduledTasks,
 } from "../store/tasks";
 
+import { TASK_STATUS } from "@/features/tasks/types/task-status";
+
 const API_URL = import.meta.env.VITE_API_URL;
 const BASE_URL = `${API_URL}/v1${TASKS_ENDPOINT}`;
 
@@ -15,11 +17,11 @@ export const taskHandlers = [
     const url = new URL(request.url);
     const status = url.searchParams.get("filter[status][eq]") ?? "";
 
-    if (status === "in_progress") {
+    if (status === TASK_STATUS.IN_PROGRESS) {
       return HttpResponse.json(inProgressTasks, { status: 200 });
-    } else if (status === "completed") {
+    } else if (status === TASK_STATUS.COMPLETED) {
       return HttpResponse.json(completedTasks, { status: 200 });
-    } else if (status === "scheduled") {
+    } else if (status === TASK_STATUS.SCHEDULED) {
       return HttpResponse.json(scheduledTasks, { status: 200 });
     }
 

@@ -1,4 +1,4 @@
-import { Colors } from "./colors";
+import type { Colors } from "./colors";
 
 export type Color = {
   id: number;

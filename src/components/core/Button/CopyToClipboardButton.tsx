@@ -9,13 +9,22 @@ import { ERROR_DURATION, SUCCESS_DURATION } from "@/constants/durations";
 import { IconButton } from "./IconButton";
 import clsx from "clsx";
 
-type Status = "idle" | "copying" | "success" | "error";
+import type { ObjectValues } from "@/types/core";
+
+const STATUS = {
+  IDLE: "idle",
+  COPYING: "copying",
+  SUCCESS: "success",
+  ERROR: "error",
+} as const;
+
+type Status = ObjectValues<typeof STATUS>;
 
 const ARIA_LABEL_MAP: Record<Status, string> = {
-  idle: "Copy to clipboard",
-  copying: "Copying",
-  success: "Copied",
-  error: "Copy failed",
+  [STATUS.IDLE]: "Copy to clipboard",
+  [STATUS.COPYING]: "Copying",
+  [STATUS.SUCCESS]: "Copied",
+  [STATUS.ERROR]: "Copy failed",
 };
 
 interface Props {
@@ -24,24 +33,24 @@ interface Props {
 }
 
 export const CopyToClipboardButton = ({ className, onCopy }: Props) => {
-  const [status, setStatus] = useState<Status>("idle");
-  const { start: scheduleReset } = useTimeout(() => setStatus("idle"));
+  const [status, setStatus] = useState<Status>(STATUS.IDLE);
+  const { start: scheduleReset } = useTimeout(() => setStatus(STATUS.IDLE));
 
-  const isIdle = status === "idle";
-  const isCopying = status === "copying";
-  const isSuccess = status === "success";
-  const isError = status === "error";
+  const isIdle = status === STATUS.IDLE;
+  const isCopying = status === STATUS.COPYING;
+  const isSuccess = status === STATUS.SUCCESS;
+  const isError = status === STATUS.ERROR;
 
   const handleCopy = async () => {
     if (isCopying) return;
 
-    setStatus("copying");
+    setStatus(STATUS.COPYING);
     try {
       await onCopy();
-      setStatus("success");
+      setStatus(STATUS.SUCCESS);
       scheduleReset(SUCCESS_DURATION);
     } catch {
-      setStatus("error");
+      setStatus(STATUS.ERROR);
       scheduleReset(ERROR_DURATION);
     }
   };

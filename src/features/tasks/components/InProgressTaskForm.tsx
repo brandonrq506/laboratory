@@ -4,9 +4,9 @@ import { TextArea, TimeInputV2 } from "@/components/form";
 import { ActivityComboBox } from "@/features/activities/components";
 import { Button } from "@/components/core";
 import { CategoryBadge } from "@/features/categories/components";
-import { DirtyFields } from "@/types/core";
-import { InProgressFormType } from "../types/inProgressFormType";
-import { InProgressTaskAPI } from "../types/inProgressTask";
+import type { DirtyFields } from "@/types/core";
+import type { InProgressFormType } from "../types/inProgressFormType";
+import type { InProgressTaskAPI } from "../types/inProgressTask";
 
 import { TASK } from "@/constants/entities";
 import { UPDATE } from "@/constants/actions";
