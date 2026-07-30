@@ -1,7 +1,7 @@
-import { Link, LinkProps } from "@tanstack/react-router";
+import { Link, type LinkProps } from "@tanstack/react-router";
 import { Card } from "@/components/layout";
 import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/outline";
-import { CompletedTaskAPI } from "../types/completedTask";
+import type { CompletedTaskAPI } from "../types/completedTask";
 import { DeleteTask } from "./DeleteTask";
 import { Dot } from "@/components/core";
 

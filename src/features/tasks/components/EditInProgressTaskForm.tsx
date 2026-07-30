@@ -1,9 +1,9 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useUpdateTask } from "../api/tanstack/useUpdateTask";
 
-import { DirtyFields } from "@/types/core";
-import { InProgressFormType } from "../types/inProgressFormType";
-import { InProgressTaskAPI } from "../types/inProgressTask";
+import type { DirtyFields } from "@/types/core";
+import type { InProgressFormType } from "../types/inProgressFormType";
+import type { InProgressTaskAPI } from "../types/inProgressTask";
 import { InProgressTaskForm } from "./InProgressTaskForm";
 import { adjustInProgressStartTime } from "../utils/adjustInProgressStartTime";
 import { floorSeconds } from "@/utils";

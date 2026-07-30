@@ -1,5 +1,5 @@
 import { SESSION_ENDPOINT, apiV1 } from "@/libs/axios";
-import { LoginFormType } from "../../types/loginForm";
+import type { LoginFormType } from "../../types/loginForm";
 
 type Response = {
   access_token: string;

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { CategoryBadge } from "@/features/categories/components";
-import { ExcelTableRow } from "@/features/excel/types/excelTableRow";
+import type { ExcelTableRow } from "@/features/excel/types/excelTableRow";
 import { calculatePercentageByCategory } from "@/features/excel/utils/calculatePercentageByCategory";
 import { categoryListQueryOptions } from "@/features/categories/api/queries";
 

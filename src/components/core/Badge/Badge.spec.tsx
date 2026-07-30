@@ -2,9 +2,11 @@ import { render, screen } from "@testing-library/react";
 
 import { Badge } from "./Badge";
 
+import { COLOR_NAME } from "@/features/colors/types/colors";
+
 describe("Badge", () => {
   it("should render with the correct color", () => {
-    const color = "rose";
+    const color = COLOR_NAME.ROSE;
     render(<Badge color={color}>Test Badge</Badge>);
 
     const badge = screen.getByText("Test Badge");
@@ -12,7 +14,7 @@ describe("Badge", () => {
   });
 
   it("should render with children", () => {
-    render(<Badge color="blue">Child Badge</Badge>);
+    render(<Badge color={COLOR_NAME.BLUE}>Child Badge</Badge>);
 
     const badge = screen.getByText("Child Badge");
     expect(badge).toBeInTheDocument();

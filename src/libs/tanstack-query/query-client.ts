@@ -1,4 +1,4 @@
-import { DefaultOptions, QueryClient } from "@tanstack/react-query";
+import { type DefaultOptions, QueryClient } from "@tanstack/react-query";
 import { millisecondsInMinute } from "date-fns/constants";
 
 const options: DefaultOptions = {

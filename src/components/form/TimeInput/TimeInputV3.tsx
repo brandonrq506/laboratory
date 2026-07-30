@@ -2,12 +2,12 @@ import {
   Description,
   Field,
   Input,
-  InputProps,
+  type InputProps,
   Label,
 } from "@headlessui/react";
 import {
-  FieldValues,
-  UseControllerProps,
+  type FieldValues,
+  type UseControllerProps,
   useController,
 } from "react-hook-form";
 import { clsx } from "clsx";

@@ -1,5 +1,7 @@
 import type { CategoryModel } from "@/features/categories/types/category-model";
 
+import { COLOR_NAME } from "@/features/colors/types/colors";
+
 export const categories: CategoryModel[] = [
   {
     id: 1,
@@ -7,7 +9,7 @@ export const categories: CategoryModel[] = [
     name: "Productive",
     updated_at: "2024-11-09T17:20:18.866Z",
     user_id: 1,
-    color: "blue",
+    color: COLOR_NAME.BLUE,
   },
   {
     id: 2,
@@ -15,7 +17,7 @@ export const categories: CategoryModel[] = [
     name: "Wellness",
     updated_at: "2024-11-09T05:39:37.605Z",
     user_id: 1,
-    color: "emerald",
+    color: COLOR_NAME.EMERALD,
   },
   {
     id: 3,
@@ -23,7 +25,7 @@ export const categories: CategoryModel[] = [
     name: "Necessary",
     updated_at: "2024-11-28T06:19:29.358Z",
     user_id: 1,
-    color: "amber",
+    color: COLOR_NAME.AMBER,
   },
   {
     id: 4,
@@ -31,6 +33,6 @@ export const categories: CategoryModel[] = [
     name: "Procrastination",
     updated_at: "2024-11-09T05:39:51.571Z",
     user_id: 1,
-    color: "rose",
+    color: COLOR_NAME.ROSE,
   },
 ];

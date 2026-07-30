@@ -2,13 +2,15 @@ import {
   getPreferencesFromLocalStorage,
   savePreferencesToLocalStorage,
 } from "../localStorage";
-import { UserPreference } from "../../types/userPreference";
+import type { UserPreference } from "../../types/userPreference";
+
+import { USER_PREFERENCE_KEY } from "@/features/userPreferences/types/userPreferenceKeys";
 
 describe("userPreferences localStorage utils", () => {
   // implementation constant
   const key = "preferences";
   const sample: UserPreference[] = [
-    { preference_id: 1, key: "theme", value: "dark" },
+    { preference_id: 1, key: USER_PREFERENCE_KEY.THEME, value: "dark" },
   ];
 
   beforeEach(() => {

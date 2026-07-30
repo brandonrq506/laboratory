@@ -1,5 +1,5 @@
 import type { CategoryModel } from "../types/category-model";
-import { Option } from "@/types/core";
+import type { Option } from "@/types/core";
 
 import { transformToOption } from "@/utils";
 

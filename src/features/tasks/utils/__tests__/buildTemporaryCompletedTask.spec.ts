@@ -1,5 +1,9 @@
 import { buildTemporaryCompletedTask } from "../buildTemporaryCompletedTask";
 
+import { TASK_STATUS } from "@/features/tasks/types/task-status";
+
+import { COLOR_NAME } from "@/features/colors/types/colors";
+
 describe("buildTemporaryCompletedTask", () => {
   beforeEach(() => {
     vi.useFakeTimers();
@@ -24,7 +28,7 @@ describe("buildTemporaryCompletedTask", () => {
       updated_at: "2025-01-01T00:00:00.000Z",
       name: "Cat",
       user_id: 1,
-      color: "blue",
+      color: COLOR_NAME.BLUE,
     },
   } as const;
 
@@ -36,7 +40,7 @@ describe("buildTemporaryCompletedTask", () => {
     const end = "2025-08-23T20:30:00.000Z";
     const task = buildTemporaryCompletedTask(baseActivity, start, end, "note");
 
-    expect(task.status).toBe("completed");
+    expect(task.status).toBe(TASK_STATUS.COMPLETED);
     expect(task.id).toBeLessThan(0);
     expect(task.position).toBeNull();
     expect(task.start_time).toBe(start);

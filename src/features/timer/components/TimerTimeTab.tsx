@@ -1,10 +1,12 @@
 import { useUpdateUserPreference } from "@/features/userPreferences/api/tanstack/useUpdateUserPreference";
 import { useUserPreference } from "@/features/userPreferences/hooks";
 
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
+
+import { USER_PREFERENCE_KEY } from "@/features/userPreferences/types/userPreferenceKeys";
 
 export const TimerTimeTab = ({ children }: PropsWithChildren) => {
-  const preference = useUserPreference("show_remaining_time");
+  const preference = useUserPreference(USER_PREFERENCE_KEY.SHOW_REMAINING_TIME);
   const { mutate } = useUpdateUserPreference();
 
   const showRemainingTime = preference?.value === "true";
@@ -12,7 +14,7 @@ export const TimerTimeTab = ({ children }: PropsWithChildren) => {
   const handleToggle = () => {
     if (!preference) return;
     mutate({
-      key: "show_remaining_time",
+      key: USER_PREFERENCE_KEY.SHOW_REMAINING_TIME,
       value: String(!showRemainingTime),
     });
   };

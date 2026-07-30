@@ -1,4 +1,4 @@
-import { SortParams } from "./sortParams";
+import type { SortParams } from "./sortParams";
 
 export type ApiQueryOptions<T> = {
   filter?: T;

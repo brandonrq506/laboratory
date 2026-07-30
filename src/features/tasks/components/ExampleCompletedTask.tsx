@@ -1,5 +1,5 @@
 import { Card } from "@/components/layout";
-import { CompletedTaskAPI } from "../types/completedTask";
+import type { CompletedTaskAPI } from "../types/completedTask";
 import { Dot } from "@/components/core";
 import { TrashIcon } from "@heroicons/react/24/outline";
 

@@ -1,6 +1,6 @@
 import { Card, HeadingLarge } from "@/components/layout";
 import {
-  NavigateOptions,
+  type NavigateOptions,
   createFileRoute,
   redirect,
   useRouter,

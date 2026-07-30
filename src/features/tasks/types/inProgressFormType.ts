@@ -1,5 +1,5 @@
-import { InProgressTaskAPI } from "./inProgressTask";
-import { Option } from "@/types/core";
+import type { InProgressTaskAPI } from "./inProgressTask";
+import type { Option } from "@/types/core";
 
 export interface InProgressFormType {
   activity: Option;

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { BaseTaskAPI } from "../../types/baseTask";
+import type { BaseTaskAPI } from "../../types/baseTask";
 import { deleteTask } from "../axios/deleteTask";
 import { removeById } from "@/utils/array";
 import { snapshotQueries } from "@/utils/tanstack/helpers";

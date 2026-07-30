@@ -1,4 +1,4 @@
-import { TaskModel } from "./taskModel";
+import type { TaskModel } from "./taskModel";
 
 export interface TaskActivateResponse {
   previous_task: TaskModel;

@@ -5,13 +5,15 @@ import { Stopwatch } from "./Stopwatch";
 import { Timer } from "./Timer";
 import { TimerTimeTab } from "./TimerTimeTab";
 
+import { USER_PREFERENCE_KEY } from "@/features/userPreferences/types/userPreferenceKeys";
+
 interface Props {
   start_time: string;
   exp_seconds: number;
 }
 
 export const TimerTime = ({ start_time, exp_seconds }: Props) => {
-  const preference = useUserPreference("show_remaining_time");
+  const preference = useUserPreference(USER_PREFERENCE_KEY.SHOW_REMAINING_TIME);
   const showRemainingTime = preference?.value === "true";
 
   return (

@@ -1,4 +1,4 @@
-import { Input, InputProps } from "@headlessui/react";
+import { Input, type InputProps } from "@headlessui/react";
 import { clsx } from "clsx";
 
 export const StateInputText = ({ ...props }: InputProps) => {

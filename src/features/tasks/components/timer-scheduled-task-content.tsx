@@ -7,7 +7,7 @@ import { Fragment } from "react/jsx-runtime";
 import { Link } from "@tanstack/react-router";
 import { QuickDeleteTask } from "./QuickDeleteTask";
 import { ScheduledTaskActionBtn } from "./ScheduledTaskActionBtn";
-import { ScheduledTaskWithEST } from "../types/scheduledTaskWithEST";
+import type { ScheduledTaskWithEST } from "../types/scheduledTaskWithEST";
 
 import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";

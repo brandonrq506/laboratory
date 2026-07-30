@@ -2,6 +2,8 @@ import { calculateRoutineItemStartTime } from "../calculateRoutineItemStartTime"
 
 import { routines } from "@/test/store/routines";
 
+import { ROUTINE_ITEM_TYPE } from "@/features/routines/types/routine-item";
+
 describe("calculateRoutineItemStartTime", () => {
   const FIXED_TEST_DATE = new Date("2025-05-03T04:00:00.000Z");
 
@@ -63,7 +65,7 @@ describe("calculateRoutineItemStartTime", () => {
     const result = calculateRoutineItemStartTime(routineItems, "05:15");
 
     expect(result).toHaveLength(3);
-    expect(result[1].type).toBe("routine");
+    expect(result[1].type).toBe(ROUTINE_ITEM_TYPE.ROUTINE);
 
     const expectedFirstStart = new Date(FIXED_TEST_DATE);
     expectedFirstStart.setMilliseconds(0);

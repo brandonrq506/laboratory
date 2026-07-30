@@ -1,7 +1,7 @@
 import type { CategoryModel } from "../../types/category-model";
-import { QueryFunctionContext } from "@tanstack/react-query";
+import type { QueryFunctionContext } from "@tanstack/react-query";
 import { apiV1 } from "@/libs/axios";
-import { categoryKeys } from "../queries";
+import type { categoryKeys } from "../queries";
 
 export const getCategory = async ({
   signal,

@@ -3,8 +3,10 @@ import { useUserPreference } from "../hooks";
 
 import { Toggle } from "@/components/core";
 
+import { USER_PREFERENCE_KEY } from "@/features/userPreferences/types/userPreferenceKeys";
+
 export const SidebarOpenToggle = () => {
-  const sidebar_open = useUserPreference("sidebar_open");
+  const sidebar_open = useUserPreference(USER_PREFERENCE_KEY.SIDEBAR_OPEN);
   const { mutate } = useUpdateUserPreference();
 
   if (sidebar_open === undefined) return null;
@@ -15,7 +17,7 @@ export const SidebarOpenToggle = () => {
     <Toggle
       checked={value}
       onChange={(value) =>
-        mutate({ key: "sidebar_open", value: String(value) })
+        mutate({ key: USER_PREFERENCE_KEY.SIDEBAR_OPEN, value: String(value) })
       }
       label="Sidebar Open"
       description="Display sidebar icons and text labels"

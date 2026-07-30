@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { type ReactNode, useState } from "react";
 
 import {
   CheckIcon,
@@ -16,8 +16,8 @@ import {
 } from "@headlessui/react";
 import { clsx } from "clsx";
 
-import { EnhancedOption, Option } from "@/types/core";
-import { ComboBoxType } from "./types";
+import type { EnhancedOption, Option } from "@/types/core";
+import type { ComboBoxType } from "./types";
 import { filterOptions } from "./utils/filterOptions";
 
 type ComboBoxRHFProps = {

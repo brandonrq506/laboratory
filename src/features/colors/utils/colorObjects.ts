@@ -1,9 +1,11 @@
-import { Color } from "../types/color";
+import type { Color } from "../types/color";
+
+import { COLOR_NAME } from "@/features/colors/types/colors";
 
 export const colors: Color[] = [
   {
     id: 1,
-    name: "white",
+    name: COLOR_NAME.WHITE,
     bgClass: "bg-white",
     textClass: "text-black",
     borderClass: "border-black",
@@ -11,7 +13,7 @@ export const colors: Color[] = [
   },
   {
     id: 2,
-    name: "rose",
+    name: COLOR_NAME.ROSE,
     bgClass: "bg-rose-300",
     textClass: "text-rose-950",
     borderClass: "border-rose-600",
@@ -19,7 +21,7 @@ export const colors: Color[] = [
   },
   {
     id: 3,
-    name: "amber",
+    name: COLOR_NAME.AMBER,
     bgClass: "bg-amber-300",
     textClass: "text-amber-950",
     borderClass: "border-amber-700",
@@ -27,7 +29,7 @@ export const colors: Color[] = [
   },
   {
     id: 4,
-    name: "emerald",
+    name: COLOR_NAME.EMERALD,
     bgClass: "bg-emerald-300",
     textClass: "text-emerald-950",
     borderClass: "border-emerald-700",
@@ -35,7 +37,7 @@ export const colors: Color[] = [
   },
   {
     id: 5,
-    name: "teal",
+    name: COLOR_NAME.TEAL,
     bgClass: "bg-teal-300",
     textClass: "text-teal-950",
     borderClass: "border-teal-700",
@@ -43,7 +45,7 @@ export const colors: Color[] = [
   },
   {
     id: 6,
-    name: "cyan",
+    name: COLOR_NAME.CYAN,
     bgClass: "bg-cyan-300",
     textClass: "text-cyan-950",
     borderClass: "border-cyan-700",
@@ -51,7 +53,7 @@ export const colors: Color[] = [
   },
   {
     id: 7,
-    name: "sky",
+    name: COLOR_NAME.SKY,
     bgClass: "bg-sky-300",
     textClass: "text-sky-950",
     borderClass: "border-sky-700",
@@ -59,7 +61,7 @@ export const colors: Color[] = [
   },
   {
     id: 8,
-    name: "blue",
+    name: COLOR_NAME.BLUE,
     bgClass: "bg-blue-300",
     textClass: "text-blue-950",
     borderClass: "border-blue-700",
@@ -67,7 +69,7 @@ export const colors: Color[] = [
   },
   {
     id: 9,
-    name: "indigo",
+    name: COLOR_NAME.INDIGO,
     bgClass: "bg-indigo-300",
     textClass: "text-indigo-950",
     borderClass: "border-indigo-700",
@@ -75,7 +77,7 @@ export const colors: Color[] = [
   },
   {
     id: 10,
-    name: "violet",
+    name: COLOR_NAME.VIOLET,
     bgClass: "bg-violet-300",
     textClass: "text-violet-950",
     borderClass: "border-violet-700",
@@ -83,7 +85,7 @@ export const colors: Color[] = [
   },
   {
     id: 11,
-    name: "purple",
+    name: COLOR_NAME.PURPLE,
     bgClass: "bg-purple-300",
     textClass: "text-purple-950",
     borderClass: "border-purple-700",
@@ -91,7 +93,7 @@ export const colors: Color[] = [
   },
   {
     id: 12,
-    name: "fuchsia",
+    name: COLOR_NAME.FUCHSIA,
     bgClass: "bg-fuchsia-300",
     textClass: "text-fuchsia-950",
     borderClass: "border-fuchsia-700",
@@ -99,7 +101,7 @@ export const colors: Color[] = [
   },
   {
     id: 13,
-    name: "pink",
+    name: COLOR_NAME.PINK,
     bgClass: "bg-pink-300",
     textClass: "text-pink-950",
     borderClass: "border-pink-700",
@@ -107,7 +109,7 @@ export const colors: Color[] = [
   },
   {
     id: 14,
-    name: "rose",
+    name: COLOR_NAME.ROSE,
     bgClass: "bg-rose-300",
     textClass: "text-rose-950",
     borderClass: "border-rose-700",

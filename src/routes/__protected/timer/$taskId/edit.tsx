@@ -10,6 +10,8 @@ import { Modal } from "@/components/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { taskByIdQueryOptions } from "@/features/tasks/api/queries";
 
+import { TASK_STATUS } from "@/features/tasks/types/task-status";
+
 export const Route = createFileRoute("/__protected/timer/$taskId/edit")({
   component: RouteComponent,
 });
@@ -19,14 +21,14 @@ function RouteComponent() {
   const navigateBack = useNavigateBack({ fallback: "/timer" });
   const { data } = useSuspenseQuery(taskByIdQueryOptions(taskId));
 
-  if (data.status === "scheduled")
+  if (data.status === TASK_STATUS.SCHEDULED)
     return (
       <Modal isOpen={true} onClose={navigateBack}>
         <EditScheduledTaskForm task={data} fallbackNavigation="/timer" />
       </Modal>
     );
 
-  if (data.status === "in_progress") {
+  if (data.status === TASK_STATUS.IN_PROGRESS) {
     return (
       <Modal isOpen={true} onClose={navigateBack}>
         <EditInProgressTaskForm task={data} />

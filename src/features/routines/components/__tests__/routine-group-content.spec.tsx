@@ -10,6 +10,10 @@ import { SortableItemCard } from "@/components/core";
 import type { ScheduledTaskWithEST } from "@/features/tasks/types/scheduledTaskWithEST";
 import type { WrappedRoutineCard } from "@/features/tasks/types/scheduled-grouped-card";
 
+import { TASK_STATUS } from "@/features/tasks/types/task-status";
+
+import { COLOR_NAME } from "@/features/colors/types/colors";
+
 const APPLICATION_ID = 42;
 const ROUTINE_NAME = "Workout";
 
@@ -30,7 +34,7 @@ const buildAbsorbedTask = (
     category: {
       id: 1,
       name: "Wellness",
-      color: "blue",
+      color: COLOR_NAME.BLUE,
       user_id: 1,
       created_at: "2025-01-01T00:00:00.000Z",
       updated_at: "2025-01-01T00:00:00.000Z",
@@ -43,7 +47,7 @@ const buildAbsorbedTask = (
   position: `${id}.0`,
   scheduled_at: "2025-05-08T09:00:00.000Z",
   start_time: null,
-  status: "scheduled",
+  status: TASK_STATUS.SCHEDULED,
   note: "",
   routine_application: {
     id: APPLICATION_ID,

@@ -1,3 +1,3 @@
-import { ActivityEditableColumns } from "./activity-editable-columns";
+import type { ActivityEditableColumns } from "./activity-editable-columns";
 
 export type ActivityPostPayload = ActivityEditableColumns;

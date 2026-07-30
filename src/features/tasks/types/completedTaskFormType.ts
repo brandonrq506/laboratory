@@ -1,5 +1,5 @@
-import { CompletedTaskAPI } from "./completedTask";
-import { Option } from "@/types/core";
+import type { CompletedTaskAPI } from "./completedTask";
+import type { Option } from "@/types/core";
 
 export type CompletedTaskFormType = Pick<
   CompletedTaskAPI,

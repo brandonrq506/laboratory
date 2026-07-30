@@ -16,6 +16,8 @@ vi.mock("../../api/tanstack/useUpdateUserPreference", () => ({
 import { useUpdateUserPreference } from "../../api/tanstack/useUpdateUserPreference";
 import { useUserPreference } from "../../hooks";
 
+import { USER_PREFERENCE_KEY } from "@/features/userPreferences/types/userPreferenceKeys";
+
 const mockUseUserPreference = vi.mocked(useUserPreference);
 const mockUseUpdateUserPreference = vi.mocked(useUpdateUserPreference);
 
@@ -33,7 +35,7 @@ describe("RemainingTimeToggle", () => {
   it("renders toggle with correct initial state (false)", () => {
     mockUseUserPreference.mockReturnValue({
       preference_id: 1,
-      key: "show_remaining_time",
+      key: USER_PREFERENCE_KEY.SHOW_REMAINING_TIME,
       value: "false",
     });
 
@@ -52,7 +54,7 @@ describe("RemainingTimeToggle", () => {
   it("renders toggle with correct initial state (true)", () => {
     mockUseUserPreference.mockReturnValue({
       preference_id: 1,
-      key: "show_remaining_time",
+      key: USER_PREFERENCE_KEY.SHOW_REMAINING_TIME,
       value: "true",
     });
 
@@ -66,7 +68,7 @@ describe("RemainingTimeToggle", () => {
     const user = userEvent.setup();
     mockUseUserPreference.mockReturnValue({
       preference_id: 1,
-      key: "show_remaining_time",
+      key: USER_PREFERENCE_KEY.SHOW_REMAINING_TIME,
       value: "false",
     });
 
@@ -76,7 +78,7 @@ describe("RemainingTimeToggle", () => {
     await user.click(toggle);
 
     expect(mockMutate).toHaveBeenCalledWith({
-      key: "show_remaining_time",
+      key: USER_PREFERENCE_KEY.SHOW_REMAINING_TIME,
       value: "true",
     });
   });
@@ -85,7 +87,7 @@ describe("RemainingTimeToggle", () => {
     const user = userEvent.setup();
     mockUseUserPreference.mockReturnValue({
       preference_id: 1,
-      key: "show_remaining_time",
+      key: USER_PREFERENCE_KEY.SHOW_REMAINING_TIME,
       value: "true",
     });
 
@@ -95,7 +97,7 @@ describe("RemainingTimeToggle", () => {
     await user.click(toggle);
 
     expect(mockMutate).toHaveBeenCalledWith({
-      key: "show_remaining_time",
+      key: USER_PREFERENCE_KEY.SHOW_REMAINING_TIME,
       value: "false",
     });
   });

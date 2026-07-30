@@ -1,4 +1,4 @@
-import { UserPreference } from "../types/userPreference";
+import type { UserPreference } from "../types/userPreference";
 
 const PREFERENCES_KEY = "preferences";
 

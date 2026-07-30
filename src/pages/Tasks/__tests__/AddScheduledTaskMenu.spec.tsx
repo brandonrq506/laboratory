@@ -8,7 +8,11 @@ import userEvent from "@testing-library/user-event";
 
 import { ROUTINES_ENDPOINT, TASKS_ENDPOINT } from "@/libs/axios";
 import { AddScheduledTaskMenu } from "../AddScheduledTaskMenu";
-import type { InsertMode } from "@/features/tasks/types/insert-mode";
+
+import {
+  INSERT_MODE,
+  type InsertMode,
+} from "@/features/tasks/types/insert-mode";
 import { server } from "@/test/server";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -23,7 +27,9 @@ describe("AddScheduledTaskMenu", () => {
       },
     });
 
-  const renderAddScheduledTaskMenu = (insertMode: InsertMode = "append") => {
+  const renderAddScheduledTaskMenu = (
+    insertMode: InsertMode = INSERT_MODE.APPEND,
+  ) => {
     const queryClient = createTestQueryClient();
 
     const utils = render(
@@ -176,7 +182,7 @@ describe("AddScheduledTaskMenu", () => {
   it("sends insert_mode when creating scheduled task", async () => {
     let requestBody: Record<string, unknown> | null = null;
     const activity = activities[0];
-    const { user } = renderAddScheduledTaskMenu("prepend");
+    const { user } = renderAddScheduledTaskMenu(INSERT_MODE.PREPEND);
 
     server.use(
       http.post(`${API_URL}/v1${TASKS_ENDPOINT}`, async ({ request }) => {
@@ -198,14 +204,14 @@ describe("AddScheduledTaskMenu", () => {
     await waitFor(() => {
       expect(requestBody).toEqual({
         activity_id: activity.id,
-        insert_mode: "prepend",
+        insert_mode: INSERT_MODE.PREPEND,
       });
     });
   });
 
   it("sends insert_mode when applying routine", async () => {
     let requestBody: Record<string, unknown> | null = null;
-    const { user } = renderAddScheduledTaskMenu("prepend");
+    const { user } = renderAddScheduledTaskMenu(INSERT_MODE.PREPEND);
 
     server.use(
       http.post(
@@ -226,7 +232,7 @@ describe("AddScheduledTaskMenu", () => {
     await user.click(screen.getByRole("menuitem", { name: "Morning Routine" }));
 
     await waitFor(() => {
-      expect(requestBody).toEqual({ insert_mode: "prepend" });
+      expect(requestBody).toEqual({ insert_mode: INSERT_MODE.PREPEND });
     });
   });
 });

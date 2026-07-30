@@ -8,9 +8,11 @@ import {
   WifiIcon,
 } from "@heroicons/react/24/solid";
 import { IconButton } from "@/components/core";
-import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
+import type { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
 
 import { calculateTimesOnCompletion } from "../utils/calculateTimesOnCompletion";
+
+import { TASK_STATUS } from "@/features/tasks/types/task-status";
 
 interface Props {
   task: InProgressTaskAPI;
@@ -41,7 +43,7 @@ export const RunningTimerButton = ({ task }: Props) => {
       onClick={() =>
         mutate({
           ...task,
-          status: "completed",
+          status: TASK_STATUS.COMPLETED,
           ...calculateTimesOnCompletion(task.start_time),
         })
       }

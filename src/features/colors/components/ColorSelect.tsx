@@ -1,4 +1,4 @@
-import { FieldValues, UseControllerProps } from "react-hook-form";
+import type { FieldValues, UseControllerProps } from "react-hook-form";
 import { ControlledSelect } from "@/components/form";
 import { colors } from "../utils/colorObjects";
 import { transformToOption } from "@/utils";

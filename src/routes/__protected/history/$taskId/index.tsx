@@ -6,6 +6,8 @@ import { Modal } from "@/components/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { taskByIdQueryOptions } from "@/features/tasks/api/queries";
 
+import { TASK_STATUS } from "@/features/tasks/types/task-status";
+
 export const Route = createFileRoute("/__protected/history/$taskId/")({
   component: RouteComponent,
 });
@@ -15,7 +17,7 @@ function RouteComponent() {
   const { data } = useSuspenseQuery(taskByIdQueryOptions(taskId));
   const navigateBack = useNavigateBack({ fallback: "/history" });
 
-  if (data.status !== "completed") return null;
+  if (data.status !== TASK_STATUS.COMPLETED) return null;
 
   return (
     <Modal isOpen={true} onClose={navigateBack}>

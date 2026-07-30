@@ -4,7 +4,7 @@ import { useLogin } from "../api/tanstack/useLogin";
 import { Button } from "@/components/core";
 import { TextInput } from "@/components/form";
 
-import { LoginFormType } from "../types/loginForm";
+import type { LoginFormType } from "../types/loginForm";
 import { SIGN_IN } from "@/constants/actions";
 import { isAxiosError } from "axios";
 

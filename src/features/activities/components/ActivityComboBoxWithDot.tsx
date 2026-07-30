@@ -1,14 +1,14 @@
 import {
-  FieldValues,
-  UseControllerProps,
+  type FieldValues,
+  type UseControllerProps,
   useController,
 } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 
-import { ComboBoxType } from "@/components/form/ComboBox/types";
+import type { ComboBoxType } from "@/components/form/ComboBox/types";
 import { ComboBoxWithRenderer } from "@/components/form";
 import { Dot } from "@/components/core";
-import { EnhancedOption } from "@/types/core";
+import type { EnhancedOption } from "@/types/core";
 import { activityListQueryOptions } from "../api/queries";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 

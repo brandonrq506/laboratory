@@ -1,5 +1,5 @@
 import {
-  NavigateOptions,
+  type NavigateOptions,
   useCanGoBack,
   useNavigate,
   useRouter,

@@ -14,8 +14,8 @@ import {
   Field,
   Label,
 } from "@headlessui/react";
-import { ComboBoxType } from "./types";
-import { Option } from "@/types/core";
+import type { ComboBoxType } from "./types";
+import type { Option } from "@/types/core";
 import { clsx } from "clsx";
 import { filterOptions } from "./utils/filterOptions";
 

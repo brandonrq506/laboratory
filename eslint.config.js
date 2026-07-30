@@ -42,6 +42,10 @@ export default [
   {
     rules: {
       "sort-imports": ["error", { allowSeparatedGroups: true }],
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        { fixStyle: "inline-type-imports" },
+      ],
       "array-callback-return": "error",
       complexity: "warn",
       "default-case": "error",

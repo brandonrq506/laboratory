@@ -4,8 +4,8 @@ import { TextArea, TimeInputV2 } from "@/components/form";
 import { ActivityComboBox } from "@/features/activities/components";
 import { Button } from "@/components/core";
 import { CategoryBadge } from "@/features/categories/components";
-import { CompletedTaskAPI } from "../types/completedTask";
-import { CompletedTaskFormType } from "../types/completedTaskFormType";
+import type { CompletedTaskAPI } from "../types/completedTask";
+import type { CompletedTaskFormType } from "../types/completedTaskFormType";
 
 import { TASK } from "@/constants/entities";
 import { UPDATE } from "@/constants/actions";

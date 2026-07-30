@@ -1,10 +1,10 @@
-import { UseFormRegisterReturn } from "react-hook-form";
+import type { UseFormRegisterReturn } from "react-hook-form";
 
 import {
   Description,
   Field,
   Input,
-  InputProps,
+  type InputProps,
   Label,
 } from "@headlessui/react";
 import clsx from "clsx";

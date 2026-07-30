@@ -16,6 +16,8 @@ import { ADD } from "@/constants/actions";
 import { TASKS } from "@/constants/entities";
 import clsx from "clsx";
 
+import { COLOR_NAME } from "@/features/colors/types/colors";
+
 type Props = {
   insertMode: InsertMode;
   scheduledAt?: string;
@@ -63,7 +65,7 @@ export const AddScheduledTaskMenu = ({ insertMode, scheduledAt }: Props) => {
                   {routine.name}
                   {pendingRoutineId === routine.id && <Loading />}
                 </div>
-                <Badge color="white">Routine</Badge>
+                <Badge color={COLOR_NAME.WHITE}>Routine</Badge>
               </button>
             </MenuItem>
           ))}

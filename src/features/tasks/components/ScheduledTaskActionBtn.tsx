@@ -4,10 +4,12 @@ import { useStartTask } from "../api/tanstack/useStartTask";
 
 import { ForwardIcon, PlayIcon } from "@heroicons/react/24/outline";
 import { IconButton } from "@/components/core";
-import { ScheduledTaskAPI } from "../types/scheduledTask";
+import type { ScheduledTaskAPI } from "../types/scheduledTask";
 import { inProgressTasksQueryOptions } from "../api/queries";
 
 import { floorMilliseconds } from "@/utils";
+
+import { TASK_STATUS } from "@/features/tasks/types/task-status";
 
 interface Props {
   task: ScheduledTaskAPI;
@@ -23,7 +25,7 @@ export const ScheduledTaskActionBtn = ({ task }: Props) => {
   const handleStartTask = () =>
     startTask({
       ...task,
-      status: "in_progress",
+      status: TASK_STATUS.IN_PROGRESS,
       start_time: floorMilliseconds(new Date()).toISOString(),
       position: null,
     });

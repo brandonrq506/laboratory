@@ -1,4 +1,4 @@
-import { Colors } from "../types/colors";
+import type { Colors } from "../types/colors";
 import { colors } from "./colorObjects";
 
 export const isColor = (color: string): color is Colors => {

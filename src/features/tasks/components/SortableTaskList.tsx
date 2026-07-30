@@ -1,9 +1,9 @@
 import {
   DndContext,
-  DragCancelEvent,
-  DragEndEvent,
+  type DragCancelEvent,
+  type DragEndEvent,
   DragOverlay,
-  DragStartEvent,
+  type DragStartEvent,
   KeyboardSensor,
   MouseSensor,
   TouchSensor,

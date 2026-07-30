@@ -1,7 +1,7 @@
 import { useNavigateBack } from "@/hooks";
 import { useUpdateTask } from "../api/tanstack/useUpdateTask";
 
-import { NavigateOptions } from "@tanstack/react-router";
+import type { NavigateOptions } from "@tanstack/react-router";
 import { ScheduledTaskForm } from "./ScheduledTaskForm";
 
 import { localDateToUtc, utcToLocalDate } from "@/utils";

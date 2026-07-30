@@ -1,4 +1,6 @@
-import { ActivityWithCategory } from "@/features/activities/types/activity-with-category";
+import type { ActivityWithCategory } from "@/features/activities/types/activity-with-category";
+
+import { COLOR_NAME } from "@/features/colors/types/colors";
 
 export const activities: ActivityWithCategory[] = [
   {
@@ -10,7 +12,7 @@ export const activities: ActivityWithCategory[] = [
       name: "Productive",
       updated_at: "2024-11-09T17:20:18.866Z",
       user_id: 1,
-      color: "blue",
+      color: COLOR_NAME.BLUE,
     },
     created_at: "2024-08-31T18:18:41.851Z",
     max_seconds: 3601,
@@ -28,7 +30,7 @@ export const activities: ActivityWithCategory[] = [
       name: "Necessary",
       updated_at: "2024-11-28T06:19:29.358Z",
       user_id: 1,
-      color: "amber",
+      color: COLOR_NAME.AMBER,
     },
     created_at: "2024-11-29T05:18:45.728Z",
     max_seconds: 600,
@@ -47,7 +49,7 @@ export const activities: ActivityWithCategory[] = [
       name: "Wellness",
       updated_at: "2024-11-09T05:39:37.605Z",
       user_id: 1,
-      color: "emerald",
+      color: COLOR_NAME.EMERALD,
     },
     created_at: "2024-08-31T18:55:49.628Z",
     max_seconds: 1500,
@@ -65,7 +67,7 @@ export const activities: ActivityWithCategory[] = [
       name: "Wellness",
       updated_at: "2024-11-09T05:39:37.605Z",
       user_id: 1,
-      color: "emerald",
+      color: COLOR_NAME.EMERALD,
     },
     created_at: "2024-08-26T00:10:13.720Z",
     max_seconds: 420,
@@ -84,7 +86,7 @@ export const activities: ActivityWithCategory[] = [
       name: "Productive",
       updated_at: "2024-11-09T17:20:18.866Z",
       user_id: 1,
-      color: "blue",
+      color: COLOR_NAME.BLUE,
     },
     created_at: "2024-08-31T18:19:35.030Z",
     max_seconds: 3600,
@@ -102,7 +104,7 @@ export const activities: ActivityWithCategory[] = [
       name: "Necessary",
       updated_at: "2024-11-28T06:19:29.358Z",
       user_id: 1,
-      color: "amber",
+      color: COLOR_NAME.AMBER,
     },
     created_at: "2024-11-29T05:23:00.014Z",
     max_seconds: 1500,
@@ -120,7 +122,7 @@ export const activities: ActivityWithCategory[] = [
       name: "Wellness",
       updated_at: "2024-11-09T05:39:37.605Z",
       user_id: 1,
-      color: "emerald",
+      color: COLOR_NAME.EMERALD,
     },
     created_at: "2024-12-08T14:42:50.013Z",
     max_seconds: 1500,
@@ -139,7 +141,7 @@ export const activities: ActivityWithCategory[] = [
       name: "Procrastination",
       updated_at: "2024-11-09T05:39:51.571Z",
       user_id: 1,
-      color: "rose",
+      color: COLOR_NAME.ROSE,
     },
     created_at: "2024-12-08T14:55:45.408Z",
     max_seconds: 1800,
@@ -157,7 +159,7 @@ export const activities: ActivityWithCategory[] = [
       name: "Procrastination",
       updated_at: "2024-11-09T05:39:51.571Z",
       user_id: 1,
-      color: "rose",
+      color: COLOR_NAME.ROSE,
     },
     created_at: "2024-11-30T19:28:00.997Z",
     max_seconds: 3600,

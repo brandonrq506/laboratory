@@ -5,8 +5,10 @@ import { useOnlineStatus } from "@/hooks";
 
 import { ActivityComboBoxWithDot } from "@/features/activities/components";
 import { IdleTimerButton } from "./IdleTimerButton";
-import { Option } from "@/types/core";
+import type { Option } from "@/types/core";
 import { floorMilliseconds } from "@/utils";
+
+import { TASK_STATUS } from "@/features/tasks/types/task-status";
 
 type FormValues = {
   activity_id: Option | null;
@@ -29,7 +31,7 @@ export const IdleTimer = () => {
     if (data.activity_id) {
       await mutateAsync({
         activity_id: data.activity_id.value,
-        status: "in_progress",
+        status: TASK_STATUS.IN_PROGRESS,
         start_time: floorMilliseconds(new Date()).toISOString(),
       });
     }

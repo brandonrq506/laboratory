@@ -13,7 +13,8 @@ import type { ApiQueryOptions } from "@/types/core";
 import type { CompletedTaskAPI } from "../types/completedTask";
 import type { InProgressTaskAPI } from "../types/inProgressTask";
 import type { ScheduledTaskAPI } from "../types/scheduledTask";
-import type { TaskStatus } from "../types/task-status";
+
+import { TASK_STATUS, type TaskStatus } from "../types/task-status";
 
 export type TaskApiFilters = {
   status?: ExactFilterOperators<TaskStatus>;
@@ -39,7 +40,7 @@ export const scheduledTasksQueryOptions = () => {
   return queryOptions({
     queryKey: taskKeys.list({
       filter: {
-        status: { eq: "scheduled" },
+        status: { eq: TASK_STATUS.SCHEDULED },
         scheduled_at: {
           is_on_or_before: formatISO(endOfDay(new Date())),
         },
@@ -52,7 +53,9 @@ export const scheduledTasksQueryOptions = () => {
 
 export const inProgressTasksQueryOptions = () => {
   return queryOptions({
-    queryKey: taskKeys.list({ filter: { status: { eq: "in_progress" } } }),
+    queryKey: taskKeys.list({
+      filter: { status: { eq: TASK_STATUS.IN_PROGRESS } },
+    }),
     queryFn: getTasks<InProgressTaskAPI[]>,
   });
 };
@@ -61,7 +64,7 @@ export const todayCompletedTasksQueryOptions = () => {
   return queryOptions({
     queryKey: taskKeys.list({
       filter: {
-        status: { eq: "completed" },
+        status: { eq: TASK_STATUS.COMPLETED },
         start_time: { is_equal_to: "today" },
       },
       sort: { sort_by: "start_time", sort_order: "desc" },
@@ -81,7 +84,7 @@ export const historyTasksQueryOptions = (date: string) => {
   return queryOptions({
     queryKey: taskKeys.list({
       filter: {
-        status: { eq: "completed" },
+        status: { eq: TASK_STATUS.COMPLETED },
         start_time: { is_equal_to: date },
       },
       sort: { sort_by: "start_time", sort_order: "asc" },
@@ -94,7 +97,7 @@ export const futureTasksQueryOptions = (date: string) => {
   return queryOptions({
     queryKey: taskKeys.list({
       filter: {
-        status: { eq: "scheduled" },
+        status: { eq: TASK_STATUS.SCHEDULED },
         scheduled_at: { is_equal_to: date },
       },
       sort: { sort_by: "position", sort_order: "asc" },

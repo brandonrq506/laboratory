@@ -1,5 +1,5 @@
 import { ME_ENDPOINT, apiV1 } from "@/libs/axios";
-import { UserSafe } from "../../types/userSafe";
+import type { UserSafe } from "../../types/userSafe";
 
 interface Props {
   signal: AbortSignal;

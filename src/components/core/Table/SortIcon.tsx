@@ -4,7 +4,7 @@ import {
   ChevronUpIcon,
 } from "@heroicons/react/24/outline";
 
-import { SortDirection } from "@tanstack/react-table";
+import type { SortDirection } from "@tanstack/react-table";
 
 type Props = {
   sortDirection: SortDirection | false;

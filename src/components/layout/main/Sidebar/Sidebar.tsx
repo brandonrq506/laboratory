@@ -16,13 +16,15 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import appLogo from "@/assets/app_logo.png";
 import clsx from "clsx";
 
+import { USER_PREFERENCE_KEY } from "@/features/userPreferences/types/userPreferenceKeys";
+
 type SidebarProps = {
   isOpen: boolean;
   onClose: () => void;
 };
 
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
-  const sidebarPreference = useUserPreference("sidebar_open");
+  const sidebarPreference = useUserPreference(USER_PREFERENCE_KEY.SIDEBAR_OPEN);
   const isDesktopSidebarOpen = sidebarPreference?.value === "true";
 
   return (

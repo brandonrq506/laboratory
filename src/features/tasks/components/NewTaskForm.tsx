@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 
 import { TextArea, TimeInputV3 } from "@/components/form";
 import { ActivityComboBox } from "@/features/activities/components";
-import { NewTaskForm as FormType } from "../types/newTaskForm";
+import type { NewTaskForm as FormType } from "../types/newTaskForm";
 
 import { Button } from "@/components/core";
 import { CREATE } from "@/constants/actions";

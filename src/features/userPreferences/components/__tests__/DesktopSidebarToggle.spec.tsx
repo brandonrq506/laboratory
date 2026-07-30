@@ -16,6 +16,8 @@ vi.mock("../../api/tanstack/useUpdateUserPreference", () => ({
 import { useUpdateUserPreference } from "../../api/tanstack/useUpdateUserPreference";
 import { useUserPreference } from "../../hooks";
 
+import { USER_PREFERENCE_KEY } from "@/features/userPreferences/types/userPreferenceKeys";
+
 const mockUseUserPreference = vi.mocked(useUserPreference);
 const mockUseUpdateUserPreference = vi.mocked(useUpdateUserPreference);
 
@@ -33,7 +35,7 @@ describe("DesktopSidebarToggle", () => {
   it("renders collapse button when sidebar is open", () => {
     mockUseUserPreference.mockReturnValue({
       preference_id: 3,
-      key: "sidebar_open",
+      key: USER_PREFERENCE_KEY.SIDEBAR_OPEN,
       value: "true",
     });
 
@@ -46,7 +48,7 @@ describe("DesktopSidebarToggle", () => {
   it("renders expand button when sidebar is closed", () => {
     mockUseUserPreference.mockReturnValue({
       preference_id: 3,
-      key: "sidebar_open",
+      key: USER_PREFERENCE_KEY.SIDEBAR_OPEN,
       value: "false",
     });
 
@@ -60,7 +62,7 @@ describe("DesktopSidebarToggle", () => {
     const user = userEvent.setup();
     mockUseUserPreference.mockReturnValue({
       preference_id: 3,
-      key: "sidebar_open",
+      key: USER_PREFERENCE_KEY.SIDEBAR_OPEN,
       value: "true",
     });
 
@@ -70,7 +72,7 @@ describe("DesktopSidebarToggle", () => {
     await user.click(button);
 
     expect(mockMutate).toHaveBeenCalledWith({
-      key: "sidebar_open",
+      key: USER_PREFERENCE_KEY.SIDEBAR_OPEN,
       value: "false",
     });
   });
@@ -79,7 +81,7 @@ describe("DesktopSidebarToggle", () => {
     const user = userEvent.setup();
     mockUseUserPreference.mockReturnValue({
       preference_id: 3,
-      key: "sidebar_open",
+      key: USER_PREFERENCE_KEY.SIDEBAR_OPEN,
       value: "false",
     });
 
@@ -89,7 +91,7 @@ describe("DesktopSidebarToggle", () => {
     await user.click(button);
 
     expect(mockMutate).toHaveBeenCalledWith({
-      key: "sidebar_open",
+      key: USER_PREFERENCE_KEY.SIDEBAR_OPEN,
       value: "true",
     });
   });

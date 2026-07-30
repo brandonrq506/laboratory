@@ -2,7 +2,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useUpdateActivity } from "../api/tanstack/useUpdateActivity";
 
 import { ActivityForm } from "./ActivityForm";
-import { CreateForm } from "../types/create-form";
+import type { CreateForm } from "../types/create-form";
 
 import { ACTIVITY } from "@/constants/entities";
 import { UPDATE } from "@/constants/actions";

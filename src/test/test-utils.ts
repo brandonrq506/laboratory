@@ -1,6 +1,6 @@
-import { RenderOptions, render } from "@testing-library/react";
+import { type RenderOptions, render } from "@testing-library/react";
 import { CommonProviders } from "./CommonWrapper";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
 const customRender = (
   ui: ReactElement,

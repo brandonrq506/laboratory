@@ -1,5 +1,5 @@
 import { Dot } from "@/components/core";
-import { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
+import type { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
 import { Link } from "@tanstack/react-router";
 import { RunningTimerButton } from "./RunningTimerButton";
 import { TimerTime } from "./TimerTime";

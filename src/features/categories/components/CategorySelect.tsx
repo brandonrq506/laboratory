@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { FieldValues, UseControllerProps } from "react-hook-form";
+import type { FieldValues, UseControllerProps } from "react-hook-form";
 import { ControlledSelect } from "@/components/form";
 import { categoryListQueryOptions } from "../api/queries";
 import { transformToOption } from "@/utils";

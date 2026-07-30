@@ -1,10 +1,10 @@
 import {
-  FieldValues,
-  UseControllerProps,
+  type FieldValues,
+  type UseControllerProps,
   useController,
 } from "react-hook-form";
 import { Select } from "./Select";
-import { SelectType } from "./types";
+import type { SelectType } from "./types";
 
 type ControlledSelectType<T extends FieldValues> = UseControllerProps<T> &
   SelectType;

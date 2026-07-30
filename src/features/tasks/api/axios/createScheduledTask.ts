@@ -1,5 +1,5 @@
 import { TASKS_ENDPOINT, apiV1 } from "@/libs/axios";
-import { ScheduledTaskAPI } from "../../types/scheduledTask";
+import type { ScheduledTaskAPI } from "../../types/scheduledTask";
 
 import type { ActivityWithCategory } from "@/features/activities/types/activity-with-category";
 import type { InsertMode } from "../../types/insert-mode";

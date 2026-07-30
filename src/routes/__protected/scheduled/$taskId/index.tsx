@@ -6,6 +6,8 @@ import { Modal } from "@/components/core";
 import { createFileRoute } from "@tanstack/react-router";
 import { taskByIdQueryOptions } from "@/features/tasks/api/queries";
 
+import { TASK_STATUS } from "@/features/tasks/types/task-status";
+
 export const Route = createFileRoute("/__protected/scheduled/$taskId/")({
   component: RouteComponent,
 });
@@ -15,7 +17,7 @@ function RouteComponent() {
   const { data } = useSuspenseQuery(taskByIdQueryOptions(taskId));
   const navigateBack = useNavigateBack({ fallback: "/scheduled" });
 
-  if (data.status !== "scheduled") return null;
+  if (data.status !== TASK_STATUS.SCHEDULED) return null;
 
   return (
     <Modal isOpen={true} onClose={navigateBack}>

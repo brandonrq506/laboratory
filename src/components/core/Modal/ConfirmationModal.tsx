@@ -1,5 +1,5 @@
 import { Description, DialogTitle } from "@headlessui/react";
-import { Modal, ModalProps } from "./Modal";
+import { Modal, type ModalProps } from "./Modal";
 import { backgrounds, icons } from "./utils";
 import clsx from "clsx";
 

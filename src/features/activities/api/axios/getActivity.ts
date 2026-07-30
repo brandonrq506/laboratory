@@ -1,5 +1,5 @@
-import { QueryFunctionContext } from "@tanstack/react-query";
-import { activityKeys } from "../queries";
+import type { QueryFunctionContext } from "@tanstack/react-query";
+import type { activityKeys } from "../queries";
 import { apiV1 } from "@/libs/axios";
 
 import type { ActivityWithCategory } from "../../types/activity-with-category";
