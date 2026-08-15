@@ -4,24 +4,12 @@
 
 ## Project overview
 
-This is a **React + TypeScript + Vite** personal project. The application is a productivity tool featuring activity/task management, timers, routines, categories.
+This is a **Vite + React + TypeScript + TailwindCSS + Tanstack** personal project. The application is a productivity tool featuring activity/task management, timers, routines, categories.
 
 **Technology Stack:**
 
 It is critial that you leverage the latest and greatest of the current libraries.
-If you need to validate versions, check the `package.json` file.
-
-- **Frontend:** React latest, TypeScript, TailwindCSS latest.
-- **Build:** Vite 7.3+ with TypeScript compilation
-- **Testing:** Vitest + React Testing Library + User Event + MSW for API mocking
-- **Routing:** @tanstack/react-router
-- **State:** TanStack Query latest, React Hook Form latest
-- **Deployment:** Heroku-ready with static file serving
-
-## Build and validation Commands
-
-Feel free to check the `package.json` scripts for more details.
-We use `mise`. Some commands for you may require `mise exec` prefix to ensure the correct tool versions are used.
+If you need to validate versions or commands, check the `package.json` file..
 
 ## Project Architecture & Layout
 
