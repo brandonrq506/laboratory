@@ -35,9 +35,10 @@ const router = createRouter({
 
 // True when the matched route chain is flagged `staticData: { modal: true }`.
 function isModalLocation(pathname: string): boolean {
-  return router
-    .getMatchedRoutes(pathname)
-    .matchedRoutes.some((route) => route.options.staticData?.modal === true);
+  const [matchedRoutes] = router.getMatchedRoutes(pathname);
+  return matchedRoutes.some(
+    (route) => route.options.staticData?.modal === true,
+  );
 }
 
 // Register the router instance for type safety
