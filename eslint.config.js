@@ -7,14 +7,14 @@ import testingLibrary from "eslint-plugin-testing-library";
 import eslintConfigPrettier from "eslint-config-prettier";
 import pluginReactHooks from "eslint-plugin-react-hooks";
 import reactCompiler from "eslint-plugin-react-compiler";
-import reactRefresh from "eslint-plugin-react-refresh";
-import pluginRouter from '@tanstack/eslint-plugin-router'
+import { reactRefresh } from "eslint-plugin-react-refresh";
+import pluginRouter from "@tanstack/eslint-plugin-router";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  ...pluginRouter.configs['flat/recommended'],
+  ...pluginRouter.configs["flat/recommended"],
   ...pluginQuery.configs["flat/recommended"],
-  reactRefresh.configs.recommended,
+  reactRefresh.configs.vite(),
   {
     files: ["**/*.spec.{ts,tsx}", "**/*.test.{ts,tsx}"],
     ...testingLibrary.configs["flat/react"],
@@ -129,6 +129,7 @@ export default [
     files: ["src/routes/**/*.tsx"],
     rules: {
       "no-use-before-define": "off",
-    }
-  }
+      "react-refresh/only-export-components": "off",
+    },
+  },
 ];
