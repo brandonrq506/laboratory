@@ -8,7 +8,7 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import { useEffect, useState } from "react";
+import { startTransition, useOptimistic } from "react";
 import { useMoveRoutineItem } from "../api/tanstack/use-move-routine-item";
 
 import {
@@ -33,13 +33,8 @@ type Props = {
 
 // TODO: Make this component adopt the sortable API used by tasks. (Then we reuse SortableTaskList)
 export const SortableRoutineItemList = ({ routineId, items }: Props) => {
-  const { mutate: moveActivity } = useMoveRoutineItem();
-  const [sortedItems, setSortedItems] =
-    useState<RoutineItemWithExpectedStartTime[]>(items);
-
-  useEffect(() => {
-    setSortedItems(items);
-  }, [items]);
+  const { mutateAsync: moveActivity } = useMoveRoutineItem();
+  const [optimisticItems, setOptimisticItems] = useOptimistic(items);
 
   const sensors = useSensors(
     useSensor(MouseSensor),
@@ -60,17 +55,21 @@ export const SortableRoutineItemList = ({ routineId, items }: Props) => {
     if (!over) return;
     if (active.id === over.id) return;
 
-    const oldIndex = sortedItems.findIndex((a) => a.id === active.id);
-    const newIndex = sortedItems.findIndex((a) => a.id === over.id);
+    const oldIndex = optimisticItems.findIndex((item) => item.id === active.id);
+    const newIndex = optimisticItems.findIndex((item) => item.id === over.id);
 
-    const newItems = arrayMove(sortedItems, oldIndex, newIndex);
-    setSortedItems(newItems);
+    if (oldIndex === -1 || newIndex === -1) return;
 
-    moveActivity({
-      routine_id: routineId,
-      routine_item_id: active.id as number,
-      new_position: newIndex,
-      routine_items: newItems,
+    const newItems = arrayMove(optimisticItems, oldIndex, newIndex);
+
+    startTransition(async () => {
+      setOptimisticItems(newItems);
+      await moveActivity({
+        routine_id: routineId,
+        routine_item_id: active.id as number,
+        new_position: newIndex,
+        routine_items: newItems,
+      }).catch(() => undefined);
     });
   };
 
@@ -82,9 +81,9 @@ export const SortableRoutineItemList = ({ routineId, items }: Props) => {
         onDragEnd={handleDragEnd}
         modifiers={[restrictToVerticalAxis, restrictToParentElement]}>
         <SortableContext
-          items={sortedItems.map((a) => a.id)}
+          items={optimisticItems.map((item) => item.id)}
           strategy={verticalListSortingStrategy}>
-          {sortedItems.map((item) => (
+          {optimisticItems.map((item) => (
             <SortableItemCard
               key={item.id}
               itemId={item.id}

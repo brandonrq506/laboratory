@@ -36,12 +36,11 @@ export const useMoveRoutineItem = () => {
     onError: (_, __, context) => {
       context?.rollback();
     },
-    onSettled: (_, __, { routine_id }) => {
+    onSettled: (_, __, { routine_id }) =>
       invalidateQueries(
         queryClient,
         routineListQueryOptions(),
         routineByIdQueryOptions(routine_id),
-      );
-    },
+      ),
   });
 };
