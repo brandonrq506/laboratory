@@ -1,7 +1,7 @@
 import { HttpResponse, http } from "msw";
 import { render, screen } from "@/test/test-utils";
-import { apiRoutes } from "@/test/handlers/api-routes";
 import { Username } from "../Username";
+import { apiRoutes } from "@/test/handlers/api-routes";
 import { server } from "@/test/server";
 
 describe("Username", () => {

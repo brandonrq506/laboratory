@@ -1,7 +1,7 @@
 import { HttpResponse, http } from "msw";
 
-import { routines } from "../store/routines";
 import { apiRoutes } from "./api-routes";
+import { routines } from "../store/routines";
 
 export const routineHandlers = [
   http.get(apiRoutes.routines, ({ request }) => {

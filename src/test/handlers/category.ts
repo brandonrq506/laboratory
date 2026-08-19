@@ -1,7 +1,7 @@
 import { HttpResponse, http } from "msw";
 
-import { categories } from "../store/categories";
 import { apiRoutes } from "./api-routes";
+import { categories } from "../store/categories";
 
 export const categoryHandlers = [
   http.get(apiRoutes.categories, () => {

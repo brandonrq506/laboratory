@@ -1,7 +1,7 @@
 import { HttpResponse, http } from "msw";
-import { apiV1 } from "@/libs/axios";
 import { resetInterceptors, setAccessToken } from "@/libs/auth-interceptors";
 import { apiRoutes } from "@/test/handlers/api-routes";
+import { apiV1 } from "@/libs/axios";
 import { server } from "@/test/server";
 
 beforeEach(() => {

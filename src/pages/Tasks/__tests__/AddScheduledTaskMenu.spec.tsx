@@ -12,8 +12,8 @@ import {
   INSERT_MODE,
   type InsertMode,
 } from "@/features/tasks/types/insert-mode";
-import { server } from "@/test/server";
 import { apiRoutes } from "@/test/handlers/api-routes";
+import { server } from "@/test/server";
 
 describe("AddScheduledTaskMenu", () => {
   const createTestQueryClient = () =>

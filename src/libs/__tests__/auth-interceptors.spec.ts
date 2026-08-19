@@ -6,8 +6,8 @@ import {
   setAccessToken,
   setLogoutHandler,
 } from "@/libs/auth-interceptors";
-import { server } from "@/test/server";
 import { apiRoutes } from "@/test/handlers/api-routes";
+import { server } from "@/test/server";
 
 beforeEach(() => {
   resetInterceptors();

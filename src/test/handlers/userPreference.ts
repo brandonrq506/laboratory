@@ -1,5 +1,6 @@
-import { HttpResponse, http } from "msw";
 import { userPreferences } from "../store/userPreferences";
+
+import { HttpResponse, http } from "msw";
 import { apiRoutes } from "./api-routes";
 
 export const userPreferenceHandlers = [
