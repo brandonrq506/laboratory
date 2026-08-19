@@ -1,14 +1,11 @@
 import { HttpResponse, http } from "msw";
-import { REFRESH_ENDPOINT, SESSION_ENDPOINT } from "@/libs/axios";
-
-const API_URL = import.meta.env.VITE_API_URL;
-const BASE_URL = `${API_URL}/v1${SESSION_ENDPOINT}`;
+import { apiRoutes } from "./api-routes";
 
 export const authHandlers = [
-  http.delete(BASE_URL, () => {
+  http.delete(apiRoutes.session, () => {
     return HttpResponse.json(null, { status: 204 });
   }),
-  http.post(`${API_URL}/v1${REFRESH_ENDPOINT}`, () => {
+  http.post(apiRoutes.refreshSession, () => {
     return HttpResponse.json(
       { error: "Invalid refresh token" },
       { status: 401 },

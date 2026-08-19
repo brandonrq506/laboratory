@@ -1,17 +1,14 @@
 import { HttpResponse, http } from "msw";
-import { CATEGORIES_ENDPOINT } from "@/libs/axios";
 
 import { categories } from "../store/categories";
-
-const API_URL = import.meta.env.VITE_API_URL;
-const BASE_URL = `${API_URL}/v1${CATEGORIES_ENDPOINT}`;
+import { apiRoutes } from "./api-routes";
 
 export const categoryHandlers = [
-  http.get(BASE_URL, () => {
+  http.get(apiRoutes.categories, () => {
     return HttpResponse.json(categories, { status: 200 });
   }),
 
-  http.get(`${BASE_URL}/:categoryId`, ({ params }) => {
+  http.get(apiRoutes.category, ({ params }) => {
     const { categoryId } = params;
 
     const category = categories.find((c) => c.id === Number(categoryId));
@@ -22,11 +19,11 @@ export const categoryHandlers = [
     return HttpResponse.json(category, { status: 200 });
   }),
 
-  http.post(BASE_URL, (req) => {
+  http.post(apiRoutes.categories, (req) => {
     return HttpResponse.json(req.params, { status: 201 });
   }),
 
-  http.patch(`${BASE_URL}/:categoryId`, async ({ params, request }) => {
+  http.patch(apiRoutes.category, async ({ params, request }) => {
     const { categoryId } = params;
     const payload = await request.json();
 
@@ -42,7 +39,7 @@ export const categoryHandlers = [
     return HttpResponse.json(updatedCategory, { status: 200 });
   }),
 
-  http.delete(`${BASE_URL}/:categoryId`, ({ params }) => {
+  http.delete(apiRoutes.category, ({ params }) => {
     const { categoryId } = params;
 
     const category = categories.find((c) => c.id === Number(categoryId));

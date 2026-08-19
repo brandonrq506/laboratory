@@ -2,8 +2,8 @@ import { HttpResponse, delay, http } from "msw";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { act, renderHook, waitFor } from "@testing-library/react";
 
-import { TASKS_ENDPOINT } from "@/libs/axios";
 import { futureTasksQueryOptions } from "@/features/tasks/api/queries";
+import { apiRoutes } from "@/test/handlers/api-routes";
 import { scheduledTasks } from "@/test/store/tasks";
 import { server } from "@/test/server";
 
@@ -11,10 +11,6 @@ import { useFutureScheduledTasksSorting } from "../use-future-scheduled-tasks-so
 
 import type { ReactNode } from "react";
 import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
-
-const API_URL = import.meta.env.VITE_API_URL;
-const BASE_URL = `${API_URL}/v1${TASKS_ENDPOINT}`;
-const MOVE_URL = `${BASE_URL}/move_drag`;
 
 const FUTURE_DATE = "2026-05-09";
 
@@ -29,7 +25,7 @@ const buildQueryClient = () =>
 
 const stubFreshGet = (data: ScheduledTaskAPI[]) => {
   server.use(
-    http.get(BASE_URL, () => HttpResponse.json(data, { status: 200 })),
+    http.get(apiRoutes.tasks, () => HttpResponse.json(data, { status: 200 })),
   );
 };
 
@@ -84,7 +80,7 @@ describe("useFutureScheduledTasksSorting", () => {
   it("handleDragEnd calls move_drag with the computed neighbors and clears draggingId", async () => {
     const movePayload = vi.fn();
     server.use(
-      http.patch(MOVE_URL, async ({ request }) => {
+      http.patch(apiRoutes.taskMove, async ({ request }) => {
         const body = await request.json();
         movePayload(body);
         return HttpResponse.json({ ok: true });
@@ -122,7 +118,7 @@ describe("useFutureScheduledTasksSorting", () => {
 
   it("renderItems reflects the optimistic order while the move mutation is pending", async () => {
     server.use(
-      http.patch(MOVE_URL, async () => {
+      http.patch(apiRoutes.taskMove, async () => {
         await delay(100);
         return HttpResponse.json({ ok: true });
       }),
@@ -156,7 +152,7 @@ describe("useFutureScheduledTasksSorting", () => {
   it("handleDragEnd bails (no mutate call) when the resulting order matches the existing order", async () => {
     const moveSpy = vi.fn();
     server.use(
-      http.patch(MOVE_URL, () => {
+      http.patch(apiRoutes.taskMove, () => {
         moveSpy();
         return HttpResponse.json({ ok: true });
       }),

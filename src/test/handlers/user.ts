@@ -1,11 +1,8 @@
 import { HttpResponse, http } from "msw";
-import { ME_ENDPOINT } from "@/libs/axios";
-
-const API_URL = import.meta.env.VITE_API_URL;
-const BASE_URL = `${API_URL}/v1${ME_ENDPOINT}`;
+import { apiRoutes } from "./api-routes";
 
 export const userHandlers = [
-  http.get(BASE_URL, () => {
+  http.get(apiRoutes.me, () => {
     return HttpResponse.json(
       {
         id: 1,

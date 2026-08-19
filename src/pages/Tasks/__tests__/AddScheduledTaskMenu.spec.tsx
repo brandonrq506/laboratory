@@ -1,12 +1,11 @@
 /* eslint-disable max-lines-per-function */
-/* eslint-disable max-lines */
+
 import { HttpResponse, http } from "msw";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import { activities } from "@/test/store/activities";
 import userEvent from "@testing-library/user-event";
 
-import { ROUTINES_ENDPOINT, TASKS_ENDPOINT } from "@/libs/axios";
 import { AddScheduledTaskMenu } from "../AddScheduledTaskMenu";
 
 import {
@@ -14,8 +13,7 @@ import {
   type InsertMode,
 } from "@/features/tasks/types/insert-mode";
 import { server } from "@/test/server";
-
-const API_URL = import.meta.env.VITE_API_URL;
+import { apiRoutes } from "@/test/handlers/api-routes";
 
 describe("AddScheduledTaskMenu", () => {
   const createTestQueryClient = () =>
@@ -59,13 +57,10 @@ describe("AddScheduledTaskMenu", () => {
     const { user } = renderAddScheduledTaskMenu();
 
     server.use(
-      http.post(
-        `${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`,
-        async () => {
-          await new Promise((resolve) => setTimeout(resolve, 100));
-          return HttpResponse.json(null, { status: 201 });
-        },
-      ),
+      http.post(apiRoutes.routineApply, async () => {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        return HttpResponse.json(null, { status: 201 });
+      }),
     );
 
     const menuButton = screen.getByRole("button", { name: "Add Tasks" });
@@ -96,13 +91,10 @@ describe("AddScheduledTaskMenu", () => {
     const { user } = renderAddScheduledTaskMenu();
 
     server.use(
-      http.post(
-        `${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`,
-        async () => {
-          await new Promise((resolve) => setTimeout(resolve, 100));
-          return HttpResponse.json(null, { status: 201 });
-        },
-      ),
+      http.post(apiRoutes.routineApply, async () => {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        return HttpResponse.json(null, { status: 201 });
+      }),
     );
 
     const menuButton = screen.getByRole("button", { name: "Add Tasks" });
@@ -132,13 +124,10 @@ describe("AddScheduledTaskMenu", () => {
     const { user } = renderAddScheduledTaskMenu();
 
     server.use(
-      http.post(
-        `${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`,
-        async () => {
-          await new Promise((resolve) => setTimeout(resolve, 100));
-          return HttpResponse.json({ error: "Server error" }, { status: 500 });
-        },
-      ),
+      http.post(apiRoutes.routineApply, async () => {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        return HttpResponse.json({ error: "Server error" }, { status: 500 });
+      }),
     );
 
     const menuButton = screen.getByRole("button", { name: "Add Tasks" });
@@ -185,7 +174,7 @@ describe("AddScheduledTaskMenu", () => {
     const { user } = renderAddScheduledTaskMenu(INSERT_MODE.PREPEND);
 
     server.use(
-      http.post(`${API_URL}/v1${TASKS_ENDPOINT}`, async ({ request }) => {
+      http.post(apiRoutes.tasks, async ({ request }) => {
         requestBody = (await request.json()) as Record<string, unknown>;
         return HttpResponse.json(null, { status: 201 });
       }),
@@ -214,13 +203,10 @@ describe("AddScheduledTaskMenu", () => {
     const { user } = renderAddScheduledTaskMenu(INSERT_MODE.PREPEND);
 
     server.use(
-      http.post(
-        `${API_URL}/v1${ROUTINES_ENDPOINT}/:routineId/apply`,
-        async ({ request }) => {
-          requestBody = (await request.json()) as Record<string, unknown>;
-          return HttpResponse.json(null, { status: 201 });
-        },
-      ),
+      http.post(apiRoutes.routineApply, async ({ request }) => {
+        requestBody = (await request.json()) as Record<string, unknown>;
+        return HttpResponse.json(null, { status: 201 });
+      }),
     );
 
     await user.click(screen.getByRole("button", { name: "Add Tasks" }));

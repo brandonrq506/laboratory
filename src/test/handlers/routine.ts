@@ -1,13 +1,10 @@
 import { HttpResponse, http } from "msw";
-import { ROUTINES_ENDPOINT } from "@/libs/axios";
 
 import { routines } from "../store/routines";
-
-const API_URL = import.meta.env.VITE_API_URL;
-const BASE_URL = `${API_URL}/v1${ROUTINES_ENDPOINT}`;
+import { apiRoutes } from "./api-routes";
 
 export const routineHandlers = [
-  http.get(BASE_URL, ({ request }) => {
+  http.get(apiRoutes.routines, ({ request }) => {
     const url = new URL(request.url);
     const hiddenAtIsNull = url.searchParams.get("filter[hidden_at][is_null]");
 
@@ -20,7 +17,7 @@ export const routineHandlers = [
 
     return HttpResponse.json(result, { status: 200 });
   }),
-  http.get(`${BASE_URL}/:routineId`, ({ params }) => {
+  http.get(apiRoutes.routine, ({ params }) => {
     const { routineId } = params;
 
     const routine = routines.find((r) => r.id === Number(routineId));
@@ -30,13 +27,13 @@ export const routineHandlers = [
 
     return HttpResponse.json(routine, { status: 200 });
   }),
-  http.post(BASE_URL, (req) => {
+  http.post(apiRoutes.routines, (req) => {
     return HttpResponse.json(req.params, { status: 201 });
   }),
-  http.post(`${BASE_URL}/:routineId/apply`, () => {
+  http.post(apiRoutes.routineApply, () => {
     return HttpResponse.json(null, { status: 201 });
   }),
-  http.post(`${BASE_URL}/:routineId/hide`, ({ params }) => {
+  http.post(apiRoutes.routineHide, ({ params }) => {
     const { routineId } = params;
 
     const routine = routines.find((r) => r.id === Number(routineId));
@@ -50,7 +47,7 @@ export const routineHandlers = [
 
     return HttpResponse.json(updatedRoutine, { status: 200 });
   }),
-  http.post(`${BASE_URL}/:routineId/unhide`, ({ params }) => {
+  http.post(apiRoutes.routineUnhide, ({ params }) => {
     const { routineId } = params;
 
     const routine = routines.find((r) => r.id === Number(routineId));
@@ -64,7 +61,7 @@ export const routineHandlers = [
 
     return HttpResponse.json(updatedRoutine, { status: 200 });
   }),
-  http.patch(`${BASE_URL}/:routineId`, async ({ params, request }) => {
+  http.patch(apiRoutes.routine, async ({ params, request }) => {
     const { routineId } = params;
     const payload = await request.json();
 
@@ -80,7 +77,7 @@ export const routineHandlers = [
     return HttpResponse.json(updatedRoutine, { status: 200 });
   }),
 
-  http.delete(`${BASE_URL}/:routineId`, ({ params }) => {
+  http.delete(apiRoutes.routine, ({ params }) => {
     const { routineId } = params;
 
     const routine = routines.find((r) => r.id === Number(routineId));

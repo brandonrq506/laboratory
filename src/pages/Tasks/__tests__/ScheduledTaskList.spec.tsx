@@ -7,17 +7,15 @@ import { activities } from "@/test/store/activities";
 import { scheduledTasks } from "@/test/store/tasks";
 
 import { HttpResponse, http } from "msw";
-import { TASKS_ENDPOINT } from "@/libs/axios";
+import { apiRoutes } from "@/test/handlers/api-routes";
 import { server } from "@/test/server";
 
 import { INSERT_MODE } from "@/features/tasks/types/insert-mode";
 
-const API_URL = import.meta.env.VITE_API_URL;
-
 describe("ScheduledTaskList", () => {
   const setupServer = (tasks: ScheduledTaskAPI[]) => {
     server.use(
-      http.get(`${API_URL}/v1${TASKS_ENDPOINT}`, () => {
+      http.get(apiRoutes.tasks, () => {
         return HttpResponse.json(tasks, { status: 200 });
       }),
     );
@@ -27,7 +25,7 @@ describe("ScheduledTaskList", () => {
     let requestBody: Record<string, unknown> | null = null;
 
     server.use(
-      http.post(`${API_URL}/v1${TASKS_ENDPOINT}`, async ({ request }) => {
+      http.post(apiRoutes.tasks, async ({ request }) => {
         requestBody = (await request.json()) as Record<string, unknown>;
 
         return HttpResponse.json(
@@ -61,7 +59,7 @@ describe("ScheduledTaskList", () => {
     const errorMessage = "Failed to fetch tasks";
 
     server.use(
-      http.get(`${API_URL}/v1${TASKS_ENDPOINT}`, () => {
+      http.get(apiRoutes.tasks, () => {
         return HttpResponse.json({ message: errorMessage }, { status: 500 });
       }),
     );

@@ -1,15 +1,13 @@
 /* eslint-disable max-lines-per-function */
 import { HttpResponse, http } from "msw";
-import { REFRESH_ENDPOINT, SESSION_ENDPOINT, apiV1 } from "@/libs/axios";
+import { SESSION_ENDPOINT, apiV1 } from "@/libs/axios";
 import {
   resetInterceptors,
   setAccessToken,
   setLogoutHandler,
 } from "@/libs/auth-interceptors";
 import { server } from "@/test/server";
-
-const API_URL = import.meta.env.VITE_API_URL;
-const BASE = `${API_URL}/v1`;
+import { apiRoutes } from "@/test/handlers/api-routes";
 
 beforeEach(() => {
   resetInterceptors();
@@ -18,7 +16,7 @@ beforeEach(() => {
 describe("auth-interceptors", () => {
   it("attaches access token to request headers", async () => {
     server.use(
-      http.get(`${BASE}/test`, ({ request }) => {
+      http.get(apiRoutes.test, ({ request }) => {
         const auth = request.headers.get("Authorization");
         return HttpResponse.json({ auth });
       }),
@@ -32,13 +30,13 @@ describe("auth-interceptors", () => {
   it("does NOT refresh on 401 when _skipAuthRefresh is set", async () => {
     const refreshSpy = vi.fn();
     server.use(
-      http.post(`${BASE}${SESSION_ENDPOINT}`, () => {
+      http.post(apiRoutes.session, () => {
         return HttpResponse.json(
           { error: "Invalid credentials" },
           { status: 401 },
         );
       }),
-      http.post(`${BASE}${REFRESH_ENDPOINT}`, () => {
+      http.post(apiRoutes.refreshSession, () => {
         refreshSpy();
         return HttpResponse.json({ access_token: "new" });
       }),
@@ -55,10 +53,10 @@ describe("auth-interceptors", () => {
     setLogoutHandler(logoutSpy);
 
     server.use(
-      http.delete(`${BASE}${SESSION_ENDPOINT}`, () => {
+      http.delete(apiRoutes.session, () => {
         return HttpResponse.json(null, { status: 401 });
       }),
-      http.post(`${BASE}${REFRESH_ENDPOINT}`, () => {
+      http.post(apiRoutes.refreshSession, () => {
         return HttpResponse.json(null, { status: 401 });
       }),
     );
@@ -70,14 +68,14 @@ describe("auth-interceptors", () => {
   it("attempts refresh on logout 401 and retries on success", async () => {
     let deleteCount = 0;
     server.use(
-      http.delete(`${BASE}${SESSION_ENDPOINT}`, () => {
+      http.delete(apiRoutes.session, () => {
         deleteCount++;
         if (deleteCount === 1) {
           return HttpResponse.json(null, { status: 401 });
         }
         return HttpResponse.json({ ok: true });
       }),
-      http.post(`${BASE}${REFRESH_ENDPOINT}`, () => {
+      http.post(apiRoutes.refreshSession, () => {
         return HttpResponse.json({ access_token: "refreshed-token" });
       }),
     );
@@ -90,14 +88,14 @@ describe("auth-interceptors", () => {
   it("refreshes on 401 from protected endpoint and retries", async () => {
     let callCount = 0;
     server.use(
-      http.get(`${BASE}/protected`, () => {
+      http.get(apiRoutes.protected, () => {
         callCount++;
         if (callCount === 1) {
           return HttpResponse.json(null, { status: 401 });
         }
         return HttpResponse.json({ data: "ok" });
       }),
-      http.post(`${BASE}${REFRESH_ENDPOINT}`, () => {
+      http.post(apiRoutes.refreshSession, () => {
         return HttpResponse.json({ access_token: "refreshed-token" });
       }),
     );
@@ -110,14 +108,14 @@ describe("auth-interceptors", () => {
   it("queues concurrent requests during refresh, retries all", async () => {
     let protectedCalls = 0;
     server.use(
-      http.get(`${BASE}/protected`, () => {
+      http.get(apiRoutes.protected, () => {
         protectedCalls++;
         if (protectedCalls <= 2) {
           return HttpResponse.json(null, { status: 401 });
         }
         return HttpResponse.json({ call: protectedCalls });
       }),
-      http.post(`${BASE}${REFRESH_ENDPOINT}`, async () => {
+      http.post(apiRoutes.refreshSession, async () => {
         await new Promise((r) => setTimeout(r, 50));
         return HttpResponse.json({ access_token: "queued-token" });
       }),
@@ -137,10 +135,10 @@ describe("auth-interceptors", () => {
     setLogoutHandler(logoutSpy);
 
     server.use(
-      http.get(`${BASE}/protected`, () => {
+      http.get(apiRoutes.protected, () => {
         return HttpResponse.json(null, { status: 401 });
       }),
-      http.post(`${BASE}${REFRESH_ENDPOINT}`, () => {
+      http.post(apiRoutes.refreshSession, () => {
         return HttpResponse.json(null, { status: 401 });
       }),
     );
@@ -154,10 +152,10 @@ describe("auth-interceptors", () => {
     setLogoutHandler(logoutSpy);
 
     server.use(
-      http.get(`${BASE}/protected`, () => {
+      http.get(apiRoutes.protected, () => {
         return HttpResponse.json(null, { status: 401 });
       }),
-      http.post(`${BASE}${REFRESH_ENDPOINT}`, () => {
+      http.post(apiRoutes.refreshSession, () => {
         return HttpResponse.json({ access_token: "refreshed-token" });
       }),
     );
@@ -171,7 +169,7 @@ describe("auth-interceptors", () => {
     setLogoutHandler(logoutSpy);
 
     server.use(
-      http.get(`${BASE}/protected`, () => {
+      http.get(apiRoutes.protected, () => {
         return HttpResponse.json(null, { status: 401 });
       }),
     );
@@ -185,7 +183,7 @@ describe("auth-interceptors", () => {
     resetInterceptors();
 
     server.use(
-      http.get(`${BASE}/test`, ({ request }) => {
+      http.get(apiRoutes.test, ({ request }) => {
         const auth = request.headers.get("Authorization");
         return HttpResponse.json({ auth });
       }),
