@@ -1,16 +1,13 @@
 import { HttpResponse, http } from "msw";
 import { render, screen } from "@/test/test-utils";
 import { AdminProtectedContent } from "../AdminProtectedContent";
-import { ME_ENDPOINT } from "@/libs/axios";
+import { apiRoutes } from "@/test/handlers/api-routes";
 import { server } from "@/test/server";
-
-const API_URL = import.meta.env.VITE_API_URL;
-const BASE_URL = `${API_URL}/v1${ME_ENDPOINT}`;
 
 describe("AdminProtectedContent", () => {
   it("renders children when user is admin", async () => {
     server.use(
-      http.get(BASE_URL, () =>
+      http.get(apiRoutes.me, () =>
         HttpResponse.json(
           {
             id: 1,

@@ -10,16 +10,13 @@ import {
   futureTasksQueryOptions,
   scheduledTasksQueryOptions,
 } from "../../queries";
-import { TASKS_ENDPOINT } from "@/libs/axios";
+import { apiRoutes } from "@/test/handlers/api-routes";
 import { scheduledTasks } from "@/test/store/tasks";
 import { server } from "@/test/server";
 import { useFutureMoveTask } from "../use-move-future-task";
 
 import type { ReactNode } from "react";
 import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
-
-const API_URL = import.meta.env.VITE_API_URL;
-const MOVE_URL = `${API_URL}/v1${TASKS_ENDPOINT}/move_drag`;
 
 const FUTURE_DATE = "2026-05-09";
 
@@ -48,7 +45,9 @@ describe("useFutureMoveTask", () => {
   ];
 
   it("writes optimistic value to the future key and invalidates only that key on settle", async () => {
-    server.use(http.patch(MOVE_URL, () => HttpResponse.json({ ok: true })));
+    server.use(
+      http.patch(apiRoutes.taskMove, () => HttpResponse.json({ ok: true })),
+    );
 
     const queryClient = buildQueryClient();
     queryClient.setQueryData(futureKey, initialOrder);
@@ -84,7 +83,7 @@ describe("useFutureMoveTask", () => {
 
   it("rolls back to snapshot on 422", async () => {
     server.use(
-      http.patch(MOVE_URL, () =>
+      http.patch(apiRoutes.taskMove, () =>
         HttpResponse.json({ errors: [] }, { status: 422 }),
       ),
     );
@@ -112,7 +111,9 @@ describe("useFutureMoveTask", () => {
   });
 
   it("calls cancelQueries on the future key in onMutate", async () => {
-    server.use(http.patch(MOVE_URL, () => HttpResponse.json({ ok: true })));
+    server.use(
+      http.patch(apiRoutes.taskMove, () => HttpResponse.json({ ok: true })),
+    );
 
     const queryClient = buildQueryClient();
     queryClient.setQueryData(futureKey, initialOrder);

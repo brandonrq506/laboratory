@@ -10,16 +10,13 @@ import {
   inProgressTasksQueryOptions,
   scheduledTasksQueryOptions,
 } from "@/features/tasks/api/queries";
-import { TASKS_ENDPOINT } from "@/libs/axios";
+import { apiRoutes } from "@/test/handlers/api-routes";
 import { scheduledTasks } from "@/test/store/tasks";
 import { server } from "@/test/server";
 import { useDeleteTasks } from "../use-delete-tasks";
 
 import type { ReactNode } from "react";
 import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
-
-const API_URL = import.meta.env.VITE_API_URL;
-const SPAN_DELETE_URL = `${API_URL}/v1${TASKS_ENDPOINT}/span_deletions`;
 
 const makeWrapper = (queryClient: QueryClient) => {
   return ({ children }: { children: ReactNode }) => (
@@ -47,7 +44,10 @@ describe("useDeleteTasks", () => {
 
   it("filters deleted ids out of the scheduled cache and invalidates only that key on settle", async () => {
     server.use(
-      http.post(SPAN_DELETE_URL, () => new HttpResponse(null, { status: 204 })),
+      http.post(
+        apiRoutes.taskSpanDeletions,
+        () => new HttpResponse(null, { status: 204 }),
+      ),
     );
 
     const queryClient = buildQueryClient();
@@ -81,7 +81,7 @@ describe("useDeleteTasks", () => {
 
   it("rolls back to snapshot on 422", async () => {
     server.use(
-      http.post(SPAN_DELETE_URL, () =>
+      http.post(apiRoutes.taskSpanDeletions, () =>
         HttpResponse.json({ errors: [] }, { status: 422 }),
       ),
     );
@@ -105,7 +105,10 @@ describe("useDeleteTasks", () => {
 
   it("calls cancelQueries on the scheduled key in onMutate", async () => {
     server.use(
-      http.post(SPAN_DELETE_URL, () => new HttpResponse(null, { status: 204 })),
+      http.post(
+        apiRoutes.taskSpanDeletions,
+        () => new HttpResponse(null, { status: 204 }),
+      ),
     );
 
     const queryClient = buildQueryClient();

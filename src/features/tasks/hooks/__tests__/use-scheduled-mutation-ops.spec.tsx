@@ -8,7 +8,7 @@ import {
   inProgressTasksQueryOptions,
   scheduledTasksQueryOptions,
 } from "@/features/tasks/api/queries";
-import { TASKS_ENDPOINT } from "@/libs/axios";
+import { apiRoutes } from "@/test/handlers/api-routes";
 import { groupRoutineTasks } from "@/features/tasks/utils/group-routine-tasks";
 import { scheduledTasks } from "@/test/store/tasks";
 import { server } from "@/test/server";
@@ -16,11 +16,6 @@ import { useScheduledMutationOps } from "../use-scheduled-mutation-ops";
 import { wrapSortableId } from "@/features/routines/utils/wrap-sortable-id";
 
 import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
-
-const API_URL = import.meta.env.VITE_API_URL;
-const BASE_URL = `${API_URL}/v1${TASKS_ENDPOINT}`;
-const MOVE_URL = `${BASE_URL}/move_drag`;
-const SPAN_MOVE_URL = `${BASE_URL}/span_moves`;
 
 const APPLICATION_ID = 42;
 const ROUTINE_NAME = "Workout";
@@ -45,7 +40,7 @@ const withApplication = (task: ScheduledTaskAPI): ScheduledTaskAPI => ({
 
 const stubFreshGet = (data: ScheduledTaskAPI[]) => {
   server.use(
-    http.get(BASE_URL, () => HttpResponse.json(data, { status: 200 })),
+    http.get(apiRoutes.tasks, () => HttpResponse.json(data, { status: 200 })),
   );
 };
 
@@ -90,7 +85,7 @@ describe("useScheduledMutationOps", () => {
   it("performMove on a single task calls move_drag with the computed neighbors", async () => {
     const movePayload = vi.fn();
     server.use(
-      http.patch(MOVE_URL, async ({ request }) => {
+      http.patch(apiRoutes.taskMove, async ({ request }) => {
         const body = await request.json();
         movePayload(body);
         return HttpResponse.json({ ok: true });
@@ -117,7 +112,7 @@ describe("useScheduledMutationOps", () => {
 
   it("rawItems reflects the optimistic order while the move mutation is pending", async () => {
     server.use(
-      http.patch(MOVE_URL, async () => {
+      http.patch(apiRoutes.taskMove, async () => {
         await delay(100);
         return HttpResponse.json({ ok: true });
       }),
@@ -146,7 +141,7 @@ describe("useScheduledMutationOps", () => {
   it("performMove bails (no mutate) when the resulting order matches the existing order", async () => {
     const moveSpy = vi.fn();
     server.use(
-      http.patch(MOVE_URL, () => {
+      http.patch(apiRoutes.taskMove, () => {
         moveSpy();
         return HttpResponse.json({ ok: true });
       }),
@@ -170,7 +165,7 @@ describe("useScheduledMutationOps", () => {
   it("performMove on a wrap sortable id calls span_moves with all absorbed task ids", async () => {
     const spanMovePayload = vi.fn();
     server.use(
-      http.post(SPAN_MOVE_URL, async ({ request }) => {
+      http.post(apiRoutes.taskSpanMoves, async ({ request }) => {
         const body = await request.json();
         spanMovePayload(body);
         return HttpResponse.json({ success: true });

@@ -3,10 +3,8 @@ import { ActivityTable } from "../ActivityTable";
 import userEvent from "@testing-library/user-event";
 
 import { HttpResponse, http } from "msw";
-import { ACTIVITIES_ENDPOINT } from "@/libs/axios";
+import { apiRoutes } from "@/test/handlers/api-routes";
 import { server } from "@/test/server";
-
-const API_URL = import.meta.env.VITE_API_URL;
 
 describe("ActivityTable", () => {
   it("renders component", async () => {
@@ -42,7 +40,7 @@ describe("ActivityTable", () => {
 
     server.use(
       http.get(
-        `${API_URL}/v1${ACTIVITIES_ENDPOINT}`,
+        apiRoutes.activities,
         () => {
           return HttpResponse.json([], { status: 200 });
         },

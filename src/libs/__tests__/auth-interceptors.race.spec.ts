@@ -1,10 +1,8 @@
 import { HttpResponse, http } from "msw";
-import { REFRESH_ENDPOINT, apiV1 } from "@/libs/axios";
 import { resetInterceptors, setAccessToken } from "@/libs/auth-interceptors";
+import { apiRoutes } from "@/test/handlers/api-routes";
+import { apiV1 } from "@/libs/axios";
 import { server } from "@/test/server";
-
-const API_URL = import.meta.env.VITE_API_URL;
-const BASE = `${API_URL}/v1`;
 
 beforeEach(() => {
   resetInterceptors();
@@ -15,14 +13,14 @@ describe("auth-interceptors — refresh/rotation race", () => {
     const refreshSpy = vi.fn();
     let protectedCalls = 0;
     server.use(
-      http.get(`${BASE}/protected`, () => {
+      http.get(apiRoutes.protected, () => {
         protectedCalls++;
         if (protectedCalls <= 3) {
           return HttpResponse.json(null, { status: 401 });
         }
         return HttpResponse.json({ ok: true });
       }),
-      http.post(`${BASE}${REFRESH_ENDPOINT}`, async () => {
+      http.post(apiRoutes.refreshSession, async () => {
         refreshSpy();
         await new Promise((r) => setTimeout(r, 30));
         return HttpResponse.json({ access_token: "fresh-token" });
@@ -45,7 +43,7 @@ describe("auth-interceptors — refresh/rotation race", () => {
 
     let calls = 0;
     server.use(
-      http.get(`${BASE}/straggler`, ({ request }) => {
+      http.get(apiRoutes.straggler, ({ request }) => {
         calls++;
         if (calls === 1) {
           /* Simulate a concurrent refresh having already rotated the token
@@ -57,7 +55,7 @@ describe("auth-interceptors — refresh/rotation race", () => {
           auth: request.headers.get("Authorization"),
         });
       }),
-      http.post(`${BASE}${REFRESH_ENDPOINT}`, () => {
+      http.post(apiRoutes.refreshSession, () => {
         refreshSpy();
         return HttpResponse.json({ access_token: "should-not-be-used" });
       }),

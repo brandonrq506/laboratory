@@ -1,5 +1,4 @@
 import { HttpResponse, delay, http } from "msw";
-import { TASKS_ENDPOINT } from "@/libs/axios";
 
 import {
   completedTasks,
@@ -8,12 +7,10 @@ import {
 } from "../store/tasks";
 
 import { TASK_STATUS } from "@/features/tasks/types/task-status";
-
-const API_URL = import.meta.env.VITE_API_URL;
-const BASE_URL = `${API_URL}/v1${TASKS_ENDPOINT}`;
+import { apiRoutes } from "./api-routes";
 
 export const taskHandlers = [
-  http.get(BASE_URL, ({ request }) => {
+  http.get(apiRoutes.tasks, ({ request }) => {
     const url = new URL(request.url);
     const status = url.searchParams.get("filter[status][eq]") ?? "";
 
@@ -28,7 +25,7 @@ export const taskHandlers = [
     return HttpResponse.json([], { status: 200 });
   }),
 
-  http.get(`${BASE_URL}/:taskId`, ({ params }) => {
+  http.get(apiRoutes.task, ({ params }) => {
     const { taskId } = params;
 
     const task = scheduledTasks.find((t) => t.id === Number(taskId));
@@ -39,7 +36,7 @@ export const taskHandlers = [
     return HttpResponse.json(task, { status: 200 });
   }),
 
-  http.patch(`${BASE_URL}/:taskId`, async ({ params, request }) => {
+  http.patch(apiRoutes.task, async ({ params, request }) => {
     const { taskId } = params;
     const payload = await request.json();
 
@@ -55,7 +52,7 @@ export const taskHandlers = [
     return HttpResponse.json(updatedTask, { status: 200 });
   }),
 
-  http.delete(`${BASE_URL}/delete_scheduled`, async ({ params }) => {
+  http.delete(apiRoutes.deleteScheduledTasks, async ({ params }) => {
     const { taskId } = params;
     await delay();
 
@@ -67,7 +64,7 @@ export const taskHandlers = [
     return HttpResponse.json(null, { status: 204 });
   }),
 
-  http.delete(`${BASE_URL}/:taskId`, ({ params }) => {
+  http.delete(apiRoutes.task, ({ params }) => {
     const { taskId } = params;
 
     const task = scheduledTasks.find((t) => t.id === Number(taskId));
@@ -78,7 +75,7 @@ export const taskHandlers = [
     return HttpResponse.json(null, { status: 204 });
   }),
 
-  http.options(BASE_URL, () => {
+  http.options(apiRoutes.tasks, () => {
     return HttpResponse.json(null, { status: 204 });
   }),
 ];
