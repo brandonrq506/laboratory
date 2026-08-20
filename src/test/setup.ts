@@ -1,10 +1,10 @@
-import "@testing-library/jest-dom";
+import "@testing-library/jest-dom/vitest";
 import { mockAnimationsApi } from "jsdom-testing-mocks";
 import { server } from "./server";
 
 mockAnimationsApi();
 
-beforeAll(() => server.listen());
+beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
