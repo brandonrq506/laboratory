@@ -1,9 +1,8 @@
-/* eslint-disable max-lines-per-function */
-
 import { HttpResponse, http } from "msw";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import { activities } from "@/test/store/activities";
+import { routines } from "@/test/store/routines";
 import userEvent from "@testing-library/user-event";
 
 import { AddScheduledTaskMenu } from "../AddScheduledTaskMenu";
@@ -14,6 +13,16 @@ import {
 } from "@/features/tasks/types/insert-mode";
 import { apiRoutes } from "@/test/handlers/api-routes";
 import { server } from "@/test/server";
+
+const visibleRoutines = routines.filter(
+  (routine) => routine.hidden_at === null,
+);
+
+beforeEach(() => {
+  server.use(
+    http.get(apiRoutes.routines, () => HttpResponse.json(visibleRoutines)),
+  );
+});
 
 describe("AddScheduledTaskMenu", () => {
   const createTestQueryClient = () =>
@@ -44,9 +53,7 @@ describe("AddScheduledTaskMenu", () => {
   it("displays routines list", async () => {
     const { user } = renderAddScheduledTaskMenu();
 
-    const menuButton = screen.getByRole("button", { name: "Add Tasks" });
-
-    await user.click(menuButton);
+    await user.click(screen.getByRole("button", { name: "Add Tasks" }));
 
     expect(screen.getByText("Workout")).toBeInTheDocument();
     expect(screen.getByText("Routines")).toBeInTheDocument();
@@ -63,9 +70,7 @@ describe("AddScheduledTaskMenu", () => {
       }),
     );
 
-    const menuButton = screen.getByRole("button", { name: "Add Tasks" });
-
-    await user.click(menuButton);
+    await user.click(screen.getByRole("button", { name: "Add Tasks" }));
 
     await waitFor(() => {
       expect(screen.getByText("Morning")).toBeInTheDocument();
@@ -97,9 +102,7 @@ describe("AddScheduledTaskMenu", () => {
       }),
     );
 
-    const menuButton = screen.getByRole("button", { name: "Add Tasks" });
-
-    await user.click(menuButton);
+    await user.click(screen.getByRole("button", { name: "Add Tasks" }));
 
     await waitFor(() => {
       expect(screen.getByText("Morning")).toBeInTheDocument();
@@ -130,9 +133,7 @@ describe("AddScheduledTaskMenu", () => {
       }),
     );
 
-    const menuButton = screen.getByRole("button", { name: "Add Tasks" });
-
-    await user.click(menuButton);
+    await user.click(screen.getByRole("button", { name: "Add Tasks" }));
 
     await waitFor(() => {
       expect(screen.getByText("Morning")).toBeInTheDocument();
@@ -157,9 +158,7 @@ describe("AddScheduledTaskMenu", () => {
   it("hides routines without activities", async () => {
     const { user } = renderAddScheduledTaskMenu();
 
-    const menuButton = screen.getByRole("button", { name: "Add Tasks" });
-
-    await user.click(menuButton);
+    await user.click(screen.getByRole("button", { name: "Add Tasks" }));
 
     await waitFor(() => {
       expect(screen.getByText("Morning")).toBeInTheDocument();

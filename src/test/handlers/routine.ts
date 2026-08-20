@@ -4,18 +4,8 @@ import { apiRoutes } from "./api-routes";
 import { routines } from "../store/routines";
 
 export const routineHandlers = [
-  http.get(apiRoutes.routines, ({ request }) => {
-    const url = new URL(request.url);
-    const hiddenAtIsNull = url.searchParams.get("filter[hidden_at][is_null]");
-
-    let result = routines;
-    if (hiddenAtIsNull === "true") {
-      result = routines.filter((r) => r.hidden_at === null);
-    } else if (hiddenAtIsNull === "false") {
-      result = routines.filter((r) => r.hidden_at !== null);
-    }
-
-    return HttpResponse.json(result, { status: 200 });
+  http.get(apiRoutes.routines, () => {
+    return HttpResponse.json(routines, { status: 200 });
   }),
   http.get(apiRoutes.routine, ({ params }) => {
     const { routineId } = params;
