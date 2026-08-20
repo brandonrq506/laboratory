@@ -1,6 +1,11 @@
 import { HttpResponse, http } from "msw";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { render, screen, waitFor } from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import { activities } from "@/test/store/activities";
 import { routines } from "@/test/store/routines";
 import userEvent from "@testing-library/user-event";
@@ -12,6 +17,7 @@ import {
   type InsertMode,
 } from "@/features/tasks/types/insert-mode";
 import { apiRoutes } from "@/test/handlers/api-routes";
+import { createDeferred } from "@/test/utils/create-deferred";
 import { server } from "@/test/server";
 
 const visibleRoutines = routines.filter(
@@ -62,19 +68,18 @@ describe("AddScheduledTaskMenu", () => {
 
   it("shows loading indicator when applying routine", async () => {
     const { user } = renderAddScheduledTaskMenu();
+    const response = createDeferred<void>();
 
     server.use(
       http.post(apiRoutes.routineApply, async () => {
-        await new Promise((resolve) => setTimeout(resolve, 100));
+        await response.promise;
         return HttpResponse.json(null, { status: 201 });
       }),
     );
 
     await user.click(screen.getByRole("button", { name: "Add Tasks" }));
 
-    await waitFor(() => {
-      expect(screen.getByText("Morning")).toBeInTheDocument();
-    });
+    expect(await screen.findByText("Morning")).toBeInTheDocument();
 
     const routineBtn = screen.getByRole("menuitem", {
       name: "Morning Routine",
@@ -84,29 +89,25 @@ describe("AddScheduledTaskMenu", () => {
 
     expect(screen.getByRole("status")).toBeInTheDocument();
 
-    await waitFor(
-      () => {
-        expect(screen.queryByRole("status")).not.toBeInTheDocument();
-      },
-      { timeout: 1000 },
-    );
+    response.resolve();
+
+    await waitForElementToBeRemoved(() => screen.queryByRole("status"));
   });
 
   it("shows loading indicator only for the clicked routine", async () => {
     const { user } = renderAddScheduledTaskMenu();
+    const response = createDeferred<void>();
 
     server.use(
       http.post(apiRoutes.routineApply, async () => {
-        await new Promise((resolve) => setTimeout(resolve, 100));
+        await response.promise;
         return HttpResponse.json(null, { status: 201 });
       }),
     );
 
     await user.click(screen.getByRole("button", { name: "Add Tasks" }));
 
-    await waitFor(() => {
-      expect(screen.getByText("Morning")).toBeInTheDocument();
-    });
+    expect(await screen.findByText("Morning")).toBeInTheDocument();
 
     expect(screen.getByText("Workout")).toBeInTheDocument();
 
@@ -121,23 +122,26 @@ describe("AddScheduledTaskMenu", () => {
     expect(loadingIndicator).toHaveLength(1);
     expect(screen.getByText("Morning")).toBeInTheDocument();
     expect(screen.getByText("Workout")).toBeInTheDocument();
+
+    response.resolve();
+
+    await waitForElementToBeRemoved(() => screen.queryByRole("status"));
   });
 
   it("clears loading state on error", async () => {
     const { user } = renderAddScheduledTaskMenu();
+    const response = createDeferred<void>();
 
     server.use(
       http.post(apiRoutes.routineApply, async () => {
-        await new Promise((resolve) => setTimeout(resolve, 100));
+        await response.promise;
         return HttpResponse.json({ error: "Server error" }, { status: 500 });
       }),
     );
 
     await user.click(screen.getByRole("button", { name: "Add Tasks" }));
 
-    await waitFor(() => {
-      expect(screen.getByText("Morning")).toBeInTheDocument();
-    });
+    expect(await screen.findByText("Morning")).toBeInTheDocument();
 
     const routineBtn = screen.getByRole("menuitem", {
       name: "Morning Routine",
@@ -147,12 +151,9 @@ describe("AddScheduledTaskMenu", () => {
 
     expect(screen.getByRole("status")).toBeInTheDocument();
 
-    await waitFor(
-      () => {
-        expect(screen.queryByRole("status")).not.toBeInTheDocument();
-      },
-      { timeout: 1000 },
-    );
+    response.resolve();
+
+    await waitForElementToBeRemoved(() => screen.queryByRole("status"));
   });
 
   it("hides routines without activities", async () => {
@@ -160,9 +161,7 @@ describe("AddScheduledTaskMenu", () => {
 
     await user.click(screen.getByRole("button", { name: "Add Tasks" }));
 
-    await waitFor(() => {
-      expect(screen.getByText("Morning")).toBeInTheDocument();
-    });
+    expect(await screen.findByText("Morning")).toBeInTheDocument();
 
     expect(screen.queryByText("Swimming")).not.toBeInTheDocument();
   });
@@ -181,9 +180,7 @@ describe("AddScheduledTaskMenu", () => {
 
     await user.click(screen.getByRole("button", { name: "Add Tasks" }));
 
-    await waitFor(() => {
-      expect(screen.getByText(activity.display_name)).toBeInTheDocument();
-    });
+    expect(await screen.findByText(activity.display_name)).toBeInTheDocument();
 
     await user.click(
       screen.getByRole("menuitem", { name: new RegExp(activity.display_name) }),
@@ -210,9 +207,7 @@ describe("AddScheduledTaskMenu", () => {
 
     await user.click(screen.getByRole("button", { name: "Add Tasks" }));
 
-    await waitFor(() => {
-      expect(screen.getByText("Morning")).toBeInTheDocument();
-    });
+    expect(await screen.findByText("Morning")).toBeInTheDocument();
 
     await user.click(screen.getByRole("menuitem", { name: "Morning Routine" }));
 

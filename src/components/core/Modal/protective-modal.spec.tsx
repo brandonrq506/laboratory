@@ -1,6 +1,7 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+import { MODAL_DURATION } from "@/constants/durations";
 import { ProtectiveModal } from "./protective-modal";
 
 const defaultProps = {
@@ -12,21 +13,29 @@ const defaultProps = {
   description: "This action cannot be undone.",
 };
 
-describe("ProtectiveModal", () => {
-  it("confirm button disabled by default", async () => {
-    render(<ProtectiveModal {...defaultProps} />);
+const renderProtectiveModal = async (
+  props: React.ComponentProps<typeof ProtectiveModal> = defaultProps,
+) => {
+  const utils = render(<ProtectiveModal {...props} />);
 
-    await screen.findByRole("dialog", { name: "Delete Category" });
+  await act(() => vi.advanceTimersByTimeAsync(MODAL_DURATION));
+  vi.useRealTimers();
+
+  return { ...utils, user: userEvent.setup() };
+};
+
+describe("ProtectiveModal", () => {
+  beforeEach(() => vi.useFakeTimers());
+  afterEach(() => vi.useRealTimers());
+
+  it("confirm button disabled by default", async () => {
+    await renderProtectiveModal();
 
     expect(screen.getByRole("button", { name: "Confirm" })).toBeDisabled();
   });
 
   it("confirm button enabled on exact match", async () => {
-    const user = userEvent.setup();
-
-    render(<ProtectiveModal {...defaultProps} />);
-
-    await screen.findByRole("dialog", { name: "Delete Category" });
+    const { user } = await renderProtectiveModal();
 
     await user.type(screen.getByRole("textbox"), "my-category");
 
@@ -34,12 +43,11 @@ describe("ProtectiveModal", () => {
   });
 
   it("calls onConfirm on confirm click after typing match", async () => {
-    const user = userEvent.setup();
     const onConfirm = vi.fn();
-
-    render(<ProtectiveModal {...defaultProps} onConfirm={onConfirm} />);
-
-    await screen.findByRole("dialog", { name: "Delete Category" });
+    const { user } = await renderProtectiveModal({
+      ...defaultProps,
+      onConfirm,
+    });
 
     await user.type(screen.getByRole("textbox"), "my-category");
 
@@ -49,12 +57,8 @@ describe("ProtectiveModal", () => {
   });
 
   it("calls onClose on Cancel click", async () => {
-    const user = userEvent.setup();
     const onClose = vi.fn();
-
-    render(<ProtectiveModal {...defaultProps} onClose={onClose} />);
-
-    await screen.findByRole("dialog", { name: "Delete Category" });
+    const { user } = await renderProtectiveModal({ ...defaultProps, onClose });
 
     await user.click(screen.getByRole("button", { name: "Cancel" }));
 
@@ -62,12 +66,8 @@ describe("ProtectiveModal", () => {
   });
 
   it("calls onClose on Escape", async () => {
-    const user = userEvent.setup();
     const onClose = vi.fn();
-
-    render(<ProtectiveModal {...defaultProps} onClose={onClose} />);
-
-    await screen.findByRole("dialog", { name: "Delete Category" });
+    const { user } = await renderProtectiveModal({ ...defaultProps, onClose });
 
     await user.keyboard("{Escape}");
 
@@ -75,14 +75,11 @@ describe("ProtectiveModal", () => {
   });
 
   it("resets input on close", async () => {
-    const user = userEvent.setup();
     const onClose = vi.fn();
-
-    const { rerender } = render(
-      <ProtectiveModal {...defaultProps} onClose={onClose} />,
-    );
-
-    await screen.findByRole("dialog", { name: "Delete Category" });
+    const { rerender, user } = await renderProtectiveModal({
+      ...defaultProps,
+      onClose,
+    });
 
     const input = screen.getByRole("textbox");
 
@@ -95,8 +92,6 @@ describe("ProtectiveModal", () => {
     expect(onClose).toHaveBeenCalledTimes(1);
 
     rerender(<ProtectiveModal {...defaultProps} onClose={onClose} />);
-
-    await screen.findByRole("dialog", { name: "Delete Category" });
 
     expect(screen.getByRole("textbox")).toHaveValue("");
   });

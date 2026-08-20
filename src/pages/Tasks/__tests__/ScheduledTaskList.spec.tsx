@@ -48,10 +48,8 @@ describe("ScheduledTaskList", () => {
     const title = "No Tasks";
     const description = "Get started by creating a new task.";
 
-    await waitFor(() => {
-      expect(screen.queryByRole("status")).not.toBeInTheDocument();
-    });
-    expect(screen.getByText(title)).toBeInTheDocument();
+    expect(await screen.findByText(title)).toBeInTheDocument();
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
     expect(screen.getByText(description)).toBeInTheDocument();
   });
 
@@ -66,13 +64,10 @@ describe("ScheduledTaskList", () => {
 
     render(<ScheduledTaskList />);
 
-    await waitFor(() => {
-      expect(screen.queryByRole("status")).not.toBeInTheDocument();
-    });
-
     expect(
-      screen.getByText("There was an error loading your tasks"),
+      await screen.findByText("There was an error loading your tasks"),
     ).toBeInTheDocument();
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
   });
 
   it("toggles insert mode button", async () => {
