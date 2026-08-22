@@ -1,13 +1,11 @@
-import {
-  ChatBubbleLeftEllipsisIcon,
-  ClockIcon,
-} from "@heroicons/react/24/outline";
+import { ClockIcon } from "@heroicons/react/24/outline";
 import { Dot } from "@/components/core";
 import { Fragment } from "react/jsx-runtime";
 import { Link } from "@tanstack/react-router";
 import { QuickDeleteTask } from "./QuickDeleteTask";
 import { ScheduledTaskActionBtn } from "./ScheduledTaskActionBtn";
 import type { ScheduledTaskWithEST } from "../types/scheduledTaskWithEST";
+import { TaskNotePreview } from "./TaskNotePreview";
 
 import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
@@ -31,7 +29,7 @@ export const TimerScheduledTaskContent = ({ task }: Props) => {
           <p className="text-sm font-semibold">{task.activity.display_name}</p>
         </div>
 
-        <div className="flex gap-2.5 text-xs text-gray-600">
+        <div className="flex gap-2.5 text-xs whitespace-nowrap text-gray-600">
           <p className="tabular-nums">
             {formatDatetimeTo12hTime(task.expected_start_time.toISOString())}
           </p>
@@ -41,7 +39,7 @@ export const TimerScheduledTaskContent = ({ task }: Props) => {
               {secondsToTime(task.activity.exp_seconds)}
             </p>
           </div>
-          {task.note && <ChatBubbleLeftEllipsisIcon className="size-4" />}
+          <TaskNotePreview note={task.note} />
         </div>
       </Link>
       <QuickDeleteTask taskId={task.id} />

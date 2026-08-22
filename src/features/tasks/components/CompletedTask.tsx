@@ -1,9 +1,9 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { Card } from "@/components/layout";
-import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/outline";
 import type { CompletedTaskAPI } from "../types/completedTask";
 import { DeleteTask } from "./DeleteTask";
 import { Dot } from "@/components/core";
+import { TaskNotePreview } from "./TaskNotePreview";
 
 import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
@@ -28,7 +28,7 @@ export const CompletedTask = ({ task, linkProps }: Props) => {
           </p>
         </div>
 
-        <div className="flex gap-2.5 text-xs text-gray-600">
+        <div className="flex gap-2.5 text-xs whitespace-nowrap text-gray-600">
           <p className="tabular-nums">
             {formatDatetimeTo12hTime(task.start_time)}
           </p>
@@ -36,8 +36,7 @@ export const CompletedTask = ({ task, linkProps }: Props) => {
           <p className="tabular-nums">
             {formatDatetimeTo12hTime(task.end_time)}
           </p>
-
-          {task.note && <ChatBubbleLeftEllipsisIcon className="size-4" />}
+          <TaskNotePreview note={task.note} />
         </div>
       </Link>
 
