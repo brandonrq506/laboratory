@@ -18,8 +18,8 @@ export const CompletedTask = ({ task, linkProps }: Props) => {
   const durationSeconds = getDurationInSeconds(task.start_time, task.end_time);
 
   return (
-    <Card className="flex justify-between shadow-xs">
-      <Link {...linkProps} className="grow">
+    <Card className="flex justify-between gap-1 shadow-xs">
+      <Link {...linkProps} className="min-w-0 grow">
         <div className="flex items-center gap-1.5">
           <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
           <p className="text-sm font-semibold">{task.activity.display_name}</p>

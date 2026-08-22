@@ -20,7 +20,7 @@ export const TimerScheduledTaskContent = ({ task }: Props) => {
   return (
     <Fragment>
       <Link
-        className="grow"
+        className="min-w-0 grow"
         from="/timer"
         to="$taskId/edit"
         params={{ taskId: task.id }}>

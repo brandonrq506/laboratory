@@ -31,7 +31,7 @@ export const CardShell = ({
 }: Props) => (
   <div ref={outerRef} style={style} className={clsx("relative", className)}>
     <Card className={clsx("flex justify-between", shadowStyle, cardClassName)}>
-      <div className="flex grow items-center gap-2">
+      <div className="flex min-w-0 grow items-center gap-2">
         {handle}
         {children}
       </div>
