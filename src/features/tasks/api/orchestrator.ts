@@ -8,7 +8,7 @@ import {
 import type { CompletedTaskAPI } from "../types/completedTask";
 import type { InProgressTaskAPI } from "../types/inProgressTask";
 import type { QueryClient } from "@tanstack/react-query";
-import { buildTemporaryCompletedTask } from "../utils/buildTemporaryCompletedTask";
+import { transitionInProgressTaskToCompleted } from "../utils/transitionInProgressTaskToCompleted";
 
 import { TASK_STATUS } from "@/features/tasks/types/task-status";
 
@@ -69,14 +69,13 @@ export const activateScheduledTask = ({
   const inProgressTask = inProgressCache?.[0];
 
   if (inProgressTask) {
-    const tempCompleted = buildTemporaryCompletedTask(
-      inProgressTask.activity,
-      inProgressTask.start_time,
-      timestamp,
-    );
+    const completedTask = transitionInProgressTaskToCompleted({
+      task: inProgressTask,
+      endTime: timestamp,
+    });
 
     // Move current in_progress to the start of completed
-    completeInProgressTask({ qc, task: tempCompleted });
+    completeInProgressTask({ qc, task: completedTask });
   }
 
   const scheduledCache = qc.getQueryData(scheduledKey);
