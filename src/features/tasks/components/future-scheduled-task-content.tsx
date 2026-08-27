@@ -1,11 +1,9 @@
-import {
-  ChatBubbleLeftEllipsisIcon,
-  ClockIcon,
-} from "@heroicons/react/24/outline";
 import { Link, getRouteApi } from "@tanstack/react-router";
+import { ClockIcon } from "@heroicons/react/24/outline";
 import { DeleteTask } from "./DeleteTask";
 import { Dot } from "@/components/core";
 import { Fragment } from "react/jsx-runtime";
+import { TaskNotePreview } from "./TaskNotePreview";
 
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 import { secondsToTime } from "@/utils";
@@ -25,7 +23,7 @@ export const FutureScheduledTaskContent = ({ task }: Props) => {
   return (
     <Fragment>
       <Link
-        className="grow"
+        className="min-w-0 grow"
         to="/scheduled/$taskId"
         params={{ taskId: task.id }}
         search={{ date }}>
@@ -34,14 +32,14 @@ export const FutureScheduledTaskContent = ({ task }: Props) => {
           <p className="text-sm font-semibold">{task.activity.display_name}</p>
         </div>
 
-        <div className="flex gap-2.5 text-gray-600">
-          <div className="flex gap-1 text-xs">
+        <div className="flex gap-2.5 text-xs whitespace-nowrap text-gray-600">
+          <div className="flex gap-1">
             <ClockIcon className="size-4" />
             <p className="tabular-nums">
               {secondsToTime(task.activity.exp_seconds)}
             </p>
           </div>
-          {task.note && <ChatBubbleLeftEllipsisIcon className="size-4" />}
+          <TaskNotePreview note={task.note} />
         </div>
       </Link>
       <DeleteTask taskId={task.id} />
