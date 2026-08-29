@@ -63,7 +63,7 @@
     "@vitejs/plugin-react": "^6.0.5",
     "@vitest/coverage-istanbul": "^4.1.10",
     "@vitest/ui": "^4.0.12",
-    "baseline-browser-mapping": "^2.11.11",
+    "baseline-browser-mapping": "^2.11.18",
     "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
