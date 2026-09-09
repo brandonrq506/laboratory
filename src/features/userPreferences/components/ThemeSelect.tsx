@@ -1,18 +1,18 @@
 import { StringSelect } from "@/components/form/Select/StringSelect";
 import { THEME_OPTIONS } from "../constants/theme";
 import { USER_PREFERENCE_KEY } from "../types/userPreferenceKeys";
+import { parseThemePreference } from "../utils/theme";
 import { useQuery } from "@tanstack/react-query";
-import { useTheme } from "../hooks/useTheme";
 import { useUpdateUserPreference } from "../api/tanstack/useUpdateUserPreference";
-import { userPreferencesOptions } from "../api/queryOptions/userPreferencesOptions";
+import { userPreferencesOptions } from "../api/queries";
 
 export const ThemeSelect = () => {
-  const { preference, isSaving } = useTheme();
-  const preferences = useQuery(userPreferencesOptions());
-  const { mutate, isPending, isError } = useUpdateUserPreference();
-  const canSave =
-    preferences.data?.some((pref) => pref.key === USER_PREFERENCE_KEY.THEME) &&
-    !preferences.isPlaceholderData;
+  const { data, isError: isLoadError } = useQuery(userPreferencesOptions());
+  const { mutate, isPending, isError: isSaveError } = useUpdateUserPreference();
+
+  const preference = parseThemePreference(
+    data?.find((pref) => pref.key === USER_PREFERENCE_KEY.THEME)?.value,
+  );
 
   return (
     <div className="max-w-sm">
@@ -22,17 +22,17 @@ export const ThemeSelect = () => {
         description="Choose a color theme. System follows your device settings."
         options={THEME_OPTIONS}
         value={THEME_OPTIONS.find((option) => option.value === preference)}
-        disabled={!canSave || isSaving || isPending}
+        disabled={!data || isPending}
         onChange={(option) =>
           mutate({ key: USER_PREFERENCE_KEY.THEME, value: option.value })
         }
         error={
-          isError
+          isSaveError
             ? "Could not save theme. Your previous theme was restored."
             : undefined
         }
       />
-      {preferences.isError && (
+      {isLoadError && (
         <p role="alert" className="text-danger-text mt-2 text-sm">
           Could not load theme preference. Reload to try again.
         </p>

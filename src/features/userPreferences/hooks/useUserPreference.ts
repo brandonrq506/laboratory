@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import type { UserPreferenceKeys } from "../types/userPreferenceKeys";
 import { matchUserPreference } from "../utils/matchUserPreference";
-import { userPreferencesOptions } from "../api/queryOptions/userPreferencesOptions";
+import { userPreferencesOptions } from "../api/queries";
 
 export function useUserPreference(preferenceKey: UserPreferenceKeys) {
   const { data } = useQuery(userPreferencesOptions());

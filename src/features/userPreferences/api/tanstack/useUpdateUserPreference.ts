@@ -1,13 +1,18 @@
 import {
-  getThemePreference,
-  setThemePreference,
-  setThemeSaving,
-} from "../../stores/theme-store";
+  restorePreference,
+  setPreferenceValue,
+} from "../../utils/updatePreferenceList";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { USER_PREFERENCE_KEY } from "../../types/userPreferenceKeys";
-import { savePreferencesToLocalStorage } from "../../utils/localStorage";
+
 import { updateUserPreference } from "../axios/updateUserPreference";
-import { userPreferencesOptions } from "../queryOptions/userPreferencesOptions";
+import { userPreferencesOptions } from "../queries";
+
+/*
+  Every preference shares one query key, so `onSettled` runs once per concurrent
+  save. In v5 a mutation still counts itself while its own `onSettled` runs, so
+  this value means "I am the last one pending" and the refetch happens once.
+*/
+const LAST_PENDING_MUTATION = 1;
 
 const preferencesKey = userPreferencesOptions().queryKey;
 
@@ -18,46 +23,32 @@ export const useUpdateUserPreference = () => {
     mutationKey: preferencesKey,
     mutationFn: updateUserPreference,
     onMutate: async ({ key, value }) => {
-      const previousTheme = getThemePreference();
-      if (key === USER_PREFERENCE_KEY.THEME) {
-        setThemeSaving(true);
-        setThemePreference(value);
-      }
       await queryClient.cancelQueries({ queryKey: preferencesKey });
+
       const previous = queryClient
         .getQueryData(preferencesKey)
         ?.find((pref) => pref.key === key);
 
-      queryClient.setQueryData(preferencesKey, (old) => {
-        if (!old) return old;
-        return old.map((pref) =>
-          pref.key === key ? { ...pref, value } : pref,
-        );
-      });
-      const optimistic = queryClient.getQueryData(preferencesKey);
-      if (optimistic) savePreferencesToLocalStorage(optimistic);
+      queryClient.setQueryData(preferencesKey, (old) =>
+        old ? setPreferenceValue(old, key, value) : old,
+      );
 
-      return { previous, previousTheme };
+      return { previous };
     },
     onError: (_, { key }, context) => {
-      // Restore only this preference so another setting's save is preserved.
+      /* Restore only this preference so another setting's save is preserved. */
       queryClient.setQueryData(preferencesKey, (old) =>
-        old?.map((pref) =>
-          pref.key === key && context?.previous ? context.previous : pref,
-        ),
+        old ? restorePreference(old, key, context?.previous) : old,
       );
-      const restored = queryClient.getQueryData(preferencesKey);
-      if (restored) savePreferencesToLocalStorage(restored);
-      if (key === USER_PREFERENCE_KEY.THEME && context) {
-        setThemePreference(context.previousTheme);
-      }
     },
-    onSettled: (_, __, { key }) => {
-      if (key === USER_PREFERENCE_KEY.THEME) setThemeSaving(false);
-      // The last concurrent preference save refreshes the account snapshot.
-      if (queryClient.isMutating({ mutationKey: preferencesKey }) === 1) {
-        return queryClient.invalidateQueries({ queryKey: preferencesKey });
-      }
+    onSettled: () => {
+      if (
+        queryClient.isMutating({ mutationKey: preferencesKey }) !==
+        LAST_PENDING_MUTATION
+      )
+        return;
+
+      return queryClient.invalidateQueries({ queryKey: preferencesKey });
     },
   });
 };

@@ -12,9 +12,9 @@ import {
 } from "@/libs/auth-interceptors";
 import { AuthContext } from "./AuthContext";
 import { Loading } from "@/components/core";
-import { USER_PREFERENCES_ENDPOINT } from "@/libs/axios";
 import { clearPreferencesFromLocalStorage } from "@/features/userPreferences/utils/localStorage";
 import { queryClient } from "@/libs/tanstack-query/query-client";
+import { userPreferencesOptions } from "@/features/userPreferences/api/queries";
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [isAuth, setIsAuth] = useState(false);
@@ -22,15 +22,19 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const hasAttemptedRefresh = useRef(false);
 
   const login = useCallback((accessToken: string) => {
-    queryClient.removeQueries({ queryKey: [USER_PREFERENCES_ENDPOINT] });
+    /* Drop the previous account's cached preferences before this one loads. */
+    queryClient.removeQueries(userPreferencesOptions());
     clearPreferencesFromLocalStorage();
     setAccessToken(accessToken);
     setIsAuth(true);
   }, []);
 
   const logout = useCallback(() => {
-    queryClient.removeQueries({ queryKey: [USER_PREFERENCES_ENDPOINT] });
-    clearPreferencesFromLocalStorage();
+    /*
+      The cached blob is deliberately kept so the sign-in screen still paints the
+      last theme before React loads. `login` clears it for the next account.
+    */
+    queryClient.removeQueries(userPreferencesOptions());
     setAccessToken(null);
     setIsAuth(false);
   }, []);

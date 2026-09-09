@@ -25,5 +25,6 @@ export const apiRoutes = {
   taskSpanMoves: `${API_V1_URL}/tasks/span_moves`,
   tasks: `${API_V1_URL}/tasks`,
   test: `${API_V1_URL}/test`,
+  userPreference: `${API_V1_URL}/user_preferences/:key`,
   userPreferences: `${API_V1_URL}/user_preferences`,
 } as const;

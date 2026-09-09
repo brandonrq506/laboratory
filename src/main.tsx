@@ -11,6 +11,12 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./libs/tanstack-query/query-client";
 
+import { startPreferencesStorageSync } from "./features/userPreferences/stores/preferencesStorageSync";
+
+const disposeStorageSync = startPreferencesStorageSync(queryClient);
+// Prevent duplicate global listeners after Vite replaces this module in development.
+import.meta.hot?.dispose(disposeStorageSync);
+
 // Create a new router instance
 const TanStackQueryProviderContext = { queryClient };
 

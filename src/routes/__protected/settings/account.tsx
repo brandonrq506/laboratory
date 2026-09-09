@@ -1,5 +1,5 @@
 import { ThemeSelect } from "@/features/userPreferences/components/ThemeSelect";
-import { userPreferencesOptions } from "@/features/userPreferences/api/queryOptions/userPreferencesOptions";
+import { userPreferencesOptions } from "@/features/userPreferences/api/queries";
 
 import {
   RemainingTimeToggle,

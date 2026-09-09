@@ -1,5 +1,5 @@
-import { type ResolvedTheme, THEME } from "../types/theme";
 import { DEFAULT_THEME, THEMES } from "../constants/theme";
+import { type ResolvedTheme, THEME } from "../types/theme";
 
 export const isTheme = (value: unknown): value is THEME =>
   THEMES.includes(value as THEME);
