@@ -14,7 +14,9 @@ export const RoutineCardItem = ({ item }: Props) => {
         {item.type === ROUTINE_ITEM_TYPE.ACTIVITY ? (
           <>
             <Badge color={item.category_color}>{item.item_name}</Badge>
-            <span className="text-xs text-gray-500">{item.category_name}</span>
+            <span className="text-foreground-subtle text-xs">
+              {item.category_name}
+            </span>
           </>
         ) : (
           <RainbowBadge>{item.item_name}</RainbowBadge>

@@ -23,7 +23,7 @@ export const TimerTime = ({ start_time, exp_seconds }: Props) => {
       ) : (
         <Stopwatch start_at={start_time} />
       )}
-      <span className="font-light text-gray-700">/</span>
+      <span className="text-foreground-secondary font-light">/</span>
       <span className="tabular-nums">{secondsToHHmmss(exp_seconds)}</span>
     </TimerTimeTab>
   );

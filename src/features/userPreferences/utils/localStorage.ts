@@ -22,9 +22,24 @@ export const getPreferencesFromLocalStorage = ():
   UserPreference[] | undefined => {
   try {
     const preferences = localStorage.getItem(PREFERENCES_KEY);
-    return preferences ? JSON.parse(preferences) : undefined;
+    const parsed: unknown = preferences ? JSON.parse(preferences) : undefined;
+
+    return Array.isArray(parsed) ? (parsed as UserPreference[]) : undefined;
   } catch (error) {
     console.error("Error retrieving preferences from localStorage:", error);
     return undefined;
   }
 };
+
+/** Clears the signed-in account's cached preferences. */
+export const clearPreferencesFromLocalStorage = () => {
+  try {
+    localStorage.removeItem(PREFERENCES_KEY);
+  } catch {
+    /* Browser storage may be unavailable. */
+  }
+};
+
+/** True when a storage event affects the preferences entry. */
+export const isPreferencesStorageEvent = (event: StorageEvent) =>
+  event.key === PREFERENCES_KEY || event.key === null;

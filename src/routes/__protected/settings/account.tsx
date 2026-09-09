@@ -1,4 +1,5 @@
-import { userPreferencesOptions } from "@/features/userPreferences/api/queryOptions/userPreferencesOptions";
+import { ThemeSelect } from "@/features/userPreferences/components/ThemeSelect";
+import { userPreferencesOptions } from "@/features/userPreferences/api/queries";
 
 import {
   RemainingTimeToggle,
@@ -20,6 +21,7 @@ function RouteComponent() {
       <HeadingLarge title="Account Settings" />
       <br />
       <div className="space-y-6">
+        <ThemeSelect />
         <RemainingTimeToggle />
         <SidebarOpenToggle />
       </div>

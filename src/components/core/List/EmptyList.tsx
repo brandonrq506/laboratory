@@ -4,7 +4,7 @@ const defaultIcon = (
   <ListBulletIcon
     role="img"
     aria-hidden
-    className="mx-auto size-12 stroke-1 text-gray-400"
+    className="text-foreground-faint mx-auto size-12 stroke-1"
   />
 );
 
@@ -22,8 +22,8 @@ export const EmptyList = ({
   return (
     <div className="rounded-md p-6 text-center font-light">
       {icon}
-      <h3 className="mt-2 text-sm font-semibold text-gray-900">{title}</h3>
-      <p className="mt-1 text-sm text-gray-500">{description}</p>
+      <h3 className="text-foreground mt-2 text-sm font-semibold">{title}</h3>
+      <p className="text-foreground-subtle mt-1 text-sm">{description}</p>
     </div>
   );
 };

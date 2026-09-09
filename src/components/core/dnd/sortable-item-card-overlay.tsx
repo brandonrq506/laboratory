@@ -22,7 +22,7 @@ export const SortableItemCardOverlay = ({
   <CardShell
     className={className}
     shadowStyle={shadowStyle}
-    cardClassName="z-20 border border-indigo-700 shadow-2xl"
+    cardClassName="z-20 border border-accent-strong shadow-2xl"
     handle={<DragHandleOverlay />}>
     {children}
   </CardShell>

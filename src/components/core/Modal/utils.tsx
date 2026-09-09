@@ -6,24 +6,24 @@ import {
 
 export const icons = {
   success: (
-    <CheckBadgeIcon className="size-6 text-green-600" aria-hidden="true" />
+    <CheckBadgeIcon className="text-success-text size-6" aria-hidden="true" />
   ),
   info: (
     <InformationCircleIcon
-      className="size-6 text-yellow-600"
+      className="text-warning-text size-6"
       aria-hidden="true"
     />
   ),
   danger: (
     <ExclamationTriangleIcon
-      className="size-6 text-red-600"
+      className="text-danger-text size-6"
       aria-hidden="true"
     />
   ),
 };
 
 export const backgrounds = {
-  success: "bg-green-100",
-  info: "bg-yellow-100",
-  danger: "bg-red-100",
+  success: "bg-success-subtle",
+  info: "bg-warning-subtle",
+  danger: "bg-danger-tint",
 };

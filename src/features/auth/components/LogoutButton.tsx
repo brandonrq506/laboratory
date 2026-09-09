@@ -19,7 +19,7 @@ export const LogoutButton = () => {
     <IconButton onClick={handleLogout} shape="circle">
       <span className="sr-only">Logout Button</span>
       <ArrowRightStartOnRectangleIcon
-        className="size-5 text-gray-400 hover:text-indigo-600"
+        className="text-foreground-faint hover:text-accent size-5"
         aria-hidden
       />
     </IconButton>

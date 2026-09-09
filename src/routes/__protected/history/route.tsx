@@ -52,7 +52,7 @@ function RouteComponent() {
         />
         <button type="button" onClick={onOpen}>
           <span className="sr-only">Add Task</span>
-          <PlusIcon className="size-5 text-blue-600" aria-hidden />
+          <PlusIcon className="text-primary-text size-5" aria-hidden />
         </button>
       </div>
       <HistoryTaskList />

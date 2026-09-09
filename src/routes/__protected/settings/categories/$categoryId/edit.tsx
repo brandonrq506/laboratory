@@ -32,7 +32,7 @@ function RouteComponent() {
             to="/settings/categories/$categoryId/delete"
             params={{ categoryId }}>
             <span className="sr-only">Delete Category</span>
-            <TrashIcon className="size-5 text-red-600" />
+            <TrashIcon className="text-danger-text size-5" />
           </Link>
         }
       />

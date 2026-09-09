@@ -28,9 +28,9 @@ export const DesktopSidebarItem = ({
   );
 
   const inactiveClasses = clsx(
-    "text-gray-700 *:text-gray-400 hover:bg-gray-50 hover:text-indigo-600",
+    "text-foreground-secondary *:text-foreground-faint hover:bg-surface-subtle hover:text-accent",
   );
-  const activeClasses = clsx("bg-gray-50 text-indigo-600 *:text-indigo-600");
+  const activeClasses = clsx("bg-surface-subtle text-accent *:text-accent");
 
   return (
     <li>
@@ -42,7 +42,7 @@ export const DesktopSidebarItem = ({
         {...linkProps}>
         <Icon
           className={clsx(
-            "shrink-0 transition-all group-hover:text-indigo-600",
+            "group-hover:text-accent shrink-0 transition-all",
             isOpen ? "size-6" : "size-5",
           )}
           aria-hidden="true"

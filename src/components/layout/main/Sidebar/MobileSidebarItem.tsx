@@ -18,9 +18,8 @@ export const MobileSidebarItem = ({
     "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition-colors";
 
   const inactiveClasses =
-    "text-gray-700 group-hover:text-gray-400 hover:bg-gray-50 hover:text-indigo-600";
-  const activeClasses =
-    "bg-gray-50 text-indigo-600 group-hover:text-indigo-600";
+    "text-foreground-secondary group-hover:text-foreground-faint hover:bg-surface-subtle hover:text-accent";
+  const activeClasses = "bg-surface-subtle text-accent group-hover:text-accent";
 
   return (
     <li>
@@ -30,7 +29,7 @@ export const MobileSidebarItem = ({
         inactiveProps={{ className: clsx(baseClasses, inactiveClasses) }}
         {...linkProps}>
         <Icon
-          className="size-6 shrink-0 group-hover:text-indigo-600"
+          className="group-hover:text-accent size-6 shrink-0"
           aria-hidden="true"
         />
         {label}

@@ -53,7 +53,7 @@ export const IdleTimer = () => {
         />
       </div>
 
-      <p className="text-gray-600 tabular-nums">0:00:00</p>
+      <p className="text-foreground-muted tabular-nums">0:00:00</p>
 
       <IdleTimerButton
         isError={isError}

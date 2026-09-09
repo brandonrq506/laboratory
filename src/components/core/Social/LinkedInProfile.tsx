@@ -8,7 +8,7 @@ export const LinkedInProfile = () => {
       <img
         src="/linked-in.svg"
         alt="LinkedIn's Logo"
-        className="size-6 stroke-blue-600"
+        className="stroke-primary-text size-6"
       />
     </a>
   );

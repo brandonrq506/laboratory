@@ -78,13 +78,13 @@ export const NetworkBadge = () => {
       )}
       role="status"
       aria-live="polite">
-      <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-lg">
+      <div className="bg-surface flex items-center gap-2 rounded-full px-4 py-2 shadow-lg">
         {isOnline ? (
-          <CheckCircleIcon className="size-5 animate-pulse text-green-400" />
+          <CheckCircleIcon className="text-success-indicator size-5 animate-pulse" />
         ) : (
-          <XCircleIcon className="size-5 animate-pulse text-red-400" />
+          <XCircleIcon className="text-danger-indicator size-5 animate-pulse" />
         )}
-        <span className="text-xs text-nowrap text-gray-600 transition">
+        <span className="text-foreground-muted text-xs text-nowrap transition">
           {isOnline ? "Connection Restored" : "You are Offline"}
         </span>
       </div>

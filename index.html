@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="h-full bg-gray-50">
+<html lang="en" class="h-full">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/logo_32.png" />
@@ -17,15 +17,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Laboratory</title>
     <script>
-      if (
-        localStorage.theme === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
+      // Runs before paint; contract covered by theme-bootstrap tests.
+      (() => {
+        let preference = "light";
+        try {
+          const cached = JSON.parse(localStorage.getItem("preferences"));
+          const row = Array.isArray(cached)
+            ? cached.find((pref) => pref && pref.key === "theme")
+            : undefined;
+          const value = row && row.value;
+          if (value === "light" || value === "dark" || value === "system") {
+            preference = value;
+          }
+        } catch {
+          // Storage may be unavailable or hold malformed data; retain light.
+        }
+        const dark = preference === "dark" ||
+          (preference === "system" &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        const root = document.documentElement;
+        root.classList.toggle("dark", dark);
+        // Sets the canvas the browser paints before the stylesheet loads.
+        root.style.colorScheme = dark ? "dark" : "light";
+        document.querySelector('meta[name="theme-color"]').content =
+          dark ? "#030712" : "#f9fafb";
+      })();
     </script>
   </head>
   <body class="h-full">

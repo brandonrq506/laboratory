@@ -12,7 +12,7 @@ export const TaskNotePreview = ({ note }: Props) => {
   return (
     <div
       role="note"
-      className="flex min-w-0 items-center gap-1 text-xs text-gray-600">
+      className="text-foreground-muted flex min-w-0 items-center gap-1 text-xs">
       <ChatBubbleLeftEllipsisIcon aria-hidden className="size-4 shrink-0" />
       <p className="min-w-0 truncate">{firstLine}</p>
     </div>

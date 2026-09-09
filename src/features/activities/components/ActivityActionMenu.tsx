@@ -20,7 +20,7 @@ export const ActivityActionMenu = ({ activity }: Props) => {
           <Link
             to="/activities/$activityId/edit"
             params={{ activityId: activity.id }}
-            className="group flex w-full items-center gap-2 px-4 py-2 text-sm text-nowrap text-blue-600 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
+            className="group text-primary-text data-focus:bg-surface-hover data-focus:text-foreground flex w-full items-center gap-2 px-4 py-2 text-sm text-nowrap data-focus:outline-hidden">
             <PencilIcon aria-hidden className="size-4" />
             {UPDATE} {ACTIVITY}
           </Link>
@@ -32,7 +32,7 @@ export const ActivityActionMenu = ({ activity }: Props) => {
           <Link
             to="/activities/$activityId/delete"
             params={{ activityId: activity.id }}
-            className="group flex w-full items-center gap-2 px-4 py-2 text-sm text-nowrap text-red-600 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden">
+            className="group text-danger-text data-focus:bg-surface-hover data-focus:text-foreground flex w-full items-center gap-2 px-4 py-2 text-sm text-nowrap data-focus:outline-hidden">
             <TrashIcon aria-hidden className="size-4" />
             {DELETE} {ACTIVITY}
           </Link>

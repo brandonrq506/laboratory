@@ -91,16 +91,16 @@ export const ActivityTable = () => {
       <div className="flow-root">
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full p-0.5 align-middle">
-            <div className="overflow-hidden rounded-lg shadow-sm ring-1 ring-black/5">
-              <table className="min-w-full divide-y divide-gray-300">
-                <thead className="bg-gray-50">
+            <div className="ring-surface-edge overflow-hidden rounded-lg shadow-sm ring-1">
+              <table className="divide-input-border min-w-full divide-y">
+                <thead className="bg-surface-subtle">
                   <tr>
                     {table.getFlatHeaders().map((header, index) => (
                       <th
                         scope="col"
                         key={header.id}
                         className={clsx(
-                          "text-left text-sm font-semibold whitespace-nowrap text-gray-900",
+                          "text-foreground text-left text-sm font-semibold whitespace-nowrap",
                           index === 0 ? "pr-3 pl-4" : "px-2 py-3",
                           // TODO: Have to do this until this improves: https://tanstack.com/table/latest/docs/api/core/column-def#meta
                           (
@@ -129,14 +129,14 @@ export const ActivityTable = () => {
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 bg-white tabular-nums">
+                <tbody className="divide-border bg-surface divide-y tabular-nums">
                   {table.getRowModel().rows.map((row) => (
                     <tr key={row.id}>
                       {row.getVisibleCells().map((cell, index) => (
                         <td
                           key={cell.id}
                           className={clsx(
-                            "text-sm whitespace-nowrap text-gray-500",
+                            "text-foreground-subtle text-sm whitespace-nowrap",
                             index === 0 ? "pr-3 pl-4" : "px-3 py-2",
                             // TODO: Have to do this until this improves: https://tanstack.com/table/latest/docs/api/core/column-def#meta
                             (

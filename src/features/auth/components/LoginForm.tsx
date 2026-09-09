@@ -57,7 +57,7 @@ export const LoginForm = ({ onLoginSuccess }: Props) => {
       />
 
       {isError && isAxiosError(error) && (
-        <div className="text-xs text-red-500">
+        <div className="text-danger-text-hover text-xs">
           {error.status === UNAUTHORIZED_CODE && "Incorrect Email / Password"}
           {error.status === SERVER_ERROR_CODE && "Server Error"}
         </div>

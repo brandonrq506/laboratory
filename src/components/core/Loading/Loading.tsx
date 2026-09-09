@@ -10,8 +10,8 @@ type Props = {
 export const Loading = ({
   className,
   sizeStyles = "size-4",
-  fillStyles = "fill-blue-600",
-  lineStyles = "text-gray-200",
+  fillStyles = "fill-primary-text",
+  lineStyles = "text-loading-track",
 }: Props) => {
   return (
     <div role="status">

@@ -36,7 +36,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         className="relative z-50 lg:hidden">
         <DialogBackdrop
           transition
-          className="fixed inset-0 bg-gray-900/80 transition-opacity duration-300 ease-linear data-closed:opacity-0"
+          className="bg-sidebar-overlay/80 fixed inset-0 transition-opacity duration-300 ease-linear data-closed:opacity-0"
         />
 
         <div className="fixed inset-0 flex">
@@ -52,13 +52,13 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                   <span className="sr-only">Close sidebar</span>
                   <XMarkIcon
                     aria-hidden="true"
-                    className="h-6 w-6 text-white"
+                    className="text-overlay-foreground h-6 w-6"
                   />
                 </button>
               </div>
             </TransitionChild>
             {/* Sidebar component, swap this element with another sidebar if you like */}
-            <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
+            <div className="bg-surface flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-2">
               <div className="flex h-16 shrink-0 items-center">
                 <img
                   alt="App Logo"
@@ -92,7 +92,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div
           className={clsx(
-            "flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white transition-all",
+            "border-border bg-surface flex grow flex-col gap-y-5 overflow-y-auto border-r transition-all",
             isDesktopSidebarOpen ? "px-6" : "px-3",
           )}>
           <div className="flex h-16 shrink-0 items-center justify-center">

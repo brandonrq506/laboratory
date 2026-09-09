@@ -40,29 +40,29 @@ export const ProtectiveModal = ({
     <Modal isOpen={isOpen} onClose={handleClose}>
       <div className="space-y-6">
         <div className="flex items-start gap-4">
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red-50">
+          <span className="bg-danger-subtle flex h-12 w-12 shrink-0 items-center justify-center rounded-full">
             <ExclamationTriangleIcon
               aria-hidden="true"
-              className="size-6 text-red-600"
+              className="text-danger-text size-6"
             />
           </span>
           <div className="space-y-2 text-left">
-            <DialogTitle className="text-lg font-semibold text-gray-900">
+            <DialogTitle className="text-foreground text-lg font-semibold">
               {title}
             </DialogTitle>
-            <Description className="text-sm text-gray-600">
+            <Description className="text-foreground-muted text-sm">
               {description}
             </Description>
           </div>
         </div>
 
-        <div className="rounded-md border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="border-danger-border bg-danger-subtle text-danger-strong rounded-md border px-4 py-3 text-sm">
           Type <span className="font-semibold">"{confirmValue}"</span> to
           confirm.
         </div>
 
         <Field>
-          <Label className="block text-sm leading-6 font-medium text-gray-900">
+          <Label className="text-foreground block text-sm leading-6 font-medium">
             Confirmation
           </Label>
           <StateInputText

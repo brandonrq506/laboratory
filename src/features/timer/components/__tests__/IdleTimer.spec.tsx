@@ -29,7 +29,7 @@ describe("IdleTimer", () => {
     await user.click(playBtn);
 
     expect(input).toHaveAttribute("aria-invalid");
-    expect(input).toHaveClass("ring-red-300");
+    expect(input).toHaveClass("ring-invalid-border");
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
   });
 

@@ -10,6 +10,7 @@ const domTestFiles = [
   "src/hooks/**/*.{test,spec}.ts",
   "src/features/userPreferences/components/**/*.{test,spec}.tsx",
   "src/features/userPreferences/utils/__tests__/localStorage.{test,spec}.ts",
+  "src/features/userPreferences/utils/__tests__/applyResolvedTheme.{test,spec}.ts",
 ];
 
 const nodeTestFiles = ["src/**/utils/**/*.{test,spec}.ts"];

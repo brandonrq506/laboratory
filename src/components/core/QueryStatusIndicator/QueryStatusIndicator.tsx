@@ -35,11 +35,11 @@ export const QueryStatusIndicator = ({ status, reset, className }: Props) => {
     <div className={clsx("inline-flex items-center", className)}>
       {status === "pending" && <Loading sizeStyles="size-5" />}
       {status === "success" && (
-        <CheckCircleIcon className="size-5 text-green-600" aria-hidden />
+        <CheckCircleIcon className="text-success-text size-5" aria-hidden />
       )}
       {status === "error" && (
         <ExclamationCircleIcon
-          className="animate-shake size-5 text-red-600"
+          className="animate-shake text-danger-text size-5"
           aria-hidden
         />
       )}

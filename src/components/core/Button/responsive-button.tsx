@@ -11,10 +11,11 @@ const sizes = {
 
 const variants = {
   primary:
-    "bg-blue-600 text-white data-hover:bg-blue-500 data-focus:bg-blue-500",
+    "bg-primary text-primary-foreground data-hover:bg-primary-hover data-focus:bg-primary-hover",
   secondary:
-    "bg-white text-blue-600 data-hover:bg-gray-100 data-focus:bg-gray-100 border border-gray-200",
-  danger: "bg-red-600 text-white data-hover:bg-red-500 data-focus:bg-red-500",
+    "bg-surface text-primary-text data-hover:bg-surface-hover data-focus:bg-surface-hover border border-border",
+  danger:
+    "bg-danger text-danger-foreground data-hover:bg-danger-hover data-focus:bg-danger-hover",
 };
 
 type IconProps =

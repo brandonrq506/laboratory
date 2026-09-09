@@ -20,7 +20,7 @@ export const EditRoutineActions = () => {
     <div className="flex items-center justify-between">
       <Link to="/routines/$routineId/delete" params={{ routineId }}>
         <span className="sr-only">Delete Routine</span>
-        <TrashIcon className="size-5 text-red-600" />
+        <TrashIcon className="text-danger-text size-5" />
       </Link>
       {isHidden ? (
         <UnhideRoutineButton routineId={routineId} />

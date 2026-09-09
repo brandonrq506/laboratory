@@ -25,7 +25,7 @@ export const RoutineItemContent = ({ routineId, item }: Props) => {
           <RainbowBadge>{item.item_name}</RainbowBadge>
         )}
 
-        <div className="flex gap-2 text-gray-600">
+        <div className="text-foreground-muted flex gap-2">
           <div className="flex gap-1 text-xs">
             <p className="tabular-nums">
               {formatDatetimeTo12hTime(item.expected_start_time.toISOString())}

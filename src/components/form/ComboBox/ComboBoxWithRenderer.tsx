@@ -58,10 +58,11 @@ export function ComboBoxWithRenderer<T = unknown>({
     <Field>
       <Label
         className={clsx(
-          "block text-sm leading-6 font-medium text-gray-900",
+          "text-foreground block text-sm leading-6 font-medium",
           hideLabel && "sr-only",
         )}>
-        {label} {showAsterisk && <span className="ml-1 text-red-700">*</span>}
+        {label}{" "}
+        {showAsterisk && <span className="text-danger-strong ml-1">*</span>}
       </Label>
       <Combobox
         as="div"
@@ -72,9 +73,9 @@ export function ComboBoxWithRenderer<T = unknown>({
         <div className={clsx("relative", !hideLabel && "mt-2")}>
           <ComboboxInput
             className={clsx(
-              "w-full rounded-md border-0 bg-white py-1.5 pr-10 pl-3 text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:text-sm sm:leading-6",
+              "bg-surface text-foreground ring-input-border focus:ring-focus-ring w-full rounded-md border-0 py-1.5 pr-10 pl-3 shadow-xs ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6",
               error &&
-                "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500",
+                "text-invalid-text ring-invalid-border placeholder:text-invalid-placeholder focus:ring-danger-ring",
             )}
             onBlur={onBlur}
             name={name}
@@ -88,13 +89,13 @@ export function ComboBoxWithRenderer<T = unknown>({
             <span className="sr-only">ComboBox button</span>
             {!error && (
               <ChevronUpDownIcon
-                className="size-5 text-gray-400"
+                className="text-foreground-faint size-5"
                 aria-hidden="true"
               />
             )}
             {error && (
               <ExclamationCircleIcon
-                className="size-5 text-red-500"
+                className="text-danger-text-hover size-5"
                 aria-hidden="true"
               />
             )}
@@ -103,13 +104,13 @@ export function ComboBoxWithRenderer<T = unknown>({
           {finalOptions.length > 0 && (
             <ComboboxOptions
               anchor={{ to: "bottom", padding: "1.5rem", gap: "0.5rem" }}
-              className="absolute z-10 mt-1 w-[var(--input-width)] overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-gray-100 focus:outline-hidden sm:text-sm">
+              className="bg-elevated ring-border-subtle absolute z-10 mt-1 w-[var(--input-width)] overflow-auto rounded-md py-1 text-base shadow-lg ring-1 focus:outline-hidden sm:text-sm">
               {finalOptions.map((option) => (
                 <ComboboxOption
                   key={option.value}
                   value={option}
                   disabled={option.disabled}
-                  className="group relative cursor-default py-1.5 pr-9 pl-3 text-gray-900 select-none data-disabled:cursor-not-allowed data-disabled:opacity-60 data-focus:bg-indigo-600 data-focus:text-white">
+                  className="group text-foreground data-focus:bg-selection data-focus:text-selection-foreground relative cursor-default py-1.5 pr-9 pl-3 select-none data-disabled:cursor-not-allowed data-disabled:opacity-60">
                   {/* Custom content if provided, otherwise fallback to default */}
                   {renderOption ? (
                     <div className="flex items-center gap-2">
@@ -122,7 +123,7 @@ export function ComboBoxWithRenderer<T = unknown>({
                       {option.label}
                     </span>
                   )}
-                  <span className="absolute inset-y-0 right-0 hidden items-center pr-4 text-indigo-600 group-data-focus:text-white group-data-selected:flex">
+                  <span className="text-accent group-data-focus:text-selection-foreground absolute inset-y-0 right-0 hidden items-center pr-4 group-data-selected:flex">
                     <CheckIcon className="size-5" aria-hidden="true" />
                   </span>
                 </ComboboxOption>
@@ -132,10 +133,12 @@ export function ComboBoxWithRenderer<T = unknown>({
         </div>
       </Combobox>
       {description && !error && (
-        <p className="mt-2 text-sm font-light text-gray-500">{description}</p>
+        <p className="text-foreground-subtle mt-2 text-sm font-light">
+          {description}
+        </p>
       )}
       {error && !hideErrorMessage && (
-        <p role="alert" className="mt-2 text-sm font-light text-red-600">
+        <p role="alert" className="text-danger-text mt-2 text-sm font-light">
           {error}
         </p>
       )}
