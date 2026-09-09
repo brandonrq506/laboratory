@@ -28,3 +28,12 @@ export const getPreferencesFromLocalStorage = ():
     return undefined;
   }
 };
+
+/** Clear account data while retaining the device's last applied theme. */
+export const clearPreferencesFromLocalStorage = () => {
+  try {
+    localStorage.removeItem(PREFERENCES_KEY);
+  } catch {
+    // Browser storage may be unavailable.
+  }
+};
