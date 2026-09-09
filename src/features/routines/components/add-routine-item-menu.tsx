@@ -55,7 +55,7 @@ export const AddRoutineItemMenu = ({ routineId }: Props) => {
       iconBtn={<PlusIcon className="size-5" aria-hidden />}>
       <MenuSection>
         <MenuItem disabled>
-          <div className="flex w-full items-center justify-between gap-2 px-2 py-2 text-sm font-light data-focus:bg-gray-100">
+          <div className="data-focus:bg-surface-hover flex w-full items-center justify-between gap-2 px-2 py-2 text-sm font-light">
             Options
             <QueryStatusIndicator status={status} reset={reset} />
           </div>
@@ -64,7 +64,7 @@ export const AddRoutineItemMenu = ({ routineId }: Props) => {
       {routines.map((routine) => (
         <MenuItem key={routine.id}>
           <button
-            className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
+            className="data-focus:bg-surface-hover flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light"
             onClick={(e) => {
               e.preventDefault();
               mutate({ nestedRoutineId: routine.id, routineId });
@@ -78,7 +78,7 @@ export const AddRoutineItemMenu = ({ routineId }: Props) => {
       {activities.map((activity) => (
         <MenuItem key={activity.id}>
           <button
-            className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
+            className="data-focus:bg-surface-hover flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light"
             onClick={(e) => {
               e.preventDefault();
               mutate({ activityId: activity.id, routineId });

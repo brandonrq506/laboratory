@@ -61,7 +61,7 @@ export const ActivityDurationFields = () => {
             })}
           />
         </div>
-        <div role="alert" className="mt-2 text-sm font-light text-red-600">
+        <div role="alert" className="text-danger-text mt-2 text-sm font-light">
           {errors.exp_time_hours?.message || errors.exp_time_minutes?.message}
         </div>
       </div>
@@ -116,7 +116,7 @@ export const ActivityDurationFields = () => {
             })}
           />
         </div>
-        <div role="alert" className="mt-2 text-sm font-light text-red-600">
+        <div role="alert" className="text-danger-text mt-2 text-sm font-light">
           {errors.max_time_hours?.message || errors.max_time_minutes?.message}
         </div>
       </div>

@@ -23,20 +23,22 @@ export const Toggle = ({
         <Label
           as="span"
           passive
-          className="text-sm/6 font-medium text-gray-900">
+          className="text-foreground text-sm/6 font-medium">
           {label}
         </Label>
-        <Description as="span" className="text-sm font-light text-gray-500">
+        <Description
+          as="span"
+          className="text-foreground-subtle text-sm font-light">
           {description}
         </Description>
       </span>
       <Switch
         checked={checked}
         onChange={onChange}
-        className="group relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-200 transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 focus:outline-none data-[checked]:bg-indigo-600">
+        className="group bg-control-track focus:ring-focus-ring data-[checked]:bg-selection relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-offset-2 focus:outline-none">
         <span
           aria-hidden="true"
-          className="pointer-events-none inline-block size-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out group-data-[checked]:translate-x-5"
+          className="bg-control-thumb pointer-events-none inline-block size-5 transform rounded-full shadow ring-0 transition duration-200 ease-in-out group-data-[checked]:translate-x-5"
         />
       </Switch>
     </Field>

@@ -12,6 +12,6 @@ describe("Timer", () => {
 
     // Display minus sign
     const el = screen.getByText(/-/);
-    expect(el).toHaveClass("text-red-800");
+    expect(el).toHaveClass("text-danger-emphasis");
   });
 });

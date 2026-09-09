@@ -73,10 +73,11 @@ export const TimeInputV3 = <T extends FieldValues>({
     <Field className={clsx(className)}>
       <Label
         className={clsx(
-          "block text-sm leading-6 font-medium text-gray-900",
+          "text-foreground block text-sm leading-6 font-medium",
           hideLabel && "sr-only",
         )}>
-        {label} {showAsterisk && <span className="ml-1 text-red-700">*</span>}
+        {label}{" "}
+        {showAsterisk && <span className="text-danger-strong ml-1">*</span>}
       </Label>
       <Input
         type="time"
@@ -89,21 +90,21 @@ export const TimeInputV3 = <T extends FieldValues>({
         invalid={Boolean(error)}
         {...props}
         className={clsx(
-          "block w-full rounded-md border-0 py-1.5 text-sm font-light text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 sm:leading-6",
-          "data-focus:ring-2 data-focus:ring-indigo-600 data-focus:ring-inset",
-          "data-disabled:cursor-not-allowed data-disabled:bg-gray-50 data-disabled:text-gray-500 data-disabled:ring-gray-200",
-          "data-invalid:text-red-900 data-invalid:ring-red-300 data-invalid:placeholder:text-red-300 data-invalid:focus:ring-red-500",
+          "bg-surface text-foreground ring-input-border placeholder:text-foreground-faint block w-full rounded-md border-0 py-1.5 text-sm font-light shadow-xs ring-1 ring-inset sm:leading-6",
+          "data-focus:ring-focus-ring data-focus:ring-2 data-focus:ring-inset",
+          "data-disabled:bg-surface-subtle data-disabled:text-foreground-subtle data-disabled:ring-border data-disabled:cursor-not-allowed",
+          "data-invalid:text-invalid-text data-invalid:ring-invalid-border data-invalid:placeholder:text-invalid-placeholder data-invalid:focus:ring-danger-ring",
           !hideLabel && "mt-2",
           inputClassName,
         )}
       />
       {description && !error && (
-        <Description className="mt-2 text-sm font-light text-gray-500">
+        <Description className="text-foreground-subtle mt-2 text-sm font-light">
           {description}
         </Description>
       )}
       {fieldState.error && !hideErrorMessage && (
-        <Description className="mt-2 text-sm font-light text-red-600">
+        <Description className="text-danger-text mt-2 text-sm font-light">
           {fieldState.error.message}
         </Description>
       )}

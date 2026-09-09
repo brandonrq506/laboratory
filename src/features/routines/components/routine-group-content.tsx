@@ -34,7 +34,7 @@ export const RoutineGroupContent = ({
     <Fragment>
       <div className="grow">
         <p className="text-sm font-semibold">{item.routine_name}</p>
-        <div className="flex gap-2.5 text-xs text-gray-600">
+        <div className="text-foreground-muted flex gap-2.5 text-xs">
           <p>{item.absorbed_count} tasks</p>
           <p className="tabular-nums">
             {formatDatetimeTo12hTime(item.expected_start_time.toISOString())}

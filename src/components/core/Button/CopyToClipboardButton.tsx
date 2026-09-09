@@ -59,7 +59,7 @@ export const CopyToClipboardButton = ({ className, onCopy }: Props) => {
     if (isSuccess) {
       return (
         <ClipboardDocumentCheckIcon
-          className="size-5 text-green-600 transition duration-200 ease-out"
+          className="text-success-text size-5 transition duration-200 ease-out"
           aria-hidden
         />
       );
@@ -68,9 +68,9 @@ export const CopyToClipboardButton = ({ className, onCopy }: Props) => {
     return (
       <ClipboardIcon
         className={clsx("size-5 transition duration-200 ease-out", {
-          "text-gray-900": isIdle,
-          "text-gray-700": isCopying,
-          "animate-shake text-red-600": isError,
+          "text-foreground": isIdle,
+          "text-foreground-secondary": isCopying,
+          "animate-shake text-danger-text": isError,
         })}
         aria-hidden
       />

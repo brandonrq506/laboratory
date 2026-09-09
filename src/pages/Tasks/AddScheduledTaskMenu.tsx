@@ -50,13 +50,13 @@ export const AddScheduledTaskMenu = ({ insertMode, scheduledAt }: Props) => {
       iconBtn={<PlusIcon className="size-5" aria-hidden />}>
       {hasRoutines && (
         <MenuSection>
-          <MenuHeading className="bg-gray-100 px-2 py-1.5 text-sm opacity-50">
+          <MenuHeading className="bg-surface-hover px-2 py-1.5 text-sm opacity-50">
             Routines
           </MenuHeading>
           {nonEmptyRoutines?.map((routine) => (
             <MenuItem key={routine.id}>
               <button
-                className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
+                className="data-focus:bg-surface-hover flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light"
                 onClick={(e) => {
                   e.preventDefault();
                   handleApplyRoutine(routine.id);
@@ -75,7 +75,7 @@ export const AddScheduledTaskMenu = ({ insertMode, scheduledAt }: Props) => {
       <MenuSection>
         <MenuHeading
           className={clsx(
-            "bg-gray-100 px-2 py-1.5 text-sm opacity-50",
+            "bg-surface-hover px-2 py-1.5 text-sm opacity-50",
             !hasRoutines && "hidden",
           )}>
           Activities
@@ -84,7 +84,7 @@ export const AddScheduledTaskMenu = ({ insertMode, scheduledAt }: Props) => {
         {activities?.map((activity) => (
           <MenuItem key={activity.id}>
             <button
-              className="flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light data-focus:bg-gray-100"
+              className="data-focus:bg-surface-hover flex w-full items-center justify-between gap-2 px-2 py-1 text-sm font-light"
               onClick={(e) => {
                 e.preventDefault();
                 mutateTask({ activity, insertMode, scheduledAt });

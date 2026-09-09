@@ -31,11 +31,11 @@ export const ConfirmationModal = ({
         <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
           <DialogTitle
             as="h3"
-            className="text-base leading-6 font-semibold text-gray-900">
+            className="text-foreground text-base leading-6 font-semibold">
             {title}
           </DialogTitle>
           <div className="mt-2">
-            <Description className="text-sm text-gray-500">
+            <Description className="text-foreground-subtle text-sm">
               {description}
             </Description>
           </div>

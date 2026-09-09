@@ -23,11 +23,11 @@ export const MainLayout = () => {
       <Header>
         <IconButton
           onClick={onOpen}
-          className="-m-2.5 p-2.5 text-gray-700 lg:hidden">
+          className="text-foreground-secondary -m-2.5 p-2.5 lg:hidden">
           <span className="sr-only">Open sidebar</span>
           <Bars3Icon className="h-6 w-6" aria-hidden="true" />
         </IconButton>
-        <div className="flex-1 text-sm leading-6 font-semibold text-gray-900">
+        <div className="text-foreground flex-1 text-sm leading-6 font-semibold">
           Laboratory
         </div>
         <LinkedInProfile />

@@ -46,7 +46,7 @@ export const CategoryForm = ({
         <ColorSelect control={control} name="color" />
       </div>
 
-      <div className="my-4 rounded-md bg-gray-100 p-2">
+      <div className="bg-surface-hover my-4 rounded-md p-2">
         <CategoryFormTaskExample control={control} />
       </div>
 

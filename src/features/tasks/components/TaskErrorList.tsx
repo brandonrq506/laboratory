@@ -10,10 +10,10 @@ export const TaskErrorList = ({ refetch }: Props) => {
     <div className="rounded-md p-6 text-center font-light">
       <FaceFrownIcon
         aria-hidden
-        className="mx-auto size-12 stroke-1 text-gray-400"
+        className="text-foreground-faint mx-auto size-12 stroke-1"
       />
-      <h3 className="mt-2 text-sm font-semibold text-gray-900">Oh no!</h3>
-      <p className="mt-1 text-sm text-gray-500">
+      <h3 className="text-foreground mt-2 text-sm font-semibold">Oh no!</h3>
+      <p className="text-foreground-subtle mt-1 text-sm">
         There was an error loading your tasks
       </p>
       <div className="mt-6">

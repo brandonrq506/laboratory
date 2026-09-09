@@ -14,18 +14,20 @@ type Props = {
 export const SortIcon = ({ sortDirection, canSort }: Props) => {
   if (!canSort) return null;
   if (sortDirection === false)
-    return <ChevronUpDownIcon aria-hidden className="size-5 text-gray-400" />;
+    return (
+      <ChevronUpDownIcon aria-hidden className="text-foreground-faint size-5" />
+    );
   if (sortDirection === "asc")
     return (
       <ChevronUpIcon
         aria-hidden
-        className="m-1 size-3 stroke-2 text-gray-400"
+        className="text-foreground-faint m-1 size-3 stroke-2"
       />
     );
   return (
     <ChevronDownIcon
       aria-hidden
-      className="m-1 size-3 stroke-2 text-gray-400"
+      className="text-foreground-faint m-1 size-3 stroke-2"
     />
   );
 };

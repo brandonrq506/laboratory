@@ -32,7 +32,7 @@ export const FutureScheduledTaskContent = ({ task }: Props) => {
           <p className="text-sm font-semibold">{task.activity.display_name}</p>
         </div>
 
-        <div className="flex gap-2.5 text-xs whitespace-nowrap text-gray-600">
+        <div className="text-foreground-muted flex gap-2.5 text-xs whitespace-nowrap">
           <div className="flex gap-1">
             <ClockIcon className="size-4" />
             <p className="tabular-nums">

@@ -30,11 +30,11 @@ export const NumberInput = ({
     <Field className={clsx(className)}>
       <Label
         className={clsx(
-          "block text-sm leading-6 font-medium text-gray-900",
+          "text-foreground block text-sm leading-6 font-medium",
           hideLabel && "sr-only",
         )}>
         <span>{label}</span>
-        {showAsterisk && <span className="ml-1 text-red-700">*</span>}
+        {showAsterisk && <span className="text-danger-strong ml-1">*</span>}
         <div className={clsx("relative", !hideLabel && "mt-2")}>
           <Input
             type="number"
@@ -43,17 +43,17 @@ export const NumberInput = ({
             invalid={Boolean(error)}
             {...registration}
             className={clsx(
-              "block w-full rounded-md border-0 py-1.5 text-sm text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-600 focus:ring-inset sm:leading-6",
-              "font-light disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200",
+              "bg-surface text-foreground ring-input-border placeholder:text-foreground-faint focus:ring-focus-ring block w-full rounded-md border-0 py-1.5 text-sm shadow-xs ring-1 ring-inset focus:ring-2 focus:ring-inset sm:leading-6",
+              "disabled:bg-surface-subtle disabled:text-foreground-subtle disabled:ring-border font-light disabled:cursor-not-allowed",
               error &&
-                "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500",
+                "text-invalid-text ring-invalid-border placeholder:text-invalid-placeholder focus:ring-danger-ring",
               className,
             )}
           />
           {error && (
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
               <ExclamationCircleIcon
-                className="h-5 w-5 text-red-500"
+                className="text-danger-text-hover h-5 w-5"
                 aria-hidden="true"
               />
             </div>
@@ -61,14 +61,14 @@ export const NumberInput = ({
         </div>
       </Label>
       {description && !error && (
-        <Description className="mt-2 text-sm font-light text-gray-500">
+        <Description className="text-foreground-subtle mt-2 text-sm font-light">
           {description}
         </Description>
       )}
       {error && !hideErrorMessage && (
         <Description
           role="alert"
-          className="mt-2 text-sm font-light text-red-600">
+          className="text-danger-text mt-2 text-sm font-light">
           {error}
         </Description>
       )}

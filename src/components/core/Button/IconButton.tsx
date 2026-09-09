@@ -1,19 +1,21 @@
 import clsx from "clsx";
 
 const variants = {
-  primary: "bg-blue-600 text-white shadow-xs",
-  primaryOutline: "bg-transparent text-blue-600",
-  danger: "bg-red-600 text-white shadow-xs",
-  dangerOutline: "bg-transparent text-red-600",
-  blackOutline: "bg-transparent text-black",
+  primary: "bg-primary text-primary-foreground shadow-xs",
+  primaryOutline: "bg-transparent text-primary-text",
+  danger: "bg-danger text-danger-foreground shadow-xs",
+  dangerOutline: "bg-transparent text-danger-text",
+  blackOutline: "bg-transparent text-foreground-strong",
 };
 
 const states = {
-  primary: "hover:bg-blue-500 focus-visible:ring-blue-600",
-  primaryOutline: "hover:text-blue-500 focus-visible:ring-blue-600",
-  danger: "hover:bg-red-500 focus-visible:ring-red-600",
-  dangerOutline: "hover:text-red-500 focus-visible:ring-red-600",
-  blackOutline: "hover:text-gray-500 focus-visible:ring-black",
+  primary: "hover:bg-primary-hover focus-visible:ring-primary-text",
+  primaryOutline:
+    "hover:text-primary-text-hover focus-visible:ring-primary-text",
+  danger: "hover:bg-danger-hover focus-visible:ring-danger-text",
+  dangerOutline: "hover:text-danger-text-hover focus-visible:ring-danger-text",
+  blackOutline:
+    "hover:text-foreground-subtle focus-visible:ring-foreground-strong",
 };
 
 const shapes = {

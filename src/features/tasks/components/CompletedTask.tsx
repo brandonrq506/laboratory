@@ -23,12 +23,12 @@ export const CompletedTask = ({ task, linkProps }: Props) => {
         <div className="flex items-center gap-1.5">
           <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
           <p className="text-sm font-semibold">{task.activity.display_name}</p>
-          <p className="text-xs text-gray-600 tabular-nums">
+          <p className="text-foreground-muted text-xs tabular-nums">
             {secondsToTime(durationSeconds)}
           </p>
         </div>
 
-        <div className="flex gap-2.5 text-xs whitespace-nowrap text-gray-600">
+        <div className="text-foreground-muted flex gap-2.5 text-xs whitespace-nowrap">
           <p className="tabular-nums">
             {formatDatetimeTo12hTime(task.start_time)}
           </p>

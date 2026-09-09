@@ -9,7 +9,7 @@ type Props = {
 export const Dot = ({
   className,
   sizeStyles = "size-5",
-  colorStyles = "fill-red-500",
+  colorStyles = "fill-danger-text-hover",
 }: Props) => {
   return (
     <svg

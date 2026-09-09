@@ -19,12 +19,12 @@ export const ExampleCompletedTask = ({ task }: Props) => {
         <div className="flex items-center gap-1.5">
           <Dot sizeStyles="size-2" colorStyles={color.fillClass} />
           <p className="text-sm font-semibold">{task.activity.display_name}</p>
-          <p className="text-xs text-gray-600 tabular-nums">
+          <p className="text-foreground-muted text-xs tabular-nums">
             {secondsToTime(durationSeconds)}
           </p>
         </div>
 
-        <div className="flex gap-1 text-xs text-gray-600">
+        <div className="text-foreground-muted flex gap-1 text-xs">
           <p className="tabular-nums">
             {formatDatetimeTo12hTime(task.start_time)}
           </p>
@@ -36,7 +36,7 @@ export const ExampleCompletedTask = ({ task }: Props) => {
       </div>
 
       <TrashIcon
-        className="my-auto size-5 cursor-pointer text-gray-600"
+        className="text-foreground-muted my-auto size-5 cursor-pointer"
         aria-hidden
       />
     </Card>

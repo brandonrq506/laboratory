@@ -10,7 +10,7 @@ import { IconButton } from "@/components/core/Button/IconButton";
 export const DragHandleOverlay = () => {
   return (
     <IconButton aria-hidden tabIndex={-1} className="rounded-lg">
-      <Bars3Icon className="size-5 cursor-grabbing text-gray-600" />
+      <Bars3Icon className="text-foreground-muted size-5 cursor-grabbing" />
     </IconButton>
   );
 };

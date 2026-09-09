@@ -14,8 +14,9 @@ const settingsTabs = linkOptions([
 ]);
 
 const baseClass = "rounded-md px-3 py-2 text-sm font-medium";
-const activeClass = "bg-indigo-100 text-indigo-700";
-const inactiveClass = "text-gray-500 hover:bg-gray-50 hover:text-gray-700";
+const activeClass = "bg-accent-subtle text-accent-strong";
+const inactiveClass =
+  "text-foreground-subtle hover:bg-surface-subtle hover:text-foreground-secondary";
 
 export const Route = createFileRoute("/__protected/settings")({
   component: RouteComponent,

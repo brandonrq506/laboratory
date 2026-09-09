@@ -31,7 +31,9 @@ export const PerformanceSummaryCard = ({ tasks }: Props) => {
           <SummaryItem emoji="🐢" percent={summary.turtlePct} />
           <SummaryItem emoji="🐌" percent={summary.snailPct} />
         </div>
-        <span className="text-sm tracking-widest text-gray-600">{message}</span>
+        <span className="text-foreground-muted text-sm tracking-widest">
+          {message}
+        </span>
       </div>
     </Card>
   );

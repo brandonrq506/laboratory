@@ -29,7 +29,7 @@ export const TimerScheduledTaskContent = ({ task }: Props) => {
           <p className="text-sm font-semibold">{task.activity.display_name}</p>
         </div>
 
-        <div className="flex gap-2.5 text-xs whitespace-nowrap text-gray-600">
+        <div className="text-foreground-muted flex gap-2.5 text-xs whitespace-nowrap">
           <p className="tabular-nums">
             {formatDatetimeTo12hTime(task.expected_start_time.toISOString())}
           </p>

@@ -5,11 +5,11 @@ export const NotFoundPage = () => {
   return (
     <Card className="grid min-h-dvh place-items-center py-32">
       <div className="text-center">
-        <p className="text-4xl font-semibold text-indigo-600">404</p>
-        <h1 className="mt-4 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">
+        <p className="text-accent text-4xl font-semibold">404</p>
+        <h1 className="text-foreground mt-4 text-5xl font-semibold tracking-tight text-balance sm:text-7xl">
           Page not found
         </h1>
-        <div className="mt-6 text-lg font-light text-pretty text-gray-500 sm:text-xl/8">
+        <div className="text-foreground-subtle mt-6 text-lg font-light text-pretty sm:text-xl/8">
           <p>Sorry, we couldn't find the page you're looking for</p>
         </div>
         <div className="mt-10 flex items-center justify-center gap-x-6">

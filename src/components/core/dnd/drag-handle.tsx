@@ -26,8 +26,8 @@ export const DragHandle = ({
         touchAction: "none",
         visibility: isHidden ? "hidden" : "visible",
       }}
-      className="group rounded-lg transition-colors hover:bg-gray-100/80">
-      <Bars3Icon className="size-5 cursor-grab text-gray-400 transition-all duration-200 group-hover:text-gray-600 group-active:cursor-grabbing" />
+      className="group hover:bg-surface-hover/80 rounded-lg transition-colors">
+      <Bars3Icon className="text-foreground-faint group-hover:text-foreground-muted size-5 cursor-grab transition-all duration-200 group-active:cursor-grabbing" />
       <span className="sr-only">Drag handle</span>
     </IconButton>
   );

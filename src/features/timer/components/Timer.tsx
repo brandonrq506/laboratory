@@ -12,7 +12,8 @@ export const Timer = ({ start_time, exp_seconds }: Props) => {
   const seconds = useTimer({ start_time, exp_seconds });
 
   return (
-    <span className={clsx(seconds < 0 && "text-red-800", "tabular-nums")}>
+    <span
+      className={clsx(seconds < 0 && "text-danger-emphasis", "tabular-nums")}>
       {secondsToHHmmss(seconds)}
     </span>
   );
