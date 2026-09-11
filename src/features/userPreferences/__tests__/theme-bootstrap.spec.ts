@@ -19,7 +19,10 @@ beforeEach(() => {
   localStorage.clear();
   document.documentElement.className = "";
   document.documentElement.style.removeProperty("color-scheme");
-  document.head.innerHTML = '<meta name="theme-color" content="#f9fafb">';
+  document.head.innerHTML = `
+    <meta name="theme-color" content="${BROWSER_THEME_COLORS.light}" media="(prefers-color-scheme: light)" data-theme="light">
+    <meta name="theme-color" content="${BROWSER_THEME_COLORS.dark}" media="(prefers-color-scheme: dark)" data-theme="dark">
+  `;
 });
 afterEach(() => {
   vi.restoreAllMocks();
@@ -47,8 +50,15 @@ describe("actual pre-render HTML bootstrap", () => {
       );
       expect(document.documentElement.style.colorScheme).toBe(resolved);
       expect(
-        document.querySelector('meta[name="theme-color"]'),
-      ).toHaveAttribute("content", BROWSER_THEME_COLORS[resolved]);
+        document.querySelector(
+          `meta[name="theme-color"][data-theme="${resolved}"]`,
+        ),
+      ).toHaveAttribute("media", "all");
+      expect(
+        document.querySelector(
+          `meta[name="theme-color"][data-theme="${resolved === "dark" ? "light" : "dark"}"]`,
+        ),
+      ).toHaveAttribute("media", "not all");
     },
   );
 
