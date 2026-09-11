@@ -1,5 +1,5 @@
-import { BROWSER_THEME_COLORS, THEME_COLOR_SELECTOR } from "../constants/theme";
 import { type ResolvedTheme, THEME } from "../types/theme";
+import { THEME_COLOR_SELECTOR } from "../constants/theme";
 
 /**
  * Applies the resolved theme to the document.
@@ -16,6 +16,11 @@ export const applyResolvedTheme = (resolved: ResolvedTheme) => {
   root.style.colorScheme = resolved;
 
   document
-    .querySelector(THEME_COLOR_SELECTOR)
-    ?.setAttribute("content", BROWSER_THEME_COLORS[resolved]);
+    .querySelectorAll<HTMLMetaElement>(THEME_COLOR_SELECTOR)
+    .forEach((meta) => {
+      meta.setAttribute(
+        "media",
+        meta.dataset.theme === resolved ? "all" : "not all",
+      );
+    });
 };

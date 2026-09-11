@@ -6,7 +6,7 @@ export const THEMES: readonly THEME[] = [THEME.LIGHT, THEME.DARK, THEME.SYSTEM];
 
 export const SYSTEM_THEME_QUERY = "(prefers-color-scheme: dark)";
 
-export const THEME_COLOR_SELECTOR = 'meta[name="theme-color"]';
+export const THEME_COLOR_SELECTOR = 'meta[name="theme-color"][data-theme]';
 
 export const THEME_OPTIONS = [
   { label: "Light", value: THEME.LIGHT },

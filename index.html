@@ -5,14 +5,22 @@
     <link rel="icon" type="image/png" href="/logo_32.png" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <link rel="manifest" href="app.webmanifest" />
-    <meta name="theme-color" content="#f9fafb" />
+    <meta
+      name="theme-color"
+      content="#f9fafb"
+      media="(prefers-color-scheme: light)"
+      data-theme="light" />
+    <meta
+      name="theme-color"
+      content="#030712"
+      media="(prefers-color-scheme: dark)"
+      data-theme="dark" />
 
     <!-- iOS support -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link rel="apple-touch-icon" href="/icons/logo_192.png">
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="apple-touch-icon" href="/icons/logo_192.png" />
     <!-- iOS support -->
-
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Laboratory</title>
@@ -32,15 +40,24 @@
         } catch {
           // Storage may be unavailable or hold malformed data; retain light.
         }
-        const dark = preference === "dark" ||
+        const dark =
+          preference === "dark" ||
           (preference === "system" &&
             window.matchMedia("(prefers-color-scheme: dark)").matches);
         const root = document.documentElement;
         root.classList.toggle("dark", dark);
         // Sets the canvas the browser paints before the stylesheet loads.
         root.style.colorScheme = dark ? "dark" : "light";
-        document.querySelector('meta[name="theme-color"]').content =
-          dark ? "#030712" : "#f9fafb";
+        document
+          .querySelectorAll('meta[name="theme-color"][data-theme]')
+          .forEach((meta) => {
+            meta.setAttribute(
+              "media",
+              meta.dataset.theme === (dark ? "dark" : "light")
+                ? "all"
+                : "not all",
+            );
+          });
       })();
     </script>
   </head>
