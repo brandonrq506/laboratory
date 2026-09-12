@@ -22,7 +22,7 @@ export const DesktopSidebarToggle = () => {
     <IconButton
       onClick={handleToggle}
       variant="blackOutline"
-      className="border-border bg-surface hover:bg-surface-subtle absolute top-4 right-0 z-10 translate-x-1/2 rounded-full border shadow-sm transition-all"
+      className="border-border bg-surface hover:bg-surface-subtle top-safe-4 absolute right-0 z-10 translate-x-1/2 rounded-full border shadow-sm transition-all"
       title={isOpen ? "Collapse sidebar" : "Expand sidebar"}
       shape="circle"
       size="sm">

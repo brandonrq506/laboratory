@@ -211,6 +211,36 @@
   }
 }
 
+/* Safe-area insets: the page opts into viewport-fit=cover so installed apps
+   (Android edge-to-edge, iOS standalone) draw under the system bars.
+   Use `*-safe` / `*-safe-N` instead of hand-written calc(env(...)) so the
+   inset math lives here only. Guarded by src/utils/__tests__/safeAreaGuard.spec.ts */
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@utility pt-safe-* {
+  padding-top: calc(env(safe-area-inset-top) + --spacing(--value(integer)));
+}
+
+@utility pb-safe-* {
+  padding-bottom: calc(
+    env(safe-area-inset-bottom) + --spacing(--value(integer))
+  );
+}
+
+@utility top-safe-* {
+  top: calc(env(safe-area-inset-top) + --spacing(--value(integer)));
+}
+
+@utility bottom-safe-* {
+  bottom: calc(env(safe-area-inset-bottom) + --spacing(--value(integer)));
+}
+
 @layer utilities {
   @keyframes shake {
     0%,

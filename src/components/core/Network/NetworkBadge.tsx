@@ -65,15 +65,15 @@ export const NetworkBadge = () => {
   // Don't render until triggered
   if (!shouldRender) return null;
 
-  // Slide fully off-screen (height + bottom margin) when hidden
+  // Slide fully off-screen (height + bottom offset incl. safe-area) when hidden
   const translateClass = visible
     ? "translate-y-0"
-    : "translate-y-[calc(100%_+_1rem)]";
+    : "translate-y-[calc(100%+--spacing(4)+env(safe-area-inset-bottom))]";
 
   return (
     <div
       className={clsx(
-        "fixed bottom-4 left-1/2 -translate-x-1/2 transform transition-transform duration-300 ease-out",
+        "bottom-safe-4 fixed left-1/2 -translate-x-1/2 transform transition-transform duration-300 ease-out",
         translateClass,
       )}
       role="status"
