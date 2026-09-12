@@ -16,7 +16,11 @@ interface MyRouterContext {
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: RootComponent,
   notFoundComponent: () => <NotFoundPage />,
-  errorComponent: ({ error }) => <div>Route Error: {error.message}</div>,
+  errorComponent: ({ error }) => (
+    <div>
+      Route Error: {error instanceof Error ? error.message : String(error)}
+    </div>
+  ),
 });
 
 function RootComponent() {
