@@ -37,7 +37,7 @@ function RouteComponent() {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center px-4 sm:px-0">
+    <div className="pt-safe pb-safe flex h-screen items-center justify-center px-4 sm:px-0">
       <Card className="min-h-fit w-full sm:max-w-lg">
         <HeadingLarge title="Login" />
         <br />

@@ -211,6 +211,16 @@
   }
 }
 
+/* Safe-area insets: the page opts into viewport-fit=cover so installed apps
+   (Android edge-to-edge, iOS standalone) draw under the system bars. */
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
 @layer utilities {
   @keyframes shake {
     0%,

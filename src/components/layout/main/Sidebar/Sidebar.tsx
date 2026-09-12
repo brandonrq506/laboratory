@@ -44,7 +44,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             transition
             className="relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-closed:-translate-x-full">
             <TransitionChild>
-              <div className="absolute top-0 left-full flex w-16 justify-center pt-5 duration-300 ease-in-out data-closed:opacity-0">
+              <div className="absolute top-0 left-full flex w-16 justify-center pt-[calc(--spacing(5)+env(safe-area-inset-top))] duration-300 ease-in-out data-closed:opacity-0">
                 <button
                   type="button"
                   onClick={onClose}
@@ -58,7 +58,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
               </div>
             </TransitionChild>
             {/* Sidebar component, swap this element with another sidebar if you like */}
-            <div className="bg-surface flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-2">
+            <div className="bg-surface pt-safe flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-2">
               <div className="flex h-16 shrink-0 items-center">
                 <img
                   alt="App Logo"
@@ -92,7 +92,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div
           className={clsx(
-            "border-border bg-surface flex grow flex-col gap-y-5 overflow-y-auto border-r transition-all",
+            "border-border bg-surface pt-safe flex grow flex-col gap-y-5 overflow-y-auto border-r transition-all",
             isDesktopSidebarOpen ? "px-6" : "px-3",
           )}>
           <div className="flex h-16 shrink-0 items-center justify-center">
