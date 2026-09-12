@@ -17,7 +17,10 @@ export const Route = createFileRoute("/__protected/excel")({
   },
   loaderDeps: ({ search: { date } }) => ({ date }),
   beforeLoad: ({ context: { queryClient }, search: { date } }) =>
-    queryClient.ensureQueryData(excelByDateQueryOptions(date)),
+    queryClient.query({
+      ...excelByDateQueryOptions(date),
+      staleTime: "static",
+    }),
   component: RouteComponent,
 });
 

@@ -8,7 +8,10 @@ export const Route = createFileRoute(
   staticData: { modal: true },
   params: validateIdParam("categoryId"),
   loader: ({ context: { queryClient }, params: { categoryId } }) =>
-    queryClient.ensureQueryData(categoryByIdQueryOptions(categoryId)),
+    queryClient.query({
+      ...categoryByIdQueryOptions(categoryId),
+      staleTime: "static",
+    }),
   component: RouteComponent,
 });
 

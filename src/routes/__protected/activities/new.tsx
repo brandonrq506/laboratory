@@ -10,7 +10,10 @@ import { getFirstCategoryAsOption } from "@/features/categories/utils";
 export const Route = createFileRoute("/__protected/activities/new")({
   staticData: { modal: true },
   loader: ({ context }) =>
-    context.queryClient.ensureQueryData(categoryListQueryOptions()),
+    context.queryClient.query({
+      ...categoryListQueryOptions(),
+      staleTime: "static",
+    }),
   component: RouteComponent,
 });
 

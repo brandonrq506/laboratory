@@ -6,7 +6,10 @@ export const Route = createFileRoute("/__protected/routines/$routineId")({
   staticData: { modal: true },
   params: validateIdParam("routineId"),
   loader: ({ context: { queryClient }, params: { routineId } }) =>
-    queryClient.ensureQueryData(routineByIdQueryOptions(routineId)),
+    queryClient.query({
+      ...routineByIdQueryOptions(routineId),
+      staleTime: "static",
+    }),
   component: RouteComponent,
 });
 

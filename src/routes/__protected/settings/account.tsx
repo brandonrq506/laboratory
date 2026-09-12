@@ -11,7 +11,10 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/__protected/settings/account")({
   loader: ({ context: { queryClient } }) =>
-    queryClient.ensureQueryData(userPreferencesOptions()),
+    queryClient.query({
+      ...userPreferencesOptions(),
+      staleTime: "static",
+    }),
   component: RouteComponent,
 });
 

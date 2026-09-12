@@ -13,7 +13,10 @@ import { RoutineCard } from "@/features/routines/components";
 
 export const Route = createFileRoute("/__protected/routines")({
   loader: ({ context: { queryClient } }) =>
-    queryClient.ensureQueryData(routineListQueryOptions()),
+    queryClient.query({
+      ...routineListQueryOptions(),
+      staleTime: "static",
+    }),
   component: RouteComponent,
 });
 

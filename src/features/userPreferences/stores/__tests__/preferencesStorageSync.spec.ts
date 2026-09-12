@@ -39,7 +39,7 @@ describe("preferences storage projection", () => {
       ),
     );
 
-    await client.fetchQuery(userPreferencesOptions());
+    await client.query(userPreferencesOptions());
 
     expect(getPreferencesFromLocalStorage()).toEqual(darkUserPreferences);
   });
@@ -72,7 +72,7 @@ describe("preferences storage projection", () => {
     );
 
     const request = client
-      .fetchQuery(userPreferencesOptions())
+      .query(userPreferencesOptions())
       .catch((error: unknown) => error);
     await started.promise;
 

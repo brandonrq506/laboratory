@@ -6,7 +6,10 @@ export const Route = createFileRoute("/__protected/timer/$taskId")({
   staticData: { modal: true },
   params: validateIdParam("taskId"),
   loader: ({ context: { queryClient }, params: { taskId } }) =>
-    queryClient.ensureQueryData(taskByIdQueryOptions(taskId)),
+    queryClient.query({
+      ...taskByIdQueryOptions(taskId),
+      staleTime: "static",
+    }),
   component: RouteComponent,
 });
 
