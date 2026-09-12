@@ -35,7 +35,7 @@ export const MainLayout = () => {
 
       <main
         className={clsx(
-          "pt-6 pb-[calc(--spacing(6)+env(safe-area-inset-bottom))] transition-all",
+          "pb-safe-6 lg:pt-safe-6 pt-6 transition-all",
           isDesktopSidebarOpen ? "lg:pl-72" : "lg:pl-20",
         )}>
         <div className="px-4 sm:px-6">{<Outlet />}</div>

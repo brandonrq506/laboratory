@@ -44,7 +44,7 @@ export const FullHeightModal = ({
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
         <div
           className={clsx(
-            "flex min-h-full items-stretch justify-center p-4 text-center sm:p-0",
+            "pt-safe-4 pb-safe-4 sm:pt-safe sm:pb-safe flex min-h-full items-stretch justify-center px-4 text-center sm:px-0",
           )}>
           <DialogPanel
             transition
