@@ -10,7 +10,10 @@ import { categoryListQueryOptions } from "@/features/categories/api/queries";
 
 export const Route = createFileRoute("/__protected/settings/categories")({
   loader: ({ context: { queryClient } }) =>
-    queryClient.ensureQueryData(categoryListQueryOptions()),
+    queryClient.query({
+      ...categoryListQueryOptions(),
+      staleTime: "static",
+    }),
   component: RouteComponent,
 });
 

@@ -11,7 +11,10 @@ import { ADD } from "@/constants/actions";
 
 export const Route = createFileRoute("/__protected/activities")({
   loader: ({ context }) =>
-    context.queryClient.ensureQueryData(activityListQueryOptions()),
+    context.queryClient.query({
+      ...activityListQueryOptions(),
+      staleTime: "static",
+    }),
   component: RouteComponent,
 });
 

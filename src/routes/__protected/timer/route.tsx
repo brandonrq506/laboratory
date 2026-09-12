@@ -11,11 +11,9 @@ import { TodayCompletedTaskList } from "@/pages/Tasks/TodayCompletedTaskList";
 export const Route = createFileRoute("/__protected/timer")({
   component: RouteComponent,
   loader: ({ context: { queryClient } }) => {
-    queryClient.prefetchQuery(inProgressTasksQueryOptions()).catch(() => {});
-    queryClient.prefetchQuery(scheduledTasksQueryOptions()).catch(() => {});
-    queryClient
-      .prefetchQuery(todayCompletedTasksQueryOptions())
-      .catch(() => {});
+    void queryClient.query(inProgressTasksQueryOptions()).catch(() => {});
+    void queryClient.query(scheduledTasksQueryOptions()).catch(() => {});
+    void queryClient.query(todayCompletedTasksQueryOptions()).catch(() => {});
   },
 });
 

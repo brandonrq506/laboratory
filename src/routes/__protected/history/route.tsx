@@ -25,7 +25,10 @@ export const Route = createFileRoute("/__protected/history")({
   loaderDeps: ({ search: { date } }) => ({ date }),
   beforeLoad: ({ search: { date } }) => redirectHistoryFutureDate(date),
   loader: ({ context: { queryClient }, deps: { date } }) =>
-    queryClient.ensureQueryData(historyTasksQueryOptions(date)),
+    queryClient.query({
+      ...historyTasksQueryOptions(date),
+      staleTime: "static",
+    }),
   component: RouteComponent,
 });
 

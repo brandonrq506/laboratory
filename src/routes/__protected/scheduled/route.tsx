@@ -21,7 +21,10 @@ export const Route = createFileRoute("/__protected/scheduled")({
   loaderDeps: ({ search: { date } }) => ({ date }),
   beforeLoad: ({ search: { date } }) => redirectScheduledPastDate(date),
   loader: ({ context: { queryClient }, deps: { date } }) =>
-    queryClient.ensureQueryData(futureTasksQueryOptions(date)),
+    queryClient.query({
+      ...futureTasksQueryOptions(date),
+      staleTime: "static",
+    }),
   component: RouteComponent,
 });
 
