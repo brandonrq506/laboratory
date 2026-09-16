@@ -8,6 +8,7 @@ import {
 import { HeadingLarge } from "@/components/layout";
 
 import { createFileRoute } from "@tanstack/react-router";
+import { getPageTitle } from "@/utils";
 
 export const Route = createFileRoute("/__protected/settings/account")({
   loader: ({ context: { queryClient } }) =>
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/__protected/settings/account")({
       ...userPreferencesOptions(),
       staleTime: "static",
     }),
+  head: () => ({ meta: [{ title: getPageTitle("Account Settings") }] }),
   component: RouteComponent,
 });
 

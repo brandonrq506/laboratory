@@ -6,6 +6,7 @@ import { HeadingLarge } from "@/components/layout";
 import { ScheduledTaskListActions } from "@/pages/Tasks/ScheduledTaskListActions";
 
 import { futureTasksQueryOptions } from "@/features/tasks/api/queries";
+import { getPageTitle } from "@/utils";
 import { localDateToUtc } from "@/utils/dateConversion";
 import { redirectScheduledPastDate } from "@/utils/taskDateRouting";
 import { validateDateSearch } from "@/utils/search";
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/__protected/scheduled")({
       ...futureTasksQueryOptions(date),
       staleTime: "static",
     }),
+  head: () => ({ meta: [{ title: getPageTitle("Scheduled Tasks") }] }),
   component: RouteComponent,
 });
 

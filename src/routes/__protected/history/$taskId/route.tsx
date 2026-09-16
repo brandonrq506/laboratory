@@ -1,6 +1,6 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
+import { getPageTitle, validateIdParam } from "@/utils";
 import { taskByIdQueryOptions } from "@/features/tasks/api/queries";
-import { validateIdParam } from "@/utils";
 
 export const Route = createFileRoute("/__protected/history/$taskId")({
   staticData: { modal: true },
@@ -10,6 +10,13 @@ export const Route = createFileRoute("/__protected/history/$taskId")({
       ...taskByIdQueryOptions(taskId),
       staleTime: "static",
     }),
+  head: ({ loaderData }) => ({
+    meta: [
+      {
+        title: getPageTitle(loaderData?.activity.display_name || "Task"),
+      },
+    ],
+  }),
   component: RouteComponent,
 });
 

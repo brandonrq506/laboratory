@@ -8,6 +8,7 @@ import { activityListQueryOptions } from "@/features/activities/api/queries";
 
 import { ACTIVITIES, ACTIVITY } from "@/constants/entities";
 import { ADD } from "@/constants/actions";
+import { getPageTitle } from "@/utils";
 
 export const Route = createFileRoute("/__protected/activities")({
   loader: ({ context }) =>
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/__protected/activities")({
       ...activityListQueryOptions(),
       staleTime: "static",
     }),
+  head: () => ({ meta: [{ title: getPageTitle("Activities") }] }),
   component: RouteComponent,
 });
 
