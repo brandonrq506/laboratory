@@ -6,6 +6,7 @@ import {
   useRouter,
 } from "@tanstack/react-router";
 import { LoginForm } from "@/features/auth/components";
+import { getPageTitle } from "@/utils";
 import { validateRedirectSearch } from "@/utils/search";
 
 const TIMER_PATH: NavigateOptions["to"] = "/timer";
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/login")({
       throw redirect({ to: search.redirect ?? TIMER_PATH });
     }
   },
+  head: () => ({ meta: [{ title: getPageTitle("Login") }] }),
   component: RouteComponent,
 });
 

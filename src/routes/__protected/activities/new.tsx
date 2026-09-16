@@ -6,14 +6,16 @@ import { Modal } from "@/components/core";
 import { categoryListQueryOptions } from "@/features/categories/api/queries";
 import { createFileRoute } from "@tanstack/react-router";
 import { getFirstCategoryAsOption } from "@/features/categories/utils";
+import { getPageTitle } from "@/utils";
 
 export const Route = createFileRoute("/__protected/activities/new")({
-  staticData: { modal: true },
   loader: ({ context }) =>
     context.queryClient.query({
       ...categoryListQueryOptions(),
       staleTime: "static",
     }),
+  staticData: { modal: true },
+  head: () => ({ meta: [{ title: getPageTitle("New Activity") }] }),
   component: RouteComponent,
 });
 

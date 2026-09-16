@@ -10,6 +10,7 @@ import { Modal } from "@/components/core";
 import { PageHeaderWithActions } from "@/components/layout";
 import { PlusIcon } from "@heroicons/react/24/solid";
 
+import { getPageTitle } from "@/utils";
 import { historyTasksQueryOptions } from "@/features/tasks/api/queries";
 import { redirectHistoryFutureDate } from "@/utils/taskDateRouting";
 import { validateDateSearch } from "@/utils/search";
@@ -29,6 +30,7 @@ export const Route = createFileRoute("/__protected/history")({
       ...historyTasksQueryOptions(date),
       staleTime: "static",
     }),
+  head: () => ({ meta: [{ title: getPageTitle("History") }] }),
   component: RouteComponent,
 });
 

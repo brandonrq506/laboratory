@@ -3,8 +3,10 @@ import { useNavigateBack } from "@/hooks";
 import { CreateRoutineForm } from "@/features/routines/components/CreateRoutineForm";
 import { Modal } from "@/components/core";
 import { createFileRoute } from "@tanstack/react-router";
+import { getPageTitle } from "@/utils";
 
 export const Route = createFileRoute("/__protected/routines/new")({
+  head: () => ({ meta: [{ title: getPageTitle("New Routine") }] }),
   staticData: { modal: true },
   component: RouteComponent,
 });

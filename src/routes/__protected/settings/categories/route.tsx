@@ -7,6 +7,7 @@ import {
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 import { PageHeaderWithActions } from "@/components/layout";
 import { categoryListQueryOptions } from "@/features/categories/api/queries";
+import { getPageTitle } from "@/utils";
 
 export const Route = createFileRoute("/__protected/settings/categories")({
   loader: ({ context: { queryClient } }) =>
@@ -14,6 +15,7 @@ export const Route = createFileRoute("/__protected/settings/categories")({
       ...categoryListQueryOptions(),
       staleTime: "static",
     }),
+  head: () => ({ meta: [{ title: getPageTitle("Category Settings") }] }),
   component: RouteComponent,
 });
 

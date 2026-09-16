@@ -1,6 +1,6 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
+import { getPageTitle, validateIdParam } from "@/utils";
 import { categoryByIdQueryOptions } from "@/features/categories/api/queries";
-import { validateIdParam } from "@/utils";
 
 export const Route = createFileRoute(
   "/__protected/settings/categories/$categoryId",
@@ -12,6 +12,9 @@ export const Route = createFileRoute(
       ...categoryByIdQueryOptions(categoryId),
       staleTime: "static",
     }),
+  head: ({ loaderData }) => ({
+    meta: [{ title: getPageTitle(loaderData?.name ?? "Category") }],
+  }),
   component: RouteComponent,
 });
 

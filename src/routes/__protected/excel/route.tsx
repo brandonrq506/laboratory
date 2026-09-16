@@ -5,6 +5,7 @@ import { PageHeaderWithActions } from "@/components/layout";
 
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { excelByDateQueryOptions } from "@/features/excel/api/queries";
+import { getPageTitle } from "@/utils";
 import { validateDateSearch } from "@/utils/search";
 
 type ExcelSearch = {
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/__protected/excel")({
       ...excelByDateQueryOptions(date),
       staleTime: "static",
     }),
+  head: () => ({ meta: [{ title: getPageTitle("Excel Exporter") }] }),
   component: RouteComponent,
 });
 

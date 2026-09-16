@@ -3,8 +3,10 @@ import { useNavigateBack } from "@/hooks";
 import { CreateCategoryForm } from "@/features/categories/components/CreateCategoryForm";
 import { Modal } from "@/components/core/Modal/Modal";
 import { createFileRoute } from "@tanstack/react-router";
+import { getPageTitle } from "@/utils";
 
 export const Route = createFileRoute("/__protected/settings/categories/new")({
+  head: () => ({ meta: [{ title: getPageTitle("New Category") }] }),
   staticData: { modal: true },
   component: RouteComponent,
 });

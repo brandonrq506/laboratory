@@ -3,6 +3,7 @@ export { floorMilliseconds } from "./floorMilliseconds";
 export { floorSeconds } from "./floorSeconds";
 export { formatDatetimeTo12hTime } from "./formatDatetimeTo12hTime";
 export { getNewTaskDefaultTimes } from "./getNewTaskDefaultTimes";
+export { getPageTitle } from "./getPageTitle";
 export { getToday } from "./getToday";
 export { isHtmlResponse } from "./isHtmlResponse";
 export { secondsToHHmm } from "./secondsToHHmm";

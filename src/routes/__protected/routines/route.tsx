@@ -10,6 +10,7 @@ import { routineListQueryOptions } from "@/features/routines/api/queries";
 import { ADD } from "@/constants/actions";
 import { ROUTINE } from "@/constants/entities";
 import { RoutineCard } from "@/features/routines/components";
+import { getPageTitle } from "@/utils";
 
 export const Route = createFileRoute("/__protected/routines")({
   loader: ({ context: { queryClient } }) =>
@@ -17,6 +18,7 @@ export const Route = createFileRoute("/__protected/routines")({
       ...routineListQueryOptions(),
       staleTime: "static",
     }),
+  head: () => ({ meta: [{ title: getPageTitle("Routines") }] }),
   component: RouteComponent,
 });
 
