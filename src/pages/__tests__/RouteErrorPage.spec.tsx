@@ -17,21 +17,41 @@ describe("RouteErrorPage", () => {
     invalidate.mockReset();
   });
 
-  it("explains the connection problem without exposing error details", () => {
-    render(<RouteErrorPage />);
+  it("shows connection guidance for network failures", () => {
+    const error = Object.assign(new Error("Network Error"), {
+      isAxiosError: true,
+      code: "ERR_NETWORK",
+    });
+
+    render(<RouteErrorPage error={error} reset={vi.fn()} />);
 
     expect(
-      screen.getByRole("heading", { name: "We couldn't load this page" }),
+      screen.getByRole("heading", { name: "We couldn't connect" }),
     ).toBeInTheDocument();
     expect(
       screen.getByText(/check your internet connection/i),
     ).toBeInTheDocument();
-    expect(screen.queryByText(/route error/i)).not.toBeInTheDocument();
+  });
+
+  it("shows a neutral message for application errors", () => {
+    const error = new Error("Sensitive internal details");
+
+    render(<RouteErrorPage error={error} reset={vi.fn()} />);
+
+    expect(
+      screen.getByRole("heading", { name: "Something went wrong" }),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(error.message)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/check your internet connection/i),
+    ).not.toBeInTheDocument();
   });
 
   it("retries failed route loaders", async () => {
     const user = userEvent.setup();
-    render(<RouteErrorPage />);
+    render(
+      <RouteErrorPage error={new Error("Render failed")} reset={vi.fn()} />,
+    );
 
     await user.click(screen.getByRole("button", { name: "Try again" }));
 

@@ -22,7 +22,7 @@ interface MyRouterContext {
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({ meta: [{ title: getPageTitle("Laboratory") }] }),
   component: RootComponent,
-  notFoundComponent: () => <NotFoundPage />,
+  notFoundComponent: NotFoundPage,
   errorComponent: RouteErrorPage,
 });
 
