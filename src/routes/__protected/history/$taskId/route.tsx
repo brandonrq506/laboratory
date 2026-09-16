@@ -1,15 +1,23 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
-import { getPageTitle, validateIdParam } from "@/utils";
+import {
+  getPageTitle,
+  mapApiNotFoundToRouteNotFound,
+  validateIdParam,
+} from "@/utils";
+import { TASK } from "@/constants/entities";
 import { taskByIdQueryOptions } from "@/features/tasks/api/queries";
 
 export const Route = createFileRoute("/__protected/history/$taskId")({
   staticData: { modal: true },
   params: validateIdParam("taskId"),
   loader: ({ context: { queryClient }, params: { taskId } }) =>
-    queryClient.query({
-      ...taskByIdQueryOptions(taskId),
-      staleTime: "static",
-    }),
+    mapApiNotFoundToRouteNotFound(
+      queryClient.query({
+        ...taskByIdQueryOptions(taskId),
+        staleTime: "static",
+      }),
+      TASK,
+    ),
   head: ({ loaderData }) => ({
     meta: [
       {

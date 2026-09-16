@@ -12,6 +12,13 @@ export const TASKS = "Tasks";
 export const USERS = "Users";
 export const ROUTINES = "Routines";
 
+export const ROUTE_NOT_FOUND_ENTITIES = [
+  ACTIVITY,
+  CATEGORY,
+  ROUTINE,
+  TASK,
+] as const;
+
 // Tasks Statuses
 export const SCHEDULED = "Scheduled";
 export const COMPLETED = "Completed";

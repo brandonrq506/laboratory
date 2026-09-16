@@ -4,5 +4,6 @@ export type { DirtyFields } from "./form";
 export type { EnhancedOption } from "./EnhancedOption";
 export type { ObjectValues } from "./object-values";
 export type { Option } from "./option";
+export type { RouteNotFoundData } from "./route-not-found-data";
 export type { SortParams } from "./sortParams";
 export type { StringOption } from "./stringOption";
