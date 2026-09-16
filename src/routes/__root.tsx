@@ -10,6 +10,7 @@ import { TanStackDevtoolsWrapper } from "@/libs/tanstack-devtools";
 import type { AuthContextType } from "@/features/auth/stores/AuthContextType";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import type { QueryClient } from "@tanstack/react-query";
+import { RouteErrorPage } from "@/pages/RouteErrorPage";
 import { getPageTitle } from "@/utils";
 import { useApplyTheme } from "@/features/userPreferences/hooks";
 
@@ -22,11 +23,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({ meta: [{ title: getPageTitle("Laboratory") }] }),
   component: RootComponent,
   notFoundComponent: () => <NotFoundPage />,
-  errorComponent: ({ error }) => (
-    <div>
-      Route Error: {error instanceof Error ? error.message : String(error)}
-    </div>
-  ),
+  errorComponent: RouteErrorPage,
 });
 
 function RootComponent() {
