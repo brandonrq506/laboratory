@@ -37,30 +37,21 @@ export const NetworkBadge = () => {
 
     // online -> offline: mount + show immediately
     if (wasOnline && !isOnline) {
-      requestAnimationFrame(() => {
-        setShouldRender(true);
-        requestAnimationFrame(() => setVisible(true));
-      });
+      setShouldRender(true);
+      const animationFrameId = requestAnimationFrame(() => setVisible(true));
+
       // Wait for offline -> online transition next
-      return;
+      return () => cancelAnimationFrame(animationFrameId);
     }
 
     // offline -> online: ensure shown, then schedule hide & unmount
-    if (!wasOnline && isOnline && shouldRender) {
-      requestAnimationFrame(() => {
-        setVisible(true);
-        scheduleHide(NOTIFICATION_DURATION);
-        scheduleUnmount(NOTIFICATION_DURATION + THREE_HUNDRED_MS);
-      });
+    if (!wasOnline && isOnline) {
+      setShouldRender(true);
+      setVisible(true);
+      scheduleHide(NOTIFICATION_DURATION);
+      scheduleUnmount(NOTIFICATION_DURATION + THREE_HUNDRED_MS);
     }
-  }, [
-    isOnline,
-    shouldRender,
-    clearHide,
-    clearUnmount,
-    scheduleHide,
-    scheduleUnmount,
-  ]);
+  }, [isOnline, clearHide, clearUnmount, scheduleHide, scheduleUnmount]);
 
   // Don't render until triggered
   if (!shouldRender) return null;
