@@ -215,7 +215,7 @@ describe("ScheduledTaskList with a routine group", () => {
     render(<ScheduledTaskList />);
 
     await user.click(
-      await screen.findByRole("button", { name: `Expand ${routine_name}` }),
+      await screen.findByRole("button", { name: `${routine_name} tasks` }),
     );
 
     expect(screen.getByText(fourth.activity.display_name)).toBeInTheDocument();

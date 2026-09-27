@@ -1,8 +1,9 @@
 import {
   DeleteAllScheduledTasks,
-  ScheduledTaskRow,
-  ScheduledTaskRowOverlay,
+  ScheduledItemCard,
+  ScheduledItemCardOverlay,
   SortableTaskList,
+  TimerScheduledCardContent,
 } from "@/features/tasks/components";
 import { Loading } from "@/components/core";
 import { ScheduledTaskListActions } from "./ScheduledTaskListActions";
@@ -47,12 +48,21 @@ export const ScheduledTaskList = () => {
         onDragEnd={list.handleDragEnd}
         onDragCancel={list.handleDragCancel}
         renderItem={(item) => (
-          <ScheduledTaskRow
-            item={item}
-            onToggleExpanded={list.toggleExpanded}
-          />
+          <ScheduledItemCard item={item}>
+            <TimerScheduledCardContent
+              item={item}
+              onToggleExpanded={list.toggleExpanded}
+            />
+          </ScheduledItemCard>
         )}
-        renderOverlay={(item) => <ScheduledTaskRowOverlay item={item} />}
+        renderOverlay={(item) => (
+          <ScheduledItemCardOverlay item={item}>
+            <TimerScheduledCardContent
+              item={item}
+              onToggleExpanded={list.toggleExpanded}
+            />
+          </ScheduledItemCardOverlay>
+        )}
       />
       {displayDeleteAll && (
         <div className="mt-2 text-center">
