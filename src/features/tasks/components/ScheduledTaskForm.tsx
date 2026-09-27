@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 
-import { Badge, Button } from "@/components/core";
+import { Badge, Button, DurationLabel } from "@/components/core";
 import { DateInput, TextArea } from "@/components/form";
-import { getToday, secondsToTime } from "@/utils";
-import { ClockIcon } from "@heroicons/react/24/outline";
 import { HeadingLarge } from "@/components/layout";
 import type { ScheduleForm } from "../types/schedule-form";
 import type { ScheduledTaskAPI } from "../types/scheduledTask";
+
+import { getToday } from "@/utils";
 
 import type { DirtyFields } from "@/types/core/form";
 
@@ -33,11 +33,8 @@ export const ScheduledTaskForm = ({ initialValues, task, onSubmit }: Props) => {
       <div className="flex items-center justify-between">
         <div className="flex items-baseline gap-2">
           <HeadingLarge title={task.activity.display_name} />
-          <div className="flex gap-1 text-xs">
-            <ClockIcon className="size-4" />
-            <p className="tabular-nums">
-              {secondsToTime(task.activity.exp_seconds)}
-            </p>
+          <div className="text-xs">
+            <DurationLabel seconds={task.activity.exp_seconds} />
           </div>
         </div>
         <Badge color={task.activity.category.color}>

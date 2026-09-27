@@ -1,12 +1,10 @@
+import { Dot, DurationLabel } from "@/components/core";
 import { Link, getRouteApi } from "@tanstack/react-router";
-import { ClockIcon } from "@heroicons/react/24/outline";
 import { DeleteTask } from "./DeleteTask";
-import { Dot } from "@/components/core";
 import { Fragment } from "react/jsx-runtime";
 import { TaskNotePreview } from "./TaskNotePreview";
 
 import { getColorByName } from "@/features/colors/utils/getColorByName";
-import { secondsToTime } from "@/utils";
 
 import type { ScheduledTaskAPI } from "../types/scheduledTask";
 
@@ -33,12 +31,7 @@ export const FutureScheduledTaskContent = ({ task }: Props) => {
         </div>
 
         <div className="text-foreground-muted flex gap-2.5 text-xs whitespace-nowrap">
-          <div className="flex gap-1">
-            <ClockIcon className="size-4" />
-            <p className="tabular-nums">
-              {secondsToTime(task.activity.exp_seconds)}
-            </p>
-          </div>
+          <DurationLabel seconds={task.activity.exp_seconds} />
           <TaskNotePreview note={task.note} />
         </div>
       </Link>
