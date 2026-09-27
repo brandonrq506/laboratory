@@ -1,9 +1,11 @@
-import { Badge, RainbowBadge } from "@/components/core";
-import { ClockIcon } from "@heroicons/react/24/outline";
+import {
+  Badge,
+  DurationLabel,
+  RainbowBadge,
+  StartTimeLabel,
+} from "@/components/core";
 import { DeleteRoutineItem } from "./delete-routine-item";
 import { Fragment } from "react/jsx-runtime";
-
-import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 
 import type { RoutineItemWithExpectedStartTime } from "../types/routine-with-expected-time";
 
@@ -25,18 +27,9 @@ export const RoutineItemContent = ({ routineId, item }: Props) => {
           <RainbowBadge>{item.item_name}</RainbowBadge>
         )}
 
-        <div className="text-foreground-muted flex gap-2">
-          <div className="flex gap-1 text-xs">
-            <p className="tabular-nums">
-              {formatDatetimeTo12hTime(item.expected_start_time.toISOString())}
-            </p>
-          </div>
-          <div className="flex gap-1 text-xs">
-            <ClockIcon className="size-4" />
-            <p className="tabular-nums">
-              {secondsToTime(item.item_exp_seconds)}
-            </p>
-          </div>
+        <div className="text-foreground-muted flex gap-2 text-xs">
+          <StartTimeLabel date={item.expected_start_time} />
+          <DurationLabel seconds={item.item_exp_seconds} />
         </div>
       </div>
       <DeleteRoutineItem itemId={item.id} routineId={routineId} />

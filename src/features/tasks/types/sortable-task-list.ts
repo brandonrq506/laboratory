@@ -16,8 +16,8 @@ export interface OnDragEndArgs<T extends SortableListItem> {
 export interface SortableTaskListProps<T extends SortableListItem> {
   items: T[];
   renderItem: (item: T) => React.ReactNode;
-  renderOverlay?: (item: T) => React.ReactNode;
-  onDragStart?: (id: T["id"]) => void;
+  renderOverlay: (item: T) => React.ReactNode;
+  onDragStart: (id: T["id"]) => void;
   onDragEnd: (args: OnDragEndArgs<T>) => void;
-  onDragCancel?: (id: T["id"]) => void;
+  onDragCancel: (id: T["id"]) => void;
 }

@@ -1,34 +1,42 @@
 import type { CARD_TYPE } from "./card-types";
-import type { ScheduledTaskWithEST } from "./scheduledTaskWithEST";
+import type { ScheduledTaskAPI } from "./scheduledTask";
 import type { WrapCardSortableId } from "@/types/routines";
 
-export type PlainScheduledCard = {
+export interface PlainScheduledCard<T extends ScheduledTaskAPI> {
   id: number;
   kind: typeof CARD_TYPE.TASK;
-  task: ScheduledTaskWithEST;
-};
+  task: T;
+}
 
-export type WrappedRoutineCard = {
+export interface WrappedRoutineCard<T extends ScheduledTaskAPI> {
   id: WrapCardSortableId;
-  absorbed_count: number;
   absorbed_task_ids: number[];
-  absorbed_tasks: ScheduledTaskWithEST[];
-  expected_start_time: Date;
+  absorbed_tasks: T[];
   kind: typeof CARD_TYPE.WRAP;
   member_ids: number[];
   routine_application_id: number;
   routine_name: string;
   total_seconds: number;
-};
+}
 
-type ExpandedCard = {
+/**
+ * Render-time wrap. `expanded` is resolved by the projection: user-expanded
+ * AND not the card currently being dragged.
+ */
+export interface WrappedRoutineRenderCard<
+  T extends ScheduledTaskAPI,
+> extends WrappedRoutineCard<T> {
+  expanded: boolean;
+}
+
+export interface ExpandedChildCard<T extends ScheduledTaskAPI> {
   id: number;
   kind: typeof CARD_TYPE.EXPANDED_CHILD;
-  parent_routine_application_id: number;
-  task: ScheduledTaskWithEST;
-};
+  task: T;
+}
 
-export type ScheduledGroupedItem = PlainScheduledCard | WrappedRoutineCard;
+export type ScheduledGroupedItem<T extends ScheduledTaskAPI> =
+  PlainScheduledCard<T> | WrappedRoutineCard<T>;
 
-export type ScheduledRenderItem =
-  PlainScheduledCard | WrappedRoutineCard | ExpandedCard;
+export type ScheduledRenderItem<T extends ScheduledTaskAPI> =
+  PlainScheduledCard<T> | WrappedRoutineRenderCard<T> | ExpandedChildCard<T>;

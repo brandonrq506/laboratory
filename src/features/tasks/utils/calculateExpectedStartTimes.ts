@@ -9,7 +9,7 @@ import { floorMilliseconds } from "@/utils";
  * Takes into account any in-progress task and calculates a cumulative timeline
  */
 type FnDef = (
-  scheduledTasks: ScheduledTaskAPI[] | undefined,
+  scheduledTasks: readonly ScheduledTaskAPI[] | undefined,
   inProgressTask: InProgressTaskAPI | undefined,
 ) => ScheduledTaskWithEST[];
 

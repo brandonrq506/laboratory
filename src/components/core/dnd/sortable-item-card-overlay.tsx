@@ -6,6 +6,10 @@ import { DragHandleOverlay } from "./drag-handle-overlay";
  * <DragOverlay> — the lifted clone that follows the cursor. It carries no
  * sortable bindings (no useSortable, no itemId) and shows the "picked up"
  * styling.
+ *
+ * `inert` makes the clone a visual snapshot: hidden from assistive tech and
+ * never focusable or clickable. So a row's content (links, buttons) can render
+ * here unchanged without duplicating the live row's controls.
  */
 
 type Props = {
@@ -19,11 +23,13 @@ export const SortableItemCardOverlay = ({
   shadowStyle = "shadow-xs",
   className,
 }: Props) => (
-  <CardShell
-    className={className}
-    shadowStyle={shadowStyle}
-    cardClassName="z-20 border border-accent-strong shadow-2xl"
-    handle={<DragHandleOverlay />}>
-    {children}
-  </CardShell>
+  <div inert>
+    <CardShell
+      className={className}
+      shadowStyle={shadowStyle}
+      cardClassName="z-20 border border-accent-strong shadow-2xl"
+      handle={<DragHandleOverlay />}>
+      {children}
+    </CardShell>
+  </div>
 );

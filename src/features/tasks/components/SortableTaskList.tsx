@@ -65,12 +65,12 @@ export const SortableTaskList = <T extends SortableListItem>({
 
   const handleDragStart = (event: DragStartEvent) => {
     setActiveId(event.active.id as T["id"]);
-    onDragStart?.(event.active.id as T["id"]);
+    onDragStart(event.active.id as T["id"]);
   };
 
   const handleDragCancel = (event: DragCancelEvent) => {
     setActiveId(null);
-    onDragCancel?.(event.active.id as T["id"]);
+    onDragCancel(event.active.id as T["id"]);
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -78,11 +78,11 @@ export const SortableTaskList = <T extends SortableListItem>({
     const { active, over } = event;
 
     if (!over) {
-      onDragCancel?.(active.id as T["id"]);
+      onDragCancel(active.id as T["id"]);
       return;
     }
     if (active.id === over.id) {
-      onDragCancel?.(active.id as T["id"]);
+      onDragCancel(active.id as T["id"]);
       return;
     }
 
@@ -90,7 +90,7 @@ export const SortableTaskList = <T extends SortableListItem>({
     const newIndex = items.findIndex((item) => item.id === over.id);
 
     if (oldIndex === -1 || newIndex === -1) {
-      onDragCancel?.(active.id as T["id"]);
+      onDragCancel(active.id as T["id"]);
       return;
     }
 
@@ -129,7 +129,7 @@ export const SortableTaskList = <T extends SortableListItem>({
           ))}
         </SortableContext>
         <DragOverlay dropAnimation={DROP_ANIMATION}>
-          {!activeItem || !renderOverlay ? null : renderOverlay(activeItem)}
+          {activeItem ? renderOverlay(activeItem) : null}
         </DragOverlay>
       </DndContext>
     </div>

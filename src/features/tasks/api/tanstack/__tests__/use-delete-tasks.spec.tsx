@@ -1,127 +1,88 @@
 import { HttpResponse, http } from "msw";
-import {
-  QueryClient,
-  QueryClientProvider,
-  type QueryKey,
-} from "@tanstack/react-query";
-import { renderHook, waitFor } from "@testing-library/react";
+import { renderHook, waitFor } from "@/test/test-utils";
 
 import {
-  inProgressTasksQueryOptions,
-  scheduledTasksQueryOptions,
-} from "@/features/tasks/api/queries";
+  SCHEDULED_LIST_CASES,
+  expectBystanderUntouched,
+  seedBystander,
+} from "@/test/utils/scheduled-list-isolation";
+import {
+  createQueryWrapper,
+  createTestQueryClient,
+} from "@/test/utils/query-client";
 import { apiRoutes } from "@/test/handlers/api-routes";
 import { scheduledTasks } from "@/test/store/tasks";
 import { server } from "@/test/server";
 import { useDeleteTasks } from "../use-delete-tasks";
 
-import type { ReactNode } from "react";
 import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 
-const makeWrapper = (queryClient: QueryClient) => {
-  return ({ children }: { children: ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+describe.each(SCHEDULED_LIST_CASES)(
+  "useDeleteTasks on the $label list",
+  ({ listQueryOptions, bystanderQueryOptions }) => {
+    const listKey = listQueryOptions.queryKey;
 
-const buildQueryClient = () =>
-  new QueryClient({ defaultOptions: { queries: { retry: false } } });
-
-describe("useDeleteTasks", () => {
-  const scheduledKey = scheduledTasksQueryOptions().queryKey;
-  const inProgressKey = inProgressTasksQueryOptions().queryKey;
-
-  const initialOrder: ScheduledTaskAPI[] = [
-    scheduledTasks[0],
-    scheduledTasks[1],
-    scheduledTasks[2],
-    scheduledTasks[3],
-  ];
-  const deletedIds = [scheduledTasks[1].id, scheduledTasks[2].id];
-  const expectedAfterDelete = initialOrder.filter(
-    (t) => !deletedIds.includes(t.id),
-  );
-
-  it("filters deleted ids out of the scheduled cache and invalidates only that key on settle", async () => {
-    server.use(
-      http.post(
-        apiRoutes.taskSpanDeletions,
-        () => new HttpResponse(null, { status: 204 }),
-      ),
+    const initialOrder: ScheduledTaskAPI[] = [
+      scheduledTasks[0],
+      scheduledTasks[1],
+      scheduledTasks[2],
+      scheduledTasks[3],
+    ];
+    const deletedIds = [scheduledTasks[1].id, scheduledTasks[2].id];
+    const expectedAfterDelete = initialOrder.filter(
+      (t) => !deletedIds.includes(t.id),
     );
 
-    const queryClient = buildQueryClient();
-    queryClient.setQueryData(scheduledKey, initialOrder);
-    queryClient.setQueryData(inProgressKey, []);
+    const seedClient = () => {
+      const queryClient = createTestQueryClient();
+      queryClient.setQueryData(listKey, initialOrder);
+      seedBystander(queryClient, bystanderQueryOptions);
+      return queryClient;
+    };
 
-    const invalidateSpy = vi.spyOn(queryClient, "invalidateQueries");
+    it("filters deleted ids out of its key and invalidates only that key on settle", async () => {
+      const queryClient = seedClient();
 
-    const { result } = renderHook(() => useDeleteTasks(), {
-      wrapper: makeWrapper(queryClient),
+      const { result } = renderHook(() => useDeleteTasks(listQueryOptions), {
+        wrapper: createQueryWrapper(queryClient),
+      });
+
+      result.current.mutate({ task_ids: deletedIds });
+
+      await waitFor(() => {
+        expect(queryClient.getQueryData(listKey)).toEqual(expectedAfterDelete);
+      });
+
+      await waitFor(() => {
+        expect(result.current.isSuccess).toBe(true);
+      });
+
+      expect(queryClient.getQueryState(listKey)?.isInvalidated).toBe(true);
+      expectBystanderUntouched(queryClient, bystanderQueryOptions);
     });
 
-    result.current.mutate({ task_ids: deletedIds });
-
-    await waitFor(() => {
-      expect(queryClient.getQueryData(scheduledKey)).toEqual(
-        expectedAfterDelete,
+    it("rolls back its key to the snapshot on 422", async () => {
+      server.use(
+        http.post(apiRoutes.taskSpanDeletions, () =>
+          HttpResponse.json({ errors: [] }, { status: 422 }),
+        ),
       );
+
+      const queryClient = seedClient();
+
+      const { result } = renderHook(() => useDeleteTasks(listQueryOptions), {
+        wrapper: createQueryWrapper(queryClient),
+      });
+
+      await result.current
+        .mutateAsync({ task_ids: deletedIds })
+        .catch(() => undefined);
+
+      await waitFor(() => {
+        expect(result.current.isError).toBe(true);
+      });
+      expect(queryClient.getQueryData(listKey)).toEqual(initialOrder);
+      expectBystanderUntouched(queryClient, bystanderQueryOptions);
     });
-
-    await waitFor(() => {
-      expect(result.current.isSuccess).toBe(true);
-    });
-
-    const invalidatedKeys = invalidateSpy.mock.calls.map(
-      ([arg]) => (arg as { queryKey: QueryKey }).queryKey,
-    );
-    expect(invalidatedKeys).toContainEqual(scheduledKey);
-    expect(invalidatedKeys).not.toContainEqual(inProgressKey);
-  });
-
-  it("rolls back to snapshot on 422", async () => {
-    server.use(
-      http.post(apiRoutes.taskSpanDeletions, () =>
-        HttpResponse.json({ errors: [] }, { status: 422 }),
-      ),
-    );
-
-    const queryClient = buildQueryClient();
-    queryClient.setQueryData(scheduledKey, initialOrder);
-
-    const { result } = renderHook(() => useDeleteTasks(), {
-      wrapper: makeWrapper(queryClient),
-    });
-
-    await result.current
-      .mutateAsync({ task_ids: deletedIds })
-      .catch(() => undefined);
-
-    await waitFor(() => {
-      expect(result.current.isError).toBe(true);
-    });
-    expect(queryClient.getQueryData(scheduledKey)).toEqual(initialOrder);
-  });
-
-  it("calls cancelQueries on the scheduled key in onMutate", async () => {
-    server.use(
-      http.post(
-        apiRoutes.taskSpanDeletions,
-        () => new HttpResponse(null, { status: 204 }),
-      ),
-    );
-
-    const queryClient = buildQueryClient();
-    queryClient.setQueryData(scheduledKey, initialOrder);
-
-    const cancelSpy = vi.spyOn(queryClient, "cancelQueries");
-
-    const { result } = renderHook(() => useDeleteTasks(), {
-      wrapper: makeWrapper(queryClient),
-    });
-
-    await result.current.mutateAsync({ task_ids: deletedIds });
-
-    expect(cancelSpy).toHaveBeenCalledWith({ queryKey: scheduledKey });
-  });
-});
+  },
+);

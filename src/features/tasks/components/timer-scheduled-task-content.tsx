@@ -1,5 +1,4 @@
-import { ClockIcon } from "@heroicons/react/24/outline";
-import { Dot } from "@/components/core";
+import { Dot, DurationLabel, StartTimeLabel } from "@/components/core";
 import { Fragment } from "react/jsx-runtime";
 import { Link } from "@tanstack/react-router";
 import { QuickDeleteTask } from "./QuickDeleteTask";
@@ -7,7 +6,6 @@ import { ScheduledTaskActionBtn } from "./ScheduledTaskActionBtn";
 import type { ScheduledTaskWithEST } from "../types/scheduledTaskWithEST";
 import { TaskNotePreview } from "./TaskNotePreview";
 
-import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 
 type Props = {
@@ -30,15 +28,8 @@ export const TimerScheduledTaskContent = ({ task }: Props) => {
         </div>
 
         <div className="text-foreground-muted flex gap-2.5 text-xs whitespace-nowrap">
-          <p className="tabular-nums">
-            {formatDatetimeTo12hTime(task.expected_start_time.toISOString())}
-          </p>
-          <div className="flex gap-1">
-            <ClockIcon className="size-4" />
-            <p className="tabular-nums">
-              {secondsToTime(task.activity.exp_seconds)}
-            </p>
-          </div>
+          <StartTimeLabel date={task.expected_start_time} />
+          <DurationLabel seconds={task.activity.exp_seconds} />
           <TaskNotePreview note={task.note} />
         </div>
       </Link>

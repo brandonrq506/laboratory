@@ -9,9 +9,9 @@ import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 import type { SortableId } from "@/features/tasks/types/sortable-task-list";
 
 export const findWrap = (
-  groupedItems: ScheduledGroupedItem[],
+  groupedItems: readonly ScheduledGroupedItem<ScheduledTaskAPI>[],
   applicationId: number,
-): WrappedRoutineCard | null => {
+): WrappedRoutineCard<ScheduledTaskAPI> | null => {
   for (const item of groupedItems) {
     if (
       item.kind === CARD_TYPE.WRAP &&
@@ -25,7 +25,7 @@ export const findWrap = (
 
 export const lookupAnchorRawId = (
   prevItemId: SortableId | null,
-  groupedItems: ScheduledGroupedItem[],
+  groupedItems: readonly ScheduledGroupedItem<ScheduledTaskAPI>[],
 ): number | null => {
   if (prevItemId === null) return null;
   if (typeof prevItemId === "number") return prevItemId;
@@ -37,10 +37,10 @@ export const lookupAnchorRawId = (
 };
 
 export const computeRestDestIndex = (
-  rawItems: ScheduledTaskAPI[],
+  rawItems: readonly ScheduledTaskAPI[],
   spanIds: ReadonlySet<number>,
   prevItemId: SortableId | null,
-  groupedItems: ScheduledGroupedItem[],
+  groupedItems: readonly ScheduledGroupedItem<ScheduledTaskAPI>[],
 ): number => {
   const restAnchor = lookupAnchorRawId(prevItemId, groupedItems);
   if (restAnchor === null) return 0;

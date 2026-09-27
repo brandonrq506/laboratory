@@ -36,6 +36,19 @@ export const taskHandlers = [
     return HttpResponse.json(task, { status: 200 });
   }),
 
+  // Must precede `apiRoutes.task`: `/tasks/:taskId` would also match `/tasks/move_drag`.
+  http.patch(apiRoutes.taskMove, () => HttpResponse.json({ ok: true })),
+
+  http.post(
+    apiRoutes.taskSpanMoves,
+    () => new HttpResponse(null, { status: 204 }),
+  ),
+
+  http.post(
+    apiRoutes.taskSpanDeletions,
+    () => new HttpResponse(null, { status: 204 }),
+  ),
+
   http.patch(apiRoutes.task, async ({ params, request }) => {
     const { taskId } = params;
     const payload = await request.json();

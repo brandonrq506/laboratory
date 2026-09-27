@@ -1,22 +1,22 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { moveTasks } from "../axios/move-tasks";
-import { scheduledTasksQueryOptions } from "../queries";
-import { snapshotQueries } from "@/utils/tanstack/helpers";
 
-export const useMoveTasks = () => {
+import type { ScheduledListQueryOptions } from "@/features/tasks/types/scheduled-list-query-options";
+
+export const useMoveTasks = (listQueryOptions: ScheduledListQueryOptions) => {
   const queryClient = useQueryClient();
+  const { queryKey } = listQueryOptions;
 
   return useMutation({
     mutationFn: moveTasks,
     onMutate: async ({ tasks }) => {
-      const scheduledTaskKeys = scheduledTasksQueryOptions().queryKey;
+      await queryClient.cancelQueries({ queryKey });
 
-      await queryClient.cancelQueries({ queryKey: scheduledTaskKeys });
+      const { rollback } = snapshotQueries(queryClient, [queryKey]);
 
-      const { rollback } = snapshotQueries(queryClient, [scheduledTaskKeys]);
-
-      queryClient.setQueryData(scheduledTaskKeys, tasks);
+      queryClient.setQueryData(queryKey, tasks);
 
       return { rollback };
     },
@@ -24,7 +24,7 @@ export const useMoveTasks = () => {
       context?.rollback();
     },
     onSettled: () => {
-      queryClient.invalidateQueries(scheduledTasksQueryOptions());
+      invalidateQueries(queryClient, listQueryOptions);
     },
   });
 };

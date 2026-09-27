@@ -47,7 +47,8 @@ function RouteComponent() {
         />
         <ScheduledTaskListActions scheduledAt={scheduledAt} />
       </div>
-      <FutureScheduledTaskList />
+      {/* Remount per date: optimistic pin, drag and expansion state belong to one date; DateFilter stays mounted (unlike route remountDeps). */}
+      <FutureScheduledTaskList key={date} />
       <Outlet />
     </div>
   );

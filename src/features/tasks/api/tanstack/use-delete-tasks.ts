@@ -1,27 +1,23 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
+import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { deleteTasks } from "../axios/delete-tasks";
-import { scheduledTasksQueryOptions } from "../queries";
-import { snapshotQueries } from "@/utils/tanstack/helpers";
 
-// TODO: Currently only supports deleting scheduled tasks, make it generic.
-export const useDeleteTasks = () => {
+import type { ScheduledListQueryOptions } from "@/features/tasks/types/scheduled-list-query-options";
+
+export const useDeleteTasks = (listQueryOptions: ScheduledListQueryOptions) => {
   const queryClient = useQueryClient();
+  const { queryKey } = listQueryOptions;
 
   return useMutation({
     mutationFn: deleteTasks,
     onMutate: async ({ task_ids }) => {
-      const scheduledTaskKeys = scheduledTasksQueryOptions().queryKey;
+      await queryClient.cancelQueries({ queryKey });
 
-      await queryClient.cancelQueries({ queryKey: scheduledTaskKeys });
+      const { rollback } = snapshotQueries(queryClient, [queryKey]);
 
-      const { rollback } = snapshotQueries(queryClient, [scheduledTaskKeys]);
-
-      queryClient.setQueryData(
-        scheduledTaskKeys,
-        (prev: ScheduledTaskAPI[] | undefined) =>
-          prev ? prev.filter((task) => !task_ids.includes(task.id)) : [],
+      queryClient.setQueryData(queryKey, (prev) =>
+        prev ? prev.filter((task) => !task_ids.includes(task.id)) : [],
       );
 
       return { rollback };
@@ -30,7 +26,7 @@ export const useDeleteTasks = () => {
       context?.rollback();
     },
     onSettled: () => {
-      queryClient.invalidateQueries(scheduledTasksQueryOptions());
+      invalidateQueries(queryClient, listQueryOptions);
     },
   });
 };

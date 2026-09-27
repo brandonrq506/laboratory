@@ -2,10 +2,17 @@
 import type { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
 import type { InProgressTaskAPI } from "@/features/tasks/types/inProgressTask";
 import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
+import type { ScheduledTaskWithEST } from "@/features/tasks/types/scheduledTaskWithEST";
+import type { WrappedRoutineRenderCard } from "@/features/tasks/types/scheduled-grouped-card";
 
+import { CARD_TYPE } from "@/features/tasks/types/card-types";
 import { TASK_STATUS } from "@/features/tasks/types/task-status";
+import { wrapSortableId } from "@/features/routines/utils/wrap-sortable-id";
 
 import { COLOR_NAME } from "@/features/colors/types/colors";
+
+/** Fixed future day for specs bound to a scheduled date; never read from the clock. */
+export const SCHEDULED_LIST_DATE = "2030-01-15";
 
 export const completedTasks: CompletedTaskAPI[] = [
   {
@@ -322,6 +329,45 @@ export const scheduledTasks: ScheduledTaskAPI[] = [
     routine_application: null,
   },
 ];
+
+/** One routine apply; tasks sharing it form a routine group the wrap rules can collapse. */
+export const routineApplication: NonNullable<
+  ScheduledTaskAPI["routine_application"]
+> = {
+  id: 42,
+  routine_id: 42,
+  routine_name: "Morning Routine",
+};
+
+export const withApplication = (task: ScheduledTaskAPI): ScheduledTaskAPI => ({
+  ...task,
+  routine_application: routineApplication,
+});
+
+/** A /timer task: `task` at the expected start time the list chains for it. */
+export const withEST = (
+  task: ScheduledTaskAPI,
+  expected_start_time: Date,
+): ScheduledTaskWithEST => ({ ...task, expected_start_time });
+
+/** The wrap card `routineApplication` renders for `members`. */
+export const routineWrapCard = <T extends ScheduledTaskAPI>(
+  members: T[],
+  expanded: boolean,
+): WrappedRoutineRenderCard<T> => ({
+  kind: CARD_TYPE.WRAP,
+  id: wrapSortableId(routineApplication.id),
+  routine_application_id: routineApplication.id,
+  routine_name: routineApplication.routine_name,
+  member_ids: members.map((task) => task.id),
+  absorbed_task_ids: members.map((task) => task.id),
+  absorbed_tasks: members,
+  total_seconds: members.reduce(
+    (sum, task) => sum + task.activity.exp_seconds,
+    0,
+  ),
+  expanded,
+});
 
 export const inProgressTasks: InProgressTaskAPI[] = [
   {
