@@ -10,10 +10,11 @@ import { QuickDeleteRoutineGroup } from "./quick-delete-routine-group";
 
 import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 
+import type { ScheduledTaskWithEST } from "@/features/tasks/types/scheduledTaskWithEST";
 import type { WrappedRoutineCard } from "@/features/tasks/types/scheduled-grouped-card";
 
 type Props = {
-  item: WrappedRoutineCard;
+  item: WrappedRoutineCard<ScheduledTaskWithEST>;
   expanded?: boolean;
   onToggleExpanded?: (applicationId: number) => void;
 };
@@ -35,9 +36,11 @@ export const RoutineGroupContent = ({
       <div className="grow">
         <p className="text-sm font-semibold">{item.routine_name}</p>
         <div className="text-foreground-muted flex gap-2.5 text-xs">
-          <p>{item.absorbed_count} tasks</p>
+          <p>{item.absorbed_tasks.length} tasks</p>
           <p className="tabular-nums">
-            {formatDatetimeTo12hTime(item.expected_start_time.toISOString())}
+            {formatDatetimeTo12hTime(
+              item.absorbed_tasks[0].expected_start_time.toISOString(),
+            )}
           </p>
           <div className="flex gap-1">
             <ClockIcon className="size-4" />

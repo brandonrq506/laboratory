@@ -6,10 +6,11 @@ import { CARD_TYPE } from "../types/card-types";
 
 import type { ExpandedGroupMap } from "../types/expanded-group-map";
 import type { ScheduledRenderItem } from "@/features/tasks/types/scheduled-grouped-card";
+import type { ScheduledTaskWithEST } from "@/features/tasks/types/scheduledTaskWithEST";
 import type { SortableId } from "@/features/tasks/types/sortable-task-list";
 
 type Props = {
-  item: ScheduledRenderItem;
+  item: ScheduledRenderItem<ScheduledTaskWithEST>;
   expandedGroups: ExpandedGroupMap;
   draggingId: SortableId | null;
   onToggleExpanded: (applicationId: number) => void;

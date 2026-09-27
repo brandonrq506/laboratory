@@ -57,7 +57,7 @@ const buildAbsorbedTask = (
   expected_start_time: new Date("2025-05-08T09:00:00.000Z"),
 });
 
-const buildItem = (): WrappedRoutineCard => {
+const buildItem = (): WrappedRoutineCard<ScheduledTaskWithEST> => {
   const tasks = [
     buildAbsorbedTask(101, 600),
     buildAbsorbedTask(102, 1200),
@@ -72,18 +72,19 @@ const buildItem = (): WrappedRoutineCard => {
     absorbed_task_ids: [101, 102, 103],
     absorbed_tasks: tasks,
     total_seconds: 2700,
-    expected_start_time: new Date("2025-05-08T09:00:00.000Z"),
-    absorbed_count: 3,
   };
 };
 
 type RenderOpts = {
   expanded?: boolean;
   onToggleExpanded?: (id: number) => void;
-  item?: WrappedRoutineCard;
+  item?: WrappedRoutineCard<ScheduledTaskWithEST>;
 };
 
-const renderInCard = (item: WrappedRoutineCard, props: RenderOpts) => (
+const renderInCard = (
+  item: WrappedRoutineCard<ScheduledTaskWithEST>,
+  props: RenderOpts,
+) => (
   <DndContext>
     <SortableContext items={[item.id]}>
       <SortableItemCard itemId={item.id}>

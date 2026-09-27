@@ -1,5 +1,5 @@
 export const arrayMoveSpan = <T extends { id: number }>(
-  items: T[],
+  items: readonly T[],
   spanIds: ReadonlySet<number>,
   destIndexInRest: number,
 ): T[] => {

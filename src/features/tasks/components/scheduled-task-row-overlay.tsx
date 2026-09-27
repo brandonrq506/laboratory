@@ -5,9 +5,10 @@ import { TimerScheduledTaskContent } from "./timer-scheduled-task-content";
 import { CARD_TYPE } from "../types/card-types";
 
 import type { ScheduledRenderItem } from "@/features/tasks/types/scheduled-grouped-card";
+import type { ScheduledTaskWithEST } from "@/features/tasks/types/scheduledTaskWithEST";
 
 type Props = {
-  item: ScheduledRenderItem;
+  item: ScheduledRenderItem<ScheduledTaskWithEST>;
 };
 
 export const ScheduledTaskRowOverlay = ({ item }: Props) => {

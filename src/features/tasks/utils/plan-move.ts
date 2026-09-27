@@ -13,8 +13,8 @@ import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 import type { SortableId } from "@/features/tasks/types/sortable-task-list";
 
 export const sameOrder = (
-  a: ScheduledTaskAPI[],
-  b: ScheduledTaskAPI[],
+  a: readonly ScheduledTaskAPI[],
+  b: readonly ScheduledTaskAPI[],
 ): boolean => {
   if (a.length !== b.length) return false;
   for (let i = 0; i < a.length; i++) {
@@ -31,8 +31,8 @@ export type SingleMovePlan = {
 };
 
 export const planSingleMove = (
-  rawItems: ScheduledTaskAPI[],
-  groupedItems: ScheduledGroupedItem[],
+  rawItems: readonly ScheduledTaskAPI[],
+  groupedItems: readonly ScheduledGroupedItem<ScheduledTaskAPI>[],
   activeId: number,
   prevItemId: SortableId | null,
 ): SingleMovePlan | null => {
@@ -63,8 +63,8 @@ export type SpanMovePlan = {
 };
 
 export const planSpanMove = (
-  rawItems: ScheduledTaskAPI[],
-  groupedItems: ScheduledGroupedItem[],
+  rawItems: readonly ScheduledTaskAPI[],
+  groupedItems: readonly ScheduledGroupedItem<ScheduledTaskAPI>[],
   activeWrapId: SortableId,
   prevItemId: SortableId | null,
 ): SpanMovePlan | null => {

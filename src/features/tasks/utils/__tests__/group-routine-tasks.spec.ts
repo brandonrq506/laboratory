@@ -3,7 +3,7 @@ import type {
   ScheduledGroupedItem,
   WrappedRoutineCard,
 } from "@/features/tasks/types/scheduled-grouped-card";
-import type { ScheduledTaskWithEST } from "@/features/tasks/types/scheduledTaskWithEST";
+import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 
 import { groupRoutineTasks } from "../group-routine-tasks";
 
@@ -18,14 +18,12 @@ type MakeArgs = {
   expSeconds?: number;
 };
 
-const SENTINEL_DATE = new Date(0);
-
 const makeTask = ({
   id,
   applicationId = null,
   routineName = "Routine",
   expSeconds = 60,
-}: MakeArgs): ScheduledTaskWithEST => ({
+}: MakeArgs): ScheduledTaskAPI => ({
   id,
   activity: {
     id,
@@ -54,7 +52,6 @@ const makeTask = ({
   status: TASK_STATUS.SCHEDULED,
   updated_at: "2025-01-01T00:00:00Z",
   note: "",
-  expected_start_time: SENTINEL_DATE,
   routine_application:
     applicationId === null
       ? null
@@ -65,12 +62,13 @@ const makeTask = ({
         },
 });
 
-const kinds = (items: ScheduledGroupedItem[]) => items.map((i) => i.kind);
+const kinds = (items: ScheduledGroupedItem<ScheduledTaskAPI>[]) =>
+  items.map((i) => i.kind);
 
 const wrappedAt = (
-  items: ScheduledGroupedItem[],
+  items: ScheduledGroupedItem<ScheduledTaskAPI>[],
   index: number,
-): WrappedRoutineCard => {
+): WrappedRoutineCard<ScheduledTaskAPI> => {
   const item = items[index];
   if (item.kind !== "wrap") {
     throw new Error(`Expected wrap at index ${index}, got ${item.kind}`);
@@ -92,7 +90,7 @@ describe("groupRoutineTasks — A. Basic wrap eligibility", () => {
     const wrap = wrappedAt(result, 3);
     expect(wrap.routine_application_id).toBe(1);
     expect(wrap.routine_name).toBe("Workout");
-    expect(wrap.absorbed_count).toBe(2);
+    expect(wrap.absorbed_tasks).toHaveLength(2);
     expect(wrap.member_ids).toEqual([4, 5]);
     expect(wrap.absorbed_task_ids).toEqual([4, 5]);
   });
@@ -134,7 +132,7 @@ describe("groupRoutineTasks — A. Basic wrap eligibility", () => {
     const result = groupRoutineTasks(tasks);
     expect(kinds(result)).toEqual(["task", "task", "task", "wrap"]);
     const wrap = wrappedAt(result, 3);
-    expect(wrap.absorbed_count).toBe(5);
+    expect(wrap.absorbed_tasks).toHaveLength(5);
     expect(wrap.member_ids).toEqual([4, 5, 6, 7, 8]);
   });
 });
@@ -153,7 +151,7 @@ describe("groupRoutineTasks — B. Tolerance", () => {
     const result = groupRoutineTasks(tasks);
     expect(kinds(result)).toEqual(["task", "task", "task", "wrap"]);
     const wrap = wrappedAt(result, 3);
-    expect(wrap.absorbed_count).toBe(4);
+    expect(wrap.absorbed_tasks).toHaveLength(4);
     expect(wrap.absorbed_task_ids).toEqual([4, 5, 6, 7]);
     expect(wrap.member_ids).toEqual([4, 5, 7]);
   });
@@ -195,7 +193,7 @@ describe("groupRoutineTasks — B. Tolerance", () => {
       "task",
       "task",
     ]);
-    expect(wrappedAt(result, 3).absorbed_count).toBe(3);
+    expect(wrappedAt(result, 3).absorbed_tasks).toHaveLength(3);
   });
 });
 
@@ -234,7 +232,7 @@ describe("groupRoutineTasks — C. Absorption cap", () => {
     ];
     const result = groupRoutineTasks(tasks);
     expect(kinds(result)).toEqual(["task", "task", "task", "wrap"]);
-    expect(wrappedAt(result, 3).absorbed_count).toBe(7);
+    expect(wrappedAt(result, 3).absorbed_tasks).toHaveLength(7);
   });
 });
 
@@ -318,7 +316,7 @@ describe("groupRoutineTasks — E. Reactive re-evaluation (post-mutation arrays)
     ];
     const result = groupRoutineTasks(tasks);
     expect(kinds(result)).toEqual(["task", "task", "task", "wrap"]);
-    expect(wrappedAt(result, 3).absorbed_count).toBe(8);
+    expect(wrappedAt(result, 3).absorbed_tasks).toHaveLength(8);
   });
 
   it("E4: post-move with wrapped-card-as-unit at top — auto-unwrap", () => {
@@ -378,7 +376,7 @@ describe("groupRoutineTasks — H. Overlap (outer-wins)", () => {
     const wrap = wrappedAt(result, 3);
     expect(wrap.routine_application_id).toBe(1);
     expect(wrap.routine_name).toBe("Routine 1");
-    expect(wrap.absorbed_count).toBe(5);
+    expect(wrap.absorbed_tasks).toHaveLength(5);
     expect(wrap.absorbed_task_ids).toEqual([4, 5, 6, 7, 8]);
     expect(wrap.member_ids).toEqual([4, 6, 8]);
   });
@@ -399,7 +397,7 @@ describe("groupRoutineTasks — H. Overlap (outer-wins)", () => {
     expect(kinds(result)).toEqual(["task", "task", "task", "wrap", "task"]);
     const wrap = wrappedAt(result, 3);
     expect(wrap.routine_application_id).toBe(2);
-    expect(wrap.absorbed_count).toBe(5);
+    expect(wrap.absorbed_tasks).toHaveLength(5);
     expect(wrap.absorbed_task_ids).toEqual([4, 5, 6, 7, 8]);
     const residual = result[4];
     expect(residual.kind).toBe("task");
@@ -450,7 +448,7 @@ describe("groupRoutineTasks — H. Overlap (outer-wins)", () => {
     ]);
     const wrap = wrappedAt(result, 4);
     expect(wrap.routine_application_id).toBe(2);
-    expect(wrap.absorbed_count).toBe(7);
+    expect(wrap.absorbed_tasks).toHaveLength(7);
     const residual = result[5];
     expect(residual.kind).toBe("task");
     if (residual.kind === "task") expect(residual.id).toBe(12);
@@ -499,8 +497,41 @@ describe("groupRoutineTasks — J. Edge cases & invariants", () => {
     ];
     const result = groupRoutineTasks(tasks);
     const ids = result
-      .filter((i): i is WrappedRoutineCard => i.kind === "wrap")
+      .filter(
+        (i): i is WrappedRoutineCard<ScheduledTaskAPI> => i.kind === "wrap",
+      )
       .map((i) => i.routine_application_id);
     expect(new Set(ids).size).toBe(ids.length);
+  });
+});
+
+describe("groupRoutineTasks — K. Pure structure (no EST)", () => {
+  it("K1: absorbed_tasks are the input references; first entry is the span's first task", () => {
+    const tasks = [
+      makeTask({ id: 1 }),
+      makeTask({ id: 2 }),
+      makeTask({ id: 3 }),
+      makeTask({ id: 4, applicationId: 1 }),
+      makeTask({ id: 5 }),
+      makeTask({ id: 6, applicationId: 1 }),
+    ];
+    const wrap = wrappedAt(groupRoutineTasks(tasks), 3);
+    expect(wrap.absorbed_tasks[0]).toBe(tasks[3]);
+    wrap.absorbed_tasks.forEach((task, i) => {
+      expect(task).toBe(tasks[3 + i]);
+    });
+  });
+
+  it("K2: wrap carries no expected_start_time or absorbed_count", () => {
+    const tasks = [
+      makeTask({ id: 1 }),
+      makeTask({ id: 2 }),
+      makeTask({ id: 3 }),
+      makeTask({ id: 4, applicationId: 1 }),
+      makeTask({ id: 5, applicationId: 1 }),
+    ];
+    const wrap = wrappedAt(groupRoutineTasks(tasks), 3);
+    expect(wrap).not.toHaveProperty("expected_start_time");
+    expect(wrap).not.toHaveProperty("absorbed_count");
   });
 });

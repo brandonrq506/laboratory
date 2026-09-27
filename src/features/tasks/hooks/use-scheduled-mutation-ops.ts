@@ -12,7 +12,7 @@ import type { SortableId } from "@/features/tasks/types/sortable-task-list";
 
 type Args = {
   rawItems: ScheduledTaskAPI[];
-  groupedItems: ScheduledGroupedItem[];
+  groupedItems: ScheduledGroupedItem<ScheduledTaskAPI>[];
   setTempItems: (next: ScheduledTaskAPI[] | null) => void;
 };
 

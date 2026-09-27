@@ -3,7 +3,7 @@ import type {
   ScheduledGroupedItem,
   WrappedRoutineCard,
 } from "@/features/tasks/types/scheduled-grouped-card";
-import type { ScheduledTaskWithEST } from "@/features/tasks/types/scheduledTaskWithEST";
+import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 
 import { CARD_TYPE } from "@/features/tasks/types/card-types";
 import { wrapSortableId } from "@/features/routines/utils/wrap-sortable-id";
@@ -12,6 +12,8 @@ import { wrapSortableId } from "@/features/routines/utils/wrap-sortable-id";
  * Wrap rules — the algorithm below is parameterized by these four values.
  * They control when a routine application's tasks get collapsed into a single
  * wrap card (and when the rest of the list stays flat).
+ * The same rules intentionally apply to timer and future-date lists: even an
+ * entire routine stays flat when its first member is before WRAP_POINT.
  */
 /** Rule 1: minimum members in a group before wrapping is worth doing. */
 export const MIN_TASKS_TO_WRAP = 2;
@@ -27,7 +29,7 @@ export const MAX_ABSORBED_FOREIGN = 3;
  * the output of one apply of one routine. Built once per render from the
  * scheduled-tasks list; never persisted.
  */
-type RoutineGroup = {
+interface RoutineGroup {
   application_id: number;
   routine_name: string;
   /**
@@ -41,7 +43,7 @@ type RoutineGroup = {
    * member.
    */
   member_indices: number[];
-};
+}
 
 /**
  * Discover every routine application present in the input list and record the
@@ -50,7 +52,7 @@ type RoutineGroup = {
  * two groups share the same `routine_name`.
  */
 const collectRoutineGroups = (
-  tasks: readonly ScheduledTaskWithEST[],
+  tasks: readonly ScheduledTaskAPI[],
 ): Map<number, RoutineGroup> => {
   const groups = new Map<number, RoutineGroup>();
   tasks.forEach((task, index) => {
@@ -136,7 +138,9 @@ const qualifiesForWrap = (
  * can sit in the same output array as wrapped routine cards. This is the
  * "renders as a normal task card" branch — no grouping logic, just a kind tag.
  */
-const buildPlainItem = (task: ScheduledTaskWithEST): PlainScheduledCard => ({
+const buildPlainItem = <T extends ScheduledTaskAPI>(
+  task: T,
+): PlainScheduledCard<T> => ({
   kind: CARD_TYPE.TASK,
   id: task.id,
   task,
@@ -148,10 +152,10 @@ const buildPlainItem = (task: ScheduledTaskWithEST): PlainScheduledCard => ({
  * members AND interleaved foreign tasks — because per the spec foreigners in
  * span are contextual additions to the routine block.
  */
-const buildWrappedItem = (
+const buildWrappedItem = <T extends ScheduledTaskAPI>(
   group: RoutineGroup,
-  tasks: readonly ScheduledTaskWithEST[],
-): WrappedRoutineCard => {
+  tasks: readonly T[],
+): WrappedRoutineCard<T> => {
   const firstIndex = group.member_indices[0];
   const absorbedTasks = tasks.slice(firstIndex, lastMemberIndex(group) + 1);
 
@@ -167,8 +171,6 @@ const buildWrappedItem = (
       (sum, t) => sum + t.activity.exp_seconds,
       0,
     ),
-    expected_start_time: absorbedTasks[0].expected_start_time,
-    absorbed_count: absorbedTasks.length,
   };
 };
 
@@ -185,11 +187,11 @@ const buildWrappedItem = (
  * claims a span, the cursor jumps past it, so any inner routine starting
  * inside that span is never independently considered.
  */
-const projectGroupedItems = (
-  tasks: readonly ScheduledTaskWithEST[],
+const projectGroupedItems = <T extends ScheduledTaskAPI>(
+  tasks: readonly T[],
   groupsByFirstMemberIndex: ReadonlyMap<number, RoutineGroup>,
-): ScheduledGroupedItem[] => {
-  const items: ScheduledGroupedItem[] = [];
+): ScheduledGroupedItem<T>[] => {
+  const items: ScheduledGroupedItem<T>[] = [];
   let cursor = 0;
 
   while (cursor < tasks.length) {
@@ -214,9 +216,9 @@ const projectGroupedItems = (
  * single wrapped card; everything else stays as a plain task. Pure function —
  * idempotent and re-derives wrap state from scratch on every call.
  */
-export const groupRoutineTasks = (
-  tasks: readonly ScheduledTaskWithEST[],
-): ScheduledGroupedItem[] => {
+export const groupRoutineTasks = <T extends ScheduledTaskAPI>(
+  tasks: readonly T[],
+): ScheduledGroupedItem<T>[] => {
   const groupsByFirstMember = indexGroupsByFirstMember(
     collectRoutineGroups(tasks),
   );

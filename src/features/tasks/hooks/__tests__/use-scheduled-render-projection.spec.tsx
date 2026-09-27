@@ -91,7 +91,7 @@ describe("scheduled tasks render projection (expansion + drag)", () => {
       result.current.projectedItems.filter(
         (i) =>
           i.kind === "expanded-child" &&
-          i.parent_routine_application_id === APPLICATION_ID,
+          i.task.routine_application?.id === APPLICATION_ID,
       ).length,
     ).toBe(0);
     expect(
