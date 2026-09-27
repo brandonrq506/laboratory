@@ -1,3 +1,4 @@
+import { scheduledTasksQueryOptions } from "@/features/tasks/api/queries";
 import { useDeleteTasks } from "@/features/tasks/api/tanstack/use-delete-tasks";
 
 import { IconButton } from "@/components/core";
@@ -9,7 +10,7 @@ interface Props {
 }
 
 export const QuickDeleteRoutineGroup = ({ taskIds, routineName }: Props) => {
-  const { mutate } = useDeleteTasks();
+  const { mutate } = useDeleteTasks(scheduledTasksQueryOptions());
 
   return (
     <IconButton

@@ -1,141 +1,93 @@
 import { HttpResponse, http } from "msw";
-import {
-  QueryClient,
-  QueryClientProvider,
-  type QueryKey,
-} from "@tanstack/react-query";
-import { renderHook, waitFor } from "@testing-library/react";
+import { renderHook, waitFor } from "@/test/test-utils";
 
 import {
-  inProgressTasksQueryOptions,
-  scheduledTasksQueryOptions,
-} from "../../queries";
+  SCHEDULED_LIST_CASES,
+  expectBystanderUntouched,
+  seedBystander,
+} from "@/test/utils/scheduled-list-isolation";
+import {
+  createQueryWrapper,
+  createTestQueryClient,
+} from "@/test/utils/query-client";
 import { apiRoutes } from "@/test/handlers/api-routes";
 import { scheduledTasks } from "@/test/store/tasks";
 import { server } from "@/test/server";
 import { useMoveTask } from "../useMoveTask";
 
-import type { ReactNode } from "react";
-import type { ScheduledTaskWithEST } from "@/features/tasks/types/scheduledTaskWithEST";
+import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 
-const makeWrapper = (queryClient: QueryClient) => {
-  return ({ children }: { children: ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+describe.each(SCHEDULED_LIST_CASES)(
+  "useMoveTask on the $label list",
+  ({ listQueryOptions, bystanderQueryOptions }) => {
+    const listKey = listQueryOptions.queryKey;
 
-const buildQueryClient = () =>
-  new QueryClient({ defaultOptions: { queries: { retry: false } } });
+    const initialOrder: ScheduledTaskAPI[] = [
+      scheduledTasks[0],
+      scheduledTasks[1],
+      scheduledTasks[2],
+    ];
+    const optimisticOrder: ScheduledTaskAPI[] = [
+      scheduledTasks[1],
+      scheduledTasks[0],
+      scheduledTasks[2],
+    ];
 
-const enrich = (
-  task: (typeof scheduledTasks)[number],
-): ScheduledTaskWithEST => ({
-  ...task,
-  expected_start_time: new Date(task.scheduled_at),
-});
-
-describe("useMoveTask", () => {
-  const scheduledKey = scheduledTasksQueryOptions().queryKey;
-  const inProgressKey = inProgressTasksQueryOptions().queryKey;
-
-  const initialOrder: ScheduledTaskWithEST[] = [
-    enrich(scheduledTasks[0]),
-    enrich(scheduledTasks[1]),
-    enrich(scheduledTasks[2]),
-  ];
-  const optimisticOrder: ScheduledTaskWithEST[] = [
-    initialOrder[1],
-    initialOrder[0],
-    initialOrder[2],
-  ];
-
-  it("writes optimistic value to the scheduled key and invalidates only that key on settle", async () => {
-    server.use(
-      http.patch(apiRoutes.taskMove, () => HttpResponse.json({ ok: true })),
-    );
-
-    const queryClient = buildQueryClient();
-    queryClient.setQueryData(scheduledKey, initialOrder);
-    queryClient.setQueryData(inProgressKey, []);
-
-    const invalidateSpy = vi.spyOn(queryClient, "invalidateQueries");
-
-    const { result } = renderHook(() => useMoveTask(), {
-      wrapper: makeWrapper(queryClient),
-    });
-
-    result.current.mutate({
+    const payload = {
       taskId: scheduledTasks[1].id,
       prevTaskId: null,
       nextTaskId: scheduledTasks[0].id,
       tasks: optimisticOrder,
+    };
+
+    const seedClient = () => {
+      const queryClient = createTestQueryClient();
+      queryClient.setQueryData(listKey, initialOrder);
+      seedBystander(queryClient, bystanderQueryOptions);
+      return queryClient;
+    };
+
+    it("writes the optimistic value to its key and invalidates only that key on settle", async () => {
+      const queryClient = seedClient();
+
+      const { result } = renderHook(() => useMoveTask(listQueryOptions), {
+        wrapper: createQueryWrapper(queryClient),
+      });
+
+      result.current.mutate(payload);
+
+      await waitFor(() => {
+        expect(queryClient.getQueryData(listKey)).toEqual(optimisticOrder);
+      });
+
+      await waitFor(() => {
+        expect(result.current.isSuccess).toBe(true);
+      });
+
+      expect(queryClient.getQueryState(listKey)?.isInvalidated).toBe(true);
+      expectBystanderUntouched(queryClient, bystanderQueryOptions);
     });
 
-    await waitFor(() => {
-      expect(queryClient.getQueryData(scheduledKey)).toEqual(optimisticOrder);
+    it("rolls back its key to the snapshot on 422", async () => {
+      server.use(
+        http.patch(apiRoutes.taskMove, () =>
+          HttpResponse.json({ errors: [] }, { status: 422 }),
+        ),
+      );
+
+      const queryClient = seedClient();
+
+      const { result } = renderHook(() => useMoveTask(listQueryOptions), {
+        wrapper: createQueryWrapper(queryClient),
+      });
+
+      await result.current.mutateAsync(payload).catch(() => undefined);
+
+      await waitFor(() => {
+        expect(result.current.isError).toBe(true);
+      });
+      expect(queryClient.getQueryData(listKey)).toEqual(initialOrder);
+      expectBystanderUntouched(queryClient, bystanderQueryOptions);
     });
-
-    await waitFor(() => {
-      expect(result.current.isSuccess).toBe(true);
-    });
-
-    const invalidatedKeys = invalidateSpy.mock.calls.map(
-      ([arg]) => (arg as { queryKey: QueryKey }).queryKey,
-    );
-    expect(invalidatedKeys).toContainEqual(scheduledKey);
-    expect(invalidatedKeys).not.toContainEqual(inProgressKey);
-  });
-
-  it("rolls back to snapshot on 422", async () => {
-    server.use(
-      http.patch(apiRoutes.taskMove, () =>
-        HttpResponse.json({ errors: [] }, { status: 422 }),
-      ),
-    );
-
-    const queryClient = buildQueryClient();
-    queryClient.setQueryData(scheduledKey, initialOrder);
-
-    const { result } = renderHook(() => useMoveTask(), {
-      wrapper: makeWrapper(queryClient),
-    });
-
-    await result.current
-      .mutateAsync({
-        taskId: scheduledTasks[1].id,
-        prevTaskId: null,
-        nextTaskId: scheduledTasks[0].id,
-        tasks: optimisticOrder,
-      })
-      .catch(() => undefined);
-
-    await waitFor(() => {
-      expect(result.current.isError).toBe(true);
-    });
-    expect(queryClient.getQueryData(scheduledKey)).toEqual(initialOrder);
-  });
-
-  it("calls cancelQueries on the scheduled key in onMutate", async () => {
-    server.use(
-      http.patch(apiRoutes.taskMove, () => HttpResponse.json({ ok: true })),
-    );
-
-    const queryClient = buildQueryClient();
-    queryClient.setQueryData(scheduledKey, initialOrder);
-
-    const cancelSpy = vi.spyOn(queryClient, "cancelQueries");
-
-    const { result } = renderHook(() => useMoveTask(), {
-      wrapper: makeWrapper(queryClient),
-    });
-
-    await result.current.mutateAsync({
-      taskId: scheduledTasks[1].id,
-      prevTaskId: null,
-      nextTaskId: scheduledTasks[0].id,
-      tasks: optimisticOrder,
-    });
-
-    expect(cancelSpy).toHaveBeenCalledWith({ queryKey: scheduledKey });
-  });
-});
+  },
+);

@@ -36,20 +36,22 @@ export const taskKeys = {
   detail: (taskId: number) => [{ ...taskKeys.details()[0], taskId }] as const,
 };
 
-export const scheduledTasksQueryOptions = () => {
+export const scheduledListQueryOptions = (
+  scheduled_at: DateFilterOperators,
+) => {
   return queryOptions({
     queryKey: taskKeys.list({
-      filter: {
-        status: { eq: TASK_STATUS.SCHEDULED },
-        scheduled_at: {
-          is_on_or_before: formatISO(endOfDay(new Date())),
-        },
-      },
+      filter: { status: { eq: TASK_STATUS.SCHEDULED }, scheduled_at },
       sort: { sort_by: "position", sort_order: "asc" },
     }),
     queryFn: getTasks<ScheduledTaskAPI[]>,
   });
 };
+
+export const scheduledTasksQueryOptions = () =>
+  scheduledListQueryOptions({
+    is_on_or_before: formatISO(endOfDay(new Date())),
+  });
 
 export const inProgressTasksQueryOptions = () => {
   return queryOptions({
@@ -93,15 +95,5 @@ export const historyTasksQueryOptions = (date: string) => {
   });
 };
 
-export const futureTasksQueryOptions = (date: string) => {
-  return queryOptions({
-    queryKey: taskKeys.list({
-      filter: {
-        status: { eq: TASK_STATUS.SCHEDULED },
-        scheduled_at: { is_equal_to: date },
-      },
-      sort: { sort_by: "position", sort_order: "asc" },
-    }),
-    queryFn: getTasks<ScheduledTaskAPI[]>,
-  });
-};
+export const futureTasksQueryOptions = (date: string) =>
+  scheduledListQueryOptions({ is_equal_to: date });

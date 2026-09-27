@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { futureTasksQueryOptions } from "@/features/tasks/api/queries";
 import { planSingleMove } from "@/features/tasks/utils/plan-move";
-import { useFutureMoveTask } from "@/features/tasks/api/tanstack/use-move-future-task";
+import { useMoveTask } from "@/features/tasks/api/tanstack/useMoveTask";
 
 import type {
   OnDragEndArgs,
@@ -15,7 +15,7 @@ const EMPTY: ScheduledTaskAPI[] = [];
 
 export const useFutureScheduledTasksSorting = (date: string) => {
   const queryResult = useQuery(futureTasksQueryOptions(date));
-  const moveMutation = useFutureMoveTask(date);
+  const moveMutation = useMoveTask(futureTasksQueryOptions(date));
 
   const [tempItems, setTempItems] = useState<ScheduledTaskAPI[] | null>(null);
   const [draggingId, setDraggingId] = useState<SortableId | null>(null);

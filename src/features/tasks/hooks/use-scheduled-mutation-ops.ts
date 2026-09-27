@@ -1,3 +1,4 @@
+import { scheduledTasksQueryOptions } from "@/features/tasks/api/queries";
 import { useCallback } from "react";
 import { useMoveTask } from "@/features/tasks/api/tanstack/useMoveTask";
 import { useMoveTasks } from "@/features/tasks/api/tanstack/use-move-tasks";
@@ -36,8 +37,8 @@ export const useScheduledMutationOps = ({
   groupedItems,
   setTempItems,
 }: Args) => {
-  const { mutateAsync: moveTask } = useMoveTask();
-  const { mutateAsync: moveTasks } = useMoveTasks();
+  const { mutateAsync: moveTask } = useMoveTask(scheduledTasksQueryOptions());
+  const { mutateAsync: moveTasks } = useMoveTasks(scheduledTasksQueryOptions());
 
   const performMove = useCallback(
     async (activeId: SortableId, prevItemId: SortableId | null) => {

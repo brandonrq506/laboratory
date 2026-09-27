@@ -7,6 +7,9 @@ import { TASK_STATUS } from "@/features/tasks/types/task-status";
 
 import { COLOR_NAME } from "@/features/colors/types/colors";
 
+/** Fixed future day for specs bound to a scheduled date; never read from the clock. */
+export const SCHEDULED_LIST_DATE = "2030-01-15";
+
 export const completedTasks: CompletedTaskAPI[] = [
   {
     id: 3406,
