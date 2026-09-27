@@ -4,7 +4,7 @@ export { DeleteAllScheduledTasks } from "./DeleteAllScheduledTasks";
 export { EditInProgressTaskForm } from "./EditInProgressTaskForm";
 export { EditScheduledTaskForm } from "./EditScheduledTaskForm";
 export { ExampleCompletedTask } from "./ExampleCompletedTask";
-export { FutureScheduledTaskContent } from "./future-scheduled-task-content";
+export { FutureScheduledCardContent } from "./future-scheduled-card-content";
 export { PerformanceSummaryCard } from "./PerformanceSummaryCard";
 export { ScheduledItemCard } from "./scheduled-item-card";
 export { ScheduledItemCardOverlay } from "./scheduled-item-card-overlay";

@@ -2,6 +2,7 @@ export { AddRoutineItemMenu } from "./add-routine-item-menu";
 export { DeleteRoutineDialog } from "./DeleteRoutineDialog";
 export { DeleteRoutineItem } from "./delete-routine-item";
 export { EditRoutineForm } from "./EditRoutineForm";
+export { FutureRoutineGroupContent } from "./future-routine-group-content";
 export { HideRoutineButton } from "./hide-routine-btn";
 export { PlayRoutineButton } from "./PlayRoutineButton";
 export { RoutineCard } from "./RoutineCard";
