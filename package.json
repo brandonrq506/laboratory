@@ -45,7 +45,7 @@
     "react-dom": "^19.3.0",
     "react-hook-form": "^7.88.0",
     "serve": "^14.2.5",
-    "vite": "^8.3.0"
+    "vite": "^8.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
