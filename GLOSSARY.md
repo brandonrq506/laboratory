@@ -54,6 +54,18 @@ _Avoid_: Motivation text, tagline
 Part of the day by clock time: Morning, Afternoon, Evening or Night. Night runs past midnight until Morning.
 _Avoid_: Time slot, period
 
+**Net Band**:
+How good or bad a day's Net Delta is: Outstanding, Steady, Behind or Far Behind. Finer than the Performance Tier, and only used to pick a Motivational Message.
+_Avoid_: Level, grade
+
+**Day Outcome**:
+How the day ended at Night: On Track (Net Delta even or ahead) or Off Track (behind).
+_Avoid_: Result, verdict
+
+**Milestone**:
+A round number of Completed Tasks reached today, celebrated by the Motivational Message.
+_Avoid_: Goal, achievement
+
 **Pace Trend**:
 Whether the latest Completed Tasks are doing better (Speeding Up) or worse (Slowing Down) than the earlier ones, judged by average Performance Delta.
 _Avoid_: Momentum, velocity
