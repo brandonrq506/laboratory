@@ -4,8 +4,7 @@ import {
 } from "../types/performance-tier";
 import type { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
 
-import { getDurationInSeconds } from "./getDurationInSeconds";
-import { getPerformanceDelta } from "./getPerformanceDelta";
+import { getCompletedTaskDelta } from "./getCompletedTaskDelta";
 
 export interface PerformanceSummary {
   total: number;
@@ -22,13 +21,10 @@ const getNetTier = (netMinutes: number): PerformanceTier => {
 export function getPerformanceSummary(
   tasks: CompletedTaskAPI[],
 ): PerformanceSummary {
-  const netMinutes = tasks.reduce((sum, task) => {
-    const { minutes } = getPerformanceDelta({
-      activity: task.activity,
-      duration_seconds: getDurationInSeconds(task.start_time, task.end_time),
-    });
-    return sum + minutes;
-  }, 0);
+  const netMinutes = tasks.reduce(
+    (sum, task) => sum + getCompletedTaskDelta(task).minutes,
+    0,
+  );
 
   return { total: tasks.length, netMinutes, tier: getNetTier(netMinutes) };
 }
