@@ -2,7 +2,7 @@ import type { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
 
 import { Card } from "@/components/layout/Card";
 import { PerformanceDelta } from "./PerformanceDelta";
-import { getMotivationalMessage } from "@/features/tasks/utils/getMotivationalMessage";
+import { getMotivationalMessage } from "@/features/motivationalMessage/utils/getMotivationalMessage";
 import { getPerformanceSummary } from "@/features/tasks/utils/getPerformanceSummary";
 
 interface Props {
@@ -29,7 +29,7 @@ export const PerformanceSummaryCard = ({
         )}
         {withMessage && (
           <span className="text-foreground-muted text-sm tracking-widest">
-            {getMotivationalMessage(summary)}
+            {getMotivationalMessage({ tasks })}
           </span>
         )}
       </div>
