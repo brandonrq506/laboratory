@@ -1,60 +1,36 @@
+import {
+  PERFORMANCE_TIER,
+  type PerformanceTier,
+} from "../types/performance-tier";
 import type { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
 
 import { getDurationInSeconds } from "./getDurationInSeconds";
-import { getPerformanceEmoji } from "./getPerformanceEmoji";
-
-const HUNDRED = 100;
+import { getPerformanceDelta } from "./getPerformanceDelta";
 
 export interface PerformanceSummary {
-  rocket: number;
-  turtle: number;
-  snail: number;
   total: number;
-  rocketPct: number;
-  turtlePct: number;
-  snailPct: number;
+  /** Sum of each task's rounded minutes won (+) or lost (-). */
+  netMinutes: number;
+  tier: PerformanceTier;
 }
+
+// Net has no `late` tier: any net loss reads as over (red).
+const getNetTier = (netMinutes: number): PerformanceTier => {
+  if (netMinutes > 0) return PERFORMANCE_TIER.AHEAD;
+  if (netMinutes < 0) return PERFORMANCE_TIER.OVER;
+  return PERFORMANCE_TIER.ON_TIME;
+};
 
 export function getPerformanceSummary(
   tasks: CompletedTaskAPI[],
 ): PerformanceSummary {
-  const total = tasks.length;
-
-  if (total === 0) {
-    return {
-      rocket: 0,
-      turtle: 0,
-      snail: 0,
-      total: 0,
-      rocketPct: 0,
-      turtlePct: 0,
-      snailPct: 0,
-    };
-  }
-
-  let rocket = 0;
-  let turtle = 0;
-  let snail = 0;
-
-  for (const task of tasks) {
-    const duration = getDurationInSeconds(task.start_time, task.end_time);
-    const emoji = getPerformanceEmoji({
+  const netMinutes = tasks.reduce((sum, task) => {
+    const { minutes } = getPerformanceDelta({
       activity: task.activity,
-      duration_seconds: duration,
+      duration_seconds: getDurationInSeconds(task.start_time, task.end_time),
     });
+    return sum + minutes;
+  }, 0);
 
-    if (emoji === "🚀") rocket++;
-    else if (emoji === "🐢") turtle++;
-    else snail++;
-  }
-
-  return {
-    rocket,
-    turtle,
-    snail,
-    total,
-    rocketPct: Math.round((rocket / total) * HUNDRED),
-    turtlePct: Math.round((turtle / total) * HUNDRED),
-    snailPct: Math.round((snail / total) * HUNDRED),
-  };
+  return { total: tasks.length, netMinutes, tier: getNetTier(netMinutes) };
 }

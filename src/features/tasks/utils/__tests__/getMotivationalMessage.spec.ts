@@ -1,50 +1,33 @@
 import type { PerformanceSummary } from "../getPerformanceSummary";
 
-import { MESSAGES, getMotivationalMessage } from "../getMotivationalMessage";
+import {
+  MESSAGES,
+  OUTSTANDING_MIN_MINUTES,
+  ROOM_MIN_MINUTES,
+  SOLID_MIN_MINUTES,
+  getMotivationalMessage,
+} from "../getMotivationalMessage";
+import { PERFORMANCE_TIER } from "../../types/performance-tier";
 
-const makeSummary = (
-  overrides: Partial<PerformanceSummary> = {},
-): PerformanceSummary => ({
-  rocket: 0,
-  turtle: 0,
-  snail: 0,
-  total: 0,
-  rocketPct: 0,
-  turtlePct: 0,
-  snailPct: 0,
-  ...overrides,
+const makeSummary = (netMinutes: number, total = 3): PerformanceSummary => ({
+  total,
+  netMinutes,
+  tier: PERFORMANCE_TIER.ON_TIME,
 });
 
 describe("getMotivationalMessage", () => {
   it("returns empty message when total is 0", () => {
-    expect(getMotivationalMessage(makeSummary())).toBe(MESSAGES.empty);
+    expect(getMotivationalMessage(makeSummary(0, 0))).toBe(MESSAGES.empty);
   });
 
-  it("returns outstanding when rocketPct >= 80", () => {
-    expect(
-      getMotivationalMessage(makeSummary({ total: 5, rocketPct: 80 })),
-    ).toBe(MESSAGES.outstanding);
-  });
-
-  it("returns solid when rocketPct >= 50 but < 80", () => {
-    expect(
-      getMotivationalMessage(makeSummary({ total: 4, rocketPct: 50 })),
-    ).toBe(MESSAGES.solid);
-  });
-
-  it("returns tough when snailPct >= 50", () => {
-    expect(
-      getMotivationalMessage(
-        makeSummary({ total: 4, rocketPct: 25, snailPct: 50 }),
-      ),
-    ).toBe(MESSAGES.tough);
-  });
-
-  it("returns room to improve as default", () => {
-    expect(
-      getMotivationalMessage(
-        makeSummary({ total: 4, rocketPct: 25, snailPct: 25 }),
-      ),
-    ).toBe(MESSAGES.room);
+  it.each([
+    [OUTSTANDING_MIN_MINUTES, MESSAGES.outstanding],
+    [OUTSTANDING_MIN_MINUTES - 1, MESSAGES.solid],
+    [SOLID_MIN_MINUTES, MESSAGES.solid],
+    [SOLID_MIN_MINUTES - 1, MESSAGES.room],
+    [ROOM_MIN_MINUTES, MESSAGES.room],
+    [ROOM_MIN_MINUTES - 1, MESSAGES.tough],
+  ])("net %i returns %s", (netMinutes, message) => {
+    expect(getMotivationalMessage(makeSummary(netMinutes))).toBe(message);
   });
 });

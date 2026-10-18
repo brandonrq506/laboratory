@@ -5,17 +5,34 @@ import { PerformanceSummaryCard } from "../PerformanceSummaryCard";
 import { completedTasks } from "@/test/store/tasks";
 
 describe("PerformanceSummaryCard", () => {
-  it("renders all 3 emojis with tasks", () => {
+  it("renders net minutes and message with tasks", () => {
+    // -2m, -1m, +2m, +5m
     render(<PerformanceSummaryCard tasks={completedTasks} />);
 
-    expect(screen.getByText(/🚀/)).toBeInTheDocument();
-    expect(screen.getByText(/🐢/)).toBeInTheDocument();
-    expect(screen.getByText(/🐌/)).toBeInTheDocument();
+    expect(screen.getByText("+4m")).toBeInTheDocument();
+    expect(screen.getByText(MESSAGES.solid)).toBeInTheDocument();
   });
 
-  it("renders empty-state message with no tasks", () => {
+  it("renders only the empty-state message with no tasks", () => {
     render(<PerformanceSummaryCard tasks={[]} />);
 
     expect(screen.getByText(MESSAGES.empty)).toBeInTheDocument();
+    expect(screen.queryByText("0m")).not.toBeInTheDocument();
+  });
+
+  it("renders net minutes without message when disabled", () => {
+    render(
+      <PerformanceSummaryCard tasks={completedTasks} withMessage={false} />,
+    );
+
+    expect(screen.getByText("+4m")).toBeInTheDocument();
+    expect(screen.queryByText(MESSAGES.solid)).not.toBeInTheDocument();
+  });
+
+  it("renders 0m with no tasks when message is disabled", () => {
+    render(<PerformanceSummaryCard tasks={[]} withMessage={false} />);
+
+    expect(screen.getByText("0m")).toBeInTheDocument();
+    expect(screen.queryByText(MESSAGES.empty)).not.toBeInTheDocument();
   });
 });
