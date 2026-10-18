@@ -25,6 +25,7 @@ export function getPaceTrend(tasks: CompletedTaskAPI[]): PaceTrend | null {
   const deltas = tasks
     .toSorted((a, b) => compareAsc(a.end_time, b.end_time))
     .map((task) => getCompletedTaskDelta(task).minutes);
+
   const recent = deltas.slice(-PACE_TREND_WINDOW);
   const earlier = deltas.slice(0, -PACE_TREND_WINDOW);
 
@@ -33,6 +34,8 @@ export function getPaceTrend(tasks: CompletedTaskAPI[]): PaceTrend | null {
   const minGap = PACE_TREND_MIN_GAP_MINUTES * scale;
 
   if (gap >= minGap) return PACE_TREND.SPEEDING_UP;
+
   if (gap <= -minGap) return PACE_TREND.SLOWING_DOWN;
+
   return null;
 }

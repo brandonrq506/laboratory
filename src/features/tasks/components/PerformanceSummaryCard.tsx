@@ -22,7 +22,7 @@ export const PerformanceSummaryCard = ({
       <div className="flex min-h-9 items-center justify-between gap-2">
         {showDelta && (
           <PerformanceDelta
-            minutes={summary.netMinutes}
+            minutes={summary.netDelta}
             tier={summary.tier}
             className="text-sm font-semibold xl:text-base"
           />

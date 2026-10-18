@@ -81,7 +81,7 @@ describe("getMotivationalMessage", () => {
       );
     });
 
-    it("21:30 · back to 15 done → Night beats milestone", () => {
+    it("21:30 · a task deleted, 15 done → Night beats milestone", () => {
       expect(NIGHT_PHRASES[DAY_OUTCOME.OFF_TRACK]).toContain(
         message([...flat(14), -5], "21:30"),
       );

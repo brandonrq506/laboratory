@@ -9,7 +9,7 @@ const MAX_MINUTES = 60;
 const FIRST_END = new Date("2026-10-18T08:00:00");
 
 /** Completed Task ending at `end` with the given Performance Delta. */
-export const makeCompletedTask = (
+const makeCompletedTask = (
   deltaMinutes: number,
   end: Date,
 ): CompletedTaskAPI => {

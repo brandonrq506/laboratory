@@ -13,7 +13,7 @@ export const EMPTY_PHRASES = {
   [DAY_PHASE.MORNING]: ["Let's get started"],
   [DAY_PHASE.AFTERNOON]: ["Not too late to start"],
   [DAY_PHASE.EVENING]: ["Still time for one"],
-  [DAY_PHASE.NIGHT]: ["Fresh start tomorrow"],
+  [DAY_PHASE.NIGHT]: ["Rest up, see you soon"],
 } satisfies Record<DayPhase, Variants>;
 
 export const NIGHT_PHRASES = {
@@ -50,6 +50,6 @@ export const NET_BAND_PHRASES = {
   [NET_BAND.FAR_BEHIND]: {
     [DAY_PHASE.MORNING]: ["Plenty of day left"],
     [DAY_PHASE.AFTERNOON]: ["Time to catch up"],
-    [DAY_PHASE.EVENING]: ["Finish strong"],
+    [DAY_PHASE.EVENING]: ["Still time to rally"],
   },
 } satisfies Record<NetBand, Record<DaytimePhase, Variants>>;

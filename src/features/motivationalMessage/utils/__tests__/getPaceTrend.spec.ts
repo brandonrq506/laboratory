@@ -44,6 +44,7 @@ describe("getPaceTrend", () => {
 
   it("orders tasks by end time, not input order", () => {
     const newestFirst = makeCompletedDay([-15, -15, 2, 2, 2]).toReversed();
+
     expect(getPaceTrend(newestFirst)).toBe(PACE_TREND.SPEEDING_UP);
   });
 });

@@ -10,7 +10,10 @@ import { NET_BAND_MIN_MINUTES } from "../constants/net-band";
 export function getNetBand(netDelta: number): NetBand {
   if (netDelta >= NET_BAND_MIN_MINUTES[NET_BAND.OUTSTANDING])
     return NET_BAND.OUTSTANDING;
+
   if (netDelta >= NET_BAND_MIN_MINUTES[NET_BAND.STEADY]) return NET_BAND.STEADY;
+
   if (netDelta >= NET_BAND_MIN_MINUTES[NET_BAND.BEHIND]) return NET_BAND.BEHIND;
+
   return NET_BAND.FAR_BEHIND;
 }

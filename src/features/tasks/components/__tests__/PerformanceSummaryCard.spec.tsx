@@ -2,18 +2,19 @@ import { render, screen } from "@/test/test-utils";
 
 import {
   EMPTY_PHRASES,
-  PACE_TREND_PHRASES,
+  NET_BAND_PHRASES,
 } from "@/features/motivationalMessage/constants/phrases";
 import { DAY_PHASE } from "@/features/motivationalMessage/types/day-phase";
-import { PACE_TREND } from "@/features/motivationalMessage/types/pace-trend";
+import { NET_BAND } from "@/features/motivationalMessage/types/net-band";
 import { PerformanceSummaryCard } from "../PerformanceSummaryCard";
-import { completedTasks } from "@/test/store/tasks";
+import { makeCompletedDay } from "@/test/utils/make-completed-task";
 
 const MORNING = new Date("2026-10-18T09:00:00");
 const [EMPTY_MORNING] = EMPTY_PHRASES[DAY_PHASE.MORNING];
-/** The fixture's last 3 tasks run slower than its first: Slowing Down. */
-const SLOWING_DOWN = PACE_TREND_PHRASES[PACE_TREND.SLOWING_DOWN];
-const SLOWING_DOWN_TEXT = new RegExp(`^(${SLOWING_DOWN.join("|")})$`);
+/** 4 tasks netting +5m with no Pace Trend: a Steady morning. */
+const TASKS = makeCompletedDay([2, 1, 1, 1]);
+const STEADY_MORNING = NET_BAND_PHRASES[NET_BAND.STEADY][DAY_PHASE.MORNING];
+const STEADY_MORNING_TEXT = new RegExp(`^(${STEADY_MORNING.join("|")})$`);
 
 describe("PerformanceSummaryCard", () => {
   beforeEach(() => {
@@ -26,10 +27,10 @@ describe("PerformanceSummaryCard", () => {
   });
 
   it("renders net minutes and today's message with tasks", () => {
-    render(<PerformanceSummaryCard tasks={completedTasks} />);
+    render(<PerformanceSummaryCard tasks={TASKS} />);
 
-    expect(screen.getByText("+4m")).toBeInTheDocument();
-    expect(screen.getByText(SLOWING_DOWN_TEXT)).toBeInTheDocument();
+    expect(screen.getByText("+5m")).toBeInTheDocument();
+    expect(screen.getByText(STEADY_MORNING_TEXT)).toBeInTheDocument();
   });
 
   it("renders only the empty-state message with no tasks", () => {
@@ -40,12 +41,10 @@ describe("PerformanceSummaryCard", () => {
   });
 
   it("renders net minutes without message when disabled", () => {
-    render(
-      <PerformanceSummaryCard tasks={completedTasks} withMessage={false} />,
-    );
+    render(<PerformanceSummaryCard tasks={TASKS} withMessage={false} />);
 
-    expect(screen.getByText("+4m")).toBeInTheDocument();
-    expect(screen.queryByText(SLOWING_DOWN_TEXT)).not.toBeInTheDocument();
+    expect(screen.getByText("+5m")).toBeInTheDocument();
+    expect(screen.queryByText(STEADY_MORNING_TEXT)).not.toBeInTheDocument();
   });
 
   it("renders 0m with no tasks when message is disabled", () => {

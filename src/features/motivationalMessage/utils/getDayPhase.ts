@@ -12,9 +12,13 @@ export function getDayPhase(now: Date): DayPhase {
   const hour = getHours(now);
 
   if (hour < DAY_PHASE_START_HOUR[DAY_PHASE.MORNING]) return DAY_PHASE.NIGHT;
+
   if (hour >= DAY_PHASE_START_HOUR[DAY_PHASE.NIGHT]) return DAY_PHASE.NIGHT;
+
   if (hour >= DAY_PHASE_START_HOUR[DAY_PHASE.EVENING]) return DAY_PHASE.EVENING;
+
   if (hour >= DAY_PHASE_START_HOUR[DAY_PHASE.AFTERNOON])
     return DAY_PHASE.AFTERNOON;
+
   return DAY_PHASE.MORNING;
 }

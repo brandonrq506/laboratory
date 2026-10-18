@@ -5,13 +5,11 @@ import {
   NIGHT_PHRASES,
   PACE_TREND_PHRASES,
 } from "../constants/phrases";
-import {
-  MILESTONE_STEP,
-  SLOWING_DOWN_CUTOFF_HOUR,
-} from "../constants/motivational-message";
 import type { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
 import { DAY_PHASE } from "../types/day-phase";
+import { MILESTONE_STEP } from "../constants/motivational-message";
 import { PACE_TREND } from "../types/pace-trend";
+import { SLOWING_DOWN_CUTOFF_HOUR } from "../constants/pace-trend";
 
 import { getDayOutcome } from "./getDayOutcome";
 import { getDayPhase } from "./getDayPhase";
@@ -39,7 +37,7 @@ export function getMotivationalMessage({
   tasks,
   now = new Date(),
 }: Props): string {
-  const { total, netMinutes: netDelta } = getPerformanceSummary(tasks);
+  const { total, netDelta } = getPerformanceSummary(tasks);
   const phase = getDayPhase(now);
   const seed = getVariantSeed(now, total);
 
