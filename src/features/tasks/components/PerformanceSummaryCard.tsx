@@ -2,7 +2,7 @@ import type { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
 
 import { Card } from "@/components/layout/Card";
 import { PerformanceDelta } from "./PerformanceDelta";
-import { getMotivationalMessage } from "@/features/tasks/utils/getMotivationalMessage";
+import { getMotivationalMessage } from "@/features/motivationalMessage/utils/getMotivationalMessage";
 import { getPerformanceSummary } from "@/features/tasks/utils/getPerformanceSummary";
 
 interface Props {
@@ -22,14 +22,14 @@ export const PerformanceSummaryCard = ({
       <div className="flex min-h-9 items-center justify-between gap-2">
         {showDelta && (
           <PerformanceDelta
-            minutes={summary.netMinutes}
+            minutes={summary.netDelta}
             tier={summary.tier}
             className="text-sm font-semibold xl:text-base"
           />
         )}
         {withMessage && (
           <span className="text-foreground-muted text-sm tracking-widest">
-            {getMotivationalMessage(summary)}
+            {getMotivationalMessage({ tasks })}
           </span>
         )}
       </div>

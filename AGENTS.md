@@ -11,6 +11,10 @@ This is a **Vite + React + TypeScript + TailwindCSS + Tanstack** personal projec
 It is critial that you leverage the latest and greatest of the current libraries.
 If you need to validate versions or commands, check the `package.json` file..
 
+## Domain language
+
+Domain terms live in `GLOSSARY.md`. Read it before naming types, utils, constants or tests, and use its terms over the ones it lists under _Avoid_.
+
 ## Project Architecture & Layout
 
 ### Core Structure
@@ -26,6 +30,7 @@ src/
 │   ├── activities/        # Activity management
 │   ├── auth/              # Authentication management
 │   ├── categories/        # Category management
+│   ├── motivationalMessage/ # Motivational Message on Today's summary
 │   ├── routines/          # Routine management
 │   ├── tasks/             # Task management
 │   ├── timer/             # Timer functionality
@@ -54,6 +59,7 @@ src/
 - Promote DRY code.
 - Promote Single Responsibility Principle design.
 - Promote the use of Single Source of Truth for data, types, constants.
+- Separate semantically different blocks inside a function (guards, setup, each rule, the result) with a blank line.
 - Do not use magic numbers or strings.
 - Component files .tsx should only contain the component code.
 - Do not declare utils functions or types in .tsx files.

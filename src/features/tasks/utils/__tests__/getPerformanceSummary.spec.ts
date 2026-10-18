@@ -31,7 +31,7 @@ describe("getPerformanceSummary", () => {
   it("returns zero on time for empty array", () => {
     expect(getPerformanceSummary([])).toEqual({
       total: 0,
-      netMinutes: 0,
+      netDelta: 0,
       tier: PERFORMANCE_TIER.ON_TIME,
     });
   });
@@ -44,7 +44,7 @@ describe("getPerformanceSummary", () => {
     ];
     expect(getPerformanceSummary(tasks)).toEqual({
       total: 3,
-      netMinutes: 3,
+      netDelta: 3,
       tier: PERFORMANCE_TIER.AHEAD,
     });
   });
@@ -53,7 +53,7 @@ describe("getPerformanceSummary", () => {
     const tasks = [makeTask(1800, 2700, 1680), makeTask(1800, 2700, 2100)];
     expect(getPerformanceSummary(tasks)).toEqual({
       total: 2,
-      netMinutes: -3,
+      netDelta: -3,
       tier: PERFORMANCE_TIER.OVER,
     });
   });
@@ -62,7 +62,7 @@ describe("getPerformanceSummary", () => {
     const tasks = [makeTask(1800, 2700, 1500), makeTask(1800, 2700, 2100)];
     expect(getPerformanceSummary(tasks)).toEqual({
       total: 2,
-      netMinutes: 0,
+      netDelta: 0,
       tier: PERFORMANCE_TIER.ON_TIME,
     });
   });
