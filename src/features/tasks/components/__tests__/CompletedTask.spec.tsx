@@ -49,4 +49,18 @@ describe("CompletedTask", () => {
 
     expect(screen.queryByRole("note")).not.toBeInTheDocument();
   });
+
+  it("shows minutes won against expected time", () => {
+    const task = completedTasks[2];
+
+    render(
+      <CompletedTask
+        task={task}
+        linkProps={{ to: "/timer/$taskId/edit", params: { taskId: task.id } }}
+      />,
+    );
+
+    expect(screen.getByText("+2m")).toBeInTheDocument();
+    expect(screen.getByText("2 minutes ahead")).toBeInTheDocument();
+  });
 });

@@ -8,14 +8,17 @@ export const MESSAGES = {
   room: "Room to improve, stay focused!",
 } as const;
 
-const OUTSTANDING_THRESHOLD = 80;
-const SOLID_THRESHOLD = 50;
-const TOUGH_DAY_THRESHOLD = 50;
+export const OUTSTANDING_MIN_MINUTES = 15;
+export const SOLID_MIN_MINUTES = 0;
+export const ROOM_MIN_MINUTES = -30;
 
-export function getMotivationalMessage(summary: PerformanceSummary): string {
-  if (summary.total === 0) return MESSAGES.empty;
-  if (summary.rocketPct >= OUTSTANDING_THRESHOLD) return MESSAGES.outstanding;
-  if (summary.rocketPct >= SOLID_THRESHOLD) return MESSAGES.solid;
-  if (summary.snailPct >= TOUGH_DAY_THRESHOLD) return MESSAGES.tough;
-  return MESSAGES.room;
+export function getMotivationalMessage({
+  total,
+  netMinutes,
+}: PerformanceSummary): string {
+  if (total === 0) return MESSAGES.empty;
+  if (netMinutes >= OUTSTANDING_MIN_MINUTES) return MESSAGES.outstanding;
+  if (netMinutes >= SOLID_MIN_MINUTES) return MESSAGES.solid;
+  if (netMinutes >= ROOM_MIN_MINUTES) return MESSAGES.room;
+  return MESSAGES.tough;
 }

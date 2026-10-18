@@ -1,5 +1,6 @@
 import type { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
 
+import { PERFORMANCE_TIER } from "../../types/performance-tier";
 import { completedTasks } from "@/test/store/tasks";
 import { getPerformanceSummary } from "../getPerformanceSummary";
 
@@ -27,65 +28,42 @@ const makeTask = (
 };
 
 describe("getPerformanceSummary", () => {
-  it("returns all zeros for empty array", () => {
-    const result = getPerformanceSummary([]);
-    expect(result).toEqual({
-      rocket: 0,
-      turtle: 0,
-      snail: 0,
+  it("returns zero on time for empty array", () => {
+    expect(getPerformanceSummary([])).toEqual({
       total: 0,
-      rocketPct: 0,
-      turtlePct: 0,
-      snailPct: 0,
+      netMinutes: 0,
+      tier: PERFORMANCE_TIER.ON_TIME,
     });
   });
 
-  it("counts all rockets when all tasks <= exp", () => {
-    const tasks = [makeTask(300, 600, 200), makeTask(300, 600, 300)];
-    const result = getPerformanceSummary(tasks);
-    expect(result).toEqual({
-      rocket: 2,
-      turtle: 0,
-      snail: 0,
-      total: 2,
-      rocketPct: 100,
-      turtlePct: 0,
-      snailPct: 0,
-    });
-  });
-
-  it("counts all snails when all tasks > max", () => {
-    const tasks = [makeTask(300, 600, 601), makeTask(300, 600, 700)];
-    const result = getPerformanceSummary(tasks);
-    expect(result).toEqual({
-      rocket: 0,
-      turtle: 0,
-      snail: 2,
-      total: 2,
-      rocketPct: 0,
-      turtlePct: 0,
-      snailPct: 100,
-    });
-  });
-
-  it("classifies mixed tasks and rounds percentages", () => {
+  it("sums minutes won as ahead", () => {
     const tasks = [
-      // rocket
-      makeTask(300, 600, 200),
-      // turtle
-      makeTask(300, 600, 400),
-      // snail
-      makeTask(300, 600, 700),
+      makeTask(1800, 2700, 1200),
+      makeTask(1800, 2700, 2040),
+      makeTask(1800, 2700, 1980),
     ];
-    const result = getPerformanceSummary(tasks);
-    expect(result).toEqual({
-      rocket: 1,
-      turtle: 1,
-      snail: 1,
+    expect(getPerformanceSummary(tasks)).toEqual({
       total: 3,
-      rocketPct: 33,
-      turtlePct: 33,
-      snailPct: 33,
+      netMinutes: 3,
+      tier: PERFORMANCE_TIER.AHEAD,
+    });
+  });
+
+  it("treats any net loss as over, even if tasks were only late", () => {
+    const tasks = [makeTask(1800, 2700, 1680), makeTask(1800, 2700, 2100)];
+    expect(getPerformanceSummary(tasks)).toEqual({
+      total: 2,
+      netMinutes: -3,
+      tier: PERFORMANCE_TIER.OVER,
+    });
+  });
+
+  it("returns on time when wins and losses cancel out", () => {
+    const tasks = [makeTask(1800, 2700, 1500), makeTask(1800, 2700, 2100)];
+    expect(getPerformanceSummary(tasks)).toEqual({
+      total: 2,
+      netMinutes: 0,
+      tier: PERFORMANCE_TIER.ON_TIME,
     });
   });
 });
