@@ -8,7 +8,6 @@ export const MESSAGES = {
   room: "Room to improve, stay focused!",
 } as const;
 
-/** Net minutes thresholds (inclusive). */
 export const OUTSTANDING_MIN_MINUTES = 15;
 export const SOLID_MIN_MINUTES = 0;
 export const ROOM_MIN_MINUTES = -30;

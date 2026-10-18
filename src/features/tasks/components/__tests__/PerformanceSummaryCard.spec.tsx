@@ -6,7 +6,6 @@ import { completedTasks } from "@/test/store/tasks";
 
 describe("PerformanceSummaryCard", () => {
   it("renders net minutes and message with tasks", () => {
-    // -2m, -1m, +2m, +5m
     render(<PerformanceSummaryCard tasks={completedTasks} />);
 
     expect(screen.getByText("+4m")).toBeInTheDocument();

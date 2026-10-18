@@ -4,7 +4,6 @@ import {
 } from "../types/performance-tier";
 
 export const PLUS_SIGN = "+";
-/** Typographic minus (U+2212): same width as "+", keeps tabular-nums aligned. */
 export const MINUS_SIGN = "−";
 export const MINUTE_SUFFIX = "m";
 

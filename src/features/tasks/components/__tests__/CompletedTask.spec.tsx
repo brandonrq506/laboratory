@@ -51,7 +51,6 @@ describe("CompletedTask", () => {
   });
 
   it("shows minutes won against expected time", () => {
-    // 3m against 5m expected
     const task = completedTasks[2];
 
     render(

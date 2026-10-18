@@ -9,12 +9,10 @@ import { getPerformanceDelta } from "./getPerformanceDelta";
 
 export interface PerformanceSummary {
   total: number;
-  /** Sum of each task's rounded minutes won (+) or lost (-). */
   netMinutes: number;
   tier: PerformanceTier;
 }
 
-// Net has no `late` tier: any net loss reads as over (red).
 const getNetTier = (netMinutes: number): PerformanceTier => {
   if (netMinutes > 0) return PERFORMANCE_TIER.AHEAD;
   if (netMinutes < 0) return PERFORMANCE_TIER.OVER;

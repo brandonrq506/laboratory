@@ -6,6 +6,16 @@ const getSign = (minutes: number) => {
   return "";
 };
 
-/** e.g. "+12m", "−90m", "0m". */
+/**
+ * Formats minutes won or lost as a signed, compact label.
+ *
+ * @param minutes - Minutes won (positive) or lost (negative).
+ * @returns The signed minutes with an `m` suffix, unsigned when zero.
+ *
+ * @example
+ * formatPerformanceDelta(12); // "+12m"
+ * formatPerformanceDelta(-90); // "−90m"
+ * formatPerformanceDelta(0); // "0m"
+ */
 export const formatPerformanceDelta = (minutes: number) =>
   `${getSign(minutes)}${Math.abs(minutes)}${MINUTE_SUFFIX}`;

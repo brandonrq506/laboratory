@@ -15,7 +15,6 @@ export const PerformanceSummaryCard = ({
   withMessage = true,
 }: Props) => {
   const summary = getPerformanceSummary(tasks);
-  // With a message, an empty day only shows the "start" prompt.
   const showDelta = !withMessage || summary.total > 0;
 
   return (

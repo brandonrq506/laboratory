@@ -37,7 +37,6 @@ describe("getPerformanceSummary", () => {
   });
 
   it("sums minutes won as ahead", () => {
-    // +10m, -4m, -3m
     const tasks = [
       makeTask(1800, 2700, 1200),
       makeTask(1800, 2700, 2040),
@@ -51,7 +50,6 @@ describe("getPerformanceSummary", () => {
   });
 
   it("treats any net loss as over, even if tasks were only late", () => {
-    // +2m, -5m (late, within max)
     const tasks = [makeTask(1800, 2700, 1680), makeTask(1800, 2700, 2100)];
     expect(getPerformanceSummary(tasks)).toEqual({
       total: 2,

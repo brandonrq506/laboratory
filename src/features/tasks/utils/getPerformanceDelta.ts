@@ -11,7 +11,6 @@ interface Props {
 }
 
 export interface PerformanceDelta {
-  /** Minutes won (+) or lost (-) against the activity's expected time. */
   minutes: number;
   tier: PerformanceTier;
 }
@@ -23,12 +22,19 @@ function getTier(minutes: number, isOverMax: boolean): PerformanceTier {
   return PERFORMANCE_TIER.LATE;
 }
 
+/**
+ * Compares a task's duration against its activity's expected time.
+ *
+ * @param props.activity - Activity holding `exp_seconds` and `max_seconds`.
+ * @param props.duration_seconds - How long the task took.
+ * @returns Minutes won (positive) or lost (negative), rounded to the nearest
+ * minute and never `-0`, plus its {@link PerformanceTier}.
+ */
 export function getPerformanceDelta({
   activity,
   duration_seconds,
 }: Props): PerformanceDelta {
   const { exp_seconds, max_seconds } = activity;
-  // Rounds legacy tasks saved with seconds; `|| 0` normalizes -0.
   const minutes =
     Math.round((exp_seconds - duration_seconds) / secondsInMinute) || 0;
 
