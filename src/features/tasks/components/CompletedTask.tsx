@@ -9,13 +9,18 @@ import { formatDatetimeTo12hTime, secondsToTime } from "@/utils";
 import { getColorByName } from "@/features/colors/utils/getColorByName";
 import { getDurationInSeconds } from "../utils/getDurationInSeconds";
 
-import { getPerformanceEmoji } from "../utils/getPerformanceEmoji";
+import { PerformanceDelta } from "./PerformanceDelta";
+import { getPerformanceDelta } from "../utils/getPerformanceDelta";
 
 type Props = { task: CompletedTaskAPI; linkProps: LinkProps };
 
 export const CompletedTask = ({ task, linkProps }: Props) => {
   const color = getColorByName(task.activity.category.color);
   const durationSeconds = getDurationInSeconds(task.start_time, task.end_time);
+  const { minutes, tier } = getPerformanceDelta({
+    activity: task.activity,
+    duration_seconds: durationSeconds,
+  });
 
   return (
     <Card className="flex justify-between gap-1 shadow-xs">
@@ -41,12 +46,7 @@ export const CompletedTask = ({ task, linkProps }: Props) => {
       </Link>
 
       <div className="flex items-center gap-2">
-        <span className="text-xs">
-          {getPerformanceEmoji({
-            activity: task.activity,
-            duration_seconds: durationSeconds,
-          })}
-        </span>
+        <PerformanceDelta minutes={minutes} tier={tier} className="text-xs" />
         <DeleteTask taskId={task.id} />
       </div>
     </Card>
