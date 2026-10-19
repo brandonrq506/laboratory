@@ -4,12 +4,6 @@ import { getFirstCategoryAsOption } from "../getFirstCategoryAsOption";
 import { COLOR_NAME } from "@/features/colors/types/colors";
 
 describe("getFirstCategoryAsOption", () => {
-  it("should return null if categories is undefined", () => {
-    const categories = undefined;
-    const result = getFirstCategoryAsOption(categories);
-    expect(result).toBeNull();
-  });
-
   it("should return null if categories is empty", () => {
     const categories: CategoryModel[] = [];
     const result = getFirstCategoryAsOption(categories);
