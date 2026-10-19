@@ -9,3 +9,6 @@ export const ERROR_DURATION = 2000;
 
 /** Delay before triggering the open animation for HeadlessUI dialogs (milliseconds) */
 export const MODAL_DURATION = 10;
+
+/** How long the notification badge takes to slide off-screen (milliseconds) */
+export const NOTIFICATION_EXIT_DURATION = 300;

@@ -1,9 +1,10 @@
 import { act, render, screen } from "@testing-library/react";
 
-import { NOTIFICATION_DURATION } from "@/constants/durations";
+import {
+  NOTIFICATION_DURATION,
+  NOTIFICATION_EXIT_DURATION,
+} from "@/constants/durations";
 import { NetworkBadge } from "./NetworkBadge";
-
-const EXIT_ANIMATION_DURATION = 300;
 
 describe("NetworkBadge", () => {
   beforeEach(() => {
@@ -40,7 +41,9 @@ describe("NetworkBadge", () => {
     expect(screen.getByText("Connection Restored")).toBeInTheDocument();
 
     act(() => {
-      vi.advanceTimersByTime(NOTIFICATION_DURATION + EXIT_ANIMATION_DURATION);
+      vi.advanceTimersByTime(
+        NOTIFICATION_DURATION + NOTIFICATION_EXIT_DURATION,
+      );
     });
 
     expect(screen.queryByRole("status")).not.toBeInTheDocument();

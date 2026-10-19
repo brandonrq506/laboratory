@@ -1,4 +1,8 @@
-import type { AxiosError, InternalAxiosRequestConfig } from "axios";
+import {
+  type AxiosError,
+  HttpStatusCode,
+  type InternalAxiosRequestConfig,
+} from "axios";
 
 import { REFRESH_ENDPOINT, apiV1 } from "./axios";
 
@@ -9,7 +13,6 @@ declare module "axios" {
   }
 }
 
-const UNAUTHORIZED = 401;
 const BEARER_PREFIX = "Bearer ";
 
 let accessToken: string | null = null;
@@ -59,7 +62,10 @@ const tokenSentWith = (config: InternalAxiosRequestConfig): string | null => {
 const handleResponseError = async (error: AxiosError) => {
   const originalRequest = error.config;
 
-  if (!originalRequest || error.response?.status !== UNAUTHORIZED) {
+  if (
+    !originalRequest ||
+    error.response?.status !== HttpStatusCode.Unauthorized
+  ) {
     return Promise.reject(error);
   }
 
