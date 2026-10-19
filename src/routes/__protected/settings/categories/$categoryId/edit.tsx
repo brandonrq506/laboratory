@@ -40,7 +40,7 @@ function RouteComponent() {
         categoryId={categoryId}
         initialValues={{
           name: data.name,
-          color: { value: color.id, label: color.name },
+          color: color.name,
         }}
       />
     </Modal>

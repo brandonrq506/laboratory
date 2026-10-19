@@ -6,7 +6,6 @@ interface Props {
   item: RoutineItem;
 }
 
-// Todo: I don't really like this. What is the cleanest way to handle both routine and activity cases?
 export const RoutineCardItem = ({ item }: Props) => {
   return (
     <div className="my-1 flex justify-between">

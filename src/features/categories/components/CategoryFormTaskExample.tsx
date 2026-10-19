@@ -2,11 +2,8 @@ import { type Control, useWatch } from "react-hook-form";
 
 import type { EditForm } from "../types/editForm";
 import { ExampleCompletedTask } from "@/features/tasks/components";
-import { isColor } from "@/features/colors/utils/isColor";
 
 import { TASK_STATUS } from "@/features/tasks/types/task-status";
-
-import { COLOR_NAME } from "@/features/colors/types/colors";
 
 type Props = {
   control: Control<EditForm>;
@@ -14,7 +11,6 @@ type Props = {
 
 export const CategoryFormTaskExample = ({ control }: Props) => {
   const color = useWatch({ control, name: "color" });
-  const validColor = isColor(color.label) ? color.label : COLOR_NAME.WHITE;
 
   return (
     <ExampleCompletedTask
@@ -24,7 +20,7 @@ export const CategoryFormTaskExample = ({ control }: Props) => {
           category: {
             id: 1,
             name: "Productive",
-            color: validColor,
+            color,
             created_at: "2024-01-01T00:00:00Z",
             updated_at: "2024-01-01T00:00:00Z",
             user_id: 1,

@@ -8,12 +8,6 @@ import { TextInput } from "@/components/form";
 
 import { COLOR_NAME } from "@/features/colors/types/colors";
 
-// TODO: Add type-safety to color. How do we know value 1 is white?
-const defaultCategory: EditForm = {
-  name: "",
-  color: { value: 1, label: COLOR_NAME.WHITE },
-};
-
 type Props = {
   initialValues?: Partial<EditForm>;
   onSubmit: (data: EditForm) => void;
@@ -26,7 +20,7 @@ export const CategoryForm = ({
   submitButtonText,
 }: Props) => {
   const { control, formState, handleSubmit, register } = useForm<EditForm>({
-    values: { ...defaultCategory, ...initialValues },
+    values: { name: "", color: COLOR_NAME.WHITE, ...initialValues },
   });
 
   const { errors, isDirty, isSubmitting } = formState;
