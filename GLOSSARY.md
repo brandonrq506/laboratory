@@ -28,6 +28,28 @@ _Avoid_: Estimate, target
 The longest an Activity may take before it counts as Over.
 _Avoid_: Limit, cap
 
+## Planning
+
+**Expected Start**:
+When a Scheduled Task should begin: right after the Task before it, given its Expected Time.
+_Avoid_: EST, ETA, estimated start
+
+**Day Window**:
+A user's usual Day Start and Day End for one day of the week (Monday to Sunday). Either may be unset.
+_Avoid_: Schedule, schedule preferences, waking hours
+
+**Day Start**:
+When a user's day usually begins on a given day of the week. Anchors the first Expected Start of a future date's Scheduled Tasks.
+_Avoid_: Wake time
+
+**Day End**:
+When a user's day usually ends on a given day of the week. Never past midnight, and later than the Day Start when both are set.
+_Avoid_: Bedtime, sleep time
+
+**Start Override**:
+A one-off replacement for the Day Start of a single future date.
+_Avoid_: Custom start, date start
+
 ## Performance
 
 **Performance Delta**:
