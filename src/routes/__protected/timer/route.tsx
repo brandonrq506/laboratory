@@ -4,9 +4,9 @@ import {
   scheduledTasksQueryOptions,
   todayCompletedTasksQueryOptions,
 } from "@/features/tasks/api/queries";
-import { ScheduledTaskList } from "@/pages/Tasks/ScheduledTaskList";
+import { ScheduledTaskList } from "./-components/ScheduledTaskList";
 import { TimerPanel } from "@/features/timer/components";
-import { TodayCompletedTaskList } from "@/pages/Tasks/TodayCompletedTaskList";
+import { TodayCompletedTaskList } from "./-components/TodayCompletedTaskList";
 import { getPageTitle } from "@/utils";
 
 export const Route = createFileRoute("/__protected/timer")({

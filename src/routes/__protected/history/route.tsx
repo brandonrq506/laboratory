@@ -4,7 +4,7 @@ import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { CreateTaskForm } from "@/features/tasks/components/CreateTaskForm";
 import { DateFilter } from "@/components/core/Date";
 import { HeadingLarge } from "@/components/layout";
-import { HistoryTaskList } from "@/pages/Tasks";
+import { HistoryTaskList } from "./-components/HistoryTaskList";
 import { Modal } from "@/components/core";
 import { PlusIcon } from "@heroicons/react/24/solid";
 

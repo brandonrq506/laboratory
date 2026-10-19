@@ -1,9 +1,9 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 
 import { DateFilter } from "@/components/core/Date";
-import { FutureScheduledTaskList } from "@/pages/Tasks/future-scheduled-task-list";
+import { FutureScheduledTaskList } from "./-components/FutureScheduledTaskList";
 import { HeadingLarge } from "@/components/layout";
-import { ScheduledTaskListActions } from "@/pages/Tasks/ScheduledTaskListActions";
+import { ScheduledTaskListActions } from "@/features/tasks/components/ScheduledTaskListActions";
 
 import { futureTasksQueryOptions } from "@/features/tasks/api/queries";
 import { getPageTitle } from "@/utils";

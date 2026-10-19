@@ -13,7 +13,7 @@ const domTestFiles = [
   "src/features/userPreferences/utils/__tests__/applyResolvedTheme.{test,spec}.ts",
 ];
 
-const nodeTestFiles = ["src/**/utils/**/*.{test,spec}.ts"];
+const nodeTestFiles = ["src/**/{utils,-utils}/**/*.{test,spec}.ts"];
 
 export default defineConfig({
   resolve: {

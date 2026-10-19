@@ -6,7 +6,7 @@ import {
   TimerScheduledCardContent,
 } from "@/features/tasks/components";
 import { Loading } from "@/components/core";
-import { ScheduledTaskListActions } from "./ScheduledTaskListActions";
+import { ScheduledTaskListActions } from "@/features/tasks/components/ScheduledTaskListActions";
 import { SectionHeaderWithAction } from "@/components/layout";
 import { TaskErrorList } from "@/features/tasks/components/TaskErrorList";
 
