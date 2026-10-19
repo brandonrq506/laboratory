@@ -1,7 +1,6 @@
 export { Badge } from "./Badge/Badge";
 export { Button } from "./Button/Button";
 export { ConfirmationModal } from "./Modal/ConfirmationModal";
-export { CopyToClipboardButton } from "./Button/CopyToClipboardButton";
 export { Dot } from "./Dot/Dot";
 export { DurationLabel } from "./time/duration-label";
 export { EmptyList } from "./List/EmptyList";

@@ -1,13 +1,11 @@
 import { useDisclosure } from "@/hooks";
 
 import { Outlet, createFileRoute } from "@tanstack/react-router";
-import { AdminProtectedContent } from "@/features/user/components";
 import { CreateTaskForm } from "@/features/tasks/components/CreateTaskForm";
 import { DateFilter } from "@/components/core/Date";
-import { ExcelLink } from "@/pages/Tasks/ExcelLink";
+import { HeadingLarge } from "@/components/layout";
 import { HistoryTaskList } from "@/pages/Tasks";
 import { Modal } from "@/components/core";
-import { PageHeaderWithActions } from "@/components/layout";
 import { PlusIcon } from "@heroicons/react/24/solid";
 
 import { getPageTitle } from "@/utils";
@@ -40,14 +38,7 @@ function RouteComponent() {
 
   return (
     <div>
-      <PageHeaderWithActions
-        title="Tasks"
-        actions={
-          <AdminProtectedContent>
-            <ExcelLink />
-          </AdminProtectedContent>
-        }
-      />
+      <HeadingLarge title="Tasks" />
       <div className="mb-2 flex w-full items-center justify-between">
         <DateFilter
           label="Date Filter"

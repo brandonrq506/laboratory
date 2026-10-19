@@ -36,7 +36,6 @@ apiV1.interceptors.response.use(
 // ENDPOINTS
 export const ACTIVITIES_ENDPOINT = "/activities";
 export const CATEGORIES_ENDPOINT = "/categories";
-export const EXCEL_ENDPOINT = "/excel";
 export const ME_ENDPOINT = "/me";
 export const ROUTINES_ENDPOINT = "/routines";
 export const SESSION_ENDPOINT = "/session";
