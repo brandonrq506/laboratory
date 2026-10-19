@@ -3,10 +3,11 @@ import { useOnlineStatus } from "@/hooks";
 import { useTimeout } from "@/hooks/useTimeout";
 
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
-import { NOTIFICATION_DURATION } from "@/constants/durations";
+import {
+  NOTIFICATION_DURATION,
+  NOTIFICATION_EXIT_DURATION,
+} from "@/constants/durations";
 import clsx from "clsx";
-
-const THREE_HUNDRED_MS = 300;
 
 export const NetworkBadge = () => {
   const isOnline = useOnlineStatus();
@@ -49,7 +50,7 @@ export const NetworkBadge = () => {
       setShouldRender(true);
       setVisible(true);
       scheduleHide(NOTIFICATION_DURATION);
-      scheduleUnmount(NOTIFICATION_DURATION + THREE_HUNDRED_MS);
+      scheduleUnmount(NOTIFICATION_DURATION + NOTIFICATION_EXIT_DURATION);
     }
   }, [isOnline, clearHide, clearUnmount, scheduleHide, scheduleUnmount]);
 

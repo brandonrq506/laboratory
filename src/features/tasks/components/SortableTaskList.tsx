@@ -21,6 +21,10 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import {
+  TOUCH_ACTIVATION_DELAY,
+  TOUCH_ACTIVATION_TOLERANCE,
+} from "@/constants/dnd";
+import {
   restrictToParentElement,
   restrictToVerticalAxis,
 } from "@dnd-kit/modifiers";
@@ -54,8 +58,8 @@ export const SortableTaskList = <T extends SortableListItem>({
     useSensor(TouchSensor, {
       // Add a small delay to prevent accidental drags
       activationConstraint: {
-        delay: 100,
-        tolerance: 5,
+        delay: TOUCH_ACTIVATION_DELAY,
+        tolerance: TOUCH_ACTIVATION_TOLERANCE,
       },
     }),
     useSensor(KeyboardSensor, {
