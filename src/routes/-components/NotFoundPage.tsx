@@ -1,7 +1,7 @@
 import { Card } from "@/components/layout";
 import { LinkButton } from "@/components/core";
 import type { NotFoundRouteProps } from "@tanstack/react-router";
-import { getNotFoundPageContent } from "./utils/getNotFoundPageContent";
+import { getNotFoundPageContent } from "../-utils/getNotFoundPageContent";
 
 export const NotFoundPage = ({ data }: NotFoundRouteProps) => {
   const content = getNotFoundPageContent(data);

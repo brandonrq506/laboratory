@@ -7,7 +7,7 @@ import {
   scheduledTasks,
   withApplication,
 } from "@/test/store/tasks";
-import { FutureScheduledTaskList } from "../future-scheduled-task-list";
+import { FutureScheduledTaskList } from "../FutureScheduledTaskList";
 
 import { HttpResponse, http } from "msw";
 import { apiRoutes } from "@/test/handlers/api-routes";

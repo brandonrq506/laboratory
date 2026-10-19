@@ -1,7 +1,7 @@
 import { useNavigateBack } from "@/hooks";
 
 import { Modal } from "@/components/core";
-import { NewTodayCompletedTaskForm } from "@/pages/Tasks/NewTodayCompletedTaskForm";
+import { NewTodayCompletedTaskForm } from "./-components/NewTodayCompletedTaskForm";
 import { createFileRoute } from "@tanstack/react-router";
 import { getPageTitle } from "@/utils";
 

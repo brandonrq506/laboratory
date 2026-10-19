@@ -2,9 +2,9 @@ import { set, startOfToday } from "date-fns";
 import { useNavigate } from "@tanstack/react-router";
 
 import { getNewTaskDefaultTimes, splitHHMM } from "@/utils";
-import type { NewTaskForm as FormType } from "../../features/tasks/types/newTaskForm";
-import { NewTaskForm } from "../../features/tasks/components/NewTaskForm";
-import { useCreateCompletedTodayTask } from "../../features/tasks/api/tanstack/useCreateCompletedTodayTask";
+import type { NewTaskForm as FormType } from "@/features/tasks/types/newTaskForm";
+import { NewTaskForm } from "@/features/tasks/components/NewTaskForm";
+import { useCreateCompletedTodayTask } from "@/features/tasks/api/tanstack/useCreateCompletedTodayTask";
 
 import { TASK_STATUS } from "@/features/tasks/types/task-status";
 

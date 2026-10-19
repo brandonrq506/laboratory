@@ -6,7 +6,7 @@ import {
 import { type ErrorComponentProps, useRouter } from "@tanstack/react-router";
 import { Button } from "@/components/core";
 import clsx from "clsx";
-import { getRouteErrorPageContent } from "./utils/getRouteErrorPageContent";
+import { getRouteErrorPageContent } from "../-utils/getRouteErrorPageContent";
 
 export const RouteErrorPage = ({ error }: ErrorComponentProps) => {
   const router = useRouter();

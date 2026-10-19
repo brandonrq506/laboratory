@@ -8,9 +8,9 @@ import { Fragment } from "react/jsx-runtime";
 import { TanStackDevtoolsWrapper } from "@/libs/tanstack-devtools";
 
 import type { AuthContextType } from "@/features/auth/stores/AuthContextType";
-import { NotFoundPage } from "@/pages/NotFoundPage";
+import { NotFoundPage } from "./-components/NotFoundPage";
 import type { QueryClient } from "@tanstack/react-query";
-import { RouteErrorPage } from "@/pages/RouteErrorPage";
+import { RouteErrorPage } from "./-components/RouteErrorPage";
 import { getPageTitle } from "@/utils";
 import { useApplyTheme } from "@/features/userPreferences/hooks";
 

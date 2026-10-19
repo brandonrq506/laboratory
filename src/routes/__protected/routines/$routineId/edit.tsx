@@ -6,7 +6,7 @@ import {
   RoutineItemList,
 } from "@/features/routines/components";
 import { HeadingMedium, SectionHeaderWithAction } from "@/components/layout";
-import { EditRoutineActions } from "@/pages/routines/EditRoutinePage/EditRoutineActions";
+import { EditRoutineActions } from "./-components/EditRoutineActions";
 import { FullHeightModal } from "@/components/core";
 import { createFileRoute } from "@tanstack/react-router";
 
