@@ -1,6 +1,6 @@
-import type { Option } from "@/types/core";
+import type { Colors } from "@/features/colors/types/colors";
 
 export type EditForm = {
   name: string;
-  color: Option;
+  color: Colors;
 };

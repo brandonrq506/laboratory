@@ -3,18 +3,51 @@ import { CategoryForm } from "../CategoryForm";
 import userEvent from "@testing-library/user-event";
 
 import { COLOR_NAME } from "@/features/colors/types/colors";
+import type { CompletedTaskAPI } from "@/features/tasks/types/completedTask";
+
+vi.mock("@/features/tasks/components", () => ({
+  ExampleCompletedTask: ({ task }: { task: CompletedTaskAPI }) => (
+    <output aria-label="Preview color">{task.activity.category.color}</output>
+  ),
+}));
 
 describe("CategoryForm", () => {
-  it("shows all 14 colors as options", async () => {
+  it("shows every color once", async () => {
     const user = userEvent.setup();
     render(<CategoryForm onSubmit={vi.fn()} submitButtonText="Add Category" />);
 
     await user.click(screen.getByRole("button", { name: "Color" }));
 
-    expect(screen.getAllByRole("option")).toHaveLength(14);
+    const options = screen.getAllByRole("option");
+    expect(options.map((option) => option.textContent)).toEqual(
+      Object.values(COLOR_NAME),
+    );
   });
 
-  it("shows default values when provided, ", async () => {
+  it("submits white by default", async () => {
+    const user = userEvent.setup();
+    const onSubmit = vi.fn();
+    render(
+      <CategoryForm onSubmit={onSubmit} submitButtonText="Add Category" />,
+    );
+
+    expect(screen.getByRole("button", { name: "Color" })).toHaveTextContent(
+      COLOR_NAME.WHITE,
+    );
+    expect(screen.getByLabelText("Preview color")).toHaveTextContent(
+      COLOR_NAME.WHITE,
+    );
+
+    await user.type(screen.getByLabelText("Name *"), "Tester");
+    await user.click(screen.getByRole("button", { name: /add category/i }));
+
+    expect(onSubmit).toHaveBeenCalledWith({
+      name: "Tester",
+      color: COLOR_NAME.WHITE,
+    });
+  });
+
+  it("shows default values when provided", async () => {
     const user = userEvent.setup();
     render(
       <CategoryForm
@@ -22,7 +55,7 @@ describe("CategoryForm", () => {
         onSubmit={vi.fn()}
         initialValues={{
           name: "Tester",
-          color: { value: 4, label: COLOR_NAME.EMERALD },
+          color: COLOR_NAME.EMERALD,
         }}
       />,
     );
@@ -67,13 +100,17 @@ describe("CategoryForm", () => {
     await user.click(screen.getByRole("button", { name: "Color" }));
     await user.click(screen.getByRole("option", { name: COLOR_NAME.EMERALD }));
 
+    expect(screen.getByLabelText("Preview color")).toHaveTextContent(
+      COLOR_NAME.EMERALD,
+    );
+
     await user.type(screen.getByLabelText("Name *"), "Tester");
     await user.click(screen.getByRole("button", { name: /add category/i }));
 
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit).toHaveBeenCalledWith({
       name: "Tester",
-      color: { value: 4, label: COLOR_NAME.EMERALD, disabled: false },
+      color: COLOR_NAME.EMERALD,
     });
   });
 });
