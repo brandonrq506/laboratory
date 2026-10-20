@@ -37,7 +37,8 @@ export const EditInProgressTaskForm = ({ task }: Props) => {
   return (
     <InProgressTaskForm
       initialValues={{
-        start_time: task.start_time,
+        // Normalize to the "Z" format TimeInputV2 emits so dirty-checking compares like with like.
+        start_time: new Date(task.start_time).toISOString(),
         activity: {
           label: task.activity.display_name,
           value: task.activity.id,
