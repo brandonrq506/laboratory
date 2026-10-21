@@ -10,5 +10,8 @@ export { StateInputText } from "./TextInput/StateInputText";
 export { StringSelect } from "./Select/StringSelect";
 export { TextArea } from "./Textarea/TextArea";
 export { TextInput } from "./TextInput/TextInput";
-export { TimeInputV2 } from "./TimeInput/TimeInputV2";
-export { TimeInputV3 } from "./TimeInput/TimeInputV3";
+export { TimeInput } from "./TimeInput/TimeInput";
+export {
+  instantOnTransform,
+  wallClockTransform,
+} from "./TimeInput/utils/timeInputTransforms";

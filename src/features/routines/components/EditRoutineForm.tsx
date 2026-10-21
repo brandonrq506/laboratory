@@ -7,7 +7,7 @@ import { routineByIdQueryOptions } from "../api/queries";
 
 import type { EditRoutineForm as FormType } from "../types/routine-form";
 
-import { TextInput, TimeInputV3 } from "@/components/form";
+import { TextInput, TimeInput, wallClockTransform } from "@/components/form";
 import { Button } from "@/components/core";
 import { UPDATE } from "@/constants/actions";
 
@@ -47,9 +47,10 @@ export const EditRoutineForm = () => {
           })}
         />
 
-        <TimeInputV3
+        <TimeInput
           control={control}
           name="start_time"
+          transform={wallClockTransform}
           label="Start Time"
           hideLabel
         />

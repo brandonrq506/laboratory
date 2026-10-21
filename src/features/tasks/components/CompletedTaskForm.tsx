@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-import { TextArea, TimeInputV2 } from "@/components/form";
+import { TextArea, TimeInput, instantOnTransform } from "@/components/form";
 import { ActivityComboBox } from "@/features/activities/components";
 import { Button } from "@/components/core";
 import { CategoryBadge } from "@/features/categories/components";
@@ -48,17 +48,19 @@ export const CompletedTaskForm = ({ initialValues, task, onSubmit }: Props) => {
         error={errors.note?.message}
       />
 
-      <TimeInputV2
+      <TimeInput
         label="Start Time"
         name="start_time"
         control={control}
+        transform={instantOnTransform(task.start_time)}
         rules={{ required: "Start time is required." }}
       />
 
-      <TimeInputV2
+      <TimeInput
         label="End Time"
         name="end_time"
         control={control}
+        transform={instantOnTransform(task.end_time)}
         rules={{
           required: "End time is required.",
           validate: {

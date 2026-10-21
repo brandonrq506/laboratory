@@ -1,21 +1,23 @@
 import { useForm } from "react-hook-form";
 
-import { TextArea, TimeInputV3 } from "@/components/form";
+import { TextArea, TimeInput, instantOnTransform } from "@/components/form";
 import { ActivityComboBox } from "@/features/activities/components";
 import type { NewTaskForm as FormType } from "../types/newTaskForm";
 
 import { Button } from "@/components/core";
 import { CREATE } from "@/constants/actions";
 import { TASK } from "@/constants/entities";
-import { splitHHMM } from "@/utils";
 import { useEffect } from "react";
 
+import { isAfter, parseISO } from "date-fns";
+
 interface Props {
+  date: Date;
   initialValues: FormType;
   onSubmit: (data: FormType) => void;
 }
 
-export const NewTaskForm = ({ initialValues, onSubmit }: Props) => {
+export const NewTaskForm = ({ date, initialValues, onSubmit }: Props) => {
   const { control, formState, getValues, handleSubmit, register, setFocus } =
     useForm<FormType>({
       values: initialValues,
@@ -48,32 +50,31 @@ export const NewTaskForm = ({ initialValues, onSubmit }: Props) => {
         error={errors.note?.message}
       />
 
-      <TimeInputV3
+      <TimeInput
         label="Start Time"
         name="start_time"
         control={control}
+        transform={instantOnTransform(date)}
         rules={{ required: "Start time is required." }}
       />
 
-      <TimeInputV3
+      <TimeInput
         label="End Time"
         name="end_time"
         control={control}
+        transform={instantOnTransform(date)}
         rules={{
           required: "End time is required.",
           validate: {
             isAfterStartTime: (v) => {
               const { start_time } = getValues();
-              const [startHours, startMinutes] = splitHHMM(start_time);
-              const [endHours, endMinutes] = splitHHMM(v as string);
+              const endTime = parseISO(v as string);
+              const startTime = parseISO(start_time);
 
-              if (startHours > endHours)
-                return "End time must be after start time";
-
-              if (startHours === endHours && startMinutes >= endMinutes)
-                return "End time must be after start time";
-
-              return true;
+              return (
+                isAfter(endTime, startTime) ||
+                "End time must be after start time"
+              );
             },
           },
         }}
