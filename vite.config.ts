@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
 
-import { coverageConfigDefaults, defineConfig } from "vitest/config";
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
@@ -65,7 +65,18 @@ export default defineConfig({
     coverage: {
       provider: "istanbul",
       reporter: ["text", "html", "clover", "json"],
-      exclude: ["src/routes", ...coverageConfigDefaults.exclude],
+      include: ["src/**/*.{ts,tsx}"],
+      exclude: [
+        "src/test/**",
+        "src/main.tsx",
+        "src/routeTree.gen.ts",
+        "src/vite-env.d.ts",
+        "src/libs/tanstack-devtools/**",
+        "src/libs/**/dev-tools.tsx",
+        // Route files belong to e2e; `-` prefixed folders (co-located components/utils) stay in
+        "src/routes/*.{ts,tsx}",
+        "src/routes/**/!(-*)/*.{ts,tsx}",
+      ],
     },
   },
 });
