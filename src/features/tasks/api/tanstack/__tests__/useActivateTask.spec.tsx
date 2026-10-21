@@ -12,8 +12,8 @@ import {
 } from "@/test/utils/query-client";
 import {
   inProgressTasksQueryOptions,
-  scheduledTasksQueryOptions,
   taskByIdQueryOptions,
+  timerScheduledTasksQueryOptions,
   todayCompletedTasksQueryOptions,
 } from "../../queries";
 import { apiRoutes } from "@/test/handlers/api-routes";
@@ -23,7 +23,7 @@ import { useActivateTask } from "../useActivateTask";
 
 describe("useActivateTask", () => {
   const inProgressKey = inProgressTasksQueryOptions().queryKey;
-  const scheduledKey = scheduledTasksQueryOptions().queryKey;
+  const scheduledKey = timerScheduledTasksQueryOptions().queryKey;
   const completedKey = todayCompletedTasksQueryOptions().queryKey;
 
   const [current] = inProgressTasks;

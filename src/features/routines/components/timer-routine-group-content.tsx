@@ -5,7 +5,7 @@ import { RoutineGroupExpandToggle } from "./routine-group-expand-toggle";
 import { RoutineGroupName } from "./routine-group-name";
 import { TaskCountLabel } from "./task-count-label";
 
-import { scheduledTasksQueryOptions } from "@/features/tasks/api/queries";
+import { timerScheduledTasksQueryOptions } from "@/features/tasks/api/queries";
 import { useDeleteTasks } from "@/features/tasks/api/tanstack/use-delete-tasks";
 
 import type { ScheduledTaskWithEST } from "@/features/tasks/types/scheduledTaskWithEST";
@@ -17,7 +17,9 @@ interface Props {
 }
 
 export const TimerRoutineGroupContent = ({ item, onToggleExpanded }: Props) => {
-  const { mutate: deleteTasks } = useDeleteTasks(scheduledTasksQueryOptions());
+  const { mutate: deleteTasks } = useDeleteTasks(
+    timerScheduledTasksQueryOptions(),
+  );
 
   // Safe: a wrap always absorbs at least MIN_TASKS_TO_WRAP tasks.
   const firstTask = item.absorbed_tasks[0];

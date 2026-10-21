@@ -13,8 +13,8 @@ import {
 } from "@/test/store/tasks";
 import { apiRoutes } from "@/test/handlers/api-routes";
 import { createDeferred } from "@/test/utils/create-deferred";
-import { scheduledTasksQueryOptions } from "@/features/tasks/api/queries";
 import { server } from "@/test/server";
+import { timerScheduledTasksQueryOptions } from "@/features/tasks/api/queries";
 import { useScheduledListController } from "../use-scheduled-list-controller";
 import { useTimerScheduledListData } from "../use-timer-scheduled-list-data";
 import { wrapSortableId } from "@/features/routines/utils/wrap-sortable-id";
@@ -29,7 +29,7 @@ import type { ScheduledTaskAPI } from "@/features/tasks/types/scheduledTask";
 /** A list whose pin is a spy: lets specs read exactly what the controller pins. */
 const buildSource = (rawItems: ScheduledTaskAPI[]) =>
   ({
-    listQueryOptions: scheduledTasksQueryOptions(),
+    listQueryOptions: timerScheduledTasksQueryOptions(),
     rawItems,
     displayTasks: rawItems,
     setTempItems: vi.fn<SetTempItems>(),
@@ -173,7 +173,7 @@ describe("useScheduledListController — moves", () => {
       }),
     );
     const queryClient = createTestQueryClient();
-    const { queryKey } = scheduledTasksQueryOptions();
+    const { queryKey } = timerScheduledTasksQueryOptions();
     const { result } = renderHook(
       () => useScheduledListController(useTimerScheduledListData()),
       { wrapper: createQueryWrapper(queryClient) },

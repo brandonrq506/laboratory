@@ -1,7 +1,7 @@
+import { DATE_TOKEN_TODAY } from "@/constants/date-tokens";
 import { TASKS_ENDPOINT } from "@/libs/axios";
 import { queryOptions } from "@tanstack/react-query";
 
-import { endOfDay, formatISO } from "date-fns";
 import { getTask } from "./axios/getTask";
 import { getTasks } from "./axios/getTasks";
 
@@ -30,6 +30,13 @@ export type TaskApiFilters = {
 export const taskKeys = {
   all: [{ feature: TASKS_ENDPOINT }] as const,
   lists: () => [{ ...taskKeys.all[0], entity: "list" }] as const,
+  scheduledLists: () =>
+    [
+      {
+        ...taskKeys.lists()[0],
+        filter: { status: { eq: TASK_STATUS.SCHEDULED } },
+      },
+    ] as const,
   list: ({ filter = {}, sort = {} }: ApiQueryOptions<TaskApiFilters>) =>
     [{ ...taskKeys.lists()[0], filter, sort }] as const,
   details: () => [{ ...taskKeys.all[0], entity: "details" }] as const,
@@ -48,10 +55,9 @@ export const scheduledListQueryOptions = (
   });
 };
 
-export const scheduledTasksQueryOptions = () =>
-  scheduledListQueryOptions({
-    is_on_or_before: formatISO(endOfDay(new Date())),
-  });
+/** /timer page list: scheduled tasks on or before today, sorted by position. Constant key; backend resolves "today". */
+export const timerScheduledTasksQueryOptions = () =>
+  scheduledListQueryOptions({ is_on_or_before: DATE_TOKEN_TODAY });
 
 export const inProgressTasksQueryOptions = () => {
   return queryOptions({
@@ -67,7 +73,7 @@ export const todayCompletedTasksQueryOptions = () => {
     queryKey: taskKeys.list({
       filter: {
         status: { eq: TASK_STATUS.COMPLETED },
-        start_time: { is_equal_to: "today" },
+        start_time: { is_equal_to: DATE_TOKEN_TODAY },
       },
       sort: { sort_by: "start_time", sort_order: "desc" },
     }),

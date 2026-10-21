@@ -3,8 +3,8 @@ import { QueryClient } from "@tanstack/react-query";
 import { inProgressTasks, scheduledTasks } from "@/test/store/tasks";
 import {
   inProgressTasksQueryOptions,
-  scheduledTasksQueryOptions,
   taskByIdQueryOptions,
+  timerScheduledTasksQueryOptions,
   todayCompletedTasksQueryOptions,
 } from "../queries";
 import { activateScheduledTask } from "../orchestrator";
@@ -18,7 +18,7 @@ describe("activateScheduledTask", () => {
     queryClient.setQueryData(inProgressTasksQueryOptions().queryKey, [
       inProgressTask,
     ]);
-    queryClient.setQueryData(scheduledTasksQueryOptions().queryKey, [
+    queryClient.setQueryData(timerScheduledTasksQueryOptions().queryKey, [
       scheduledTask,
     ]);
 

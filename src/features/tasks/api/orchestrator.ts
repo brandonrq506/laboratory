@@ -1,8 +1,8 @@
 import { addStart, removeById } from "@/utils/array";
 import {
   inProgressTasksQueryOptions,
-  scheduledTasksQueryOptions,
   taskByIdQueryOptions,
+  timerScheduledTasksQueryOptions,
   todayCompletedTasksQueryOptions,
 } from "./queries";
 import type { CompletedTaskAPI } from "../types/completedTask";
@@ -19,7 +19,7 @@ interface StartParams {
 
 export const promoteScheduledToInProgress = ({ qc, task }: StartParams) => {
   const inProgressKey = inProgressTasksQueryOptions().queryKey;
-  const scheduledKey = scheduledTasksQueryOptions().queryKey;
+  const scheduledKey = timerScheduledTasksQueryOptions().queryKey;
   const detailKey = taskByIdQueryOptions(task.id).queryKey;
 
   // Add new in_progress task to in_progress cache
@@ -64,7 +64,7 @@ export const activateScheduledTask = ({
   timestamp,
 }: ActivateParams) => {
   const inProgressKey = inProgressTasksQueryOptions().queryKey;
-  const scheduledKey = scheduledTasksQueryOptions().queryKey;
+  const scheduledKey = timerScheduledTasksQueryOptions().queryKey;
   const inProgressCache = qc.getQueryData(inProgressKey);
   const inProgressTask = inProgressCache?.[0];
 

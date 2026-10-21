@@ -7,8 +7,8 @@ import {
 } from "@/test/utils/query-client";
 import {
   inProgressTasksQueryOptions,
-  scheduledTasksQueryOptions,
   taskByIdQueryOptions,
+  timerScheduledTasksQueryOptions,
 } from "../../queries";
 import { apiRoutes } from "@/test/handlers/api-routes";
 import { createDeferred } from "@/test/utils/create-deferred";
@@ -22,7 +22,7 @@ import { TASK_STATUS } from "@/features/tasks/types/task-status";
 
 describe("useStartTask", () => {
   const inProgressKey = inProgressTasksQueryOptions().queryKey;
-  const scheduledKey = scheduledTasksQueryOptions().queryKey;
+  const scheduledKey = timerScheduledTasksQueryOptions().queryKey;
 
   const [task, ...otherScheduled] = scheduledTasks;
   const detailKey = taskByIdQueryOptions(task.id).queryKey;
