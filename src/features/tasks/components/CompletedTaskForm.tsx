@@ -66,8 +66,8 @@ export const CompletedTaskForm = ({ initialValues, task, onSubmit }: Props) => {
           validate: {
             isAfterStartTime: (v) => {
               const { start_time } = getValues();
-              const endTime = parseISO(v as string);
-              const startTime = parseISO(start_time as string);
+              const endTime = parseISO(v);
+              const startTime = parseISO(start_time);
 
               return (
                 isAfter(endTime, startTime) ||
