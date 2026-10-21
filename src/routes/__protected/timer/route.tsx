@@ -1,7 +1,7 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 import {
   inProgressTasksQueryOptions,
-  scheduledTasksQueryOptions,
+  timerScheduledTasksQueryOptions,
   todayCompletedTasksQueryOptions,
 } from "@/features/tasks/api/queries";
 import { ScheduledTaskList } from "./-components/ScheduledTaskList";
@@ -12,7 +12,7 @@ import { getPageTitle } from "@/utils";
 export const Route = createFileRoute("/__protected/timer")({
   loader: ({ context: { queryClient } }) => {
     void queryClient.query(inProgressTasksQueryOptions()).catch(() => {});
-    void queryClient.query(scheduledTasksQueryOptions()).catch(() => {});
+    void queryClient.query(timerScheduledTasksQueryOptions()).catch(() => {});
     void queryClient.query(todayCompletedTasksQueryOptions()).catch(() => {});
   },
   component: RouteComponent,

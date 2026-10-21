@@ -8,8 +8,8 @@ import {
 } from "@/test/utils/query-client";
 import {
   futureTasksQueryOptions,
-  scheduledTasksQueryOptions,
   taskByIdQueryOptions,
+  timerScheduledTasksQueryOptions,
 } from "../../queries";
 import { apiRoutes } from "@/test/handlers/api-routes";
 import { createDeferred } from "@/test/utils/create-deferred";
@@ -17,7 +17,7 @@ import { server } from "@/test/server";
 import { useUpdateTask } from "../useUpdateTask";
 
 describe("useUpdateTask", () => {
-  const listKey = scheduledTasksQueryOptions().queryKey;
+  const listKey = timerScheduledTasksQueryOptions().queryKey;
 
   const [task, ...otherScheduled] = scheduledTasks;
   const detailKey = taskByIdQueryOptions(task.id).queryKey;

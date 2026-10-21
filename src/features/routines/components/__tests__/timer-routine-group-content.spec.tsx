@@ -22,7 +22,7 @@ import {
 } from "@/test/utils/scheduled-list-isolation";
 import {
   futureTasksQueryOptions,
-  scheduledTasksQueryOptions,
+  timerScheduledTasksQueryOptions,
 } from "@/features/tasks/api/queries";
 import { ScheduledItemCard } from "@/features/tasks/components";
 import { TimerRoutineGroupContent } from "../timer-routine-group-content";
@@ -95,7 +95,7 @@ describe("TimerRoutineGroupContent", () => {
       member_ids: members.map((task) => task.id),
     };
     const queryClient = createTestQueryClient();
-    const { queryKey } = scheduledTasksQueryOptions();
+    const { queryKey } = timerScheduledTasksQueryOptions();
     const futureQueryOptions = futureTasksQueryOptions(SCHEDULED_LIST_DATE);
     queryClient.setQueryData(queryKey, [first, ...absorbed]);
     seedBystander(queryClient, futureQueryOptions);

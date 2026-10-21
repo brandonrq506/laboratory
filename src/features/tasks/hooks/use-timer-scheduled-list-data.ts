@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import {
   inProgressTasksQueryOptions,
-  scheduledTasksQueryOptions,
+  timerScheduledTasksQueryOptions,
 } from "@/features/tasks/api/queries";
 import { calculateExpectedStartTimes } from "@/features/tasks/utils/calculateExpectedStartTimes";
 import { useScheduledListData } from "@/features/tasks/hooks/use-scheduled-list-data";
@@ -13,7 +13,7 @@ import { useScheduledListData } from "@/features/tasks/hooks/use-scheduled-list-
  * the cache.
  */
 export const useTimerScheduledListData = () => {
-  const list = useScheduledListData(scheduledTasksQueryOptions());
+  const list = useScheduledListData(timerScheduledTasksQueryOptions());
   const { data: inProgress } = useQuery(inProgressTasksQueryOptions());
 
   return {

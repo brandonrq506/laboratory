@@ -2,7 +2,7 @@ import type { QueryClient } from "@tanstack/react-query";
 
 import {
   futureTasksQueryOptions,
-  scheduledTasksQueryOptions,
+  timerScheduledTasksQueryOptions,
 } from "@/features/tasks/api/queries";
 import { SCHEDULED_LIST_DATE } from "@/test/store/tasks";
 
@@ -18,13 +18,13 @@ const BYSTANDER_SEEDED_AT = new Date("2026-01-01T00:00:00.000Z").getTime();
 export const SCHEDULED_LIST_CASES = [
   {
     label: "timer",
-    listQueryOptions: scheduledTasksQueryOptions(),
+    listQueryOptions: timerScheduledTasksQueryOptions(),
     bystanderQueryOptions: futureTasksQueryOptions(SCHEDULED_LIST_DATE),
   },
   {
     label: "future",
     listQueryOptions: futureTasksQueryOptions(SCHEDULED_LIST_DATE),
-    bystanderQueryOptions: scheduledTasksQueryOptions(),
+    bystanderQueryOptions: timerScheduledTasksQueryOptions(),
   },
 ];
 

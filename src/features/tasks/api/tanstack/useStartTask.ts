@@ -2,9 +2,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import {
   inProgressTasksQueryOptions,
-  scheduledTasksQueryOptions,
   taskByIdQueryOptions,
   taskKeys,
+  timerScheduledTasksQueryOptions,
 } from "../queries";
 import { invalidateQueries, snapshotQueries } from "@/utils/tanstack/helpers";
 import { promoteScheduledToInProgress } from "../orchestrator";
@@ -17,7 +17,7 @@ export const useStartTask = () => {
     mutationFn: startTask,
     onMutate: async (newInProgressTask) => {
       const inProgressKey = inProgressTasksQueryOptions().queryKey;
-      const scheduledKey = scheduledTasksQueryOptions().queryKey;
+      const scheduledKey = timerScheduledTasksQueryOptions().queryKey;
 
       await queryClient.cancelQueries({ queryKey: taskKeys.lists() });
 
@@ -43,7 +43,7 @@ export const useStartTask = () => {
       invalidateQueries(
         queryClient,
         inProgressTasksQueryOptions(),
-        scheduledTasksQueryOptions(),
+        timerScheduledTasksQueryOptions(),
         taskByIdQueryOptions(newTask.id),
       );
     },
