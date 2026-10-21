@@ -10,6 +10,7 @@ import {
   type UseControllerProps,
   useController,
 } from "react-hook-form";
+import type { TimeInputTransform } from "./types";
 import { clsx } from "clsx";
 
 type CustomTimeField = Omit<
@@ -33,12 +34,13 @@ type CustomTimeProps = CustomTimeField & {
   hideErrorMessage?: boolean;
   hideLabel?: boolean;
   showAsterisk?: boolean;
+  transform: TimeInputTransform;
 };
 
 type ControlledTimeInputProps<T extends FieldValues> = UseControllerProps<T> &
   CustomTimeProps;
 
-export const TimeInputV3 = <T extends FieldValues>({
+export const TimeInput = <T extends FieldValues>({
   defaultValue,
   disabled,
   name,
@@ -53,6 +55,7 @@ export const TimeInputV3 = <T extends FieldValues>({
   hideErrorMessage = false,
   hideLabel = false,
   showAsterisk = false,
+  transform,
   ...props
 }: ControlledTimeInputProps<T>) => {
   const {
@@ -81,9 +84,9 @@ export const TimeInputV3 = <T extends FieldValues>({
       </Label>
       <Input
         type="time"
-        onChange={onChange}
+        onChange={(event) => onChange(transform.output(event.target.value))}
         onBlur={onBlur}
-        value={value}
+        value={transform.input(value)}
         name={rhfName}
         ref={ref}
         aria-invalid={Boolean(error)}

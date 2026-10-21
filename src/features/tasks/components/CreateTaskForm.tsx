@@ -3,8 +3,7 @@ import { useCreateTask } from "../api/tanstack/useCreateTask";
 import type { NewTaskForm as FormType } from "../types/newTaskForm";
 import { NewTaskForm } from "./NewTaskForm";
 
-import { parse, set, startOfToday } from "date-fns";
-import { splitHHMM } from "@/utils";
+import { parse, startOfToday } from "date-fns";
 
 import { TASK_STATUS } from "@/features/tasks/types/task-status";
 
@@ -22,25 +21,10 @@ export const CreateTaskForm = ({
   const date = parse(dateParam, "yyyy-MM-dd", startOfToday());
 
   const handleSubmit = async (data: FormType) => {
-    const [startHours, startMinutes] = splitHHMM(data.start_time);
-    const [endHours, endMinutes] = splitHHMM(data.end_time);
-
-    const startTime = set(date, {
-      hours: startHours,
-      minutes: startMinutes,
-      seconds: 0,
-    });
-
-    const endTime = set(date, {
-      hours: endHours,
-      minutes: endMinutes,
-      seconds: 0,
-    });
-
     await mutateAsync({
       activity_id: data.activity!.value,
-      start_time: startTime.toISOString(),
-      end_time: endTime.toISOString(),
+      start_time: data.start_time,
+      end_time: data.end_time,
       status: data.status,
       note: data.note,
     });
@@ -50,11 +34,12 @@ export const CreateTaskForm = ({
 
   return (
     <NewTaskForm
+      date={date}
       onSubmit={handleSubmit}
       initialValues={{
         activity: null,
-        end_time: "00:00",
-        start_time: "00:00",
+        end_time: date.toISOString(),
+        start_time: date.toISOString(),
         status: TASK_STATUS.COMPLETED,
         note: "",
       }}

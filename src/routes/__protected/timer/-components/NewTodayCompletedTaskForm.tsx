@@ -1,7 +1,9 @@
-import { set, startOfToday } from "date-fns";
+import { startOfToday } from "date-fns";
 import { useNavigate } from "@tanstack/react-router";
 
-import { getNewTaskDefaultTimes, splitHHMM } from "@/utils";
+import { getNewTaskDefaultTimes } from "@/utils";
+import { instantOnTransform } from "@/components/form";
+
 import type { NewTaskForm as FormType } from "@/features/tasks/types/newTaskForm";
 import { NewTaskForm } from "@/features/tasks/components/NewTaskForm";
 import { useCreateCompletedTodayTask } from "@/features/tasks/api/tanstack/useCreateCompletedTodayTask";
@@ -12,29 +14,16 @@ export const NewTodayCompletedTaskForm = () => {
   const navigate = useNavigate();
   const { mutate } = useCreateCompletedTodayTask();
 
-  const defaultTime = getNewTaskDefaultTimes();
+  const today = startOfToday();
+  const defaultTime = instantOnTransform(today).output(
+    getNewTaskDefaultTimes(),
+  );
 
   const handleSubmit = (data: FormType) => {
-    const [startHours, startMinutes] = splitHHMM(data.start_time);
-    const [endHours, endMinutes] = splitHHMM(data.end_time);
-    const today = startOfToday();
-
-    const startTime = set(today, {
-      hours: startHours,
-      minutes: startMinutes,
-      seconds: 0,
-    });
-
-    const endTime = set(today, {
-      hours: endHours,
-      minutes: endMinutes,
-      seconds: 0,
-    });
-
     mutate({
       activity_id: data.activity!.value,
-      start_time: startTime.toISOString(),
-      end_time: endTime.toISOString(),
+      start_time: data.start_time,
+      end_time: data.end_time,
       status: data.status,
       note: data.note,
     });
@@ -44,6 +33,7 @@ export const NewTodayCompletedTaskForm = () => {
 
   return (
     <NewTaskForm
+      date={today}
       onSubmit={handleSubmit}
       initialValues={{
         activity: null,
