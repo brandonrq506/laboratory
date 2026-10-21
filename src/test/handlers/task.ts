@@ -65,16 +65,24 @@ export const taskHandlers = [
     return HttpResponse.json(updatedTask, { status: 200 });
   }),
 
-  http.delete(apiRoutes.deleteScheduledTasks, async ({ params }) => {
-    const { taskId } = params;
+  http.delete(apiRoutes.deleteScheduledTasks, async () => {
     await delay();
+
+    return new HttpResponse(null, { status: 204 });
+  }),
+
+  http.post(apiRoutes.taskActivate, ({ params }) => {
+    const { taskId } = params;
 
     const task = scheduledTasks.find((t) => t.id === Number(taskId));
 
     if (!task)
       return HttpResponse.json({ error: "Record not found" }, { status: 404 });
 
-    return HttpResponse.json(null, { status: 204 });
+    return HttpResponse.json(
+      { previous_task: inProgressTasks[0], current_task: task },
+      { status: 200 },
+    );
   }),
 
   http.delete(apiRoutes.task, ({ params }) => {
