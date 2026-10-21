@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+import type { RoutineNestableCandidate } from "@/features/routines/types/routine-nestable-candidates";
 import type { RoutineWithItems } from "@/features/routines/types/routine-with-items";
 
 import { ROUTINE_ITEM_TYPE } from "@/features/routines/types/routine-item";
@@ -233,3 +234,7 @@ export const routines: RoutineWithItems[] = [
     routine_items: [],
   },
 ];
+
+export const nestableRoutineCandidates: RoutineNestableCandidate[] = routines
+  .filter(({ hidden_at }) => hidden_at === null)
+  .map(({ id, name }) => ({ id, name }));

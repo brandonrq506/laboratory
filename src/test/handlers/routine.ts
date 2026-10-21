@@ -1,7 +1,7 @@
 import { HttpResponse, http } from "msw";
 
+import { nestableRoutineCandidates, routines } from "../store/routines";
 import { apiRoutes } from "./api-routes";
-import { routines } from "../store/routines";
 
 export const routineHandlers = [
   http.get(apiRoutes.routines, () => {
@@ -17,13 +17,26 @@ export const routineHandlers = [
 
     return HttpResponse.json(routine, { status: 200 });
   }),
-  http.post(apiRoutes.routines, (req) => {
-    return HttpResponse.json(req.params, { status: 201 });
+  http.get(apiRoutes.routineNestableCandidates, ({ params }) => {
+    const { routineId } = params;
+
+    return HttpResponse.json(
+      nestableRoutineCandidates.filter(({ id }) => id !== Number(routineId)),
+      { status: 200 },
+    );
+  }),
+  http.post(apiRoutes.routines, async ({ request }) => {
+    const payload = await request.json();
+
+    return HttpResponse.json(
+      { ...routines[0], ...(typeof payload === "object" ? payload : {}) },
+      { status: 201 },
+    );
   }),
   http.post(apiRoutes.routineApply, () => {
     return HttpResponse.json(null, { status: 201 });
   }),
-  http.post(apiRoutes.routineHide, ({ params }) => {
+  http.patch(apiRoutes.routineHide, ({ params }) => {
     const { routineId } = params;
 
     const routine = routines.find((r) => r.id === Number(routineId));
@@ -37,7 +50,7 @@ export const routineHandlers = [
 
     return HttpResponse.json(updatedRoutine, { status: 200 });
   }),
-  http.post(apiRoutes.routineUnhide, ({ params }) => {
+  http.patch(apiRoutes.routineUnhide, ({ params }) => {
     const { routineId } = params;
 
     const routine = routines.find((r) => r.id === Number(routineId));
