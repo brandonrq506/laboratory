@@ -67,7 +67,7 @@ export const InProgressTaskForm = ({
           validate: {
             isPast: (v) => {
               // Flooring startTime and not 'now' to ensure even within the same minute, it is in the past.
-              const startTime = floorSeconds(parseISO(v as string));
+              const startTime = floorSeconds(parseISO(v));
               const now = new Date();
 
               return (

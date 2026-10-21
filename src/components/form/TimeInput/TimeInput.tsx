@@ -6,6 +6,7 @@ import {
   Label,
 } from "@headlessui/react";
 import {
+  type FieldPath,
   type FieldValues,
   type UseControllerProps,
   useController,
@@ -37,10 +38,12 @@ type CustomTimeProps = CustomTimeField & {
   transform: TimeInputTransform;
 };
 
-type ControlledTimeInputProps<T extends FieldValues> = UseControllerProps<T> &
-  CustomTimeProps;
+type ControlledTimeInputProps<
+  T extends FieldValues,
+  TName extends FieldPath<T>,
+> = UseControllerProps<T, TName> & CustomTimeProps;
 
-export const TimeInput = <T extends FieldValues>({
+export const TimeInput = <T extends FieldValues, TName extends FieldPath<T>>({
   defaultValue,
   disabled,
   name,
@@ -57,7 +60,7 @@ export const TimeInput = <T extends FieldValues>({
   showAsterisk = false,
   transform,
   ...props
-}: ControlledTimeInputProps<T>) => {
+}: ControlledTimeInputProps<T, TName>) => {
   const {
     field: { onChange, onBlur, value, name: rhfName, ref },
     fieldState,
